@@ -15,7 +15,7 @@ use eska_project_core::{
     },
 };
 
-use crate::dbgs::Module;
+use crate::dbgs::{Module, ModuleOrigin};
 
 pub struct Sources {
     modules: BTreeMap<PathBuf, Module>,
@@ -100,7 +100,7 @@ impl Sources {
     ) -> Result<(), SourceError> {
         let model =
             object_model::discover_from_source(root, kind).map_err(|_| SourceError::Project)?;
-        let extension = if kind == ProjectType::Extension {
+        let origin = if kind == ProjectType::Extension {
             let name = model
                 .objects()
                 .find(|object| object.descriptor_path() == Path::new("Configuration.xml"))
@@ -110,9 +110,9 @@ impl Sources {
             if !extensions.insert(name.to_lowercase()) {
                 return Err(SourceError::DuplicateExtension);
             }
-            name
+            ModuleOrigin::Extension(name.to_owned())
         } else {
-            ""
+            ModuleOrigin::Configuration
         };
         for owner in model.objects().filter(|owner| !owner.uuid().is_empty()) {
             for path in owner.module_paths() {
@@ -123,7 +123,7 @@ impl Sources {
                 let module = Module {
                     object: owner.uuid().to_ascii_lowercase(),
                     property: property.to_owned(),
-                    extension: extension.to_owned(),
+                    origin: origin.clone(),
                 };
                 self.modules.insert(path.clone(), module.clone());
                 self.paths

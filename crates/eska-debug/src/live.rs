@@ -13,7 +13,8 @@ use eska_build_runtime::runtime::DebugLaunch;
 use eska_project_core::project::{discovery, local_settings::ProfileName};
 
 use crate::dbgs::{
-    self, Breakpoint, Calculation, Event, Frame, Module, Selector, Server, StackAction, Step,
+    self, Breakpoint, Calculation, Event, Frame, Module, ModuleOrigin, Selector, Server,
+    StackAction, Step,
 };
 
 #[test]
@@ -33,7 +34,7 @@ fn direct_http_breakpoint_and_selected_frame() {
             .unwrap()
             .to_ascii_lowercase(),
         property: "d22e852a-cf8a-4f77-8ccb-3548e7792bea".to_owned(),
-        extension: String::new(),
+        origin: ModuleOrigin::Configuration,
     };
     let launch = DebugLaunch::prepare(&project, ProfileName::Test).unwrap();
     let endpoint = url::Url::parse(
@@ -99,21 +100,116 @@ fn direct_http_breakpoint_and_selected_frame() {
     drop(worker);
 }
 
+#[test]
+#[ignore = "requires a built external processing in the owned 1C playground fixture"]
+fn external_module_breakpoint_and_evaluate() {
+    let project = discovery::discover(&PathBuf::from(
+        env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap(),
+    ))
+    .unwrap();
+    let launch = DebugLaunch::prepare(&project, ProfileName::Test).unwrap();
+    let debug = launch.profile().debug.as_ref().unwrap();
+    let endpoint = url::Url::parse(debug.url.as_deref().unwrap()).unwrap();
+    let artifact = env::var("ESKA_DEBUG_LIVE_EPF").unwrap();
+    let form = env::var_os("ESKA_DEBUG_LIVE_EPF_FORM").is_some();
+    let (tag, scheme, property, line, expression, expected) = if form {
+        (
+            "Form",
+            "file",
+            "32e087ab-1491-49b6-aba7-43571b41ac2b",
+            4,
+            "Значение",
+            "73",
+        )
+    } else {
+        (
+            "ExternalDataProcessor",
+            "sfile",
+            "a637f77f-3840-441d-a1c3-699c8c5cb7e0",
+            3,
+            "Результат",
+            "42",
+        )
+    };
+    let descriptor =
+        fs::read_to_string(env::var_os("ESKA_DEBUG_LIVE_EPF_DESCRIPTOR").unwrap()).unwrap();
+    let document = roxmltree::Document::parse(descriptor.trim_start_matches('\u{feff}')).unwrap();
+    let module = Module {
+        object: document
+            .root_element()
+            .children()
+            .find(|node| node.has_tag_name(tag))
+            .unwrap()
+            .attribute("uuid")
+            .unwrap()
+            .to_ascii_lowercase(),
+        property: property.into(),
+        origin: ModuleOrigin::External(format!("{scheme}://{artifact}")),
+    };
+    let server = Server::new(&endpoint, "DefAlias".into()).unwrap();
+    assert_eq!(server.attach().unwrap(), dbgs::Registration::Registered);
+    let _registration = Registration(&server);
+    let kinds = ["ManagedClient".to_owned(), "ServerEmulation".to_owned()];
+    server.auto_attach(&kinds).unwrap();
+    server
+        .breakpoints([(
+            &module,
+            [Breakpoint {
+                line,
+                ..Default::default()
+            }]
+            .as_slice(),
+        )])
+        .unwrap();
+    // The external driver starts its client only after this signal.
+    println!("EPF_BREAKPOINT_READY");
+    let (target, frames, action) = wait_for_stop(&server, Duration::from_secs(35), |target| {
+        if kinds.contains(&target.kind) {
+            server.attach_target(&target.id).unwrap();
+        }
+    });
+    assert!(matches!(action, StackAction::Breakpoint));
+    assert_eq!(frames[0].module.as_ref(), Some(&module));
+    assert_eq!(frames[0].line, line);
+    assert_eq!(
+        calculate(
+            &server,
+            &target,
+            0,
+            &[Selector::Expression(expression.into())]
+        )[0]
+        .value
+        .text,
+        expected
+    );
+    server.breakpoints([(&module, [].as_slice())]).unwrap();
+    server.step(&target, Step::Continue).unwrap();
+}
+
 fn stopped(server: &Server) -> (String, Vec<Frame>) {
-    let deadline = Instant::now() + Duration::from_secs(12);
+    let (target, frames, _) = wait_for_stop(server, Duration::from_secs(12), |target| {
+        server.break_on_next_statement(false).unwrap();
+        server.attach_target(&target.id).unwrap();
+    });
+    (target, frames)
+}
+
+fn wait_for_stop(
+    server: &Server,
+    timeout: Duration,
+    attach: impl Fn(dbgs::Target),
+) -> (String, Vec<Frame>, StackAction) {
+    let deadline = Instant::now() + timeout;
     while Instant::now() < deadline {
         for event in server.poll(None).unwrap() {
             match event {
-                Event::Started(target) => {
-                    server.break_on_next_statement(false).unwrap();
-                    server.attach_target(&target.id).unwrap();
-                }
+                Event::Started(target) => attach(target),
                 Event::Stack {
                     target,
                     frames,
-                    action: StackAction::Breakpoint | StackAction::Step,
+                    action: action @ (StackAction::Breakpoint | StackAction::Step),
                     ..
-                } => return (target, frames),
+                } => return (target, frames, action),
                 _ => {}
             }
         }

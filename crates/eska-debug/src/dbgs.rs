@@ -22,7 +22,53 @@ const REQUEST_TIMEOUT: Duration = Duration::from_secs(6);
 pub struct Module {
     pub object: String,
     pub property: String,
-    pub extension: String,
+    pub origin: ModuleOrigin,
+}
+
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub enum ModuleOrigin {
+    Configuration,
+    Extension(String),
+    External(String),
+}
+
+impl Module {
+    fn from_xml(node: Node<'_, '_>) -> Option<Self> {
+        let extension = text(node, "extensionName");
+        let origin = match text(node, "type") {
+            "" | "ConfigModule" | "ExtensionModule" if extension.is_empty() => {
+                ModuleOrigin::Configuration
+            }
+            "" | "ConfigModule" | "ExtensionModule" => {
+                ModuleOrigin::Extension(extension.to_owned())
+            }
+            "ExtMDModule" => {
+                let url = child(node, "URL")?.text()?.to_owned();
+                ModuleOrigin::External(url)
+            }
+            _ => return None,
+        };
+        Some(Self {
+            object: child(node, "objectID")?.text()?.to_ascii_lowercase(),
+            property: child(node, "propertyID")?.text()?.to_ascii_lowercase(),
+            origin,
+        })
+    }
+
+    fn write_xml(&self, body: &mut String) {
+        let (kind, qualifier, value) = match &self.origin {
+            ModuleOrigin::Configuration => ("ConfigModule", "extensionName", ""),
+            ModuleOrigin::Extension(name) => ("ExtensionModule", "extensionName", name.as_str()),
+            ModuleOrigin::External(url) => ("ExtMDModule", "URL", url.as_str()),
+        };
+        let _ = write!(
+            body,
+            "<id><type xmlns=\"{BASE}\">{kind}</type><{qualifier} xmlns=\"{BASE}\">{}</{qualifier}><objectID xmlns=\"{BASE}\">{}</objectID><propertyID xmlns=\"{BASE}\">{}</propertyID></id>",
+            escape(value),
+            escape(&self.object),
+            escape(&self.property)
+        );
+    }
 }
 
 #[derive(Clone, Debug, Default)]
@@ -265,18 +311,8 @@ impl Server {
     ) -> io::Result<()> {
         let mut body = String::from("<bpWorkspace>");
         for (module, lines) in modules {
-            let kind = if module.extension.is_empty() {
-                "ConfigModule"
-            } else {
-                "ExtensionModule"
-            };
-            let _ = write!(
-                body,
-                "<moduleBPInfo xmlns=\"{BREAKPOINTS}\"><id><type xmlns=\"{BASE}\">{kind}</type><extensionName xmlns=\"{BASE}\">{}</extensionName><objectID xmlns=\"{BASE}\">{}</objectID><propertyID xmlns=\"{BASE}\">{}</propertyID></id>",
-                escape(&module.extension),
-                escape(&module.object),
-                escape(&module.property)
-            );
+            let _ = write!(body, "<moduleBPInfo xmlns=\"{BREAKPOINTS}\">");
+            module.write_xml(&mut body);
             for point in lines {
                 let line = point.line;
                 let condition = point.condition.as_deref().unwrap_or_default();
@@ -539,17 +575,7 @@ fn target(node: Node<'_, '_>) -> Option<Target> {
 
 fn frame(node: Node<'_, '_>) -> Option<Frame> {
     Some(Frame {
-        module: child(node, "moduleID").and_then(|node| {
-            if matches!(text(node, "type"), "" | "ConfigModule" | "ExtensionModule") {
-                Some(Module {
-                    object: child(node, "objectID")?.text()?.to_ascii_lowercase(),
-                    property: child(node, "propertyID")?.text()?.to_ascii_lowercase(),
-                    extension: text(node, "extensionName").to_owned(),
-                })
-            } else {
-                None
-            }
-        }),
+        module: child(node, "moduleID").and_then(Module::from_xml),
         line: text(node, "lineNo").parse().ok()?,
         name: decoded(node, "presentation"),
     })
@@ -680,6 +706,31 @@ fn invalid() -> io::Error {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn external_module_uses_the_exact_platform_url_for_frames_and_breakpoints() {
+        let xml = r"<callStack><lineNo>3</lineNo><moduleID>
+            <type>ExtMDModule</type><URL>sfile:///tmp/Проба &amp; тест/Probe.epf</URL>
+            <objectID>8FD0D78A-2342-4C52-AC20-D6A5D366DA6D</objectID>
+            <propertyID>A637F77F-3840-441D-A1C3-699C8C5CB7E0</propertyID>
+            <version>0000000000000000000000000000000000000000</version>
+            </moduleID></callStack>";
+        let document = Document::parse(xml).unwrap();
+        let frame = frame(document.root_element()).unwrap();
+        assert_eq!(frame.line, 3);
+        let module = frame.module.unwrap();
+        assert_eq!(
+            module.origin,
+            ModuleOrigin::External("sfile:///tmp/Проба & тест/Probe.epf".into())
+        );
+        let mut breakpoint = String::new();
+        module.write_xml(&mut breakpoint);
+        assert!(breakpoint.contains("Проба &amp; тест"));
+        let document = Document::parse(&breakpoint).unwrap();
+        let id = document.root_element();
+        assert!(child(id, "extensionName").is_none());
+        assert_eq!(Module::from_xml(id), Some(module));
+    }
 
     #[test]
     fn a_failed_context_property_keeps_its_native_message_and_siblings() {
