@@ -172,7 +172,8 @@
           "frame": [1094, 308],
           "nativeCapture": "TallStretch.png",
           "screenshotSha256": "8263c9ade77c93684fa3d0c69ca9ba3c7e1fdbb51f605456b6385575bd821562",
-          "controls": {"Memo": [13, 188, null, 107]},
+          "controls": {"Memo": [13, 188, null, 107], "Amount": [916, 209, 152, 19]},
+          "groupBoxes": {"Summary": [null, 204, null, 40]},
           "edit": {
             "form": {"Height": 16},
             "groups": {"Footer": {"VerticalStretch": "true"}},
@@ -196,7 +197,8 @@
           "frame": [1094, 308],
           "nativeCapture": "TallThree.png",
           "screenshotSha256": "337cd11f8a964abc79f01dd433eb25cc662c46a1a43e8cca0e332e9c4e11581c",
-          "controls": {"Memo": [13, 216, null, 79]},
+          "controls": {"Memo": [13, 216, null, 79], "Amount": [916, 237, 152, 19]},
+          "groupBoxes": {"Summary": [null, 232, null, 40]},
           "edit": {
             "form": {"Height": 16},
             "groups": {"Footer": {"VerticalStretch": "true"}},
@@ -208,7 +210,8 @@
           "frame": [1094, 308],
           "nativeCapture": "TallFive.png",
           "screenshotSha256": "5856c268040f86edbaf03a4d2ba21e7d30f196290d1125875573eeeb37c68c5f",
-          "controls": {"Memo": [13, 160, null, 135]},
+          "controls": {"Memo": [13, 160, null, 135], "Amount": [916, 181, 152, 19]},
+          "groupBoxes": {"Summary": [null, 176, null, 40]},
           "edit": {
             "form": {"Height": 16},
             "groups": {"Footer": {"VerticalStretch": "true"}},
@@ -220,7 +223,8 @@
           "frame": [1094, 308],
           "nativeCapture": "TallTop.png",
           "screenshotSha256": "399692f036881acb499d39d77112bee0b538a4d5c97d7cad657209a1d6840c47",
-          "controls": {"Memo": [13, 58, null, 107]},
+          "controls": {"Memo": [13, 58, null, 107], "Amount": [916, 44, 152, 19]},
+          "groupBoxes": {"Summary": [null, 39, null, 40]},
           "edit": {
             "form": {"Height": 16},
             "groups": {"Footer": {"VerticalStretch": "true", "VerticalAlign": "Top"}},
@@ -232,7 +236,8 @@
           "frame": [1094, 308],
           "nativeCapture": "TallCenter.png",
           "screenshotSha256": "4cef6ae10aa8a28eb78309d0ecfddb771b2dcf92c7e7953ccf9eebb1c7733ee7",
-          "controls": {"Memo": [13, 123, null, 107]},
+          "controls": {"Memo": [13, 123, null, 107], "Amount": [916, 124, 152, 19]},
+          "groupBoxes": {"Summary": [null, 119, null, 40]},
           "edit": {
             "form": {"Height": 16},
             "groups": {"Footer": {"VerticalStretch": "true", "VerticalAlign": "Center"}},
@@ -244,11 +249,72 @@
           "frame": [1094, 308],
           "nativeCapture": "TallAuto.png",
           "screenshotSha256": "9d80f042c3f6387306dc69fa847843c5b8fdaca99a73cb7ea2810772bccaccca",
-          "controls": {"Memo": [13, 58, null, 237]},
+          "controls": {"Memo": [13, 58, null, 237], "Amount": [916, 79, 152, 19]},
+          "groupBoxes": {"Summary": [null, 74, null, 40]},
           "edit": {
             "form": {"Height": 16},
             "groups": {"Footer": {"VerticalStretch": "true"}},
             "fields": {"Amount": {"TitleLocation": null}, "Memo": {"AutoMaxHeight": null, "MaxHeight": null}}
+          }
+        },
+        {
+          "name": "separate totals follow the default top alignment",
+          "frame": [1094, 308],
+          "nativeCapture": "TallAutoAlign.png",
+          "screenshotSha256": "0b4fccdf97da071b68ed3182807bc9ad6cd76a9ca35882b0bac61788b22b2118",
+          "controls": {"Memo": [13, 58, null, 107], "Amount": [916, 44, 152, 19]},
+          "groupBoxes": {"Summary": [null, 39, null, 40]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true", "VerticalAlign": null}},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "short authored footer aligns totals to the bounded field",
+          "frame": [1094, 180],
+          "nativeCapture": "ShortHeight.png",
+          "screenshotSha256": "b6d6ae512b44c1d562e87e629304095b1bfc18dd4ae408f6f5bf449976262fa2",
+          "controls": {"Memo": [13, 60, null, 107], "Amount": [916, 81, 152, 19]},
+          "groupBoxes": {"Summary": [null, 76, null, 40]},
+          "edit": {
+            "form": {"Height": 8},
+            "groups": {"Footer": {"VerticalStretch": "true", "VerticalAlign": "Bottom"}},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "the painted group extends the preferred multiline row",
+          "frame": [1094, 127],
+          "nativeCapture": "Wrapped.png",
+          "screenshotSha256": "13589b17b442c13e7b1ab92bedb7004a012b185e5cc971a30b8e1b0eb924a9b6",
+          "controls": {"Memo": [13, 58, null, 56], "Amount": [916, 79, 152, 19]},
+          "groupBoxes": {"Summary": [null, 74, null, 40]},
+          "edit": {
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "a single-line totals caption keeps its own group height",
+          "frame": [1434, 122],
+          "nativeCapture": "Wide.png",
+          "screenshotSha256": "4cbb6d347edece17adab63594179a8fc2b83155f15d191fdbf34a862c4bdb1a7",
+          "controls": {"Memo": [13, 58, 511, 51], "Amount": [1256, 79, 152, 19]},
+          "groupBoxes": {"Summary": [1128, 74, 285, 29]},
+          "edit": {
+            "form": {"Width": 140},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "clearing the group background restores the original field height",
+          "frame": [1094, 122],
+          "nativeCapture": "Plain.png",
+          "screenshotSha256": "76ac1275643744e2888b85eec7cf1898ac5ce0bbe9c1f4998c91eafab5f8a648",
+          "controls": {"Memo": [13, 58, null, 51], "Amount": [921, 79, 152, 19]},
+          "edit": {
+            "groups": {"Summary": {"BackColor": null}},
+            "fields": {"Amount": {"TitleLocation": null}}
           }
         }
       ]
