@@ -1168,6 +1168,9 @@ HTTP-сервер 1С. Для файловой базы вместо `debug.url`
 `WEBClient`, `COMConnector`, `Server`, `ServerEmulation`, `WEBService`,
 `HTTPService`, `OData`, `JOB`, `JobFileMode`, `MobileClient`, `MobileServer`,
 `MobileJobFileMode`, `MobileManagedClient`, `MobileManagedServer`.
+В проекте типа `processing` таблица `debug.external_processing` задаёт
+`artifact` и необязательный `debug_url` для подключения к загруженной копии.
+Относительный путь артефакта считается от корня проекта. [Отладка EPF из проекта](1c-http-debug.md#epf-в-проекте-explorer)
 `password_env` содержит имя переменной окружения, а её
 значение передаётся отдельно от TOML.
 

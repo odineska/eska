@@ -1168,6 +1168,7 @@ debug-standalone-source = Could not read the specified Designer XML configuratio
 debug-epf-manifest = Could not prepare the EPF. Check the processing file and its adjacent build manifest.
 debug-epf-artifact-mismatch = The EPF file does not match the build manifest checksum.
 debug-epf-source-mismatch = The Designer XML sources differ from the snapshot used to build the EPF.
+debug-epf-project-type = External processing debugging requires an ESKA processing project with sources inside its root.
 debug-epf-attach-url = Set the exact dbgs file:/// or sfile:/// URL of the deployed EPF, with the artifact SHA-256 as its parent directory.
 debug-target-not-found = The requested 1C debug target is no longer available on this server.
 debug-managed-server-ready = Started the local 1C debug server at { $url }.

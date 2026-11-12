@@ -118,6 +118,16 @@ pub struct DebugEndpoint {
     pub port: Option<u16>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_attach_types: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub external_processing: Option<DebugProcessing>,
+}
+
+#[derive(Clone, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct DebugProcessing {
+    pub artifact: PathBuf,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub debug_url: Option<String>,
 }
 
 impl DebugEndpoint {
@@ -288,6 +298,16 @@ impl Profile {
                     .is_none_or(valid_auto_attach_types),
                 "debug.auto_attach_types",
             )?;
+            if let Some(processing) = &debug.external_processing {
+                require(
+                    path_text(&processing.artifact),
+                    "debug.external_processing.artifact",
+                )?;
+                require(
+                    processing.debug_url.as_deref().is_none_or(text),
+                    "debug.external_processing.debug_url",
+                )?;
+            }
         }
         if let Some(auth) = &self.authentication {
             require(text(&auth.user), "authentication.user")?;
@@ -490,9 +510,47 @@ mod tests {
                 managed: false,
                 port: None,
                 auto_attach_types: None,
+                external_processing: None,
             }),
             authentication: None,
         }
+    }
+
+    #[test]
+    fn debug_processing_is_optional_and_round_trips_with_the_profile() {
+        let mut profile = file_profile("demo");
+        let processing = DebugProcessing {
+            artifact: "artifacts/Демо.epf".into(),
+            debug_url: Some(format!("file:///EPF/{}/Демо.epf", "a".repeat(64))),
+        };
+        profile.debug.as_mut().unwrap().external_processing = Some(processing);
+        let mut settings = LocalSettings {
+            test: None,
+            prod: Some(profile),
+        };
+        let toml = toml::to_string(&settings).unwrap();
+        assert!(toml.contains("[prod.debug.external_processing]"));
+        let decoded: LocalSettings = toml::from_str(&toml).unwrap();
+        assert!(decoded == settings);
+        assert!(decoded.validate().is_ok());
+        settings
+            .prod
+            .as_mut()
+            .unwrap()
+            .debug
+            .as_mut()
+            .unwrap()
+            .external_processing
+            .as_mut()
+            .unwrap()
+            .artifact = PathBuf::new();
+        assert!(matches!(
+            settings.validate(),
+            Err(SettingsError::InvalidField {
+                profile: ProfileName::Prod,
+                field: "debug.external_processing.artifact",
+            })
+        ));
     }
 
     #[test]
@@ -577,6 +635,7 @@ mod tests {
                 managed: false,
                 port: None,
                 auto_attach_types: None,
+                external_processing: None,
             });
             let settings = LocalSettings {
                 test: None,

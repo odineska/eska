@@ -721,8 +721,7 @@ fn native_standalone_attaches_to_loaded_external_processing() {
     let root = Path::new(&root);
     let args: Value =
         serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
-    let source = Path::new(args["externalProcessing"]["sourceRoot"].as_str().unwrap())
-        .join("EskaEpfWire/Forms/ProbeForm/Ext/Form/Module.bsl");
+    let source = Path::new(args["externalProcessing"]["sourceRoot"].as_str().unwrap()).to_owned();
     let mut dap = Dap::standalone(root, "ru-RU", false);
     dap.success("initialize", json!({"adapterID":"onec-http"}));
     let mut invalid = args.clone();
@@ -730,7 +729,23 @@ fn native_standalone_attaches_to_loaded_external_processing() {
     let reply = dap.request("attach", invalid);
     assert_eq!(reply["success"], false);
     assert!(reply["message"].as_str().unwrap().contains("SHA-256"));
-    dap.success("attach", args);
+    verify_loaded_processing(&mut dap, &source, args);
+    assert!(!root.join(".eska").exists());
+}
+
+#[test]
+#[ignore = "requires an already loaded EPF and a processing project with a configured test profile"]
+fn native_project_attaches_to_loaded_external_processing() {
+    let root = env::var_os("ESKA_DEBUG_PROCESSING_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let mut dap = Dap::start(root, "test", "attach");
+    dap.success("initialize", json!({"adapterID":"eska-debug"}));
+    verify_loaded_processing(&mut dap, &root.join("src"), json!({}));
+}
+
+fn verify_loaded_processing(dap: &mut Dap, source: &Path, arguments: Value) {
+    let source = source.join("EskaEpfWire/Forms/ProbeForm/Ext/Form/Module.bsl");
+    dap.success("attach", arguments);
     dap.success("configurationDone", json!({}));
     let points = dap.success(
         "setBreakpoints",
@@ -782,7 +797,6 @@ fn native_standalone_attaches_to_loaded_external_processing() {
     assert_eq!(stack["stackFrames"][0]["line"], 15);
     assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(source));
     dap.shutdown();
-    assert!(!root.join(".eska").exists());
 }
 
 #[test]

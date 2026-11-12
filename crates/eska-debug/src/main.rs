@@ -5,6 +5,7 @@ mod dbgs;
 mod http;
 #[cfg(test)]
 mod live;
+mod processing;
 mod session;
 mod source;
 mod standalone;
@@ -158,18 +159,14 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
                 .map_err(|_| localizer.text("debug-project-unavailable"))?;
         }
     }
-    let sources = source::Sources::load(&project).map_err(|error| {
+    let mut sources = source::Sources::load(&project).map_err(|error| {
         localizer.text(match error {
             source::SourceError::Project => "debug-project-unavailable",
             source::SourceError::ApplicationChoice => "debug-application-choice",
             source::SourceError::DuplicateExtension => "debug-duplicate-extension",
         })
     })?;
-    let settings = runtime::profile(&project, profile, action)
-        .map_err(|error| runtime_error(&error, localizer))?;
-    let (alias, auto_attach_types) = connection_settings(&settings)
-        .ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
-    let launch = if args.mode == Mode::Launch {
+    let mut launch = if args.mode == Mode::Launch {
         Some(
             DebugLaunch::prepare(&project, profile)
                 .map_err(|error| runtime_error(&error, localizer))?,
@@ -177,6 +174,13 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
     } else {
         None
     };
+    let settings = match launch.as_ref() {
+        Some(launch) => launch.profile().clone(),
+        None => runtime::profile(&project, profile, action)
+            .map_err(|error| runtime_error(&error, localizer))?,
+    };
+    let (alias, auto_attach_types) = connection_settings(&settings)
+        .ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
     let connection = launch
         .as_ref()
         .map_or_else(
@@ -184,6 +188,19 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
             DebugLaunch::connection,
         )
         .map_err(|error| runtime_error(&error, localizer))?;
+    let mut attach_selection = None;
+    if let Some(processing) = settings
+        .debug
+        .as_ref()
+        .and_then(|debug| debug.external_processing.as_ref())
+    {
+        processing::ExternalProcessing::from_project(&project, processing)
+            .and_then(|processing| processing.configure(&mut sources, launch.as_mut()))
+            .map_err(|key| localizer.text(key))?;
+        if args.mode == Mode::Attach {
+            attach_selection = Some(session::AttachSelection::MatchingTypes);
+        }
+    }
     session::run(
         Some(session::Config {
             connection,
@@ -193,7 +210,7 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
             mode: args.mode,
             launch,
             production,
-            attach_selection: None,
+            attach_selection,
         }),
         localizer,
     )
