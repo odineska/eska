@@ -437,7 +437,7 @@ impl Target {
         })
     }
 
-    fn capture(&self, project: &Project, target: Option<&Path>) -> Result<Catalog, ApplyError> {
+    fn snapshot_exclusions(&self, project: &Project) -> Vec<PathBuf> {
         let mut ignored = vec![
             project.root().join(".eska"),
             project.root().join(".gitignore"),
@@ -448,36 +448,33 @@ impl Target {
         if let Connection::File(base) = &self.connection {
             ignored.push(base.clone());
         }
+        ignored
+    }
+
+    fn capture(&self, project: &Project, target: Option<&Path>) -> Result<Catalog, ApplyError> {
+        let ignored = self.snapshot_exclusions(project);
         let excluded: Vec<_> = ignored.iter().map(PathBuf::as_path).collect();
         source_snapshot::catalog(project.source(), target, &excluded).map_err(ApplyError::Snapshot)
     }
 
     fn stage_source(&self, project: &Project, initialize: bool) -> Result<StagedInput, ApplyError> {
         if !initialize && let Ok(baseline) = read_baseline(&self.state)? {
-            let current = self.capture(project, None)?;
-            let delta = changes(&baseline.files, &current);
-            if delta.iter().all(|(path, change)| {
-                *change == Change::Modified && descriptor::has_extension(path, "bsl")
-            }) {
-                let source = self.scratch.path().join("modules");
-                let root = Path::new(structure::ROOT);
-                // The extension identity and legacy structural baseline still need
-                // the verified root descriptor. Only the listed modules are imported.
-                let root = if self.extension.is_some() || baseline.root.is_none() {
-                    current.get_key_value(root)
-                } else {
-                    None
-                };
-                let selected = delta
-                    .keys()
-                    .filter_map(|path| current.get_key_value(path))
-                    .chain(root)
-                    .map(|(path, digest)| (path.as_path(), digest.as_slice()));
-                if !source_snapshot::copy_selected(project.source(), &source, selected)
-                    .map_err(ApplyError::Snapshot)?
-                {
-                    return Err(ApplyError::StalePreview);
-                }
+            let source = self.scratch.path().join("modules");
+            let ignored = self.snapshot_exclusions(project);
+            let excluded: Vec<_> = ignored.iter().map(PathBuf::as_path).collect();
+            // The extension identity and legacy baseline still use a staged root.
+            let required = (self.extension.is_some() || baseline.root.is_none())
+                .then_some(Path::new(structure::ROOT));
+            if let Some(current) = source_snapshot::stage_modules(
+                project.source(),
+                &source,
+                &excluded,
+                &baseline.files,
+                required,
+                |path| descriptor::has_extension(path, "bsl"),
+            )
+            .map_err(ApplyError::Snapshot)?
+            {
                 return Ok(StagedInput {
                     source,
                     current,
