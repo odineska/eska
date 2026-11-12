@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>ProbeDateHeight01</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>ProbeDateHeight01</v8:content>
+		</v8:item>
+	</Title>
+	<Width>62</Width>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<UsualGroup name="Dates" id="5">
+			<Group>Vertical</Group>
+			<ShowTitle>false</ShowTitle>
+			<BackColor>web:LightGoldenRodYellow</BackColor>
+			<ExtendedTooltip name="DatesРасширеннаяПодсказка" id="201"/>
+			<ChildItems>
+				<InputField name="Stamp" id="51">
+					<DataPath>Stamp</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Дата идентификации</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Дата идентификации</v8:content>
+						</v8:item>
+					</Title>
+					<BackColor>web:PaleGreen</BackColor>
+					<ContextMenu name="StampКонтекстноеМеню" id="202"/>
+					<ExtendedTooltip name="StampРасширеннаяПодсказка" id="203"/>
+				</InputField>
+				<UsualGroup name="DateRow" id="6">
+					<Group>AlwaysHorizontal</Group>
+					<United>false</United>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="DateRowРасширеннаяПодсказка" id="204"/>
+					<ChildItems>
+						<InputField name="Settlement" id="52">
+							<DataPath>Settlement</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Дата отражения в учете</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Дата отражения в учете</v8:content>
+								</v8:item>
+							</Title>
+							<BackColor>web:LightCyan</BackColor>
+							<ContextMenu name="SettlementКонтекстноеМеню" id="205"/>
+							<ExtendedTooltip name="SettlementРасширеннаяПодсказка" id="206"/>
+						</InputField>
+						<Button name="EditStamp" id="55">
+							<Type>UsualButton</Type>
+							<Representation>Picture</Representation>
+							<CommandName>Form.Command.EditStamp</CommandName>
+							<Picture>
+								<xr:Ref>StdPicture.Change</xr:Ref>
+								<xr:LoadTransparent>true</xr:LoadTransparent>
+							</Picture>
+							<ExtendedTooltip name="EditStampРасширеннаяПодсказка" id="207"/>
+						</Button>
+						<CheckBoxField name="Flag" id="53">
+							<DataPath>Flag</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>По дате входящего документа</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>По дате входящего документа</v8:content>
+								</v8:item>
+							</Title>
+							<TitleLocation>Right</TitleLocation>
+							<CheckBoxType>Auto</CheckBoxType>
+							<ContextMenu name="FlagКонтекстноеМеню" id="208"/>
+							<ExtendedTooltip name="FlagРасширеннаяПодсказка" id="209"/>
+						</CheckBoxField>
+					</ChildItems>
+				</UsualGroup>
+				<LabelField name="Horizon" id="54">
+					<DataPath>Horizon</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Дата запрета отражения</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Дата запрета отражения</v8:content>
+						</v8:item>
+					</Title>
+					<BackColor>web:LightCoral</BackColor>
+					<ContextMenu name="HorizonКонтекстноеМеню" id="210"/>
+					<ExtendedTooltip name="HorizonРасширеннаяПодсказка" id="211"/>
+				</LabelField>
+			</ChildItems>
+		</UsualGroup>
+		<InputField name="Tail" id="200">
+			<DataPath>Tail</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>18</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>web:Lavender</BackColor>
+			<ContextMenu name="TailКонтекстноеМеню" id="212"/>
+			<ExtendedTooltip name="TailРасширеннаяПодсказка" id="213"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Stamp" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Stamp</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Stamp</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:dateTime</v8:Type>
+				<v8:DateQualifiers>
+					<v8:DateFractions>DateTime</v8:DateFractions>
+				</v8:DateQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Settlement" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Settlement</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Settlement</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:dateTime</v8:Type>
+				<v8:DateQualifiers>
+					<v8:DateFractions>DateTime</v8:DateFractions>
+				</v8:DateQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Horizon" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Horizon</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Horizon</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:dateTime</v8:Type>
+				<v8:DateQualifiers>
+					<v8:DateFractions>DateTime</v8:DateFractions>
+				</v8:DateQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Flag" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Flag</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Flag</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="Tail" id="200">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>120</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="EditStamp" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Edit</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Edit</v8:content>
+				</v8:item>
+			</Title>
+			<Action>EditStamp</Action>
+		</Command>
+	</Commands>
+</Form>
