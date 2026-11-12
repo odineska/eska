@@ -15,6 +15,7 @@ pub struct Variable {
     pub position: Position,
     pub path: Vec<Selector>,
     pub indexed: bool,
+    pub indexed_count: Option<u32>,
 }
 
 pub struct Thread {
@@ -169,6 +170,7 @@ mod tests {
             position: state.frame(old).unwrap(),
             path: vec![],
             indexed: false,
+            indexed_count: None,
         });
         state.resume(first);
         assert!(state.frame(old).is_none());
@@ -196,6 +198,7 @@ mod tests {
             position: state.frame(frame_id).unwrap(),
             path: vec![Selector::Expression("A".into())],
             indexed: false,
+            indexed_count: None,
         };
         let old = state.add_variable(variable.clone()).unwrap();
         for _ in 0..10_000 {

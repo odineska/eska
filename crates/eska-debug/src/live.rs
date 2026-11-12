@@ -111,7 +111,9 @@ fn stopped(server: &Server) -> (String, Vec<Frame>) {
 
 fn calculate(server: &Server, target: &str, level: usize, path: &[Selector]) -> Vec<Calculation> {
     let id = dbgs::random_id().unwrap();
-    let result = server.calculate(target, level, &id, path, false).unwrap();
+    let result = server
+        .calculate(target, level, &id, path, false, None)
+        .unwrap();
     if !result.is_empty() {
         return result;
     }

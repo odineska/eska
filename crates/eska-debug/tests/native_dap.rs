@@ -290,6 +290,78 @@ fn native_updates_auto_attach_types_without_losing_manual_selection() {
     dap.shutdown();
 }
 
+#[test]
+#[ignore = "requires the owned collection fixture and its HTTP debug server"]
+fn native_pages_large_collections_with_absolute_indices() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let mut dap = Dap::start(root, "test", "launch");
+    let capabilities = dap.success(
+        "initialize",
+        json!({"adapterID":"eska","supportsVariablePaging":true}),
+    );
+    assert_eq!(capabilities["supportsVariablePaging"], true);
+    dap.success("launch", json!({}));
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":7}]}),
+    );
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let frame = &stack["stackFrames"][0]["id"];
+    let evaluated = dap.success("evaluate", json!({"frameId":frame,"expression":"Ряд"}));
+    assert_eq!(evaluated["indexedVariables"], 600, "{evaluated}");
+    let reference = &evaluated["variablesReference"];
+    assert_eq!(
+        dap.request("variables", json!({"variablesReference":reference}))["success"],
+        false
+    );
+    let page = |dap: &mut Dap, filter, start, count| {
+        dap.success(
+            "variables",
+            json!({"variablesReference":reference,"filter":filter,"start":start,"count":count}),
+        )["variables"]
+            .clone()
+    };
+    let items = page(&mut dap, "indexed", 550, 5);
+    assert_eq!(items[0]["name"], "550");
+    assert_eq!(items[1]["value"], "551");
+    assert_eq!(items[4]["name"], "554");
+    assert_eq!(page(&mut dap, "indexed", 550, 5), items);
+    if env::var_os("ESKA_DEBUG_TIMINGS").is_some() {
+        let first = page(&mut dap, "indexed", 500, 100);
+        let before = memory(dap.process.id());
+        for _ in 0..24 {
+            assert_eq!(page(&mut dap, "indexed", 500, 100), first);
+        }
+        let after = memory(dap.process.id());
+        let durations = dap.durations.get_mut("variables").unwrap();
+        let start = durations.len() - 24;
+        let samples = &mut durations[start..];
+        samples.sort_by(f64::total_cmp);
+        eprintln!(
+            "collection_page n=24 p50_ms={:.3} p95_ms={:.3} rss_hwm_before_kib={before:?} rss_hwm_after_kib={after:?}",
+            samples[11].midpoint(samples[12]),
+            samples[22]
+        );
+    }
+    let nested = dap.success(
+        "variables",
+        json!({"variablesReference":items[0]["variablesReference"]}),
+    );
+    assert_eq!(nested["variables"][0]["name"], "Номер");
+    assert_eq!(nested["variables"][0]["value"], "550");
+    assert_eq!(
+        page(&mut dap, "indexed", 598, 5).as_array().unwrap().len(),
+        2
+    );
+    assert_eq!(page(&mut dap, "indexed", 600, 5), json!([]));
+    assert_eq!(page(&mut dap, "named", 0, 0), json!([]));
+    dap.shutdown();
+}
+
 impl Drop for Dap {
     fn drop(&mut self) {
         let _ = self.process.kill();

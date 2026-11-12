@@ -21,7 +21,8 @@ use crate::{
     Mode,
     dap::{self, Output, Request},
     dbgs::{
-        self, Breakpoint, Calculation, Event, Module, Selector, Server, StackAction, Step, Target,
+        self, Breakpoint, Calculation, Event, Module, Page, Selector, Server, StackAction, Step,
+        Target,
     },
     source::Sources,
     state::{Position, State, Variable},
@@ -72,7 +73,7 @@ enum CalculationPhase {
     Store,
     ReadSnapshot(String),
     ReplaceSnapshot(String),
-    Children,
+    Children(Page),
 }
 
 struct Pending {
@@ -193,6 +194,7 @@ impl<W: Write> Session<'_, W> {
                 Ok(
                     json!({"supportsConfigurationDoneRequest":true,"supportsCancelRequest":true,
                     "supportsEvaluateForHovers":true, "supportsSingleThreadExecutionRequests":false,
+                    "supportsVariablePaging":true,
                     "supportsConditionalBreakpoints":true,"supportsHitConditionalBreakpoints":true,
                     "supportsLogPoints":true,"supportsExceptionFilterOptions":true,
                     "exceptionBreakpointFilters":[{"filter":ERROR_FILTER,"label":self.language.text("debug-runtime-errors"),
@@ -416,6 +418,7 @@ impl<W: Write> Session<'_, W> {
                 position,
                 path: Vec::new(),
                 indexed: false,
+                indexed_count: None,
             })
             .ok_or(values::LIMIT)?;
         Ok(
@@ -613,11 +616,19 @@ impl<W: Write> Session<'_, W> {
         } else if request.command == "evaluate" {
             self.expression(&request.arguments)
         } else {
-            request.arguments["variablesReference"]
+            let variable = request.arguments["variablesReference"]
                 .as_u64()
                 .and_then(|id| self.state.variable(id))
-                .map(|variable| (variable, CalculationPhase::Children))
-                .ok_or(INVALID)
+                .ok_or(INVALID);
+            match variable.and_then(|variable| {
+                values::page(&variable, &request.arguments).map(|page| (variable, page))
+            }) {
+                Ok((variable, Some(page))) => Ok((variable, CalculationPhase::Children(page))),
+                Ok((_, None)) => {
+                    return self.output.response(&request, Ok(json!({"variables":[]})));
+                }
+                Err(error) => Err(error),
+            }
         };
         let (variable, phase) = match calculation {
             Ok(calculation) => calculation,
@@ -640,6 +651,10 @@ impl<W: Write> Session<'_, W> {
         }
         let id = dbgs::random_id()?;
         let variable = &pending.variable;
+        let page = match pending.phase {
+            CalculationPhase::Children(page) if variable.indexed => Some(page),
+            _ => None,
+        };
         let result = self.server().and_then(|server| {
             let target = &self
                 .state
@@ -655,6 +670,7 @@ impl<W: Write> Session<'_, W> {
                     &id,
                     &variable.path,
                     variable.indexed,
+                    page,
                 )
                 .map_err(|_| ENDPOINT)
         });
@@ -701,6 +717,7 @@ impl<W: Write> Session<'_, W> {
                 address.as_deref(),
             ))],
             indexed: false,
+            indexed_count: None,
         };
         let phase = address.map_or(CalculationPhase::Store, CalculationPhase::ReplaceSnapshot);
         Ok((variable, phase))
@@ -749,7 +766,7 @@ impl<W: Write> Session<'_, W> {
                     }
                     hidden
                 }
-                CalculationPhase::Children => {
+                CalculationPhase::Children(_) => {
                     matches!(pending.variable.path.first(), Some(Selector::Snapshot(address))
                         if failed.value.text.contains(address))
                 }
@@ -800,8 +817,8 @@ impl<W: Write> Session<'_, W> {
                 }
                 evaluated
             }
-            CalculationPhase::Children => {
-                values::children(&mut self.state, &pending.variable, results)
+            CalculationPhase::Children(page) => {
+                values::children(&mut self.state, &pending.variable, page, results)
             }
         };
         self.output.response(

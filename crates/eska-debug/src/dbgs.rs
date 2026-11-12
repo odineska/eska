@@ -52,6 +52,12 @@ pub enum Selector {
     Index(u32),
 }
 
+#[derive(Clone, Copy, Debug)]
+pub struct Page {
+    pub start: u32,
+    pub count: u32,
+}
+
 #[derive(Clone, Debug)]
 pub struct Value {
     pub name: String,
@@ -59,6 +65,7 @@ pub struct Value {
     pub kind: String,
     pub expandable: bool,
     pub indexed: bool,
+    pub collection_size: Option<u32>,
     pub error: bool,
 }
 
@@ -253,6 +260,7 @@ impl Server {
         id: &str,
         path: &[Selector],
         indexed: bool,
+        page: Option<Page>,
     ) -> io::Result<Vec<Calculation>> {
         let interface = if indexed { "collection" } else { "context" };
         let mut items = String::new();
@@ -277,8 +285,14 @@ impl Server {
         } else {
             "evalExpr"
         };
+        let page = page.map_or_else(String::new, |page| {
+            format!(
+                "<startIndex>{}</startIndex><pageSize>{}</pageSize>",
+                page.start, page.count
+            )
+        });
         let response = self.call(command, &format!(
-            "<calcWaitingTime>100</calcWaitingTime>{}<expr><stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\"><expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces></srcCalcInfo><presOptions xmlns=\"{CALC}\"><maxTextSize>16384</maxTextSize></presOptions></expr>", target_xml(target)))?;
+            "<calcWaitingTime>100</calcWaitingTime>{}<expr><stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\"><expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces>{page}</srcCalcInfo><presOptions xmlns=\"{CALC}\"><maxTextSize>16384</maxTextSize></presOptions></expr>", target_xml(target)))?;
         if response.is_empty() {
             return Ok(Vec::new());
         }
@@ -465,6 +479,7 @@ fn value(info: Option<Node<'_, '_>>, name: String) -> Value {
         kind: info.map_or_else(String::new, |node| text(node, "typeName").to_owned()),
         expandable: info.is_some_and(|node| text(node, "isExpandable") == "true"),
         indexed: info.is_some_and(|node| text(node, "isIIndexedCollectionRO") == "true"),
+        collection_size: info.and_then(|node| text(node, "collectionSize").parse().ok()),
         error: false,
     }
 }

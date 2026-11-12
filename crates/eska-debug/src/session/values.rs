@@ -1,13 +1,14 @@
 //! Translate platform values without silently losing children or expandable handles.
 use super::{Failure, INVALID};
 use crate::{
-    dbgs::{self, Calculation, Selector},
+    dbgs::{self, Calculation, Page, Selector},
     state::{State, Variable},
 };
 use serde_json::{Value, json};
 
 pub(super) const LIMIT: Failure = "debug-value-limit";
-const MAX_CHILDREN: usize = 512;
+const PAGE_LIMIT: Failure = "debug-variable-page-limit";
+const MAX_CHILDREN: u32 = 512;
 
 // Save the result once in 1C session storage. DAP handles contain only the
 // retrieval expression and paths within that value, never the user's expression.
@@ -40,38 +41,111 @@ pub(super) fn evaluated(
     value: &dbgs::Value,
 ) -> Result<Value, Failure> {
     let reference = reference(state, variable.clone(), value)?;
-    Ok(json!({"result":value.text,"type":value.kind,"variablesReference":reference}))
+    let mut body = json!({"result":value.text,"type":value.kind,"variablesReference":reference});
+    add_count(&mut body, value);
+    Ok(body)
+}
+
+pub(super) fn page(variable: &Variable, arguments: &Value) -> Result<Option<Page>, Failure> {
+    match arguments["filter"].as_str() {
+        Some("named") if variable.indexed => return Ok(None),
+        Some("indexed") if !variable.indexed => return Ok(None),
+        Some("named" | "indexed") => {}
+        None if arguments["filter"].is_null() => {}
+        _ => return Err(INVALID),
+    }
+    let number = |field: &str| {
+        if arguments[field].is_null() {
+            return Ok(0);
+        }
+        arguments[field]
+            .as_u64()
+            .and_then(|value| u32::try_from(value).ok())
+            .ok_or(INVALID)
+    };
+    let start = number("start")?;
+    let requested = number("count")?;
+    let remaining = variable
+        .indexed_count
+        .map(|size| size.saturating_sub(start));
+    if remaining == Some(0) {
+        return Ok(None);
+    }
+    let count = if requested == 0 {
+        remaining.unwrap_or(MAX_CHILDREN + 1)
+    } else {
+        requested.min(remaining.unwrap_or(u32::MAX))
+    };
+    if count > MAX_CHILDREN && (remaining.is_some() || requested != 0) {
+        return Err(PAGE_LIMIT);
+    }
+    if variable.indexed && start.checked_add(count - 1).is_none() {
+        return Err(INVALID);
+    }
+    Ok(Some(Page { start, count }))
 }
 
 pub(super) fn children(
     state: &mut State,
     variable: &Variable,
+    page: Page,
     results: Vec<Calculation>,
 ) -> Result<Value, Failure> {
-    if results
-        .iter()
-        .map(|result| result.children.len())
-        .sum::<usize>()
-        > MAX_CHILDREN
-    {
+    let raw = results.into_iter().flat_map(|result| result.children);
+    let raw = if variable.indexed {
+        raw.take(MAX_CHILDREN as usize + 1).collect::<Vec<_>>()
+    } else {
+        raw.skip(page.start as usize)
+            .take(page.count as usize)
+            .collect()
+    };
+    if raw.len() > MAX_CHILDREN as usize || raw.len() > page.count as usize {
         return Err(LIMIT);
     }
-    let children = results.into_iter().flat_map(|result| result.children).map(|value| {
-        let mut child = variable.clone();
-        let reference = if value.can_expand() && !value.name.is_empty() {
-            let selector = if child.path.is_empty() {
-                Selector::Expression(value.name.clone())
-            } else if variable.indexed {
-                Selector::Index(value.name.parse().map_err(|_| INVALID)?)
-            } else {
-                Selector::Property(value.name.clone())
-            };
-            child.path.push(selector);
-            reference(state, child, &value)?
-        } else { 0 };
-        Ok(json!({"name":value.name,"value":value.text,"type":value.kind,"variablesReference":reference}))
-    }).collect::<Result<Vec<_>, Failure>>()?;
+    let mut children = Vec::with_capacity(raw.len());
+    for value in &raw {
+        children.push(display_child(state, variable, page.start, value)?);
+    }
     Ok(json!({"variables":children}))
+}
+
+fn display_child(
+    state: &mut State,
+    parent: &Variable,
+    start: u32,
+    value: &dbgs::Value,
+) -> Result<Value, Failure> {
+    let index = if parent.indexed {
+        Some(
+            value
+                .name
+                .parse::<u32>()
+                .ok()
+                .and_then(|index| start.checked_add(index))
+                .ok_or(INVALID)?,
+        )
+    } else {
+        None
+    };
+    let reference = if value.can_expand() && !value.name.is_empty() {
+        let mut child = parent.clone();
+        let selector = if child.path.is_empty() {
+            Selector::Expression(value.name.clone())
+        } else if let Some(index) = index {
+            Selector::Index(index)
+        } else {
+            Selector::Property(value.name.clone())
+        };
+        child.path.push(selector);
+        reference(state, child, value)?
+    } else {
+        0
+    };
+    let name = index.map_or_else(|| value.name.clone(), |index| index.to_string());
+    let mut body =
+        json!({"name":name,"value":value.text,"type":value.kind,"variablesReference":reference});
+    add_count(&mut body, value);
+    Ok(body)
 }
 
 fn reference(
@@ -83,7 +157,17 @@ fn reference(
         return Ok(0);
     }
     variable.indexed = !value.expandable && value.indexed;
+    variable.indexed_count = value.collection_size.filter(|_| variable.indexed);
     state.add_variable(variable).ok_or(LIMIT)
+}
+
+fn add_count(body: &mut Value, value: &dbgs::Value) {
+    if let Some(size) = value
+        .collection_size
+        .filter(|_| value.indexed && !value.expandable)
+    {
+        body["indexedVariables"] = json!(size);
+    }
 }
 
 #[cfg(test)]
@@ -112,6 +196,7 @@ mod tests {
             position: state.frame(frame).unwrap(),
             path: vec![],
             indexed: false,
+            indexed_count: None,
         };
         (state, variable)
     }
@@ -123,6 +208,7 @@ mod tests {
             kind: "object".into(),
             expandable: true,
             indexed: false,
+            collection_size: None,
             error: false,
         }
     }
@@ -137,9 +223,16 @@ mod tests {
                 children: vec![value(); count],
             }]
         };
-        assert_eq!(children(&mut state, &variable, result(513)), Err(LIMIT));
+        let page = Page {
+            start: 0,
+            count: 513,
+        };
         assert_eq!(
-            children(&mut state, &variable, result(512)).unwrap()["variables"]
+            children(&mut state, &variable, page, result(513)),
+            Err(LIMIT)
+        );
+        assert_eq!(
+            children(&mut state, &variable, page, result(512)).unwrap()["variables"]
                 .as_array()
                 .unwrap()
                 .len(),
