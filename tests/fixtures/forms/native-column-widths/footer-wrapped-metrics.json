@@ -166,6 +166,90 @@
               "Fixed"
             ]
           }
+        },
+        {
+          "name": "stretched footer stops at four multiline rows",
+          "frame": [1094, 308],
+          "nativeCapture": "TallStretch.png",
+          "screenshotSha256": "8263c9ade77c93684fa3d0c69ca9ba3c7e1fdbb51f605456b6385575bd821562",
+          "controls": {"Memo": [13, 188, null, 107]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true"}},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "dirty two-row multiline limit",
+          "frame": [1094, 308],
+          "nativeCapture": "TallTwo.png",
+          "screenshotSha256": "f5c8abcbb9d5a6a3f921a7f040d19679975cef28c32e4ca534e0866711427506",
+          "controls": {"Memo": [13, null, null, 51]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true"}},
+            "fields": {"Amount": {"TitleLocation": null}, "Memo": {"MaxHeight": 2}}
+          }
+        },
+        {
+          "name": "dirty three-row multiline limit",
+          "frame": [1094, 308],
+          "nativeCapture": "TallThree.png",
+          "screenshotSha256": "337cd11f8a964abc79f01dd433eb25cc662c46a1a43e8cca0e332e9c4e11581c",
+          "controls": {"Memo": [13, 216, null, 79]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true"}},
+            "fields": {"Amount": {"TitleLocation": null}, "Memo": {"MaxHeight": 3}}
+          }
+        },
+        {
+          "name": "dirty five-row multiline limit",
+          "frame": [1094, 308],
+          "nativeCapture": "TallFive.png",
+          "screenshotSha256": "5856c268040f86edbaf03a4d2ba21e7d30f196290d1125875573eeeb37c68c5f",
+          "controls": {"Memo": [13, 160, null, 135]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true"}},
+            "fields": {"Amount": {"TitleLocation": null}, "Memo": {"MaxHeight": 5}}
+          }
+        },
+        {
+          "name": "bounded multiline field aligns to the top",
+          "frame": [1094, 308],
+          "nativeCapture": "TallTop.png",
+          "screenshotSha256": "399692f036881acb499d39d77112bee0b538a4d5c97d7cad657209a1d6840c47",
+          "controls": {"Memo": [13, 58, null, 107]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true", "VerticalAlign": "Top"}},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "bounded multiline field aligns to the center",
+          "frame": [1094, 308],
+          "nativeCapture": "TallCenter.png",
+          "screenshotSha256": "4cef6ae10aa8a28eb78309d0ecfddb771b2dcf92c7e7953ccf9eebb1c7733ee7",
+          "controls": {"Memo": [13, 123, null, 107]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true", "VerticalAlign": "Center"}},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "removing the multiline limit restores full height",
+          "frame": [1094, 308],
+          "nativeCapture": "TallAuto.png",
+          "screenshotSha256": "9d80f042c3f6387306dc69fa847843c5b8fdaca99a73cb7ea2810772bccaccca",
+          "controls": {"Memo": [13, 58, null, 237]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true"}},
+            "fields": {"Amount": {"TitleLocation": null}, "Memo": {"AutoMaxHeight": null, "MaxHeight": null}}
+          }
         }
       ]
     }
