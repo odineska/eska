@@ -151,6 +151,11 @@ fn prepare_extensions(root: &Path) -> (PathBuf, PathBuf) {
     )
     .unwrap();
     fs::write(
+        base.join("src/Configuration.xml"),
+        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Configuration uuid="eec8818c-9361-478d-b14f-01d342006de0"><Properties><Name>Base</Name></Properties></Configuration></MetaDataObject>"#,
+    )
+    .unwrap();
+    fs::write(
         root.join("eska.toml"),
         "[workspace.members.probe]\nconfiguration='base'\nextensions=[{path='one', depends_on=['two']}, {path='two'}]\n",
     )
@@ -213,6 +218,13 @@ case "$1:$2:$3" in
         esac ;;
     infobase:config:import|infobase:config:apply)
         printf '%s:%s\n' "$3" "$name" >> "$dir/writes"
+        if test "$3" = apply; then
+            if test -f "$dir/fail-$name"; then exit 4; fi
+            if test -f "$dir/advance-generations"; then
+                tr 0123456789abcdef 123456789abcdef0 < "$dir/generation-$name" > "$dir/next-generation"
+                mv "$dir/next-generation" "$dir/generation-$name"
+            fi
+        fi
         if test "$4" = files; then cat > "$dir/import-files"; fi ;;
     *) exit 2 ;;
 esac
@@ -223,6 +235,101 @@ esac
         fs::write(base.join(format!("generation-{name}")), digit.repeat(40)).unwrap();
     }
     (base, one)
+}
+
+fn apply_application(root: &Path, lang: &str, args: &[&str]) -> (Output, Value) {
+    let mut command = vec!["--application", "probe"];
+    command.extend_from_slice(args);
+    apply(root, lang, &command)
+}
+
+#[test]
+fn apply_application_orders_components_and_resumes_after_partial_success() {
+    let root = TestDir::new();
+    let root = &root.0;
+    let (base, one) = prepare_extensions(root);
+    let two = root.join("two");
+    fs::write(base.join("advance-generations"), "").unwrap();
+    let writes = base.join("writes");
+    let (output, prod) = apply_application(root, "ru-RU", &["--profile", "prod", "--initialize"]);
+    assert!(!output.status.success());
+    assert_eq!(prod["error"]["code"], "forbidden_action");
+    assert!(!writes.exists());
+    let (_, blocked) = apply_application(root, "en-US", &[]);
+    assert!(blocked["plan"]["confirmation"].is_null());
+    assert_eq!(
+        blocked["plan"]["components"][0]["review"]["reason"],
+        "baseline_required"
+    );
+
+    let (output, initial) = apply_application(root, "en-US", &["--initialize"]);
+    assert!(output.status.success(), "{initial}");
+    assert_eq!(
+        initial,
+        apply_application(root, "ru-RU", &["--initialize"]).1
+    );
+    let token = initial["plan"]["confirmation"].as_str().unwrap();
+    let (output, applied) = apply_application(root, "en-US", &["--initialize", "--confirm", token]);
+    assert!(output.status.success(), "{applied}");
+    assert_eq!(
+        fs::read_to_string(&writes).unwrap(),
+        "import:base\napply:base\nimport:Two\napply:Two\nimport:One\napply:One\n"
+    );
+    let (_, unchanged) = apply_application(root, "en-US", &["--initialize"]);
+    assert!(unchanged["plan"]["confirmation"].is_null());
+    assert_eq!(
+        unchanged["plan"]["components"][1]["plan"]["mode"],
+        "unchanged"
+    );
+
+    fs::remove_file(&writes).unwrap();
+    for member in [&base, &one, &two] {
+        fs::write(member.join("src/Module.bsl"), "A = 2;").unwrap();
+    }
+    let (_, preview) = apply_application(root, "en-US", &[]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    fs::write(one.join("src/Module.bsl"), "A = 3;").unwrap();
+    let (output, stale) = apply_application(root, "en-US", &["--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(stale["error"]["code"], "stale_preview");
+    assert!(!writes.exists());
+
+    let failure = base.join("fail-Two");
+    fs::write(&failure, "").unwrap();
+    let (_, preview) = apply_application(root, "en-US", &[]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, failed) = apply_application(root, "en-US", &["--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(failed["error"]["code"], "apply_failed");
+    assert_eq!(failed["error"]["component"], "two");
+    assert_eq!(
+        failed["outcomes"],
+        serde_json::json!([
+            {"member":"base","status":"applied"},
+            {"member":"two","status":"failed"},
+            {"member":"one","status":"not_started"}
+        ])
+    );
+
+    fs::remove_file(failure).unwrap();
+    let (_, blocked) = apply_application(root, "en-US", &[]);
+    assert_eq!(
+        blocked["plan"]["components"][1]["review"]["reason"],
+        "incomplete"
+    );
+    assert!(blocked["plan"]["confirmation"].is_null());
+    let (_, recovery) = apply_application(root, "en-US", &["--initialize"]);
+    let components = &recovery["plan"]["components"];
+    assert_eq!(components[0]["plan"]["mode"], "unchanged");
+    assert_eq!(components[1]["plan"]["mode"], "initialize");
+    assert_eq!(components[2]["plan"]["mode"], "incremental");
+    let token = recovery["plan"]["confirmation"].as_str().unwrap();
+    let (output, resumed) = apply_application(root, "en-US", &["--initialize", "--confirm", token]);
+    assert!(output.status.success(), "{resumed}");
+    assert_eq!(
+        fs::read_to_string(writes).unwrap(),
+        "import:base\napply:base\nimport:Two\napply:Two\nimport:Two\napply:Two\nimport:One\napply:One\n"
+    );
 }
 
 #[test]

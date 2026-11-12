@@ -8,7 +8,7 @@ use std::{
 use eska_project_core::{
     application::project_application,
     project::{
-        Project, ProjectType, designer_xml,
+        Project, ProjectName, ProjectType, designer_xml,
         discovery::{self, DiscoveryContext},
     },
 };
@@ -77,21 +77,7 @@ pub(super) fn resolve(project: &Project) -> Result<Selection, ApplyError> {
     let identity = members
         .remove(&selected)
         .ok_or(ApplyError::ExtensionApplication)?;
-    let mut pending = vec![&selected];
-    let mut required = BTreeSet::new();
-    while let Some(member) = pending.pop() {
-        for dependency in application
-            .extension_dependencies()
-            .get(member)
-            .into_iter()
-            .flatten()
-        {
-            if required.insert(dependency) {
-                pending.push(dependency);
-            }
-        }
-    }
-    let dependencies = required
+    let dependencies = dependency_closure(&selected, application.extension_dependencies())
         .into_iter()
         .map(|name| {
             if application
@@ -108,6 +94,22 @@ pub(super) fn resolve(project: &Project) -> Result<Selection, ApplyError> {
         identity,
         dependencies,
     })
+}
+
+pub(super) fn dependency_closure<'a>(
+    selected: &'a ProjectName,
+    edges: &'a BTreeMap<ProjectName, Vec<ProjectName>>,
+) -> BTreeSet<&'a ProjectName> {
+    let mut pending = vec![selected];
+    let mut required = BTreeSet::new();
+    while let Some(member) = pending.pop() {
+        for dependency in edges.get(member).into_iter().flatten() {
+            if required.insert(dependency) {
+                pending.push(dependency);
+            }
+        }
+    }
+    required
 }
 
 pub(super) fn identity(source: &Path) -> Option<Identity> {

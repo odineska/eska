@@ -1,5 +1,6 @@
 //! Plan and apply Designer XML changes to an existing test infobase.
 
+pub mod application;
 mod descriptor;
 mod extension;
 mod structure;
@@ -95,7 +96,8 @@ pub struct Review {
     pub changes: Option<BTreeMap<PathBuf, Change>>,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum ReviewReason {
     BaselineRequired,
     BaselineChanged,
@@ -125,7 +127,7 @@ pub struct Plan {
     root: Option<structure::Root>,
 }
 
-#[derive(Clone, Debug, Serialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct LaunchTarget {
     pub project_dir: String,
     pub fingerprint: String,
@@ -144,6 +146,7 @@ pub enum ApplyError {
     ExtensionAmbiguous,
     ExtensionUnavailable,
     ExtensionIdentityMismatch,
+    ApplicationContext,
     SourceInsideInfobase,
     ReviewRequired(ReviewReason, Box<Review>),
     Busy,
@@ -199,13 +202,28 @@ pub fn execute(
     if plan.confirmation.as_deref() != Some(confirmation) {
         return Err(ApplyError::StalePreview);
     }
+    write_plan(&target, &source, current, &mut plan, &mut progress)?;
+    Ok(plan)
+}
+
+fn write_plan(
+    target: &Target,
+    source: &Path,
+    current: Catalog,
+    plan: &mut Plan,
+    progress: &mut impl FnMut(Stage),
+) -> Result<String, ApplyError> {
+    let confirmation = plan
+        .confirmation
+        .as_deref()
+        .ok_or(ApplyError::StalePreview)?;
     let descriptors = if plan.mode == Mode::Initialize {
-        descriptor::baseline(&source, target.project_type(), &current)
+        descriptor::baseline(source, target.project_type(), &current)
     } else {
         std::mem::take(&mut plan.descriptors)
     };
     let root = if target.extension.is_none() {
-        plan.root.take().or_else(|| structure::Root::read(&source))
+        plan.root.take().or_else(|| structure::Root::read(source))
     } else {
         None
     };
@@ -225,7 +243,7 @@ pub fn execute(
         Mode::Initialize => {
             target.command(
                 &["import"],
-                &[native_path(&source).as_os_str().to_owned()],
+                &[native_path(source).as_os_str().to_owned()],
                 None,
                 None,
                 Stage::Import,
@@ -244,8 +262,8 @@ pub fn execute(
             input.rewind().map_err(ApplyError::Io)?;
             target.command(
                 &["import", "files"],
-                &[option("--base-dir", &source)],
-                Some(&source),
+                &[option("--base-dir", source)],
+                Some(source),
                 Some(input),
                 Stage::Import,
             )?;
@@ -256,7 +274,7 @@ pub fn execute(
     target.command(&["apply"], &[], None, None, Stage::Apply)?;
     let generation = target.applied_generation()?;
     let document = Baseline {
-        generation,
+        generation: generation.clone(),
         files: current,
         descriptors,
         root,
@@ -267,7 +285,7 @@ pub fn execute(
     temp.persist(&target.state)
         .map_err(|error| ApplyError::Io(error.error))?;
     fs::remove_file(state).map_err(ApplyError::Io)?;
-    Ok(plan)
+    Ok(generation)
 }
 
 struct Target {
@@ -283,12 +301,13 @@ struct Target {
     authentication: Vec<OsString>,
 }
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 enum Connection {
     File(PathBuf),
     Standalone(u32),
 }
 
+#[derive(Clone, Eq, PartialEq)]
 struct Observation {
     generation: String,
     configuration_generation: Option<String>,
@@ -355,22 +374,8 @@ impl Target {
             _ => return Err(ApplyError::InvalidState),
         };
         let extension = selected.as_ref().map(|selection| &selection.identity);
-        let state_id = extension.map_or_else(
-            || checksum(&[identity.as_bytes()]),
-            |extension| {
-                checksum(&[
-                    b"extension\0",
-                    identity.as_bytes(),
-                    b"\0",
-                    extension.uuid.as_bytes(),
-                ])
-            },
-        );
-        let state = directory.join(format!("apply-{state_id}.json"));
-        let scratch = tempfile::Builder::new()
-            .prefix("apply-")
-            .tempdir_in(directory)
-            .map_err(ApplyError::Io)?;
+        let state = state_path(&directory, &identity, extension);
+        let scratch = scratch(&directory)?;
         let platform = platform(profile_project, &profile).map_err(ApplyError::Runtime)?;
         platform
             .begin_interruptible_operation()
@@ -390,6 +395,36 @@ impl Target {
             state,
             scratch,
             authentication: authentication(&profile)?,
+        })
+    }
+
+    fn for_extension(
+        &self,
+        project: &Project,
+        extension: ExtensionIdentity,
+        dependencies: Vec<ExtensionIdentity>,
+    ) -> Result<Self, ApplyError> {
+        if let Connection::File(base) = &self.connection
+            && project
+                .source()
+                .canonicalize()
+                .map_err(ApplyError::Io)?
+                .starts_with(base)
+        {
+            return Err(ApplyError::SourceInsideInfobase);
+        }
+        let directory = self.state.parent().ok_or(ApplyError::InvalidState)?;
+        Ok(Self {
+            platform: self.platform.clone(),
+            connection: self.connection.clone(),
+            identity: self.identity.clone(),
+            launch: self.launch.clone(),
+            lock: self.lock.clone(),
+            state: state_path(directory, &self.identity, Some(&extension)),
+            scratch: scratch(directory)?,
+            extension: Some(extension),
+            dependencies,
+            authentication: self.authentication.clone(),
         })
     }
 
@@ -427,6 +462,13 @@ impl Target {
         self.generation_for(self.extension.as_ref())
     }
 
+    fn verified_generation(&self) -> Result<String, ApplyError> {
+        if let Some(extension) = &self.extension {
+            self.verify_installed(extension)?;
+        }
+        self.generation()
+    }
+
     fn generation_for(&self, extension: Option<&ExtensionIdentity>) -> Result<String, ApplyError> {
         let output = self.command_for(
             extension,
@@ -455,8 +497,8 @@ impl Target {
     }
 
     fn observe(&self) -> Result<Observation, ApplyError> {
-        let configuration_generation = if let Some(extension) = &self.extension {
-            self.verify_installed(extension)?;
+        let generation = self.verified_generation()?;
+        let configuration_generation = if self.extension.is_some() {
             Some(self.generation_for(None)?)
         } else {
             None
@@ -470,18 +512,18 @@ impl Target {
             );
         }
         Ok(Observation {
-            generation: self.generation()?,
+            generation,
             configuration_generation,
             dependency_generations,
         })
     }
 
     fn verify_installed(&self, extension: &ExtensionIdentity) -> Result<(), ApplyError> {
-        let directory = self
-            .scratch
-            .path()
-            .join(format!("extension-{}", extension.uuid));
-        fs::create_dir(&directory).map_err(ApplyError::Io)?;
+        let output = tempfile::Builder::new()
+            .prefix("extension-")
+            .tempdir_in(self.scratch.path())
+            .map_err(ApplyError::Io)?;
+        let directory = output.path();
         // A PID connection reports success for export info without writing its XML.
         // Export only the configuration object to obtain its actual name and UUID.
         let standalone = matches!(self.connection, Connection::Standalone(_));
@@ -493,7 +535,7 @@ impl Target {
         self.command_for(
             Some(extension),
             command,
-            &[option("--out", &directory)],
+            &[option("--out", directory)],
             None,
             None,
             Stage::Inspect,
@@ -503,9 +545,9 @@ impl Target {
             error => error,
         })?;
         let matches = if standalone {
-            extension::identity(&directory).as_ref() == Some(extension)
+            extension::identity(directory).as_ref() == Some(extension)
         } else {
-            extension::installed_uuid(&directory, &extension.name).as_ref() == Some(&extension.uuid)
+            extension::installed_uuid(directory, &extension.name).as_ref() == Some(&extension.uuid)
         };
         if !matches {
             return Err(ApplyError::ExtensionIdentityMismatch);
@@ -569,6 +611,28 @@ impl Target {
         }
         Ok(output.stdout)
     }
+}
+
+fn scratch(directory: &Path) -> Result<tempfile::TempDir, ApplyError> {
+    tempfile::Builder::new()
+        .prefix("apply-")
+        .tempdir_in(directory)
+        .map_err(ApplyError::Io)
+}
+
+fn state_path(directory: &Path, identity: &str, extension: Option<&ExtensionIdentity>) -> PathBuf {
+    let state_id = extension.map_or_else(
+        || checksum(&[identity.as_bytes()]),
+        |extension| {
+            checksum(&[
+                b"extension\0",
+                identity.as_bytes(),
+                b"\0",
+                extension.uuid.as_bytes(),
+            ])
+        },
+    );
+    directory.join(format!("apply-{state_id}.json"))
 }
 
 fn process_error(error: RunError) -> ApplyError {

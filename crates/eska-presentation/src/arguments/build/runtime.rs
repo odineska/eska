@@ -19,6 +19,8 @@ pub struct ApplyArgs {
     #[arg(long, value_enum, default_value = "test")]
     pub profile: ProfileArg,
     #[arg(long)]
+    pub application: Option<String>,
+    #[arg(long)]
     pub initialize: bool,
     #[arg(long)]
     pub confirm: Option<String>,
@@ -55,6 +57,9 @@ pub fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command 
 pub fn localize_apply(command: clap::Command, localizer: &Localizer) -> clap::Command {
     localize(command, localizer)
         .about(localizer.text("runtime-apply-about"))
+        .mut_arg("application", |arg| {
+            arg.help(localizer.text("runtime-apply-application-help"))
+        })
         .mut_arg("initialize", |arg| {
             arg.help(localizer.text("runtime-apply-initialize-help"))
         })

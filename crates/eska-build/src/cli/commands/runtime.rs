@@ -3,6 +3,7 @@ use std::{collections::BTreeSet, path::Path, process::ExitCode};
 use eska_build_runtime::runtime::apply::{
     self, ApplyError, Change, Mode, ObjectKind, ObjectOperation, Plan, Review, ReviewReason, Stage,
     Status,
+    application::{self, ComponentOutcome, ComponentStatus},
 };
 use eska_build_runtime::runtime::{self, RuntimeError};
 use eska_presentation::{
@@ -119,6 +120,9 @@ fn failure(args: &RunArgs, kind: &str, code: &str, message: &str) -> ExitCode {
 }
 
 pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode {
+    if let Some(name) = args.application.as_deref() {
+        return apply_application(args, start, name, localizer);
+    }
     if matches!(args.profile, ProfileArg::Prod) {
         return apply_failure(
             args,
@@ -181,7 +185,7 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
             } else if args.confirm.is_some() {
                 println!("{}", localizer.text("runtime-apply-done"));
             } else {
-                print_apply_plan(&plan, localizer);
+                print_apply_plan(&plan, localizer, true);
             }
             ExitCode::SUCCESS
         }
@@ -196,7 +200,122 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
     }
 }
 
-fn print_apply_plan(plan: &Plan, localizer: &Localizer) {
+fn apply_application(
+    args: &ApplyArgs,
+    start: &Path,
+    name: &str,
+    localizer: &Localizer,
+) -> ExitCode {
+    let profile = match args.profile {
+        ProfileArg::Test => ProfileName::Test,
+        ProfileArg::Prod => ProfileName::Prod,
+    };
+    let json_output = matches!(args.format, OutputFormat::Json);
+    let failure = if let Some(token) = args.confirm.as_deref() {
+        match application::execute(
+            start,
+            name,
+            profile,
+            args.initialize,
+            token,
+            |member, stage| {
+                let (phase, key) = match stage {
+                    Stage::Import => ("import", "runtime-apply-importing"),
+                    _ => ("apply", "runtime-apply-applying"),
+                };
+                if json_output {
+                    eprintln!(
+                        "{}",
+                        json!({"schema_version":1,"kind":"apply_progress","phase":phase,"component":member})
+                    );
+                } else {
+                    eprintln!("{member}  {}", localizer.text(key));
+                }
+            },
+        ) {
+            Ok(applied) => {
+                if json_output {
+                    println!(
+                        "{}",
+                        json!({"schema_version":1,"kind":"application_apply","status":"applied",
+                        "launch":applied.launch,"outcomes":applied.outcomes})
+                    );
+                } else {
+                    print_outcomes(&applied.outcomes, localizer);
+                }
+                return ExitCode::SUCCESS;
+            }
+            Err(failure) => failure,
+        }
+    } else {
+        match application::preview(start, name, profile, args.initialize) {
+            Ok(plan) => {
+                if json_output {
+                    println!(
+                        "{}",
+                        json!({"schema_version":1,"kind":"application_apply","status":"preview","plan":plan})
+                    );
+                } else {
+                    for component in &plan.components {
+                        println!("{}", component.member);
+                        if let Some(plan) = &component.plan {
+                            print_apply_plan(plan, localizer, false);
+                        }
+                        if let Some(blocked) = &component.review {
+                            let (_, message) = review_error(blocked.reason);
+                            println!(
+                                "{}",
+                                localizer.text(inspection_key(blocked.review.inspection.status))
+                            );
+                            if let Some(changes) = &blocked.review.changes {
+                                for (path, change) in changes {
+                                    let label = localizer.text(change_key(*change));
+                                    println!("{label} {}", path.display());
+                                }
+                            }
+                            println!("{}", localizer.text(message));
+                        }
+                    }
+                    if let Some(token) = plan.confirmation {
+                        println!("--confirm {token}");
+                    }
+                }
+                return ExitCode::SUCCESS;
+            }
+            Err(failure) => failure,
+        }
+    };
+    let (code, message) = apply_error(&failure.error);
+    if json_output {
+        println!(
+            "{}",
+            json!({"schema_version":1,"kind":"application_apply","status":"error",
+            "error":{"code":code,"component":failure.member},"outcomes":failure.outcomes})
+        );
+    } else {
+        print_outcomes(&failure.outcomes, localizer);
+    }
+    if let Some(member) = failure.member {
+        eprintln!("{member}  {}", localizer.text(message));
+    } else {
+        eprintln!("{}", localizer.text(message));
+    }
+    ExitCode::FAILURE
+}
+
+fn print_outcomes(outcomes: &[ComponentOutcome], localizer: &Localizer) {
+    for outcome in outcomes {
+        let key = match outcome.status {
+            ComponentStatus::Applied => "runtime-apply-done",
+            ComponentStatus::Unchanged => "runtime-apply-unchanged",
+            ComponentStatus::NotStarted => "runtime-apply-component-not-started",
+            ComponentStatus::Failed => "runtime-apply-component-failed",
+        };
+        println!("{}  {}", outcome.member, localizer.text(key));
+    }
+}
+
+fn print_apply_plan(plan: &Plan, localizer: &Localizer, show_confirmation: bool) {
     println!(
         "{}",
         localizer.text(match plan.mode {
@@ -229,7 +348,7 @@ fn print_apply_plan(plan: &Plan, localizer: &Localizer) {
             println!("{label} {}", path.display());
         }
     }
-    if let Some(confirmation) = &plan.confirmation {
+    if show_confirmation && let Some(confirmation) = &plan.confirmation {
         println!("--confirm {confirmation}");
     }
 }
@@ -327,6 +446,9 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
         ApplyError::Runtime(RuntimeError::Settings(SettingsError::AdminEndpointRequired)) => {
             ("missing_admin_endpoint", "project-settings-missing-admin")
         }
+        ApplyError::Runtime(RuntimeError::Settings(SettingsError::ForbiddenAction)) => {
+            ("forbidden_action", "project-settings-forbidden")
+        }
         ApplyError::Runtime(RuntimeError::Settings(_)) => {
             ("invalid_settings", "project-settings-invalid")
         }
@@ -339,19 +461,7 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
         ApplyError::Runtime(RuntimeError::Platform(_) | RuntimeError::PlatformUnavailable) => {
             ("platform_unavailable", "runtime-platform-unavailable")
         }
-        ApplyError::ReviewRequired(reason, _) => match reason {
-            ReviewReason::BaselineRequired => {
-                ("baseline_required", "runtime-apply-baseline-required")
-            }
-            ReviewReason::BaselineChanged => ("baseline_changed", "runtime-apply-baseline-changed"),
-            ReviewReason::Incomplete => ("incomplete_apply", "runtime-apply-incomplete"),
-            ReviewReason::GenerationUnavailable => {
-                ("generation_failed", "runtime-apply-inspect-failed")
-            }
-            ReviewReason::InvalidBaseline | ReviewReason::InvalidGeneration => {
-                ("invalid_state", "runtime-apply-state-error")
-            }
-        },
+        ApplyError::ReviewRequired(reason, _) => review_error(*reason),
         ApplyError::Busy => ("busy", "runtime-apply-busy"),
         ApplyError::StalePreview => ("stale_preview", "runtime-apply-stale"),
         ApplyError::ProjectType => ("project_type_unsupported", "runtime-apply-project-type"),
@@ -359,6 +469,9 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
             "extension_application_required",
             "runtime-apply-extension-application",
         ),
+        ApplyError::ApplicationContext => {
+            ("application_required", "runtime-apply-application-required")
+        }
         ApplyError::ExtensionScope => (
             "extension_scope_unsupported",
             "runtime-apply-extension-scope",
@@ -391,5 +504,19 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
         ApplyError::PlatformFailed(Stage::Apply) => ("apply_failed", "runtime-apply-apply-failed"),
         ApplyError::Interrupted => ("cancelled", "component-cancelled"),
         _ => ("invalid_state", "runtime-apply-state-error"),
+    }
+}
+
+const fn review_error(reason: ReviewReason) -> (&'static str, &'static str) {
+    match reason {
+        ReviewReason::BaselineRequired => ("baseline_required", "runtime-apply-baseline-required"),
+        ReviewReason::BaselineChanged => ("baseline_changed", "runtime-apply-baseline-changed"),
+        ReviewReason::Incomplete => ("incomplete_apply", "runtime-apply-incomplete"),
+        ReviewReason::GenerationUnavailable => {
+            ("generation_failed", "runtime-apply-inspect-failed")
+        }
+        ReviewReason::InvalidBaseline | ReviewReason::InvalidGeneration => {
+            ("invalid_state", "runtime-apply-state-error")
+        }
     }
 }
