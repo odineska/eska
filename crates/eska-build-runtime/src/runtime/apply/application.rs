@@ -13,7 +13,7 @@ use serde::Serialize;
 
 use super::{
     ApplyError, Catalog, LaunchTarget, Mode, Observation, Plan, Review, ReviewReason, RuntimeError,
-    Stage, Target, checksum, extension, lock, plan, write_plan,
+    Stage, StagedInput, Target, checksum, extension, lock, plan, write_plan,
 };
 
 #[derive(Debug, Serialize)]
@@ -297,16 +297,25 @@ fn prepare_component(
 ) -> Result<(ComponentPlan, (PathBuf, Catalog)), ApplyError> {
     let project = member.source.project();
     let target = &member.target;
-    let source = if stage {
-        target.scratch.path().join("source")
+    let mut input = if stage {
+        target.stage_source(project, false)?
     } else {
-        project.source().to_owned()
+        StagedInput {
+            source: project.source().to_owned(),
+            current: target.capture(project, None)?,
+            complete: false,
+        }
     };
-    let current = target.capture(project, stage.then_some(source.as_path()))?;
-    target.verify_source(&source)?;
+    target.verify_source(&input.source)?;
     generations.set(target, target.verified_generation()?);
     let observation = generations.for_target(target)?;
-    let incremental = plan(target, Ok(observation.clone()), &source, &current, false);
+    let incremental = plan(
+        target,
+        Ok(observation.clone()),
+        &input.source,
+        &input.current,
+        false,
+    );
     let needs_full = matches!(&incremental, Ok(plan) if plan.mode == Mode::Unsupported)
         || matches!(
             &incremental,
@@ -319,7 +328,11 @@ fn prepare_component(
             ))
         );
     let result = if allow_full && needs_full {
-        plan(target, Ok(observation), &source, &current, true)
+        if stage && !input.complete {
+            input = target.stage_full_source(project)?;
+            target.verify_source(&input.source)?;
+        }
+        plan(target, Ok(observation), &input.source, &input.current, true)
     } else {
         incremental
     };
@@ -337,7 +350,7 @@ fn prepare_component(
             plan,
             review,
         },
-        (source, current),
+        (input.source, input.current),
     ))
 }
 

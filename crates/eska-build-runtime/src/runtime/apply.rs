@@ -194,8 +194,9 @@ pub fn execute(
 ) -> Result<Plan, ApplyError> {
     let target = Target::open(project, name)?;
     let _lock = lock(&target.lock)?;
-    let source = target.scratch.path().join("source");
-    let current = target.capture(project, Some(&source))?;
+    let StagedInput {
+        source, current, ..
+    } = target.stage_source(project, initialize)?;
     target.verify_source(&source)?;
     let generation = target.observe()?;
     let mut plan = plan(&target, Ok(generation), &source, &current, initialize)?;
@@ -299,6 +300,12 @@ struct Target {
     state: PathBuf,
     scratch: tempfile::TempDir,
     authentication: Vec<OsString>,
+}
+
+struct StagedInput {
+    source: PathBuf,
+    current: Catalog,
+    complete: bool,
 }
 
 #[derive(Clone, Serialize)]
@@ -441,6 +448,52 @@ impl Target {
         }
         let excluded: Vec<_> = ignored.iter().map(PathBuf::as_path).collect();
         source_snapshot::catalog(project.source(), target, &excluded).map_err(ApplyError::Snapshot)
+    }
+
+    fn stage_source(&self, project: &Project, initialize: bool) -> Result<StagedInput, ApplyError> {
+        if !initialize && let Ok(baseline) = read_baseline(&self.state)? {
+            let current = self.capture(project, None)?;
+            let delta = changes(&baseline.files, &current);
+            if delta.iter().all(|(path, change)| {
+                *change == Change::Modified && descriptor::has_extension(path, "bsl")
+            }) {
+                let source = self.scratch.path().join("modules");
+                let root = Path::new(structure::ROOT);
+                // The extension identity and legacy structural baseline still need
+                // the verified root descriptor. Only the listed modules are imported.
+                let root = if self.extension.is_some() || baseline.root.is_none() {
+                    current.get_key_value(root)
+                } else {
+                    None
+                };
+                let selected = delta
+                    .keys()
+                    .filter_map(|path| current.get_key_value(path))
+                    .chain(root)
+                    .map(|(path, digest)| (path.as_path(), digest.as_slice()));
+                if !source_snapshot::copy_selected(project.source(), &source, selected)
+                    .map_err(ApplyError::Snapshot)?
+                {
+                    return Err(ApplyError::StalePreview);
+                }
+                return Ok(StagedInput {
+                    source,
+                    current,
+                    complete: false,
+                });
+            }
+        }
+        self.stage_full_source(project)
+    }
+
+    fn stage_full_source(&self, project: &Project) -> Result<StagedInput, ApplyError> {
+        let source = self.scratch.path().join("source");
+        let current = self.capture(project, Some(&source))?;
+        Ok(StagedInput {
+            source,
+            current,
+            complete: true,
+        })
     }
 
     fn applied_generation(&self) -> Result<String, ApplyError> {

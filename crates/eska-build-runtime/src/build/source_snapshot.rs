@@ -47,6 +47,66 @@ pub fn catalog(source: &Path, target: Option<&Path>, excluded: &[&Path]) -> Resu
     catalog_with_digest(source, target, excluded).map(|(files, _)| files)
 }
 
+/// Materialize selected catalog entries and check the bytes that will be imported.
+pub fn copy_selected<'a>(
+    source: &Path,
+    target: &Path,
+    entries: impl IntoIterator<Item = (&'a Path, &'a [u8])>,
+) -> Result<bool, Error> {
+    create_directory(target)?;
+    for (relative, expected) in entries {
+        for directory in relative
+            .ancestors()
+            .skip(1)
+            .take_while(|path| !path.as_os_str().is_empty())
+        {
+            if !is_entry(&source.join(directory), fs::Metadata::is_dir)? {
+                return Ok(false);
+            }
+        }
+        let input = source.join(relative);
+        if !is_entry(&input, fs::Metadata::is_file)? {
+            return Ok(false);
+        }
+        let output = target.join(relative);
+        if let Some(parent) = output.parent() {
+            fs::create_dir_all(parent).map_err(|source| Error::Io {
+                path: parent.to_owned(),
+                source,
+            })?;
+        }
+        match file_digest(&input, Some(&output)) {
+            Ok(actual) if actual == expected => {}
+            Ok(_) => return Ok(false),
+            Err(Error::Io { path, source })
+                if path == input && source.kind() == io::ErrorKind::NotFound =>
+            {
+                return Ok(false);
+            }
+            Err(error) => return Err(error),
+        }
+    }
+    Ok(true)
+}
+
+fn is_entry(path: &Path, is_kind: fn(&fs::Metadata) -> bool) -> Result<bool, Error> {
+    match fs::symlink_metadata(path) {
+        Ok(metadata) => Ok(is_kind(&metadata)),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(false),
+        Err(source) => Err(Error::Io {
+            path: path.to_owned(),
+            source,
+        }),
+    }
+}
+
+fn create_directory(path: &Path) -> Result<(), Error> {
+    fs::create_dir(path).map_err(|source| Error::Io {
+        path: path.to_owned(),
+        source,
+    })
+}
+
 pub(super) fn catalog_with_digest(
     source: &Path,
     target: Option<&Path>,
@@ -77,10 +137,7 @@ fn visit_directory(
     on_file: &mut impl FnMut(&Path, &[u8]),
 ) -> Result<(), Error> {
     if let Some(target) = target {
-        fs::create_dir(target).map_err(|source| Error::Io {
-            path: target.to_owned(),
-            source,
-        })?;
+        create_directory(target)?;
     }
     let mut entries = fs::read_dir(source)
         .map_err(|source_error| Error::Io {
@@ -204,4 +261,49 @@ fn path_bytes(path: &Path) -> Vec<u8> {
         .encode_wide()
         .flat_map(u16::to_le_bytes)
         .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn selected_copy_rejects_bytes_changed_since_catalog_capture() {
+        let temp = tempfile::tempdir().unwrap();
+        let source = temp.path().join("source");
+        fs::create_dir(&source).unwrap();
+        let name = Path::new("Module.bsl");
+        let module = source.join(name);
+        fs::write(&module, "A = 1;").unwrap();
+        let expected = file_digest(&module, None).unwrap();
+        fs::write(&module, "A = 2;").unwrap();
+
+        let selected = [(name, expected.as_slice())];
+        assert!(!copy_selected(&source, &temp.path().join("stale"), selected).unwrap());
+
+        fs::write(&module, "A = 1;").unwrap();
+        let staged = temp.path().join("staged");
+        assert!(copy_selected(&source, &staged, selected).unwrap());
+        assert_eq!(fs::read(staged.join(name)).unwrap(), b"A = 1;");
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn selected_copy_rejects_a_link_replacing_the_source_directory() {
+        let temp = tempfile::tempdir().unwrap();
+        let source = temp.path().join("source");
+        let modules = source.join("modules");
+        fs::create_dir_all(&modules).unwrap();
+        let relative = Path::new("modules/Module.bsl");
+        let module = source.join(relative);
+        fs::write(&module, "A = 1;").unwrap();
+        let expected = file_digest(&module, None).unwrap();
+        let moved = temp.path().join("moved");
+        fs::rename(&modules, &moved).unwrap();
+        std::os::unix::fs::symlink(&moved, &modules).unwrap();
+
+        let staged = temp.path().join("staged");
+        assert!(!copy_selected(&source, &staged, [(relative, expected.as_slice())]).unwrap());
+        assert!(!staged.join(relative).exists());
+    }
 }

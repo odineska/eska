@@ -43,6 +43,7 @@ fn prepare(root: &Path) -> PathBuf {
 case "$1:$2:$3" in
   --version::) printf '8.3.27.2342\n' ;;
   infobase:config:generation-id)
+    if test -f edit-after-staging; then printf 'A = 3;' > src/Module.bsl; fi
     if test -f generation-unavailable; then exit 3; fi
     if test -f generation-override; then
       cat generation-override
@@ -56,7 +57,14 @@ case "$1:$2:$3" in
     fi
     test ! -f fail-apply ;;
   infobase:config:import)
-    if test "$4" = files; then cat > "$(dirname "$0")/import-files"; fi ;;
+    if test "$4" = files; then
+      dir=$(dirname "$0")
+      cat > "$dir/import-files"
+      if test -f "$dir/edit-after-staging"; then
+        find . -type f | LC_ALL=C sort > "$dir/staged-files"
+        cat Module.bsl > "$dir/staged-module"
+      fi
+    fi ;;
   *) exit 2 ;;
 esac
 "#,
@@ -83,6 +91,48 @@ fn initialize(root: &Path) {
             .status
             .success()
     );
+}
+
+#[test]
+fn apply_stages_only_the_reviewed_module_and_imports_its_frozen_bytes() {
+    let root = TestDir::new();
+    let root = &root.0;
+    let module = prepare(root);
+    fs::write(
+        root.join("src/Configuration.xml"),
+        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Configuration><Properties><DefaultLanguage>Language.Russian</DefaultLanguage></Properties><ChildObjects><Language>Russian</Language></ChildObjects></Configuration></MetaDataObject>"#,
+    )
+    .unwrap();
+    fs::write(root.join("src/Other.bsl"), "B = 1;").unwrap();
+    initialize(root);
+    fs::write(&module, "A = 2;").unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    assert_eq!(
+        preview["plan"]["import_files"],
+        serde_json::json!(["Module.bsl"])
+    );
+
+    fs::write(root.join("edit-after-staging"), "").unwrap();
+    let (output, applied) = apply(root, "ru-RU", &["--confirm", token]);
+    assert!(output.status.success(), "{applied}");
+    assert_eq!(
+        fs::read_to_string(root.join("staged-files")).unwrap(),
+        "./Module.bsl\n"
+    );
+    assert_eq!(
+        fs::read_to_string(root.join("staged-module")).unwrap(),
+        "A = 2;"
+    );
+    assert_eq!(fs::read_to_string(&module).unwrap(), "A = 3;");
+    fs::remove_file(root.join("edit-after-staging")).unwrap();
+
+    let (_, next) = apply(root, "en-US", &[]);
+    assert_eq!(
+        next["plan"]["changes"],
+        serde_json::json!({"Module.bsl":"modified"})
+    );
+    assert_ne!(next["plan"]["confirmation"], token);
 }
 
 #[test]
