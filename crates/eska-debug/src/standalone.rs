@@ -1,7 +1,7 @@
 //! Standalone DAP request parameters. Project policy is enforced at the other entry point.
 use std::{env, path::PathBuf};
 
-use eska_build_runtime::runtime::DebugLaunch;
+use eska_build_runtime::runtime::{DebugConnection, DebugLaunch};
 use eska_project_core::project::local_settings::{
     Authentication, DebugEndpoint, Infobase, Profile, Runner, debug_server_url,
     valid_auto_attach_types,
@@ -21,7 +21,10 @@ struct Arguments {
     source_root: PathBuf,
     #[serde(default)]
     extension_roots: Vec<PathBuf>,
-    debug_server_url: String,
+    debug_server_url: Option<String>,
+    #[serde(default)]
+    managed_debug_server: bool,
+    debug_server_port: Option<u16>,
     infobase_alias: Option<String>,
     target_id: Option<String>,
     auto_attach_types: Option<Vec<String>>,
@@ -49,7 +52,6 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
     {
         return Err(INVALID);
     }
-    let endpoint = debug_server_url(&args.debug_server_url).ok_or(INVALID)?;
     let alias = args.infobase_alias.unwrap_or_else(|| match &args.infobase {
         Some(Infobase::Cluster { name, .. } | Infobase::Standalone { name, .. }) => name.clone(),
         _ => "DefAlias".to_owned(),
@@ -59,10 +61,12 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
     }
     let debug = DebugEndpoint {
         url: args.debug_server_url,
+        managed: args.managed_debug_server,
+        port: args.debug_server_port,
         auto_attach_types: args.auto_attach_types,
     };
     let mut auto_attach_types = debug.auto_attach_types();
-    let (launch, attach_selection) = match mode {
+    let (connection, launch, attach_selection) = match mode {
         Mode::Launch if args.target_id.is_none() => {
             let infobase = args.infobase.ok_or(INVALID)?;
             let runner = args.runner.ok_or(INVALID)?;
@@ -84,12 +88,15 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
                         crate::runtime_failure(&error)
                     }
                 })?;
-            (Some(launch), None)
+            let connection = launch.connection().map_err(|_| INVALID)?;
+            (connection, Some(launch), None)
         }
         Mode::Attach
             if args.runner.is_none()
                 && args.infobase.is_none()
-                && args.authentication.is_none() =>
+                && args.authentication.is_none()
+                && !debug.managed
+                && debug.port.is_none() =>
         {
             let selection = args
                 .target_id
@@ -97,7 +104,12 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
             if matches!(selection, AttachSelection::Exact(_)) {
                 auto_attach_types.clear();
             }
-            (None, Some(selection))
+            let endpoint = debug
+                .url
+                .as_deref()
+                .and_then(debug_server_url)
+                .ok_or(INVALID)?;
+            (DebugConnection::External(endpoint), None, Some(selection))
         }
         _ => return Err(INVALID),
     };
@@ -109,7 +121,7 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
             }
         })?;
     Ok(Config {
-        endpoint,
+        connection,
         alias,
         auto_attach_types,
         sources,

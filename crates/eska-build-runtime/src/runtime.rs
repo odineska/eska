@@ -1,6 +1,8 @@
 //! Launch a configured client through the same verified platform installation as ibcmd.
 
 pub mod apply;
+mod debug_server;
+pub use debug_server::{DebugConnection, ManagedDebugServer};
 
 use std::{
     env,
@@ -116,7 +118,8 @@ pub fn file_infobase(root: &Path, path: &Path) -> Result<PathBuf, RuntimeError> 
 /// Returns the first unavailable or invalid part of the saved profile.
 pub fn inspect(project: &Project, name: ProfileName) -> Result<(), RuntimeError> {
     let profile = profile(project, name, Action::Inspect)?;
-    if !platform(project, &profile)?
+    let platform = platform(project, &profile)?;
+    if !platform
         .program_available("1cv8c")
         .map_err(RuntimeError::Io)?
     {
@@ -137,8 +140,16 @@ pub fn inspect(project: &Project, name: ProfileName) -> Result<(), RuntimeError>
         }
     }
     if let Some(debug) = &profile.debug {
-        let url = url::Url::parse(&debug.url).map_err(|_| RuntimeError::EndpointUnavailable)?;
-        inspect_endpoint(&url, 80)?;
+        if debug.managed {
+            if !platform
+                .program_available("dbgs")
+                .map_err(RuntimeError::Io)?
+            {
+                return Err(RuntimeError::EndpointUnavailable);
+            }
+        } else if let DebugConnection::External(url) = DebugConnection::external(debug)? {
+            inspect_endpoint(&url, 80)?;
+        }
     }
     Ok(())
 }
@@ -250,21 +261,35 @@ impl DebugLaunch {
         &self.profile
     }
 
-    /// Start the debugger-enabled client only after initial DAP configuration has completed.
+    /// Obtain the debugger endpoint or reuse the verified platform for owned dbgs startup.
     /// # Errors
-    /// Returns native launch or cancellation errors.
-    pub fn run(&self, cancelled: &AtomicBool) -> Result<(), RuntimeError> {
-        let endpoint = self
+    /// Returns an endpoint error when the debug settings are missing or invalid.
+    pub fn connection(&self) -> Result<DebugConnection, RuntimeError> {
+        let debug = self
             .profile
             .debug
             .as_ref()
             .ok_or(RuntimeError::EndpointUnavailable)?;
+        if debug.managed {
+            Ok(DebugConnection::Managed {
+                platform: self.platform.clone(),
+                port: debug.port,
+            })
+        } else {
+            DebugConnection::external(debug)
+        }
+    }
+
+    /// Start the debugger-enabled client only after initial DAP configuration has completed.
+    /// # Errors
+    /// Returns native launch or cancellation errors.
+    pub fn run(&self, endpoint: &url::Url, cancelled: &AtomicBool) -> Result<(), RuntimeError> {
         launch_client(
             &self.base,
             self.scratch_parent.as_deref(),
             &self.profile,
             &self.platform,
-            Some(&endpoint.url),
+            Some(endpoint.as_str()),
             Some(cancelled),
         )
     }

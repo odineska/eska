@@ -13,7 +13,7 @@ mod state;
 use std::{ffi::OsString, path::PathBuf, process::ExitCode};
 
 use clap::{ArgAction, Args, CommandFactory, FromArgMatches, Parser, Subcommand, ValueEnum};
-use eska_build_runtime::runtime::{self, DebugLaunch};
+use eska_build_runtime::runtime::{self, DebugConnection, DebugLaunch};
 use eska_presentation::{
     arguments::bootstrap_lang,
     localization::{Localizer, resolve_locale_from_environment},
@@ -167,8 +167,8 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
     })?;
     let settings = runtime::profile(&project, profile, action)
         .map_err(|error| runtime_error(&error, localizer))?;
-    let (endpoint, alias, auto_attach_types) =
-        connection(&settings).ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
+    let (alias, auto_attach_types) = connection_settings(&settings)
+        .ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
     let launch = if args.mode == Mode::Launch {
         Some(
             DebugLaunch::prepare(&project, profile)
@@ -177,9 +177,16 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
     } else {
         None
     };
+    let connection = launch
+        .as_ref()
+        .map_or_else(
+            || DebugConnection::prepare(&project, &settings),
+            DebugLaunch::connection,
+        )
+        .map_err(|error| runtime_error(&error, localizer))?;
     session::run(
         Some(session::Config {
-            endpoint,
+            connection,
             alias,
             auto_attach_types,
             sources,
@@ -249,15 +256,14 @@ fn source_options(unsaved: bool) -> Option<OsString> {
     unsaved.then(|| "--unsaved".into())
 }
 
-fn connection(profile: &Profile) -> Option<(url::Url, String, Vec<String>)> {
+fn connection_settings(profile: &Profile) -> Option<(String, Vec<String>)> {
     use eska_project_core::project::local_settings::Infobase;
     let debug = profile.debug.as_ref()?;
-    let endpoint = eska_project_core::project::local_settings::debug_server_url(&debug.url)?;
     let alias = match &profile.infobase {
         Infobase::File { .. } => "DefAlias".to_owned(),
         Infobase::Cluster { name, .. } | Infobase::Standalone { name, .. } => name.clone(),
     };
-    Some((endpoint, alias, debug.auto_attach_types()))
+    Some((alias, debug.auto_attach_types()))
 }
 
 fn runtime_error(error: &runtime::RuntimeError, localizer: &Localizer) -> String {
@@ -279,6 +285,7 @@ const fn runtime_failure(error: &runtime::RuntimeError) -> &'static str {
         }
         runtime::RuntimeError::FileInfobaseUnavailable => "runtime-infobase-unavailable",
         runtime::RuntimeError::SecretUnavailable => "runtime-secret-unavailable",
+        runtime::RuntimeError::EndpointUnavailable => "debug-endpoint-unavailable",
         _ => "runtime-client-failed",
     }
 }

@@ -173,6 +173,70 @@ impl Dap {
 }
 
 #[test]
+#[ignore = "requires the owned native fixture with managed dbgs configured"]
+fn native_managed_debug_server_lifecycle() {
+    use std::net::{TcpListener, TcpStream};
+
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    for eof in [false, true] {
+        let mode = if eof { "attach" } else { "launch" };
+        let mut dap = Dap::start(root, "test", mode);
+        dap.success("initialize", json!({"adapterID":"eska"}));
+        dap.success(mode, json!({}));
+        let port = loop {
+            let msg = dap.receive();
+            if let Some(address) = msg["body"]["output"]
+                .as_str()
+                .and_then(|output| output.split("http://127.0.0.1:").nth(1))
+            {
+                let digits: String = address.chars().take_while(char::is_ascii_digit).collect();
+                break digits.parse::<u16>().unwrap();
+            }
+        };
+        assert!(TcpStream::connect(("127.0.0.1", port)).is_ok());
+        if eof {
+            dap.success("configurationDone", json!({}));
+            dap.input.take();
+            dap.wait_for_exit();
+        } else {
+            dap.success(
+                "setBreakpoints",
+                json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+            );
+            dap.success("configurationDone", json!({}));
+            verify_stop(&mut dap, &source, 1);
+            dap.shutdown();
+        }
+        assert!(
+            TcpStream::connect(("127.0.0.1", port)).is_err(),
+            "owned listener still active"
+        );
+    }
+    let occupied = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+    let address = occupied.local_addr().unwrap();
+    let settings = root.join(".eska/settings_local.toml");
+    let profile = fs::read_to_string(&settings).unwrap();
+    fs::write(settings, format!("{profile}\nport = {}\n", address.port())).unwrap();
+    let mut dap = Dap::start(root, "test", "launch");
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    let failure = dap.request("launch", json!({}));
+    assert_eq!(failure["success"], false);
+    assert!(
+        failure["message"]
+            .as_str()
+            .unwrap()
+            .contains("local 1C debug server")
+    );
+    assert!(
+        TcpStream::connect(address).is_ok(),
+        "existing listener was affected"
+    );
+    dap.shutdown();
+}
+
+#[test]
 #[ignore = "requires the owned standalone fixture and its HTTP debug server"]
 fn native_standalone_launch_with_standard_dap() {
     let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();

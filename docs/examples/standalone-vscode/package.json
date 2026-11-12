@@ -28,13 +28,15 @@
           }
         },
         "launch": {
-          "required": ["sourceRoot", "debugServerUrl", "infobase", "runner"],
+          "required": ["sourceRoot", "infobase", "runner"],
           "properties": {
             "sourceRoot": { "type": "string" },
             "extensionRoots": { "type": "array", "items": { "type": "string" } },
             "debugServerUrl": { "type": "string" },
             "infobaseAlias": { "type": "string" },
             "infobase": { "type": "object" },
+            "managedDebugServer": { "type": "boolean" },
+            "debugServerPort": { "type": "integer", "minimum": 1, "maximum": 65535 },
             "runner": { "type": "object" },
             "authentication": { "type": "object" },
             "autoAttachTypes": { "type": "array", "items": { "type": "string" } }

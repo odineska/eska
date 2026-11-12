@@ -36,7 +36,17 @@ fn direct_http_breakpoint_and_selected_frame() {
         extension: String::new(),
     };
     let launch = DebugLaunch::prepare(&project, ProfileName::Test).unwrap();
-    let endpoint = url::Url::parse(&launch.profile().debug.as_ref().unwrap().url).unwrap();
+    let endpoint = url::Url::parse(
+        launch
+            .profile()
+            .debug
+            .as_ref()
+            .unwrap()
+            .url
+            .as_deref()
+            .unwrap(),
+    )
+    .unwrap();
     let server = Server::new(&endpoint, "DefAlias".into()).unwrap();
     server.attach().unwrap();
     let _registration = Registration(&server);
@@ -53,7 +63,7 @@ fn direct_http_breakpoint_and_selected_frame() {
             .as_slice(),
         )])
         .unwrap();
-    let worker = Client::launch(launch);
+    let worker = Client::launch(launch, endpoint);
     let (target, frames) = stopped(&server);
     assert_eq!(frames[0].module.as_ref(), Some(&module));
     assert_eq!(frames[0].line, 3);
@@ -143,11 +153,11 @@ struct Client {
     worker: Option<thread::JoinHandle<()>>,
 }
 impl Client {
-    fn launch(launch: DebugLaunch) -> Self {
+    fn launch(launch: DebugLaunch, endpoint: url::Url) -> Self {
         let cancelled = Arc::new(AtomicBool::new(false));
         let flag = Arc::clone(&cancelled);
         let worker = thread::spawn(move || {
-            let result = launch.run(&flag);
+            let result = launch.run(&endpoint, &flag);
             if !flag.load(Ordering::Acquire) {
                 eprintln!("native client result: {result:?}");
             }

@@ -16,10 +16,10 @@ pub(super) struct Client {
 }
 
 impl Client {
-    pub(super) fn launch(launch: DebugLaunch) -> io::Result<Self> {
+    pub(super) fn launch(launch: DebugLaunch, endpoint: url::Url) -> io::Result<Self> {
         let stop = Arc::new(AtomicBool::new(false));
         let cancel = Arc::clone(&stop);
-        let worker = thread::Builder::new().spawn(move || launch.run(&cancel))?;
+        let worker = thread::Builder::new().spawn(move || launch.run(&endpoint, &cancel))?;
         Ok(Self {
             stop,
             worker: Some(worker),

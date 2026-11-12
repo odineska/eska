@@ -646,6 +646,30 @@ impl Ibcmd {
             Ok(output)
         }
     }
+
+    pub(crate) fn spawn_managed_debug_server(
+        &self,
+        mut arguments: Vec<OsString>,
+        pid_file: &Path,
+        notification_arg: OsString,
+    ) -> io::Result<DebugServerChild> {
+        let program = self.sibling_program("dbgs");
+        if matches!(program.runner, Runner::Host(_)) {
+            arguments.push(format!("--ownerPID={}", std::process::id()).into());
+        }
+        arguments.push(notification_arg.clone());
+        let child = interruptible_runner_command(&program.runner, &arguments, pid_file)
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()?;
+        Ok(DebugServerChild {
+            child,
+            runner: program.runner,
+            pid_file: pid_file.to_path_buf(),
+            notification_arg,
+        })
+    }
 }
 
 #[derive(Debug)]
@@ -905,6 +929,48 @@ fn terminate_distrobox_process(runner: &Runner, pid_file: &Path) {
             pid,
         ])
         .output();
+}
+
+pub struct DebugServerChild {
+    child: std::process::Child,
+    runner: Runner,
+    pid_file: PathBuf,
+    notification_arg: OsString,
+}
+
+impl DebugServerChild {
+    pub(crate) fn stopped(&mut self) -> io::Result<bool> {
+        self.child.try_wait().map(|status| status.is_some())
+    }
+}
+
+impl Drop for DebugServerChild {
+    fn drop(&mut self) {
+        if let Runner::Distrobox { container, .. } = &self.runner
+            && let Ok(pid) = std::fs::read_to_string(&self.pid_file)
+            && let Ok(pid) = pid.trim().parse::<u32>()
+            && pid > 1
+        {
+            // The notification path is unique to this spawn. Verify it before signaling a
+            // container PID, even when the runner exited first or a PID was reused.
+            if let Ok(mut stop) = Command::new("distrobox")
+                .args(["enter", "--name", container, "--no-tty", "--", "sh", "-c",
+                    "tr '\\000' '\\n' < \"/proc/$1/cmdline\" | grep -Fqx -- \"$2\" && kill -KILL \"$1\"", "sh"])
+                .arg(pid.to_string())
+                .arg(&self.notification_arg)
+                .stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null()).spawn()
+            {
+                let deadline = std::time::Instant::now() + Duration::from_secs(2);
+                while matches!(stop.try_wait(), Ok(None)) && std::time::Instant::now() < deadline {
+                    thread::sleep(Duration::from_millis(20));
+                }
+                let _ = stop.kill();
+                let _ = stop.wait();
+            }
+        }
+        let _ = self.child.kill();
+        let _ = self.child.wait();
+    }
 }
 
 /// Install one Windows console handler that records cancellation for the active build command.

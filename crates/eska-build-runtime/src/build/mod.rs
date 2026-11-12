@@ -9,6 +9,7 @@ mod shared_library;
 pub(crate) mod source_snapshot;
 pub use source_snapshot::Error as SourceSnapshotError;
 mod tool;
+pub(crate) use tool::DebugServerChild;
 
 pub use eska_project_core::project::build::{
     BuildSettings, BuildSettingsError, InvalidArtifactsDirectoryReason, PlatformVersion,

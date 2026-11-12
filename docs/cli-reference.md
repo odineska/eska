@@ -1159,7 +1159,10 @@ password_env = "ESKA_DEMO_PASSWORD"
 раннере. Внутри Git-репозитория для проверки индекса и правил исключения
 используется установленный `eska-vcs`. В `runner` можно указать
 точную `version` и абсолютный путь `ibcmd`. `debug.url` задаёт отдельный
-HTTP-сервер 1С. Без `debug.auto_attach_types` автоматически подключаются
+HTTP-сервер 1С. Для файловой базы вместо `debug.url` можно задать
+`debug.managed = true` и необязательный `debug.port`. Управляемый сервер
+слушает `127.0.0.1`; если порт не указан, его выбирает `dbgs`.
+Без `debug.auto_attach_types` автоматически подключаются
 `ManagedClient`, `Client`, `Server` и `ServerEmulation`. Пустой список
 оставляет только ручной выбор. Поддерживаемые типы — `Client`, `ManagedClient`,
 `WEBClient`, `COMConnector`, `Server`, `ServerEmulation`, `WEBService`,
@@ -2112,7 +2115,8 @@ eska-build 0.22.0
 
 `eska-debug --project-dir <путь> dap --profile test|prod --mode launch|attach`
 обслуживает DAP через stdin/stdout. `launch` запускает клиент после установки
-начальных точек останова, `attach` использует уже запущенный HTTP-сервер.
+начальных точек останова. `attach` использует сервер из профиля, внешний или
+управляемый для файловой базы.
 При расхождении или невозможности проверки `prod` требует явного решения
 `--sources current|fast-forward|switch-main`. Два варианта обновления доступны
 для чистой рабочей копии без несохранённых файлов и без расхождения истории

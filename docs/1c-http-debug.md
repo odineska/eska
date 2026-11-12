@@ -4,6 +4,12 @@ VS Code обменивается с `eska-debug` сообщениями DAP по
 соединяется с `dbgs` по HTTP. Клиент 1С подключается к своей информационной базе
 через настроенный runner. Адрес базы и `debug.url` задаются независимо.
 
+Для файловой базы профиль может запускать собственный сервер через
+`debug.managed = true`. Он слушает `127.0.0.1` и выбирает свободный порт.
+`debug.port` задаёт фиксированный порт, например для подключения отдельно
+запущенного клиента. Адрес показывается в Debug Console. Адаптер завершает
+свой сервер при отключении и EOF. Для внешнего сервера задайте `debug.url`.
+
 ## Критерии приёмки
 
 ESKA использует [DAP](https://github.com/microsoft/debug-adapter-protocol/blob/main/debugAdapterProtocol.json)
@@ -132,6 +138,12 @@ ESKA_DEBUG_ROUNDS=8 ESKA_DEBUG_TIMINGS=1 cargo test --release -p eska-debug \
 передаёт `ESKA_HOST_HTTP_FIXTURE` с путями `binary`, `settings` и `source`.
 Для проверки attach до запуска теста запустите отдельный клиент с
 `/DEBUG -http -attach /DEBUGGERURL <URL dbgs>`.
+
+Для проверки управляемого сервера задайте `managed = true` в `[test.debug]`
+вместо `url` и запустите `native_managed_debug_server_lifecycle` из
+`--test native_dap`. Сценарий проверяет запуск клиента, остановку, закрытие
+слушателя при `disconnect` и EOF и сохранность слушателя, занимающего заданный
+порт. Последняя проверка задаёт занятый порт в настройках временного проекта.
 
 `ESKA_DEBUG_TIMINGS` выводит имена HTTP-операций и миллисекунды в stderr.
 DAP-время включает обработку адаптера, HTTP и ожидание асинхронного результата.

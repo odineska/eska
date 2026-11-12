@@ -13,8 +13,8 @@ use std::{
     time::{Duration, Instant},
 };
 
-use eska_build_runtime::runtime::DebugLaunch;
-use eska_presentation::localization::Localizer;
+use eska_build_runtime::runtime::{DebugConnection, DebugLaunch, ManagedDebugServer};
+use eska_presentation::localization::{LocalizationValue, Localizer};
 use eska_project_core::project::local_settings::{DEBUG_TARGET_TYPES, valid_auto_attach_types};
 use serde_json::{Value, json};
 
@@ -39,7 +39,7 @@ const MAX_DEBUG_EXPRESSION: usize = 16384;
 const ERROR_FILTER: &str = "all";
 
 pub struct Config {
-    pub endpoint: url::Url,
+    pub connection: DebugConnection,
     pub alias: String,
     pub auto_attach_types: Vec<String>,
     pub sources: Sources,
@@ -100,6 +100,8 @@ struct Session<'a, W> {
     output: Output<W>,
     language: &'a Localizer,
     server: Option<Arc<Server>>,
+    endpoint: Option<url::Url>,
+    managed_server: Option<ManagedDebugServer>,
     input: mpsc::SyncSender<Input>,
     poll: Option<Poll>,
     state: State,
@@ -129,6 +131,8 @@ pub fn run(config: Option<Config>, language: &Localizer) -> io::Result<()> {
         output: Output::new(BufWriter::new(io::stdout().lock())),
         language,
         server: None,
+        endpoint: None,
+        managed_server: None,
         input: send,
         poll: None,
         state: State::default(),
@@ -153,6 +157,14 @@ fn drive(
     operation: &eska_tool_runtime::Operation,
 ) -> io::Result<()> {
     while !session.ended && !operation.is_cancelled() {
+        if session
+            .managed_server
+            .as_mut()
+            .is_some_and(ManagedDebugServer::stopped)
+        {
+            session.terminate(Some("debug-managed-server-stopped"))?;
+            break;
+        }
         if let Some(success) = session.client.as_mut().and_then(Client::completed) {
             session.terminate((!success).then_some("runtime-client-failed"))?;
             break;
@@ -240,6 +252,18 @@ impl<W: Write> Session<'_, W> {
             .response(&request, result.map_err(|key| self.language.text(key)))?;
         if started {
             self.output.event("initialized", &json!({}))?;
+            if self.managed_server.is_some()
+                && let Some(url) = &self.endpoint
+            {
+                let message = self.language.format(
+                    "debug-managed-server-ready",
+                    &[("url", LocalizationValue::Text(url.as_str()))],
+                );
+                self.output.event(
+                    "output",
+                    &json!({"category":"console","output":format!("{message}\n")}),
+                )?;
+            }
             if self.config.as_ref().is_some_and(|config| config.production) {
                 self.output.event("output", &json!({"category":"stderr","output":format!("{}\n",self.language.text("debug-prod-warning"))}))?;
             }
@@ -269,7 +293,11 @@ impl<W: Write> Session<'_, W> {
         if config.mode != mode {
             return Err(INVALID);
         }
-        let server = Server::new(&config.endpoint, config.alias.clone()).map_err(|_| ENDPOINT)?;
+        let (endpoint, managed_server) = config
+            .connection
+            .open()
+            .map_err(|_| "debug-managed-server-start-failed")?;
+        let server = Server::new(&endpoint, config.alias.clone()).map_err(|_| ENDPOINT)?;
         server.attach().map_err(|_| ENDPOINT)?;
         if server.auto_attach(&config.auto_attach_types).is_err() {
             let _ = server.detach();
@@ -283,6 +311,8 @@ impl<W: Write> Session<'_, W> {
             })?,
         );
         self.server = Some(server);
+        self.endpoint = Some(endpoint);
+        self.managed_server = managed_server;
         if standalone.is_some() {
             self.config = standalone;
         }
@@ -310,10 +340,14 @@ impl<W: Write> Session<'_, W> {
             }
         }
         let launch = self.config.as_mut().and_then(|config| config.launch.take());
-        self.client = launch.map(Client::launch).transpose().map_err(|_| {
-            self.ended = true;
-            "runtime-client-failed"
-        })?;
+        let endpoint = self.endpoint.as_ref().ok_or(INVALID)?;
+        self.client = launch
+            .map(|launch| Client::launch(launch, endpoint.clone()))
+            .transpose()
+            .map_err(|_| {
+                self.ended = true;
+                "runtime-client-failed"
+            })?;
         self.configured = true;
         Ok(json!({}))
     }
@@ -949,5 +983,6 @@ impl<W: Write> Session<'_, W> {
             poll.stop();
         }
         self.client.take();
+        self.managed_server.take();
     }
 }

@@ -110,7 +110,12 @@ pub enum Runner {
 #[derive(Clone, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct DebugEndpoint {
-    pub url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub managed: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub port: Option<u16>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_attach_types: Option<Vec<String>>,
 }
@@ -262,7 +267,20 @@ impl Profile {
             "runner.ibcmd",
         )?;
         if let Some(debug) = &self.debug {
-            require(debug_server_url(&debug.url).is_some(), "debug.url")?;
+            if debug.managed {
+                require(
+                    matches!(self.infobase, Infobase::File { .. }),
+                    "debug.managed",
+                )?;
+                require(debug.url.is_none(), "debug.url")?;
+                require(debug.port != Some(0), "debug.port")?;
+            } else {
+                require(
+                    debug.url.as_deref().and_then(debug_server_url).is_some(),
+                    "debug.url",
+                )?;
+                require(debug.port.is_none(), "debug.port")?;
+            }
             require(
                 debug
                     .auto_attach_types
@@ -468,7 +486,9 @@ mod tests {
                 ibcmd: None,
             },
             debug: Some(DebugEndpoint {
-                url: "http://127.0.0.1:1550".into(),
+                url: Some("http://127.0.0.1:1550".into()),
+                managed: false,
+                port: None,
                 auto_attach_types: None,
             }),
             authentication: None,
@@ -553,7 +573,9 @@ mod tests {
         ] {
             let mut prod = file_profile("release");
             prod.debug = Some(DebugEndpoint {
-                url: invalid.into(),
+                url: Some(invalid.into()),
+                managed: false,
+                port: None,
                 auto_attach_types: None,
             });
             let settings = LocalSettings {
