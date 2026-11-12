@@ -2,6 +2,7 @@
 
 mod base_configuration;
 mod execute;
+pub(crate) mod ibcmd_generation;
 mod infobase;
 pub(crate) mod manifest;
 mod plan;

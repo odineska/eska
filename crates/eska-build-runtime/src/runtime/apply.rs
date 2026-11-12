@@ -21,7 +21,7 @@ use std::{
 
 use super::{RuntimeError, checksum, launch_fingerprint, platform, profile};
 use crate::{
-    build::{Ibcmd, RunError, SourceSnapshotError, source_snapshot},
+    build::{Ibcmd, RunError, SourceSnapshotError, ibcmd_generation, source_snapshot},
     platform_path::native_path,
 };
 use eska_project_core::project::{
@@ -271,8 +271,8 @@ fn write_plan(
         Mode::Unchanged | Mode::Unsupported => return Err(ApplyError::StalePreview),
     }
     progress(Stage::Apply);
-    target.command(&["apply"], &[], None, None, Stage::Apply)?;
-    let generation = target.applied_generation()?;
+    let applied = target.command(&["apply"], &[], None, None, Stage::Apply)?;
+    let generation = target.applied_generation(&applied)?;
     let document = Baseline {
         generation: generation.clone(),
         files: current,
@@ -495,7 +495,13 @@ impl Target {
         })
     }
 
-    fn applied_generation(&self) -> Result<String, ApplyError> {
+    fn applied_generation(&self, output: &[u8]) -> Result<String, ApplyError> {
+        if matches!(self.connection, Connection::File(_))
+            && let Some(generation) =
+                ibcmd_generation::from_apply_output(output, self.extension.is_some())
+        {
+            return Ok(generation);
+        }
         let deadline = Instant::now() + Duration::from_secs(15);
         loop {
             match self.generation() {
@@ -530,13 +536,8 @@ impl Target {
             None,
             Stage::Inspect,
         )?;
-        let id = std::str::from_utf8(&output)
-            .map_err(|_| ApplyError::InvalidState)?
-            .trim();
-        if id.len() != 40 || !id.bytes().all(|byte| byte.is_ascii_hexdigit()) {
-            return Err(ApplyError::InvalidState);
-        }
-        Ok(id.to_ascii_lowercase())
+        let id = std::str::from_utf8(&output).map_err(|_| ApplyError::InvalidState)?;
+        ibcmd_generation::parse_id(id).ok_or(ApplyError::InvalidState)
     }
 
     fn verify_source(&self, source: &Path) -> Result<(), ApplyError> {

@@ -43,6 +43,7 @@ fn prepare(root: &Path) -> PathBuf {
 case "$1:$2:$3" in
   --version::) printf '8.3.27.2342\n' ;;
   infobase:config:generation-id)
+    if test -f track-generations; then printf 'generation-id\n' >> generation-calls; fi
     if test -f edit-after-staging; then printf 'A = 3;' > src/Module.bsl; fi
     if test -f generation-unavailable; then exit 3; fi
     if test -f generation-override; then
@@ -55,7 +56,9 @@ case "$1:$2:$3" in
       touch apply-ready
       exec sleep 30
     fi
-    test ! -f fail-apply ;;
+    test ! -f fail-apply || exit 1
+    if test -f next-generation; then cp next-generation generation-override; fi
+    if test -f apply-generation-output; then cat apply-generation-output; fi ;;
   infobase:config:import)
     if test "$4" = files; then
       dir=$(dirname "$0")
@@ -91,6 +94,75 @@ fn initialize(root: &Path) {
             .status
             .success()
     );
+}
+
+#[test]
+fn file_apply_uses_one_valid_generation_record_and_rechecks_ambiguous_output() {
+    let root = TestDir::new();
+    let root = &root.0;
+    let module = prepare(root);
+    initialize(root);
+    fs::write(root.join("track-generations"), "").unwrap();
+    let calls = root.join("generation-calls");
+    let initial = "a".repeat(40);
+    let second = "b".repeat(40);
+    let third = "c".repeat(40);
+    let prefix = "[INFO] Configuration generation is created:";
+    for (source, output, generation, expected_calls) in [
+        ("A = 2;", format!("{prefix} {initial}\n"), initial, 1),
+        (
+            "A = 3;",
+            format!("{prefix} {second}\n{prefix} {third}\n"),
+            second,
+            2,
+        ),
+        ("A = 4;", String::new(), third, 2),
+    ] {
+        fs::write(&module, source).unwrap();
+        let (_, preview) = apply(root, "en-US", &[]);
+        let token = preview["plan"]["confirmation"].as_str().unwrap();
+        fs::write(&calls, "").unwrap();
+        fs::write(root.join("next-generation"), format!("{generation}\n")).unwrap();
+        fs::write(root.join("apply-generation-output"), output).unwrap();
+
+        let (output, applied) = apply(root, "ru-RU", &["--confirm", token]);
+        assert!(output.status.success(), "{applied}");
+        assert_eq!(
+            fs::read_to_string(&calls).unwrap().lines().count(),
+            expected_calls
+        );
+        let (_, unchanged) = apply(root, "en-US", &[]);
+        assert_eq!(unchanged["plan"]["mode"], "unchanged");
+        assert_eq!(
+            unchanged["plan"]["inspection"]["baseline_generation"],
+            generation
+        );
+    }
+
+    fs::write(&module, "A = 5;").unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let applied = "d".repeat(40);
+    let external = "e".repeat(40);
+    fs::write(
+        root.join("apply-generation-output"),
+        format!("{prefix} {applied}\n"),
+    )
+    .unwrap();
+    fs::write(root.join("next-generation"), format!("{external}\n")).unwrap();
+    assert!(
+        apply(root, "en-US", &["--confirm", token])
+            .0
+            .status
+            .success()
+    );
+
+    let (output, review) = apply(root, "ru-RU", &[]);
+    assert!(!output.status.success());
+    assert_eq!(review["error"]["code"], "baseline_changed");
+    let inspection = &review["review"]["inspection"];
+    assert_eq!(inspection["baseline_generation"], applied);
+    assert_eq!(inspection["database_generation"], external);
 }
 
 #[test]
