@@ -13,7 +13,7 @@ use serde::Serialize;
 
 use super::{
     ApplyError, Catalog, LaunchTarget, Mode, Observation, Plan, Review, ReviewReason, RuntimeError,
-    Stage, StagedInput, Target, checksum, extension, lock, plan, write_plan,
+    Stage, StagedInput, Target, checksum, extension, lock, plan, read_baseline, write_plan,
 };
 
 #[derive(Debug, Serialize)]
@@ -297,8 +297,14 @@ fn prepare_component(
 ) -> Result<(ComponentPlan, (PathBuf, Catalog)), ApplyError> {
     let project = member.source.project();
     let target = &member.target;
+    let staged_baseline = stage.then(|| read_baseline(&target.state)).transpose()?;
     let mut input = if stage {
-        target.stage_source(project, false)?
+        target.stage_source(
+            project,
+            staged_baseline
+                .as_ref()
+                .and_then(|saved| saved.as_ref().ok()),
+        )?
     } else {
         StagedInput {
             source: project.source().to_owned(),
@@ -309,12 +315,17 @@ fn prepare_component(
     target.verify_source(&input.source)?;
     generations.set(target, target.verified_generation()?);
     let observation = generations.for_target(target)?;
+    let baseline = match staged_baseline {
+        Some(baseline) => baseline,
+        None => read_baseline(&target.state)?,
+    };
     let incremental = plan(
         target,
         Ok(observation.clone()),
         &input.source,
         &input.current,
         false,
+        baseline,
     );
     let needs_full = matches!(&incremental, Ok(plan) if plan.mode == Mode::Unsupported)
         || matches!(
@@ -332,7 +343,14 @@ fn prepare_component(
             input = target.stage_full_source(project)?;
             target.verify_source(&input.source)?;
         }
-        plan(target, Ok(observation), &input.source, &input.current, true)
+        plan(
+            target,
+            Ok(observation),
+            &input.source,
+            &input.current,
+            true,
+            read_baseline(&target.state)?,
+        )
     } else {
         incremental
     };

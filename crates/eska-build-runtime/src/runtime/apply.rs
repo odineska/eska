@@ -30,6 +30,7 @@ use eska_project_core::project::{
     local_settings::{Action, Infobase, Profile, ProfileName, SettingsError},
 };
 use serde::{Deserialize, Serialize};
+use sha2::{Digest, Sha256};
 
 type Catalog = BTreeMap<PathBuf, Vec<u8>>;
 
@@ -182,7 +183,15 @@ pub fn preview(project: &Project, name: ProfileName, initialize: bool) -> Result
     };
     let current = target.capture(project, None)?;
     target.verify_source(project.source())?;
-    plan(&target, generation, project.source(), &current, initialize)
+    let baseline = read_baseline(&target.state)?;
+    plan(
+        &target,
+        generation,
+        project.source(),
+        &current,
+        initialize,
+        baseline,
+    )
 }
 
 /// Revalidate the reviewed plan under the infobase lock, then apply its exact source snapshot.
@@ -197,12 +206,20 @@ pub fn execute(
 ) -> Result<Plan, ApplyError> {
     let target = Target::open(project, name)?;
     let _lock = lock(&target.lock)?;
+    let baseline = read_baseline(&target.state)?;
     let StagedInput {
         source, current, ..
-    } = target.stage_source(project, initialize)?;
+    } = target.stage_source(project, baseline.as_ref().ok().filter(|_| !initialize))?;
     target.verify_source(&source)?;
     let generation = target.observe()?;
-    let mut plan = plan(&target, Ok(generation), &source, &current, initialize)?;
+    let mut plan = plan(
+        &target,
+        Ok(generation),
+        &source,
+        &current,
+        initialize,
+        baseline,
+    )?;
     if plan.confirmation.as_deref() != Some(confirmation) {
         return Err(ApplyError::StalePreview);
     }
@@ -457,8 +474,12 @@ impl Target {
         source_snapshot::catalog(project.source(), target, &excluded).map_err(ApplyError::Snapshot)
     }
 
-    fn stage_source(&self, project: &Project, initialize: bool) -> Result<StagedInput, ApplyError> {
-        if !initialize && let Ok(baseline) = read_baseline(&self.state)? {
+    fn stage_source(
+        &self,
+        project: &Project,
+        baseline: Option<&Baseline>,
+    ) -> Result<StagedInput, ApplyError> {
+        if let Some(baseline) = baseline {
             let source = self.scratch.path().join("modules");
             let ignored = self.snapshot_exclusions(project);
             let excluded: Vec<_> = ignored.iter().map(PathBuf::as_path).collect();
@@ -701,13 +722,13 @@ fn plan(
     source: &Path,
     current: &Catalog,
     initialize: bool,
+    baseline: Result<Baseline, ReviewReason>,
 ) -> Result<Plan, ApplyError> {
     let pending = match fs::read(target.state.with_extension("pending")) {
         Ok(bytes) => Some(bytes),
         Err(error) if error.kind() == io::ErrorKind::NotFound => None,
         Err(error) => return Err(ApplyError::Io(error)),
     };
-    let baseline = read_baseline(&target.state)?;
     let delta = baseline
         .as_ref()
         .ok()
@@ -843,12 +864,8 @@ fn assemble_plan(
             &inspection.baseline_generation,
             pending,
             &import_files,
-            previous,
-            current,
         );
-        Some(checksum(&[
-            &serde_json::to_vec(&identity).map_err(|_| ApplyError::UnrepresentablePath)?
-        ]))
+        Some(confirmation_token(&identity, previous, current)?)
     } else {
         None
     };
@@ -877,6 +894,33 @@ fn assemble_plan(
         descriptors,
         root: if initialize { None } else { root },
     })
+}
+
+fn confirmation_token(
+    identity: &impl Serialize,
+    previous: &Catalog,
+    current: &Catalog,
+) -> Result<String, ApplyError> {
+    let identity = serde_json::to_vec(identity).map_err(|_| ApplyError::UnrepresentablePath)?;
+    Ok(checksum(&[
+        b"apply\0v2\0",
+        &catalog_digest(previous)?,
+        &catalog_digest(current)?,
+        &identity,
+    ]))
+}
+
+fn catalog_digest(files: &Catalog) -> Result<[u8; 32], ApplyError> {
+    let mut hash = Sha256::new();
+    for (path, digest) in files {
+        let path = path.to_str().ok_or(ApplyError::UnrepresentablePath)?;
+        // Frame each entry independently, including digests from old baselines.
+        hash.update((path.len() as u64).to_le_bytes());
+        hash.update(path.as_bytes());
+        hash.update((digest.len() as u64).to_le_bytes());
+        hash.update(digest);
+    }
+    Ok(hash.finalize().into())
 }
 
 fn read_baseline(path: &Path) -> Result<Result<Baseline, ReviewReason>, ApplyError> {
@@ -1013,6 +1057,21 @@ fn input_path(path: &Path) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn confirmation_binds_both_catalogs_and_the_target() {
+        let previous = Catalog::from([("x".into(), b"yz".to_vec())]);
+        let current = Catalog::from([("xy".into(), b"z".to_vec())]);
+        let token = confirmation_token(&"test-a", &previous, &current).unwrap();
+        for (target, saved, sources) in [
+            ("test-b", &previous, &current),
+            ("test-a", &current, &current),
+            ("test-a", &previous, &previous),
+            ("test-a", &current, &previous),
+        ] {
+            assert_ne!(confirmation_token(&target, saved, sources).unwrap(), token);
+        }
+    }
 
     #[test]
     fn source_delta_includes_removed_and_added_paths() {
