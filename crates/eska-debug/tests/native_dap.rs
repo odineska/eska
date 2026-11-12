@@ -173,6 +173,77 @@ impl Dap {
 }
 
 #[test]
+#[ignore = "requires the owned enumerable fixture and its HTTP debug server"]
+fn native_enumeration_expands_keys_and_nested_values_by_page() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let mut dap = Dap::start(root, "test", "launch");
+    dap.success(
+        "initialize",
+        json!({"adapterID":"eska","supportsVariablePaging":true}),
+    );
+    dap.success("launch", json!({}));
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":6}]}),
+    );
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let frame = &stack["stackFrames"][0]["id"];
+    for expression in ["Ряд", "ФиксированныйРяд"] {
+        let evaluated = dap.success("evaluate", json!({"frameId":frame,"expression":expression}));
+        assert_eq!(evaluated["indexedVariables"], 2, "{evaluated}");
+        let reference = &evaluated["variablesReference"];
+        let mut seen = std::collections::BTreeSet::new();
+        for index in 0..2 {
+            let page = dap.success(
+                "variables",
+                json!({"variablesReference":reference,"filter":"indexed","start":index,"count":1}),
+            );
+            let entry = &page["variables"][0];
+            assert_eq!(page["variables"].as_array().unwrap().len(), 1);
+            assert!(
+                entry["name"]
+                    .as_str()
+                    .unwrap()
+                    .starts_with(&format!("{index}: ")),
+                "{entry}"
+            );
+            let expanded = dap.success(
+                "variables",
+                json!({"variablesReference":entry["variablesReference"]}),
+            );
+            let properties = expanded["variables"].as_array().unwrap();
+            let key = properties
+                .iter()
+                .find(|value| value["name"] == "Ключ")
+                .unwrap()["value"]
+                .as_str()
+                .unwrap();
+            let value = properties
+                .iter()
+                .find(|value| value["name"] == "Значение")
+                .unwrap();
+            assert!(entry["name"].as_str().unwrap().ends_with(key));
+            assert!(seen.insert(key.to_owned()));
+            if key == "\"первый\"" {
+                assert_eq!(value["value"], "11");
+            } else {
+                let nested = dap.success(
+                    "variables",
+                    json!({"variablesReference":value["variablesReference"]}),
+                );
+                assert_eq!(nested["variables"][0]["name"], "Вложенный");
+                assert_eq!(nested["variables"][0]["value"], "22");
+            }
+        }
+    }
+    dap.shutdown();
+}
+
+#[test]
 #[ignore = "requires the owned native fixture with managed dbgs configured"]
 fn native_managed_debug_server_lifecycle() {
     use std::net::{TcpListener, TcpStream};

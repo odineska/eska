@@ -1,7 +1,7 @@
 //! DAP identifiers have a lifetime independent of dbgs target and stack identifiers.
 use std::collections::{BTreeMap, BTreeSet};
 
-use crate::dbgs::{Frame, Selector, Target};
+use crate::dbgs::{Frame, Selector, Target, View};
 
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct Position {
@@ -14,7 +14,7 @@ pub struct Position {
 pub struct Variable {
     pub position: Position,
     pub path: Vec<Selector>,
-    pub indexed: bool,
+    pub view: View,
     pub indexed_count: Option<u32>,
 }
 
@@ -169,7 +169,7 @@ mod tests {
         let reference = state.add_variable(Variable {
             position: state.frame(old).unwrap(),
             path: vec![],
-            indexed: false,
+            view: View::Context,
             indexed_count: None,
         });
         state.resume(first);
@@ -197,7 +197,7 @@ mod tests {
         let mut variable = Variable {
             position: state.frame(frame_id).unwrap(),
             path: vec![Selector::Expression("A".into())],
-            indexed: false,
+            view: View::Context,
             indexed_count: None,
         };
         let old = state.add_variable(variable.clone()).unwrap();

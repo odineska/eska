@@ -58,20 +58,33 @@ pub struct Page {
     pub count: u32,
 }
 
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub enum View {
+    Context,
+    Collection,
+    Enumeration,
+}
+
+impl View {
+    pub const fn paged(self) -> bool {
+        !matches!(self, Self::Context)
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct Value {
     pub name: String,
     pub text: String,
     pub kind: String,
-    pub expandable: bool,
-    pub indexed: bool,
+    pub view: Option<View>,
+    pub entry_key: Option<String>,
     pub collection_size: Option<u32>,
     pub error: bool,
 }
 
 impl Value {
     pub const fn can_expand(&self) -> bool {
-        self.expandable || self.indexed
+        !self.error && self.view.is_some()
     }
 }
 
@@ -259,10 +272,14 @@ impl Server {
         level: usize,
         id: &str,
         path: &[Selector],
-        indexed: bool,
+        view: View,
         page: Option<Page>,
     ) -> io::Result<Vec<Calculation>> {
-        let interface = if indexed { "collection" } else { "context" };
+        let interface = match view {
+            View::Context => "context",
+            View::Collection => "collection",
+            View::Enumeration => "enum",
+        };
         let mut items = String::new();
         for selector in path {
             let (kind, field, value) = match selector {
@@ -452,17 +469,22 @@ fn calculation(node: Node<'_, '_>) -> Option<Calculation> {
     for result in children(node, "calculationResult") {
         let mut collection_index = 0;
         for property in result.children().filter(Node::is_element) {
-            let name = match property.tag_name().name() {
-                "valueOfContextPropInfo" => child(property, "propInfo")
-                    .map_or_else(String::new, |info| text(info, "propName").to_owned()),
+            match property.tag_name().name() {
+                "valueOfContextPropInfo" => values.push(context_property(property)),
                 "valueOfCollectionInfo" | "valueOfEnumInfo" => {
                     let index = collection_index;
                     collection_index += 1;
-                    index.to_string()
+                    let mut entry = value(child(property, "valueInfo"), index.to_string());
+                    if property.has_tag_name("valueOfEnumInfo") {
+                        entry.entry_key = children(property, "valueOfContextPropInfo")
+                            .map(context_property)
+                            .find(|key| !key.error && matches!(key.name.as_str(), "Ключ" | "Key"))
+                            .map(|key| key.text);
+                    }
+                    values.push(entry);
                 }
-                _ => continue,
-            };
-            values.push(value(child(property, "valueInfo"), name));
+                _ => {}
+            }
         }
     }
     Some(Calculation {
@@ -472,13 +494,35 @@ fn calculation(node: Node<'_, '_>) -> Option<Calculation> {
     })
 }
 
+fn context_property(property: Node<'_, '_>) -> Value {
+    let info = child(property, "propInfo");
+    let data = child(property, "valueInfo");
+    let name = info.map_or_else(String::new, |info| text(info, "propName").to_owned());
+    let mut result = value(data, name);
+    if let Some(info) = info
+        && (data.is_none() || text(info, "isReaded") == "false")
+    {
+        result.error = true;
+        result.text = decoded(info, "errorStr");
+    }
+    result
+}
+
 fn value(info: Option<Node<'_, '_>>, name: String) -> Value {
     Value {
         name,
         text: info.map_or_else(String::new, |node| decoded(node, "pres")),
         kind: info.map_or_else(String::new, |node| text(node, "typeName").to_owned()),
-        expandable: info.is_some_and(|node| text(node, "isExpandable") == "true"),
-        indexed: info.is_some_and(|node| text(node, "isIIndexedCollectionRO") == "true"),
+        view: info.and_then(|node| {
+            [
+                ("isExpandable", View::Context),
+                ("isIIndexedCollectionRO", View::Collection),
+                ("isSupportIEnumValue", View::Enumeration),
+            ]
+            .into_iter()
+            .find_map(|(flag, view)| (text(node, flag) == "true").then_some(view))
+        }),
+        entry_key: None,
         collection_size: info.and_then(|node| text(node, "collectionSize").parse().ok()),
         error: false,
     }
@@ -530,4 +574,24 @@ fn escape(text: &str) -> String {
 
 fn invalid() -> io::Error {
     io::Error::new(io::ErrorKind::InvalidData, "invalid debugger XML")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_failed_context_property_keeps_its_native_message_and_siblings() {
+        let xml = r"<result><expressionResultID>id</expressionResultID><calculationResult>
+            <valueOfContextPropInfo><propInfo><propName>Unavailable</propName><isReaded>false</isReaded><errorStr>RGVuaWVk</errorStr></propInfo></valueOfContextPropInfo>
+            <valueOfContextPropInfo><propInfo><propName>Readable</propName><isReaded>true</isReaded></propInfo><valueInfo><typeName>Number</typeName><pres>NDI=</pres></valueInfo></valueOfContextPropInfo>
+            </calculationResult></result>";
+        let result = calculation(Document::parse(xml).unwrap().root_element()).unwrap();
+        assert!(!result.value.error);
+        assert_eq!(result.children[0].name, "Unavailable");
+        assert!(result.children[0].error);
+        assert_eq!(result.children[0].text, "Denied");
+        assert!(!result.children[0].can_expand());
+        assert_eq!(result.children[1].text, "42");
+    }
 }

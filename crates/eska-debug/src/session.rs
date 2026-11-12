@@ -23,7 +23,7 @@ use crate::{
     dap::{self, Output, Request},
     dbgs::{
         self, Breakpoint, Calculation, Event, Module, Page, Selector, Server, StackAction, Step,
-        Target,
+        Target, View,
     },
     source::Sources,
     state::{Position, State, Variable},
@@ -494,7 +494,7 @@ impl<W: Write> Session<'_, W> {
             .add_variable(Variable {
                 position,
                 path: Vec::new(),
-                indexed: false,
+                view: View::Context,
                 indexed_count: None,
             })
             .ok_or(values::LIMIT)?;
@@ -733,7 +733,7 @@ impl<W: Write> Session<'_, W> {
         let id = dbgs::random_id()?;
         let variable = &pending.variable;
         let page = match pending.phase {
-            CalculationPhase::Children(page) if variable.indexed => Some(page),
+            CalculationPhase::Children(page) if variable.view.paged() => Some(page),
             _ => None,
         };
         let result = self.server().and_then(|server| {
@@ -750,7 +750,7 @@ impl<W: Write> Session<'_, W> {
                     variable.position.level,
                     &id,
                     &variable.path,
-                    variable.indexed,
+                    variable.view,
                     page,
                 )
                 .map_err(|_| ENDPOINT)
@@ -797,7 +797,7 @@ impl<W: Write> Session<'_, W> {
                 expression,
                 address.as_deref(),
             ))],
-            indexed: false,
+            view: View::Context,
             indexed_count: None,
         };
         let phase = address.map_or(CalculationPhase::Store, CalculationPhase::ReplaceSnapshot);
@@ -898,9 +898,13 @@ impl<W: Write> Session<'_, W> {
                 }
                 evaluated
             }
-            CalculationPhase::Children(page) => {
-                values::children(&mut self.state, &pending.variable, page, results)
-            }
+            CalculationPhase::Children(page) => values::children(
+                &mut self.state,
+                &pending.variable,
+                page,
+                results,
+                &self.language.text("debug-unreadable-property"),
+            ),
         };
         self.output.response(
             &pending.request,

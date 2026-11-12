@@ -1180,6 +1180,7 @@ debug-invalid-log-template = Use a 1C expression between single braces and doubl
 debug-runtime-error-condition = Stop when the error message contains this text.
 debug-value-limit = The debugger data limit was exceeded (512 children, 8192 references or 32 nesting levels). Use a more specific expression to inspect the required value.
 debug-variable-page-limit = At most 512 variables can be displayed at once. Expand a smaller range or use a more specific expression.
+debug-unreadable-property = 1C could not read this property.
 debug-snapshot-limit = The debugger reached its limit of 256 saved evaluation results for this target.
 debug-evaluation-failed = Could not evaluate the expression.
 debug-evaluation-timeout = The server did not return a calculation for the active frame in time.

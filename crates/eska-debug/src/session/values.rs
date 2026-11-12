@@ -48,8 +48,8 @@ pub(super) fn evaluated(
 
 pub(super) fn page(variable: &Variable, arguments: &Value) -> Result<Option<Page>, Failure> {
     match arguments["filter"].as_str() {
-        Some("named") if variable.indexed => return Ok(None),
-        Some("indexed") if !variable.indexed => return Ok(None),
+        Some("named") if variable.view.paged() => return Ok(None),
+        Some("indexed") if !variable.view.paged() => return Ok(None),
         Some("named" | "indexed") => {}
         None if arguments["filter"].is_null() => {}
         _ => return Err(INVALID),
@@ -79,7 +79,7 @@ pub(super) fn page(variable: &Variable, arguments: &Value) -> Result<Option<Page
     if count > MAX_CHILDREN && (remaining.is_some() || requested != 0) {
         return Err(PAGE_LIMIT);
     }
-    if variable.indexed && start.checked_add(count - 1).is_none() {
+    if variable.view.paged() && start.checked_add(count - 1).is_none() {
         return Err(INVALID);
     }
     Ok(Some(Page { start, count }))
@@ -90,9 +90,10 @@ pub(super) fn children(
     variable: &Variable,
     page: Page,
     results: Vec<Calculation>,
+    unreadable: &str,
 ) -> Result<Value, Failure> {
     let raw = results.into_iter().flat_map(|result| result.children);
-    let raw = if variable.indexed {
+    let raw = if variable.view.paged() {
         raw.take(MAX_CHILDREN as usize + 1).collect::<Vec<_>>()
     } else {
         raw.skip(page.start as usize)
@@ -104,7 +105,9 @@ pub(super) fn children(
     }
     let mut children = Vec::with_capacity(raw.len());
     for value in &raw {
-        children.push(display_child(state, variable, page.start, value)?);
+        children.push(display_child(
+            state, variable, page.start, value, unreadable,
+        )?);
     }
     Ok(json!({"variables":children}))
 }
@@ -114,8 +117,9 @@ fn display_child(
     parent: &Variable,
     start: u32,
     value: &dbgs::Value,
+    unreadable: &str,
 ) -> Result<Value, Failure> {
-    let index = if parent.indexed {
+    let index = if parent.view.paged() {
         Some(
             value
                 .name
@@ -141,9 +145,21 @@ fn display_child(
     } else {
         0
     };
-    let name = index.map_or_else(|| value.name.clone(), |index| index.to_string());
+    let name = match (index, value.entry_key.as_deref()) {
+        (Some(index), Some(key)) => format!("{index}: {key}"),
+        (Some(index), None) => index.to_string(),
+        (None, _) => value.name.clone(),
+    };
+    let text = if value.error && value.text.is_empty() {
+        unreadable
+    } else {
+        &value.text
+    };
     let mut body =
-        json!({"name":name,"value":value.text,"type":value.kind,"variablesReference":reference});
+        json!({"name":name,"value":text,"type":value.kind,"variablesReference":reference});
+    if value.error {
+        body["presentationHint"] = json!({"attributes":["readOnly"]});
+    }
     add_count(&mut body, value);
     Ok(body)
 }
@@ -153,18 +169,18 @@ fn reference(
     mut variable: Variable,
     value: &dbgs::Value,
 ) -> Result<u64, Failure> {
-    if !value.can_expand() {
+    let Some(view) = value.view.filter(|_| !value.error) else {
         return Ok(0);
-    }
-    variable.indexed = !value.expandable && value.indexed;
-    variable.indexed_count = value.collection_size.filter(|_| variable.indexed);
+    };
+    variable.view = view;
+    variable.indexed_count = value.collection_size.filter(|_| variable.view.paged());
     state.add_variable(variable).ok_or(LIMIT)
 }
 
 fn add_count(body: &mut Value, value: &dbgs::Value) {
     if let Some(size) = value
         .collection_size
-        .filter(|_| value.indexed && !value.expandable)
+        .filter(|_| !value.error && value.view.is_some_and(dbgs::View::paged))
     {
         body["indexedVariables"] = json!(size);
     }
@@ -173,7 +189,7 @@ fn add_count(body: &mut Value, value: &dbgs::Value) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::dbgs::{Frame, Target};
+    use crate::dbgs::{Frame, Target, View};
 
     fn stopped() -> (State, Variable) {
         let mut state = State::default();
@@ -195,7 +211,7 @@ mod tests {
         let variable = Variable {
             position: state.frame(frame).unwrap(),
             path: vec![],
-            indexed: false,
+            view: View::Context,
             indexed_count: None,
         };
         (state, variable)
@@ -206,8 +222,8 @@ mod tests {
             name: "Object".into(),
             text: "value".into(),
             kind: "object".into(),
-            expandable: true,
-            indexed: false,
+            view: Some(View::Context),
+            entry_key: None,
             collection_size: None,
             error: false,
         }
@@ -228,11 +244,11 @@ mod tests {
             count: 513,
         };
         assert_eq!(
-            children(&mut state, &variable, page, result(513)),
+            children(&mut state, &variable, page, result(513), "Unreadable"),
             Err(LIMIT)
         );
         assert_eq!(
-            children(&mut state, &variable, page, result(512)).unwrap()["variables"]
+            children(&mut state, &variable, page, result(512), "Unreadable").unwrap()["variables"]
                 .as_array()
                 .unwrap()
                 .len(),
@@ -246,10 +262,22 @@ mod tests {
         variable.path = vec![Selector::Property("Nested".into()); 33];
         assert_eq!(evaluated(&mut state, &variable, &value()), Err(LIMIT));
         let mut scalar = value();
-        scalar.expandable = false;
+        scalar.view = None;
         assert_eq!(
             evaluated(&mut state, &variable, &scalar).unwrap()["variablesReference"],
             0
         );
+    }
+
+    #[test]
+    fn unreadable_properties_use_the_fallback_and_do_not_offer_a_handle() {
+        let (mut state, variable) = stopped();
+        let mut property = value();
+        property.error = true;
+        property.text.clear();
+        let child = display_child(&mut state, &variable, 0, &property, "Недоступно").unwrap();
+        assert_eq!(child["value"], "Недоступно");
+        assert_eq!(child["variablesReference"], 0);
+        assert_eq!(child["presentationHint"]["attributes"], json!(["readOnly"]));
     }
 }
