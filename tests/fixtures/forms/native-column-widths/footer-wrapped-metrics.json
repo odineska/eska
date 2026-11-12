@@ -321,6 +321,46 @@
           }
         },
         {
+          "name": "totals caption wraps below the one-line threshold",
+          "frame": [1364, 127],
+          "nativeCapture": "Transition133.png",
+          "screenshotSha256": "5022454bed8298842eda3219ee02956a7a8fec6fd05fd7584521ba4d12f66e6f",
+          "controls": {"Memo": [13, 58, 511, 56], "Amount": [1186, 79, 152, 19]},
+          "groupBoxes": {"Summary": [null, 74, null, 40]},
+          "captions": {"Amount": ["Сумма", "документа:"]},
+          "edit": {
+            "form": {"Width": 133},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "one-line totals clear the taller minimum immediately",
+          "frame": [1374, 122],
+          "nativeCapture": "Transition134.png",
+          "screenshotSha256": "7bd1907b352bc23c359bd4bb341b95bcfac100b5389d5bb9bfb5682907dc7961",
+          "controls": {"Memo": [13, 58, 511, 51], "Amount": [1196, 79, 152, 19]},
+          "groupBoxes": {"Summary": [1068, 74, 285, 29]},
+          "captions": {"Amount": ["Сумма документа:"]},
+          "bodyScrollable": false,
+          "edit": {
+            "form": {"Width": 134},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "one-line totals retain the full preferred frame width",
+          "frame": [1384, 122],
+          "nativeCapture": "Transition135.png",
+          "screenshotSha256": "21d9e46eda79f88a3ef097627684a6f6bad4d9cce574bb9a10ff024d3671c5dd",
+          "controls": {"Memo": [13, 58, 511, 51], "Amount": [1206, 79, 152, 19]},
+          "groupBoxes": {"Summary": [1078, 74, 285, 29]},
+          "bodyScrollable": false,
+          "edit": {
+            "form": {"Width": 135},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
           "name": "clearing the group background restores the original field height",
           "frame": [1094, 122],
           "nativeCapture": "Plain.png",
