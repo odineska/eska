@@ -14,7 +14,7 @@ use std::{
     env,
     ffi::OsString,
     fs::{self, File, OpenOptions},
-    io::{self, Seek, Write},
+    io::{self, BufWriter, Seek, Write},
     path::{Path, PathBuf},
     process::Output,
     thread,
@@ -307,7 +307,11 @@ fn write_plan(
         root,
     };
     let mut temp = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
-    serde_json::to_writer(temp.as_file_mut(), &document).map_err(|_| ApplyError::InvalidState)?;
+    {
+        let mut writer = BufWriter::new(temp.as_file_mut());
+        serde_json::to_writer(&mut writer, &document).map_err(|_| ApplyError::InvalidState)?;
+        writer.flush().map_err(ApplyError::Io)?;
+    }
     temp.as_file().sync_all().map_err(ApplyError::Io)?;
     temp.persist(&target.state)
         .map_err(|error| ApplyError::Io(error.error))?;
