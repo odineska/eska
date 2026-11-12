@@ -361,6 +361,9 @@ fn prepare_component(
         }
         Err(error) => return Err(error),
     };
+    if stage && let Some(plan) = &plan {
+        input.stage_import_files(project, plan)?;
+    }
     Ok((
         ComponentPlan {
             member: member.name.to_owned(),

@@ -209,23 +209,28 @@ pub fn execute(
     let target = Target::open(project, name)?;
     let _lock = lock(&target.lock)?;
     let baseline = read_baseline(&target.state)?;
-    let StagedInput {
-        source, current, ..
-    } = target.stage_source(project, baseline.as_ref().ok().filter(|_| !initialize))?;
-    target.verify_source(&source)?;
+    let input = target.stage_source(project, baseline.as_ref().ok().filter(|_| !initialize))?;
+    target.verify_source(&input.source)?;
     let generation = target.observe()?;
     let mut plan = plan(
         &target,
         Ok(generation),
-        &source,
-        &current,
+        &input.source,
+        &input.current,
         initialize,
         baseline,
     )?;
     if plan.confirmation.as_deref() != Some(confirmation) {
         return Err(ApplyError::StalePreview);
     }
-    write_plan(&target, &source, current, &mut plan, &mut progress)?;
+    input.stage_import_files(project, &plan)?;
+    write_plan(
+        &target,
+        &input.source,
+        input.current,
+        &mut plan,
+        &mut progress,
+    )?;
     Ok(plan)
 }
 
@@ -327,6 +332,24 @@ struct StagedInput {
     source: PathBuf,
     current: Catalog,
     complete: bool,
+}
+
+impl StagedInput {
+    fn stage_import_files(&self, project: &Project, plan: &Plan) -> Result<(), ApplyError> {
+        if !self.complete
+            && let Some(paths) = &plan.import_files
+            && !source_snapshot::stage_selected(
+                project.source(),
+                &self.source,
+                &self.current,
+                paths,
+            )
+            .map_err(ApplyError::Snapshot)?
+        {
+            return Err(ApplyError::StalePreview);
+        }
+        Ok(())
+    }
 }
 
 #[derive(Clone, Serialize)]
@@ -482,28 +505,26 @@ impl Target {
         baseline: Option<&Baseline>,
     ) -> Result<StagedInput, ApplyError> {
         if let Some(baseline) = baseline {
-            let source = self.scratch.path().join("modules");
+            let source = self.scratch.path().join("delta");
             let ignored = self.snapshot_exclusions(project);
             let excluded: Vec<_> = ignored.iter().map(PathBuf::as_path).collect();
             // The extension identity and legacy baseline still use a staged root.
             let required = (self.extension.is_some() || baseline.root.is_none())
                 .then_some(Path::new(structure::ROOT));
-            if let Some(current) = source_snapshot::stage_modules(
+            let current = source_snapshot::stage_delta(
                 project.source(),
                 &source,
                 &excluded,
                 &baseline.files,
                 required,
-                |path| descriptor::has_extension(path, "bsl"),
             )
             .map_err(ApplyError::Snapshot)?
-            {
-                return Ok(StagedInput {
-                    source,
-                    current,
-                    complete: false,
-                });
-            }
+            .ok_or(ApplyError::StalePreview)?;
+            return Ok(StagedInput {
+                source,
+                current,
+                complete: false,
+            });
         }
         self.stage_full_source(project)
     }

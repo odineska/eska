@@ -43,33 +43,72 @@ pub fn catalog(source: &Path, target: Option<&Path>, excluded: &[&Path]) -> Resu
     Walker::new(source, excluded, None).catalog(target)
 }
 
-/// Capture exact digests and materialize only modified modules and the required root.
-/// `None` requests a full snapshot when the delta also changes the tree or other files.
-pub fn stage_modules(
+/// Capture exact digests and freeze the inputs needed to plan an incremental import.
+/// `None` means that a selected file changed while it was being staged.
+pub fn stage_delta(
     source: &Path,
     target: &Path,
     excluded: &[&Path],
     previous: &Files,
     required: Option<&Path>,
-    is_module: impl Fn(&Path) -> bool,
 ) -> Result<Option<Files>, Error> {
     create_directory(target)?;
     let mut walker = Walker::new(source, excluded, None);
     let mut files = Files::new();
-    let mut sparse = true;
+    let mut needs_xml = false;
+    let mut stable = true;
     walker.visit(source, None, &mut |relative, digest, buffered| {
         let old = previous.get(relative);
         let changed = old.is_none_or(|old| *old != digest);
-        if old.is_none() || (changed && !is_module(relative)) {
-            sparse = false;
-        }
-        if sparse && (changed || Some(relative) == required) {
-            sparse = stage_entry(source, target, relative, &digest, buffered)?;
+        let module = has_extension(relative, "bsl");
+        needs_xml |= old.is_none() || (changed && !module);
+        if stable && ((changed && module) || Some(relative) == required) {
+            stable = stage_entry(source, target, relative, &digest, buffered)?;
         }
         files.insert(relative.to_owned(), digest);
         Ok(())
     })?;
-    Ok((sparse && previous.len() == files.len()).then_some(files))
+    if !stable {
+        return Ok(None);
+    }
+    // Structural plans can check references in unrelated XML. Freeze all XML
+    // for those checks and leave other resources to the eventual import list.
+    if needs_xml || previous.len() != files.len() {
+        for (path, digest) in &files {
+            if has_extension(path, "xml") && !stage_missing(source, target, path, digest)? {
+                return Ok(None);
+            }
+        }
+    }
+    Ok(Some(files))
+}
+
+fn has_extension(path: &Path, extension: &str) -> bool {
+    path.extension()
+        .is_some_and(|value| value.eq_ignore_ascii_case(extension))
+}
+
+/// Materialize import companions from the same catalog before the first write.
+pub fn stage_selected(
+    source: &Path,
+    target: &Path,
+    files: &Files,
+    paths: &[PathBuf],
+) -> Result<bool, Error> {
+    for path in paths {
+        let Some(digest) = files.get(path) else {
+            return Ok(false);
+        };
+        if !stage_missing(source, target, path, digest)? {
+            return Ok(false);
+        }
+    }
+    Ok(true)
+}
+
+fn stage_missing(source: &Path, target: &Path, path: &Path, digest: &[u8]) -> Result<bool, Error> {
+    Ok(is_entry(&target.join(path), fs::Metadata::is_file)?
+        || stage_entry(source, target, path, digest, None)?)
 }
 
 fn stage_entry(
@@ -350,17 +389,46 @@ mod tests {
         fs::write(source.join(small), b"").unwrap();
         fs::write(source.join(large), &large_bytes).unwrap();
         let staged = temp.path().join("staged");
-        let current = stage_modules(&source, &staged, &[], &previous, Some(required), |path| {
-            path.extension() == Some(OsStr::new("bsl"))
-        })
-        .unwrap()
-        .unwrap();
+        let current = stage_delta(&source, &staged, &[], &previous, Some(required))
+            .unwrap()
+            .unwrap();
 
         assert_eq!(current, catalog(&source, None, &[]).unwrap());
         assert_eq!(fs::read(staged.join(small)).unwrap(), b"");
         assert_eq!(fs::read(staged.join(large)).unwrap(), large_bytes);
         assert_eq!(fs::read(staged.join(required)).unwrap(), b"original");
         assert!(!staged.join(unchanged).exists());
+    }
+
+    #[test]
+    fn xml_delta_freezes_references_and_stages_only_selected_resources() {
+        let temp = tempfile::tempdir().unwrap();
+        let source = temp.path().join("source");
+        fs::create_dir(&source).unwrap();
+        let descriptor = PathBuf::from("Changed.xml");
+        let references = PathBuf::from("References.xml");
+        let resource = PathBuf::from("Picture.png");
+        let unrelated = PathBuf::from("Unrelated.bsl");
+        for path in [&descriptor, &references, &resource, &unrelated] {
+            fs::write(source.join(path), b"old bytes").unwrap();
+        }
+        let previous = catalog(&source, None, &[]).unwrap();
+        fs::write(source.join(&descriptor), b"new bytes").unwrap();
+        let staged = temp.path().join("staged");
+        let current = stage_delta(&source, &staged, &[], &previous, None)
+            .unwrap()
+            .unwrap();
+        assert_eq!(current, catalog(&source, None, &[]).unwrap());
+        assert_eq!(fs::read(staged.join(&descriptor)).unwrap(), b"new bytes");
+        assert_eq!(fs::read(staged.join(&references)).unwrap(), b"old bytes");
+        assert!(!staged.join(&resource).exists());
+
+        fs::write(source.join(&descriptor), b"later edit").unwrap();
+        let selected = [descriptor.clone(), resource.clone()];
+        assert!(stage_selected(&source, &staged, &current, &selected).unwrap());
+        assert_eq!(fs::read(staged.join(&descriptor)).unwrap(), b"new bytes");
+        assert_eq!(fs::read(staged.join(resource)).unwrap(), b"old bytes");
+        assert!(!staged.join(unrelated).exists());
     }
 
     #[test]
