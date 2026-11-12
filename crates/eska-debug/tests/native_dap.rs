@@ -800,6 +800,154 @@ fn verify_loaded_processing(dap: &mut Dap, source: &Path, arguments: Value) {
 }
 
 #[test]
+#[ignore = "requires an already loaded server EPF in the owned 1C standalone fixture"]
+fn native_server_processing_steps_across_verified_sources() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let caller = Path::new(args["sourceRoot"].as_str().unwrap())
+        .join("CommonModules/EskaEpfLoader/Ext/Module.bsl");
+    let external = Path::new(args["externalProcessing"]["sourceRoot"].as_str().unwrap())
+        .join("EskaEpfWire/Ext/ObjectModule.bsl");
+    let mut dap = Dap::standalone(root, "en-US", false);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    dap.success("attach", args);
+    dap.success("configurationDone", json!({}));
+    let point = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":caller},"breakpoints":[{"line":3}]}),
+    );
+    assert_eq!(point["breakpoints"][0]["verified"], true);
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(caller));
+    assert_eq!(stack["stackFrames"][0]["line"], 3);
+    dap.success("stepIn", json!({"threadId":thread}));
+    assert_eq!(dap.stop(), thread);
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(external));
+    assert_eq!(stack["stackFrames"][1]["source"]["path"], json!(caller));
+    dap.success("next", json!({"threadId":thread}));
+    assert_eq!(dap.stop(), thread);
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let top = &stack["stackFrames"][0];
+    assert_eq!(top["line"], 3);
+    assert_eq!(top["source"]["path"], json!(external));
+    let value = dap.success(
+        "evaluate",
+        json!({"frameId":top["id"],"expression":"Результат"}),
+    );
+    assert_eq!(value["result"], "42");
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":caller},"breakpoints":[]}),
+    );
+    dap.success("stepOut", json!({"threadId":thread}));
+    let returned = dap.stop_event();
+    assert_eq!(returned["reason"], "step");
+    assert_eq!(returned["threadId"], thread);
+    let mut stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(caller));
+    if stack["stackFrames"][0]["line"] == 3 {
+        dap.success("next", json!({"threadId":thread}));
+        assert_eq!(dap.stop(), thread);
+        stack = dap.success("stackTrace", json!({"threadId":thread}));
+    }
+    assert_eq!(stack["stackFrames"][0]["line"], 4);
+    let value = dap.success(
+        "evaluate",
+        json!({"frameId":stack["stackFrames"][0]["id"],"expression":"Результат"}),
+    );
+    assert_eq!(value["result"], "42");
+    let point = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":external},"breakpoints":[{"line":3}]}),
+    );
+    assert_eq!(point["breakpoints"][0]["verified"], true);
+    dap.success("continue", json!({"threadId":thread}));
+    let event = dap.stop_event();
+    assert_eq!(event["reason"], "breakpoint");
+    let stack = dap.success("stackTrace", json!({"threadId":event["threadId"]}));
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(external));
+    assert_eq!(stack["stackFrames"][0]["line"], 3);
+    dap.shutdown();
+    assert!(!root.join(".eska").exists());
+}
+
+#[test]
+#[ignore = "requires two deployed builds of the same server EPF in the owned 1C fixture"]
+fn native_server_processing_rebinds_after_reload() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let first: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let second: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_EPF_RELOAD_ARGUMENTS").unwrap()).unwrap();
+    let caller = Path::new(first["sourceRoot"].as_str().unwrap())
+        .join("CommonModules/EskaEpfLoader/Ext/Module.bsl");
+    let module_path = |args: &Value| {
+        Path::new(args["externalProcessing"]["sourceRoot"].as_str().unwrap())
+            .join("EskaEpfWire/Ext/ObjectModule.bsl")
+    };
+    let original = module_path(&first);
+    let replacement = module_path(&second);
+    let mut dap = Dap::standalone(root, "en-US", false);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    dap.success("attach", first);
+    dap.success("configurationDone", json!({}));
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":caller},"breakpoints":[{"line":3}]}),
+    );
+    let thread = dap.stop();
+    dap.success("stepIn", json!({"threadId":thread}));
+    assert_eq!(dap.stop(), thread);
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(original));
+
+    fs::write(env::var_os("ESKA_DEBUG_EPF_RELOAD_MARKER").unwrap(), b"").unwrap();
+    dap.success("continue", json!({"threadId":thread}));
+    let thread = dap.stop();
+    dap.success("stepIn", json!({"threadId":thread}));
+    assert_eq!(dap.stop(), thread);
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert!(stack["stackFrames"][0]["source"].is_null());
+    assert_eq!(stack["stackFrames"][1]["source"]["path"], json!(caller));
+    dap.success("next", json!({"threadId":thread}));
+    assert_eq!(dap.stop(), thread);
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let value = dap.success(
+        "evaluate",
+        json!({"frameId":stack["stackFrames"][0]["id"],"expression":"Результат"}),
+    );
+    assert_eq!(value["result"], "84");
+    dap.success("continue", json!({"threadId":thread}));
+    dap.shutdown();
+
+    let mut dap = Dap::standalone(root, "en-US", false);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    dap.success("attach", second);
+    dap.success("configurationDone", json!({}));
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":replacement},"breakpoints":[{"line":3}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let top = &stack["stackFrames"][0];
+    assert_eq!(top["source"]["path"], json!(replacement));
+    assert_eq!(top["line"], 3);
+    let value = dap.success(
+        "evaluate",
+        json!({"frameId":top["id"],"expression":"Результат"}),
+    );
+    assert_eq!(value["result"], "84");
+    dap.shutdown();
+}
+
+#[test]
 #[ignore = "requires a standalone fixture and an already running 1C client"]
 fn native_standalone_attaches_with_standard_dap() {
     let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
