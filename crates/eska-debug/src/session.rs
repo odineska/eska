@@ -1,0 +1,722 @@
+//! One serialized debugger session. HTTP requests and poll results have a single owner.
+use std::{
+    collections::BTreeMap,
+    io::{self, BufReader, BufWriter, Write},
+    path::Path,
+    sync::{
+        Arc,
+        atomic::{AtomicBool, Ordering},
+        mpsc,
+    },
+    thread,
+    time::{Duration, Instant},
+};
+
+use eska_build_runtime::runtime::DebugLaunch;
+use eska_presentation::localization::Localizer;
+use serde_json::{Value, json};
+
+use crate::{
+    Mode,
+    dap::{self, Output, Request},
+    dbgs::{self, Calculation, Event, Module, Selector, Server, Step, Target},
+    source::Sources,
+    state::{State, Variable},
+};
+
+const POLL_MIN: Duration = Duration::from_millis(30);
+const POLL_MAX: Duration = Duration::from_millis(240);
+const MAX_THREADS: usize = 256;
+const MAX_PENDING: usize = 16;
+
+pub struct Config {
+    pub endpoint: url::Url,
+    pub alias: String,
+    pub sources: Sources,
+    pub mode: Mode,
+    pub launch: Option<DebugLaunch>,
+    pub production: bool,
+}
+
+struct Client {
+    stop: Arc<AtomicBool>,
+    exited: Arc<AtomicBool>,
+    worker: Option<thread::JoinHandle<()>>,
+}
+
+impl Client {
+    fn launch(launch: DebugLaunch) -> io::Result<Self> {
+        let stop = Arc::new(AtomicBool::new(false));
+        let exited = Arc::new(AtomicBool::new(false));
+        let (cancel, complete) = (Arc::clone(&stop), Arc::clone(&exited));
+        let worker = thread::Builder::new().spawn(move || {
+            let _ = launch.run(&cancel);
+            complete.store(true, Ordering::Release);
+        })?;
+        Ok(Self {
+            stop,
+            exited,
+            worker: Some(worker),
+        })
+    }
+}
+
+impl Drop for Client {
+    fn drop(&mut self) {
+        self.stop.store(true, Ordering::Release);
+        if let Some(worker) = self.worker.take() {
+            let _ = worker.join();
+        }
+    }
+}
+
+type Failure = &'static str;
+const INVALID: Failure = "debug-request-unavailable";
+const ENDPOINT: Failure = "debug-endpoint-unavailable";
+
+struct Pending {
+    request: Request,
+    variable: Variable,
+    deadline: Instant,
+}
+
+enum Input {
+    Packet(io::Result<Option<Request>>),
+    Events(io::Result<Vec<Event>>),
+}
+
+struct Poll {
+    stop: Arc<AtomicBool>,
+    worker: thread::JoinHandle<()>,
+}
+
+impl Poll {
+    fn start(server: Arc<Server>, send: mpsc::SyncSender<Input>) -> io::Result<Self> {
+        let stop = Arc::new(AtomicBool::new(false));
+        let flag = Arc::clone(&stop);
+        let worker = thread::Builder::new().spawn(move || {
+            let mut interval = POLL_MIN;
+            while !flag.load(Ordering::Acquire) {
+                let events = server.poll();
+                let empty = events.as_ref().is_ok_and(Vec::is_empty);
+                if !empty && send.try_send(Input::Events(events)).is_err() {
+                    // A bounded queue cannot discard a stop or a calculation. End polling;
+                    // the session will report loss of its event stream.
+                    flag.store(true, Ordering::Release);
+                    break;
+                }
+                interval = if empty {
+                    (interval * 2).min(POLL_MAX)
+                } else {
+                    POLL_MIN
+                };
+                thread::park_timeout(interval);
+            }
+        })?;
+        Ok(Self { stop, worker })
+    }
+
+    fn stop(self) {
+        self.stop.store(true, Ordering::Release);
+        self.worker.thread().unpark();
+        let _ = self.worker.join();
+    }
+}
+
+struct Session<'a, W> {
+    config: Config,
+    output: Output<W>,
+    language: &'a Localizer,
+    server: Option<Arc<Server>>,
+    input: mpsc::SyncSender<Input>,
+    poll: Option<Poll>,
+    state: State,
+    breakpoints: BTreeMap<Module, Vec<u32>>,
+    pending: BTreeMap<String, Pending>,
+    client: Option<Client>,
+    initialized: bool,
+    configured: bool,
+    ended: bool,
+}
+
+pub fn run(config: Config, language: &Localizer) -> io::Result<()> {
+    let (send, receive) = mpsc::sync_channel(32);
+    let reader = send.clone();
+    thread::Builder::new().spawn(move || {
+        let mut input = BufReader::new(io::stdin());
+        loop {
+            let packet = dap::read(&mut input);
+            let done = !matches!(packet, Ok(Some(_)));
+            if reader.send(Input::Packet(packet)).is_err() || done {
+                break;
+            }
+        }
+    })?;
+    let mut session = Session {
+        config,
+        output: Output::new(BufWriter::new(io::stdout().lock())),
+        language,
+        server: None,
+        input: send,
+        poll: None,
+        state: State::default(),
+        breakpoints: BTreeMap::new(),
+        pending: BTreeMap::new(),
+        client: None,
+        initialized: false,
+        configured: false,
+        ended: false,
+    };
+    let operation = eska_tool_runtime::Operation::new()
+        .map_err(|_| io::Error::other("cannot install debugger cancellation"))?;
+    let result = drive(&mut session, &receive, &operation);
+    session.cleanup();
+    result
+}
+
+fn drive(
+    session: &mut Session<'_, impl Write>,
+    receive: &mpsc::Receiver<Input>,
+    operation: &eska_tool_runtime::Operation,
+) -> io::Result<()> {
+    let mut failed_since = None;
+    while !session.ended && !operation.is_cancelled() {
+        if session
+            .client
+            .as_ref()
+            .is_some_and(|client| client.exited.load(Ordering::Acquire))
+        {
+            session.output.event("terminated", &json!({}))?;
+            break;
+        }
+        if session
+            .poll
+            .as_ref()
+            .is_some_and(|poll| poll.stop.load(Ordering::Acquire))
+        {
+            session.output.event("terminated", &json!({}))?;
+            break;
+        }
+        match receive.recv_timeout(Duration::from_millis(100)) {
+            Ok(Input::Packet(Ok(Some(request)))) => session.request(request)?,
+            Ok(Input::Packet(Ok(None))) | Err(mpsc::RecvTimeoutError::Disconnected) => break,
+            Ok(Input::Packet(Err(error))) => return Err(error),
+            Ok(Input::Events(Ok(events))) => {
+                failed_since = None;
+                session.events(events)?;
+            }
+            Ok(Input::Events(Err(_))) => {
+                let first = *failed_since.get_or_insert_with(Instant::now);
+                if first.elapsed() >= Duration::from_secs(5) {
+                    session.output.event(
+                        "output",
+                        &json!({"category":"stderr","output":session.language.text(ENDPOINT)}),
+                    )?;
+                    session.output.event("terminated", &json!({}))?;
+                    break;
+                }
+            }
+            Err(mpsc::RecvTimeoutError::Timeout) => {}
+        }
+        session.expire()?;
+    }
+    Ok(())
+}
+
+impl<W: Write> Session<'_, W> {
+    fn request(&mut self, request: Request) -> io::Result<()> {
+        if matches!(request.command.as_str(), "evaluate" | "variables") {
+            return self.calculation_request(request);
+        }
+        let result = match request.command.as_str() {
+            "initialize" if !self.initialized => {
+                self.initialized = true;
+                Ok(
+                    json!({"supportsConfigurationDoneRequest":true,"supportsCancelRequest":true,
+                    "supportsEvaluateForHovers":true, "supportsSingleThreadExecutionRequests":false}),
+                )
+            }
+            "launch" | "attach" => self.open(&request.command),
+            "configurationDone" if self.server.is_some() && !self.configured => {
+                self.configured = true;
+                if let Some(launch) = self.config.launch.take() {
+                    self.client = Some(Client::launch(launch)?);
+                }
+                Ok(json!({}))
+            }
+            "setBreakpoints" => self.set_breakpoints(&request.arguments),
+            "setExceptionBreakpoints"
+                if request.arguments["filters"]
+                    .as_array()
+                    .is_some_and(Vec::is_empty) =>
+            {
+                Ok(json!({}))
+            }
+            "threads" if self.server.is_some() => Ok(self.threads()),
+            "stackTrace" => self.stack(&request.arguments),
+            "scopes" => self.scopes(&request.arguments),
+            "continue" | "next" | "stepIn" | "stepOut" => self.step(&request),
+            "eska/listDebugTargets" => self.targets(),
+            "eska/attachDebugTarget" => self.select_target(&request.arguments),
+            "cancel" => {
+                self.cancel(&request.arguments)?;
+                Ok(json!({}))
+            }
+            "disconnect" => {
+                self.cancel_pending()?;
+                self.cleanup();
+                self.ended = true;
+                Ok(json!({}))
+            }
+            _ => Err(INVALID),
+        };
+        let started = matches!(request.command.as_str(), "attach" | "launch") && result.is_ok();
+        self.output
+            .response(&request, result.map_err(|key| self.language.text(key)))?;
+        if started {
+            self.output.event("initialized", &json!({}))?;
+            if self.config.production {
+                self.output.event("output", &json!({"category":"stderr","output":format!("{}\n",self.language.text("debug-prod-warning"))}))?;
+            }
+        }
+        Ok(())
+    }
+
+    fn open(&mut self, command: &str) -> Result<Value, Failure> {
+        let expected = if self.config.mode == Mode::Launch {
+            "launch"
+        } else {
+            "attach"
+        };
+        if !self.initialized || self.server.is_some() || command != expected {
+            return Err(INVALID);
+        }
+        let server =
+            Server::new(&self.config.endpoint, self.config.alias.clone()).map_err(|_| ENDPOINT)?;
+        server.attach().map_err(|_| ENDPOINT)?;
+        if server.auto_attach().is_err() {
+            let _ = server.detach();
+            return Err(ENDPOINT);
+        }
+        let server = Arc::new(server);
+        self.poll = Some(
+            Poll::start(Arc::clone(&server), self.input.clone()).map_err(|_| {
+                let _ = server.detach();
+                ENDPOINT
+            })?,
+        );
+        self.server = Some(server);
+        Ok(json!({}))
+    }
+
+    fn server(&self) -> Result<&Server, Failure> {
+        self.server.as_deref().ok_or(INVALID)
+    }
+
+    fn set_breakpoints(&mut self, arguments: &Value) -> Result<Value, Failure> {
+        let path = arguments["source"]["path"].as_str().ok_or(INVALID)?;
+        let entries = arguments["breakpoints"].as_array().ok_or(INVALID)?;
+        if entries.len() > 1024 {
+            return Err(INVALID);
+        }
+        let module = self.config.sources.module(Path::new(path)).cloned();
+        let lines: Vec<_> = entries
+            .iter()
+            .map(|entry| {
+                entry["line"]
+                    .as_u64()
+                    .and_then(|line| u32::try_from(line).ok())
+                    .filter(|line| *line > 0)
+            })
+            .collect();
+        let mut accepted = Vec::with_capacity(entries.len());
+        for (entry, line) in entries.iter().zip(&lines) {
+            let plain = ["condition", "hitCondition", "logMessage"]
+                .into_iter()
+                .all(|key| entry[key].is_null());
+            accepted.push(line.is_some() && plain && module.is_some());
+        }
+        if let Some(module) = module {
+            let mut candidate = self.breakpoints.clone();
+            candidate.insert(
+                module.clone(),
+                lines
+                    .iter()
+                    .zip(&accepted)
+                    .filter_map(|(line, &accepted)| if accepted { *line } else { None })
+                    .collect(),
+            );
+            if candidate.len() > 2048 {
+                return Err(INVALID);
+            }
+            self.server()?
+                .breakpoints(candidate.iter().map(|(id, lines)| (id, lines.as_slice())))
+                .map_err(|_| ENDPOINT)?;
+            if candidate.get(&module).is_some_and(Vec::is_empty) {
+                candidate.remove(&module);
+            }
+            self.breakpoints = candidate;
+        }
+        Ok(
+            json!({"breakpoints":lines.iter().zip(accepted).map(|(line, verified)| line.as_ref().map_or_else(|| json!({"verified":false}), |line| json!({"verified":verified,"line":line}))).collect::<Vec<_>>() }),
+        )
+    }
+
+    fn threads(&self) -> Value {
+        json!({"threads":self.state.threads.iter().map(|(id, thread)| {
+            json!({"id":id,"name":format!("{} ({})", thread.target.kind, thread.target.session)})
+        }).collect::<Vec<_>>()})
+    }
+
+    fn stack(&self, arguments: &Value) -> Result<Value, Failure> {
+        let id = arguments["threadId"].as_u64().ok_or(INVALID)?;
+        let stack = self
+            .state
+            .threads
+            .get(&id)
+            .and_then(|thread| thread.stack.as_ref())
+            .ok_or(INVALID)?;
+        let start = arguments["startFrame"]
+            .as_u64()
+            .and_then(|v| usize::try_from(v).ok())
+            .unwrap_or(0);
+        let levels = arguments["levels"]
+            .as_u64()
+            .and_then(|v| usize::try_from(v).ok())
+            .filter(|&n| n > 0)
+            .unwrap_or(stack.len());
+        let frames = stack
+            .iter()
+            .skip(start)
+            .take(levels)
+            .map(|(id, frame)| {
+                let mut result =
+                    json!({"id":id,"name":frame.name,"line":frame.line.max(1),"column":1});
+                if let Some(path) = frame
+                    .module
+                    .as_ref()
+                    .and_then(|module| self.config.sources.path(module))
+                {
+                    result["source"] = json!({"name":path.file_name(),"path":path});
+                }
+                result
+            })
+            .collect::<Vec<_>>();
+        Ok(json!({"stackFrames":frames,"totalFrames":stack.len()}))
+    }
+
+    fn scopes(&mut self, arguments: &Value) -> Result<Value, Failure> {
+        let position = self
+            .state
+            .frame(arguments["frameId"].as_u64().ok_or(INVALID)?)
+            .ok_or(INVALID)?;
+        let reference = self.state.add_variable(Variable {
+            position,
+            path: Vec::new(),
+            indexed: false,
+        });
+        Ok(
+            json!({"scopes":[{"name":self.language.text("debug-locals"),"presentationHint":"locals","expensive":false,"variablesReference":reference}]}),
+        )
+    }
+
+    fn step(&mut self, request: &Request) -> Result<Value, Failure> {
+        let id = request.arguments["threadId"].as_u64().ok_or(INVALID)?;
+        let target = self
+            .state
+            .threads
+            .get(&id)
+            .filter(|thread| thread.stack.is_some())
+            .ok_or(INVALID)?
+            .target
+            .id
+            .clone();
+        let step = match request.command.as_str() {
+            "continue" => Step::Continue,
+            "next" => Step::Over,
+            "stepIn" => Step::In,
+            _ => Step::Out,
+        };
+        let resumed = self.server()?.step(&target, step).map_err(|_| ENDPOINT)?;
+        let mut ids = vec![id];
+        for target in resumed {
+            if let Some(other) = self.state.thread_id(&target)
+                && other != id
+                && self.state.threads[&other].stack.is_some()
+            {
+                ids.push(other);
+            }
+        }
+        for id in ids {
+            self.state.resume(id);
+            self.output
+                .event(
+                    "continued",
+                    &json!({"threadId":id,"allThreadsContinued":false}),
+                )
+                .map_err(|_| INVALID)?;
+        }
+        Ok(json!({"allThreadsContinued":false}))
+    }
+
+    fn targets(&self) -> Result<Value, Failure> {
+        let targets = self.server()?.targets().map_err(|_| ENDPOINT)?;
+        Ok(
+            json!({"targets":targets.into_iter().filter(|target| self.state.thread_id(&target.id).is_none()).map(|target|
+            json!({"id":target.id,"kind":target.kind,"session":target.session,"user":target.user})).collect::<Vec<_>>() }),
+        )
+    }
+
+    fn select_target(&mut self, arguments: &Value) -> Result<Value, Failure> {
+        let id = arguments["id"].as_str().ok_or(INVALID)?;
+        let target = self
+            .server()?
+            .targets()
+            .map_err(|_| ENDPOINT)?
+            .into_iter()
+            .find(|target| target.id == id)
+            .ok_or(INVALID)?;
+        self.attach_target(target).map_err(|_| ENDPOINT)?;
+        Ok(json!({}))
+    }
+
+    fn attach_target(&mut self, target: Target) -> io::Result<()> {
+        if self.state.thread_id(&target.id).is_some() || self.state.threads.len() >= MAX_THREADS {
+            return Ok(());
+        }
+        self.server
+            .as_ref()
+            .ok_or_else(|| io::Error::other("session closed"))?
+            .attach_target(&target.id)?;
+        let id = self.state.add_thread(target);
+        self.output
+            .event("thread", &json!({"reason":"started","threadId":id}))
+    }
+
+    fn events(&mut self, events: Vec<Event>) -> io::Result<()> {
+        for event in events {
+            match event {
+                Event::Started(target) => self.attach_target(target)?,
+                Event::Exited(target) => {
+                    if let Some(id) = self.state.thread_id(&target) {
+                        self.state.remove(id);
+                        self.output
+                            .event("thread", &json!({"reason":"exited","threadId":id}))?;
+                    }
+                }
+                Event::Stopped {
+                    target,
+                    breakpoint,
+                    frames,
+                } => {
+                    if let Some(id) = self.state.thread_id(&target) {
+                        self.state.stop(id, frames);
+                        self.output.event("stopped", &json!({"reason":if breakpoint {"breakpoint"} else {"step"},"threadId":id,"allThreadsStopped":false}))?;
+                    }
+                }
+                Event::Calculated(result) => {
+                    if let Some(pending) = self.pending.remove(&result.id) {
+                        self.finish(&pending, vec![result])?;
+                    }
+                }
+            }
+        }
+        Ok(())
+    }
+
+    fn calculation_request(&mut self, request: Request) -> io::Result<()> {
+        let variable = if request.command == "evaluate" {
+            self.expression(&request.arguments)
+        } else {
+            request.arguments["variablesReference"]
+                .as_u64()
+                .and_then(|id| self.state.variable(id))
+        };
+        let Some(variable) = variable.filter(|_| self.pending.len() < MAX_PENDING) else {
+            return self
+                .output
+                .response(&request, Err(self.language.text(INVALID)));
+        };
+        let id = dbgs::random_id()?;
+        let result = self.server().and_then(|server| {
+            let target = &self
+                .state
+                .threads
+                .get(&variable.position.thread)
+                .ok_or(INVALID)?
+                .target
+                .id;
+            server
+                .calculate(
+                    target,
+                    variable.position.level,
+                    &id,
+                    &variable.path,
+                    variable.indexed,
+                )
+                .map_err(|_| ENDPOINT)
+        });
+        let pending = Pending {
+            request,
+            variable,
+            deadline: Instant::now() + Duration::from_secs(4),
+        };
+        match result {
+            Ok(results) if results.iter().any(|result| result.id == id) => self.finish(
+                &pending,
+                results
+                    .into_iter()
+                    .filter(|result| result.id == id)
+                    .collect(),
+            ),
+            Ok(_) => {
+                self.pending.insert(id, pending);
+                Ok(())
+            }
+            Err(key) => self
+                .output
+                .response(&pending.request, Err(self.language.text(key))),
+        }
+    }
+
+    fn expression(&self, arguments: &Value) -> Option<Variable> {
+        let expression = arguments["expression"]
+            .as_str()
+            .filter(|text| !text.is_empty() && text.len() <= 16384)?;
+        let position = if let Some(id) = arguments["frameId"].as_u64() {
+            self.state.frame(id)?
+        } else {
+            let mut stopped = self
+                .state
+                .threads
+                .values()
+                .filter_map(|thread| thread.stack.as_ref());
+            let frame = stopped.next()?.first()?.0;
+            if stopped.next().is_some() {
+                return None;
+            }
+            self.state.frame(frame)?
+        };
+        Some(Variable {
+            position,
+            path: vec![Selector::Expression(expression.to_owned())],
+            indexed: false,
+        })
+    }
+
+    fn finish(&mut self, pending: &Pending, results: Vec<Calculation>) -> io::Result<()> {
+        let result = if !self.state.is_current(&pending.variable.position) {
+            Err(self.language.text(INVALID))
+        } else if let Some(failed) = results.iter().find(|value| value.value.error) {
+            Err(if failed.value.text.is_empty() {
+                self.language.text("debug-evaluation-failed")
+            } else {
+                failed.value.text.clone()
+            })
+        } else if pending.request.command == "evaluate" {
+            results.first().map_or_else(|| Err(self.language.text("debug-evaluation-failed")), |result| {
+                let reference = if result.value.expandable {
+                    self.state.add_variable(Variable { indexed: result.value.indexed, ..pending.variable.clone() })
+                } else { 0 };
+                Ok(json!({"result":result.value.text,"type":result.value.kind,"variablesReference":reference}))
+            })
+        } else {
+            Ok(self.variables(&pending.variable, results))
+        };
+        self.output.response(&pending.request, result)
+    }
+
+    fn variables(&mut self, variable: &Variable, results: Vec<Calculation>) -> Value {
+        let children = results.into_iter().flat_map(|result| result.children).take(512).map(|value| {
+            let mut path = variable.path.clone();
+            let selector = if path.is_empty() {
+                Selector::Expression(value.name.clone())
+            } else if variable.indexed {
+                Selector::Index(value.name.parse().unwrap_or_default())
+            } else {
+                Selector::Property(value.name.clone())
+            };
+            path.push(selector);
+            let reference = if value.expandable && !value.name.is_empty() {
+                self.state.add_variable(Variable { position: variable.position.clone(), path, indexed: value.indexed })
+            } else { 0 };
+            json!({"name":value.name,"value":value.text,"type":value.kind,"variablesReference":reference})
+        }).collect::<Vec<_>>();
+        json!({"variables":children})
+    }
+
+    fn cancel(&mut self, arguments: &Value) -> io::Result<()> {
+        let seq = arguments["requestId"].as_u64();
+        let id = self
+            .pending
+            .iter()
+            .find_map(|(id, pending)| (Some(pending.request.seq) == seq).then(|| id.clone()));
+        if let Some(pending) = id.and_then(|id| self.pending.remove(&id)) {
+            self.output.response(
+                &pending.request,
+                Err(self.language.text("component-cancelled")),
+            )?;
+        }
+        Ok(())
+    }
+
+    fn cancel_pending(&mut self) -> io::Result<()> {
+        for (_, pending) in std::mem::take(&mut self.pending) {
+            self.output.response(
+                &pending.request,
+                Err(self.language.text("component-cancelled")),
+            )?;
+        }
+        Ok(())
+    }
+
+    fn expire(&mut self) -> io::Result<()> {
+        let now = Instant::now();
+        let expired: Vec<_> = self
+            .pending
+            .iter()
+            .filter(|(_, pending)| {
+                pending.deadline <= now || !self.state.is_current(&pending.variable.position)
+            })
+            .map(|(id, _)| id.clone())
+            .collect();
+        for id in expired {
+            if let Some(pending) = self.pending.remove(&id) {
+                self.output.response(
+                    &pending.request,
+                    Err(self.language.text("debug-evaluation-timeout")),
+                )?;
+            }
+        }
+        Ok(())
+    }
+
+    fn cleanup(&mut self) {
+        if let Some(poll) = &self.poll {
+            poll.stop.store(true, Ordering::Release);
+            poll.worker.thread().unpark();
+        }
+        if let Some(server) = self.server.take() {
+            let start = Instant::now();
+            let mut stopped = self.state.stopped();
+            while let Some(id) = stopped.pop_first() {
+                if start.elapsed() >= Duration::from_secs(2) {
+                    break;
+                }
+                if let Ok(resumed) = server.step(&self.state.threads[&id].target.id, Step::Continue)
+                {
+                    for target in resumed {
+                        if let Some(thread) = self.state.thread_id(&target) {
+                            stopped.remove(&thread);
+                        }
+                    }
+                }
+            }
+            let _ = server.detach();
+        }
+        if let Some(poll) = self.poll.take() {
+            poll.stop();
+        }
+        self.client.take();
+    }
+}

@@ -1,0 +1,343 @@
+//! Opt-in tests against a disposable 1C fixture prepared in the sibling playground.
+use std::{
+    collections::BTreeMap,
+    env, fs,
+    io::{BufRead, BufReader, Write},
+    path::Path,
+    process::{Child, ChildStdin, Command, Stdio},
+    sync::mpsc,
+    thread,
+    time::{Duration, Instant},
+};
+
+use serde_json::{Value, json};
+
+struct Dap {
+    process: Child,
+    input: Option<ChildStdin>,
+    messages: mpsc::Receiver<Value>,
+    seq: u64,
+    stopped: Vec<u64>,
+    durations: BTreeMap<String, Vec<f64>>,
+}
+
+impl Dap {
+    fn start(root: &Path, profile: &str, mode: &str) -> Self {
+        let mut process = Command::new(env!("CARGO_BIN_EXE_eska-debug"))
+            .current_dir(root)
+            .args([
+                "--lang",
+                "en-US",
+                "dap",
+                "--profile",
+                profile,
+                "--mode",
+                mode,
+            ])
+            .args(if profile == "prod" {
+                ["--sources", "current"].as_slice()
+            } else {
+                &[]
+            })
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .spawn()
+            .unwrap();
+        let mut output = BufReader::new(process.stdout.take().unwrap());
+        let input = process.stdin.take().unwrap();
+        let (send, messages) = mpsc::sync_channel(64);
+        thread::spawn(move || {
+            while let Some(packet) = packet(&mut output) {
+                if send.send(packet).is_err() {
+                    break;
+                }
+            }
+        });
+        Self {
+            process,
+            input: Some(input),
+            messages,
+            seq: 0,
+            stopped: Vec::new(),
+            durations: BTreeMap::new(),
+        }
+    }
+
+    fn request(&mut self, command: &str, arguments: Value) -> Value {
+        let start = Instant::now();
+        self.seq += 1;
+        let mut request = json!({"seq":self.seq,"type":"request","command":command});
+        request["arguments"] = arguments;
+        let body = serde_json::to_vec(&request).unwrap();
+        let input = self.input.as_mut().unwrap();
+        write!(input, "Content-Length: {}\r\n\r\n", body.len()).unwrap();
+        input.write_all(&body).unwrap();
+        input.flush().unwrap();
+        loop {
+            let reply = self.receive();
+            if reply["request_seq"] == self.seq {
+                assert_eq!(reply["command"], command);
+                self.durations
+                    .entry(command.to_owned())
+                    .or_default()
+                    .push(start.elapsed().as_secs_f64() * 1000.0);
+                return reply;
+            }
+        }
+    }
+
+    fn success(&mut self, command: &str, arguments: Value) -> Value {
+        let result = self.request(command, arguments);
+        assert_eq!(result["success"], true, "{result}");
+        result["body"].clone()
+    }
+
+    fn receive(&mut self) -> Value {
+        let message = self.messages.recv_timeout(Duration::from_secs(12)).unwrap();
+        if message["event"] == "stopped" {
+            self.stopped
+                .push(message["body"]["threadId"].as_u64().unwrap());
+        }
+        message
+    }
+
+    fn stop(&mut self) -> u64 {
+        loop {
+            if !self.stopped.is_empty() {
+                return self.stopped.remove(0);
+            }
+            let _ = self.receive();
+        }
+    }
+
+    fn shutdown(&mut self) {
+        self.success("disconnect", json!({"terminateDebuggee":false}));
+        self.wait_for_exit();
+    }
+
+    fn wait_for_exit(&mut self) {
+        let deadline = Instant::now() + Duration::from_secs(8);
+        loop {
+            if let Some(status) = self.process.try_wait().unwrap() {
+                assert!(status.success(), "{status}");
+                break;
+            }
+            assert!(Instant::now() < deadline, "adapter did not exit");
+            thread::sleep(Duration::from_millis(20));
+        }
+    }
+}
+
+impl Drop for Dap {
+    fn drop(&mut self) {
+        let _ = self.process.kill();
+        let _ = self.process.wait();
+    }
+}
+
+fn packet(reader: &mut impl BufRead) -> Option<Value> {
+    let mut line = String::new();
+    reader.read_line(&mut line).ok()?;
+    let length = line
+        .trim()
+        .strip_prefix("Content-Length: ")?
+        .parse::<usize>()
+        .ok()?;
+    if length > 2 * 1024 * 1024 {
+        return None;
+    }
+    line.clear();
+    reader.read_line(&mut line).ok()?;
+    if line != "\r\n" {
+        return None;
+    }
+    let mut bytes = vec![0; length];
+    reader.read_exact(&mut bytes).ok()?;
+    serde_json::from_slice(&bytes).ok()
+}
+
+fn memory(id: u32) -> (u64, u64) {
+    let status = fs::read_to_string(format!("/proc/{id}/status")).unwrap_or_default();
+    let field = |name| {
+        status
+            .lines()
+            .find_map(|line| {
+                line.strip_prefix(name)?
+                    .split_whitespace()
+                    .next()?
+                    .parse()
+                    .ok()
+            })
+            .unwrap_or(0)
+    };
+    (field("VmRSS:"), field("VmHWM:"))
+}
+
+fn cpu_ticks(id: u32) -> u64 {
+    let stat = fs::read_to_string(format!("/proc/{id}/stat")).unwrap_or_default();
+    let fields = stat.rsplit_once(')').map_or("", |(_, fields)| fields);
+    fields
+        .split_whitespace()
+        .skip(11)
+        .take(2)
+        .filter_map(|ticks| ticks.parse::<u64>().ok())
+        .sum()
+}
+
+fn verify_stop(dap: &mut Dap, source: &Path, samples: usize) {
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let frame = stack["stackFrames"][0]["id"].as_u64().unwrap();
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(source));
+    assert_eq!(stack["stackFrames"][0]["line"], 3);
+    let scopes = dap.success("scopes", json!({"frameId":frame}));
+    let reference = scopes["scopes"][0]["variablesReference"].as_u64().unwrap();
+    for _ in 0..samples {
+        dap.success("stackTrace", json!({"threadId":thread}));
+        let variables = dap.success("variables", json!({"variablesReference":reference}));
+        assert!(
+            variables["variables"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|v| v["name"] == "A" && v["value"] == "41")
+        );
+        let result = dap.success("evaluate", json!({"frameId":frame,"expression":"A + 1"}));
+        assert_eq!(result["result"], "42");
+    }
+    let structure = dap.success(
+        "evaluate",
+        json!({"frameId":frame,"expression":"Новый Структура(\"Поле\", 17)"}),
+    );
+    assert!(
+        structure["variablesReference"]
+            .as_u64()
+            .is_some_and(|reference| reference > 0)
+    );
+    let children = dap.success(
+        "variables",
+        json!({"variablesReference":structure["variablesReference"]}),
+    );
+    assert!(
+        children["variables"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|v| v["name"] == "Поле" && v["value"] == "17")
+    );
+    let failed = dap.request("evaluate", json!({"frameId":frame,"expression":"1 + )"}));
+    assert_eq!(failed["success"], false);
+    dap.success("stepIn", json!({"threadId":thread}));
+    assert_eq!(
+        dap.request("variables", json!({"variablesReference":reference}))["success"],
+        false
+    );
+    let thread = dap.stop();
+    let nested = dap.success("stackTrace", json!({"threadId":thread}));
+    let caller = nested["stackFrames"][1]["id"].as_u64().unwrap();
+    let result = dap.success("evaluate", json!({"frameId":caller,"expression":"A + 2"}));
+    assert_eq!(result["result"], "43");
+    dap.success("next", json!({"threadId":thread}));
+    let thread = dap.stop();
+    dap.success("stepOut", json!({"threadId":thread}));
+    let thread = dap.stop();
+    dap.success("continue", json!({"threadId":thread}));
+    let removed = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[]}),
+    );
+    assert_eq!(removed["breakpoints"], json!([]));
+}
+
+#[test]
+#[ignore = "requires the owned 1C playground fixture"]
+fn native_dap_release_series() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let profile = env::var("ESKA_NATIVE_PROFILE").unwrap_or_else(|_| "test".into());
+    let rounds = env::var("ESKA_DEBUG_ROUNDS")
+        .ok()
+        .and_then(|text| text.parse().ok())
+        .unwrap_or(1);
+    let samples = if rounds > 1 { 10 } else { 1 };
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let mut measurements = BTreeMap::<String, Vec<f64>>::new();
+    for round in 0..rounds {
+        let started = Instant::now();
+        let mut dap = Dap::start(root, &profile, "launch");
+        dap.success(
+            "initialize",
+            json!({"adapterID":"eska","linesStartAt1":true,"columnsStartAt1":true}),
+        );
+        measurements
+            .entry("spawn_to_initialize".into())
+            .or_default()
+            .push(started.elapsed().as_secs_f64() * 1000.0);
+        dap.success("launch", json!({}));
+        let breakpoints = dap.success(
+            "setBreakpoints",
+            json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+        );
+        assert_eq!(breakpoints["breakpoints"][0]["verified"], true);
+        let id = dap.process.id();
+        if round == 0 && rounds > 1 {
+            let before = cpu_ticks(id);
+            thread::sleep(Duration::from_secs(2));
+            eprintln!(
+                "idle cpu_ticks={} duration_seconds=2",
+                cpu_ticks(id).saturating_sub(before)
+            );
+        }
+        dap.success("configurationDone", json!({}));
+        verify_stop(&mut dap, &source, samples);
+        eprintln!("round={round} memory_rss_hwm_kib={:?}", memory(id));
+        dap.shutdown();
+        for (command, times) in std::mem::take(&mut dap.durations) {
+            measurements.entry(command).or_default().extend(times);
+        }
+    }
+    for (name, mut values) in measurements {
+        values.sort_by(f64::total_cmp);
+        let mid = values.len() / 2;
+        let median = values[mid].midpoint(values[(values.len() - 1) / 2]);
+        let p95 = values[(values.len() * 95).div_ceil(100) - 1];
+        eprintln!(
+            "{name} n={} median_ms={median:.3} p95_ms={p95:.3}",
+            values.len()
+        );
+    }
+}
+
+#[test]
+#[ignore = "requires a playground dbgs with an already running 1C client"]
+fn native_attach_detach_series() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let mut process_memory = Vec::new();
+    for round in 0..8 {
+        let mut dap = Dap::start(root, "test", "attach");
+        dap.success("initialize", json!({"adapterID":"eska"}));
+        dap.success("attach", json!({}));
+        dap.success("configurationDone", json!({}));
+        let deadline = Instant::now() + Duration::from_secs(3);
+        let target = loop {
+            let targets = dap.success("eska/listDebugTargets", json!({}));
+            if let Some(target) = targets["targets"].as_array().unwrap().first() {
+                break target["id"].clone();
+            }
+            assert!(Instant::now() < deadline, "existing target not listed");
+            thread::sleep(Duration::from_millis(50));
+        };
+        dap.success("eska/attachDebugTarget", json!({"id":target}));
+        let threads = dap.success("threads", json!({}));
+        assert_ne!(threads["threads"], json!([]));
+        process_memory.push(memory(dap.process.id()));
+        if round % 2 == 0 {
+            dap.shutdown();
+        } else {
+            drop(dap.input.take());
+            dap.wait_for_exit();
+        }
+    }
+    eprintln!("attach/detach memory RSS/HWM KiB: {process_memory:?}");
+}

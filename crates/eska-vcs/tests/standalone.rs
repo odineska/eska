@@ -450,6 +450,17 @@ fn production_debug_compares_configured_remote_and_protects_local_sources() {
     assert_eq!(current.status, Status::Current, "{current:?}");
     assert_eq!(current.remote.as_deref(), Some("ship"));
 
+    let path = std::env::var_os("PATH").unwrap_or_default();
+    let status = json(&tool(
+        &work,
+        &path,
+        "en-US",
+        &["__bridge", "debug-source-check"],
+    ));
+    assert_eq!(status["operation"], "debug_source_check");
+    assert_eq!(status["data"]["status"], "current");
+    assert_eq!(status["data"]["main_branch"], "deployed");
+
     fs::write(seed.join("src/Configuration.xml"), "<new/>").unwrap();
     git(&seed, &["commit", "-qam", "remote change"]);
     let behind = debug_sources::check(&project, false);

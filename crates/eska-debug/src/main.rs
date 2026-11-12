@@ -1,11 +1,15 @@
-//! Native launch and source policy around an independently installed stdio DAP adapter.
+//! 1C debugger entry point and production source policy.
 
 mod dap;
+mod dbgs;
+mod http;
+#[cfg(test)]
+mod live;
+mod session;
+mod source;
+mod state;
 
-use std::{
-    path::{Path, PathBuf},
-    process::ExitCode,
-};
+use std::{ffi::OsString, path::PathBuf, process::ExitCode};
 
 use clap::{ArgAction, Args, CommandFactory, FromArgMatches, Parser, Subcommand, ValueEnum};
 use eska_build_runtime::runtime::{self, DebugLaunch};
@@ -17,7 +21,7 @@ use eska_project_core::project::{
     Project, discovery,
     local_settings::{Action, Profile, ProfileName},
 };
-use eska_vcs::project::debug_sources::{self, Status, Update};
+use eska_tool_runtime::Component;
 use serde_json::json;
 
 #[derive(Debug, Parser)]
@@ -51,8 +55,6 @@ struct CheckArgs {
 
 #[derive(Debug, Args)]
 struct DapArgs {
-    #[arg(long)]
-    adapter: PathBuf,
     #[arg(long, value_enum)]
     profile: ProfileArg,
     #[arg(long, value_enum)]
@@ -98,7 +100,7 @@ fn main() -> ExitCode {
     };
     match cli.command {
         Operation::Check(args) => {
-            let result = debug_sources::check(&project, args.unsaved);
+            let result = source_status(&project, args.unsaved);
             println!(
                 "{}",
                 json!({"schema_version":1,"kind":"prod-source-check","check":result})
@@ -120,19 +122,13 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
         ProfileArg::Test => ProfileName::Test,
         ProfileArg::Prod => ProfileName::Prod,
     };
-    let executable = args
-        .adapter
-        .canonicalize()
-        .ok()
-        .filter(|path| path.is_file())
-        .ok_or_else(|| localizer.text("debug-adapter-unavailable"))?;
     let action = if args.mode == Mode::Launch {
         Action::DebugLaunch
     } else {
         Action::DebugAttach
     };
-    let warning = (profile == ProfileName::Prod).then(|| localizer.text("debug-prod-warning"));
-    if profile == ProfileName::Prod {
+    let production = profile == ProfileName::Prod;
+    if production {
         runtime::profile(&project, profile, action)
             .map_err(|error| runtime_error(&error, localizer))?;
         check_sources(&project, args).map_err(|key| localizer.text(key))?;
@@ -144,63 +140,98 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
                 .map_err(|_| localizer.text("debug-project-unavailable"))?;
         }
     }
-    let root = project.root().to_owned();
-    let source = project.source().to_owned();
-    let (config, launch) = if args.mode == Mode::Launch {
-        let launch = DebugLaunch::prepare(project, profile)
-            .map_err(|error| runtime_error(&error, localizer))?;
-        let config = connection(launch.profile(), &root, &source)
-            .ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
-        (config, Some(launch))
+    let sources =
+        source::Sources::load(&project).map_err(|_| localizer.text("debug-project-unavailable"))?;
+    let settings = runtime::profile(&project, profile, action)
+        .map_err(|error| runtime_error(&error, localizer))?;
+    let (endpoint, alias) =
+        connection(&settings).ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
+    let launch = if args.mode == Mode::Launch {
+        Some(
+            DebugLaunch::prepare(project, profile)
+                .map_err(|error| runtime_error(&error, localizer))?,
+        )
     } else {
-        let profile = runtime::profile(&project, profile, action)
-            .map_err(|error| runtime_error(&error, localizer))?;
-        let config = connection(&profile, &root, &source)
-            .ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
-        (config, None)
+        None
     };
-    dap::run(&executable, config, args.mode, launch, warning, localizer)
-        .map_err(|_| localizer.text("debug-adapter-disconnected"))
+    session::run(
+        session::Config {
+            endpoint,
+            alias,
+            sources,
+            mode: args.mode,
+            launch,
+            production,
+        },
+        localizer,
+    )
+    .map_err(|_| localizer.text("debug-adapter-disconnected"))
 }
 
 fn check_sources(project: &Project, args: &DapArgs) -> Result<(), &'static str> {
     match args.sources {
-        Some(SourceChoice::FastForward | SourceChoice::SwitchMain) => {
-            let update = if matches!(args.sources, Some(SourceChoice::SwitchMain)) {
-                Update::SwitchMain
-            } else {
-                Update::FastForward
-            };
-            debug_sources::update(project, args.unsaved, update).map_err(|_| "debug-update-failed")
-        }
-        choice => {
-            let check = debug_sources::check(project, args.unsaved);
-            if check.status == Status::Current || matches!(choice, Some(SourceChoice::Current)) {
+        Some(SourceChoice::Current) => Ok(()),
+        Some(choice @ (SourceChoice::FastForward | SourceChoice::SwitchMain)) => {
+            let options = source_options(args.unsaved);
+            let mut options = options.into_iter().collect::<Vec<_>>();
+            options.push(
+                match choice {
+                    SourceChoice::FastForward => "fast-forward",
+                    _ => "switch-main",
+                }
+                .into(),
+            );
+            let binary =
+                eska_tool_runtime::resolve(Component::Vcs).map_err(|_| "debug-update-failed")?;
+            let result = eska_tool_runtime::query(
+                Component::Vcs,
+                &binary,
+                "debug_source_update",
+                project.root(),
+                &options,
+            )
+            .map_err(|_| "debug-update-failed")?;
+            if result["updated"] == true {
                 Ok(())
             } else {
-                Err("debug-source-choice-required")
+                Err("debug-update-failed")
             }
         }
+        None if source_status(project, args.unsaved)["status"] == "current" => Ok(()),
+        None => Err("debug-source-choice-required"),
     }
 }
 
-fn connection(profile: &Profile, root: &Path, source: &Path) -> Option<serde_json::Value> {
+fn source_status(project: &Project, unsaved: bool) -> serde_json::Value {
+    eska_tool_runtime::resolve(Component::Vcs)
+        .and_then(|binary| {
+            eska_tool_runtime::query(
+                Component::Vcs,
+                &binary,
+                "debug_source_check",
+                project.root(),
+                &source_options(unsaved).into_iter().collect::<Vec<_>>(),
+            )
+        })
+        .unwrap_or_else(|_| {
+            json!({"status":"unverified","reason":"repository","main_branch":null,
+            "remote":null,"active_branch":null,"local_main_ahead":null,"local_main_behind":null,
+            "active_ahead":null,"active_behind":null,"dirty":null,"unsaved":unsaved,"update":null})
+        })
+}
+
+fn source_options(unsaved: bool) -> Option<OsString> {
+    unsaved.then(|| "--unsaved".into())
+}
+
+fn connection(profile: &Profile) -> Option<(url::Url, String)> {
     use eska_project_core::project::local_settings::Infobase;
     let endpoint = url::Url::parse(&profile.debug.as_ref()?.url).ok()?;
-    let connection = match &profile.infobase {
-        Infobase::File { path } => format!("/F{}", root.join(path).to_str()?),
-        Infobase::Cluster { host, name } => format!("/S{host}\\{name}"),
-        // The adapter's attach uses only the suffix as the platform's debug alias.
-        Infobase::Standalone { name, .. } => format!("/Slocalhost\\{name}"),
+    let alias = match &profile.infobase {
+        Infobase::File { .. } => "DefAlias".to_owned(),
+        Infobase::Cluster { name, .. } | Infobase::Standalone { name, .. } => name.clone(),
     };
-    Some(json!({
-        "request": "attach",
-        "connectionString": connection,
-        "rootProject": source.to_str()?,
-        "debugServerHost": endpoint.host_str()?,
-        "debugServerPort": endpoint.port_or_known_default()?,
-        "autoAttachTypes": ["ManagedClient", "Client", "Server", "ServerEmulation"],
-    }))
+    Some((endpoint, alias))
 }
 
 fn runtime_error(error: &runtime::RuntimeError, localizer: &Localizer) -> String {
@@ -241,9 +272,6 @@ fn localized(localizer: &Localizer) -> clap::Command {
         .mut_subcommand("dap", |command| {
             command
                 .about(localizer.text("debug-dap-about"))
-                .mut_arg("adapter", |arg| {
-                    arg.help(localizer.text("debug-adapter-help"))
-                })
                 .mut_arg("profile", |arg| {
                     arg.help(localizer.text("runtime-profile-help"))
                 })

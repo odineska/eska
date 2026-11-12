@@ -2094,17 +2094,16 @@ eska-build 0.22.0
 
 ## eska-debug
 
-Опциональный инструмент собирается из репозитория ESKA командой
-`cargo build --release -p eska-debug`. Отдельно установите
-[`OnecDebugAdapter` 0.4.1](https://github.com/yellow-hammer/onec-debug-adapter/releases/tag/v0.4.1)
-и запустите HTTP-сервер отладки 1С по адресу `debug.url` выбранного профиля.
+Соберите опциональный Rust-инструмент командой `cargo build --release -p eska-debug`.
+Адаптер принимает DAP по stdin/stdout и напрямую обращается к серверу отладки
+1С по HTTP. Запустите `dbgs` по адресу `debug.url` выбранного профиля.
 
 `eska-debug --project-dir <путь> check [--unsaved]` возвращает JSON
 `prod-source-check`. Команда запрашивает актуальное состояние настроенной
 удалённой основной ветки, сравнивает её с локальной основной веткой и HEAD
 и сообщает, допустимо ли безопасное обновление.
 
-`eska-debug --project-dir <путь> dap --adapter <путь> --profile test|prod --mode launch|attach`
+`eska-debug --project-dir <путь> dap --profile test|prod --mode launch|attach`
 обслуживает DAP через stdin/stdout. `launch` запускает клиент после установки
 начальных точек останова, `attach` использует уже запущенный HTTP-сервер.
 При расхождении или невозможности проверки `prod` требует явного решения
@@ -2112,6 +2111,12 @@ eska-build 0.22.0
 для чистой рабочей копии без несохранённых файлов и без расхождения истории
 локальной основной ветки. `--unsaved` передаёт состояние буферов редактора.
 `Evaluate` может менять данные базы.
+
+Опция `--adapter` и настройка Explorer `eska.explorer.debugAdapterExecutable`
+удалены. Путь к бинарнику ESKA задаёт `eska.explorer.debugExecutable`.
+Существующие `settings_local.toml`, адреса и ссылки на секреты сохраняются.
+Операции Git для проверки исходников `prod` выполняет установленный `eska-vcs`.
+[Контракт HTTP и проверка](1c-http-debug.md).
 
 ## eska-vcs
 

@@ -53,6 +53,16 @@ enum Operation {
     Provenance,
     RepositoryExists,
     SettingsProtection,
+    DebugSourceCheck {
+        #[arg(long)]
+        unsaved: bool,
+    },
+    DebugSourceUpdate {
+        #[arg(long)]
+        unsaved: bool,
+        #[arg(value_enum)]
+        decision: DebugSourceDecision,
+    },
     Initialize,
     InitializeReserved,
     SourceChanges {
@@ -61,6 +71,12 @@ enum Operation {
         #[arg(long)]
         files: usize,
     },
+}
+
+#[derive(Clone, Copy, Debug, clap::ValueEnum)]
+enum DebugSourceDecision {
+    FastForward,
+    SwitchMain,
 }
 
 /// Preserve the same available/absent/unavailable semantics as the former in-process adapter.
@@ -151,6 +167,27 @@ impl BridgeArgs {
             Operation::SettingsProtection => {
                 ("settings_protection", Ok(json!(settings_protection(root))))
             }
+            Operation::DebugSourceCheck { unsaved } => (
+                "debug_source_check",
+                discovery::discover(root)
+                    .map_err(|_| json!("project"))
+                    .map(|project| json!(crate::project::debug_sources::check(&project, *unsaved))),
+            ),
+            Operation::DebugSourceUpdate { unsaved, decision } => (
+                "debug_source_update",
+                discovery::discover(root)
+                    .map_err(|_| json!("project"))
+                    .and_then(|project| {
+                        use crate::project::debug_sources::{self, Update};
+                        let update = match decision {
+                            DebugSourceDecision::FastForward => Update::FastForward,
+                            DebugSourceDecision::SwitchMain => Update::SwitchMain,
+                        };
+                        debug_sources::update(&project, *unsaved, update)
+                            .map_err(|_| json!("update"))
+                    })
+                    .map(|()| json!({"updated":true})),
+            ),
             Operation::Initialize => (
                 "initialize",
                 initialize(root, false).map_err(|error| json!(error)),
