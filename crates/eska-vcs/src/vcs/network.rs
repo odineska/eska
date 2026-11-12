@@ -64,6 +64,25 @@ impl std::error::Error for FetchError {}
 /// # Errors
 /// Returns the exact open, remote, transport, fetch or system Git failure.
 pub fn fetch(repository: &Repository, remote_name: &str) -> Result<FetchOutcome, FetchError> {
+    fetch_operation(repository, remote_name, None).map(|(outcome, _)| outcome)
+}
+
+/// Fetch and return the commit advertised by this fetch for one full branch name.
+/// # Errors
+/// Returns network failures. A missing branch or helper without an advertisement returns no commit.
+pub fn fetch_branch(
+    repository: &Repository,
+    remote_name: &str,
+    branch: &str,
+) -> Result<Option<gix::ObjectId>, FetchError> {
+    fetch_operation(repository, remote_name, Some(branch)).map(|(_, id)| id)
+}
+
+fn fetch_operation(
+    repository: &Repository,
+    remote_name: &str,
+    branch: Option<&str>,
+) -> Result<(FetchOutcome, Option<gix::ObjectId>), FetchError> {
     let network_repository =
         gix::open(repository.git_dir()).map_err(|source| FetchError::Open(Box::new(source)))?;
     let remote = network_repository
@@ -83,7 +102,7 @@ pub fn fetch(repository: &Repository, remote_name: &str) -> Result<FetchOutcome,
                 reason: reason.clone(),
                 source,
             })?;
-        return Ok(FetchOutcome { backend });
+        return Ok((FetchOutcome { backend }, None));
     }
 
     let connection = remote
@@ -96,10 +115,23 @@ pub fn fetch(repository: &Repository, remote_name: &str) -> Result<FetchOutcome,
         )
         .map_err(|source| FetchError::Prepare(Box::new(source)))?;
     let interrupt = AtomicBool::new(false);
+    let advertised = branch.and_then(|name| {
+        prepare
+            .ref_map()
+            .remote_refs
+            .iter()
+            .find_map(|reference| match reference {
+                gix::protocol::handshake::Ref::Direct {
+                    full_ref_name,
+                    object,
+                } if full_ref_name.as_slice() == name.as_bytes() => Some(*object),
+                _ => None,
+            })
+    });
     prepare
         .receive(gix::progress::Discard, &interrupt)
         .map_err(|source| FetchError::Receive(Box::new(source)))?;
-    Ok(FetchOutcome { backend })
+    Ok((FetchOutcome { backend }, advertised))
 }
 
 /// Select the network backend solely from a transport capability known before execution.

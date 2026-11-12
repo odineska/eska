@@ -421,3 +421,78 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
         );
     }
 }
+
+#[test]
+fn production_debug_compares_configured_remote_and_protects_local_sources() {
+    use eska_project_core::project::discovery;
+    use eska_vcs::project::debug_sources::{self, Reason, Status, Update};
+
+    let fixture = TestDir::new();
+    let seed = fixture.0.join("сервер");
+    let work = fixture.0.join("проект");
+    fs::create_dir(&seed).unwrap();
+    git(&seed, &["init", "-q", "-b", "deployed"]);
+    fs::create_dir(seed.join("src")).unwrap();
+    fs::write(seed.join("src/Configuration.xml"), "<configuration/>").unwrap();
+    fs::write(
+        seed.join("eska.toml"),
+        "[project]\ntype = 'configuration'\n[vcs.workflow]\npreset = 'git-flow'\n[vcs.workflow.policy]\nmain_branch = 'deployed'\nremote = 'ship'\n",
+    )
+    .unwrap();
+    git(&seed, &["add", "."]);
+    git(&seed, &["commit", "-qm", "initial"]);
+    git(
+        &fixture.0,
+        &["clone", "-q", "--origin", "ship", "сервер", "проект"],
+    );
+    let project = discovery::discover(&work).unwrap();
+    let current = debug_sources::check(&project, false);
+    assert_eq!(current.status, Status::Current, "{current:?}");
+    assert_eq!(current.remote.as_deref(), Some("ship"));
+
+    fs::write(seed.join("src/Configuration.xml"), "<new/>").unwrap();
+    git(&seed, &["commit", "-qam", "remote change"]);
+    let behind = debug_sources::check(&project, false);
+    assert_eq!(behind.update, Some(Update::FastForward), "{behind:?}");
+    assert_eq!(behind.local_main_behind, Some(1));
+    assert!(debug_sources::update(&project, true, Update::FastForward).is_err());
+    fs::write(work.join("src/Configuration.xml"), "<dirty/>").unwrap();
+    let dirty = debug_sources::check(&project, false);
+    assert_eq!(dirty.dirty, Some(true));
+    assert_eq!(dirty.update, None);
+    assert!(debug_sources::update(&project, false, Update::FastForward).is_err());
+    fs::write(work.join("src/Configuration.xml"), "<configuration/>").unwrap();
+
+    git(&work, &["switch", "-qc", "feature"]);
+    let feature = debug_sources::check(&project, false);
+    assert_eq!(feature.update, Some(Update::SwitchMain), "{feature:?}");
+    debug_sources::update(&project, false, Update::SwitchMain).unwrap();
+    assert_eq!(
+        debug_sources::check(&project, false).status,
+        Status::Current
+    );
+    assert_eq!(
+        fs::read(work.join("src/Configuration.xml")).unwrap(),
+        b"<new/>"
+    );
+
+    fs::write(seed.join("src/Configuration.xml"), "<another-remote/>").unwrap();
+    git(&seed, &["commit", "-qam", "remote-only change"]);
+    fs::write(work.join("src/Configuration.xml"), "<local/>").unwrap();
+    git(&work, &["commit", "-qam", "local-only change"]);
+    let diverged = debug_sources::check(&project, false);
+    assert_eq!(diverged.local_main_ahead, Some(1));
+    assert_eq!(diverged.local_main_behind, Some(1));
+    assert_eq!(diverged.update, None);
+
+    git(&seed, &["branch", "-m", "moved"]);
+    let missing = debug_sources::check(&project, false);
+    assert_eq!(missing.status, Status::Unverified);
+    assert_eq!(missing.reason, Some(Reason::RemoteBranchMissing));
+    assert_eq!(missing.update, None);
+    git(&work, &["remote", "set-url", "ship", "../missing-remote"]);
+    let unavailable = debug_sources::check(&project, false);
+    assert_eq!(unavailable.status, Status::Unverified);
+    assert_eq!(unavailable.reason, Some(Reason::Remote));
+    assert_eq!(unavailable.update, None);
+}

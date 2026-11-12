@@ -797,6 +797,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "eska-debug"
+version = "0.29.1"
+dependencies = [
+ "clap",
+ "eska-build-runtime",
+ "eska-presentation",
+ "eska-project-core",
+ "eska-vcs",
+ "serde_json",
+ "url",
+]
+
+[[package]]
 name = "eska-fmt"
 version = "0.29.1"
 dependencies = [
