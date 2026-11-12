@@ -1,4 +1,5 @@
 //! One serialized debugger session. HTTP requests and poll results have a single owner.
+mod breakpoints;
 mod client;
 mod poll;
 mod values;
@@ -286,44 +287,42 @@ impl<W: Write> Session<'_, W> {
             return Err(INVALID);
         }
         let module = self.config.sources.module(Path::new(path)).cloned();
-        let lines: Vec<_> = entries
-            .iter()
-            .map(|entry| {
-                entry["line"]
-                    .as_u64()
-                    .and_then(|line| u32::try_from(line).ok())
-                    .filter(|line| *line > 0)
-            })
-            .collect();
         let points: Vec<_> = entries
             .iter()
-            .zip(&lines)
-            .map(|(entry, line)| {
-                let line = (*line)?;
-                let condition = optional_expression(entry, "condition")
-                    .ok()?
-                    .map(str::to_owned);
-                let hit_count = optional_expression(entry, "hitCondition")
-                    .ok()?
-                    .map(|hit| hit.trim().parse().unwrap_or(1));
-                let log_expression = optional_expression(entry, "logMessage")
-                    .ok()?
-                    .map(str::to_owned);
-                Some(Breakpoint {
+            .map(|entry| {
+                let line = entry["line"]
+                    .as_u64()
+                    .and_then(|line| u32::try_from(line).ok())
+                    .filter(|line| *line > 0);
+                (
                     line,
-                    condition,
-                    hit_count,
-                    log_expression,
-                })
+                    line.ok_or(INVALID)
+                        .and_then(|line| breakpoints::parse(entry, line)),
+                )
             })
             .collect();
-        let accepted = points
+        let responses = points
             .iter()
-            .map(|point| point.is_some() && module.is_some())
+            .map(|(line, point)| {
+                let mut response = json!({"verified":module.is_some() && point.is_ok()});
+                if let Some(line) = line {
+                    response["line"] = json!(line);
+                }
+                if let Err(key) = point {
+                    response["message"] = json!(self.language.text(key));
+                }
+                response
+            })
             .collect::<Vec<_>>();
         if let Some(module) = module {
             let mut candidate = self.breakpoints.clone();
-            candidate.insert(module.clone(), points.into_iter().flatten().collect());
+            candidate.insert(
+                module.clone(),
+                points
+                    .into_iter()
+                    .filter_map(|(_, point)| point.ok())
+                    .collect(),
+            );
             if candidate.len() > 2048 {
                 return Err(INVALID);
             }
@@ -335,9 +334,7 @@ impl<W: Write> Session<'_, W> {
             }
             self.breakpoints = candidate;
         }
-        Ok(
-            json!({"breakpoints":lines.iter().zip(accepted).map(|(line, verified)| line.as_ref().map_or_else(|| json!({"verified":false}), |line| json!({"verified":verified,"line":line}))).collect::<Vec<_>>() }),
-        )
+        Ok(json!({"breakpoints":responses}))
     }
 
     fn set_exception_breakpoints(&self, arguments: &Value) -> Result<Value, Failure> {

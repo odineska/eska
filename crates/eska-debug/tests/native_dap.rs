@@ -118,6 +118,17 @@ impl Dap {
         }
     }
 
+    fn assert_output(&self, category: &str, expected: &str) {
+        assert!(
+            self.output.iter().any(|body| body["category"] == category
+                && body["output"]
+                    .as_str()
+                    .is_some_and(|output| output.contains(expected))),
+            "missing {expected:?} in {category}: {:?}",
+            self.output
+        );
+    }
+
     fn shutdown(&mut self) {
         self.success("disconnect", json!({"terminateDebuggee":false}));
         self.wait_for_exit();
@@ -157,16 +168,27 @@ fn native_breakpoint_conditions_logpoints_and_exception_filters() {
         "setBreakpoints",
         json!({"source":{"path":source},"breakpoints":[
             {"line":3,"condition":"A < 0"},{"line":5,"hitCondition":"2"},
-            {"line":7,"logMessage":"\"ESKA log \" + Строка(A)"},
-            {"line":8,"condition":"A = 5"},{"line":24}
+            {"line":7,"logMessage":"ESKA log {A}; {{текст}} {\"}\"}"},
+            {"line":8,"condition":"A = 5"},{"line":24},
+            {"line":31,"condition":"J > 1","hitCondition":"2"},
+            {"line":4,"hitCondition":"0"},{"line":10,"logMessage":"ESKA {"}
         ]}),
     );
+    let points = points["breakpoints"].as_array().unwrap();
+    assert!(points[..6].iter().all(|point| point["verified"] == true));
+    assert_eq!(points[6]["verified"], false);
     assert!(
-        points["breakpoints"]
-            .as_array()
+        points[6]["message"]
+            .as_str()
             .unwrap()
-            .iter()
-            .all(|point| point["verified"] == true)
+            .contains("positive integer")
+    );
+    assert_eq!(points[7]["verified"], false);
+    assert!(
+        points[7]["message"]
+            .as_str()
+            .unwrap()
+            .contains("single braces")
     );
     dap.success(
         "setExceptionBreakpoints",
@@ -188,37 +210,23 @@ fn native_breakpoint_conditions_logpoints_and_exception_filters() {
     );
     dap.success("continue", json!({"threadId":thread}));
     let (thread, _) = stop(&mut dap, "breakpoint", 8);
-    assert!(
-        dap.output.iter().any(|body| body["category"] == "console"
-            && body["output"]
-                .as_str()
-                .is_some_and(|output| output.contains("ESKA log 4"))),
-        "{:?}",
-        dap.output
-    );
+    dap.assert_output("console", "ESKA log 4; {текст} }");
     dap.success("continue", json!({"threadId":thread}));
     let (thread, _) = stop(&mut dap, "exception", 15);
-    assert!(
-        dap.output.iter().any(|body| body["category"] == "stderr"
-            && body["output"]
-                .as_str()
-                .is_some_and(|output| output.contains("ESKA match"))),
-        "{:?}",
-        dap.output
-    );
+    dap.assert_output("stderr", "ESKA match");
     dap.success("setExceptionBreakpoints", json!({"filters":[]}));
     dap.success("continue", json!({"threadId":thread}));
     let (thread, _) = stop(&mut dap, "breakpoint", 24);
     dap.success("setExceptionBreakpoints", json!({"filters":["all"]}));
     dap.success("continue", json!({"threadId":thread}));
-    stop(&mut dap, "exception", 26);
-    assert!(
-        dap.output.iter().any(|body| body["category"] == "stderr"
-            && body["output"]
-                .as_str()
-                .is_some_and(|output| output.contains("ESKA unfiltered"))),
-        "{:?}",
-        dap.output
+    let (thread, _) = stop(&mut dap, "exception", 26);
+    dap.assert_output("stderr", "ESKA unfiltered");
+    dap.success("setExceptionBreakpoints", json!({"filters":[]}));
+    dap.success("continue", json!({"threadId":thread}));
+    let (_, frame) = stop(&mut dap, "breakpoint", 31);
+    assert_eq!(
+        dap.success("evaluate", json!({"frameId":frame,"expression":"J"}))["result"],
+        "3"
     );
     dap.success(
         "setBreakpoints",
