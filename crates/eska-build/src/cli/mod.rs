@@ -10,7 +10,7 @@ pub use eska_terminal::{interactive, process_output};
 use clap::{CommandFactory, FromArgMatches, Parser, Subcommand};
 use eska_build_runtime::build::GitProvenance;
 use eska_presentation::{
-    arguments::bootstrap_lang,
+    arguments::{bootstrap_lang, build::runtime},
     localization::{Localizer, resolve_locale_from_environment},
 };
 use std::{
@@ -59,6 +59,12 @@ enum Commands {
     Platform(commands::platform::PlatformArgs),
     #[command(disable_help_flag = true)]
     Config(commands::config::ConfigArgs),
+    #[command(disable_help_flag = true)]
+    Run(runtime::RunArgs),
+    #[command(disable_help_flag = true)]
+    Probe(runtime::RunArgs),
+    #[command(disable_help_flag = true)]
+    Apply(runtime::ApplyArgs),
 }
 
 /// Parse standalone help before touching the project or locating a 1C installation.
@@ -118,6 +124,15 @@ pub fn run() -> ExitCode {
         Some(Commands::Clean(args)) => commands::clean::run(&args, &cli.project_dir, &localizer),
         Some(Commands::Platform(args)) => commands::platform::run(&args, &localizer),
         Some(Commands::Config(args)) => commands::config::run(&args, &localizer),
+        Some(Commands::Run(args)) => {
+            commands::runtime::run(&args, &cli.project_dir, &localizer, false)
+        }
+        Some(Commands::Probe(args)) => {
+            commands::runtime::run(&args, &cli.project_dir, &localizer, true)
+        }
+        Some(Commands::Apply(args)) => {
+            commands::runtime::apply(&args, &cli.project_dir, &localizer)
+        }
         None => commands::build::run(
             &commands::build::BuildArgs::default(),
             &cli.project_dir,
@@ -159,7 +174,10 @@ fn localized(localizer: &Localizer) -> clap::Command {
         .mut_subcommand("import", |command| commands::import::localize(command, localizer))
         .mut_subcommand("clean",|command|commands::clean::localize(command,localizer))
         .mut_subcommand("platform",|command|commands::platform::localize(command,localizer))
-        .mut_subcommand("config",|command|commands::config::localize(command,localizer));
+        .mut_subcommand("config",|command|commands::config::localize(command,localizer))
+        .mut_subcommand("run",|command|runtime::localize(command,localizer))
+        .mut_subcommand("probe",|command|runtime::localize(command,localizer).about(localizer.text("runtime-probe-about")))
+        .mut_subcommand("apply",|command|runtime::localize_apply(command,localizer));
     command.mut_subcommands(|command| standalone_help(command, localizer))
 }
 

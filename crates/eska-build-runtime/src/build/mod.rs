@@ -6,7 +6,7 @@ mod infobase;
 mod manifest;
 mod plan;
 mod shared_library;
-mod source_snapshot;
+pub(crate) mod source_snapshot;
 pub use source_snapshot::Error as SourceSnapshotError;
 mod tool;
 

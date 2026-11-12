@@ -25,6 +25,7 @@ pub enum ProfileName {
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Action {
+    Inspect,
     Run,
     DebugLaunch,
     DebugAttach,
@@ -60,7 +61,7 @@ pub enum Infobase {
     Standalone {
         url: String,
         name: String,
-        admin_url: Option<String>,
+        admin_pid: Option<u32>,
     },
 }
 
@@ -153,7 +154,7 @@ impl LocalSettings {
             match &profile.infobase {
                 Infobase::Cluster { .. } => return Err(SettingsError::ClusterApplyUnsupported),
                 Infobase::Standalone {
-                    admin_url: None, ..
+                    admin_pid: None, ..
                 } => {
                     return Err(SettingsError::AdminEndpointRequired);
                 }
@@ -188,14 +189,11 @@ impl Profile {
             Infobase::Standalone {
                 url,
                 name,
-                admin_url,
+                admin_pid,
             } => {
                 require(http_url(url).is_some(), "infobase.url")?;
                 require(infobase_name(name), "infobase.name")?;
-                require(
-                    admin_url.as_ref().is_none_or(|url| http_url(url).is_some()),
-                    "infobase.admin_url",
-                )?;
+                require(admin_pid.is_none_or(|pid| pid > 0), "infobase.admin_pid")?;
             }
         }
         let (version, ibcmd) = match &self.runner {
@@ -255,21 +253,15 @@ impl Infobase {
             (
                 Self::Standalone {
                     url: a,
-                    admin_url: aa,
+                    admin_pid: aa,
                     ..
                 },
                 Self::Standalone {
                     url: b,
-                    admin_url: ba,
+                    admin_pid: ba,
                     ..
                 },
-            ) => {
-                equal_url(a, b)
-                    || aa
-                        .as_ref()
-                        .zip(ba.as_ref())
-                        .is_some_and(|(a, b)| equal_url(a, b))
-            }
+            ) => equal_url(a, b) || aa.is_some() && aa == ba,
             _ => false,
         }
     }

@@ -6,6 +6,7 @@ pub mod artifact;
 pub mod build;
 pub mod patch;
 mod platform_path;
+pub mod runtime;
 
 #[cfg(test)]
 #[path = "../../../tests/support/mod.rs"]

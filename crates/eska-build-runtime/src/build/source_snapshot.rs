@@ -1,6 +1,7 @@
 //! Immutable Designer XML copying and digesting without project or artifact policy.
 
 use std::{
+    collections::BTreeMap,
     ffi::OsStr,
     fs::{self, File},
     io::{self, Read, Write},
@@ -21,15 +22,42 @@ pub enum Error {
 /// Rejects failed I/O and non-regular entries instead of following links outside the source.
 pub(super) fn capture(source: &Path, target: &Path, excluded: &[&Path]) -> Result<Vec<u8>, Error> {
     let mut hash = Sha256::new();
-    visit_directory(source, Some(target), source, excluded, &mut hash)?;
+    visit_directory(
+        source,
+        Some(target),
+        source,
+        excluded,
+        &mut hash,
+        &mut |_, _| {},
+    )?;
     Ok(hash.finalize().to_vec())
 }
 
 /// Identify all current bytes without creating a copy or relying on metadata timestamps.
 pub(super) fn digest(source: &Path, excluded: &[&Path]) -> Result<Vec<u8>, Error> {
     let mut hash = Sha256::new();
-    visit_directory(source, None, source, excluded, &mut hash)?;
+    visit_directory(source, None, source, excluded, &mut hash, &mut |_, _| {})?;
     Ok(hash.finalize().to_vec())
+}
+
+/// Capture individual files for runtime delta calculation, optionally from an immutable copy.
+pub fn catalog(
+    source: &Path,
+    target: Option<&Path>,
+    excluded: &[&Path],
+) -> Result<BTreeMap<PathBuf, Vec<u8>>, Error> {
+    let mut files = BTreeMap::new();
+    visit_directory(
+        source,
+        target,
+        source,
+        excluded,
+        &mut Sha256::new(),
+        &mut |path, digest| {
+            files.insert(path.to_owned(), digest.to_vec());
+        },
+    )?;
+    Ok(files)
 }
 
 /// Copy one directory without following links and hash its exact relative structure and bytes.
@@ -39,6 +67,7 @@ fn visit_directory(
     root: &Path,
     excluded: &[&Path],
     hash: &mut Sha256,
+    on_file: &mut impl FnMut(&Path, &[u8]),
 ) -> Result<(), Error> {
     if let Some(target) = target {
         fs::create_dir(target).map_err(|source| Error::Io {
@@ -76,10 +105,11 @@ fn visit_directory(
         })?;
         if file_type.is_dir() {
             hash_entry(hash, b'd', relative, &[]);
-            visit_directory(&path, destination.as_deref(), root, excluded, hash)?;
+            visit_directory(&path, destination.as_deref(), root, excluded, hash, on_file)?;
         } else if file_type.is_file() {
             let digest = file_digest(&path, destination.as_deref())?;
             hash_entry(hash, b'f', relative, &digest);
+            on_file(relative, &digest);
         } else {
             return Err(Error::UnsupportedEntry(path));
         }
