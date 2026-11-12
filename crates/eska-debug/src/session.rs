@@ -6,7 +6,7 @@ mod poll;
 mod values;
 
 use std::{
-    collections::BTreeMap,
+    collections::{BTreeMap, BTreeSet},
     io::{self, BufReader, BufWriter, Write},
     path::Path,
     sync::{Arc, mpsc},
@@ -112,6 +112,8 @@ struct Session<'a, W> {
     state: State,
     breakpoints: BTreeMap<Module, Vec<Breakpoint>>,
     pending: BTreeMap<String, Pending>,
+    pause: Option<BTreeSet<u64>>,
+    step_target: Option<u64>,
     client: Option<Client>,
     initialized: bool,
     configured: bool,
@@ -144,6 +146,8 @@ pub fn run(config: Option<Config>, language: &Localizer) -> io::Result<()> {
         state: State::default(),
         breakpoints: BTreeMap::new(),
         pending: BTreeMap::new(),
+        pause: None,
+        step_target: None,
         client: None,
         initialized: false,
         configured: false,
@@ -240,6 +244,7 @@ impl<W: Write> Session<'_, W> {
             "stackTrace" => self.stack(&request.arguments),
             "scopes" => self.scopes(&request.arguments),
             "continue" | "next" | "stepIn" | "stepOut" => self.step(&request),
+            "pause" => self.pause(&request.arguments),
             "eska/listDebugTargets" => self.targets(),
             "eska/attachDebugTarget" => self.select_target(&request.arguments),
             "eska/getAutoAttachTypes" if self.server.is_some() => {
@@ -525,6 +530,25 @@ impl<W: Write> Session<'_, W> {
         )
     }
 
+    fn pause(&mut self, arguments: &Value) -> Result<Value, Failure> {
+        let thread = arguments["threadId"].as_u64().ok_or(INVALID)?;
+        let running: BTreeSet<_> = self
+            .state
+            .threads
+            .iter()
+            .filter_map(|(&id, thread)| thread.stack.is_none().then_some(id))
+            .collect();
+        if !running.contains(&thread) {
+            return Err(INVALID);
+        }
+        // dbgs applies this request to the whole debugger registration.
+        self.server()?
+            .break_on_next_statement(true)
+            .map_err(|_| ENDPOINT)?;
+        self.pause = Some(running);
+        Ok(json!({}))
+    }
+
     fn step(&mut self, request: &Request) -> Result<Value, Failure> {
         let id = request.arguments["threadId"].as_u64().ok_or(INVALID)?;
         let target = self
@@ -542,7 +566,14 @@ impl<W: Write> Session<'_, W> {
             "stepIn" => Step::In,
             _ => Step::Out,
         };
+        if self.pause.is_some() {
+            self.server()?
+                .break_on_next_statement(false)
+                .map_err(|_| ENDPOINT)?;
+            self.pause = None;
+        }
         let resumed = self.server()?.step(&target, step).map_err(|_| ENDPOINT)?;
+        self.step_target = (!matches!(step, Step::Continue)).then_some(id);
         let mut ids = vec![id];
         for target in resumed {
             if let Some(other) = self.state.thread_id(&target)
@@ -606,10 +637,14 @@ impl<W: Write> Session<'_, W> {
         if self.state.thread_id(&target.id).is_some() || self.state.threads.len() >= MAX_THREADS {
             return Ok(());
         }
-        self.server
+        let server = self
+            .server
             .as_ref()
-            .ok_or_else(|| io::Error::other("session closed"))?
-            .attach_target(&target.id)?;
+            .ok_or_else(|| io::Error::other("session closed"))?;
+        if self.pause.is_none() {
+            server.break_on_next_statement(false)?;
+        }
+        server.attach_target(&target.id)?;
         let id = self.state.add_thread(target);
         self.output
             .event("thread", &json!({"reason":"started","threadId":id}))
@@ -630,6 +665,12 @@ impl<W: Write> Session<'_, W> {
                 }
                 Event::Exited(target) => {
                     if let Some(id) = self.state.thread_id(&target) {
+                        if let Some(threads) = &mut self.pause {
+                            threads.remove(&id);
+                        }
+                        if self.step_target == Some(id) {
+                            self.step_target = None;
+                        }
                         self.state.remove(id);
                         self.output
                             .event("thread", &json!({"reason":"exited","threadId":id}))?;
@@ -691,8 +732,20 @@ impl<W: Write> Session<'_, W> {
                 &json!({"category":category,"output":format!("{message}\n")}),
             )?;
         }
+        let paused = !matches!(action, StackAction::Resume)
+            && self
+                .pause
+                .as_mut()
+                .is_some_and(|threads| threads.remove(&id));
+        let stepped = !matches!(action, StackAction::Resume) && self.step_target == Some(id);
+        if stepped {
+            self.step_target = None;
+        }
         let reason = match action {
+            // dbgs can flag its own temporary stepping breakpoint as stopByBP.
+            StackAction::Breakpoint if stepped && !self.has_breakpoint_at_top(&frames) => "step",
             StackAction::Breakpoint => "breakpoint",
+            StackAction::Step if paused => "pause",
             StackAction::Step => "step",
             StackAction::Exception => "exception",
             StackAction::Resume => {
@@ -711,6 +764,16 @@ impl<W: Write> Session<'_, W> {
             "stopped",
             &json!({"reason":reason,"threadId":id,"allThreadsStopped":false}),
         )
+    }
+
+    fn has_breakpoint_at_top(&self, frames: &[dbgs::Frame]) -> bool {
+        frames.first().is_some_and(|frame| {
+            frame
+                .module
+                .as_ref()
+                .and_then(|module| self.breakpoints.get(module))
+                .is_some_and(|points| points.iter().any(|point| point.line == frame.line))
+        })
     }
 
     fn calculation_request(&mut self, request: Request) -> io::Result<()> {
@@ -1040,6 +1103,9 @@ impl<W: Write> Session<'_, W> {
         if let Some(server) = self.server.take() {
             let start = Instant::now();
             let mut stopped = self.state.stopped();
+            if !stopped.is_empty() && self.pause.take().is_some() {
+                let _ = server.break_on_next_statement(false);
+            }
             while let Some(id) = stopped.pop_first() {
                 if start.elapsed() >= Duration::from_secs(2) {
                     break;

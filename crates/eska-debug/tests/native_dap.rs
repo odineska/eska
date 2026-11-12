@@ -185,6 +185,75 @@ impl Dap {
 }
 
 #[test]
+#[ignore = "requires the pause fixture and one externally started managed client"]
+fn native_pause_reports_both_running_clients_and_preserves_step_reason() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let mut dap = Dap::start(Path::new(&root), "test", "launch");
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    dap.success("launch", json!({}));
+    let targets = dap.success("eska/listDebugTargets", json!({}));
+    let existing = targets["targets"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|target| target["kind"] == "ManagedClient")
+        .unwrap();
+    dap.success("eska/attachDebugTarget", json!({"id":existing["id"]}));
+    dap.success("configurationDone", json!({}));
+    let deadline = Instant::now() + Duration::from_secs(8);
+    let mut clients = loop {
+        let threads = dap.success("threads", json!({}));
+        let ids: Vec<_> = threads["threads"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .filter(|thread| {
+                thread["name"]
+                    .as_str()
+                    .unwrap()
+                    .starts_with("ManagedClient")
+            })
+            .map(|thread| thread["id"].as_u64().unwrap())
+            .collect();
+        if ids.len() == 2 {
+            break ids;
+        }
+        assert!(Instant::now() < deadline, "{threads}");
+        thread::sleep(Duration::from_millis(40));
+    };
+    let selected = clients[0];
+    dap.success("pause", json!({"threadId":selected}));
+    let mut stopped = Vec::new();
+    for _ in 0..2 {
+        let event = dap.stop_event();
+        assert_eq!(event["reason"], "pause", "{event}");
+        stopped.push(event["threadId"].as_u64().unwrap());
+    }
+    clients.sort_unstable();
+    stopped.sort_unstable();
+    assert_eq!(stopped, clients);
+    let mut old_frames = Vec::new();
+    for id in &clients {
+        let stack = dap.success("stackTrace", json!({"threadId":id}));
+        assert_eq!(stack["stackFrames"][0]["line"], 6, "{stack}");
+        old_frames.push(stack["stackFrames"][0]["id"].clone());
+    }
+    dap.success("next", json!({"threadId":selected}));
+    let event = dap.stop_event();
+    assert_eq!(event["reason"], "step", "{event}");
+    assert_eq!(event["threadId"], selected, "{event}");
+    let stack = dap.success("stackTrace", json!({"threadId":selected}));
+    assert_eq!(stack["stackFrames"][0]["line"], 7, "{stack}");
+    for old_frame in old_frames {
+        assert_eq!(
+            dap.request("scopes", json!({"frameId":old_frame}))["success"],
+            false
+        );
+    }
+    dap.shutdown();
+}
+
+#[test]
 #[ignore = "requires a standalone fixture and a client started outside the adapter"]
 fn native_transport_loss_reports_lost_and_busy_connections() {
     let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();

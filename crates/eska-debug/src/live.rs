@@ -104,7 +104,10 @@ fn stopped(server: &Server) -> (String, Vec<Frame>) {
     while Instant::now() < deadline {
         for event in server.poll(None).unwrap() {
             match event {
-                Event::Started(target) => server.attach_target(&target.id).unwrap(),
+                Event::Started(target) => {
+                    server.break_on_next_statement(false).unwrap();
+                    server.attach_target(&target.id).unwrap();
+                }
                 Event::Stack {
                     target,
                     frames,

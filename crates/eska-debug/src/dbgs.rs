@@ -196,7 +196,6 @@ impl Server {
     }
 
     pub fn attach_target(&self, id: &str) -> io::Result<()> {
-        self.call("clearBreakOnNextStatement", "")?;
         self.call(
             "attachDetachDbgTargets",
             &format!(
@@ -205,6 +204,15 @@ impl Server {
             ),
         )
         .map(|_| ())
+    }
+
+    pub fn break_on_next_statement(&self, enabled: bool) -> io::Result<()> {
+        let command = if enabled {
+            "setBreakOnNextStatement"
+        } else {
+            "clearBreakOnNextStatement"
+        };
+        self.call(command, "").map(|_| ())
     }
 
     pub fn breakpoints<'a>(
