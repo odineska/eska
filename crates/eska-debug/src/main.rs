@@ -75,6 +75,8 @@ struct DapArgs {
     unsaved: bool,
     #[arg(long, hide = true)]
     expected_infobase: Option<String>,
+    #[arg(long, hide = true, requires = "expected_infobase")]
+    application: Option<String>,
     #[arg(short, long, action = ArgAction::Help)]
     help: Option<bool>,
 }
@@ -164,13 +166,15 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
                 .map_err(|_| localizer.text("debug-project-unavailable"))?;
         }
     }
-    let mut sources = source::Sources::load(&project).map_err(|error| {
-        localizer.text(match error {
-            source::SourceError::Project => "debug-project-unavailable",
-            source::SourceError::ApplicationChoice => "debug-application-choice",
-            source::SourceError::DuplicateExtension => "debug-duplicate-extension",
-        })
-    })?;
+    let mut sources =
+        source::Sources::load(&project, args.application.as_deref()).map_err(|error| {
+            localizer.text(match error {
+                source::SourceError::Project => "debug-project-unavailable",
+                source::SourceError::ApplicationChoice => "debug-application-choice",
+                source::SourceError::ApplicationMismatch => "debug-application-mismatch",
+                source::SourceError::DuplicateExtension => "debug-duplicate-extension",
+            })
+        })?;
     let mut launch = if args.mode == Mode::Launch {
         Some(
             DebugLaunch::prepare(&project, profile, args.expected_infobase.as_deref())

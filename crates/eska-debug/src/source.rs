@@ -27,6 +27,7 @@ pub struct Sources {
 pub enum SourceError {
     Project,
     ApplicationChoice,
+    ApplicationMismatch,
     DuplicateExtension,
 }
 
@@ -39,24 +40,48 @@ impl Sources {
         }
     }
 
-    pub fn load(project: &Project) -> Result<Self, SourceError> {
+    pub fn load(project: &Project, requested: Option<&str>) -> Result<Self, SourceError> {
         let mut sources = Self::new();
         let mut extensions = BTreeSet::new();
         let context =
             discovery::discover_context(project.root()).map_err(|_| SourceError::Project)?;
-        if let DiscoveryContext::Workspace { workspace, .. } = context
-            && let Some((_, application)) = project_application(project, &workspace)
-                .map_err(|_| SourceError::ApplicationChoice)?
+        if let DiscoveryContext::Workspace {
+            workspace,
+            current_member,
+        } = &context
         {
-            for member in workspace.members().iter().filter(|member| {
-                application.configuration() == Some(member.name())
-                    || application.extensions().contains(member.name())
-            }) {
-                sources.add_project(member.project(), &mut extensions)?;
+            let selected = if let Some(name) = requested {
+                Some(
+                    workspace
+                        .analysis_settings()
+                        .applications()
+                        .iter()
+                        .find(|(id, application)| {
+                            id.as_str() == name
+                                && application.configuration() == current_member.as_ref()
+                                && current_member.is_some()
+                        })
+                        .map(|(_, application)| application)
+                        .ok_or(SourceError::ApplicationMismatch)?,
+                )
+            } else {
+                project_application(project, workspace)
+                    .map_err(|_| SourceError::ApplicationChoice)?
+                    .map(|(_, application)| application)
+            };
+            if let Some(application) = selected {
+                for member in workspace.members().iter().filter(|member| {
+                    application.configuration() == Some(member.name())
+                        || application.extensions().contains(member.name())
+                }) {
+                    sources.add_project(member.project(), &mut extensions)?;
+                }
+                return Ok(sources);
             }
-        } else {
-            sources.add_project(project, &mut extensions)?;
+        } else if requested.is_some() {
+            return Err(SourceError::ApplicationMismatch);
         }
+        sources.add_project(project, &mut extensions)?;
         Ok(sources)
     }
 

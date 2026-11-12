@@ -1189,6 +1189,7 @@ debug-managed-server-ready = Started the local 1C debug server at { $url }.
 debug-managed-server-start-failed = Could not start the local 1C debug server. Check the platform installation and whether the configured port is free.
 debug-managed-server-stopped = The local 1C debug server stopped unexpectedly.
 debug-application-choice = This project belongs to multiple applications. Set analysis.default_application to select one that includes it.
+debug-application-mismatch = The selected application does not use this project as its main configuration. Review a new application plan.
 debug-duplicate-extension = The selected application contains extensions with the same Designer name. Debugger source paths cannot be resolved uniquely.
 debug-endpoint-unavailable = Check the HTTP debug server and source mapping in the profile.
 debug-transport-lost = The connection to the 1C debug server was lost. Restore the connection and start debugging again.

@@ -131,7 +131,9 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
     let mut sources = Sources::from_designer(args.source_root.as_deref(), &args.extension_roots)
         .map_err(|error| match error {
             SourceError::DuplicateExtension => "debug-duplicate-extension",
-            SourceError::Project | SourceError::ApplicationChoice => "debug-standalone-source",
+            SourceError::Project
+            | SourceError::ApplicationChoice
+            | SourceError::ApplicationMismatch => "debug-standalone-source",
         })?;
     if let Some(processing) = args.external_processing {
         processing.configure(&mut sources, launch.as_mut())?;
