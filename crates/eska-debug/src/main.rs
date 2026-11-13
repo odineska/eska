@@ -48,6 +48,16 @@ enum Operation {
     Dap(DapArgs),
     #[command(disable_help_flag = true)]
     Standalone(StandaloneArgs),
+    #[command(disable_help_flag = true)]
+    Infobases(InfobasesArgs),
+}
+
+#[derive(Debug, Args)]
+struct InfobasesArgs {
+    #[arg(long)]
+    list: Option<PathBuf>,
+    #[arg(short, long, action = ArgAction::Help)]
+    help: Option<bool>,
 }
 
 #[derive(Debug, Args)]
@@ -109,6 +119,17 @@ fn main() -> ExitCode {
     };
     let parsed = localized(&localizer).get_matches_from(args);
     let cli = Cli::from_arg_matches(&parsed).unwrap_or_else(|error| error.exit());
+    if let Operation::Infobases(args) = cli.command {
+        let Some(entries) = infobases::list(args.list) else {
+            eprintln!("{}", localizer.text("debug-infobases-unavailable"));
+            return ExitCode::FAILURE;
+        };
+        println!(
+            "{}",
+            json!({"schema_version":1,"kind":"registered-infobases","entries":entries})
+        );
+        return ExitCode::SUCCESS;
+    }
     if matches!(cli.command, Operation::Standalone(_)) {
         return if session::run(None, &localizer).is_ok() {
             ExitCode::SUCCESS
@@ -137,7 +158,7 @@ fn main() -> ExitCode {
                 ExitCode::FAILURE
             }
         },
-        Operation::Standalone(_) => ExitCode::FAILURE,
+        Operation::Standalone(_) | Operation::Infobases(_) => ExitCode::FAILURE,
     }
 }
 
@@ -352,6 +373,14 @@ fn localized(localizer: &Localizer) -> clap::Command {
         .mut_subcommand("standalone", |command| {
             command
                 .about(localizer.text("debug-standalone-about"))
+                .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
+        })
+        .mut_subcommand("infobases", |command| {
+            command
+                .about(localizer.text("debug-infobases-about"))
+                .mut_arg("list", |arg| {
+                    arg.help(localizer.text("debug-infobases-list-help"))
+                })
                 .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
         })
 }

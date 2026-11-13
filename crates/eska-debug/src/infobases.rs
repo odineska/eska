@@ -1,9 +1,9 @@
 //! Read only the connection selected from a local 1C launcher list.
 
-use std::{env, fs::File, io::Read, path::PathBuf};
+use std::{collections::BTreeMap, env, fs::File, io::Read, path::PathBuf};
 
 use eska_project_core::project::local_settings::Infobase;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 const MAX_LIST_BYTES: usize = 1024 * 1024;
 
@@ -16,23 +16,46 @@ pub struct RegisteredInfobase {
 
 impl RegisteredInfobase {
     pub fn resolve(self) -> Option<Infobase> {
-        let path = self.list.or_else(default_list)?;
-        if !path.is_file() {
-            return None;
-        }
-        let file = File::open(path).ok()?;
-        if !file.metadata().ok()?.is_file() {
-            return None;
-        }
-        let mut contents = String::new();
-        file.take((MAX_LIST_BYTES + 1) as u64)
-            .read_to_string(&mut contents)
-            .ok()?;
-        if contents.len() > MAX_LIST_BYTES {
-            return None;
-        }
-        connection(selected_connection(&contents, &self.name)?)
+        let contents = read(self.list)?;
+        connection(entries(&contents).get(self.name.as_str())?.as_ref()?)
     }
+}
+
+#[derive(Serialize)]
+pub struct Entry {
+    name: String,
+    infobase: Infobase,
+}
+
+pub fn list(path: Option<PathBuf>) -> Option<Vec<Entry>> {
+    let contents = read(path)?;
+    Some(
+        entries(&contents)
+            .into_iter()
+            .filter_map(|(name, value)| {
+                Some(Entry {
+                    name: name.to_owned(),
+                    infobase: connection(value?)?,
+                })
+            })
+            .collect(),
+    )
+}
+
+fn read(path: Option<PathBuf>) -> Option<String> {
+    let path = path.or_else(default_list)?;
+    if !path.is_file() {
+        return None;
+    }
+    let file = File::open(path).ok()?;
+    if !file.metadata().ok()?.is_file() {
+        return None;
+    }
+    let mut contents = String::new();
+    file.take((MAX_LIST_BYTES + 1) as u64)
+        .read_to_string(&mut contents)
+        .ok()?;
+    (contents.len() <= MAX_LIST_BYTES).then_some(contents)
 }
 
 fn default_list() -> Option<PathBuf> {
@@ -44,32 +67,42 @@ fn default_list() -> Option<PathBuf> {
     Some(PathBuf::from(env::var_os(variable)?).join(suffix))
 }
 
-fn selected_connection<'a>(contents: &'a str, name: &str) -> Option<&'a str> {
-    let mut selected = false;
-    let mut seen = false;
-    let mut connection = None;
+fn entries(contents: &str) -> BTreeMap<&str, Option<&str>> {
+    use std::collections::btree_map::Entry;
+
+    let mut entries = BTreeMap::new();
+    let mut section = None;
     for line in contents
         .trim_start_matches('\u{feff}')
         .lines()
         .map(str::trim)
     {
-        if let Some(section) = line
+        if let Some(name) = line
             .strip_prefix('[')
             .and_then(|line| line.strip_suffix(']'))
         {
-            selected = section == name;
-            if selected && std::mem::replace(&mut seen, true) {
-                return None;
+            section = match entries.entry(name) {
+                Entry::Vacant(entry) if !name.is_empty() => {
+                    entry.insert(None);
+                    Some(name)
+                }
+                Entry::Occupied(mut entry) => {
+                    entry.insert(None);
+                    None
+                }
+                Entry::Vacant(_) => None,
             }
-        } else if selected
+        } else if let Some(name) = section
             && let Some((key, value)) = line.split_once('=')
             && key.trim().eq_ignore_ascii_case("Connect")
-            && connection.replace(value.trim()).is_some()
+            && let Some(entry) = entries.get_mut(name)
+            && entry.replace(value.trim()).is_some()
         {
-            return None;
+            *entry = None;
+            section = None;
         }
     }
-    connection
+    entries
 }
 
 fn connection(mut input: &str) -> Option<Infobase> {
@@ -131,13 +164,14 @@ mod tests {
     #[test]
     fn selects_one_named_entry_without_using_launcher_options() {
         let list = "\u{feff}[Демо]\r\nConnect=Srvr=\"host;peer\";Ref=\"test\";\r\nAdditionalParameters=/C Ignored\r\n[Other]\r\nConnect=File=\"unused\";";
-        let result = selected_connection(list, "Демо").and_then(connection);
+        let parsed = entries(list);
+        let result = parsed["Демо"].and_then(connection);
         assert!(
             matches!(result, Some(Infobase::Cluster {host, name}) if host == "host;peer" && name == "test")
         );
-        assert!(selected_connection(list, "demo").is_none());
-        assert!(selected_connection("[x]\nConnect=a\n[x]\n", "x").is_none());
-        assert!(selected_connection("[x]\nConnect=a\nConnect=b", "x").is_none());
+        assert!(!parsed.contains_key("demo"));
+        assert_eq!(entries("[x]\nConnect=a\n[x]\n")["x"], None);
+        assert_eq!(entries("[x]\nConnect=a\nConnect=b")["x"], None);
     }
 
     #[test]
