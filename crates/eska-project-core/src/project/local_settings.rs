@@ -11,6 +11,8 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use url::Url;
 
+use crate::file_lock::FileLock;
+
 use super::build::PlatformVersion;
 
 pub const SETTINGS_PATH: &str = ".eska/settings_local.toml";
@@ -471,11 +473,10 @@ pub fn save(
         .truncate(false)
         .open(lock_path)
         .map_err(SettingsError::Io)?;
-    match lock.try_lock() {
-        Ok(()) => {}
-        Err(TryLockError::WouldBlock) => return Err(SettingsError::Changed),
-        Err(TryLockError::Error(error)) => return Err(SettingsError::Io(error)),
-    }
+    let _lock = FileLock::try_lock(lock).map_err(|error| match error {
+        TryLockError::WouldBlock => SettingsError::Changed,
+        TryLockError::Error(error) => SettingsError::Io(error),
+    })?;
     if load(root)?.revision.as_deref() != expected_revision {
         return Err(SettingsError::Changed);
     }

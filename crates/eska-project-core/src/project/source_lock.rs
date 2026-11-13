@@ -7,22 +7,14 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use crate::file_lock::FileLock;
+
 /// An owned handle is the write capability; filenames and numeric session IDs never grant it.
 #[derive(Debug)]
 pub struct SourceLease {
-    _files: Vec<LockedFile>,
+    _files: Vec<FileLock>,
     root: PathBuf,
     names: Vec<String>,
-}
-
-#[derive(Debug)]
-struct LockedFile(File);
-
-impl Drop for LockedFile {
-    /// A concurrent fork may retain the open-file description until exec, so close alone is insufficient.
-    fn drop(&mut self) {
-        let _ = self.0.unlock();
-    }
 }
 
 impl SourceLease {
@@ -140,12 +132,11 @@ fn open(path: &Path, create: bool) -> io::Result<File> {
 }
 
 /// Only a successful acquisition owns an unlock; failed and competing handles never release another lease.
-fn lock(file: File) -> io::Result<LockedFile> {
-    file.try_lock().map_err(|error| match error {
+fn lock(file: File) -> io::Result<FileLock> {
+    FileLock::try_lock(file).map_err(|error| match error {
         TryLockError::WouldBlock => io::Error::from(io::ErrorKind::WouldBlock),
         TryLockError::Error(error) => error,
-    })?;
-    Ok(LockedFile(file))
+    })
 }
 
 #[cfg(all(test, unix))]
@@ -162,7 +153,7 @@ mod tests {
         fs::write(&source, "A=1;").unwrap();
         let lease = SourceLease::acquire(&directory.0, std::slice::from_ref(&source)).unwrap();
         let SourceLease { _files: files, .. } = &lease;
-        let duplicate = files[0].0.try_clone().unwrap();
+        let duplicate = files[0].duplicate().unwrap();
         drop(lease);
         let next = SourceLease::acquire(&directory.0, std::slice::from_ref(&source)).unwrap();
         drop(duplicate);
