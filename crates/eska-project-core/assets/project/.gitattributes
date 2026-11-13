@@ -1,4 +1,11 @@
-* text=auto
+# A shared checkout policy overrides per-user core.autocrlf on every OS.
+* text=auto eol=lf
+*.bsl text eol=lf
+*.os text eol=lf
+*.xml text eol=lf
+*.toml text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
 
 *.addin filter=lfs diff=lfs merge=lfs -text
 *.axdt filter=lfs diff=lfs merge=lfs -text
