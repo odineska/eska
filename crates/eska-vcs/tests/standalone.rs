@@ -41,6 +41,13 @@ fn git(root: &Path, args: &[&str]) -> Vec<u8> {
 
 /// Execute the tool with only the explicitly selected executables available to subprocesses.
 fn tool(root: &Path, path: &OsStr, locale: &str, args: &[&str]) -> Output {
+    tool_command(root, path, locale)
+        .args(args)
+        .output()
+        .unwrap()
+}
+
+fn tool_command(root: &Path, path: &OsStr, locale: &str) -> Command {
     let mut command = Command::new(env!("CARGO_BIN_EXE_eska-vcs"));
     for (key, _) in std::env::vars_os() {
         if key.to_string_lossy().starts_with("GIT_") {
@@ -59,10 +66,8 @@ fn tool(root: &Path, path: &OsStr, locale: &str, args: &[&str]) -> Output {
         .env("NO_COLOR", "1")
         .args(["--lang", locale])
         .arg("--project-dir")
-        .arg(root)
-        .args(args)
-        .output()
-        .unwrap()
+        .arg(root);
+    command
 }
 
 /// Require a complete successful JSON response without hidden stderr or terminal decoration.
@@ -463,6 +468,25 @@ fn production_debug_compares_configured_remote_and_protects_local_sources() {
 
     fs::write(seed.join("src/Configuration.xml"), "<new/>").unwrap();
     git(&seed, &["commit", "-qam", "remote change"]);
+    let config = fs::read(work.join(".git/config")).unwrap();
+    let mut unconfigured = tool_command(&work, &path, "en-US");
+    for key in [
+        "GIT_AUTHOR_NAME",
+        "GIT_AUTHOR_EMAIL",
+        "GIT_COMMITTER_NAME",
+        "GIT_COMMITTER_EMAIL",
+        "EMAIL",
+    ] {
+        unconfigured.env_remove(key);
+    }
+    let status = json(
+        &unconfigured
+            .args(["__bridge", "debug-source-check"])
+            .output()
+            .unwrap(),
+    );
+    assert_eq!(status["data"]["update"], "fast_forward", "{status}");
+    assert_eq!(fs::read(work.join(".git/config")).unwrap(), config);
     let behind = debug_sources::check(&project, false);
     assert_eq!(behind.update, Some(Update::FastForward), "{behind:?}");
     assert_eq!(behind.local_main_behind, Some(1));

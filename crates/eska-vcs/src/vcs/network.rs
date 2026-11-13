@@ -83,8 +83,13 @@ fn fetch_operation(
     remote_name: &str,
     branch: Option<&str>,
 ) -> Result<(FetchOutcome, Option<gix::ObjectId>), FetchError> {
-    let network_repository =
+    let mut network_repository =
         gix::open(repository.git_dir()).map_err(|source| FetchError::Open(Box::new(source)))?;
+    // Fetch writes reflogs but must also work before the developer configures a commit identity.
+    // The fallback belongs to this repository handle and never changes the on-disk configuration.
+    network_repository
+        .committer_or_set_generic_fallback()
+        .map_err(|source| FetchError::Prepare(Box::new(source)))?;
     let remote = network_repository
         .find_remote(remote_name.as_bytes().as_bstr())
         .map_err(|source| FetchError::Remote(Box::new(source)))?;
