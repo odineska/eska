@@ -43,47 +43,60 @@ impl<'a> Source<'a> {
 
 #[derive(Clone, Default)]
 pub(super) struct ModuleBreakpoints {
-    native: Vec<Breakpoint>,
-    protected: Option<(String, Vec<Breakpoint>)>,
+    native: BTreeMap<u32, Breakpoint>,
+    protected: Option<ProtectedBreakpoints>,
+}
+
+#[derive(Clone)]
+struct ProtectedBreakpoints {
+    uri: String,
+    points: BTreeMap<u32, Breakpoint>,
 }
 
 impl ModuleBreakpoints {
     pub(super) fn replace(&mut self, uri: Option<&str>, points: Vec<Breakpoint>) {
+        // Each view owns one entry per line; the last definition replaces earlier duplicates.
+        let points: BTreeMap<_, _> = points
+            .into_iter()
+            .map(|point| (point.line, point))
+            .collect();
         if let Some(uri) = uri {
-            self.protected = (!points.is_empty()).then(|| (uri.to_owned(), points));
+            self.protected = (!points.is_empty()).then(|| ProtectedBreakpoints {
+                uri: uri.to_owned(),
+                points,
+            });
         } else {
             self.native = points;
         }
     }
 
-    pub(super) const fn is_empty(&self) -> bool {
+    pub(super) fn is_empty(&self) -> bool {
         self.native.is_empty() && self.protected.is_none()
     }
 
     pub(super) fn contains(&self, line: u32) -> bool {
-        self.native.iter().any(|point| point.line == line)
+        self.native.contains_key(&line)
             || self
                 .protected
                 .as_ref()
-                .is_some_and(|(_, points)| points.iter().any(|point| point.line == line))
+                .is_some_and(|protected| protected.points.contains_key(&line))
     }
 
-    pub(super) fn active(&self) -> impl IntoIterator<Item = &Breakpoint> {
+    pub(super) fn active(&self) -> impl Iterator<Item = &Breakpoint> {
         // dbgs has one breakpoint per line; the native entry wins if both views set it.
-        self.protected
-            .iter()
-            .flat_map(|(_, points)| points)
-            .chain(&self.native)
-            .map(|point| (point.line, point))
-            .collect::<BTreeMap<_, _>>()
-            .into_values()
+        self.native.values().chain(
+            self.protected
+                .iter()
+                .flat_map(|protected| protected.points.values())
+                .filter(|point| !self.native.contains_key(&point.line)),
+        )
     }
 
     pub(super) fn display_path<'a>(&'a self, path: &'a Path, line: u32) -> Option<&'a str> {
-        if let Some((uri, _)) = &self.protected
-            && !self.native.iter().any(|point| point.line == line)
+        if let Some(protected) = &self.protected
+            && !self.native.contains_key(&line)
         {
-            return Some(uri);
+            return Some(&protected.uri);
         }
         path.to_str()
     }
@@ -215,22 +228,10 @@ mod tests {
         let mut module = ModuleBreakpoints::default();
         module.replace(None, vec![point(1), native]);
         module.replace(Some(uri), vec![point(2), point(3)]);
-        let lines = || {
-            module
-                .active()
-                .into_iter()
-                .map(|point| point.line)
-                .collect::<Vec<_>>()
-        };
+        let lines = || module.active().map(|point| point.line).collect::<Vec<_>>();
         assert_eq!(lines(), [1, 2, 3]);
         assert_eq!(
-            module
-                .active()
-                .into_iter()
-                .nth(1)
-                .unwrap()
-                .condition
-                .as_deref(),
+            module.active().nth(1).unwrap().condition.as_deref(),
             Some("A = 1")
         );
         assert_eq!(module.display_path(file, 3), Some(uri));
@@ -239,6 +240,35 @@ mod tests {
         assert!(module.contains(2) && !module.contains(1));
         assert_eq!(module.display_path(file, 2), Some(uri));
         module.replace(Some(uri), vec![]);
+        assert!(module.is_empty());
+    }
+
+    #[test]
+    fn clearing_protected_points_keeps_native_points_and_duplicate_lines_use_last_definition() {
+        let file = Path::new("/sources/Module.bsl");
+        let uri = "eska-protected:/sources/Module.bsl";
+        let point = |line, condition: &str| Breakpoint {
+            line,
+            condition: Some(condition.to_owned()),
+            ..Breakpoint::default()
+        };
+        let mut module = ModuleBreakpoints::default();
+        module.replace(None, vec![point(4, "old"), point(4, "native")]);
+        module.replace(Some(uri), vec![point(1, "protected"), point(4, "shadowed")]);
+        let active: BTreeMap<_, _> = module
+            .active()
+            .map(|point| (point.line, point.condition.as_deref()))
+            .collect();
+        assert_eq!(
+            active,
+            BTreeMap::from([(1, Some("protected")), (4, Some("native"))])
+        );
+        assert_eq!(module.active().count(), 2);
+        module.replace(Some(uri), vec![]);
+        assert!(module.contains(4) && !module.contains(1));
+        assert_eq!(module.active().count(), 1);
+        assert_eq!(module.display_path(file, 1), file.to_str());
+        module.replace(None, vec![]);
         assert!(module.is_empty());
     }
 
