@@ -372,10 +372,17 @@ impl Repository {
             .map_err(|source| Error::operation(Operation::Divergence, source))?
             .id;
 
-        Ok(Some(Divergence {
-            ahead: self.unique_commit_count(head, other)?,
-            behind: self.unique_commit_count(other, head)?,
-        }))
+        self.divergence_between(head, other).map(Some)
+    }
+
+    /// Count commits unique to each of two verified commit ids.
+    /// # Errors
+    /// Returns an error for an unreadable or incomplete commit graph.
+    pub fn divergence_between(&self, left: ObjectId, right: ObjectId) -> Result<Divergence, Error> {
+        Ok(Divergence {
+            ahead: self.unique_commit_count(left, right)?,
+            behind: self.unique_commit_count(right, left)?,
+        })
     }
 
     /// Return whether `ancestor` is reachable from `descendant` through commit parents.

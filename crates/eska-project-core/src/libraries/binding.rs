@@ -13,7 +13,7 @@ pub(super) fn prepare(
         return Err(Error::UnsupportedType(kind));
     }
     let owner = workspace
-        .map(|workspace| crate::application::owner(project, workspace))
+        .map(|workspace| crate::application::project_application(project, workspace))
         .transpose()
         .map_err(|error| Error::Context(Box::new(error)))?
         .flatten();

@@ -41,6 +41,13 @@ fn git(root: &Path, args: &[&str]) -> Vec<u8> {
 
 /// Execute the tool with only the explicitly selected executables available to subprocesses.
 fn tool(root: &Path, path: &OsStr, locale: &str, args: &[&str]) -> Output {
+    tool_command(root, path, locale)
+        .args(args)
+        .output()
+        .unwrap()
+}
+
+fn tool_command(root: &Path, path: &OsStr, locale: &str) -> Command {
     let mut command = Command::new(env!("CARGO_BIN_EXE_eska-vcs"));
     for (key, _) in std::env::vars_os() {
         if key.to_string_lossy().starts_with("GIT_") {
@@ -59,10 +66,8 @@ fn tool(root: &Path, path: &OsStr, locale: &str, args: &[&str]) -> Output {
         .env("NO_COLOR", "1")
         .args(["--lang", locale])
         .arg("--project-dir")
-        .arg(root)
-        .args(args)
-        .output()
-        .unwrap()
+        .arg(root);
+    command
 }
 
 /// Require a complete successful JSON response without hidden stderr or terminal decoration.
@@ -420,4 +425,165 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
             [] as [u8; 0]
         );
     }
+}
+
+#[test]
+fn production_debug_compares_configured_remote_and_protects_local_sources() {
+    use eska_project_core::project::discovery;
+    use eska_vcs::project::debug_sources::{self, Reason, Status, Update};
+
+    let fixture = TestDir::new();
+    let seed = fixture.0.join("сервер");
+    let work = fixture.0.join("проект");
+    fs::create_dir(&seed).unwrap();
+    git(&seed, &["init", "-q", "-b", "deployed"]);
+    fs::create_dir(seed.join("src")).unwrap();
+    fs::write(seed.join("src/Configuration.xml"), "<configuration/>").unwrap();
+    fs::write(
+        seed.join("eska.toml"),
+        "[project]\ntype = 'configuration'\n[vcs.workflow]\npreset = 'git-flow'\n[vcs.workflow.policy]\nmain_branch = 'deployed'\nremote = 'ship'\n",
+    )
+    .unwrap();
+    git(&seed, &["add", "."]);
+    git(&seed, &["commit", "-qm", "initial"]);
+    git(
+        &fixture.0,
+        &["clone", "-q", "--origin", "ship", "сервер", "проект"],
+    );
+    let project = discovery::discover(&work).unwrap();
+    let current = debug_sources::check(&project, false);
+    assert_eq!(current.status, Status::Current, "{current:?}");
+    assert_eq!(current.remote.as_deref(), Some("ship"));
+
+    let path = std::env::var_os("PATH").unwrap_or_default();
+    let status = json(&tool(
+        &work,
+        &path,
+        "en-US",
+        &["__bridge", "debug-source-check"],
+    ));
+    assert_eq!(status["operation"], "debug_source_check");
+    assert_eq!(status["data"]["status"], "current");
+    assert_eq!(status["data"]["main_branch"], "deployed");
+
+    fs::write(seed.join("src/Configuration.xml"), "<new/>").unwrap();
+    git(&seed, &["commit", "-qam", "remote change"]);
+    let config = fs::read(work.join(".git/config")).unwrap();
+    let mut unconfigured = tool_command(&work, &path, "en-US");
+    for key in [
+        "GIT_AUTHOR_NAME",
+        "GIT_AUTHOR_EMAIL",
+        "GIT_COMMITTER_NAME",
+        "GIT_COMMITTER_EMAIL",
+        "EMAIL",
+    ] {
+        unconfigured.env_remove(key);
+    }
+    let status = json(
+        &unconfigured
+            .args(["__bridge", "debug-source-check"])
+            .output()
+            .unwrap(),
+    );
+    assert_eq!(status["data"]["update"], "fast_forward", "{status}");
+    assert_eq!(fs::read(work.join(".git/config")).unwrap(), config);
+    let behind = debug_sources::check(&project, false);
+    assert_eq!(behind.update, Some(Update::FastForward), "{behind:?}");
+    assert_eq!(behind.local_main_behind, Some(1));
+    assert!(debug_sources::update(&project, true, Update::FastForward).is_err());
+    fs::write(work.join("src/Configuration.xml"), "<dirty/>").unwrap();
+    let dirty = debug_sources::check(&project, false);
+    assert_eq!(dirty.dirty, Some(true));
+    assert_eq!(dirty.update, None);
+    assert!(debug_sources::update(&project, false, Update::FastForward).is_err());
+    fs::write(work.join("src/Configuration.xml"), "<configuration/>").unwrap();
+
+    git(&work, &["switch", "-qc", "feature"]);
+    let feature = debug_sources::check(&project, false);
+    assert_eq!(feature.update, Some(Update::SwitchMain), "{feature:?}");
+    debug_sources::update(&project, false, Update::SwitchMain).unwrap();
+    assert_eq!(
+        debug_sources::check(&project, false).status,
+        Status::Current
+    );
+    assert_eq!(
+        fs::read(work.join("src/Configuration.xml")).unwrap(),
+        b"<new/>"
+    );
+
+    fs::write(seed.join("src/Configuration.xml"), "<another-remote/>").unwrap();
+    git(&seed, &["commit", "-qam", "remote-only change"]);
+    fs::write(work.join("src/Configuration.xml"), "<local/>").unwrap();
+    git(&work, &["commit", "-qam", "local-only change"]);
+    let diverged = debug_sources::check(&project, false);
+    assert_eq!(diverged.local_main_ahead, Some(1));
+    assert_eq!(diverged.local_main_behind, Some(1));
+    assert_eq!(diverged.update, None);
+
+    git(&seed, &["branch", "-m", "moved"]);
+    let missing = debug_sources::check(&project, false);
+    assert_eq!(missing.status, Status::Unverified);
+    assert_eq!(missing.reason, Some(Reason::RemoteBranchMissing));
+    assert_eq!(missing.update, None);
+    git(&work, &["remote", "set-url", "ship", "../missing-remote"]);
+    let unavailable = debug_sources::check(&project, false);
+    assert_eq!(unavailable.status, Status::Unverified);
+    assert_eq!(unavailable.reason, Some(Reason::Remote));
+    assert_eq!(unavailable.update, None);
+}
+
+#[test]
+fn production_debug_checks_composed_sources_in_the_selected_checkout() {
+    use eska_project_core::project::discovery;
+    use eska_vcs::project::debug_sources::{self, Reason, Status};
+
+    let fixture = TestDir::new();
+    let seed = fixture.0.join("server");
+    let work = fixture.0.join("workspace");
+    fs::create_dir(&seed).unwrap();
+    git(&seed, &["init", "-q", "-b", "deployed"]);
+    fs::write(seed.join("eska.toml"), "[workspace.members.app]\nconfiguration='base'\nextensions=[{path='extension'}]\n[vcs.workflow]\npreset='git-flow'\n[vcs.workflow.policy]\nmain_branch='deployed'\nremote='ship'\n").unwrap();
+    for (name, kind, xml) in [
+        (
+            "base",
+            "configuration",
+            include_bytes!("../../../tests/fixtures/designer/configuration/Configuration.xml")
+                .as_slice(),
+        ),
+        (
+            "extension",
+            "extension",
+            include_bytes!("../../../tests/fixtures/designer/extension/Configuration.xml")
+                .as_slice(),
+        ),
+    ] {
+        let member = seed.join(name);
+        fs::create_dir_all(member.join("src")).unwrap();
+        fs::write(
+            member.join("eska.toml"),
+            format!("[project]\nname='{name}'\ntype='{kind}'\n"),
+        )
+        .unwrap();
+        fs::write(member.join("src/Configuration.xml"), xml).unwrap();
+    }
+    git(&seed, &["add", "."]);
+    git(&seed, &["commit", "-qm", "application"]);
+    git(
+        &fixture.0,
+        &["clone", "-q", "--origin", "ship", "server", "workspace"],
+    );
+    let project = discovery::discover(&work.join("base")).unwrap();
+    let current = debug_sources::check(&project, false);
+    assert_eq!(current.status, Status::Current, "{current:?}");
+    let extension = work.join("extension");
+    let change = extension.join("src/changed.bsl");
+    fs::write(&change, "// Local changes in the extension").unwrap();
+    let dirty = debug_sources::check(&project, false);
+    assert_eq!(dirty.status, Status::Different, "{dirty:?}");
+    fs::remove_file(change).unwrap();
+    git(&extension, &["init", "-q", "-b", "separate"]);
+    let nested = debug_sources::check(&project, false);
+    assert_eq!(nested.status, Status::Unverified, "{nested:?}");
+    assert_eq!(nested.reason, Some(Reason::Repository));
+    assert_eq!(nested.update, None);
 }

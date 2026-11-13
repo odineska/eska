@@ -9,7 +9,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
-TOOLS = ("eska", "eska-project", "eska-check", "eska-build", "eska-vcs", "eska-fmt")
+TOOLS = ("eska", "eska-project", "eska-check", "eska-build", "eska-vcs", "eska-fmt", "eska-debug")
 
 
 class TakeoverTests(unittest.TestCase):
@@ -151,6 +151,27 @@ try {
                             self.assertTrue(all((stand / name).read_bytes() == data for name, data in preserved.items()))
                             self.assertFalse(list(prefix.glob(".eska-full-install.*")))
                             self.assertFalse((prefix / ".eska-components.claim").exists())
+
+    def test_old_six_tool_bundle_gains_debugger_and_preserves_other_files(self):
+        """The old receipt and six binaries upgrade without a second manual installation."""
+        for runtime in self.runtimes():
+            with self.subTest(runtime=runtime):
+                fixture = self.fixture(runtime, (), full=True)
+                stand, prefix, _, _, _ = fixture
+                suffix = ".exe" if runtime == "ps1" else ""
+                (prefix / "bin" / ("eska-debug" + suffix)).unlink()
+                before = self.snapshot(stand)
+                result = self.run_installer(fixture)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                receipt = json.loads((stand / "config/eska/eska-receipt.json").read_bytes())
+                self.assertIn("eska-debug" + suffix, receipt["binaries"])
+                for tool in TOOLS:
+                    self.assertEqual((prefix / "bin" / (tool + suffix)).read_text(), tool + " 0.22.0\n")
+                after = self.snapshot(stand)
+                for name, contents in before.items():
+                    if "/bin/eska" not in name and not name.endswith("/eska-receipt.json"):
+                        self.assertEqual(after[name], contents)
+                self.assertEqual(self.run_installer(fixture).returncode, 0)
 
     def test_failed_copy_or_receipt_write_restores_old_installation(self):
         for runtime in self.runtimes():

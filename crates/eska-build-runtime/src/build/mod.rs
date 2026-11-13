@@ -2,13 +2,15 @@
 
 mod base_configuration;
 mod execute;
+pub(crate) mod ibcmd_generation;
 mod infobase;
-mod manifest;
+pub(crate) mod manifest;
 mod plan;
 mod shared_library;
-mod source_snapshot;
+pub(crate) mod source_snapshot;
 pub use source_snapshot::Error as SourceSnapshotError;
 mod tool;
+pub(crate) use tool::DebugServerChild;
 
 pub use eska_project_core::project::build::{
     BuildSettings, BuildSettingsError, InvalidArtifactsDirectoryReason, PlatformVersion,
@@ -20,7 +22,10 @@ pub use execute::{
 pub use infobase::{
     CleanOutcome as InfobaseCleanOutcome, ManagedInfobaseError, clean as clean_infobase,
 };
-pub use manifest::{GitProvenance, ManifestError, path_for_artifact as manifest_path};
+pub use manifest::{
+    GitProvenance, ManifestError, ProcessingArtifactError, ProcessingSources,
+    path_for_artifact as manifest_path,
+};
 pub use plan::{
     ArtifactType, BaseConfiguration, BuildPlan, PlanError, managed_infobase_root,
     validate_unique_outputs,

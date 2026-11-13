@@ -778,7 +778,9 @@ dependencies = [
  "serde_json",
  "sha2",
  "signal-hook 0.4.5",
+ "tempfile",
  "toml",
+ "url",
 ]
 
 [[package]]
@@ -792,6 +794,24 @@ dependencies = [
  "eska-project-core",
  "serde",
  "serde_json",
+]
+
+[[package]]
+name = "eska-debug"
+version = "0.29.1"
+dependencies = [
+ "base64 0.23.1",
+ "clap",
+ "eska-build-runtime",
+ "eska-presentation",
+ "eska-project-core",
+ "eska-tool-runtime",
+ "getrandom 0.4.3",
+ "httparse",
+ "roxmltree",
+ "serde",
+ "serde_json",
+ "url",
 ]
 
 [[package]]
@@ -849,9 +869,11 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
+ "tempfile",
  "toml",
  "toml_edit",
  "unicode-general-category",
+ "url",
  "zip",
 ]
 

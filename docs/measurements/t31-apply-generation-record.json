@@ -1,0 +1,570 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "platform": "1C 8.3.27.2342, ALT 10 Distrobox",
+  "host": "Fedora Linux 44 Asahi Remix, Linux 7.2.12, AArch64",
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "binary": {
+    "version": "0.29.1",
+    "commit": "08040acd41b123af7e9b2f88427a19e01bdf49bb",
+    "bytes": 5728208,
+    "sha256": "e573bd81f39be9580b50de2a7b6936ab47b885e85a150767418cf572cc51d0e0"
+  },
+  "method": {
+    "mode": "file",
+    "runner": "local wrapper invoking ibcmd through the same Distrobox",
+    "record": "wrapper forwards ibcmd stdout",
+    "query": "wrapper removes only the exact generation record from successful apply stdout",
+    "state": "restore initialized source, database and local baseline before each trial",
+    "interval": "preview plus confirm with no human wait",
+    "samples_per_mode_and_scope": 3,
+    "order": "alternate mode order on successive trials",
+    "platform_timing": "sum of wrapper intervals, including the Distrobox runner",
+    "cache": "system cache retained",
+    "p95": "nearest rank",
+    "native_export_comparison": "both modes exported identical trees before and after each series; only the changed module differed across revisions, excluding ConfigDumpInfo.xml",
+    "export_hash": "SHA-256 of the sorted JSON map of source-relative paths to SHA-256 file digests"
+  },
+  "native_export_file_counts": {
+    "baseline_configuration": 15,
+    "updated_configuration": 15,
+    "baseline_extension": 3,
+    "updated_extension": 3
+  },
+  "native_export_tree_sha256": {
+    "baseline_configuration": "d36bbf736609dc79f41d1340744e883e5487dfd34966a2e9a7583490697c538c",
+    "updated_configuration": "fa883930688af1175a2a62556c1149fdda358fbe9ba59af8412d5641a64e7b2c",
+    "baseline_extension": "3ab13111bfe54edd838edd313455d0b41e69960b97a9146897358881337c89f6",
+    "updated_extension": "048f74de171306ccb38c7b3cb6bcd1f9138adb62c18763053a2ccb4fa4d40ea8"
+  },
+  "summary": {
+    "configuration": {
+      "query": {
+        "seconds": {
+          "p50": 9.172205,
+          "p95": 9.202963
+        },
+        "platform_seconds": {
+          "p50": 9.021796,
+          "p95": 9.066105
+        },
+        "outside_platform_seconds": {
+          "p50": 0.131068,
+          "p95": 0.181167
+        },
+        "cpu_seconds": {
+          "p50": 1.34,
+          "p95": 1.35
+        },
+        "calls": 7,
+        "import_files": [
+          "Ext/ManagedApplicationModule.bsl"
+        ],
+        "import_bytes": 591,
+        "peak_rss_kib": 56592
+      },
+      "record": {
+        "seconds": {
+          "p50": 7.347212,
+          "p95": 7.367595
+        },
+        "platform_seconds": {
+          "p50": 7.220725,
+          "p95": 7.256784
+        },
+        "outside_platform_seconds": {
+          "p50": 0.14687,
+          "p95": 0.156121
+        },
+        "cpu_seconds": {
+          "p50": 1.12,
+          "p95": 1.16
+        },
+        "calls": 6,
+        "import_files": [
+          "Ext/ManagedApplicationModule.bsl"
+        ],
+        "import_bytes": 591,
+        "peak_rss_kib": 57088
+      }
+    },
+    "extension": {
+      "query": {
+        "seconds": {
+          "p50": 16.218852,
+          "p95": 16.257474
+        },
+        "platform_seconds": {
+          "p50": 16.022392,
+          "p95": 16.042628
+        },
+        "outside_platform_seconds": {
+          "p50": 0.196461,
+          "p95": 0.214845
+        },
+        "cpu_seconds": {
+          "p50": 2.05,
+          "p95": 2.1
+        },
+        "calls": 11,
+        "import_files": [
+          "Ext/ManagedApplicationModule.bsl"
+        ],
+        "import_bytes": 171,
+        "peak_rss_kib": 57072
+      },
+      "record": {
+        "seconds": {
+          "p50": 14.398382,
+          "p95": 14.419789
+        },
+        "platform_seconds": {
+          "p50": 14.25536,
+          "p95": 14.262201
+        },
+        "outside_platform_seconds": {
+          "p50": 0.149233,
+          "p95": 0.157589
+        },
+        "cpu_seconds": {
+          "p50": 1.86,
+          "p95": 1.86
+        },
+        "calls": 10,
+        "import_files": [
+          "Ext/ManagedApplicationModule.bsl"
+        ],
+        "import_bytes": 171,
+        "peak_rss_kib": 57712
+      }
+    }
+  },
+  "samples": [
+    {
+      "mode": "record",
+      "scope": "configuration",
+      "sample": 0,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "preview": {
+        "seconds": 1.98162,
+        "platform_seconds": 1.926188,
+        "outside_platform_seconds": 0.055432,
+        "rss_kib": 54400,
+        "cpu_seconds": 0.39,
+        "calls": [
+          "version",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 5.385975,
+        "platform_seconds": 5.294537,
+        "outside_platform_seconds": 0.091438,
+        "rss_kib": 54896,
+        "cpu_seconds": 0.73,
+        "calls": [
+          "version",
+          "generation-id",
+          "import",
+          "apply"
+        ]
+      }
+    },
+    {
+      "mode": "query",
+      "scope": "configuration",
+      "sample": 0,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "preview": {
+        "seconds": 1.917756,
+        "platform_seconds": 1.885149,
+        "outside_platform_seconds": 0.032607,
+        "rss_kib": 54528,
+        "cpu_seconds": 0.36,
+        "calls": [
+          "version",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 7.149264,
+        "platform_seconds": 7.050803,
+        "outside_platform_seconds": 0.098461,
+        "rss_kib": 56592,
+        "cpu_seconds": 0.98,
+        "calls": [
+          "version",
+          "generation-id",
+          "import",
+          "apply",
+          "generation-id"
+        ]
+      }
+    },
+    {
+      "mode": "query",
+      "scope": "configuration",
+      "sample": 1,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "preview": {
+        "seconds": 1.960916,
+        "platform_seconds": 1.894697,
+        "outside_platform_seconds": 0.066219,
+        "rss_kib": 55392,
+        "cpu_seconds": 0.4,
+        "calls": [
+          "version",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 7.242047,
+        "platform_seconds": 7.127099,
+        "outside_platform_seconds": 0.114948,
+        "rss_kib": 54400,
+        "cpu_seconds": 0.95,
+        "calls": [
+          "version",
+          "generation-id",
+          "import",
+          "apply",
+          "generation-id"
+        ]
+      }
+    },
+    {
+      "mode": "record",
+      "scope": "configuration",
+      "sample": 1,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "preview": {
+        "seconds": 1.920885,
+        "platform_seconds": 1.863208,
+        "outside_platform_seconds": 0.057677,
+        "rss_kib": 55040,
+        "cpu_seconds": 0.41,
+        "calls": [
+          "version",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 5.36878,
+        "platform_seconds": 5.270336,
+        "outside_platform_seconds": 0.098444,
+        "rss_kib": 55088,
+        "cpu_seconds": 0.75,
+        "calls": [
+          "version",
+          "generation-id",
+          "import",
+          "apply"
+        ]
+      }
+    },
+    {
+      "mode": "record",
+      "scope": "configuration",
+      "sample": 2,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "preview": {
+        "seconds": 1.944307,
+        "platform_seconds": 1.891055,
+        "outside_platform_seconds": 0.053252,
+        "rss_kib": 57088,
+        "cpu_seconds": 0.38,
+        "calls": [
+          "version",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 5.402905,
+        "platform_seconds": 5.365729,
+        "outside_platform_seconds": 0.037176,
+        "rss_kib": 54784,
+        "cpu_seconds": 0.74,
+        "calls": [
+          "version",
+          "generation-id",
+          "import",
+          "apply"
+        ]
+      }
+    },
+    {
+      "mode": "query",
+      "scope": "configuration",
+      "sample": 2,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "preview": {
+        "seconds": 1.926924,
+        "platform_seconds": 1.895178,
+        "outside_platform_seconds": 0.031746,
+        "rss_kib": 56192,
+        "cpu_seconds": 0.36,
+        "calls": [
+          "version",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 7.245281,
+        "platform_seconds": 7.170927,
+        "outside_platform_seconds": 0.074353,
+        "rss_kib": 56576,
+        "cpu_seconds": 0.91,
+        "calls": [
+          "version",
+          "generation-id",
+          "import",
+          "apply",
+          "generation-id"
+        ]
+      }
+    },
+    {
+      "mode": "record",
+      "scope": "extension",
+      "sample": 0,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "preview": {
+        "seconds": 5.449895,
+        "platform_seconds": 5.385856,
+        "outside_platform_seconds": 0.06404,
+        "rss_kib": 57712,
+        "cpu_seconds": 0.75,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 8.969894,
+        "platform_seconds": 8.876345,
+        "outside_platform_seconds": 0.093549,
+        "rss_kib": 55936,
+        "cpu_seconds": 1.11,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id",
+          "import",
+          "apply"
+        ]
+      }
+    },
+    {
+      "mode": "query",
+      "scope": "extension",
+      "sample": 0,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "preview": {
+        "seconds": 5.427531,
+        "platform_seconds": 5.342661,
+        "outside_platform_seconds": 0.084871,
+        "rss_kib": 56240,
+        "cpu_seconds": 0.74,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 10.784365,
+        "platform_seconds": 10.673104,
+        "outside_platform_seconds": 0.111261,
+        "rss_kib": 56128,
+        "cpu_seconds": 1.31,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id",
+          "import",
+          "apply",
+          "generation-id"
+        ]
+      }
+    },
+    {
+      "mode": "query",
+      "scope": "extension",
+      "sample": 1,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "preview": {
+        "seconds": 5.459424,
+        "platform_seconds": 5.368651,
+        "outside_platform_seconds": 0.090772,
+        "rss_kib": 55680,
+        "cpu_seconds": 0.72,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 10.79805,
+        "platform_seconds": 10.673977,
+        "outside_platform_seconds": 0.124073,
+        "rss_kib": 57072,
+        "cpu_seconds": 1.32,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id",
+          "import",
+          "apply",
+          "generation-id"
+        ]
+      }
+    },
+    {
+      "mode": "record",
+      "scope": "extension",
+      "sample": 1,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "preview": {
+        "seconds": 5.394669,
+        "platform_seconds": 5.339047,
+        "outside_platform_seconds": 0.055621,
+        "rss_kib": 56064,
+        "cpu_seconds": 0.74,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 8.932805,
+        "platform_seconds": 8.839194,
+        "outside_platform_seconds": 0.093612,
+        "rss_kib": 55104,
+        "cpu_seconds": 1.12,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id",
+          "import",
+          "apply"
+        ]
+      }
+    },
+    {
+      "mode": "record",
+      "scope": "extension",
+      "sample": 2,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "preview": {
+        "seconds": 5.494371,
+        "platform_seconds": 5.443642,
+        "outside_platform_seconds": 0.050729,
+        "rss_kib": 55504,
+        "cpu_seconds": 0.74,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 8.904011,
+        "platform_seconds": 8.811718,
+        "outside_platform_seconds": 0.092293,
+        "rss_kib": 56240,
+        "cpu_seconds": 1.1,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id",
+          "import",
+          "apply"
+        ]
+      }
+    },
+    {
+      "mode": "query",
+      "scope": "extension",
+      "sample": 2,
+      "files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "preview": {
+        "seconds": 5.487515,
+        "platform_seconds": 5.395118,
+        "outside_platform_seconds": 0.092398,
+        "rss_kib": 55936,
+        "cpu_seconds": 0.78,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id"
+        ]
+      },
+      "confirm": {
+        "seconds": 10.731337,
+        "platform_seconds": 10.627274,
+        "outside_platform_seconds": 0.104063,
+        "rss_kib": 56032,
+        "cpu_seconds": 1.32,
+        "calls": [
+          "version",
+          "export info",
+          "generation-id",
+          "generation-id",
+          "import",
+          "apply",
+          "generation-id"
+        ]
+      }
+    }
+  ]
+}

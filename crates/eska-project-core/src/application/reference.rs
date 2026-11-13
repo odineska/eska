@@ -28,7 +28,7 @@ pub fn resolve_project_reference(
     workspace: Option<&Workspace>,
 ) -> Result<Option<ContextSource>, ReferenceError> {
     let (root, field, application, declaration) = if let Some(workspace) = workspace {
-        let owner = owner(project, workspace).map_err(|source| ReferenceError {
+        let owner = project_application(project, workspace).map_err(|source| ReferenceError {
             path: workspace.root().join("eska.toml"),
             field: "analysis.default_application",
             application: None,
@@ -78,7 +78,10 @@ pub fn resolve_project_reference(
 }
 
 /// A shared member needs a default that actually owns it, not an unrelated global choice.
-pub fn owner<'a>(
+///
+/// # Errors
+/// Returns the possible owning applications when the member's default is ambiguous.
+pub fn project_application<'a>(
     project: &Project,
     workspace: &'a Workspace,
 ) -> Result<Option<(&'a ProjectName, &'a Application)>, ContextError> {

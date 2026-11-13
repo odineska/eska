@@ -42,6 +42,7 @@ ESKA объединяет работу с выгрузкой Конфигура�
 | `eska-fmt` | Форматирование BSL и запросов без анализатора |
 | `eska-build` | Сборка, распаковка, import и patch средствами установленной платформы 1С |
 | `eska-vcs` | Git-workflow, состояние, semantic diff, история, сохранение и полки |
+| `eska-debug` | HTTP-отладка 1С на Rust через штатный `dbgs`. [Самостоятельный режим DAP](docs/eska-debug-standalone.md) |
 
 Для дерева Explorer достаточно `eska-project`.
 [BSL Analyzer](https://github.com/itrous/bsl-analyzer) — отдельный внешний
@@ -63,9 +64,15 @@ Windows PowerShell:
 powershell -ExecutionPolicy Bypass -c "irm https://odineska.github.io/eska/install.ps1 | iex"
 ```
 
-Повторный запуск установщика обновляет все шесть утилит до одного выбранного
+Повторный запуск установщика обновляет все семь утилит до одного выбранного
 релиза, в том числе после выборочной установки из Explorer. BSL Analyzer
 управляется отдельно. Откройте новый терминал после изменения PATH.
+
+Установка полного комплекта через Cargo:
+
+```sh
+cargo install --locked eska-project eska-check eska-build eska-vcs eska-fmt eska-debug eska
+```
 
 Подключение уже существующей выгрузки без Git и платформы:
 

@@ -9,7 +9,7 @@ import subprocess
 import sys
 import tempfile
 
-from native_components import metadata_session
+from native_components import debugger_session, metadata_session
 
 
 def main():
@@ -45,6 +45,7 @@ def main():
                 subprocess.run([tool, "--lang", locale, "--help"], cwd=stand, env=environment,
                                check=True, capture_output=True, timeout=15)
             metadata_session(binaries["eska-project"], locale, stand, environment, evidence)
+            debugger_session(binaries["eska-debug"], locale, stand, environment)
         print(json.dumps({"passed": True, "version": index["version"], "target": index["target"], "components": list(binaries)}))
 
 

@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "platform": "1C 8.3.27.2342, ALT 10 Distrobox",
+  "host": "Fedora Linux 44 Asahi Remix, Linux 7.2.12, AArch64, Btrfs",
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "builds": {
+    "before": {
+      "version": "0.29.1",
+      "commit": "ea3c24a5d57f6a4da4b0c6ee884ca863d25a0703",
+      "bytes": 5740112,
+      "sha256": "482716a7930f04c8b860953e6a01490b58d5cbe0203d1eb94e96cc1aaa2c603b"
+    },
+    "after": {
+      "version": "0.29.1",
+      "commit": "c8f3392a15fccff978d8773cadb05e26938c1aeb",
+      "bytes": 5739312,
+      "sha256": "be3bba129a974118b3d9523089f31ea7a1aa0a7e835dc1fe6dc4406c17fba2dd"
+    }
+  },
+  "method": {
+    "native": "five cycles per build changing a language descriptor comment, alternating order after each paired cycle",
+    "controls": "one additional cycle with strace per build and one same-size, same-mtime edit after committing the previous source revision",
+    "p95": "nearest rank, maximum of five measured cycles",
+    "platform_timing": "union of native ibcmd wrapper intervals",
+    "source_reads": "successful read-family syscalls on files under src, including repeated reads",
+    "staged_files": "unique successfully opened output files under the temporary source root during confirmation",
+    "native_exports": "byte-identical across builds at baseline, after the measured series and after the same-mtime control, excluding ConfigDumpInfo.xml"
+  },
+  "common_modules": 1000,
+  "source_files": 2015,
+  "source_bytes": 17395168,
+  "native_export_files": 2014,
+  "native_export_tree_sha256": {
+    "final": "c8fb85d5d4e184f9a027c242d9a7cab97cb79eaace1ccfe083ec6a236176ace8",
+    "same-mtime": "31427a7ed20f71f0e980650d26c9897be18ca852ce3f472544167748521c61b5"
+  },
+  "changed_files": [
+    "Languages/Русский.xml"
+  ],
+  "source_files_excluding_service_xml": 2014,
+  "source_bytes_excluding_service_xml": 17391001,
+  "summary": {
+    "before": {
+      "seconds": {
+        "p50": 7.685687,
+        "p95": 7.786316
+      },
+      "platform_seconds": {
+        "p50": 7.193912,
+        "p95": 7.311099
+      },
+      "host_seconds": {
+        "p50": 0.480949,
+        "p95": 0.500888
+      },
+      "cpu_seconds": {
+        "p50": 1.36,
+        "p95": 1.47
+      },
+      "peak_rss_kib": 56384,
+      "ibcmd_calls_per_cycle": 6,
+      "traced_preview_source_reads": 2028,
+      "traced_preview_source_bytes": 17393553,
+      "traced_confirm_source_reads": 4028,
+      "traced_confirm_source_bytes": 34782002,
+      "traced_confirm_staged_files": 2014
+    },
+    "after": {
+      "seconds": {
+        "p50": 7.686182,
+        "p95": 7.687576
+      },
+      "platform_seconds": {
+        "p50": 7.300924,
+        "p95": 7.348568
+      },
+      "host_seconds": {
+        "p50": 0.365552,
+        "p95": 0.386651
+      },
+      "cpu_seconds": {
+        "p50": 1.31,
+        "p95": 1.32
+      },
+      "peak_rss_kib": 55920,
+      "ibcmd_calls_per_cycle": 6,
+      "traced_preview_source_reads": 2028,
+      "traced_preview_source_bytes": 17393553,
+      "traced_confirm_source_reads": 3028,
+      "traced_confirm_source_bytes": 18046002,
+      "traced_confirm_staged_files": 1014
+    }
+  },
+  "native_samples": [
+    {
+      "preview": {
+        "seconds": 1.9657776519961772,
+        "platform_seconds": 1.871170997619629,
+        "host_seconds": 0.09460665437654825,
+        "ibcmd_calls": 2,
+        "rss_kib": 55920,
+        "cpu_seconds": 0.39
+      },
+      "confirm": {
+        "seconds": 5.719909257000836,
+        "platform_seconds": 5.322740793228149,
+        "host_seconds": 0.39716846377268666,
+        "ibcmd_calls": 4,
+        "rss_kib": 55408,
+        "cpu_seconds": 0.98
+      },
+      "tool": "before",
+      "value": 22000,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 1.966948607005179,
+        "platform_seconds": 1.8827061653137207,
+        "host_seconds": 0.08424244169145823,
+        "ibcmd_calls": 2,
+        "rss_kib": 54352,
+        "cpu_seconds": 0.39
+      },
+      "confirm": {
+        "seconds": 5.4723585920000914,
+        "platform_seconds": 5.191048860549927,
+        "host_seconds": 0.2813097314501647,
+        "ibcmd_calls": 4,
+        "rss_kib": 54400,
+        "cpu_seconds": 0.8500000000000001
+      },
+      "tool": "after",
+      "value": 22000,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 1.9665901909975219,
+        "platform_seconds": 1.8868870735168457,
+        "host_seconds": 0.07970311748067616,
+        "ibcmd_calls": 2,
+        "rss_kib": 55424,
+        "cpu_seconds": 0.38
+      },
+      "confirm": {
+        "seconds": 5.570767101999081,
+        "platform_seconds": 5.279212951660156,
+        "host_seconds": 0.29155415033892496,
+        "ibcmd_calls": 4,
+        "rss_kib": 55424,
+        "cpu_seconds": 0.91
+      },
+      "tool": "after",
+      "value": 22001,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 1.9166089599966654,
+        "platform_seconds": 1.8012096881866455,
+        "host_seconds": 0.11539927181001985,
+        "ibcmd_calls": 2,
+        "rss_kib": 53888,
+        "cpu_seconds": 0.36
+      },
+      "confirm": {
+        "seconds": 5.671260271999927,
+        "platform_seconds": 5.305711030960083,
+        "host_seconds": 0.36554924103984376,
+        "ibcmd_calls": 4,
+        "rss_kib": 54896,
+        "cpu_seconds": 0.98
+      },
+      "tool": "before",
+      "value": 22001,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 1.9163457109971205,
+        "platform_seconds": 1.8158259391784668,
+        "host_seconds": 0.10051977181865368,
+        "ibcmd_calls": 2,
+        "rss_kib": 55424,
+        "cpu_seconds": 0.38
+      },
+      "confirm": {
+        "seconds": 5.670663482000236,
+        "platform_seconds": 5.316524028778076,
+        "host_seconds": 0.3541394532221602,
+        "ibcmd_calls": 4,
+        "rss_kib": 56384,
+        "cpu_seconds": 0.91
+      },
+      "tool": "before",
+      "value": 22002,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 2.016727381000237,
+        "platform_seconds": 1.9100091457366943,
+        "host_seconds": 0.10671823526354274,
+        "ibcmd_calls": 2,
+        "rss_kib": 53888,
+        "cpu_seconds": 0.41
+      },
+      "confirm": {
+        "seconds": 5.670848523004679,
+        "platform_seconds": 5.438559055328369,
+        "host_seconds": 0.23228946767630987,
+        "ibcmd_calls": 4,
+        "rss_kib": 55408,
+        "cpu_seconds": 0.8999999999999999
+      },
+      "tool": "after",
+      "value": 22002,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 2.015734133994556,
+        "platform_seconds": 1.9382421970367432,
+        "host_seconds": 0.07749193695781287,
+        "ibcmd_calls": 2,
+        "rss_kib": 53888,
+        "cpu_seconds": 0.4
+      },
+      "confirm": {
+        "seconds": 5.670448233002389,
+        "platform_seconds": 5.383727073669434,
+        "host_seconds": 0.2867211593329557,
+        "ibcmd_calls": 4,
+        "rss_kib": 55920,
+        "cpu_seconds": 0.9099999999999999
+      },
+      "tool": "after",
+      "value": 22003,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 1.9660836100010783,
+        "platform_seconds": 1.8696508407592773,
+        "host_seconds": 0.096432769241801,
+        "ibcmd_calls": 2,
+        "rss_kib": 55424,
+        "cpu_seconds": 0.42000000000000004
+      },
+      "confirm": {
+        "seconds": 5.820232178004517,
+        "platform_seconds": 5.415776968002319,
+        "host_seconds": 0.4044552100021974,
+        "ibcmd_calls": 4,
+        "rss_kib": 54368,
+        "cpu_seconds": 1.0499999999999998
+      },
+      "tool": "before",
+      "value": 22003,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 1.9666843990053167,
+        "platform_seconds": 1.8907551765441895,
+        "host_seconds": 0.07592922246112721,
+        "ibcmd_calls": 2,
+        "rss_kib": 52864,
+        "cpu_seconds": 0.4
+      },
+      "confirm": {
+        "seconds": 5.770767986999999,
+        "platform_seconds": 5.42034387588501,
+        "host_seconds": 0.3504241111149895,
+        "ibcmd_calls": 4,
+        "rss_kib": 55424,
+        "cpu_seconds": 0.96
+      },
+      "tool": "before",
+      "value": 22004,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 2.0167887560019153,
+        "platform_seconds": 1.9138209819793701,
+        "host_seconds": 0.1029677740225452,
+        "ibcmd_calls": 2,
+        "rss_kib": 52832,
+        "cpu_seconds": 0.38
+      },
+      "confirm": {
+        "seconds": 5.670786648996,
+        "platform_seconds": 5.387103080749512,
+        "host_seconds": 0.283683568246488,
+        "ibcmd_calls": 4,
+        "rss_kib": 53888,
+        "cpu_seconds": 0.94
+      },
+      "tool": "after",
+      "value": 22004,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 4.269569876996684,
+        "platform_seconds": 3.6671700477600098,
+        "host_seconds": 0.6023998292366741,
+        "ibcmd_calls": 2,
+        "rss_kib": 54448,
+        "cpu_seconds": 1.8,
+        "baseline_reads": 1,
+        "baseline_bytes": 591054,
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2028,
+        "read_bytes": 17393553,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 69
+      },
+      "confirm": {
+        "seconds": 26.094703472997935,
+        "platform_seconds": 21.565807104110718,
+        "host_seconds": 4.528896368887217,
+        "ibcmd_calls": 4,
+        "rss_kib": 54400,
+        "cpu_seconds": 7.029999999999999,
+        "baseline_reads": 1,
+        "baseline_bytes": 591054,
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 3028,
+        "read_bytes": 18046002,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 137
+      },
+      "tool": "after",
+      "value": 22005,
+      "trace": true,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 4.628009473002749,
+        "platform_seconds": 3.742130994796753,
+        "host_seconds": 0.8858784782059956,
+        "ibcmd_calls": 2,
+        "rss_kib": 56480,
+        "cpu_seconds": 1.82,
+        "baseline_reads": 1,
+        "baseline_bytes": 591054,
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2028,
+        "read_bytes": 17393553,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 69
+      },
+      "confirm": {
+        "seconds": 28.921416948003753,
+        "platform_seconds": 23.402599811553955,
+        "host_seconds": 5.5188171364497975,
+        "ibcmd_calls": 4,
+        "rss_kib": 57984,
+        "cpu_seconds": 8.040000000000001,
+        "baseline_reads": 1,
+        "baseline_bytes": 591054,
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 4028,
+        "read_bytes": 34782002,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 137
+      },
+      "tool": "before",
+      "value": 22005,
+      "trace": true,
+      "same_mtime": false,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 1.8674208099982934,
+        "platform_seconds": 1.7982418537139893,
+        "host_seconds": 0.06917895628430415,
+        "ibcmd_calls": 2,
+        "rss_kib": 55344,
+        "cpu_seconds": 0.4
+      },
+      "confirm": {
+        "seconds": 5.8719461130021955,
+        "platform_seconds": 5.419579744338989,
+        "host_seconds": 0.45236636866320623,
+        "ibcmd_calls": 4,
+        "rss_kib": 56944,
+        "cpu_seconds": 1.01
+      },
+      "tool": "before",
+      "value": 23000,
+      "trace": false,
+      "same_mtime": true,
+      "import_bytes": 1276
+    },
+    {
+      "preview": {
+        "seconds": 2.016844797995873,
+        "platform_seconds": 1.9180541038513184,
+        "host_seconds": 0.09879069414455444,
+        "ibcmd_calls": 2,
+        "rss_kib": 55424,
+        "cpu_seconds": 0.41000000000000003
+      },
+      "confirm": {
+        "seconds": 5.671780978998868,
+        "platform_seconds": 5.392657995223999,
+        "host_seconds": 0.27912298377486877,
+        "ibcmd_calls": 4,
+        "rss_kib": 55920,
+        "cpu_seconds": 0.9500000000000001
+      },
+      "tool": "after",
+      "value": 23000,
+      "trace": false,
+      "same_mtime": true,
+      "import_bytes": 1276
+    }
+  ]
+}

@@ -1,0 +1,561 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "platform": "1C 8.3.27.2342, ALT 10 Distrobox",
+  "host": "Fedora Linux 44 Asahi Remix, Linux 7.2.12, AArch64",
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "builds": {
+    "eska": {
+      "version": "0.29.1",
+      "commit": "b0dd37bdff43bc21d4dcad06bffa500959361ea8",
+      "bytes": 5663984,
+      "sha256": "dfa033094cdc930c7e4e9c5fbfc7fb8623507a350562e085c06c12d8bd1f64af"
+    },
+    "v8-runner": {
+      "version": "0.17.1",
+      "commit": "fd41189af0649fa1ed0f68412636efa7c682e5f7",
+      "bytes": 12861264,
+      "sha256": "da8918f9c029f3a1337354d26f4a3cf379709a5f13ad75e71fd38fea71160c68"
+    }
+  },
+  "baseline": {
+    "mode": "file",
+    "declared_source_sets": {
+      "main": 15,
+      "One": 3
+    },
+    "native_export_comparison": "identical files excluding ConfigDumpInfo.xml",
+    "git_worktree": false
+  },
+  "samples": [
+    {
+      "seconds": 1.86595,
+      "platform_seconds": 1.826162,
+      "ibcmd_calls": 2,
+      "rss_kib": 53568,
+      "cpu_seconds": 0.36,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "eska",
+      "case": "noop",
+      "sample": 0,
+      "outside_platform_seconds": 0.039788
+    },
+    {
+      "seconds": 0.01554,
+      "platform_seconds": 0.0,
+      "ibcmd_calls": 0,
+      "rss_kib": 11888,
+      "cpu_seconds": 0.0,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "v8-runner",
+      "case": "noop",
+      "sample": 0,
+      "outside_platform_seconds": 0.01554
+    },
+    {
+      "seconds": 0.031548,
+      "platform_seconds": 0.0,
+      "ibcmd_calls": 0,
+      "rss_kib": 12432,
+      "cpu_seconds": 0.0,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "v8-runner",
+      "case": "noop",
+      "sample": 1,
+      "outside_platform_seconds": 0.031548
+    },
+    {
+      "seconds": 1.86602,
+      "platform_seconds": 1.778023,
+      "ibcmd_calls": 2,
+      "rss_kib": 54400,
+      "cpu_seconds": 0.37,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "eska",
+      "case": "noop",
+      "sample": 1,
+      "outside_platform_seconds": 0.087997
+    },
+    {
+      "seconds": 1.967244,
+      "platform_seconds": 1.920761,
+      "ibcmd_calls": 2,
+      "rss_kib": 54576,
+      "cpu_seconds": 0.37,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "eska",
+      "case": "noop",
+      "sample": 2,
+      "outside_platform_seconds": 0.046483
+    },
+    {
+      "seconds": 0.031813,
+      "platform_seconds": 0.0,
+      "ibcmd_calls": 0,
+      "rss_kib": 13984,
+      "cpu_seconds": 0.01,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "v8-runner",
+      "case": "noop",
+      "sample": 2,
+      "outside_platform_seconds": 0.031813
+    },
+    {
+      "seconds": 9.089564,
+      "platform_seconds": 8.883902,
+      "ibcmd_calls": 7,
+      "rss_kib": 56576,
+      "cpu_seconds": 1.28,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "tool": "eska",
+      "case": "bsl",
+      "sample": 0,
+      "outside_platform_seconds": 0.205663
+    },
+    {
+      "seconds": 6.921905,
+      "platform_seconds": 6.81325,
+      "ibcmd_calls": 4,
+      "rss_kib": 55552,
+      "cpu_seconds": 0.74,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "tool": "v8-runner",
+      "case": "bsl",
+      "sample": 0,
+      "outside_platform_seconds": 0.108655
+    },
+    {
+      "seconds": 6.875088,
+      "platform_seconds": 6.81144,
+      "ibcmd_calls": 4,
+      "rss_kib": 54208,
+      "cpu_seconds": 0.74,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "tool": "v8-runner",
+      "case": "bsl",
+      "sample": 1,
+      "outside_platform_seconds": 0.063648
+    },
+    {
+      "seconds": 9.140293,
+      "platform_seconds": 8.942383,
+      "ibcmd_calls": 7,
+      "rss_kib": 57056,
+      "cpu_seconds": 1.26,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "tool": "eska",
+      "case": "bsl",
+      "sample": 1,
+      "outside_platform_seconds": 0.197909
+    },
+    {
+      "seconds": 9.139121,
+      "platform_seconds": 8.983422,
+      "ibcmd_calls": 7,
+      "rss_kib": 54480,
+      "cpu_seconds": 1.25,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "tool": "eska",
+      "case": "bsl",
+      "sample": 2,
+      "outside_platform_seconds": 0.155699
+    },
+    {
+      "seconds": 7.07307,
+      "platform_seconds": 6.978623,
+      "ibcmd_calls": 4,
+      "rss_kib": 55472,
+      "cpu_seconds": 0.76,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 591,
+      "tool": "v8-runner",
+      "case": "bsl",
+      "sample": 2,
+      "outside_platform_seconds": 0.094447
+    },
+    {
+      "seconds": 9.09264,
+      "platform_seconds": 8.868561,
+      "ibcmd_calls": 7,
+      "rss_kib": 55424,
+      "cpu_seconds": 1.31,
+      "import_files": [
+        "Languages/Русский.xml"
+      ],
+      "import_bytes": 1272,
+      "tool": "eska",
+      "case": "xml",
+      "sample": 0,
+      "outside_platform_seconds": 0.22408
+    },
+    {
+      "seconds": 6.973462,
+      "platform_seconds": 6.901565,
+      "ibcmd_calls": 4,
+      "rss_kib": 55040,
+      "cpu_seconds": 0.73,
+      "import_files": [
+        "Languages/Русский.xml"
+      ],
+      "import_bytes": 1272,
+      "tool": "v8-runner",
+      "case": "xml",
+      "sample": 0,
+      "outside_platform_seconds": 0.071897
+    },
+    {
+      "seconds": 6.923147,
+      "platform_seconds": 6.807101,
+      "ibcmd_calls": 4,
+      "rss_kib": 54016,
+      "cpu_seconds": 0.74,
+      "import_files": [
+        "Languages/Русский.xml"
+      ],
+      "import_bytes": 1272,
+      "tool": "v8-runner",
+      "case": "xml",
+      "sample": 1,
+      "outside_platform_seconds": 0.116046
+    },
+    {
+      "seconds": 9.141307,
+      "platform_seconds": 8.956802,
+      "ibcmd_calls": 7,
+      "rss_kib": 55552,
+      "cpu_seconds": 1.3,
+      "import_files": [
+        "Languages/Русский.xml"
+      ],
+      "import_bytes": 1272,
+      "tool": "eska",
+      "case": "xml",
+      "sample": 1,
+      "outside_platform_seconds": 0.184505
+    },
+    {
+      "seconds": 9.241274,
+      "platform_seconds": 9.02238,
+      "ibcmd_calls": 7,
+      "rss_kib": 55536,
+      "cpu_seconds": 1.31,
+      "import_files": [
+        "Languages/Русский.xml"
+      ],
+      "import_bytes": 1272,
+      "tool": "eska",
+      "case": "xml",
+      "sample": 2,
+      "outside_platform_seconds": 0.218894
+    },
+    {
+      "seconds": 7.122426,
+      "platform_seconds": 7.017752,
+      "ibcmd_calls": 4,
+      "rss_kib": 54592,
+      "cpu_seconds": 0.76,
+      "import_files": [
+        "Languages/Русский.xml"
+      ],
+      "import_bytes": 1272,
+      "tool": "v8-runner",
+      "case": "xml",
+      "sample": 2,
+      "outside_platform_seconds": 0.104673
+    },
+    {
+      "seconds": 9.089572,
+      "platform_seconds": 8.951821,
+      "ibcmd_calls": 7,
+      "rss_kib": 56064,
+      "cpu_seconds": 1.26,
+      "import_files": [
+        "Configuration.xml",
+        "Languages/English.xml"
+      ],
+      "import_bytes": 12057,
+      "tool": "eska",
+      "case": "structure",
+      "sample": 0,
+      "outside_platform_seconds": 0.137751
+    },
+    {
+      "seconds": 10.428859,
+      "platform_seconds": 10.339001,
+      "ibcmd_calls": 6,
+      "rss_kib": 55088,
+      "cpu_seconds": 1.08,
+      "import_files": [
+        "Configuration.xml",
+        "Languages/English.xml"
+      ],
+      "import_bytes": 12057,
+      "tool": "v8-runner",
+      "case": "structure",
+      "sample": 0,
+      "outside_platform_seconds": 0.089858
+    },
+    {
+      "seconds": 10.529539,
+      "platform_seconds": 10.440091,
+      "ibcmd_calls": 6,
+      "rss_kib": 56576,
+      "cpu_seconds": 1.09,
+      "import_files": [
+        "Configuration.xml",
+        "Languages/English.xml"
+      ],
+      "import_bytes": 12057,
+      "tool": "v8-runner",
+      "case": "structure",
+      "sample": 1,
+      "outside_platform_seconds": 0.089447
+    },
+    {
+      "seconds": 9.190187,
+      "platform_seconds": 8.96415,
+      "ibcmd_calls": 7,
+      "rss_kib": 54912,
+      "cpu_seconds": 1.27,
+      "import_files": [
+        "Configuration.xml",
+        "Languages/English.xml"
+      ],
+      "import_bytes": 12057,
+      "tool": "eska",
+      "case": "structure",
+      "sample": 1,
+      "outside_platform_seconds": 0.226037
+    },
+    {
+      "seconds": 9.14071,
+      "platform_seconds": 8.924781,
+      "ibcmd_calls": 7,
+      "rss_kib": 55616,
+      "cpu_seconds": 1.29,
+      "import_files": [
+        "Configuration.xml",
+        "Languages/English.xml"
+      ],
+      "import_bytes": 12057,
+      "tool": "eska",
+      "case": "structure",
+      "sample": 2,
+      "outside_platform_seconds": 0.21593
+    },
+    {
+      "seconds": 10.478469,
+      "platform_seconds": 10.353238,
+      "ibcmd_calls": 6,
+      "rss_kib": 56912,
+      "cpu_seconds": 1.1,
+      "import_files": [
+        "Configuration.xml",
+        "Languages/English.xml"
+      ],
+      "import_bytes": 12057,
+      "tool": "v8-runner",
+      "case": "structure",
+      "sample": 2,
+      "outside_platform_seconds": 0.125231
+    },
+    {
+      "seconds": 16.149691,
+      "platform_seconds": 15.83912,
+      "ibcmd_calls": 11,
+      "rss_kib": 55904,
+      "cpu_seconds": 1.97,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "tool": "eska",
+      "case": "extension",
+      "sample": 0,
+      "outside_platform_seconds": 0.31057
+    },
+    {
+      "seconds": 6.872727,
+      "platform_seconds": 6.798855,
+      "ibcmd_calls": 4,
+      "rss_kib": 54976,
+      "cpu_seconds": 0.7,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "tool": "v8-runner",
+      "case": "extension",
+      "sample": 0,
+      "outside_platform_seconds": 0.073872
+    },
+    {
+      "seconds": 7.025251,
+      "platform_seconds": 6.90628,
+      "ibcmd_calls": 4,
+      "rss_kib": 54400,
+      "cpu_seconds": 0.76,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "tool": "v8-runner",
+      "case": "extension",
+      "sample": 1,
+      "outside_platform_seconds": 0.118971
+    },
+    {
+      "seconds": 16.051744,
+      "platform_seconds": 15.772823,
+      "ibcmd_calls": 11,
+      "rss_kib": 56576,
+      "cpu_seconds": 2.01,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "tool": "eska",
+      "case": "extension",
+      "sample": 1,
+      "outside_platform_seconds": 0.278921
+    },
+    {
+      "seconds": 16.149797,
+      "platform_seconds": 15.913225,
+      "ibcmd_calls": 11,
+      "rss_kib": 55536,
+      "cpu_seconds": 1.99,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "tool": "eska",
+      "case": "extension",
+      "sample": 2,
+      "outside_platform_seconds": 0.236572
+    },
+    {
+      "seconds": 7.024863,
+      "platform_seconds": 6.954533,
+      "ibcmd_calls": 4,
+      "rss_kib": 54384,
+      "cpu_seconds": 0.76,
+      "import_files": [
+        "Ext/ManagedApplicationModule.bsl"
+      ],
+      "import_bytes": 171,
+      "tool": "v8-runner",
+      "case": "extension",
+      "sample": 2,
+      "outside_platform_seconds": 0.07033
+    },
+    {
+      "seconds": 5.373437,
+      "platform_seconds": 5.261277,
+      "ibcmd_calls": 4,
+      "rss_kib": 56960,
+      "cpu_seconds": 0.73,
+      "tool": "eska",
+      "case": "deep",
+      "sample": 0,
+      "import_files": [],
+      "import_bytes": 0,
+      "outside_platform_seconds": 0.11216
+    },
+    {
+      "seconds": 12.082237,
+      "platform_seconds": 11.997797,
+      "ibcmd_calls": 7,
+      "rss_kib": 55024,
+      "cpu_seconds": 1.25,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "v8-runner",
+      "case": "deep",
+      "sample": 0,
+      "outside_platform_seconds": 0.084439
+    },
+    {
+      "seconds": 12.130605,
+      "platform_seconds": 12.055841,
+      "ibcmd_calls": 7,
+      "rss_kib": 54880,
+      "cpu_seconds": 1.28,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "v8-runner",
+      "case": "deep",
+      "sample": 1,
+      "outside_platform_seconds": 0.074764
+    },
+    {
+      "seconds": 5.52058,
+      "platform_seconds": 5.425163,
+      "ibcmd_calls": 4,
+      "rss_kib": 57152,
+      "cpu_seconds": 0.76,
+      "tool": "eska",
+      "case": "deep",
+      "sample": 1,
+      "import_files": [],
+      "import_bytes": 0,
+      "outside_platform_seconds": 0.095417
+    },
+    {
+      "seconds": 5.371804,
+      "platform_seconds": 5.245688,
+      "ibcmd_calls": 4,
+      "rss_kib": 54832,
+      "cpu_seconds": 0.74,
+      "tool": "eska",
+      "case": "deep",
+      "sample": 2,
+      "import_files": [],
+      "import_bytes": 0,
+      "outside_platform_seconds": 0.126116
+    },
+    {
+      "seconds": 12.230299,
+      "platform_seconds": 12.108528,
+      "ibcmd_calls": 7,
+      "rss_kib": 55040,
+      "cpu_seconds": 1.25,
+      "import_files": [],
+      "import_bytes": 0,
+      "tool": "v8-runner",
+      "case": "deep",
+      "sample": 2,
+      "outside_platform_seconds": 0.121771
+    }
+  ],
+  "external_change_control": {
+    "source_changes": "none",
+    "eska_inspection": "database_changed",
+    "v8_runner_push_mode": "skipped",
+    "v8_runner_push_ibcmd_calls": 0,
+    "v8_runner_deep_comparison": "moved_ahead"
+  }
+}

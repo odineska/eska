@@ -13,7 +13,7 @@ import sys
 import tempfile
 import threading
 
-from native_components import metadata_session
+from native_components import debugger_session, metadata_session
 
 
 def verify_assets(artifacts):
@@ -43,7 +43,7 @@ def main():
     repository = Path(__file__).resolve().parent.parent
     playground = Path(os.environ["ESKA_TEST_ROOT"]).resolve()
     assert playground == (repository.parent / "eska-playground").resolve()
-    tools = {"eska", "eska-project", "eska-check", "eska-build", "eska-vcs", "eska-fmt"}
+    tools = {"eska", "eska-project", "eska-check", "eska-build", "eska-vcs", "eska-fmt", "eska-debug"}
     suffix = ".exe" if os.name == "nt" else ""
     command = (["pwsh", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", artifacts / "eska-installer.ps1"]
                if os.name == "nt" else ["sh", artifacts / "eska-installer.sh"])
@@ -79,6 +79,7 @@ def main():
                                    check=True, capture_output=True, timeout=15)
             for locale in ("ru-RU", "en-US"):
                 metadata_session(prefix / ("eska-project" + suffix), locale, stand, environment, [])
+                debugger_session(prefix / ("eska-debug" + suffix), locale, stand, environment)
             project = prefix / ("eska-project" + suffix)
             target = json.loads(subprocess.check_output([project, "__tool-contract"], timeout=15))["target"]
             index = artifacts / f"release-{target}.json"

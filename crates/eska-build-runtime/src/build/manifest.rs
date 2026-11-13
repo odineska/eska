@@ -1,11 +1,12 @@
 use std::{
+    collections::BTreeMap,
     fmt::Write as _,
     fs::{self, File},
     io::{self, Read, Write},
     path::{Path, PathBuf},
 };
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 use super::{
@@ -60,6 +61,121 @@ pub fn path_for_artifact(artifact: &Path) -> PathBuf {
     let mut name = artifact.file_name().unwrap_or_default().to_os_string();
     name.push(".manifest.json");
     artifact.with_file_name(name)
+}
+
+#[derive(Debug)]
+pub enum ProcessingArtifactError {
+    Io(io::Error),
+    Manifest,
+    ArtifactMismatch,
+    SourceMismatch,
+}
+
+/// Digests of the files from which a checked external processing was built.
+#[derive(Debug)]
+pub struct ProcessingSources {
+    root: PathBuf,
+    files: BTreeMap<PathBuf, Vec<u8>>,
+    artifact_sha256: String,
+}
+
+impl ProcessingSources {
+    /// Verify a local EPF and its exact Designer XML snapshot without staging a launch.
+    /// # Errors
+    /// Returns an error for an unreadable artifact or a mismatch with its build manifest.
+    pub fn verify(source: &Path, artifact: &Path) -> Result<Self, ProcessingArtifactError> {
+        if !artifact.is_file()
+            || !artifact.extension().is_some_and(|extension| {
+                extension.eq_ignore_ascii_case(ArtifactType::Processing.extension())
+            })
+        {
+            return Err(ProcessingArtifactError::ArtifactMismatch);
+        }
+        verify_processing(source, artifact, artifact)
+    }
+
+    /// SHA-256 of the checked EPF bytes, in lowercase hexadecimal.
+    #[must_use]
+    pub fn artifact_sha256(&self) -> &str {
+        &self.artifact_sha256
+    }
+
+    /// Check that a source file still has its verified contents and location.
+    #[must_use]
+    pub fn matches_file(&self, path: &Path) -> bool {
+        let Ok(relative) = path.strip_prefix(&self.root) else {
+            return false;
+        };
+        let Some(expected) = self.files.get(relative) else {
+            return false;
+        };
+        path.canonicalize().is_ok_and(|resolved| resolved == path)
+            && source_snapshot::file_digest(path, None).is_ok_and(|actual| *expected == actual)
+    }
+}
+
+#[derive(Deserialize)]
+struct ProcessingManifest {
+    schema_version: u8,
+    kind: String,
+    artifact: ProcessingChecksum,
+    source: ProcessingSnapshot,
+}
+
+#[derive(Deserialize)]
+struct ProcessingChecksum {
+    r#type: String,
+    checksum: ReadChecksum,
+}
+
+#[derive(Deserialize)]
+struct ReadChecksum {
+    algorithm: String,
+    value: String,
+}
+
+#[derive(Deserialize)]
+struct ProcessingSnapshot {
+    snapshot_id: String,
+}
+
+pub fn verify_processing(
+    source: &Path,
+    artifact: &Path,
+    staged: &Path,
+) -> Result<ProcessingSources, ProcessingArtifactError> {
+    use ProcessingArtifactError::{ArtifactMismatch, Io, Manifest, SourceMismatch};
+    const MANIFEST_LIMIT: u64 = 1024 * 1024;
+    let manifest_path = path_for_artifact(artifact);
+    let metadata = manifest_path.metadata().map_err(Io)?;
+    if !metadata.is_file() || metadata.len() > MANIFEST_LIMIT {
+        return Err(Manifest);
+    }
+    let manifest = File::open(manifest_path).map_err(Io)?;
+    let manifest: ProcessingManifest =
+        serde_json::from_reader(manifest.take(MANIFEST_LIMIT)).map_err(|_| Manifest)?;
+    if manifest.schema_version != 1
+        || manifest.kind != "artifact-manifest"
+        || manifest.artifact.r#type != ArtifactType::Processing.as_str()
+        || manifest.artifact.checksum.algorithm != "sha256"
+    {
+        return Err(Manifest);
+    }
+    let checksum = file_checksum(staged).map_err(|_| ArtifactMismatch)?;
+    if checksum != manifest.artifact.checksum.value {
+        return Err(ArtifactMismatch);
+    }
+    let root = source.canonicalize().map_err(Io)?;
+    let (files, digest) =
+        source_snapshot::catalog_with_digest(&root, None, &[]).map_err(|_| SourceMismatch)?;
+    if manifest.source.snapshot_id != format!("sha256:{}", hex(&digest)) {
+        return Err(SourceMismatch);
+    }
+    Ok(ProcessingSources {
+        root,
+        files,
+        artifact_sha256: checksum,
+    })
 }
 
 /// Copy the exact Designer source tree that will be passed to ibcmd and identify its bytes.

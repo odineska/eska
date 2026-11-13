@@ -5,7 +5,7 @@ use std::{ffi::OsString, process::ExitCode};
 
 use clap::Subcommand;
 use eska_presentation::arguments::{
-    build::{self, clean, config, import, patch, platform},
+    build::{self, clean, config, import, patch, platform, runtime},
     check, formatting,
     project::{add, doctor, init, metadata, new, version},
     vcs::{clone, diff, finish, history, save, shelves, start, status, switch},
@@ -28,6 +28,12 @@ pub(super) enum Commands {
     Ide(ide::IdeArgs),
     #[command(disable_help_flag = true)]
     Build(build::BuildArgs),
+    #[command(disable_help_flag = true)]
+    Run(runtime::RunArgs),
+    #[command(disable_help_flag = true)]
+    Apply(runtime::ApplyArgs),
+    #[command(disable_help_flag = true)]
+    Extension(runtime::ExtensionArgs),
     #[command(disable_help_flag = true)]
     Check(check::CheckArgs),
     #[command(name = "fmt", disable_help_flag = true)]
@@ -106,7 +112,10 @@ pub(super) fn run(
             | Commands::Config(_)
             | Commands::Platform(_)
             | Commands::Import(_)
-            | Commands::Patch(_),
+            | Commands::Patch(_)
+            | Commands::Run(_)
+            | Commands::Apply(_)
+            | Commands::Extension(_),
         ) => (Component::Build, Invocation::Direct),
         Some(Commands::Build(args)) => (
             Component::Build,
@@ -128,6 +137,13 @@ pub(super) fn localize(command: clap::Command, localizer: &Localizer) -> clap::C
         .mut_subcommand("update", |command| update::localize(command, localizer))
         .mut_subcommand("ide", |command| ide::localize(command, localizer))
         .mut_subcommand("build", |command| build::localize(command, localizer))
+        .mut_subcommand("run", |command| runtime::localize(command, localizer))
+        .mut_subcommand("apply", |command| {
+            runtime::localize_apply(command, localizer)
+        })
+        .mut_subcommand("extension", |command| {
+            runtime::localize_extension(command, localizer)
+        })
         .mut_subcommand("check", |command| check::localize(command, localizer))
         .mut_subcommand("fmt", |command| formatting::localize(command, localizer))
         .mut_subcommand("clean", |command| clean::localize(command, localizer))

@@ -241,8 +241,18 @@ impl std::error::Error for ObjectModelError {
 /// Returns a structured error for unreadable paths, unsafe symlinks, malformed
 /// descriptors, missing identity fields or duplicate stable identities.
 pub fn discover(project: &Project) -> Result<ObjectModel, ObjectModelError> {
-    let files = collect_source_files(project.source())?;
-    let project_type = project.configuration().project_type();
+    discover_from_source(project.source(), project.configuration().project_type())
+}
+
+/// Index a Designer XML source directory whose export type is already known.
+///
+/// # Errors
+/// Returns the same source-tree and descriptor errors as [`discover`].
+pub fn discover_from_source(
+    source: &Path,
+    project_type: super::ProjectType,
+) -> Result<ObjectModel, ObjectModelError> {
+    let files = collect_source_files(source)?;
     let mut objects: BTreeMap<ObjectId, LogicalObject> = BTreeMap::new();
     let mut by_logical_path = BTreeMap::new();
     let mut by_source_path: BTreeMap<PathBuf, BTreeSet<ObjectId>> = BTreeMap::new();
@@ -285,12 +295,26 @@ pub fn discover_affected(
     project: &Project,
     source_paths: &[PathBuf],
 ) -> Result<AffectedObjectModel, ObjectModelError> {
-    let source =
-        fs::canonicalize(project.source()).map_err(|source_error| ObjectModelError::Io {
-            path: project.source().to_owned(),
-            source: source_error,
-        })?;
-    let project_type = project.configuration().project_type();
+    discover_affected_from_source(
+        project.source(),
+        project.configuration().project_type(),
+        source_paths,
+    )
+}
+
+/// Resolve changed path ownership in an explicit Designer XML source snapshot.
+///
+/// # Errors
+/// Returns an error when the source root itself cannot be resolved or enumerated.
+pub fn discover_affected_from_source(
+    source: &Path,
+    project_type: super::ProjectType,
+    source_paths: &[PathBuf],
+) -> Result<AffectedObjectModel, ObjectModelError> {
+    let source = fs::canonicalize(source).map_err(|source_error| ObjectModelError::Io {
+        path: source.to_owned(),
+        source: source_error,
+    })?;
     let mut candidates: Vec<_> = affected_descriptor_paths(project_type, &source, source_paths)?
         .into_iter()
         .collect();

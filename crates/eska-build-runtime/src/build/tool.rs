@@ -129,6 +129,7 @@ pub struct ToolOptions {
     platform_arch: Option<String>,
     distrobox: Option<String>,
     runner: RunnerPreference,
+    project_local: bool,
 }
 
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -154,7 +155,63 @@ impl ToolOptions {
             platform_arch,
             distrobox,
             runner: RunnerPreference::Auto,
+            project_local: false,
         }
+    }
+
+    /// A saved runner takes precedence over machine-wide process overrides.
+    pub(crate) fn project_profile(ibcmd: Option<PathBuf>, distrobox: Option<String>) -> Self {
+        let runner = if distrobox.is_some() {
+            RunnerPreference::Distrobox
+        } else {
+            RunnerPreference::Host
+        };
+        Self {
+            runner,
+            project_local: true,
+            ..Self::new(ibcmd, None, distrobox)
+        }
+    }
+
+    fn explicit_ibcmd(&self) -> Option<PathBuf> {
+        self.ibcmd.clone().or_else(|| {
+            if self.project_local {
+                None
+            } else {
+                env::var_os(IBCMD_ENV).map(PathBuf::from)
+            }
+        })
+    }
+
+    fn distrobox_name(&self) -> Option<String> {
+        self.distrobox.clone().or_else(|| {
+            if self.project_local {
+                None
+            } else {
+                env::var(DISTROBOX_ENV).ok()
+            }
+        })
+    }
+
+    fn explicit_runner(&self, path: PathBuf) -> Result<(Runner, ToolSource), ToolError> {
+        if self.project_local
+            && let Some(container) = &self.distrobox
+        {
+            validate_component(container)
+                .map_err(|()| ToolError::InvalidContainer(container.clone()))?;
+            return Ok((
+                Runner::Distrobox {
+                    container: container.clone(),
+                    path: path.clone(),
+                },
+                ToolSource::Distrobox {
+                    container: container.clone(),
+                    path,
+                },
+            ));
+        }
+        validate_executable(&path)?;
+        Ok((Runner::Host(path.clone()), ToolSource::Explicit(path)))
     }
 
     /// Preserve the caller's sticky Unix state before any discovery subprocess starts.
@@ -256,14 +313,14 @@ impl Ibcmd {
     /// # Errors
     /// Returns an I/O error when the configured Distrobox runner cannot be inspected.
     pub fn designer_available(&self) -> Result<bool, io::Error> {
-        let mut path = match &self.runner {
-            Runner::Host(path) | Runner::Distrobox { path, .. } => path.clone(),
+        self.program_available("1cv8")
+    }
+
+    pub(crate) fn program_available(&self, name: &str) -> Result<bool, io::Error> {
+        let program = self.sibling_program(name);
+        let path = match program.runner {
+            Runner::Host(path) | Runner::Distrobox { path, .. } => path,
         };
-        path.set_file_name(if path.extension() == Some(OsStr::new("exe")) {
-            "1cv8.exe"
-        } else {
-            "1cv8"
-        });
         match &self.runner {
             Runner::Host(_) => Ok(path.is_file()),
             Runner::Distrobox { container, .. } => {
@@ -292,16 +349,22 @@ impl Ibcmd {
         arguments: Vec<OsString>,
         pid_file: &Path,
     ) -> Result<Output, RunError> {
-        let mut designer = self.clone();
-        let path = match &mut designer.runner {
+        self.sibling_program("1cv8")
+            .run_interruptible(arguments, pid_file, &mut |_, _| {})
+    }
+
+    pub(crate) fn sibling_program(&self, name: &str) -> Self {
+        let mut program = self.clone();
+        let path = match &mut program.runner {
             Runner::Host(path) | Runner::Distrobox { path, .. } => path,
         };
-        path.set_file_name(if path.extension() == Some(OsStr::new("exe")) {
-            "1cv8.exe"
+        let filename = if path.extension() == Some(OsStr::new("exe")) {
+            format!("{name}.exe")
         } else {
-            "1cv8"
-        });
-        designer.run_interruptible(arguments, pid_file, &mut |_, _| {})
+            name.to_owned()
+        };
+        path.set_file_name(filename);
+        program
     }
     /// Discover `ibcmd` and require the exact project platform version.
     ///
@@ -319,25 +382,15 @@ impl Ibcmd {
             .unwrap_or_else(default_architecture);
         validate_component(&arch).map_err(|()| ToolError::InvalidArchitecture(arch.clone()))?;
 
-        let explicit = options
-            .ibcmd
-            .clone()
-            .or_else(|| env::var_os(IBCMD_ENV).map(PathBuf::from));
-        let distrobox_override = options
-            .distrobox
-            .clone()
-            .or_else(|| env::var(DISTROBOX_ENV).ok());
+        let distrobox_override = options.distrobox_name();
+        let runner_preference = if distrobox_override.is_some() {
+            RunnerPreference::Distrobox
+        } else {
+            options.runner
+        };
 
-        let runner_preference =
-            if options.distrobox.is_some() || env::var_os(DISTROBOX_ENV).is_some() {
-                RunnerPreference::Distrobox
-            } else {
-                options.runner
-            };
-
-        let (runner, source) = if let Some(path) = explicit {
-            validate_executable(&path)?;
-            (Runner::Host(path.clone()), ToolSource::Explicit(path))
+        let (runner, source) = if let Some(path) = options.explicit_ibcmd() {
+            options.explicit_runner(path)?
         } else if runner_preference != RunnerPreference::Distrobox
             && let Some(path) = find_on_path("ibcmd")
         {
@@ -408,24 +461,12 @@ impl Ibcmd {
             .or_else(|| env::var(ARCH_ENV).ok())
             .unwrap_or_else(default_architecture);
         validate_component(&arch).map_err(|()| ToolError::InvalidArchitecture(arch.clone()))?;
-        if let Some(path) = options
-            .ibcmd
-            .clone()
-            .or_else(|| env::var_os(IBCMD_ENV).map(PathBuf::from))
-        {
-            validate_executable(&path)?;
-            return platform_from_runner(
-                &Runner::Host(path.clone()),
-                ToolSource::Explicit(path),
-                options,
-            )
-            .map(|platform| vec![platform]);
+        if let Some(path) = options.explicit_ibcmd() {
+            let (runner, source) = options.explicit_runner(path)?;
+            return platform_from_runner(&runner, source, options).map(|platform| vec![platform]);
         }
-        let distrobox_override = options
-            .distrobox
-            .clone()
-            .or_else(|| env::var(DISTROBOX_ENV).ok());
-        let preference = if options.distrobox.is_some() || env::var_os(DISTROBOX_ENV).is_some() {
+        let distrobox_override = options.distrobox_name();
+        let preference = if distrobox_override.is_some() {
             RunnerPreference::Distrobox
         } else {
             options.runner
@@ -533,11 +574,37 @@ impl Ibcmd {
         S: AsRef<OsStr>,
         F: FnMut(ProcessStream, &[u8]),
     {
+        self.run_owned(arguments, pid_file, None, None, on_output, None)
+    }
+
+    pub(crate) fn run_owned<I, S, F>(
+        &self,
+        arguments: I,
+        pid_file: &Path,
+        cwd: Option<&Path>,
+        input: Option<std::fs::File>,
+        on_output: &mut F,
+        cancelled: Option<&AtomicBool>,
+    ) -> Result<Output, RunError>
+    where
+        I: IntoIterator<Item = S>,
+        S: AsRef<OsStr>,
+        F: FnMut(ProcessStream, &[u8]),
+    {
         let arguments: Vec<_> = arguments
             .into_iter()
             .map(|argument| argument.as_ref().to_os_string())
             .collect();
         let mut command = interruptible_runner_command(&self.runner, &arguments, pid_file);
+        if let Err(error) = std::fs::remove_file(pid_file)
+            && error.kind() != io::ErrorKind::NotFound
+        {
+            return Err(RunError::Io(error));
+        }
+        if let Some(cwd) = cwd {
+            command.current_dir(cwd);
+        }
+        command.stdin(input.map_or_else(Stdio::null, Stdio::from));
         let mut child = command
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
@@ -554,7 +621,8 @@ impl Ibcmd {
         let mut stderr_bytes = Vec::new();
         let (status, interrupted) = loop {
             drain_output(&receiver, &mut stdout_bytes, &mut stderr_bytes, on_output);
-            if self.was_interrupted() {
+            if self.was_interrupted() || cancelled.is_some_and(|flag| flag.load(Ordering::Acquire))
+            {
                 terminate_distrobox_process(&self.runner, pid_file);
                 child.kill().map_err(RunError::Io)?;
                 break (child.wait().map_err(RunError::Io)?, true);
@@ -577,6 +645,30 @@ impl Ibcmd {
         } else {
             Ok(output)
         }
+    }
+
+    pub(crate) fn spawn_managed_debug_server(
+        &self,
+        mut arguments: Vec<OsString>,
+        pid_file: &Path,
+        notification_arg: OsString,
+    ) -> io::Result<DebugServerChild> {
+        let program = self.sibling_program("dbgs");
+        if matches!(program.runner, Runner::Host(_)) {
+            arguments.push(format!("--ownerPID={}", std::process::id()).into());
+        }
+        arguments.push(notification_arg.clone());
+        let child = interruptible_runner_command(&program.runner, &arguments, pid_file)
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()?;
+        Ok(DebugServerChild {
+            child,
+            runner: program.runner,
+            pid_file: pid_file.to_path_buf(),
+            notification_arg,
+        })
     }
 }
 
@@ -801,7 +893,7 @@ fn interruptible_runner_command(
         Runner::Distrobox { container, path } => {
             let mut command = Command::new("distrobox");
             command
-                .args(["enter", "--name", container, "--", "sh", "-c"])
+                .args(["enter", "--name", container, "--no-tty", "--", "sh", "-c"])
                 .arg("printf '%s\\n' \"$$\" > \"$1\" || exit 1; shift; exec \"$@\"")
                 .arg("sh")
                 .arg(pid_file)
@@ -837,6 +929,48 @@ fn terminate_distrobox_process(runner: &Runner, pid_file: &Path) {
             pid,
         ])
         .output();
+}
+
+pub struct DebugServerChild {
+    child: std::process::Child,
+    runner: Runner,
+    pid_file: PathBuf,
+    notification_arg: OsString,
+}
+
+impl DebugServerChild {
+    pub(crate) fn stopped(&mut self) -> io::Result<bool> {
+        self.child.try_wait().map(|status| status.is_some())
+    }
+}
+
+impl Drop for DebugServerChild {
+    fn drop(&mut self) {
+        if let Runner::Distrobox { container, .. } = &self.runner
+            && let Ok(pid) = std::fs::read_to_string(&self.pid_file)
+            && let Ok(pid) = pid.trim().parse::<u32>()
+            && pid > 1
+        {
+            // The notification path is unique to this spawn. Verify it before signaling a
+            // container PID, even when the runner exited first or a PID was reused.
+            if let Ok(mut stop) = Command::new("distrobox")
+                .args(["enter", "--name", container, "--no-tty", "--", "sh", "-c",
+                    "tr '\\000' '\\n' < \"/proc/$1/cmdline\" | grep -Fqx -- \"$2\" && kill -KILL \"$1\"", "sh"])
+                .arg(pid.to_string())
+                .arg(&self.notification_arg)
+                .stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null()).spawn()
+            {
+                let deadline = std::time::Instant::now() + Duration::from_secs(2);
+                while matches!(stop.try_wait(), Ok(None)) && std::time::Instant::now() < deadline {
+                    thread::sleep(Duration::from_millis(20));
+                }
+                let _ = stop.kill();
+                let _ = stop.wait();
+            }
+        }
+        let _ = self.child.kill();
+        let _ = self.child.wait();
+    }
 }
 
 /// Install one Windows console handler that records cancellation for the active build command.
@@ -993,6 +1127,7 @@ fn standard_executable(version_directory: &Path) -> PathBuf {
 fn default_architecture() -> String {
     match env::consts::ARCH {
         "x86" => "i386".to_owned(),
+        "aarch64" => "arm64".to_owned(),
         arch => arch.to_owned(),
     }
 }

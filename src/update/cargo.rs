@@ -109,6 +109,7 @@ impl Installation {
             "eska-build",
             "eska-vcs",
             "eska-fmt",
+            "eska-debug",
             "eska",
             "--locked",
             "--registry",
@@ -206,7 +207,7 @@ mod tests {
         };
         let args = cargo.arguments(&Version::new(0, 11, 1));
         assert_eq!(
-            &args[..7],
+            &args[..8],
             [
                 "install",
                 "eska-project",
@@ -214,6 +215,7 @@ mod tests {
                 "eska-build",
                 "eska-vcs",
                 "eska-fmt",
+                "eska-debug",
                 "eska"
             ]
         );

@@ -3,6 +3,7 @@
 pub use eska_project_core::project::*;
 
 pub mod clone;
+pub mod debug_sources;
 pub mod diff;
 pub mod finish;
 pub mod history;
