@@ -115,6 +115,8 @@ struct Session<'a, W> {
     pause: Option<BTreeSet<u64>>,
     step_target: Option<u64>,
     client: Option<Client>,
+    line_offset: u32,
+    first_column: u32,
     initialized: bool,
     configured: bool,
     ended: bool,
@@ -149,6 +151,8 @@ pub fn run(config: Option<Config>, language: &Localizer) -> io::Result<()> {
         pause: None,
         step_target: None,
         client: None,
+        line_offset: 0,
+        first_column: 1,
         initialized: false,
         configured: false,
         ended: false,
@@ -228,6 +232,10 @@ impl<W: Write> Session<'_, W> {
         }
         let result = match request.command.as_str() {
             "initialize" if !self.initialized => {
+                self.line_offset =
+                    u32::from(request.arguments["linesStartAt1"].as_bool() == Some(false));
+                self.first_column =
+                    u32::from(request.arguments["columnsStartAt1"].as_bool() != Some(false));
                 self.initialized = true;
                 Ok(
                     json!({"supportsConfigurationDoneRequest":true,"supportsCancelRequest":true,
@@ -403,6 +411,7 @@ impl<W: Write> Session<'_, W> {
                 let line = entry["line"]
                     .as_u64()
                     .and_then(|line| u32::try_from(line).ok())
+                    .and_then(|line| line.checked_add(self.line_offset))
                     .filter(|line| *line > 0);
                 (
                     line,
@@ -416,7 +425,7 @@ impl<W: Write> Session<'_, W> {
             .map(|(line, point)| {
                 let mut response = json!({"verified":module.is_some() && point.is_ok()});
                 if let Some(line) = line {
-                    response["line"] = json!(line);
+                    response["line"] = json!(line - self.line_offset);
                 }
                 if let Err(key) = point {
                     response["message"] = json!(self.language.text(key));
@@ -519,7 +528,7 @@ impl<W: Write> Session<'_, W> {
             .take(levels)
             .map(|(id, frame)| {
                 let mut result =
-                    json!({"id":id,"name":frame.name,"line":frame.line.max(1),"column":1});
+                    json!({"id":id,"name":frame.name,"line":frame.line.max(1) - self.line_offset,"column":self.first_column});
                 if let Some(path) = frame
                     .module
                     .as_ref()

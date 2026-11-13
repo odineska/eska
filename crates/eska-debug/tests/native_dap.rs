@@ -647,7 +647,7 @@ fn native_managed_debug_server_lifecycle() {
                 json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
             );
             dap.success("configurationDone", json!({}));
-            verify_stop(&mut dap, &source, 1);
+            verify_stop(&mut dap, &source, 1, (3, 1));
             dap.shutdown();
         }
         assert!(
@@ -687,7 +687,7 @@ fn native_standalone_launch_with_standard_dap() {
     let mut dap = Dap::standalone(root, "en-US", true);
     dap.success(
         "initialize",
-        json!({"adapterID":"onec-http","linesStartAt1":true,"pathFormat":"path"}),
+        json!({"adapterID":"onec-http","linesStartAt1":false,"columnsStartAt1":false,"pathFormat":"path"}),
     );
     let invalid = dap.request(
         "launch",
@@ -702,13 +702,21 @@ fn native_standalone_launch_with_standard_dap() {
     );
     dap.success("launch", args);
     let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let limits = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":0},{"line":u32::MAX}]}),
+    );
+    assert_eq!(limits["breakpoints"][0]["verified"], true);
+    assert_eq!(limits["breakpoints"][0]["line"], 0);
+    assert_eq!(limits["breakpoints"][1]["verified"], false);
     let points = dap.success(
         "setBreakpoints",
-        json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+        json!({"source":{"path":source},"breakpoints":[{"line":2}]}),
     );
     assert_eq!(points["breakpoints"][0]["verified"], true);
+    assert_eq!(points["breakpoints"][0]["line"], 2);
     dap.success("configurationDone", json!({}));
-    verify_stop(&mut dap, &source, 1);
+    verify_stop(&mut dap, &source, 1, (2, 0));
     dap.shutdown();
     assert!(!root.join(".eska").exists());
 }
@@ -1469,12 +1477,13 @@ fn cpu_ticks(id: u32) -> u64 {
         .sum()
 }
 
-fn verify_stop(dap: &mut Dap, source: &Path, samples: usize) {
+fn verify_stop(dap: &mut Dap, source: &Path, samples: usize, position: (u32, u32)) {
     let thread = dap.stop();
     let stack = dap.success("stackTrace", json!({"threadId":thread}));
     let frame = stack["stackFrames"][0]["id"].as_u64().unwrap();
     assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(source));
-    assert_eq!(stack["stackFrames"][0]["line"], 3);
+    assert_eq!(stack["stackFrames"][0]["line"], position.0);
+    assert_eq!(stack["stackFrames"][0]["column"], position.1);
     let scopes = dap.success("scopes", json!({"frameId":frame}));
     let reference = scopes["scopes"][0]["variablesReference"].as_u64().unwrap();
     for _ in 0..samples {
@@ -1574,7 +1583,7 @@ fn native_dap_release_series() {
             );
         }
         dap.success("configurationDone", json!({}));
-        verify_stop(&mut dap, &source, samples);
+        verify_stop(&mut dap, &source, samples, (3, 1));
         eprintln!("round={round} memory_rss_hwm_kib={:?}", memory(id));
         dap.shutdown();
         for (command, times) in std::mem::take(&mut dap.durations) {
@@ -1741,7 +1750,7 @@ fn verify_prod_source_gate(
     );
     assert_eq!(points["breakpoints"][0]["verified"], true);
     dap.success("configurationDone", json!({}));
-    verify_stop(&mut dap, &source, 1);
+    verify_stop(&mut dap, &source, 1, (3, 1));
     dap.shutdown();
     assert_eq!(check("ru-RU", &[])["status"], "current");
 
