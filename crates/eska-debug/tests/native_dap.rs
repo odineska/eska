@@ -1,6 +1,8 @@
 //! Opt-in tests against a disposable 1C fixture prepared in the sibling playground.
 #[path = "support/debug_relay.rs"]
 mod debug_relay;
+#[path = "support/posting.rs"]
+mod posting;
 #[path = "../../../tests/support/mod.rs"]
 mod support;
 
@@ -29,12 +31,16 @@ struct Dap {
 
 impl Dap {
     fn start(root: &Path, profile: &str, mode: &str) -> Self {
+        Self::start_language(root, profile, mode, "en-US")
+    }
+
+    fn start_language(root: &Path, profile: &str, mode: &str, language: &str) -> Self {
         let mut command = Command::new(env!("CARGO_BIN_EXE_eska-debug"));
         command
             .current_dir(root)
             .args([
                 "--lang",
-                "en-US",
+                language,
                 "dap",
                 "--profile",
                 profile,
