@@ -8,7 +8,6 @@ mod values;
 use std::{
     collections::{BTreeMap, BTreeSet},
     io::{self, BufReader, BufWriter, Write},
-    path::Path,
     sync::{
         Arc,
         atomic::{AtomicBool, Ordering},
@@ -27,8 +26,8 @@ use crate::{
     Mode,
     dap::{self, Output, Request},
     dbgs::{
-        self, Breakpoint, Calculation, CalculationQuery, Event, Module, Page, Registration,
-        Selector, Server, StackAction, Step, Target, View,
+        self, Calculation, CalculationQuery, Event, Module, Page, Registration, Selector, Server,
+        StackAction, Step, Target, View,
     },
     http::Cancellation,
     source::Sources,
@@ -126,7 +125,7 @@ struct Session<'a, W> {
     poll: Option<Poll>,
     calculations: Option<calculation::Worker>,
     state: State,
-    breakpoints: BTreeMap<Module, Vec<Breakpoint>>,
+    breakpoints: BTreeMap<Module, breakpoints::ModuleBreakpoints>,
     pending: BTreeMap<String, Pending>,
     pause: Option<BTreeSet<u64>>,
     pending_step: Option<PendingStep>,
@@ -451,7 +450,8 @@ impl<W: Write> Session<'_, W> {
             return Err(INVALID);
         }
         let config = self.config.as_ref().ok_or(INVALID)?;
-        let module = config.sources.module(Path::new(path));
+        let source = breakpoints::Source::parse(path).ok_or(INVALID)?;
+        let module = config.sources.module(&source.path);
         let stale = module.is_some_and(|module| config.sources.path(module).is_none());
         let module = module.filter(|_| !stale || entries.is_empty()).cloned();
         let points: Vec<_> = entries
@@ -486,8 +486,8 @@ impl<W: Write> Session<'_, W> {
             .collect::<Vec<_>>();
         if let Some(module) = module {
             let mut candidate = self.breakpoints.clone();
-            candidate.insert(
-                module.clone(),
+            candidate.entry(module.clone()).or_default().replace(
+                source.protected_uri,
                 points
                     .into_iter()
                     .filter_map(|(_, point)| point.ok())
@@ -497,9 +497,12 @@ impl<W: Write> Session<'_, W> {
                 return Err(INVALID);
             }
             self.server()?
-                .breakpoints(candidate.iter().map(|(id, lines)| (id, lines.as_slice())))
+                .breakpoints(candidate.iter().map(|(id, lines)| (id, lines.active())))
                 .map_err(|_| ENDPOINT)?;
-            if candidate.get(&module).is_some_and(Vec::is_empty) {
+            if candidate
+                .get(&module)
+                .is_some_and(breakpoints::ModuleBreakpoints::is_empty)
+            {
                 candidate.remove(&module);
             }
             self.breakpoints = candidate;
@@ -578,11 +581,10 @@ impl<W: Write> Session<'_, W> {
             .map(|(id, frame)| {
                 let mut result =
                     json!({"id":id,"name":frame.name,"line":frame.line.max(1) - self.line_offset,"column":self.first_column});
-                if let Some(path) = frame
-                    .module
-                    .as_ref()
-                    .and_then(|module| sources.path(module))
-                    && let Some(display_path) = path.to_str()
+                if let Some(module) = &frame.module
+                    && let Some(path) = sources.path(module)
+                    && let Some(display_path) = self.breakpoints.get(module)
+                        .map_or_else(|| path.to_str(), |points| points.display_path(path, frame.line))
                     && let Some(name) = path.file_name().and_then(std::ffi::OsStr::to_str)
                 {
                     result["source"] = json!({"name":name,"path":display_path});
@@ -935,7 +937,7 @@ impl<W: Write> Session<'_, W> {
                 .module
                 .as_ref()
                 .and_then(|module| self.breakpoints.get(module))
-                .is_some_and(|points| points.iter().any(|point| point.line == frame.line))
+                .is_some_and(|points| points.contains(frame.line))
         })
     }
 
