@@ -1084,6 +1084,7 @@ fn native_breakpoint_conditions_logpoints_and_exception_filters() {
         "supportsHitConditionalBreakpoints",
         "supportsLogPoints",
         "supportsExceptionFilterOptions",
+        "supportsExceptionInfoRequest",
     ] {
         assert_eq!(capabilities[key], true);
     }
@@ -1138,13 +1139,19 @@ fn native_breakpoint_conditions_logpoints_and_exception_filters() {
     dap.success("continue", json!({"threadId":thread}));
     let (thread, _) = stop(&mut dap, "exception", 15);
     dap.assert_output("stderr", "ESKA match");
+    assert_exception_info(&mut dap, thread, "ESKA match");
     dap.success("setExceptionBreakpoints", json!({"filters":[]}));
     dap.success("continue", json!({"threadId":thread}));
     let (thread, _) = stop(&mut dap, "breakpoint", 24);
+    assert_eq!(
+        dap.request("exceptionInfo", json!({"threadId":thread}))["success"],
+        false
+    );
     dap.success("setExceptionBreakpoints", json!({"filters":["all"]}));
     dap.success("continue", json!({"threadId":thread}));
     let (thread, _) = stop(&mut dap, "exception", 26);
     dap.assert_output("stderr", "ESKA unfiltered");
+    assert_exception_info(&mut dap, thread, "ESKA unfiltered");
     dap.success("setExceptionBreakpoints", json!({"filters":[]}));
     dap.success("continue", json!({"threadId":thread}));
     let (_, frame) = stop(&mut dap, "breakpoint", 31);
@@ -1157,6 +1164,12 @@ fn native_breakpoint_conditions_logpoints_and_exception_filters() {
         json!({"source":{"path":source},"breakpoints":[]}),
     );
     dap.shutdown();
+}
+
+fn assert_exception_info(dap: &mut Dap, thread: u64, message: &str) {
+    let exception = dap.success("exceptionInfo", json!({"threadId":thread}));
+    assert_eq!(exception["breakMode"], "always");
+    assert!(exception["description"].as_str().unwrap().contains(message));
 }
 
 #[test]

@@ -234,7 +234,7 @@ impl<W: Write> Session<'_, W> {
                     "supportsEvaluateForHovers":true, "supportsSingleThreadExecutionRequests":false,
                     "supportsVariablePaging":true, "supportsSetVariable":true,
                     "supportsConditionalBreakpoints":true,"supportsHitConditionalBreakpoints":true,
-                    "supportsLogPoints":true,"supportsExceptionFilterOptions":true,
+                    "supportsLogPoints":true,"supportsExceptionFilterOptions":true,"supportsExceptionInfoRequest":true,
                     "exceptionBreakpointFilters":[{"filter":ERROR_FILTER,"label":self.language.text("debug-runtime-errors"),
                     "supportsCondition":true,"conditionDescription":self.language.text("debug-runtime-error-condition")}]}),
                 )
@@ -243,6 +243,7 @@ impl<W: Write> Session<'_, W> {
             "configurationDone" if self.server.is_some() && !self.configured => self.configure(),
             "setBreakpoints" => self.set_breakpoints(&request.arguments),
             "setExceptionBreakpoints" => self.set_exception_breakpoints(&request.arguments),
+            "exceptionInfo" => self.exception_info(&request.arguments),
             "threads" if self.server.is_some() => Ok(self.threads()),
             "stackTrace" => self.stack(&request.arguments),
             "scopes" => self.scopes(&request.arguments),
@@ -476,6 +477,22 @@ impl<W: Write> Session<'_, W> {
         json!({"threads":self.state.threads.iter().map(|(id, thread)| {
             json!({"id":id,"name":format!("{} ({})", thread.target.kind, thread.target.session)})
         }).collect::<Vec<_>>()})
+    }
+
+    fn exception_info(&self, arguments: &Value) -> Result<Value, Failure> {
+        let id = arguments["threadId"].as_u64().ok_or(INVALID)?;
+        let message = self
+            .state
+            .threads
+            .get(&id)
+            .and_then(|thread| thread.exception.as_deref())
+            .ok_or("debug-exception-unavailable")?;
+        let exception_id = self.language.text("debug-runtime-error");
+        let mut info = json!({"exceptionId":exception_id,"breakMode":"always"});
+        if !message.is_empty() {
+            info["description"] = json!(message);
+        }
+        Ok(info)
     }
 
     fn stack(&self, arguments: &Value) -> Result<Value, Failure> {
@@ -790,7 +807,11 @@ impl<W: Write> Session<'_, W> {
                 return Ok(());
             }
         };
-        self.state.stop(id, frames);
+        if matches!(action, StackAction::Exception) {
+            self.state.stop_on_exception(id, frames, message);
+        } else {
+            self.state.stop(id, frames);
+        }
         self.output.event(
             "stopped",
             &json!({"reason":reason,"threadId":id,"allThreadsStopped":false}),

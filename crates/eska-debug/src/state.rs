@@ -21,6 +21,7 @@ pub struct Variable {
 pub struct Thread {
     pub target: Target,
     pub stack: Option<Vec<(u64, Frame)>>,
+    pub exception: Option<String>,
     pub evaluation_count: usize,
 }
 
@@ -47,6 +48,7 @@ impl State {
             Thread {
                 target,
                 stack: None,
+                exception: None,
                 evaluation_count: 0,
             },
         );
@@ -77,6 +79,13 @@ impl State {
         }
     }
 
+    pub fn stop_on_exception(&mut self, id: u64, frames: Vec<Frame>, message: &str) {
+        self.stop(id, frames);
+        if let Some(thread) = self.threads.get_mut(&id) {
+            thread.exception = Some(message.to_owned());
+        }
+    }
+
     pub fn resume(&mut self, id: u64) {
         self.frames.retain(|_, position| position.thread != id);
         self.variables
@@ -85,6 +94,7 @@ impl State {
             .retain(|variable, _| variable.position.thread != id);
         if let Some(thread) = self.threads.get_mut(&id) {
             thread.stack = None;
+            thread.exception = None;
             thread.evaluation_count = 0;
         }
     }
