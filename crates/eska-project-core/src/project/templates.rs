@@ -200,7 +200,12 @@ mod tests {
             let attributes = &template.files()[1];
             assert_eq!(attributes.path(), Path::new(".gitattributes"));
             assert_eq!(attributes.contents(), GIT_ATTRIBUTES);
-            assert!(attributes.contents().starts_with("* text=auto\n"));
+            assert!(
+                attributes
+                    .contents()
+                    .lines()
+                    .any(|line| line == "* text=auto eol=lf")
+            );
             for pattern in [
                 "*.addin", "*.axdt", "*.bin", "*.cf", "*.cfe", "*.cfu", "*.dt", "*.epf", "*.erf",
                 "*.geo", "*.grs", "*.mxl", "*.bmp", "*.emf", "*.gif", "*.ico", "*.jpeg", "*.jpg",

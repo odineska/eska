@@ -102,77 +102,86 @@ fn git_checkout_uses_shared_line_endings_and_preserves_binary_bytes() {
             include_bytes!("../../crates/eska-project-core/assets/project/.gitattributes"),
         )
         .unwrap();
-        let cases: &[(&str, &[u8], &[u8], &[u8])] = &[
-            (
-                "Module.bsl",
-                "Сообщить(1);\r\nСообщить(2);\n".as_bytes(),
-                "Сообщить(1);\nСообщить(2);\n".as_bytes(),
-                "Сообщить(1);\nСообщить(2);\n".as_bytes(),
-            ),
-            (
-                "Configuration.xml",
-                b"\xef\xbb\xbf<Properties>\r\n</Properties>\r\n",
-                b"\xef\xbb\xbf<Properties>\n</Properties>\n",
-                b"\xef\xbb\xbf<Properties>\n</Properties>\n",
-            ),
-            (
-                "eska.toml",
-                b"[project]\r\n",
-                b"[project]\n",
-                b"[project]\n",
-            ),
-            (
-                "run.sh",
-                b"#!/bin/sh\r\necho test\r\n",
-                b"#!/bin/sh\necho test\n",
-                b"#!/bin/sh\necho test\n",
-            ),
-            (
-                "run.cmd",
-                b"@echo off\necho test\n",
-                b"@echo off\necho test\n",
-                b"@echo off\r\necho test\r\n",
-            ),
-            (
-                "run.bat",
-                b"@echo off\r\n",
-                b"@echo off\n",
-                b"@echo off\r\n",
-            ),
-            // Even text-like binary payloads must bypass line-ending conversion.
-            (
-                "configuration.cf",
-                b"native\r\npayload\r\n",
-                b"native\r\npayload\r\n",
-                b"native\r\npayload\r\n",
-            ),
-            (
-                "payload.dat",
-                b"\0native\r\npayload",
-                b"\0native\r\npayload",
-                b"\0native\r\npayload",
-            ),
-        ];
-        for &(path, input, _, _) in cases {
-            fs::write(root.join(path), input).unwrap();
+        for case in CHECKOUT_CASES {
+            fs::write(root.join(case.path), case.input).unwrap();
         }
         git(&["add", "."]);
-        for &(path, _, index, _) in cases {
+        for case in CHECKOUT_CASES {
             assert_eq!(
-                git(&["show", &format!(":{path}")]),
-                index,
-                "{autocrlf}: {path}"
+                git(&["show", &format!(":{}", case.path)]),
+                case.index,
+                "{autocrlf}: {}",
+                case.path
             );
-            fs::remove_file(root.join(path)).unwrap();
+            fs::remove_file(root.join(case.path)).unwrap();
         }
         git(&["checkout-index", "--all"]);
-        for &(path, _, _, checkout) in cases {
+        for case in CHECKOUT_CASES {
             assert_eq!(
-                fs::read(root.join(path)).unwrap(),
-                checkout,
-                "{autocrlf}: {path}"
+                fs::read(root.join(case.path)).unwrap(),
+                case.checkout,
+                "{autocrlf}: {}",
+                case.path
             );
         }
         git(&["diff", "--exit-code"]);
     }
 }
+
+struct CheckoutCase {
+    path: &'static str,
+    input: &'static [u8],
+    index: &'static [u8],
+    checkout: &'static [u8],
+}
+
+const CHECKOUT_CASES: &[CheckoutCase] = &[
+    CheckoutCase {
+        path: "Module.bsl",
+        input: "Сообщить(1);\r\nСообщить(2);\n".as_bytes(),
+        index: "Сообщить(1);\nСообщить(2);\n".as_bytes(),
+        checkout: "Сообщить(1);\nСообщить(2);\n".as_bytes(),
+    },
+    CheckoutCase {
+        path: "Configuration.xml",
+        input: b"\xef\xbb\xbf<Properties>\r\n</Properties>\r\n",
+        index: b"\xef\xbb\xbf<Properties>\n</Properties>\n",
+        checkout: b"\xef\xbb\xbf<Properties>\n</Properties>\n",
+    },
+    CheckoutCase {
+        path: "eska.toml",
+        input: b"[project]\r\n",
+        index: b"[project]\n",
+        checkout: b"[project]\n",
+    },
+    CheckoutCase {
+        path: "run.sh",
+        input: b"#!/bin/sh\r\necho test\r\n",
+        index: b"#!/bin/sh\necho test\n",
+        checkout: b"#!/bin/sh\necho test\n",
+    },
+    CheckoutCase {
+        path: "run.cmd",
+        input: b"@echo off\necho test\n",
+        index: b"@echo off\necho test\n",
+        checkout: b"@echo off\r\necho test\r\n",
+    },
+    CheckoutCase {
+        path: "run.bat",
+        input: b"@echo off\r\n",
+        index: b"@echo off\n",
+        checkout: b"@echo off\r\n",
+    },
+    CheckoutCase {
+        path: "configuration.cf",
+        input: b"native\r\npayload\r\n",
+        index: b"native\r\npayload\r\n",
+        checkout: b"native\r\npayload\r\n",
+    },
+    CheckoutCase {
+        path: "payload.dat",
+        input: b"\0native\r\npayload",
+        index: b"\0native\r\npayload",
+        checkout: b"\0native\r\npayload",
+    },
+];
