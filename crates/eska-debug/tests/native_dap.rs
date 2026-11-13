@@ -548,7 +548,7 @@ fn native_evaluation_cancellation_and_timeout_keep_dap_responsive() {
 
 #[test]
 #[ignore = "requires the owned standalone fixture and its HTTP debug server"]
-fn native_disconnect_interrupts_a_stalled_continue() {
+fn native_cancel_and_disconnect_interrupt_a_stalled_continue() {
     let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
     let root = Path::new(&root);
     let mut args: Value =
@@ -559,9 +559,21 @@ fn native_disconnect_interrupts_a_stalled_continue() {
         b"POST /e1crdbg/rdbg?cmd=step ",
     );
     args["debugServerUrl"] = json!(format!("http://{}", relay.address()));
-    let mut dap = Dap::standalone(root, "en-US", true);
+    for (command, locale) in [("cancel", "ru-RU"), ("disconnect", "en-US")] {
+        verify_stalled_continue(root, &args, &relay, command, locale);
+    }
+}
+
+fn verify_stalled_continue(
+    root: &Path,
+    args: &Value,
+    relay: &debug_relay::Relay,
+    command: &str,
+    locale: &str,
+) {
+    let mut dap = Dap::standalone(root, locale, true);
     dap.success("initialize", json!({"adapterID":"eska"}));
-    dap.success("launch", args);
+    dap.success("launch", args.clone());
     let source = root.join("src/Ext/ManagedApplicationModule.bsl");
     dap.success(
         "setBreakpoints",
@@ -576,10 +588,12 @@ fn native_disconnect_interrupts_a_stalled_continue() {
     let start = Instant::now();
     let threads = dap.send("threads", json!({}));
     let stack = dap.send("stackTrace", json!({"threadId":thread}));
-    let disconnect = dap.send("disconnect", json!({}));
+    let interruption = dap.send(command, json!({"requestId":step}));
     let mut replies = BTreeMap::new();
-    while replies.len() < 4 {
+    let mut terminated = false;
+    while replies.len() < 4 || (command == "cancel" && !terminated) {
         let reply = dap.receive_with_timeout(Duration::from_secs(4));
+        terminated |= reply["event"] == "terminated";
         if let Some(id) = reply["request_seq"].as_u64() {
             assert!(replies.insert(id, reply).is_none());
         }
@@ -594,15 +608,20 @@ fn native_disconnect_interrupts_a_stalled_continue() {
             .any(|target| target["id"] == thread)
     );
     assert_eq!(replies[&stack]["success"], false);
-    assert_eq!(
-        replies[&stack]["message"],
+    let expected = if locale == "ru-RU" {
+        "Дождитесь подтверждения шага или продолжения от 1С."
+    } else {
         "Wait for 1C to confirm the current step or continue command."
-    );
+    };
+    assert_eq!(replies[&stack]["message"], expected);
     assert_eq!(replies[&step]["message"], "cancelled");
-    assert_eq!(replies[&disconnect]["success"], true);
+    assert_eq!(replies[&interruption]["success"], true);
+    if command == "cancel" {
+        dap.assert_output("stderr", "Начните новый сеанс отладки");
+    }
     relay.await_close();
     dap.wait_for_exit();
-    eprintln!("disconnect_during_continue={elapsed:?}");
+    eprintln!("{command}_during_continue={elapsed:?}");
 }
 
 #[test]

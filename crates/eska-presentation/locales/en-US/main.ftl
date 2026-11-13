@@ -1223,6 +1223,7 @@ debug-update-failed = The selected source update failed or is no longer safe. De
 debug-prod-warning = Verify that the open sources match the deployed production configuration. Evaluate and Set Value can modify data.
 debug-request-unavailable = This debug request is unavailable in the current session state.
 debug-step-in-progress = Wait for 1C to confirm the current step or continue command.
+debug-step-cancelled = 1C may have processed the cancelled step or continue command. Start a new debug session to refresh the state.
 runtime-probe-about = Check the saved profile platform and endpoint availability
 runtime-probe-ready = The saved profile platform and connection are available.
 runtime-endpoint-unavailable = A configured endpoint is unreachable.

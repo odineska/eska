@@ -248,6 +248,16 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn request(&mut self, request: Request) -> io::Result<()> {
+        if request.command == "cancel"
+            && self.pending_step.as_ref().is_some_and(|step| {
+                request.arguments["requestId"].as_u64() == Some(step.request.seq)
+            })
+        {
+            self.cancel_step()?;
+            self.output.response(&request, Ok(json!({})))?;
+            // Closing the socket cannot tell us whether 1C already resumed the targets.
+            return self.terminate(Some("debug-step-cancelled"));
+        }
         if self.pending_step.is_some()
             && !matches!(
                 request.command.as_str(),
@@ -1196,13 +1206,18 @@ impl<W: Write> Session<'_, W> {
 
     fn cancel_operations(&mut self) -> io::Result<()> {
         let calculations = self.cancel_pending();
+        let step = self.cancel_step();
+        calculations.and(step)
+    }
+
+    fn cancel_step(&mut self) -> io::Result<()> {
         if let Some(step) = self.pending_step.take() {
             step.cancellation.cancel();
             let _ = step.worker.join();
-            let response = self.output.response(&step.request, Err("cancelled".into()));
-            return calculations.and(response);
+            self.output
+                .response(&step.request, Err("cancelled".into()))?;
         }
-        calculations
+        Ok(())
     }
 
     fn expire(&mut self) -> io::Result<()> {
