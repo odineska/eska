@@ -1222,6 +1222,7 @@ debug-source-choice-required = Production sources differ or could not be verifie
 debug-update-failed = The selected source update failed or is no longer safe. Debugging did not start.
 debug-prod-warning = Verify that the open sources match the deployed production configuration. Evaluate and Set Value can modify data.
 debug-request-unavailable = This debug request is unavailable in the current session state.
+debug-step-in-progress = Wait for 1C to confirm the current step or continue command.
 runtime-probe-about = Check the saved profile platform and endpoint availability
 runtime-probe-ready = The saved profile platform and connection are available.
 runtime-endpoint-unavailable = A configured endpoint is unreachable.

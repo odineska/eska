@@ -9,7 +9,11 @@ use std::{
     collections::{BTreeMap, BTreeSet},
     io::{self, BufReader, BufWriter, Write},
     path::Path,
-    sync::{Arc, mpsc},
+    sync::{
+        Arc,
+        atomic::{AtomicBool, Ordering},
+        mpsc,
+    },
     thread,
     time::{Duration, Instant},
 };
@@ -36,6 +40,7 @@ use poll::Poll;
 
 const MAX_THREADS: usize = 256;
 const MAX_PENDING: usize = 16;
+const MAX_STEP_EVENT_BATCHES: usize = 16;
 const MAX_EVALUATIONS_PER_STOP: usize = 256;
 const MAX_DEBUG_EXPRESSION: usize = 16384;
 const ERROR_FILTER: &str = "all";
@@ -93,10 +98,21 @@ struct Pending {
     cancellation: Arc<Cancellation>,
 }
 
+struct PendingStep {
+    request: Request,
+    thread_id: u64,
+    action: Step,
+    cancellation: Arc<Cancellation>,
+    delivery_failed: Arc<AtomicBool>,
+    worker: thread::JoinHandle<()>,
+    events: Vec<Vec<Event>>,
+}
+
 enum Input {
     Packet(io::Result<Option<Request>>),
     Events(io::Result<Vec<Event>>),
     Calculation(String, io::Result<Vec<Calculation>>),
+    Step(io::Result<Vec<String>>),
 }
 
 struct Session<'a, W> {
@@ -113,6 +129,7 @@ struct Session<'a, W> {
     breakpoints: BTreeMap<Module, Vec<Breakpoint>>,
     pending: BTreeMap<String, Pending>,
     pause: Option<BTreeSet<u64>>,
+    pending_step: Option<PendingStep>,
     step_target: Option<u64>,
     client: Option<Client>,
     line_offset: u32,
@@ -149,6 +166,7 @@ pub fn run(config: Option<Config>, language: &Localizer) -> io::Result<()> {
         breakpoints: BTreeMap::new(),
         pending: BTreeMap::new(),
         pause: None,
+        pending_step: None,
         step_target: None,
         client: None,
         line_offset: 0,
@@ -160,7 +178,7 @@ pub fn run(config: Option<Config>, language: &Localizer) -> io::Result<()> {
     let operation = eska_tool_runtime::Operation::new()
         .map_err(|_| io::Error::other("cannot install debugger cancellation"))?;
     let result = drive(&mut session, &receive, &operation);
-    let cancelled = session.cancel_pending();
+    let cancelled = session.cancel_operations();
     session.cleanup();
     result.and(cancelled)
 }
@@ -188,6 +206,10 @@ fn drive(
                 .calculations
                 .as_ref()
                 .is_some_and(calculation::Worker::failed)
+            || session
+                .pending_step
+                .as_ref()
+                .is_some_and(|step| step.delivery_failed.load(Ordering::Acquire))
         {
             session.terminate(Some(ENDPOINT))?;
             break;
@@ -204,6 +226,7 @@ fn drive(
                 break;
             }
             Ok(Input::Calculation(id, result)) => session.calculation_reply(&id, result)?,
+            Ok(Input::Step(result)) => session.step_reply(result)?,
             Err(mpsc::RecvTimeoutError::Timeout) => {}
         }
         session.expire()?;
@@ -213,7 +236,8 @@ fn drive(
 
 impl<W: Write> Session<'_, W> {
     fn terminate(&mut self, failure: Option<Failure>) -> io::Result<()> {
-        self.cancel_pending()?;
+        self.ended = true;
+        self.cancel_operations()?;
         if let Some(key) = failure {
             self.output.event(
                 "output",
@@ -224,11 +248,27 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn request(&mut self, request: Request) -> io::Result<()> {
+        if self.pending_step.is_some()
+            && !matches!(
+                request.command.as_str(),
+                "threads" | "cancel" | "disconnect"
+            )
+        {
+            return self
+                .output
+                .response(&request, Err(self.language.text("debug-step-in-progress")));
+        }
         if matches!(
             request.command.as_str(),
             "evaluate" | "variables" | "setVariable"
         ) {
             return self.calculation_request(request);
+        }
+        if matches!(
+            request.command.as_str(),
+            "continue" | "next" | "stepIn" | "stepOut"
+        ) {
+            return self.start_step(request);
         }
         let result = match request.command.as_str() {
             "initialize" if !self.initialized => {
@@ -255,7 +295,6 @@ impl<W: Write> Session<'_, W> {
             "threads" if self.server.is_some() => Ok(self.threads()),
             "stackTrace" => self.stack(&request.arguments),
             "scopes" => self.scopes(&request.arguments),
-            "continue" | "next" | "stepIn" | "stepOut" => self.step(&request),
             "pause" => self.pause(&request.arguments),
             "eska/listDebugTargets" => self.targets(),
             "eska/attachDebugTarget" => self.select_target(&request.arguments),
@@ -269,7 +308,7 @@ impl<W: Write> Session<'_, W> {
                 Ok(json!({}))
             }
             "disconnect" => {
-                self.cancel_pending()?;
+                self.cancel_operations()?;
                 self.cleanup();
                 self.ended = true;
                 Ok(json!({}))
@@ -582,36 +621,81 @@ impl<W: Write> Session<'_, W> {
         Ok(json!({}))
     }
 
-    fn step(&mut self, request: &Request) -> Result<Value, Failure> {
+    fn start_step(&mut self, request: Request) -> io::Result<()> {
         if self.assignment_pending() {
-            return Err("debug-value-assignment-in-progress");
+            return self.output.response(
+                &request,
+                Err(self.language.text("debug-value-assignment-in-progress")),
+            );
         }
-        let id = request.arguments["threadId"].as_u64().ok_or(INVALID)?;
-        let target = self
-            .state
-            .threads
-            .get(&id)
-            .filter(|thread| thread.stack.is_some())
-            .ok_or(INVALID)?
-            .target
-            .id
-            .clone();
-        let step = match request.command.as_str() {
+        let target = request.arguments["threadId"].as_u64().and_then(|id| {
+            self.state
+                .threads
+                .get(&id)
+                .filter(|thread| thread.stack.is_some())
+                .map(|thread| (id, thread.target.id.clone()))
+        });
+        let (Some((thread_id, target)), Some(server)) = (target, self.server.as_ref()) else {
+            return self
+                .output
+                .response(&request, Err(self.language.text(INVALID)));
+        };
+        let server = Arc::clone(server);
+        self.cancel_pending()?;
+        let action = match request.command.as_str() {
             "continue" => Step::Continue,
             "next" => Step::Over,
             "stepIn" => Step::In,
             _ => Step::Out,
         };
-        if self.pause.is_some() {
-            self.server()?
-                .break_on_next_statement(false)
-                .map_err(|_| ENDPOINT)?;
-            self.pause = None;
+        let clear_pause = self.pause.is_some();
+        let cancellation = Arc::<Cancellation>::default();
+        let cancel = Arc::clone(&cancellation);
+        let input = self.input.clone();
+        let delivery_failed = Arc::new(AtomicBool::new(false));
+        let failed = Arc::clone(&delivery_failed);
+        let Ok(worker) = thread::Builder::new().spawn(move || {
+            let result = server.control_step(&target, action, clear_pause, &cancel);
+            if input.try_send(Input::Step(result)).is_err() {
+                failed.store(true, Ordering::Release);
+            }
+        }) else {
+            return self
+                .output
+                .response(&request, Err(self.language.text(ENDPOINT)));
+        };
+        self.pending_step = Some(PendingStep {
+            request,
+            thread_id,
+            action,
+            cancellation,
+            delivery_failed,
+            worker,
+            events: Vec::new(),
+        });
+        Ok(())
+    }
+
+    fn step_reply(&mut self, result: io::Result<Vec<String>>) -> io::Result<()> {
+        let Some(step) = self.pending_step.take() else {
+            return Ok(());
+        };
+        let _ = step.worker.join();
+        let Ok(resumed) = result else {
+            self.output
+                .response(&step.request, Err(self.language.text(ENDPOINT)))?;
+            // The platform may have resumed execution before the reply was lost.
+            return self.terminate(Some("debug-transport-lost"));
+        };
+        self.pause = None;
+        self.step_target = (!matches!(step.action, Step::Continue)).then_some(step.thread_id);
+        self.resume_threads(step.thread_id, &resumed)?;
+        self.output
+            .response(&step.request, Ok(json!({"allThreadsContinued":false})))?;
+        for events in step.events {
+            self.events(events)?;
         }
-        let resumed = self.server()?.step(&target, step).map_err(|_| ENDPOINT)?;
-        self.step_target = (!matches!(step, Step::Continue)).then_some(id);
-        self.resume_threads(id, &resumed).map_err(|_| INVALID)?;
-        Ok(json!({"allThreadsContinued":false}))
+        Ok(())
     }
 
     fn resume_threads(&mut self, selected: u64, targets: &[String]) -> io::Result<()> {
@@ -691,6 +775,14 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn events(&mut self, events: Vec<Event>) -> io::Result<()> {
+        if let Some(step) = &mut self.pending_step {
+            // An immediately following stop can arrive before dbgs acknowledges the step.
+            if step.events.len() == MAX_STEP_EVENT_BATCHES {
+                return self.terminate(Some(ENDPOINT));
+            }
+            step.events.push(events);
+            return Ok(());
+        }
         let mut deferred_resumes = Vec::new();
         let mut events = events.into_iter().peekable();
         while let Some(event) = events.next() {
@@ -1102,6 +1194,17 @@ impl<W: Write> Session<'_, W> {
         result
     }
 
+    fn cancel_operations(&mut self) -> io::Result<()> {
+        let calculations = self.cancel_pending();
+        if let Some(step) = self.pending_step.take() {
+            step.cancellation.cancel();
+            let _ = step.worker.join();
+            let response = self.output.response(&step.request, Err("cancelled".into()));
+            return calculations.and(response);
+        }
+        calculations
+    }
+
     fn expire(&mut self) -> io::Result<()> {
         let now = Instant::now();
         let expired: Vec<_> = self
@@ -1166,17 +1269,21 @@ impl<W: Write> Session<'_, W> {
             worker.stop();
         }
         if let Some(server) = self.server.take() {
-            let start = Instant::now();
+            let deadline = Instant::now() + Duration::from_secs(2);
             let mut stopped = self.state.stopped();
             if !stopped.is_empty() && self.pause.take().is_some() {
-                let _ = server.break_on_next_statement(false);
+                let _ = server.break_on_next_statement_before(false, deadline, None);
             }
             while let Some(id) = stopped.pop_first() {
-                if start.elapsed() >= Duration::from_secs(2) {
+                if Instant::now() >= deadline {
                     break;
                 }
-                if let Ok(resumed) = server.step(&self.state.threads[&id].target.id, Step::Continue)
-                {
+                if let Ok(resumed) = server.step_before(
+                    &self.state.threads[&id].target.id,
+                    Step::Continue,
+                    deadline,
+                    None,
+                ) {
                     for target in resumed {
                         if let Some(thread) = self.state.thread_id(&target) {
                             stopped.remove(&thread);

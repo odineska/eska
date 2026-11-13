@@ -311,12 +311,22 @@ impl Server {
     }
 
     pub fn break_on_next_statement(&self, enabled: bool) -> io::Result<()> {
+        self.break_on_next_statement_before(enabled, Instant::now() + REQUEST_TIMEOUT, None)
+    }
+
+    pub fn break_on_next_statement_before(
+        &self,
+        enabled: bool,
+        deadline: Instant,
+        cancellation: Option<&Cancellation>,
+    ) -> io::Result<()> {
         let command = if enabled {
             "setBreakOnNextStatement"
         } else {
             "clearBreakOnNextStatement"
         };
-        self.call(command, "").map(|_| ())
+        self.call_before(command, "", deadline, cancellation)
+            .map(|_| ())
     }
 
     pub fn breakpoints<'a>(
@@ -365,18 +375,30 @@ impl Server {
     }
 
     pub fn step(&self, id: &str, step: Step) -> io::Result<Vec<String>> {
+        self.step_before(id, step, Instant::now() + REQUEST_TIMEOUT, None)
+    }
+
+    pub fn step_before(
+        &self,
+        id: &str,
+        step: Step,
+        deadline: Instant,
+        cancellation: Option<&Cancellation>,
+    ) -> io::Result<Vec<String>> {
         let action = match step {
             Step::Continue => "Continue",
             Step::Over => "Step",
             Step::In => "StepIn",
             Step::Out => "StepOut",
         };
-        let response = self.call(
+        let response = self.call_before(
             "step",
             &format!(
                 "{}<action>{action}</action><simple>false</simple>",
                 target_xml(id)
             ),
+            deadline,
+            cancellation,
         )?;
         if response.is_empty() {
             return Ok(Vec::new());
@@ -386,6 +408,20 @@ impl Server {
             .filter_map(|item| child(item, "targetID"))
             .map(|target| text(target, "id").to_owned())
             .collect())
+    }
+
+    pub fn control_step(
+        &self,
+        id: &str,
+        step: Step,
+        clear_pause: bool,
+        cancellation: &Cancellation,
+    ) -> io::Result<Vec<String>> {
+        let deadline = Instant::now() + REQUEST_TIMEOUT;
+        if clear_pause {
+            self.break_on_next_statement_before(false, deadline, Some(cancellation))?;
+        }
+        self.step_before(id, step, deadline, Some(cancellation))
     }
 
     pub fn calculate(

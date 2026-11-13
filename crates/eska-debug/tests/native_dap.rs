@@ -420,8 +420,10 @@ fn native_transport_loss_reports_lost_and_busy_connections() {
         .as_str()
         .expect("exact target UUID from the fixture");
     let endpoint = args["debugServerUrl"].as_str().unwrap();
-    let relay =
-        debug_relay::Relay::start(endpoint.strip_prefix("http://").unwrap().parse().unwrap());
+    let relay = debug_relay::Relay::start(
+        endpoint.strip_prefix("http://").unwrap().parse().unwrap(),
+        b"POST /e1crdbg/rdbg?cmd=evalExpr ",
+    );
     let proxied = json!({
         "debugServerUrl":format!("http://{}", relay.address()),
         "sourceRoot":args["sourceRoot"],
@@ -473,8 +475,10 @@ fn native_evaluation_cancellation_and_timeout_keep_dap_responsive() {
     let mut args: Value =
         serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
     let endpoint = args["debugServerUrl"].as_str().unwrap();
-    let relay =
-        debug_relay::Relay::start(endpoint.strip_prefix("http://").unwrap().parse().unwrap());
+    let relay = debug_relay::Relay::start(
+        endpoint.strip_prefix("http://").unwrap().parse().unwrap(),
+        b"POST /e1crdbg/rdbg?cmd=evalExpr ",
+    );
     args["debugServerUrl"] = json!(format!("http://{}", relay.address()));
     let mut dap = Dap::standalone(root, "en-US", true);
     let caps = dap.success("initialize", json!({"adapterID":"eska"}));
@@ -540,6 +544,65 @@ fn native_evaluation_cancellation_and_timeout_keep_dap_responsive() {
     assert_eq!(dap.success("evaluate", expression)["result"], "42");
     eprintln!("cancel_with_stack={latency:?} calculation_timeout={elapsed:?}");
     dap.shutdown();
+}
+
+#[test]
+#[ignore = "requires the owned standalone fixture and its HTTP debug server"]
+fn native_disconnect_interrupts_a_stalled_continue() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let mut args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let endpoint = args["debugServerUrl"].as_str().unwrap();
+    let relay = debug_relay::Relay::start(
+        endpoint.strip_prefix("http://").unwrap().parse().unwrap(),
+        b"POST /e1crdbg/rdbg?cmd=step ",
+    );
+    args["debugServerUrl"] = json!(format!("http://{}", relay.address()));
+    let mut dap = Dap::standalone(root, "en-US", true);
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    dap.success("launch", args);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+    );
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+
+    relay.arm();
+    let step = dap.send("continue", json!({"threadId":thread}));
+    relay.await_stall();
+    let start = Instant::now();
+    let threads = dap.send("threads", json!({}));
+    let stack = dap.send("stackTrace", json!({"threadId":thread}));
+    let disconnect = dap.send("disconnect", json!({}));
+    let mut replies = BTreeMap::new();
+    while replies.len() < 4 {
+        let reply = dap.receive_with_timeout(Duration::from_secs(4));
+        if let Some(id) = reply["request_seq"].as_u64() {
+            assert!(replies.insert(id, reply).is_none());
+        }
+    }
+    let elapsed = start.elapsed();
+    assert!(elapsed < Duration::from_secs(4), "{elapsed:?}");
+    assert!(
+        replies[&threads]["body"]["threads"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|target| target["id"] == thread)
+    );
+    assert_eq!(replies[&stack]["success"], false);
+    assert_eq!(
+        replies[&stack]["message"],
+        "Wait for 1C to confirm the current step or continue command."
+    );
+    assert_eq!(replies[&step]["message"], "cancelled");
+    assert_eq!(replies[&disconnect]["success"], true);
+    relay.await_close();
+    dap.wait_for_exit();
+    eprintln!("disconnect_during_continue={elapsed:?}");
 }
 
 #[test]

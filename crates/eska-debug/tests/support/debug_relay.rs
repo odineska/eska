@@ -21,7 +21,7 @@ pub struct Relay {
 }
 
 impl Relay {
-    pub fn start(endpoint: SocketAddr) -> Self {
+    pub fn start(endpoint: SocketAddr, command: &'static [u8]) -> Self {
         let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
         let address = listener.local_addr().unwrap();
         let armed = Arc::new(AtomicBool::new(false));
@@ -36,7 +36,7 @@ impl Relay {
                 }
                 let (inject, stall, close) = (Arc::clone(&inject), stall.clone(), close.clone());
                 thread::spawn(move || {
-                    let _ = forward(&client?, endpoint, &inject, &stall, &close);
+                    let _ = forward(&client?, endpoint, command, &inject, &stall, &close);
                     Ok::<(), io::Error>(())
                 });
             }
@@ -61,7 +61,7 @@ impl Relay {
     pub fn await_stall(&self) {
         self.stalled
             .recv_timeout(LIMIT)
-            .expect("evaluation reached the relay");
+            .expect("debug command reached the relay");
     }
 
     pub fn await_close(&self) {
@@ -81,6 +81,7 @@ impl Drop for Relay {
 fn forward(
     client: &TcpStream,
     endpoint: SocketAddr,
+    command: &[u8],
     armed: &AtomicBool,
     stalled: &mpsc::Sender<()>,
     closed: &mpsc::Sender<()>,
@@ -88,9 +89,7 @@ fn forward(
     let mut input = BufReader::new(client.try_clone()?);
     input.get_ref().set_read_timeout(Some(LIMIT))?;
     let request = read_request(&mut input)?;
-    if request.starts_with(b"POST /e1crdbg/rdbg?cmd=evalExpr ")
-        && armed.swap(false, Ordering::AcqRel)
-    {
+    if request.starts_with(command) && armed.swap(false, Ordering::AcqRel) {
         let _ = stalled.send(());
         io::copy(&mut input, &mut io::sink())?;
         let _ = closed.send(());
