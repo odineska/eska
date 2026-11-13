@@ -34,7 +34,9 @@ fn support_object_protocol_is_bounded_and_negotiated() {
             } else {
                 let result = client.request("metadata/supportObjects", &params);
                 assert_eq!(result["objects"][0]["objectId"], *id);
-                assert_eq!(result["objects"][0]["state"], "unknown");
+                assert_eq!(result["objects"][0]["state"], "unrestricted");
+                assert_eq!(result["objects"][0]["reason"], "ownObject");
+                assert_eq!(result["diagnostics"], json!([]));
                 assert!(result.get("files").is_none());
                 assert_eq!(result["freshness"], "current");
                 snapshots

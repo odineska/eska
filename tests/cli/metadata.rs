@@ -267,7 +267,7 @@ fn metadata_rename_preview_is_locale_independent_and_never_applies_edits() {
     let ru = call(&root, "ru-RU", "rename-preview", Some(&request), true);
     let en = call(&root, "en-US", "rename-preview", Some(&request), true);
     assert_eq!(ru, en);
-    assert_eq!(ru["result"]["applyAvailable"], false);
+    assert_eq!(ru["result"]["applyAvailable"], true);
     assert_eq!(ru["result"]["plan"]["newObjectId"], "configuration:Новая");
     assert_eq!(
         ru["result"]["plan"]["files"][0]["replacements"][0]["after"],

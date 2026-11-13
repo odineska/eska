@@ -333,18 +333,18 @@ fn query_unknown_policy_and_aliased_sources_fail_closed() {
     let (directory, mut workspace, node, path) = setup();
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let document = project.query_document(&node, &path, 1, None).unwrap();
-    fs::remove_file(directory.0.join("src/Ext/ParentConfigurations.bin")).unwrap();
+    let rules = directory.0.join("src/Ext/ParentConfigurations.bin");
+    fs::write(&rules, "broken rules").unwrap();
     assert!(matches!(
         project.check_query_document(&document, revision(&document)),
         Err(QueryDocumentError::ReadOnly)
     ));
+    fs::remove_file(rules).unwrap();
+    project
+        .check_query_document(&document, revision(&document))
+        .unwrap();
     #[cfg(unix)]
     {
-        fs::write(
-            directory.0.join("src/Ext/ParentConfigurations.bin"),
-            "{6,0,0,0,0,0}",
-        )
-        .unwrap();
         let target = directory.0.join("src").join(&path);
         let owned = directory.0.join("owned.bsl");
         fs::rename(&target, &owned).unwrap();

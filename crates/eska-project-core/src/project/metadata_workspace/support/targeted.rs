@@ -140,7 +140,7 @@ impl ProjectSession {
     }
 
     /// Display and file checks share content-verified supplier rules and the same alias boundary.
-    fn source_support_rules(&mut self) -> (Option<Arc<Support>>, Vec<String>) {
+    pub(super) fn source_support_rules(&mut self) -> (Option<Arc<Support>>, Vec<String>) {
         let source = self.project().source().to_path_buf();
         let kind = self.project().configuration().project_type();
         if unaliased(&source, Path::new("Ext/ParentConfigurations.bin")) {
@@ -257,7 +257,7 @@ impl ProjectSession {
                 .map(|object| object.object_id.clone())
                 .collect(),
         )]);
-        let file = file_policies(files, &objects, &BTreeSet::new(), true).pop()?;
+        let file = file_policies(files, &objects, &BTreeSet::new()).pop()?;
         Some((objects, file))
     }
 
