@@ -10,7 +10,14 @@
   профиль и состав приложения. В `prod` действует проверка исходников Git.
   Этот режим использует Explorer. [Проектный режим и приёмка](1c-http-debug.md)
 
-Соберите бинарник через `cargo build --release -p eska-debug` и скопируйте
+Готовый адаптер входит в полный комплект ESKA и доступен отдельно в
+[GitHub Releases](https://github.com/odineska/eska/releases/latest):
+`eska-debug-<version>-<target>.zip`. В архиве находятся бинарник, манифест
+и лицензии. Установить только адаптер можно через `components.py install
+--component eska-debug --manifest <release.json> --root <directory>` либо
+`cargo install --locked eska-debug`. Для работы адаптера .NET не нужен.
+
+Для сборки из исходников используйте `cargo build --release -p eska-debug` и скопируйте
 `target/release/eska-debug` (Windows — `eska-debug.exe`) в нужный каталог.
 Настройте клиент DAP на запуск `eska-debug standalone` с транспортом
 stdio. В `source.path` используются пути файлов. Нумерация строк и столбцов

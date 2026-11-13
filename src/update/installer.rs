@@ -28,6 +28,7 @@ pub(super) fn detect(
             "eska-build",
             "eska-vcs",
             "eska-fmt",
+            "eska-debug",
         ] {
             match std::fs::symlink_metadata(root.join("components").join(format!("{tool}.json"))) {
                 Ok(_) => return Ok(None),

@@ -113,12 +113,24 @@ enum SourceChoice {
 
 fn main() -> ExitCode {
     let args: Vec<_> = std::env::args_os().collect();
+    if let Some(code) = eska_presentation::components::tool_contract(
+        &args,
+        "eska-debug",
+        env!("CARGO_PKG_VERSION"),
+        None,
+    ) {
+        return code;
+    }
     let language = resolve_locale_from_environment(bootstrap_lang(&args).as_deref());
     let Ok(localizer) = Localizer::try_new(language) else {
         return ExitCode::FAILURE;
     };
     let parsed = localized(&localizer).get_matches_from(args);
     let cli = Cli::from_arg_matches(&parsed).unwrap_or_else(|error| error.exit());
+    if let Err(code) = eska_presentation::components::verify_installation("eska-debug", &localizer)
+    {
+        return code;
+    }
     if let Operation::Infobases(args) = cli.command {
         let Some(entries) = infobases::list(args.list) else {
             eprintln!("{}", localizer.text("debug-infobases-unavailable"));

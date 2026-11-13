@@ -2,9 +2,14 @@
 name = "eska-debug"
 version.workspace = true
 edition = "2024"
-publish = false
+publish = true
 license = "Apache-2.0"
 description = "Native DAP and HTTP debugging for 1C Designer XML projects"
+repository = "https://github.com/1c-tooling/eska"
+readme = "../../README.md"
+keywords = ["1c-enterprise", "debugger", "dap", "bsl"]
+categories = ["development-tools::debugging", "command-line-utilities"]
+authors = ["Aleksey Kalsin <aleksey@kalsin.pro>"]
 
 [lints]
 workspace = true

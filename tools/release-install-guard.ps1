@@ -1,4 +1,4 @@
-# Retire Explorer receipts only after all six commands and the full receipt are
+# Retire Explorer receipts only after all seven commands and the full receipt are
 # published. A handled failure restores the previous binaries and receipts.
 $script:EskaFullInstall = $null
 
@@ -54,7 +54,7 @@ function Start-EskaFullInstall($BinDirectory, $Binaries) {
   if ((Split-Path -Path $bin -Leaf) -ne "bin") { return }
   $root = Split-Path -Path $bin -Parent
   $components = Join-Path $root "components"
-  $names = @("eska", "eska-project", "eska-check", "eska-build", "eska-vcs", "eska-fmt")
+  $names = @("eska", "eska-project", "eska-check", "eska-build", "eska-vcs", "eska-fmt", "eska-debug")
   $receipts = @($names | ForEach-Object { Join-Path $components "$_.json" } | Where-Object { Get-EskaItem $_ })
   if ($receipts.Count -eq 0) { return }
   if (-not $install_updater) {

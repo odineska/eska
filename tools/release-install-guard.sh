@@ -61,7 +61,7 @@ eska_prepare_full_install() {
     local _eska_root="${_eska_bin%/*}"
     local _eska_name
     local _eska_components=""
-    for _eska_name in eska eska-project eska-check eska-build eska-vcs eska-fmt; do
+    for _eska_name in eska eska-project eska-check eska-build eska-vcs eska-fmt eska-debug; do
         if [ -e "$_eska_root/components/$_eska_name.json" ] || [ -L "$_eska_root/components/$_eska_name.json" ]; then
             _eska_components="$_eska_components $_eska_name"
         fi
@@ -103,7 +103,7 @@ eska_prepare_full_install() {
     done
     # Another component may have finished installing before this claim was acquired.
     ESKA_FULL_COMPONENTS=""
-    for _eska_name in eska eska-project eska-check eska-build eska-vcs eska-fmt; do
+    for _eska_name in eska eska-project eska-check eska-build eska-vcs eska-fmt eska-debug; do
         if [ -e "$_eska_root/components/$_eska_name.json" ] || [ -L "$_eska_root/components/$_eska_name.json" ]; then
             ESKA_FULL_COMPONENTS="$ESKA_FULL_COMPONENTS $_eska_name"
         fi

@@ -29,6 +29,32 @@ def frames(values):
     return bytes(output)
 
 
+def debugger_session(binary, locale, stand, environment):
+    """The installed standalone adapter negotiates DAP without another ESKA tool or .NET."""
+    requests = [
+        {"seq": 1, "type": "request", "command": "initialize", "arguments": {"adapterID": "eska-debug"}},
+        {"seq": 2, "type": "request", "command": "disconnect", "arguments": {}},
+    ]
+    result = subprocess.run([binary, "--lang", locale, "standalone"], cwd=stand,
+                            env={**environment, "PATH": ""}, input=frames(requests),
+                            capture_output=True, timeout=15)
+    assert result.returncode == 0 and not result.stderr, result
+    remaining = result.stdout
+    responses = {}
+    while remaining:
+        header, remaining = remaining.split(b"\r\n\r\n", 1)
+        assert header.startswith(b"Content-Length: ")
+        size = int(header.split(b":", 1)[1])
+        assert 0 < size <= 1024 * 1024 and len(remaining) >= size
+        message = json.loads(remaining[:size])
+        remaining = remaining[size:]
+        if message["type"] == "response":
+            assert message["success"], message
+            responses[message["request_seq"]] = message
+    assert set(responses) == {1, 2}, responses
+    assert responses[1]["body"]["supportsConfigurationDoneRequest"] is True
+
+
 def metadata_session(binary, locale, stand, environment, evidence):
     """Wait for each protocol acknowledgement before sending shutdown and exit."""
     label = "project-serve-" + locale
@@ -87,7 +113,7 @@ def matrix(repo, bundle, stand, analyzer):
     if analyzer is None or not analyzer.is_file():
         raise ValueError("complete package acceptance requires the real analyzer executable")
     release = json.loads((bundle / "release.json").read_bytes())
-    selected = ("eska-project", "eska-check", "eska-build", "eska-vcs", "eska", "eska-fmt")
+    selected = ("eska-project", "eska-check", "eska-build", "eska-vcs", "eska", "eska-fmt", "eska-debug")
     assert set(release["components"]) == set(selected)
     checksums = {}
     for line in (bundle / "SHA256SUMS").read_text().splitlines():
