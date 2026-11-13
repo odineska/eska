@@ -329,10 +329,13 @@ impl Server {
             .map(|_| ())
     }
 
-    pub fn breakpoints<'a>(
+    pub fn breakpoints<'a, Lines>(
         &self,
-        modules: impl IntoIterator<Item = (&'a Module, &'a [Breakpoint])>,
-    ) -> io::Result<()> {
+        modules: impl IntoIterator<Item = (&'a Module, Lines)>,
+    ) -> io::Result<()>
+    where
+        Lines: IntoIterator<Item = &'a Breakpoint>,
+    {
         let mut body = String::from("<bpWorkspace>");
         for (module, lines) in modules {
             let _ = write!(body, "<moduleBPInfo xmlns=\"{BREAKPOINTS}\">");

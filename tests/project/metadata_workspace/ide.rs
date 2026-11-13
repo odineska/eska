@@ -189,8 +189,10 @@ fn targeted_support_protocol_is_bounded_and_locale_independent() {
             ),
         );
         assert_eq!(result["files"].as_array().unwrap().len(), 1);
-        assert_eq!(result["files"][0]["readOnly"], true);
-        assert_eq!(result["files"][0]["unknown"], true);
+        assert_eq!(result["files"][0]["readOnly"], false);
+        assert_eq!(result["files"][0]["unknown"], false);
+        assert_eq!(result["objects"][0]["state"], "unrestricted");
+        assert_eq!(result["diagnostics"], json!([]));
         let stable = json!({"files":result["files"],"objects":result["objects"],"diagnostics":result["diagnostics"]});
         if let Some(expected) = &expected {
             assert_eq!(&stable, expected);

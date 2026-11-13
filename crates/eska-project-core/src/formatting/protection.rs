@@ -99,7 +99,7 @@ impl Access {
 /// Resolve every physical owner, including mixed XML, from the current supplier rules.
 ///
 /// # Errors
-/// Missing, malformed, locked or unresolved support never grants formatting permission.
+/// Malformed, locked or unresolved support never grants formatting permission.
 pub fn support_access(project: &mut ProjectSession, path: &Path) -> Result<Access, Error> {
     let snapshot = project
         .support_files(&[path.to_owned()])

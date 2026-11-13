@@ -30,17 +30,18 @@ impl RuleCache {
         unchanged
     }
 
-    /// Extension-owned source does not inherit its base's supplier rules; an explicit rules file still takes precedence.
+    /// A confirmed absent rules file has the same effect as an empty supplier list.
     pub(super) fn read(
         &mut self,
         root: &Path,
         kind: ProjectType,
     ) -> (Option<Arc<Support>>, Vec<String>) {
-        let extension_without_rules = kind == ProjectType::Extension
-            && std::fs::symlink_metadata(root.join("Ext/ParentConfigurations.bin"))
-                .is_err_and(|error| error.kind() == std::io::ErrorKind::NotFound);
-        if matches!(kind, ProjectType::Processing | ProjectType::Report) || extension_without_rules
+        if matches!(kind, ProjectType::Processing | ProjectType::Report)
+            || std::fs::symlink_metadata(root.join("Ext/ParentConfigurations.bin"))
+                .is_err_and(|error| error.kind() == std::io::ErrorKind::NotFound)
         {
+            self.initialized = true;
+            self.readable = false;
             return (
                 Some(Arc::new(Support {
                     suppliers: Vec::new(),

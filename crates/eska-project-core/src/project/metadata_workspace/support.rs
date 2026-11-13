@@ -75,7 +75,6 @@ pub(super) struct SupportCache {
     policy: Option<std::sync::Arc<Support>>,
     diagnostics: Vec<String>,
     pages: Vec<std::sync::Arc<SupportSnapshot>>,
-    restrict_unknown: bool,
     fingerprint: Option<[u8; 32]>,
 }
 
@@ -112,19 +111,12 @@ impl ProjectSession {
 
     /// Return a cached page or perform one bounded build step in the current generation.
     pub fn support_page(&mut self, offset: usize) -> Option<std::sync::Arc<SupportSnapshot>> {
-        let root_uuid = self
-            .objects
-            .get(self.source.root().id())
-            .and_then(|object| object.uuid.clone());
         let mut cache = self
             .support_cache
             .take()
             .filter(|cache| cache.generation == self.generation)
             .unwrap_or_else(|| {
-                let project = self.source.project();
-                let (policy, diagnostics) = self
-                    .support_rules
-                    .read(project.source(), project.configuration().project_type());
+                let (policy, diagnostics) = self.source_support_rules();
                 let fingerprint = self.support_fingerprint();
                 let pages = fingerprint.and_then(|hash| self.load_support_pages(hash));
                 let pending = if pages.is_some() {
@@ -136,9 +128,6 @@ impl ProjectSession {
                     generation: self.generation,
                     pending,
                     visited: BTreeSet::new(),
-                    restrict_unknown: policy.is_none()
-                        && (self.support_seen.is_some() && self.support_seen == root_uuid
-                            || diagnostics.iter().any(|value| !value.contains("NotFound"))),
                     policy,
                     diagnostics,
                     pages: pages.unwrap_or_default(),
@@ -153,13 +142,6 @@ impl ProjectSession {
             {
                 self.save_support_pages(hash, &cache.pages);
             }
-        }
-        if cache
-            .policy
-            .as_ref()
-            .is_some_and(|policy| !policy.suppliers.is_empty())
-        {
-            self.support_seen = root_uuid;
         }
         let result = cache.pages.get(offset).map(std::sync::Arc::clone);
         self.support_cache = Some(cache);
@@ -299,12 +281,7 @@ impl ProjectSession {
                 }
             }
         }
-        snapshot.files = file_policies(
-            files,
-            &snapshot.objects,
-            &unreadable,
-            cache.restrict_unknown,
-        );
+        snapshot.files = file_policies(files, &snapshot.objects, &unreadable);
         snapshot.next_offset = (!cache.pending.is_empty()).then_some(cache.pages.len() + 1);
         snapshot
     }
@@ -315,7 +292,6 @@ fn file_policies(
     files: BTreeMap<PathBuf, Vec<ObjectId>>,
     objects: &[ObjectSupport],
     unreadable: &BTreeSet<PathBuf>,
-    restrict_unknown: bool,
 ) -> Vec<FileSupport> {
     let policies: BTreeMap<_, _> = objects
         .iter()
@@ -350,7 +326,7 @@ fn file_policies(
                 } else {
                     FileReason::NoSupportRestriction
                 },
-                read_only: locked || unreadable.contains(&path) || (unknown && restrict_unknown),
+                read_only: locked || unknown,
                 path,
                 objects,
                 mixed,

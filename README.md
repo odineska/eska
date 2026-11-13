@@ -32,6 +32,62 @@ ESKA объединяет работу с выгрузкой Конфигура�
 ещё продолжается. BSL и команды формы не исполняются, графическое редактирование
 не входит в beta. [Описание и ограничения](https://github.com/odineska/eska-vscode-explorer/blob/main/docs/form-preview.md).
 
+## Запуск и отладка 1С
+
+`eska-debug` — собственный адаптер на Rust: DAP для редактора и HTTP для сервера
+отладки 1С (`dbgs`). .NET не требуется. Доступны:
+
+- запуск клиента с отладкой и подключение к работающим предметам;
+- точки останова, условия, счётчики срабатываний, логпоинты и остановка по ошибке;
+- шаги, стек вызовов, переменные, Watch, hover и свои выражения в Debug Console;
+- раскрытие вложенных значений и изменение доступных переменных через **Set Value**;
+- отладка конфигурации, подключённых расширений и внешних обработок EPF;
+- отдельные профили `test` и `prod`, локальные базы, Distrobox и доступный по сети/VPN `dbgs`.
+
+Настройки конкретного проекта хранятся в `.eska/settings_local.toml` вне Git.
+Обновление базы средствами ESKA доступно только для `test`, включая поддержанные
+частичные изменения и сценарий «обновить и запустить с отладкой».
+Для `prod` доступны запуск с отладкой и подключение с проверкой исходников Git.
+Нативный TCP-режим отладки 1С не поддерживается.
+
+[Настройка и первый запуск](https://github.com/odineska/eska/blob/main/docs/run-debug.md) ·
+[Возможности и ограничения HTTP-отладки](https://github.com/odineska/eska/blob/main/docs/1c-http-debug.md) ·
+[Отдельный бинарник и DAP без ESKA](https://github.com/odineska/eska/blob/main/docs/eska-debug-standalone.md)
+
+## Explorer в работе
+
+Четыре коротких скринкаста без звука — от настройки проводника до просмотра формы.
+Записано на Linux: VS Code 1.144, Explorer 0.1.19 и ESKA 0.30.0.
+Нажмите на GIF, чтобы открыть видео с управлением воспроизведением.
+
+### 1. Настроить проводник
+
+Перенесите ESKA: 1C Explorer наверх, сверните остальные группы и раскройте дерево проекта.
+
+[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-setup.gif)](https://odineska.github.io/eska/docs/#demo-setup)
+
+### 2. Найти объект и открыть модуль
+
+Документ → реквизиты → табличная часть → модуль объекта BSL.
+
+[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-tree.gif)](https://odineska.github.io/eska/docs/#demo-tree)
+
+### 3. Посмотреть свойства
+
+Откройте свойства документа, найдите настройки номера и перейдите к исходному XML.
+
+[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-properties.gif)](https://odineska.github.io/eska/docs/#demo-properties)
+
+### 4. Открыть форму
+
+Выберите поле на форме, раскройте данные и переключите страницы «Товары» и «Дополнительно».
+
+[![Открыть форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-forms.gif)](https://odineska.github.io/eska/docs/#demo-forms)
+
+Для дерева, свойств и статического просмотра форм платформа 1С не нужна.
+**Текущий этап работы с формами — только просмотр; редактирование форм — в планах.**
+Просмотрщик не исполняет BSL и команды формы.
+
 ## Компоненты
 
 | Программа | Назначение |

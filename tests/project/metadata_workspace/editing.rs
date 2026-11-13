@@ -999,7 +999,7 @@ fn existing_values_edit_minimal_bytes_and_undo_exact_lexical_source_in_all_proje
 }
 
 #[test]
-fn external_changes_and_missing_support_rules_reject_writes_without_losing_source() {
+fn property_edit_checks_external_changes_and_current_support_rules() {
     let (directory, mut workspace, id, path) = editable_fixture("configuration");
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let editing = project.property_editing(&id).unwrap();
@@ -1027,7 +1027,8 @@ fn external_changes_and_missing_support_rules_reject_writes_without_losing_sourc
     ));
     assert_eq!(fs::read_to_string(&file).unwrap(), external);
     let editing = project.property_editing(&id).unwrap();
-    fs::remove_file(directory.0.join("src/Ext/ParentConfigurations.bin")).unwrap();
+    let rules = directory.0.join("src/Ext/ParentConfigurations.bin");
+    fs::write(&rules, "broken rules").unwrap();
     assert!(matches!(
         project.update_property(
             &id,
@@ -1041,6 +1042,22 @@ fn external_changes_and_missing_support_rules_reject_writes_without_losing_sourc
         Err(PropertyEditError::Edit(EditError::ReadOnly))
     ));
     assert_eq!(fs::read_to_string(&file).unwrap(), external);
+    fs::remove_file(rules).unwrap();
+    project
+        .update_property(
+            &id,
+            &editing.properties.snapshot,
+            None,
+            &field.path,
+            &PropertyChange::Text {
+                value: "mine".into(),
+            },
+        )
+        .unwrap();
+    assert_eq!(
+        fs::read_to_string(&file).unwrap(),
+        external.replace(">external<", ">mine<")
+    );
     assert!(!fs::read_dir(file.parent().unwrap()).unwrap().any(|entry| {
         entry
             .unwrap()

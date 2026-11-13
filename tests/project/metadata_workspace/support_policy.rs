@@ -518,9 +518,14 @@ fn identical_uuids_in_different_sessions_do_not_share_policy() {
         .support_page(0)
         .unwrap();
     assert!(locked.files.iter().all(|f| f.read_only));
-    assert!(missing.objects.iter().all(|o| o.state == State::Unknown));
-    assert!(missing.files.iter().all(|f| !f.read_only));
-    assert_ne!(missing.diagnostics, [] as [String; 0]);
+    assert!(
+        missing
+            .objects
+            .iter()
+            .all(|o| o.state == State::Unrestricted)
+    );
+    assert!(missing.files.iter().all(|f| !f.read_only && !f.unknown));
+    assert!(missing.diagnostics.is_empty(), "{:?}", missing.diagnostics);
 }
 
 #[test]
@@ -722,9 +727,9 @@ fn support_snapshot_survives_restart_and_validates_rules_xml_and_file_inventory(
     );
 }
 
-/// An extension edits its own source independently of its base configuration's supplier support.
+/// Both configurations and extensions are editable after confirmed absence of supplier rules.
 #[test]
-fn extension_without_supplier_file_keeps_native_source_writable_but_honours_explicit_rules() {
+fn missing_supplier_file_keeps_native_sources_writable_but_present_rules_take_precedence() {
     use crate::backend::project::metadata_workspace::SourceAccessRequest;
     let directory = TestDir::new();
     fixture(&directory.0);
@@ -734,13 +739,38 @@ fn extension_without_supplier_file_keeps_native_source_writable_but_honours_expl
         user_read_only: false,
     };
     let mut configuration = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
-    let protection = configuration
+    let project = configuration
         .project_mut(&ProjectScope::Standalone)
-        .unwrap()
-        .source_protection(std::slice::from_ref(&request), true)
         .unwrap();
-    assert!(protection[0].support.unknown);
-    assert!(!protection[0].writable());
+    let policy = directory.0.join("src/Ext/ParentConfigurations.bin");
+    let source = std::slice::from_ref(&request);
+    assert!(project.source_protection(source, true).unwrap()[0].writable());
+    fs::write(&policy, rules(0, 0)).unwrap();
+    project
+        .changed_paths(&["Ext/ParentConfigurations.bin".into()])
+        .unwrap();
+    assert!(
+        project
+            .support_page(0)
+            .unwrap()
+            .files
+            .iter()
+            .all(|file| file.read_only)
+    );
+    assert!(!project.source_protection(source, true).unwrap()[0].writable());
+    fs::remove_file(&policy).unwrap();
+    project
+        .changed_paths(&["Ext/ParentConfigurations.bin".into()])
+        .unwrap();
+    assert!(
+        project
+            .support_page(0)
+            .unwrap()
+            .files
+            .iter()
+            .all(|file| !file.read_only && !file.unknown)
+    );
+    assert!(project.source_protection(source, true).unwrap()[0].writable());
     fs::write(
         directory.0.join("eska.toml"),
         "[project]\ntype='extension'\n",
@@ -763,7 +793,6 @@ fn extension_without_supplier_file_keeps_native_source_writable_but_honours_expl
         ..request.clone()
     };
     assert!(!project.source_protection(&[user], true).unwrap()[0].writable());
-    let policy = directory.0.join("src/Ext/ParentConfigurations.bin");
     fs::write(&policy, rules(0, 0)).unwrap();
     assert!(
         !project
