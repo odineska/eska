@@ -517,6 +517,11 @@ VS Code отправил один DAP `evaluate` с контекстом `repl` 
 в Debug Console через 7,24–7,27 с от разрыва. Клиент 1С остался запущен.
 Коммит Explorer `bf65f7c`. Повторная попытка при занятой регистрации проверена
 отдельным Rust-сценарием `native_transport_loss_reports_lost_and_busy_connections`.
+В повторном прогоне en/ru на 1С 8.3.27.2342 ретранслятор восстановил связь
+при запросе `detachDebugUI` прежнего адаптера. Новый сеанс Explorer подключился
+к тому же UUID предмета, остановился на строке 7 `attach-standalone.bsl`
+и вернул `42` через Evaluate. Внешний клиент пережил оба сеанса.
+Коммит Explorer `c5b568c`.
 
 В исходнике OnecDebugAdapter на `1d2889c6` шаг передаёт в `dbgs` предмет
 и действие. Значение `singleThread` влияет на `allThreadsContinued` в ответе
