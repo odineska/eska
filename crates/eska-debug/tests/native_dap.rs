@@ -1,12 +1,14 @@
 //! Opt-in tests against a disposable 1C fixture prepared in the sibling playground.
 #[path = "support/debug_relay.rs"]
 mod debug_relay;
+#[path = "../../../tests/support/mod.rs"]
+mod support;
 
 use std::{
     collections::BTreeMap,
     env, fs,
     io::{BufRead, BufReader, Write},
-    path::Path,
+    path::{Path, PathBuf},
     process::{Child, ChildStdin, Command, Stdio},
     sync::mpsc,
     thread,
@@ -1588,6 +1590,179 @@ fn native_dap_release_series() {
             "{name} n={} median_ms={median:.3} p95_ms={p95:.3}",
             values.len()
         );
+    }
+}
+
+#[test]
+#[ignore = "requires the owned 1C playground fixture with only a prod profile and a built eska-vcs"]
+fn native_prod_source_gate_before_live_launch() {
+    let project = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let project = Path::new(&project);
+    let vcs = fs::canonicalize(env::var_os("ESKA_VCS_BINARY").unwrap()).unwrap();
+    let fixture = support::TestDir::new();
+    let git = |directory: &Path, args: &[&str]| {
+        let mut command = Command::new("git");
+        for (key, _) in env::vars_os() {
+            if key.to_string_lossy().starts_with("GIT_") {
+                command.env_remove(key);
+            }
+        }
+        let output = command
+            .current_dir(directory)
+            .env("GIT_CONFIG_NOSYSTEM", "1")
+            .env("GIT_CONFIG_GLOBAL", fixture.0.join("absent-config"))
+            .env("GIT_AUTHOR_NAME", "Eska Test")
+            .env("GIT_AUTHOR_EMAIL", "eska@example.invalid")
+            .env("GIT_COMMITTER_NAME", "Eska Test")
+            .env("GIT_COMMITTER_EMAIL", "eska@example.invalid")
+            .args(["-c", "core.hooksPath=", "-c", "commit.gpgsign=false"])
+            .args(args)
+            .output()
+            .unwrap();
+        assert!(output.status.success(), "git {args:?}: {output:?}");
+    };
+    let (upstream, work) = prod_checkout(&fixture.0, project, &git);
+
+    verify_prod_source_gate(&upstream, &work, &vcs, &git);
+}
+
+fn prod_checkout(root: &Path, project: &Path, git: &impl Fn(&Path, &[&str])) -> (PathBuf, PathBuf) {
+    let upstream = root.join("сервер");
+    let work = root.join("проект");
+    copy_sources(&project.join("src"), &upstream.join("src"));
+    fs::write(
+        upstream.join("eska.toml"),
+        "[project]\ntype = 'configuration'\n[vcs.workflow]\npreset = 'git-flow'\n[vcs.workflow.policy]\nmain_branch = 'deployed'\nremote = 'ship'\n",
+    )
+    .unwrap();
+    git(&upstream, &["init", "-q", "-b", "deployed"]);
+    fs::write(upstream.join(".gitignore"), "/.eska/\n").unwrap();
+    git(&upstream, &["add", "."]);
+    git(&upstream, &["commit", "-qm", "initial"]);
+    git(
+        root,
+        &["clone", "-q", "--origin", "ship", "сервер", "проект"],
+    );
+    fs::create_dir(work.join(".eska")).unwrap();
+    let settings = fs::read_to_string(project.join(".eska/settings_local.toml")).unwrap();
+    assert!(settings.contains("[prod.infobase]") && !settings.contains("[test."));
+    fs::write(work.join(".eska/settings_local.toml"), settings).unwrap();
+    (upstream, work)
+}
+
+fn verify_prod_source_gate(
+    upstream: &Path,
+    work: &Path,
+    vcs: &Path,
+    git: &impl Fn(&Path, &[&str]),
+) {
+    let binary = |language| {
+        let mut command = Command::new(env!("CARGO_BIN_EXE_eska-debug"));
+        command
+            .current_dir(work)
+            .env("ESKA_VCS_BINARY", vcs)
+            .args(["--lang", language]);
+        command
+    };
+    let check = |language, args: &[&str]| {
+        let output = binary(language).arg("check").args(args).output().unwrap();
+        assert!(output.status.success(), "{output:?}");
+        assert!(output.stderr.is_empty(), "{output:?}");
+        let result: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(result["schema_version"], 1);
+        assert_eq!(result["kind"], "prod-source-check");
+        result["check"].clone()
+    };
+    let launch = |language, args: &[&str]| {
+        let mut command = binary(language);
+        command
+            .args(["dap", "--profile", "prod", "--mode", "launch"])
+            .args(args);
+        command
+    };
+    let reject = |language, args: &[&str], message| {
+        let output = launch(language, args).output().unwrap();
+        assert_eq!(output.status.code(), Some(1), "{output:?}");
+        assert!(output.stdout.is_empty(), "{output:?}");
+        assert!(
+            String::from_utf8_lossy(&output.stderr).contains(message),
+            "{output:?}"
+        );
+    };
+
+    let clean = check("en-US", &[]);
+    assert_eq!(clean["status"], "current");
+    assert_eq!(clean["main_branch"], "deployed");
+    assert_eq!(clean["remote"], "ship");
+    assert_eq!(clean, check("ru-RU", &[]));
+    let unsaved = check("ru-RU", &["--unsaved"]);
+    assert_eq!(unsaved["status"], "different");
+    assert_eq!(unsaved["unsaved"], true);
+    assert_eq!(unsaved["update"], Value::Null);
+    reject("ru-RU", &["--unsaved"], "Исходники prod различаются");
+
+    // Advance the selected remote without changing the BSL compiled into the fixture.
+    let revision = "deployed-revision.txt";
+    fs::write(upstream.join(revision), "2\n").unwrap();
+    git(upstream, &["add", revision]);
+    git(upstream, &["commit", "-qm", "advance deployment"]);
+    let behind = check("en-US", &[]);
+    assert_eq!(behind["status"], "different");
+    assert_eq!(behind["local_main_behind"], 1);
+    assert_eq!(behind["update"], "fast_forward");
+    reject("en-US", &[], "Production sources differ");
+    reject(
+        "ru-RU",
+        &["--unsaved", "--sources", "fast-forward"],
+        "Отладка не запущена",
+    );
+
+    let source = work.join("src/Ext/ManagedApplicationModule.bsl");
+    let original = fs::read_to_string(&source).unwrap();
+    fs::write(&source, format!("{original}\n// dirty\n")).unwrap();
+    let dirty = check("en-US", &[]);
+    assert_eq!(dirty["dirty"], true);
+    assert_eq!(dirty["update"], Value::Null);
+    reject(
+        "en-US",
+        &["--sources", "fast-forward"],
+        "Debugging did not start",
+    );
+    fs::write(&source, original).unwrap();
+    assert!(!work.join(revision).exists());
+
+    let mut dap = Dap::spawn(launch("en-US", &["--sources", "fast-forward"]));
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    assert_eq!(fs::read_to_string(work.join(revision)).unwrap(), "2\n");
+    dap.success("launch", json!({}));
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    dap.success("configurationDone", json!({}));
+    verify_stop(&mut dap, &source, 1);
+    dap.shutdown();
+    assert_eq!(check("ru-RU", &[])["status"], "current");
+
+    git(work, &["remote", "set-url", "ship", "../missing-remote"]);
+    let unavailable = check("en-US", &[]);
+    assert_eq!(unavailable["status"], "unverified");
+    assert_eq!(unavailable["reason"], "remote");
+    assert_eq!(unavailable["update"], Value::Null);
+    reject("en-US", &[], "could not be verified");
+}
+
+fn copy_sources(source: &Path, destination: &Path) {
+    fs::create_dir_all(destination).unwrap();
+    for entry in fs::read_dir(source).unwrap() {
+        let entry = entry.unwrap();
+        let path = destination.join(entry.file_name());
+        if entry.file_type().unwrap().is_dir() {
+            copy_sources(&entry.path(), &path);
+        } else {
+            fs::copy(entry.path(), path).unwrap();
+        }
     }
 }
 

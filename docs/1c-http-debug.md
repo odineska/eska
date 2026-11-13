@@ -204,7 +204,11 @@ ESKA_DEBUG_ROUNDS=8 ESKA_DEBUG_TIMINGS=1 cargo test --release -p eska-debug \
 
 Для серии с одним профилем `prod` назовите профиль `prod` в собственном демо и
 задайте `ESKA_NATIVE_PROFILE=prod`. Тест использует явное решение
-`--sources current`. В тесте Explorer `test/debug-http-host.cjs` стенд
+`--sources current`. Для проверки Git-защиты запустите
+`native_prod_source_gate_before_live_launch` из `--test native_dap`, указав
+`ESKA_VCS_BINARY` с путём к собранному `eska-vcs`. Тест сам создаёт локальный
+remote `ship` и рабочую копию с главной веткой `deployed`.
+В тесте Explorer `test/debug-http-host.cjs` стенд
 передаёт `ESKA_HOST_HTTP_FIXTURE` с путями `binary`, `settings` и `source`.
 Для проверки attach до запуска теста запустите отдельный клиент с
 `/DEBUG -http -attach /DEBUGGERURL <URL dbgs>`.
@@ -538,6 +542,12 @@ RSS и пик RSS в пяти сеансах составили 7488–7584 Ки
 В двух дополнительных сеансах с единственным профилем `prod` на временной
 базе прошли те же DAP-проверки, включая вычисления в двух кадрах. Выбор
 текущих исходников в тесте передан явно через `--sources current`.
+Сквозной тест `native_prod_source_gate_before_live_launch` проверил одинаковый
+JSON на en/ru и отказ запуска до первого DAP-сообщения при отставании ветки,
+несохранённых правках и недоступном remote. Автоматическое обновление при
+грязной рабочей копии или несохранённых правках отклонено. После явного
+`--sources fast-forward` адаптер обновил рабочую копию и прошёл точки, шаги
+и Evaluate в двух кадрах на временной базе с единственным профилем `prod`.
 
 Релизный `eska-debug` занимает 4 566 032 байта. VSIX занимает 4 567 600 байт,
 установленное содержимое 10 008 365 байт, JS 3 096 219 байт. В бюджеты
