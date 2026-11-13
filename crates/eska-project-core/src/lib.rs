@@ -3,6 +3,7 @@
 //! This crate contains no Git repository, platform runner or language-server runtime.
 
 pub mod doctor;
+mod file_lock;
 pub mod formatting;
 
 pub mod application;
