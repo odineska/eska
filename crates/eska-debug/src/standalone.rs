@@ -10,7 +10,7 @@ use serde::Deserialize;
 use serde_json::Value;
 
 use crate::{
-    Mode,
+    Mode, infobases,
     processing::ExternalProcessing,
     session::{AttachSelection, Config},
     source::{SourceError, Sources},
@@ -30,6 +30,7 @@ struct Arguments {
     target_id: Option<String>,
     auto_attach_types: Option<Vec<String>>,
     infobase: Option<Infobase>,
+    registered_infobase: Option<infobases::RegisteredInfobase>,
     runner: Option<Runner>,
     authentication: Option<Authentication>,
     external_processing: Option<ExternalProcessing>,
@@ -62,9 +63,19 @@ impl Arguments {
 
 pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> {
     const INVALID: &str = "debug-standalone-arguments";
-    let args: Arguments = Arguments::deserialize(arguments).map_err(|_| INVALID)?;
+    let mut args: Arguments = Arguments::deserialize(arguments).map_err(|_| INVALID)?;
     if !args.valid(mode) {
         return Err(INVALID);
+    }
+    if let Some(registered) = args.registered_infobase.take() {
+        if mode != Mode::Launch || args.infobase.is_some() || args.target_id.is_some() {
+            return Err(INVALID);
+        }
+        args.infobase = Some(
+            registered
+                .resolve()
+                .ok_or("debug-registered-infobase-unavailable")?,
+        );
     }
     let alias = args.infobase_alias.unwrap_or_else(|| match &args.infobase {
         Some(Infobase::Cluster { name, .. } | Infobase::Standalone { name, .. }) => name.clone(),

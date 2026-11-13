@@ -3,6 +3,7 @@
 mod dap;
 mod dbgs;
 mod http;
+mod infobases;
 #[cfg(test)]
 mod live;
 mod processing;

@@ -37,7 +37,8 @@
           }
         },
         "launch": {
-          "required": ["infobase", "runner"],
+          "required": ["runner"],
+          "oneOf": [{ "required": ["infobase"] }, { "required": ["registeredInfobase"] }],
           "properties": {
             "sourceRoot": { "type": "string" },
             "externalProcessing": {
@@ -52,6 +53,15 @@
             "debugServerUrl": { "type": "string" },
             "infobaseAlias": { "type": "string" },
             "infobase": { "type": "object" },
+            "registeredInfobase": {
+              "type": "object",
+              "required": ["name"],
+              "additionalProperties": false,
+              "properties": {
+                "name": { "type": "string" },
+                "list": { "type": "string" }
+              }
+            },
             "managedDebugServer": { "type": "boolean" },
             "debugServerPort": { "type": "integer", "minimum": 1, "maximum": 65535 },
             "runner": { "type": "object" },

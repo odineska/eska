@@ -1198,6 +1198,7 @@ debug-project-unavailable = Could not resolve a Designer XML project for debuggi
 debug-standalone-about = Start a standalone DAP session without an ESKA project
 debug-standalone-arguments = Invalid standalone DAP parameters. Check the source roots, HTTP debugger address and launch or attach settings.
 debug-standalone-source = Could not read the specified Designer XML configuration or extension sources.
+debug-registered-infobase-unavailable = Could not read a unique file or cluster infobase with that name from the 1C launcher list.
 debug-epf-manifest = Could not prepare the EPF. Check the processing file and its adjacent build manifest.
 debug-epf-artifact-mismatch = The EPF file does not match the build manifest checksum.
 debug-epf-source-mismatch = The Designer XML sources differ from the snapshot used to build the EPF.
