@@ -232,7 +232,10 @@ impl LocalSettings {
 }
 
 impl Profile {
-    fn validate(&self, name: ProfileName) -> Result<(), SettingsError> {
+    /// Validate the declaration independently of its source or runtime availability.
+    /// # Errors
+    /// Returns the selected profile and the first invalid field.
+    pub fn validate(&self, name: ProfileName) -> Result<(), SettingsError> {
         let require = |condition: bool, field| {
             condition.then_some(()).ok_or(SettingsError::InvalidField {
                 profile: name,

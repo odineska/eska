@@ -5,6 +5,8 @@ mod support;
 
 use std::{
     fs,
+    io::Write,
+    net::TcpListener,
     os::unix::fs::PermissionsExt,
     path::{Path, PathBuf},
     process::{Command, Output, Stdio},
@@ -12,7 +14,7 @@ use std::{
     time::{Duration, Instant},
 };
 
-use serde_json::Value;
+use serde_json::{Value, json};
 use support::TestDir;
 
 fn apply(root: &Path, lang: &str, args: &[&str]) -> (Output, Value) {
@@ -94,6 +96,103 @@ fn initialize(root: &Path) {
             .status
             .success()
     );
+}
+
+fn probe(root: &Path, language: &str, input: Option<&[u8]>) -> (Output, Value) {
+    let mut command = Command::new(env!("CARGO_BIN_EXE_eska-build"));
+    command
+        .current_dir(root)
+        .args([
+            "--lang",
+            language,
+            "probe",
+            "--profile",
+            "test",
+            "--format",
+            "json",
+        ])
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
+    if input.is_some() {
+        command.arg("--stdin").stdin(Stdio::piped());
+    }
+    let mut child = command.spawn().unwrap();
+    if let Some(input) = input {
+        child.stdin.take().unwrap().write_all(input).unwrap();
+    }
+    let output = child.wait_with_output().unwrap();
+    let value = serde_json::from_slice(&output.stdout).unwrap();
+    (output, value)
+}
+
+#[test]
+fn probe_checks_the_submitted_profile_without_loading_or_writing_saved_settings() {
+    let root = TestDir::new();
+    let root = &root.0;
+    prepare(root);
+    let client = root.join("1cv8c");
+    fs::write(&client, "#!/bin/sh\nexit 99\n").unwrap();
+    fs::set_permissions(&client, fs::Permissions::from_mode(0o700)).unwrap();
+    let file = root.join(".eska/settings_local.toml");
+    let saved = fs::read(&file).unwrap();
+    let (output, ready) = probe(root, "en-US", None);
+    assert!(output.status.success());
+    assert_eq!(
+        ready,
+        json!({"schema_version":1,"kind":"runtime_probe","status":"ready"})
+    );
+    assert_eq!(output.stderr, [] as [u8; 0]);
+
+    // A draft can repair an invalid saved profile and be checked before it is written.
+    let invalid_file = b"invalid saved TOML";
+    fs::write(&file, invalid_file).unwrap();
+    assert_eq!(
+        probe(root, "en-US", None).1["error"]["code"],
+        "invalid_settings"
+    );
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let mut draft = json!({
+        "infobase":{"kind":"file","path":"test-base"},
+        "runner":{"kind":"local","ibcmd":root.join("ibcmd"),"version":"8.3.27.2342"},
+        "debug":{"url":format!("http://{}", listener.local_addr().unwrap())},
+        "authentication":{"user":"Test","password_env":"ESKA_TEST_PROBE_MISSING_SECRET"},
+    });
+    for language in ["ru-RU", "en-US"] {
+        let (output, result) = probe(root, language, Some(draft.to_string().as_bytes()));
+        assert!(output.status.success(), "{result}");
+        assert_eq!(result, ready);
+        assert_eq!(output.stderr, [] as [u8; 0]);
+    }
+    draft["infobase"]["path"] = json!("not-the-saved-base");
+    let (output, unavailable) = probe(root, "en-US", Some(draft.to_string().as_bytes()));
+    assert_eq!(output.status.code(), Some(1));
+    assert_eq!(unavailable["error"]["code"], "infobase_unavailable");
+
+    draft["debug"]["url"] = json!("https://example.invalid");
+    let draft = draft.to_string();
+    let (english, error) = probe(root, "en-US", Some(draft.as_bytes()));
+    let (russian, translated) = probe(root, "ru-RU", Some(draft.as_bytes()));
+    assert_eq!(english.status.code(), Some(1));
+    assert_eq!(russian.status.code(), Some(1));
+    assert_eq!(error, translated);
+    assert_eq!(
+        error["error"],
+        json!({"code":"invalid_field","data":{"profile":"test","field":"debug.url"}})
+    );
+    assert!(String::from_utf8_lossy(&english.stderr).contains("invalid value"));
+    assert!(String::from_utf8_lossy(&russian.stderr).contains("недопустимое значение"));
+    assert!(!String::from_utf8_lossy(&english.stderr).contains("example.invalid"));
+    assert_eq!(
+        probe(root, "en-US", Some(b"{}")).1["error"]["code"],
+        "invalid_settings"
+    );
+    assert_eq!(
+        probe(root, "en-US", Some(&vec![b' '; 128 * 1024 + 1])).1["error"]["code"],
+        "settings_too_large"
+    );
+    assert_eq!(fs::read(&file).unwrap(), invalid_file);
+    fs::write(&file, saved).unwrap();
+    assert_eq!(probe(root, "en-US", None).1, ready);
 }
 
 #[test]

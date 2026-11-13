@@ -1,4 +1,9 @@
-use std::{collections::BTreeSet, path::Path, process::ExitCode};
+use std::{
+    collections::BTreeSet,
+    io::{self, Read as _},
+    path::Path,
+    process::ExitCode,
+};
 
 use eska_build_runtime::runtime::apply::{
     self, ApplyError, Change, Mode, ObjectKind, ObjectOperation, Plan, Review, ReviewReason, Stage,
@@ -9,32 +14,53 @@ use eska_build_runtime::runtime::apply::{
 use eska_build_runtime::runtime::{self, RuntimeError};
 use eska_presentation::{
     arguments::build::runtime::{
-        ApplyArgs, InstallExtensionArgs, OutputFormat, ProfileArg, RemoveExtensionArgs, RunArgs,
+        ApplyArgs, InstallExtensionArgs, OutputFormat, ProbeArgs, ProfileArg, RemoveExtensionArgs,
+        RunArgs,
     },
     diagnostics,
     localization::{LocalizationValue, Localizer},
 };
 use eska_project_core::project::{
     Project, discovery,
-    local_settings::{ProfileName, SettingsError},
+    local_settings::{Profile, ProfileName, SettingsError},
 };
 use serde_json::json;
 
-pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer, inspect: bool) -> ExitCode {
-    let kind = if inspect { "runtime_probe" } else { "run" };
-    if inspect && args.expected_infobase.is_some() {
+pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer) -> ExitCode {
+    execute(args, start, localizer, Operation::Run)
+}
+
+pub fn probe(args: &ProbeArgs, start: &Path, localizer: &Localizer) -> ExitCode {
+    let operation = if args.stdin {
+        Operation::ProbeDraft
+    } else {
+        Operation::ProbeSaved
+    };
+    execute(&args.common, start, localizer, operation)
+}
+
+#[derive(Clone, Copy, Eq, PartialEq)]
+enum Operation {
+    Run,
+    ProbeSaved,
+    ProbeDraft,
+}
+
+fn execute(args: &RunArgs, start: &Path, localizer: &Localizer, operation: Operation) -> ExitCode {
+    let (kind, status, success) = match operation {
+        Operation::Run => ("run", "finished", "runtime-client-exited"),
+        Operation::ProbeSaved => ("runtime_probe", "ready", "runtime-probe-ready"),
+        Operation::ProbeDraft => ("runtime_probe", "ready", "runtime-probe-draft-ready"),
+    };
+    let forbidden = match operation {
+        Operation::Run => matches!(args.profile, ProfileArg::Prod),
+        _ => args.expected_infobase.is_some(),
+    };
+    if forbidden {
         return failure(
             args,
             kind,
-            "forbidden_action",
-            &localizer.text("project-settings-forbidden"),
-        );
-    }
-    if !inspect && matches!(args.profile, ProfileArg::Prod) {
-        return failure(
-            args,
-            kind,
-            "forbidden_action",
+            &json!({"code":"forbidden_action"}),
             &localizer.text("project-settings-forbidden"),
         );
     }
@@ -44,33 +70,26 @@ pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer, inspect: bool) -
             return failure(
                 args,
                 kind,
-                "project_discovery",
+                &json!({"code":"project_discovery"}),
                 &diagnostics::present_project_error(&error, localizer),
             );
         }
     };
-    let result = if inspect {
-        let profile = match args.profile {
-            ProfileArg::Test => ProfileName::Test,
-            ProfileArg::Prod => ProfileName::Prod,
-        };
-        runtime::inspect(&project, profile)
-    } else {
-        runtime::run(
-            &project,
-            ProfileName::Test,
-            args.expected_infobase.as_deref(),
-        )
+    let (profile, profile_id) = match args.profile {
+        ProfileArg::Test => (ProfileName::Test, "test"),
+        ProfileArg::Prod => (ProfileName::Prod, "prod"),
+    };
+    let result = match operation {
+        Operation::Run => runtime::run(&project, profile, args.expected_infobase.as_deref()),
+        Operation::ProbeSaved => runtime::inspect(&project, profile),
+        Operation::ProbeDraft => read_probe_profile()
+            .map_err(RuntimeError::Settings)
+            .and_then(|draft| runtime::inspect_draft(&project, profile, &draft)),
     };
     match result {
         Ok(()) => {
-            let (status, message) = if inspect {
-                ("ready", "runtime-probe-ready")
-            } else {
-                ("finished", "runtime-client-exited")
-            };
             match args.format {
-                OutputFormat::Human => println!("{}", localizer.text(message)),
+                OutputFormat::Human => println!("{}", localizer.text(success)),
                 OutputFormat::Json => println!(
                     "{}",
                     json!({"schema_version":1,"kind":kind,"status":status})
@@ -78,10 +97,20 @@ pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer, inspect: bool) -
             }
             ExitCode::SUCCESS
         }
+        Err(RuntimeError::Settings(SettingsError::InvalidField { field, .. }))
+            if operation == Operation::ProbeDraft =>
+        {
+            invalid_probe_field(args, localizer, profile, profile_id, field)
+        }
         Err(error) => {
             let (code, message) = match error {
                 RuntimeError::Settings(SettingsError::MissingProfile(_)) => {
                     ("missing_profile", "project-settings-missing-profile")
+                }
+                RuntimeError::Settings(SettingsError::TooLarge)
+                    if operation == Operation::ProbeDraft =>
+                {
+                    ("settings_too_large", "project-settings-too-large")
                 }
                 RuntimeError::Settings(_) => ("invalid_settings", "project-settings-invalid"),
                 RuntimeError::Platform(_) | RuntimeError::PlatformUnavailable => {
@@ -106,16 +135,51 @@ pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer, inspect: bool) -
                     ("client_failed", "runtime-client-failed")
                 }
             };
-            failure(args, kind, code, &localizer.text(message))
+            failure(args, kind, &json!({"code":code}), &localizer.text(message))
         }
     }
 }
 
-fn failure(args: &RunArgs, kind: &str, code: &str, message: &str) -> ExitCode {
+fn read_probe_profile() -> Result<Profile, SettingsError> {
+    const MAX_INPUT: u64 = 128 * 1024;
+    let mut bytes = Vec::new();
+    io::stdin()
+        .take(MAX_INPUT + 1)
+        .read_to_end(&mut bytes)
+        .map_err(SettingsError::Io)?;
+    if bytes.len() as u64 > MAX_INPUT {
+        return Err(SettingsError::TooLarge);
+    }
+    serde_json::from_slice(&bytes).map_err(|_| SettingsError::InvalidFile)
+}
+
+fn invalid_probe_field(
+    args: &RunArgs,
+    localizer: &Localizer,
+    profile: ProfileName,
+    profile_id: &str,
+    field: &str,
+) -> ExitCode {
+    let message = localizer.format(
+        "project-settings-invalid-field",
+        &[
+            ("profile", LocalizationValue::Text(profile_id)),
+            ("field", LocalizationValue::Text(field)),
+        ],
+    );
+    failure(
+        args,
+        "runtime_probe",
+        &json!({"code":"invalid_field","data":{"profile":profile,"field":field}}),
+        &message,
+    )
+}
+
+fn failure(args: &RunArgs, kind: &str, error: &serde_json::Value, message: &str) -> ExitCode {
     if matches!(args.format, OutputFormat::Json) {
         println!(
             "{}",
-            json!({"schema_version":1,"kind":kind,"status":"error","error":{"code":code}})
+            json!({"schema_version":1,"kind":kind,"status":"error","error":error})
         );
     }
     eprintln!("{message}");

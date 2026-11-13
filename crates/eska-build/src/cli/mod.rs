@@ -62,7 +62,7 @@ enum Commands {
     #[command(disable_help_flag = true)]
     Run(runtime::RunArgs),
     #[command(disable_help_flag = true)]
-    Probe(runtime::RunArgs),
+    Probe(runtime::ProbeArgs),
     #[command(disable_help_flag = true)]
     Apply(runtime::ApplyArgs),
     #[command(disable_help_flag = true)]
@@ -126,11 +126,9 @@ pub fn run() -> ExitCode {
         Some(Commands::Clean(args)) => commands::clean::run(&args, &cli.project_dir, &localizer),
         Some(Commands::Platform(args)) => commands::platform::run(&args, &localizer),
         Some(Commands::Config(args)) => commands::config::run(&args, &localizer),
-        Some(Commands::Run(args)) => {
-            commands::runtime::run(&args, &cli.project_dir, &localizer, false)
-        }
+        Some(Commands::Run(args)) => commands::runtime::run(&args, &cli.project_dir, &localizer),
         Some(Commands::Probe(args)) => {
-            commands::runtime::run(&args, &cli.project_dir, &localizer, true)
+            commands::runtime::probe(&args, &cli.project_dir, &localizer)
         }
         Some(Commands::Apply(args)) => {
             commands::runtime::apply(&args, &cli.project_dir, &localizer)
@@ -186,7 +184,7 @@ fn localized(localizer: &Localizer) -> clap::Command {
         .mut_subcommand("platform",|command|commands::platform::localize(command,localizer))
         .mut_subcommand("config",|command|commands::config::localize(command,localizer))
         .mut_subcommand("run",|command|runtime::localize(command,localizer))
-        .mut_subcommand("probe",|command|runtime::localize(command,localizer).about(localizer.text("runtime-probe-about")))
+        .mut_subcommand("probe",|command|runtime::localize_probe(command,localizer))
         .mut_subcommand("apply",|command|runtime::localize_apply(command,localizer))
         .mut_subcommand("extension",|command|runtime::localize_extension(command,localizer));
     command.mut_subcommands(|command| standalone_help(command, localizer))

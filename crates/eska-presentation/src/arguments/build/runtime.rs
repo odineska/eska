@@ -15,6 +15,14 @@ pub struct RunArgs {
 }
 
 #[derive(Debug, Args)]
+pub struct ProbeArgs {
+    #[command(flatten)]
+    pub common: RunArgs,
+    #[arg(long)]
+    pub stdin: bool,
+}
+
+#[derive(Debug, Args)]
 pub struct ApplyArgs {
     #[arg(long, value_enum, default_value = "test")]
     pub profile: ProfileArg,
@@ -94,6 +102,14 @@ pub fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command 
             arg.help(localizer.text("version-format-help"))
         })
         .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
+}
+
+pub fn localize_probe(command: clap::Command, localizer: &Localizer) -> clap::Command {
+    localize(command, localizer)
+        .about(localizer.text("runtime-probe-about"))
+        .mut_arg("stdin", |arg| {
+            arg.help(localizer.text("runtime-probe-stdin-help"))
+        })
 }
 
 pub fn localize_apply(command: clap::Command, localizer: &Localizer) -> clap::Command {
