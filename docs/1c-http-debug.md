@@ -631,6 +631,23 @@ CARGO_TARGET_DIR. В Cargo-кэш перенесены индекс и архи�
 в использованном стандартном образе PostgreSQL. Launch и отладка предметов
 кластера требуют СУБД из числа поддерживаемых 1С. [Руководство администратора 1С](https://1c-dn.com/library/tutorials/1c_enterprise_administrator_guide_client_server_mode_8_3_27/) · [Модули Postgres Pro для 1С](https://postgrespro.com/docs/postgrespro/current/one-c-additional-modules)
 
+Для повторной проверки использована официальная сборка PostgreSQL для 1С
+16.15 (`postgrespro-1c-16`, Debian 12, AMD64). Подпись индекса и SHA-256
+пакетов проверены. СУБД работала в QEMU с пробросом порта только на loopback
+хоста ARM64. В гостевой системе созданы локали `en_US.UTF-8` и `ru_RU.UTF-8`.
+`rac` зарегистрировал базу, а `ibcmd` импортировал и применил Designer XML
+на тестовом стенде. `native_standalone_launch_with_standard_dap` прошёл
+с `registeredInfobase` из файла `ibases.v8i` с `Srvr` и `Ref`. Проверены
+точка, стек, переменные, три вида шага, Evaluate в двух кадрах и отключение.
+[Репозиторий PostgreSQL для 1С](https://repo.postgrespro.ru/1c/1c-16/debian/dists/bookworm/Release)
+
+Установленный Explorer 0.1.18 в VS Code 1.144.0 прошёл проектный launch
+с `infobase.kind = "cluster"` на en/ru. В каждом сеансе проверены точка,
+переменные, три шага, Evaluate в текущем и вызывающем кадрах, снятие точки,
+продолжение и attach с выбором уже запущенного предмета. Клиент продолжил
+работу после отключения. В этих прогонах кластер, адаптер и клиент 1С
+работали на Linux ARM64, в AMD64-ВМ выполнялась только СУБД.
+
 Реальные remote/VPN и Windows/macOS требуют отдельной приёмки. Возможность
 указать удалённый HTTP-адрес
 уже есть; это не доказательство прохождения этих сценариев. TCP и обновление
