@@ -5,7 +5,7 @@ pub mod doctor;
 pub mod artifact;
 pub mod build;
 pub mod patch;
-mod platform_path;
+pub use eska_project_core::paths::native_path;
 pub mod runtime;
 
 #[cfg(test)]

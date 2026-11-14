@@ -4,7 +4,11 @@ use std::{
     fs::File,
     io::Read as _,
     path::{Path, PathBuf},
+    sync::OnceLock,
 };
+
+mod lines;
+use lines::Lines;
 
 use eska_build_runtime::build::ProcessingSources;
 use eska_project_core::{
@@ -20,8 +24,13 @@ use crate::dbgs::{Module, ModuleOrigin};
 
 pub struct Sources {
     modules: BTreeMap<PathBuf, Module>,
-    paths: BTreeMap<Module, Option<PathBuf>>,
+    paths: BTreeMap<Module, Option<SourceFile>>,
     processing: Option<ProcessingSources>,
+}
+
+struct SourceFile {
+    path: PathBuf,
+    lines: OnceLock<Result<Lines, std::io::Error>>,
 }
 
 pub enum SourceError {
@@ -193,7 +202,12 @@ impl Sources {
                 self.paths
                     .entry(module)
                     .and_modify(|mapped| *mapped = None)
-                    .or_insert(Some(path));
+                    .or_insert_with(|| {
+                        Some(SourceFile {
+                            path,
+                            lines: OnceLock::new(),
+                        })
+                    });
             }
         }
     }
@@ -210,7 +224,7 @@ impl Sources {
     }
 
     pub fn path(&self, module: &Module) -> Option<&Path> {
-        let path = self.paths.get(module)?.as_deref()?;
+        let path = self.paths.get(module)?.as_ref()?.path.as_path();
         if matches!(module.origin, ModuleOrigin::External(_))
             && !self
                 .processing
@@ -220,6 +234,23 @@ impl Sources {
             return None;
         }
         Some(path)
+    }
+
+    pub fn editor_line(&self, module: &Module, line: u32) -> u32 {
+        self.lines(module).map_or(line, |lines| lines.editor(line))
+    }
+
+    pub fn platform_line(&self, module: &Module, line: u32) -> Option<u32> {
+        self.lines(module).map(|lines| lines.platform(line))
+    }
+
+    fn lines(&self, module: &Module) -> Option<&Lines> {
+        let file = self.paths.get(module)?.as_ref()?;
+        // Load only modules used by breakpoints/stack frames, once per debug session.
+        file.lines
+            .get_or_init(|| Lines::read(&file.path))
+            .as_ref()
+            .ok()
     }
 }
 

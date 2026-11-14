@@ -17,7 +17,7 @@ use super::{
     BaseConfiguration, BuildError, BuildPlan, BuildStage, Ibcmd, ProcessStream, execute,
     source_snapshot,
 };
-use crate::platform_path::native_path;
+use crate::native_path;
 
 const CACHE_CF: &str = "base.cf";
 const CACHE_STATE: &str = "base.json";

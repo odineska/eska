@@ -26,7 +26,7 @@ use std::{
 use super::{RuntimeError, checksum, launch_fingerprint, platform, profile};
 use crate::{
     build::{Ibcmd, RunError, SourceSnapshotError, ibcmd_generation, source_snapshot},
-    platform_path::native_path,
+    native_path,
 };
 use eska_project_core::project::{
     Project, ProjectType,

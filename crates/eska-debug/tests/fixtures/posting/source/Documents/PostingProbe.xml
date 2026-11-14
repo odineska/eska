@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+  <Document uuid="236d5086-75f4-4d6e-bc83-6fe7cba63aaa">
+    <InternalInfo>
+      <xr:GeneratedType name="DocumentObject.PostingProbe" category="Object">
+        <xr:TypeId>9c9a0b8f-ab48-404a-a8ce-f3bd2e8fac99</xr:TypeId>
+        <xr:ValueId>f82d6e7a-2393-4f60-b067-eedd6ee2cf43</xr:ValueId>
+      </xr:GeneratedType>
+      <xr:GeneratedType name="DocumentRef.PostingProbe" category="Ref">
+        <xr:TypeId>9dc4aa22-0586-4b4f-b380-74f89d2f5e07</xr:TypeId>
+        <xr:ValueId>86b9f371-d186-4e2a-9911-987cf8c5b770</xr:ValueId>
+      </xr:GeneratedType>
+      <xr:GeneratedType name="DocumentSelection.PostingProbe" category="Selection">
+        <xr:TypeId>23fa69c4-467e-4144-8fe6-4d1b82c07682</xr:TypeId>
+        <xr:ValueId>d3543142-fc9f-4714-bc6b-5c1136de1cbf</xr:ValueId>
+      </xr:GeneratedType>
+      <xr:GeneratedType name="DocumentList.PostingProbe" category="List">
+        <xr:TypeId>f132ab2c-d66d-4c73-b0f5-6107f993589a</xr:TypeId>
+        <xr:ValueId>900e7563-aaa9-44f2-9a7c-8335c1b90681</xr:ValueId>
+      </xr:GeneratedType>
+      <xr:GeneratedType name="DocumentManager.PostingProbe" category="Manager">
+        <xr:TypeId>41400085-79f1-4cce-bcba-d17cd206300f</xr:TypeId>
+        <xr:ValueId>916fda89-bb40-452d-8524-febf1f29d475</xr:ValueId>
+      </xr:GeneratedType>
+    </InternalInfo>
+    <Properties>
+      <Name>PostingProbe</Name>
+      <NumberType>String</NumberType>
+      <NumberLength>9</NumberLength>
+      <NumberAllowedLength>Variable</NumberAllowedLength>
+      <NumberPeriodicity>Nonperiodical</NumberPeriodicity>
+      <CheckUnique>true</CheckUnique>
+      <Autonumbering>true</Autonumbering>
+      <Posting>Allow</Posting>
+      <RealTimePosting>Deny</RealTimePosting>
+      <DataLockControlMode>Managed</DataLockControlMode>
+    </Properties>
+    <ChildObjects/>
+  </Document>
+</MetaDataObject>

@@ -17,7 +17,10 @@ use std::{
     time::{Duration, Instant},
 };
 
-use eska_build_runtime::runtime::{DebugConnection, DebugLaunch, ManagedDebugServer};
+use eska_build_runtime::{
+    native_path,
+    runtime::{DebugConnection, DebugLaunch, ManagedDebugServer},
+};
 use eska_presentation::localization::{LocalizationValue, Localizer};
 use eska_project_core::project::local_settings::{DEBUG_TARGET_TYPES, valid_auto_attach_types};
 use serde_json::{Value, json};
@@ -464,8 +467,13 @@ impl<W: Write> Session<'_, W> {
                     .filter(|line| *line > 0);
                 (
                     line,
-                    line.ok_or(INVALID)
-                        .and_then(|line| breakpoints::parse(entry, line)),
+                    line.and_then(|line| {
+                        module.as_ref().map_or(Some(line), |module| {
+                            config.sources.platform_line(module, line)
+                        })
+                    })
+                    .ok_or(INVALID)
+                    .and_then(|line| breakpoints::parse(entry, line)),
                 )
             })
             .collect();
@@ -474,6 +482,15 @@ impl<W: Write> Session<'_, W> {
             .map(|(line, point)| {
                 let mut response = json!({"verified":module.is_some() && point.is_ok()});
                 if let Some(line) = line {
+                    let line = point
+                        .as_ref()
+                        .ok()
+                        .and_then(|point| {
+                            module
+                                .as_ref()
+                                .map(|module| config.sources.editor_line(module, point.line))
+                        })
+                        .unwrap_or(*line);
                     response["line"] = json!(line - self.line_offset);
                 }
                 if let Err(key) = point {
@@ -579,12 +596,16 @@ impl<W: Write> Session<'_, W> {
             .skip(start)
             .take(levels)
             .map(|(id, frame)| {
+                let line = frame.module.as_ref().map_or(frame.line, |module| {
+                    sources.editor_line(module, frame.line)
+                });
                 let mut result =
-                    json!({"id":id,"name":frame.name,"line":frame.line.max(1) - self.line_offset,"column":self.first_column});
+                    json!({"id":id,"name":frame.name,"line":line.max(1) - self.line_offset,"column":self.first_column});
                 if let Some(module) = &frame.module
                     && let Some(path) = sources.path(module)
+                    && let native = native_path(path)
                     && let Some(display_path) = self.breakpoints.get(module)
-                        .map_or_else(|| path.to_str(), |points| points.display_path(path, frame.line))
+                        .map_or_else(|| native.to_str(), |points| points.display_path(&native, frame.line))
                     && let Some(name) = path.file_name().and_then(std::ffi::OsStr::to_str)
                 {
                     result["source"] = json!({"name":name,"path":display_path});

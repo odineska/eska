@@ -1,6 +1,6 @@
 //! Execute the verified 8.3 pipeline through the existing platform runner.
 
-use crate::platform_path::native_path;
+use crate::native_path;
 use std::{ffi::OsString, fs, path::Path};
 
 use super::{ArtifactError, Identity, PublicationError, identity::inspect_identity, io_error};

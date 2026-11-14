@@ -27,7 +27,7 @@ use crate::{
         ArtifactType, Ibcmd, PlatformVersion, ProcessingArtifactError, ProcessingSources, RunError,
         ToolError, ToolOptions, manifest::verify_processing,
     },
-    platform_path::native_path,
+    native_path,
 };
 
 #[derive(Debug)]
@@ -159,7 +159,23 @@ pub fn file_infobase(root: &Path, path: &Path) -> Result<PathBuf, RuntimeError> 
 /// Returns the first unavailable or invalid part of the saved profile.
 pub fn inspect(project: &Project, name: ProfileName) -> Result<(), RuntimeError> {
     let profile = profile(project, name, Action::Inspect)?;
-    let platform = platform(project, &profile)?;
+    inspect_profile(project, &profile)
+}
+
+/// Check a supplied profile using the same runtime as a saved profile.
+/// # Errors
+/// Returns an invalid field or the first unavailable runtime dependency.
+pub fn inspect_draft(
+    project: &Project,
+    name: ProfileName,
+    profile: &Profile,
+) -> Result<(), RuntimeError> {
+    profile.validate(name).map_err(RuntimeError::Settings)?;
+    inspect_profile(project, profile)
+}
+
+fn inspect_profile(project: &Project, profile: &Profile) -> Result<(), RuntimeError> {
+    let platform = platform(project, profile)?;
     if !platform
         .program_available("1cv8c")
         .map_err(RuntimeError::Io)?
@@ -434,9 +450,12 @@ fn launch_client(
         .map_or_else(|| scratch.tempdir(), |parent| scratch.tempdir_in(parent))
         .map_err(RuntimeError::Io)?;
     let client = platform.sibling_program("1cv8c");
-    client
-        .begin_interruptible_operation()
-        .map_err(RuntimeError::Run)?;
+    // The adapter already owns signal handling and cancels the client via this flag.
+    if cancelled.is_none() {
+        client
+            .begin_interruptible_operation()
+            .map_err(RuntimeError::Run)?;
+    }
     let output = client
         .run_owned(
             arguments,

@@ -1,6 +1,8 @@
 //! Opt-in tests against a disposable 1C fixture prepared in the sibling playground.
 #[path = "support/debug_relay.rs"]
 mod debug_relay;
+#[path = "support/posting.rs"]
+mod posting;
 #[path = "../../../tests/support/mod.rs"]
 mod support;
 
@@ -29,12 +31,16 @@ struct Dap {
 
 impl Dap {
     fn start(root: &Path, profile: &str, mode: &str) -> Self {
+        Self::start_language(root, profile, mode, "en-US")
+    }
+
+    fn start_language(root: &Path, profile: &str, mode: &str, language: &str) -> Self {
         let mut command = Command::new(env!("CARGO_BIN_EXE_eska-debug"));
         command
             .current_dir(root)
             .args([
                 "--lang",
-                "en-US",
+                language,
                 "dap",
                 "--profile",
                 profile,
@@ -1563,7 +1569,11 @@ fn verify_stop(dap: &mut Dap, source: &Path, samples: usize, position: (u32, u32
     let thread = dap.stop();
     let stack = dap.success("stackTrace", json!({"threadId":thread}));
     let frame = stack["stackFrames"][0]["id"].as_u64().unwrap();
-    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(source));
+    assert_eq!(
+        Path::new(stack["stackFrames"][0]["source"]["path"].as_str().unwrap()),
+        eska_build_runtime::native_path(&source.canonicalize().unwrap()).as_ref(),
+        "{stack}"
+    );
     assert_eq!(stack["stackFrames"][0]["line"], position.0);
     assert_eq!(stack["stackFrames"][0]["column"], position.1);
     let scopes = dap.success("scopes", json!({"frameId":frame}));
