@@ -6,6 +6,7 @@ pub mod artifact;
 pub mod build;
 pub mod patch;
 mod platform_path;
+pub use platform_path::native_path;
 pub mod runtime;
 
 #[cfg(test)]

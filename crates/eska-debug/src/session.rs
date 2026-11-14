@@ -17,7 +17,10 @@ use std::{
     time::{Duration, Instant},
 };
 
-use eska_build_runtime::runtime::{DebugConnection, DebugLaunch, ManagedDebugServer};
+use eska_build_runtime::{
+    native_path,
+    runtime::{DebugConnection, DebugLaunch, ManagedDebugServer},
+};
 use eska_presentation::localization::{LocalizationValue, Localizer};
 use eska_project_core::project::local_settings::{DEBUG_TARGET_TYPES, valid_auto_attach_types};
 use serde_json::{Value, json};
@@ -600,8 +603,9 @@ impl<W: Write> Session<'_, W> {
                     json!({"id":id,"name":frame.name,"line":line.max(1) - self.line_offset,"column":self.first_column});
                 if let Some(module) = &frame.module
                     && let Some(path) = sources.path(module)
+                    && let native = native_path(path)
                     && let Some(display_path) = self.breakpoints.get(module)
-                        .map_or_else(|| path.to_str(), |points| points.display_path(path, frame.line))
+                        .map_or_else(|| native.to_str(), |points| points.display_path(&native, frame.line))
                     && let Some(name) = path.file_name().and_then(std::ffi::OsStr::to_str)
                 {
                     result["source"] = json!({"name":name,"path":display_path});

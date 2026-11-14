@@ -55,7 +55,12 @@ fn stopped(
     let stack = dap.success("stackTrace", json!({"threadId":thread}));
     let frames = stack["stackFrames"].as_array().unwrap();
     assert_eq!(frames.len(), depth, "{stack}");
-    assert_eq!(frames[0]["source"]["path"], json!(source), "{stack}");
+    let actual = Path::new(frames[0]["source"]["path"].as_str().unwrap());
+    assert_eq!(
+        actual,
+        eska_build_runtime::native_path(&source.canonicalize().unwrap()).as_ref(),
+        "{stack}"
+    );
     assert_eq!(frames[0]["line"], editor_line(source, statement), "{stack}");
     (thread, frames[0]["id"].clone())
 }

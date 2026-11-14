@@ -1,6 +1,7 @@
 use std::{borrow::Cow, path::Path};
 
-/// The platform's argument parser rejects Win32 verbatim paths returned by canonicalize.
+/// Convert canonical Win32 paths for consumers that expect ordinary drive or UNC paths.
+#[must_use]
 #[cfg(windows)]
 pub fn native_path(path: &Path) -> Cow<'_, Path> {
     #[cfg(windows)]
@@ -32,6 +33,7 @@ pub fn native_path(path: &Path) -> Cow<'_, Path> {
 }
 
 /// Preserve paths on systems without Win32 verbatim prefixes.
+#[must_use]
 #[cfg(not(windows))]
 pub const fn native_path(path: &Path) -> Cow<'_, Path> {
     Cow::Borrowed(path)
