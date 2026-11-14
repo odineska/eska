@@ -317,7 +317,7 @@ fn prepare_component(
     let observation = generations.for_target(target)?;
     let baseline = match staged_baseline {
         Some(baseline) => baseline,
-        None => read_baseline(&target.state)?,
+        None => target.preview_baseline(Some(&observation))?,
     };
     let incremental = plan(
         target,

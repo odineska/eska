@@ -1,6 +1,7 @@
 //! Plan and apply Designer XML changes to an existing test infobase.
 
 pub mod application;
+mod baseline;
 mod descriptor;
 mod extension;
 pub mod installation;
@@ -193,7 +194,11 @@ pub fn preview(project: &Project, name: ProfileName, initialize: bool) -> Result
     };
     let current = target.capture(project, None)?;
     target.verify_source(project.source())?;
-    let baseline = read_baseline(&target.state)?;
+    let baseline = if initialize {
+        read_baseline(&target.state)?
+    } else {
+        target.preview_baseline(generation.as_ref().ok())?
+    };
     plan(
         &target,
         generation,
@@ -303,6 +308,11 @@ fn write_plan(
 }
 
 fn save_baseline(state: &Path, pending: &Path, document: &Baseline) -> Result<(), ApplyError> {
+    persist_baseline(state, document)?;
+    fs::remove_file(pending).map_err(ApplyError::Io)
+}
+
+fn persist_baseline(state: &Path, document: &Baseline) -> Result<(), ApplyError> {
     let directory = state.parent().ok_or(ApplyError::InvalidState)?;
     let mut temp = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
     {
@@ -313,7 +323,7 @@ fn save_baseline(state: &Path, pending: &Path, document: &Baseline) -> Result<()
     temp.as_file().sync_all().map_err(ApplyError::Io)?;
     temp.persist(state)
         .map_err(|error| ApplyError::Io(error.error))?;
-    fs::remove_file(pending).map_err(ApplyError::Io)
+    Ok(())
 }
 
 fn mark_pending(state: &Path, contents: &[u8]) -> Result<PathBuf, ApplyError> {

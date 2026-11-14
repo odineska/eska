@@ -279,7 +279,7 @@ impl<'a> Walker<'a> {
 }
 
 /// Stream one file once so copied bytes and their checksum cannot diverge.
-pub(super) fn file_digest(source: &Path, target: Option<&Path>) -> Result<Vec<u8>, Error> {
+pub fn file_digest(source: &Path, target: Option<&Path>) -> Result<Vec<u8>, Error> {
     let mut buffer = vec![0; BUFFER_SIZE].into_boxed_slice();
     read_file(source, target, &mut buffer).map(|(digest, _)| digest)
 }
