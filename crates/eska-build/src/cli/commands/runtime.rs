@@ -26,6 +26,8 @@ use eska_project_core::project::{
 };
 use serde_json::json;
 
+mod presentation;
+
 pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer) -> ExitCode {
     execute(args, start, localizer, Operation::Run)
 }
@@ -415,7 +417,7 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
             if matches!(args.format, OutputFormat::Json) {
                 println!(
                     "{}",
-                    json!({"schema_version":1,"kind":"apply","status":status,"plan":plan})
+                    json!({"schema_version":1,"kind":"apply","status":status,"plan":plan,"display":presentation::plan(&plan)})
                 );
             } else if args.confirm.is_some() {
                 println!("{}", localizer.text("runtime-apply-done"));
@@ -488,7 +490,7 @@ fn apply_application(
                 if json_output {
                     println!(
                         "{}",
-                        json!({"schema_version":1,"kind":"application_apply","status":"preview","plan":plan})
+                        json!({"schema_version":1,"kind":"application_apply","status":"preview","plan":plan,"display":presentation::application(&plan)})
                     );
                 } else {
                     for component in &plan.components {
@@ -636,6 +638,10 @@ fn apply_failure(
             json!({"schema_version":1,"kind":"apply","status":"error","error":details});
         if let Some(review) = review {
             response["review"] = json!(review);
+            response["display"] = json!(presentation::paths(
+                review.changes.iter().flat_map(|changes| changes.keys()),
+                eska_project_core::project::ProjectType::Configuration
+            ));
         }
         println!("{response}");
     } else if let Some(review) = review {
