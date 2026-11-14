@@ -262,27 +262,28 @@ fn write_plan(
         .root
         .take()
         .or_else(|| structure::Root::read(source, target.project_type()));
+    let partial = if plan.mode == Mode::Incremental {
+        Some(import_input(
+            source,
+            plan.import_files
+                .as_deref()
+                .ok_or(ApplyError::StalePreview)?,
+        )?)
+    } else {
+        None
+    };
     let state = mark_pending(&target.state, confirmation.as_bytes())?;
 
     progress(Stage::Import);
     match plan.mode {
         Mode::Initialize => target.import_full(source)?,
         Mode::Incremental => {
-            let mut input = tempfile::tempfile().map_err(ApplyError::Io)?;
-            for path in plan
-                .import_files
-                .as_deref()
-                .ok_or(ApplyError::StalePreview)?
-            {
-                let name = input_path(path).ok_or(ApplyError::UnrepresentablePath)?;
-                writeln!(input, "{name}").map_err(ApplyError::Io)?;
-            }
-            input.rewind().map_err(ApplyError::Io)?;
+            let (arguments, input) = partial.ok_or(ApplyError::StalePreview)?;
             target.command(
                 &["import", "files"],
-                &[option("--base-dir", source)],
+                &arguments,
                 Some(source),
-                Some(input),
+                input,
                 Stage::Import,
             )?;
         }
@@ -962,6 +963,7 @@ fn assemble_plan(
                 |selection| Some(selection.files.clone()),
             )
             .filter(|paths| paths.iter().all(|path| input_path(path).is_some()))
+            .filter(|paths| !cfg!(windows) || windows_import_fits(paths))
             .map_or((Mode::Unsupported, None), |paths| {
                 (Mode::Incremental, Some(paths))
             })
@@ -1171,9 +1173,71 @@ fn input_path(path: &Path) -> Option<String> {
     (!name.chars().any(char::is_whitespace)).then(|| name.replace(std::path::MAIN_SEPARATOR, "/"))
 }
 
+fn windows_import_fits(paths: &[PathBuf]) -> bool {
+    // Reserve half of CreateProcessW's limit for the executable, target, authentication
+    // and staging directory. Count worst-case quoting, including non-BMP names.
+    paths
+        .iter()
+        .try_fold(0_usize, |length, path| {
+            let name = input_path(path)?;
+            if name.starts_with('-') {
+                return None;
+            }
+            let next = length.checked_add(name.encode_utf16().count().checked_mul(2)? + 3)?;
+            (next <= 16_384).then_some(next)
+        })
+        .is_some()
+}
+
+fn import_input(
+    source: &Path,
+    paths: &[PathBuf],
+) -> Result<(Vec<OsString>, Option<File>), ApplyError> {
+    let mut arguments = vec![option("--base-dir", source)];
+    if cfg!(windows) {
+        // ibcmd decodes redirected stdin using the Windows ANSI code page, even
+        // with a UTF-8 BOM. Native Unicode arguments preserve metadata names.
+        if !windows_import_fits(paths) {
+            return Err(ApplyError::UnrepresentablePath);
+        }
+        for path in paths {
+            arguments.push(
+                input_path(path)
+                    .ok_or(ApplyError::UnrepresentablePath)?
+                    .into(),
+            );
+        }
+        Ok((arguments, None))
+    } else {
+        let mut input = tempfile::tempfile().map_err(ApplyError::Io)?;
+        for path in paths {
+            let name = input_path(path).ok_or(ApplyError::UnrepresentablePath)?;
+            writeln!(input, "{name}").map_err(ApplyError::Io)?;
+        }
+        input.rewind().map_err(ApplyError::Io)?;
+        Ok((arguments, Some(input)))
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn windows_import_preserves_unicode_and_limits_the_command_line() {
+        let paths = vec![PathBuf::from("CommonModules/ОбщийМодуль/Ext/Module.bsl")];
+        assert!(windows_import_fits(&paths));
+        assert!(!windows_import_fits(&[PathBuf::from("x".repeat(8191))]));
+        assert!(!windows_import_fits(&[PathBuf::from("a\nb.xml")]));
+        assert!(!windows_import_fits(&[PathBuf::from(
+            "--extension=Other.bsl"
+        )]));
+        if cfg!(windows) {
+            let (arguments, input) = import_input(Path::new("source"), &paths).unwrap();
+            assert!(input.is_none());
+            assert_eq!(arguments[1], "CommonModules/ОбщийМодуль/Ext/Module.bsl");
+        }
+    }
 
     #[test]
     fn confirmation_binds_both_catalogs_and_the_target() {
