@@ -12,7 +12,7 @@ use super::{
     infobase::{LockedInfobase, ManagedInfobase},
     manifest,
 };
-use crate::platform_path::native_path;
+use crate::native_path;
 use eska_project_core::project::{Project, ProjectType, designer_xml};
 
 static WORKSPACE_SEQUENCE: AtomicU64 = AtomicU64::new(0);

@@ -11,6 +11,7 @@ pub mod artifact;
 pub mod config;
 pub mod libraries;
 pub mod patch;
+pub mod paths;
 pub mod project;
 pub mod provenance;
 pub mod workflow;

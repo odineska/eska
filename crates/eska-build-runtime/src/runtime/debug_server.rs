@@ -18,7 +18,7 @@ use url::Url;
 use super::{RuntimeError, platform};
 use crate::{
     build::{DebugServerChild, Ibcmd},
-    platform_path::native_path,
+    native_path,
 };
 
 pub enum DebugConnection {

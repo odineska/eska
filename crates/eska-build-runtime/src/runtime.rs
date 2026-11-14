@@ -27,7 +27,7 @@ use crate::{
         ArtifactType, Ibcmd, PlatformVersion, ProcessingArtifactError, ProcessingSources, RunError,
         ToolError, ToolOptions, manifest::verify_processing,
     },
-    platform_path::native_path,
+    native_path,
 };
 
 #[derive(Debug)]
