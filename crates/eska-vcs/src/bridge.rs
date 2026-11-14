@@ -281,19 +281,20 @@ fn doctor(root: &Path, project: Option<&Path>, attributes: &[PathBuf]) -> Result
 fn settings_protection(root: &Path) -> &'static str {
     use eska_project_core::project::local_settings::SETTINGS_PATH;
 
-    let repository = match gix::discover(root) {
+    let root = git::native_path(root);
+    let repository = match gix::discover(root.as_ref()) {
         Ok(repository) => repository,
         Err(error) if error.classify().has(gix::error::Class::NotFound) => return "no_repository",
         Err(_) => return "unknown",
     };
-    let Some(relative) = repository
-        .workdir()
-        .and_then(|worktree| root.strip_prefix(worktree).ok())
-        .map(|path| path.join(SETTINGS_PATH))
-    else {
+    let Some(worktree) = repository.workdir() else {
         return "unknown";
     };
-    settings_index(&repository, &relative).unwrap_or("unknown")
+    let worktree = git::native_path(worktree);
+    let Ok(relative) = root.strip_prefix(worktree.as_ref()) else {
+        return "unknown";
+    };
+    settings_index(&repository, &relative.join(SETTINGS_PATH)).unwrap_or("unknown")
 }
 
 fn settings_index(repository: &gix::Repository, path: &Path) -> Option<&'static str> {
