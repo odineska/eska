@@ -450,9 +450,12 @@ fn launch_client(
         .map_or_else(|| scratch.tempdir(), |parent| scratch.tempdir_in(parent))
         .map_err(RuntimeError::Io)?;
     let client = platform.sibling_program("1cv8c");
-    client
-        .begin_interruptible_operation()
-        .map_err(RuntimeError::Run)?;
+    // The adapter already owns signal handling and cancels the client via this flag.
+    if cancelled.is_none() {
+        client
+            .begin_interruptible_operation()
+            .map_err(RuntimeError::Run)?;
+    }
     let output = client
         .run_owned(
             arguments,
