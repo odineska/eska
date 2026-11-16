@@ -287,6 +287,120 @@ fn removal_requires_explicit_force_for_live_form_references() {
 }
 
 #[test]
+fn removing_copied_group_keeps_bindings_to_same_named_attributes() {
+    let input = source(
+        "<ChildItems><UsualGroup name='Group' id='1'><ChildItems><InputField name='Amount' id='2'><DataPath>Amount</DataPath></InputField></ChildItems></UsualGroup></ChildItems><Attributes><Attribute name='Amount' id='1'><Type/></Attribute></Attributes>",
+    );
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![
+                FormOperation::CopyElement {
+                    target: FormTarget::Element { id: 1 },
+                    parent: FormTarget::Root {},
+                    before: None,
+                    name: "GroupCopy".into(),
+                },
+                FormOperation::Remove {
+                    target: FormTarget::Element { id: 1 },
+                    force: false,
+                },
+            ],
+        ),
+    )
+    .unwrap();
+    assert!(!edit.output().contains("name='Group'"));
+    assert!(edit.output().contains("<DataPath>Amount</DataPath>"));
+    assert!(edit.output().contains("<Attribute name='Amount'"));
+    let remove_attribute = request(
+        edit.output(),
+        vec![FormOperation::Remove {
+            target: FormTarget::Attribute {
+                name: "Amount".into(),
+            },
+            force: false,
+        }],
+    );
+    assert!(matches!(
+        plan(edit.output(), &remove_attribute),
+        Err(FormEditError::References { .. })
+    ));
+}
+
+#[test]
+fn removal_resolves_full_attribute_paths_and_command_element_domains() {
+    let input = source(
+        "<ChildItems><InputField name='Value' id='1'><DataPath>Other.Value</DataPath></InputField><Button name='Run' id='2'><CommandName>Form.Command.Run</CommandName></Button><Button name='Execute' id='3'><CommandName>Form.Command.Run</CommandName></Button></ChildItems><Attributes><Attribute name='Rows' id='1'><Type/><Columns><Column name='Value' id='1'><Type/></Column></Columns></Attribute><Attribute name='Other' id='2'><Type/><Columns><Column name='Value' id='1'><Type/></Column></Columns></Attribute></Attributes><Commands><Command name='Run' id='1'/></Commands>",
+    );
+    for target in [
+        FormTarget::Attribute {
+            name: "Rows.Value".into(),
+        },
+        FormTarget::Element { id: 2 },
+    ] {
+        assert!(
+            plan(
+                &input,
+                &request(
+                    &input,
+                    vec![FormOperation::Remove {
+                        target,
+                        force: false,
+                    }],
+                ),
+            )
+            .is_ok()
+        );
+    }
+    for target in [
+        FormTarget::Attribute {
+            name: "Other.Value".into(),
+        },
+        FormTarget::Command { name: "Run".into() },
+    ] {
+        assert!(matches!(
+            plan(
+                &input,
+                &request(
+                    &input,
+                    vec![FormOperation::Remove {
+                        target,
+                        force: false,
+                    }],
+                ),
+            ),
+            Err(FormEditError::References { .. })
+        ));
+    }
+}
+
+#[test]
+fn removal_detects_element_command_sources_and_standard_commands() {
+    for binding in [
+        "<CommandSource>Item.Rows</CommandSource>",
+        "<CommandName>Form.Item.Rows.StandardCommand.Add</CommandName>",
+    ] {
+        let input = source(&format!(
+            "<ChildItems><Table name='Rows' id='1'/><Button name='Action' id='2'>{binding}</Button></ChildItems>"
+        ));
+        assert!(matches!(
+            plan(
+                &input,
+                &request(
+                    &input,
+                    vec![FormOperation::Remove {
+                        target: FormTarget::Element { id: 1 },
+                        force: false,
+                    }],
+                ),
+            ),
+            Err(FormEditError::References { .. })
+        ));
+    }
+}
+
+#[test]
 fn prepared_input_rejects_stale_snapshot_and_ambiguous_ids_and_extra_fields() {
     let input = empty_form();
     let mut stale = request(&input, Vec::new());

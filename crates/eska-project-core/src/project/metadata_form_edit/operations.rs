@@ -123,9 +123,12 @@ fn references(xml: &Document<'_>, removed: roxmltree::Node<'_, '_>) -> Vec<Strin
         .filter(|node| document::element(*node).is_some())
         .filter_map(|node| node.attribute("id"))
         .collect();
-    let names: Vec<_> = removed
+    let targets: Vec<_> = removed
         .descendants()
-        .filter_map(|node| node.attribute("name"))
+        .filter_map(|node| {
+            document::target_of(node)
+                .map(|target| (target, node.attribute("name").unwrap_or_default()))
+        })
         .collect();
     let mut paths = Vec::new();
     for node in xml.descendants().filter(roxmltree::Node::is_element) {
@@ -141,16 +144,9 @@ fn references(xml: &Document<'_>, removed: roxmltree::Node<'_, '_>) -> Vec<Strin
         let text = text.trim();
         let local = node.tag_name().name();
         let by_id = id_reference(local) && ids.contains(&text);
-        let by_name = name_reference(local)
-            && names.iter().any(|name| {
-                text == *name
-                    || text
-                        .strip_prefix(name)
-                        .is_some_and(|rest| rest.starts_with('.'))
-                    || text
-                        .strip_suffix(name)
-                        .is_some_and(|rest| rest.ends_with('.'))
-            });
+        let by_name = targets
+            .iter()
+            .any(|(target, name)| named_reference(local, text, target, name));
         if by_id || by_name {
             paths.push(format!("{}@{}", local, node.range().start));
         }
@@ -165,9 +161,41 @@ pub(super) fn id_reference(name: &str) -> bool {
     ) || name.ends_with("ElementId")
 }
 
-pub(super) fn name_reference(name: &str) -> bool {
-    matches!(
-        name,
-        "DataPath" | "CommandName" | "CommandSource" | "DataSource" | "Element" | "Item" | "Path"
-    )
+/// Designer keeps element, attribute and command names in independent namespaces.
+fn named_reference(property: &str, value: &str, target: &FormTarget, element_name: &str) -> bool {
+    let (name, reference, descendants) = match target {
+        FormTarget::Element { .. } => {
+            let reference = match property {
+                "Element" | "Item" => Some(value),
+                "CommandSource" => value.strip_prefix("Item."),
+                "CommandName" => value
+                    .strip_prefix("Form.Item.")
+                    .and_then(|value| value.split('.').next()),
+                _ => None,
+            };
+            (element_name, reference, false)
+        }
+        FormTarget::Attribute { name } => (
+            name.as_str(),
+            (property.ends_with("DataPath") || matches!(property, "DataSource" | "Path"))
+                .then_some(value),
+            true,
+        ),
+        FormTarget::Command { name } => (
+            name.as_str(),
+            (property == "CommandName")
+                .then(|| value.strip_prefix("Form.Command.").unwrap_or(value)),
+            false,
+        ),
+        FormTarget::Root {} | FormTarget::Parameter { .. } => return false,
+    };
+    reference.is_some_and(|reference| {
+        let name = name.to_lowercase();
+        let reference = reference.to_lowercase();
+        reference == name
+            || descendants
+                && reference
+                    .strip_prefix(&name)
+                    .is_some_and(|rest| rest.starts_with('.'))
+    })
 }
