@@ -222,6 +222,18 @@ impl Server {
             }
             if self.client_minor >= 52 {
                 capabilities["formAuthoring"]["listAppearance"] = json!(self.property_editing);
+                if self.property_editing {
+                    use eska_project_core::project::{
+                        forms::ElementKind, metadata_form_edit::child_kinds,
+                    };
+                    capabilities["formAuthoring"]["layoutParents"] = Value::Object(
+                        ElementKind::ALL
+                            .iter()
+                            .copied()
+                            .map(|kind| (kind.xml_name().to_owned(), json!(child_kinds(kind))))
+                            .collect(),
+                    );
+                }
             }
         }
     }
