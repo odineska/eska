@@ -85,6 +85,40 @@ fn params(context: &Value, values: Value) -> Value {
 }
 
 #[test]
+fn form_property_search_uses_localized_applicable_values_for_the_current_revision() {
+    let directory = fixture();
+    let source = directory.0.join("src").join(PATH);
+    let group = "<Form xmlns='http://v8.1c.ru/8.3/xcf/logform'><ChildItems><UsualGroup name='Settings' id='1'><Group>Vertical</Group></UsualGroup></ChildItems></Form>";
+    fs::write(&source, group).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 53);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let request = params(
+        &context,
+        json!({"formSessionId":opened["formSessionId"],
+        "revision":opened["revision"],"query":"вертикальная","locale":"ru-RU"}),
+    );
+    let found = client.request("form/searchProperties", &request);
+    assert!(
+        found["results"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|item| item["id"] == "Group"
+                && item["identity"]["key"]["value"] == "1"
+                && item["value"] == "Вертикальная")
+    );
+    let mut stale = request;
+    stale["revision"] = json!("older");
+    assert!(
+        client
+            .response("form/searchProperties", &stale)
+            .get("error")
+            .is_some()
+    );
+}
+
+#[test]
 fn form_inspector_resolves_unbound_fields_without_mixing_definition_paths() {
     const OWNER_PATH: &str = "Documents/Receipt.xml";
     const OWNER: &str = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"
@@ -1480,8 +1514,42 @@ fn form_root_palette_uses_the_catalog_owner_and_effective_main_attribute() {
     }
     let unbound = update_input(&mut client, &context, &updated, 3, FORM);
     assert_eq!(rows(&mut client, &unbound).len(), 58);
+    let list = bound.replace("cfg:CatalogObject.ProbeOwner", "cfg:DynamicList");
+    let list = update_input(&mut client, &context, &unbound, 4, &list);
+    assert_eq!(rows(&mut client, &list).len(), 58);
     client.finish();
     assert_eq!(fs::read_to_string(payload).unwrap(), FORM);
+}
+
+#[test]
+fn report_form_palette_omits_object_write_events() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let form = INPUT.replace(
+        "</Form>",
+        concat!(
+            r#"<Attributes><Attribute name="Report" id="1">"#,
+            r#"<Type xmlns:v8="http://v8.1c.ru/8.1/data/core" "#,
+            r#"xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">"#,
+            "<v8:Type>cfg:ReportObject</v8:Type></Type>",
+            "<MainAttribute>true</MainAttribute></Attribute></Attributes></Form>"
+        ),
+    );
+    fs::write(path, form).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let palette = inspect_palette(
+        &mut client,
+        &context,
+        &opened,
+        &opened["model"]["root"],
+        true,
+    );
+    let rows = palette["rows"].as_array().unwrap();
+    assert!(rows.iter().any(|row| row["id"] == "platform:OnOpen"));
+    assert!(!rows.iter().any(|row| row["id"] == "platform:BeforeWrite"));
+    client.finish();
 }
 
 #[test]

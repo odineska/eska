@@ -20,18 +20,29 @@ pub(super) enum Context {
 impl Context {
     pub(super) fn new(preview: &FormPreview) -> Option<Self> {
         let owner = preview.form_owner.as_ref()?;
-        match (owner.kind, preview.form.main_attribute()) {
-            (MetadataKind::CommonForm | MetadataKind::Catalog, None) => Some(Self::Ordinary),
-            (MetadataKind::Catalog, Some(attribute)) => {
-                let field_type = presentation::definition_type(attribute);
-                let [kind] = field_type.types.as_slice() else {
-                    return None;
-                };
-                if kind.namespace.as_deref() != Some(references::CONFIG)
-                    || kind.name.strip_prefix("CatalogObject.") != Some(owner.name.as_str())
-                {
-                    return None;
-                }
+        let Some(attribute) = preview.form.main_attribute() else {
+            return matches!(owner.kind, MetadataKind::CommonForm | MetadataKind::Catalog)
+                .then_some(Self::Ordinary);
+        };
+        let field_type = presentation::definition_type(attribute);
+        let [kind] = field_type.types.as_slice() else {
+            return None;
+        };
+        if kind.namespace.as_deref() != Some(references::CONFIG) {
+            return None;
+        }
+        match owner.kind {
+            MetadataKind::Catalog | MetadataKind::Document if kind.name == "DynamicList" => {
+                Some(Self::Ordinary)
+            }
+            MetadataKind::CommonForm | MetadataKind::Report
+                if kind.name == "ReportObject" || kind.name.starts_with("ReportObject.") =>
+            {
+                Some(Self::Ordinary)
+            }
+            MetadataKind::Catalog
+                if kind.name.strip_prefix("CatalogObject.") == Some(owner.name.as_str()) =>
+            {
                 let catalog = preview
                     .resources
                     .iter()
@@ -44,14 +55,10 @@ impl Context {
                     presentation::metadata_property(catalog, "Hierarchical", &preview.resources)?;
                 (appearance::text(&hierarchy.value) == Some("false")).then_some(Self::CatalogObject)
             }
-            (MetadataKind::Document, Some(attribute)) => {
-                let field_type = presentation::definition_type(attribute);
-                let [kind] = field_type.types.as_slice() else {
-                    return None;
-                };
-                (kind.namespace.as_deref() == Some(references::CONFIG)
-                    && kind.name.strip_prefix("DocumentObject.") == Some(owner.name.as_str()))
-                .then_some(Self::DocumentObject)
+            MetadataKind::Document
+                if kind.name.strip_prefix("DocumentObject.") == Some(owner.name.as_str()) =>
+            {
+                Some(Self::DocumentObject)
             }
             _ => None,
         }

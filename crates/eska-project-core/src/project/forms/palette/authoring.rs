@@ -63,12 +63,22 @@ pub fn authoring_properties(kind: ElementKind) -> Vec<AuthoringProperty> {
         {
             values.push("Auto");
         }
+        let default = match definition.absent {
+            PlatformPropertyValue::Choice(caption) => definition
+                .enum_captions
+                .iter()
+                .find(|(_, key)| *key == caption)
+                .map_or(definition.absent, |(token, _)| {
+                    PlatformPropertyValue::Choice(token)
+                }),
+            value => value,
+        };
         output.push(AuthoringProperty {
             id: definition.id,
             name,
             source,
             editor: definition.editor,
-            default: definition.absent,
+            default,
             values,
             category: definition.category,
             enum_captions: definition.enum_captions,
@@ -99,14 +109,19 @@ fn definitions(kind: ElementKind) -> Vec<&'static PaletteDefinition> {
         | ElementKind::SearchControlAddition
         | ElementKind::SearchStringAddition
         | ElementKind::ViewStatusAddition => command::authoring(kind),
-        _ => vec![
-            &common::NAME,
-            &common::TITLE,
-            &common::VISIBLE,
-            &common::ENABLED,
-            &common::READ_ONLY,
-            &common::TOOLTIP,
-            &common::WIDTH,
-        ],
+        _ => {
+            let mut fields = vec![
+                &common::NAME,
+                &common::TITLE,
+                &common::VISIBLE,
+                &common::ENABLED,
+                &common::TOOLTIP,
+                &common::WIDTH,
+            ];
+            if kind.family() == crate::project::forms::ElementFamily::Field {
+                fields.push(&common::READ_ONLY);
+            }
+            fields
+        }
     }
 }

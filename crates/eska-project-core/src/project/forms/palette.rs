@@ -19,7 +19,7 @@ use serde::Serialize;
 
 use super::{
     EffectiveElement, ElementIdentity, ElementKind, FORM_NAMESPACE, FormPreview, SourcedProperty,
-    SourcedQualifier, appearance, commands, handlers,
+    SourcedQualifier, appearance, commands, handlers, presentation::ElementPresentation,
 };
 use crate::project::metadata_model::MetadataValue;
 
@@ -204,36 +204,66 @@ impl FormPreview {
     #[must_use]
     pub fn property_palette(&self, identity: &ElementIdentity) -> Option<PropertyPalette<'_>> {
         let element = self.form.root.find(identity)?;
-        let presentation = || {
-            self.presentation
-                .elements
-                .iter()
-                .find(|item| &item.identity == identity)
-        };
+        let presentation = self
+            .presentation
+            .elements
+            .iter()
+            .find(|item| &item.identity == identity);
+        Some(self.element_palette(element, presentation))
+    }
+
+    /// Visit resolved palettes once in tree order, stopping when the visitor returns false.
+    pub fn visit_property_palettes<'a>(
+        &'a self,
+        mut visit: impl FnMut(&'a EffectiveElement, PropertyPalette<'a>) -> bool,
+    ) {
+        let presentations: HashMap<_, _> = self
+            .presentation
+            .elements
+            .iter()
+            .map(|item| (&item.identity, item))
+            .collect();
+        let mut elements = vec![&self.form.root];
+        while let Some(element) = elements.pop() {
+            if !visit(
+                element,
+                self.element_palette(element, presentations.get(&element.identity).copied()),
+            ) {
+                return;
+            }
+            elements.extend(element.children.iter().chain(&element.auxiliary).rev());
+        }
+    }
+
+    fn element_palette<'a>(
+        &'a self,
+        element: &'a EffectiveElement,
+        presentation: Option<&ElementPresentation>,
+    ) -> PropertyPalette<'a> {
         let rows = match element.kind {
-            Some(ElementKind::Form) if identity == &self.form.root.identity => {
+            Some(ElementKind::Form) if element.identity == self.form.root.identity => {
                 root_form::Context::new(self).map(|context| {
                     self.palette_rows(element, root_form::definitions(context, element))
                 })
             }
-            Some(ElementKind::InputField) => presentation()
+            Some(ElementKind::InputField) => presentation
                 .and_then(|item| input_field::Context::new(item, element))
                 .map(|context| self.palette_rows(element, input_field::definitions(context))),
-            Some(ElementKind::LabelField | ElementKind::PictureField) => presentation()
+            Some(ElementKind::LabelField | ElementKind::PictureField) => presentation
                 .map(|item| self.palette_rows(element, display_field::definitions(item, element))),
             Some(ElementKind::ContextMenu) => {
                 Some(self.palette_rows(element, CONTEXT_MENU.iter().map(|row| (row, true))))
             }
-            Some(ElementKind::Button) => presentation()
+            Some(ElementKind::Button) => presentation
                 .and_then(|item| button::Context::new(self, item, element))
                 .map(|context| self.palette_rows(element, button::definitions(context))),
-            Some(ElementKind::CheckBoxField) => presentation()
+            Some(ElementKind::CheckBoxField) => presentation
                 .and_then(|item| checkbox::Context::new(item, element))
                 .map(|context| self.palette_rows(element, checkbox::definitions(context))),
-            Some(ElementKind::Table) => presentation()
+            Some(ElementKind::Table) => presentation
                 .and_then(|item| table::table_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
-            Some(ElementKind::ColumnGroup) => presentation()
+            Some(ElementKind::ColumnGroup) => presentation
                 .and_then(|item| table::column_group_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
             Some(kind @ (ElementKind::Pages | ElementKind::Page)) => {
@@ -241,11 +271,11 @@ impl FormPreview {
             }
             Some(ElementKind::UsualGroup) => usual_group_definitions(element)
                 .map(|definitions| self.palette_rows(element, definitions)),
-            Some(ElementKind::AutoCommandBar) => presentation()
+            Some(ElementKind::AutoCommandBar) => presentation
                 .and_then(command::auto_bar_definitions)
                 .map(|definitions| self.palette_rows(element, definitions)),
             Some(ElementKind::CommandBar | ElementKind::ButtonGroup | ElementKind::Popup) => {
-                presentation()
+                presentation
                     .and_then(|item| command::group_definitions(item, element))
                     .map(|definitions| self.palette_rows(element, definitions))
             }
@@ -253,12 +283,12 @@ impl FormPreview {
                 ElementKind::SearchStringAddition
                 | ElementKind::SearchControlAddition
                 | ElementKind::ViewStatusAddition,
-            ) => presentation()
+            ) => presentation
                 .and_then(|item| command::addition_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
             _ => None,
         };
-        Some(PropertyPalette { rows })
+        PropertyPalette { rows }
     }
 
     fn palette_rows<'a>(

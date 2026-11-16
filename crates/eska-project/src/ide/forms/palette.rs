@@ -1,11 +1,12 @@
 //! Project the selected element's palette without repeating its XML property values.
 
 use super::{Entry, dto, failure, limit, navigation};
-use crate::ide::{dto::Labels, params};
+use crate::ide::{dto::Labels, envelope::error, params};
 use eska_project_core::project::forms::{
     FormScriptVariant, PaletteCaption, PaletteCategory, PaletteEditor, PaletteRow, PaletteValue,
     PlatformPropertyValue,
 };
+use eska_project_core::project::metadata_model::MetadataValue;
 use serde::Deserialize;
 use serde_json::{Value, json};
 
@@ -16,6 +17,101 @@ struct Input {
     identity: Value,
     #[serde(default)]
     include_event_rows: bool,
+}
+
+#[derive(Deserialize)]
+struct SearchInput {
+    revision: String,
+    query: String,
+    locale: String,
+}
+
+pub(super) fn search(
+    labels: &Labels,
+    entry: &Entry,
+    session: &str,
+    args: &Value,
+) -> Result<Value, Value> {
+    let input: SearchInput = params::decode(args)?;
+    navigation::check_revision(entry, &input.revision)?;
+    if input.query.chars().count() > 512 || !matches!(input.locale.as_str(), "en-US" | "ru-RU") {
+        return Err(error(-32602));
+    }
+    let query = input.query.to_lowercase();
+    let terms: Vec<_> = query.split_whitespace().collect();
+    let mut results = Vec::new();
+    let preview = &entry.preview;
+    if !terms.is_empty() {
+        preview.visit_property_palettes(|element, palette| {
+            let mut append = |id: &str, name: &str, raw: &str, display: &str| {
+                let searchable = format!("{name} {id} {raw} {display}").to_lowercase();
+                if results.len() < 100 && terms.iter().all(|term| searchable.contains(term)) {
+                    let short = |value: &str| value.chars().take(160).collect::<String>();
+                    results.push(json!({"identity":dto::identity(&element.identity),"id":id,"label":short(name),"value":short(display)}));
+                }
+            };
+            if let Some(rows) = palette.rows {
+                for row in rows.into_iter().filter(|row| row.available) {
+                    let Some(definition) = row.definition else { continue };
+                    let localizer = if input.locale == "ru-RU" { &labels.ru } else { &labels.en };
+                    let name = localizer.text(&format!("form-palette-property-{}", definition.id));
+                    let raw = match row.value {
+                        PaletteValue::Declared { property, .. } => search_text(&property.property.value, &input.locale),
+                        PaletteValue::Qualifier { attribute, .. } => &attribute.text,
+                        PaletteValue::Name(name) => name.unwrap_or_default(),
+                        PaletteValue::DeclaredEvent { index, entry_index, .. } => {
+                            match &element.properties[index].property.value {
+                                MetadataValue::Record(fields) => fields.get(entry_index).map_or("", |value| search_text(&value.value, &input.locale)),
+                                _ => "",
+                            }
+                        }
+                        _ => "",
+                    };
+                    let display = match row.value {
+                        PaletteValue::Absent(default) => absent(labels, default),
+                        PaletteValue::Declared { property, .. } => definition
+                            .value_caption(&property.property.value)
+                            .map(|caption| json!({"caption":value_caption(labels, caption, preview.presentation.script_variant)}))
+                            .unwrap_or_default(),
+                        PaletteValue::Qualifier { attribute, .. } => definition
+                            .text_caption(&attribute.text)
+                            .map(|caption| json!({"caption":value_caption(labels, caption, preview.presentation.script_variant)}))
+                            .unwrap_or_default(),
+                        _ => Value::Null,
+                    };
+                    let value = display["caption"][&input.locale].as_str().unwrap_or(raw);
+                    append(definition.id, &name, raw, value);
+                }
+            } else {
+                for property in preview.form.inspectable_properties(element) {
+                    let name = &property.property.key.name;
+                    let raw = search_text(&property.property.value, &input.locale);
+                    append(name, name, raw, raw);
+                }
+            }
+            results.len() < 100
+        });
+    }
+    Ok(json!({"formSessionId":session,"revision":input.revision,"results":results}))
+}
+
+fn search_text<'a>(value: &'a MetadataValue, locale: &str) -> &'a str {
+    match value {
+        MetadataValue::Text(text)
+        | MetadataValue::TypedText { text, .. }
+        | MetadataValue::QualifiedText { text, .. } => text,
+        MetadataValue::Localized(items) => items
+            .iter()
+            .find(|item| {
+                item.language.eq_ignore_ascii_case(locale)
+                    || locale
+                        .split_once('-')
+                        .is_some_and(|(language, _)| item.language.eq_ignore_ascii_case(language))
+            })
+            .or_else(|| items.first())
+            .map_or("", |item| item.content.as_str()),
+        _ => "",
+    }
 }
 
 pub(super) fn inspect(

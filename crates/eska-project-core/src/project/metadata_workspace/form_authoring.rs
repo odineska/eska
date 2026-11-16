@@ -8,7 +8,7 @@ use super::{
 };
 use crate::project::{
     designer_source::SourceRole,
-    metadata_edit::{EditError, EditPlan, snapshot},
+    metadata_edit::{EditError, EditPlan, SavedEdit, snapshot},
     metadata_form_edit::{
         self, FormChanges, FormEditError, FormEditHistory, FormEditPlan, FormEditRequest,
         FormEditResult, FormEditSchema, FormTypeOption, PreparedFormEdit, RemovedFormTarget,
@@ -45,9 +45,17 @@ impl ProjectSession {
     /// # Errors
     /// Rejects stale snapshots, unsafe operations or unavailable source write permissions.
     pub fn preview_form_edit(
-        &mut self,
+        &self,
         request: &FormEditRequest,
     ) -> Result<FormEditPlan, FormEditError> {
+        self.preview_form_steps(request, &[]).map(|(plan, _)| plan)
+    }
+
+    fn preview_form_steps(
+        &self,
+        request: &FormEditRequest,
+        boundaries: &[usize],
+    ) -> Result<(FormEditPlan, Vec<SavedEdit>), FormEditError> {
         let mut current = self.form_authoring_current()?;
         let (path, input) = current.form_authoring_source(&request.form)?;
         if !current.form_authoring_writable(&request.form, &path)? {
@@ -57,11 +65,12 @@ impl ProjectSession {
             edit,
             assigned_ids,
             removed,
-        } = metadata_form_edit::plan_complete(&input, request)?;
+            steps,
+        } = metadata_form_edit::plan_with_steps(&input, request, boundaries)?;
         current.form_new_type_references(&input, edit.output())?;
         let mut inputs = BTreeMap::from([(path.clone(), snapshot(&input))]);
         current.form_removed_references(&request.form, &removed, &mut inputs)?;
-        Ok(FormEditPlan {
+        let plan = FormEditPlan {
             path,
             inputs: inputs.keys().cloned().collect(),
             prepared: PreparedFormEdit {
@@ -72,7 +81,8 @@ impl ProjectSession {
             assigned_ids,
             edit,
             input_snapshots: inputs,
-        })
+        };
+        Ok((plan, steps))
     }
 
     /// Reconstruct an approved preview; client-supplied XML is never accepted as a write capability.
@@ -80,7 +90,7 @@ impl ProjectSession {
     /// # Errors
     /// Rejects source changes or a result hash that differs from the reviewed semantic request.
     pub fn preview_prepared_form_edit(
-        &mut self,
+        &self,
         prepared: &PreparedFormEdit,
     ) -> Result<FormEditPlan, FormEditError> {
         let plan = self.preview_form_edit(&prepared.request)?;
@@ -101,9 +111,26 @@ impl ProjectSession {
         &mut self,
         prepared: &PreparedFormEdit,
     ) -> Result<FormEditResult, FormEditError> {
+        self.apply_form_edit_steps(prepared, &[])
+    }
+
+    /// Publish the final draft atomically and retain the individual user actions for replay.
+    ///
+    /// # Errors
+    /// In addition to publication errors, rejects inconsistent operation boundaries.
+    pub fn apply_form_edit_steps(
+        &mut self,
+        prepared: &PreparedFormEdit,
+        boundaries: &[usize],
+    ) -> Result<FormEditResult, FormEditError> {
         let guard = Guard::acquire(self.project().root())?;
         guard.check_clear(self.project().source())?;
-        let plan = self.preview_prepared_form_edit(prepared)?;
+        let (plan, mut steps) = self.preview_form_steps(&prepared.request, boundaries)?;
+        if plan.prepared.expected_output_snapshot != prepared.expected_output_snapshot
+            || plan.prepared.source_snapshot != prepared.source_snapshot
+        {
+            return Err(EditError::Conflict.into());
+        }
         if plan.is_empty() {
             return Ok(FormEditResult {
                 form: prepared.request.form.clone(),
@@ -113,13 +140,17 @@ impl ProjectSession {
             });
         }
         let after = snapshot(plan.output());
-        let history = plan.edit.history();
+        if boundaries.is_empty() {
+            steps.push(plan.edit.history());
+        }
         let refresh = self.publish_form_plan(&plan.path, &plan.input_snapshots, &plan.edit);
         if refresh.is_ok() || matches!(&refresh, Err(FormEditError::Committed(_))) {
-            self.record_edit(
-                EditedSource::Form(prepared.request.form.clone()),
-                HistoryStep::Scalar(history),
-            );
+            for step in steps {
+                self.record_edit(
+                    EditedSource::Form(prepared.request.form.clone()),
+                    HistoryStep::Scalar(step),
+                );
+            }
         }
         Ok(FormEditResult {
             form: prepared.request.form.clone(),

@@ -167,6 +167,12 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
     if minor < required {
         return Err(error(-32601));
     }
+    if minor < 53
+        && (method == "metadata/previewFormEdit" && args.get("includeDraft").is_some()
+            || method == "metadata/applyFormEdit" && args.get("steps").is_some())
+    {
+        return Err(error(-32602));
+    }
     if minor < 52
         && matches!(
             method,

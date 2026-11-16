@@ -94,6 +94,9 @@ pub(super) fn capability(minor: u32) -> Value {
     if minor >= 47 {
         result["referenceData"] = json!(true);
     }
+    if minor >= 53 {
+        result["propertySearch"] = json!(true);
+    }
     result
 }
 pub(super) fn is_method(method: &str) -> bool {
@@ -106,6 +109,7 @@ pub(super) fn is_method(method: &str) -> bool {
             | "form/close"
             | "form/locate"
             | "form/inspect"
+            | "form/searchProperties"
             | "form/handlerSource"
             | "form/handlerLocate"
     )
@@ -196,6 +200,9 @@ impl Server {
                 "form/locate" => navigation::locate(entry, args, self.client_minor)?,
                 "form/inspect" if self.client_minor >= 41 => {
                     palette::inspect(&self.labels, entry, &input.form_session_id, args)?
+                }
+                "form/searchProperties" if self.client_minor >= 53 => {
+                    palette::search(&self.labels, entry, &input.form_session_id, args)?
                 }
                 "form/handlerSource" | "form/handlerLocate" => {
                     if self.client_minor < 39 {

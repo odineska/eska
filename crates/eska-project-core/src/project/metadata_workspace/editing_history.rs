@@ -2,7 +2,7 @@
 
 use super::{ProjectSession, RefreshReport};
 use crate::project::{
-    metadata_edit::SavedEdit,
+    metadata_edit::{MAX_SOURCE_HISTORY_BYTES, MAX_SOURCE_HISTORY_STEPS, SavedEdit},
     metadata_model::ObjectId,
     metadata_rename::{RenamePlan, history::SavedRename},
 };
@@ -87,8 +87,8 @@ impl ProjectSession {
         let entry = self.edit_history.entry(source).or_default();
         entry.redo.clear();
         entry.undo.push(step);
-        while entry.undo.len() > 100
-            || entry.undo.iter().map(HistoryStep::bytes).sum::<usize>() > 8 * 1024 * 1024
+        while entry.undo.len() > MAX_SOURCE_HISTORY_STEPS
+            || entry.undo.iter().map(HistoryStep::bytes).sum::<usize>() > MAX_SOURCE_HISTORY_BYTES
         {
             entry.undo.remove(0);
         }

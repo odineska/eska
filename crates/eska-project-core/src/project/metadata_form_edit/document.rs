@@ -1,6 +1,6 @@
 //! Checked byte-level operations retain unknown XML and all untouched source bytes.
 
-use std::collections::HashSet;
+use std::collections::{HashSet, VecDeque};
 
 use roxmltree::{Document, Node};
 
@@ -10,7 +10,10 @@ use super::{
 };
 use crate::project::{
     forms::{self, ElementKind, FORM_NAMESPACE, FormIssue},
-    metadata_edit::{EditError, EditPlan, Replacement, snapshot, xml_replacements},
+    metadata_edit::{
+        EditError, EditPlan, MAX_SOURCE_HISTORY_BYTES, MAX_SOURCE_HISTORY_STEPS, Replacement,
+        SavedEdit, snapshot, xml_replacements,
+    },
 };
 
 /// Minimal managed form accepted and normalized by the platform for both form owners.
@@ -39,16 +42,34 @@ pub fn plan(
 }
 
 pub fn plan_complete(input: &str, request: &FormEditRequest) -> Result<FormChanges, FormEditError> {
+    plan_with_steps(input, request, &[])
+}
+
+pub fn plan_with_steps(
+    input: &str,
+    request: &FormEditRequest,
+    steps: &[usize],
+) -> Result<FormChanges, FormEditError> {
     if snapshot(input) != request.snapshot {
         return Err(EditError::Conflict.into());
     }
     if request.operations.len() > 1024 {
         return Err(invalid("operations", "too_many"));
     }
+    if !steps.is_empty()
+        && (steps.last() != Some(&request.operations.len())
+            || steps[0] == 0
+            || steps.windows(2).any(|pair| pair[0] >= pair[1]))
+    {
+        return Err(invalid("steps", "invalid_boundaries"));
+    }
     validate(input)?;
     let mut output = input.to_owned();
     let mut assigned = Vec::new();
     let mut removed = Vec::new();
+    let mut previous = (!steps.is_empty()).then(|| input.to_owned());
+    let mut boundaries = steps.iter().copied().peekable();
+    let mut history = VecDeque::new();
     for (index, operation) in request.operations.iter().enumerate() {
         let document = xml(&output)?;
         let replacements = super::operations::apply(
@@ -63,12 +84,29 @@ pub fn plan_complete(input: &str, request: &FormEditRequest) -> Result<FormChang
             .output()
             .clone_into(&mut output);
         validate(&output)?;
+        if boundaries.peek() == Some(&(index + 1))
+            && let Some(previous) = &mut previous
+        {
+            boundaries.next();
+            let edit = xml_replacements(previous, difference(previous, &output))?;
+            if !edit.is_empty() {
+                history.push_back(edit.history());
+                while history.len() > MAX_SOURCE_HISTORY_STEPS
+                    || history.iter().map(SavedEdit::bytes).sum::<usize>()
+                        > MAX_SOURCE_HISTORY_BYTES
+                {
+                    history.pop_front();
+                }
+            }
+            previous.clone_from(&output);
+        }
     }
     let replacements = difference(input, &output);
     Ok(FormChanges {
         edit: xml_replacements(input, replacements)?,
         assigned_ids: assigned,
         removed,
+        steps: history.into(),
     })
 }
 

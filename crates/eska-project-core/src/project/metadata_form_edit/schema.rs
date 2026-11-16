@@ -64,6 +64,15 @@ pub struct FormEditSchema {
     pub dynamic_list_appearance: Vec<appearance::ListAppearanceSchema>,
 }
 
+/// Mutable parts of the schema derived from the exact bytes in a checked plan.
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FormDraftSchema {
+    pub nodes: Vec<FormEditNode>,
+    pub conditional_appearance: Option<appearance::AppearanceSchema>,
+    pub dynamic_list_appearance: Vec<appearance::ListAppearanceSchema>,
+}
+
 /// Inspect exactly one managed-form payload, including existing properties unknown to the palette.
 ///
 /// # Errors
@@ -75,6 +84,43 @@ pub fn inspect(
     writable: bool,
 ) -> Result<FormEditSchema, FormEditError> {
     document::validate(input)?;
+    let FormDraftSchema {
+        nodes,
+        conditional_appearance,
+        dynamic_list_appearance,
+    } = inspect_draft(input, writable)?;
+    Ok(FormEditSchema {
+        form: form.clone(),
+        path,
+        snapshot: snapshot(input),
+        writable,
+        nodes,
+        element_kinds: ElementKind::ALL
+            .iter()
+            .copied()
+            .map(|kind| FormElementKindSchema {
+                kind,
+                catalog: authoring_properties(kind),
+                child_kinds: child_kinds(kind),
+            })
+            .collect(),
+        conditional_appearance,
+        dynamic_list_appearance,
+        definition_kinds: ["Attribute", "Column", "Command", "Parameter"]
+            .into_iter()
+            .map(|kind| FormDefinitionSchema {
+                kind,
+                catalog: definition_catalog(kind),
+            })
+            .collect(),
+    })
+}
+
+/// Inspect the result of a validated form-edit plan.
+///
+/// # Errors
+/// Returns a malformed XML error if its input is not parseable.
+pub fn inspect_draft(input: &str, writable: bool) -> Result<FormDraftSchema, FormEditError> {
     let document = document::xml(input)?;
     let nodes = document
         .root_element()
@@ -95,6 +141,7 @@ pub fn inspect(
                     let writable = writable
                         && node.tag_name().name() != "Events"
                         && (!node.has_tag_name((FORM_NAMESPACE, "Type"))
+                            || !node.parent().is_some_and(defines_data_type)
                             || super::types::validate(node).is_ok())
                         && supported_value(&property.value);
                     FormEditProperty { property, writable }
@@ -128,30 +175,10 @@ pub fn inspect(
             })
         })
         .collect();
-    Ok(FormEditSchema {
-        form: form.clone(),
-        path,
-        snapshot: snapshot(input),
-        writable,
+    Ok(FormDraftSchema {
         nodes,
-        element_kinds: ElementKind::ALL
-            .iter()
-            .copied()
-            .map(|kind| FormElementKindSchema {
-                kind,
-                catalog: authoring_properties(kind),
-                child_kinds: child_kinds(kind),
-            })
-            .collect(),
         conditional_appearance: appearance::inspect(document.root_element()),
         dynamic_list_appearance: appearance::inspect_lists(document.root_element()),
-        definition_kinds: ["Attribute", "Column", "Command", "Parameter"]
-            .into_iter()
-            .map(|kind| FormDefinitionSchema {
-                kind,
-                catalog: definition_catalog(kind),
-            })
-            .collect(),
     })
 }
 
@@ -172,6 +199,11 @@ pub(super) fn catalog(node: Node<'_, '_>) -> Vec<AuthoringProperty> {
         || definition_catalog(node.tag_name().name()),
         authoring_properties,
     )
+}
+
+pub(super) fn defines_data_type(node: Node<'_, '_>) -> bool {
+    node.tag_name().namespace() == Some(FORM_NAMESPACE)
+        && matches!(node.tag_name().name(), "Attribute" | "Column" | "Parameter")
 }
 
 pub(super) fn definition_catalog(kind: &str) -> Vec<AuthoringProperty> {

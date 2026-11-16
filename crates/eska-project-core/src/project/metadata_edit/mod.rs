@@ -40,6 +40,9 @@ use std::{fmt::Write, io, ops::Range};
 
 use sha2::{Digest, Sha256};
 
+pub(crate) const MAX_SOURCE_HISTORY_STEPS: usize = 100;
+pub(crate) const MAX_SOURCE_HISTORY_BYTES: usize = 8 * 1024 * 1024;
+
 /// A replacement is always computed by the backend from a parsed property.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Replacement {

@@ -15,7 +15,12 @@ pub(super) fn set(
 ) -> Result<Vec<Replacement>, FormEditError> {
     unique_property(node, &property.key)?;
     let definition = schema::validate_property(node, property)?;
-    validate_type(property, node)?;
+    if definition.is_some() {
+        validate_command_dependencies(node, property)?;
+    }
+    if schema::defines_data_type(node) {
+        validate_type(property, node)?;
+    }
     if definition.is_some_and(|definition| definition.source == AuthoringSource::Qualifier) {
         let MetadataValue::Text(text) = &property.value else {
             return Err(invalid("property", "invalid_qualifier"));
@@ -31,7 +36,7 @@ pub(super) fn set(
         if existing == *property {
             return Ok(Vec::new());
         }
-        if current.has_tag_name((FORM_NAMESPACE, "Type")) {
+        if current.has_tag_name((FORM_NAMESPACE, "Type")) && schema::defines_data_type(node) {
             super::super::types::validate(current)?;
         }
         if existing.qualifiers == property.qualifiers
@@ -62,6 +67,53 @@ pub(super) fn set(
         &render::property(property, node)?,
         before,
     )?])
+}
+
+fn validate_command_dependencies(
+    node: Node<'_, '_>,
+    property: &MetadataProperty,
+) -> Result<(), FormEditError> {
+    if !matches!(&property.value, MetadataValue::Text(value) if matches!(value.as_str(), "false" | "0"))
+    {
+        return Ok(());
+    }
+    let commands = || {
+        node.document()
+            .root_element()
+            .descendants()
+            .filter(|child| child.has_tag_name((FORM_NAMESPACE, "CommandName")))
+    };
+    let in_use = match (node.tag_name().name(), property.key.name.as_str()) {
+        ("Form", "Customizable") => commands().any(|command| {
+            command.text().map(str::trim) == Some("Form.StandardCommand.CustomizeForm")
+        }),
+        ("Table", "ChangeRowSet") => {
+            let name = node.attribute("name").unwrap_or_default();
+            let prefix = format!("Form.Item.{name}.StandardCommand.");
+            commands().any(|command| {
+                let Some(value) = command.text().map(str::trim) else {
+                    return false;
+                };
+                let local = command
+                    .ancestors()
+                    .find(|parent| parent.has_tag_name((FORM_NAMESPACE, "Table")))
+                    == Some(node);
+                let action = value
+                    .strip_prefix(&prefix)
+                    .or_else(|| local.then_some(value));
+                matches!(
+                    action,
+                    Some("Add" | "Copy" | "Create" | "Delete" | "MoveItem" | "SetDeletionMark")
+                )
+            })
+        }
+        _ => false,
+    };
+    // Designer rejects imports if a form disables commands still assigned to its buttons.
+    if in_use {
+        return Err(invalid("property", "used_standard_commands"));
+    }
+    Ok(())
 }
 
 pub(super) fn validate_type(

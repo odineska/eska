@@ -236,6 +236,9 @@ impl Server {
                     );
                 }
             }
+            if self.client_minor >= 53 {
+                capabilities["formAuthoring"]["draft"] = json!(self.property_editing);
+            }
         }
     }
 

@@ -576,6 +576,119 @@ fn type_property(digits: &str, fraction: &str) -> MetadataProperty {
 }
 
 #[test]
+fn editing_flags_preserves_active_standard_commands() {
+    let input = source(
+        r#"<ChildItems>
+        <Button name="Customize" id="1"><CommandName>Form.StandardCommand.CustomizeForm</CommandName></Button>
+        <Table name="Folders" id="2"><ContextMenu name="Menu" id="3"><ChildItems>
+        <Button name="Remove" id="4"><CommandName>Delete</CommandName></Button>
+        </ChildItems></ContextMenu><ChildItems/></Table>
+        <Button name="Create" id="5"><CommandName>Form.Item.Folders.StandardCommand.Create</CommandName></Button>
+        <Table name="Items" id="6"><ChildItems/></Table>
+        </ChildItems>"#,
+    );
+    let edit = |target, name| FormOperation::SetProperty {
+        target,
+        property: property(name, "false"),
+    };
+    for op in [
+        edit(FormTarget::Root {}, "Customizable"),
+        edit(FormTarget::Element { id: 2 }, "ChangeRowSet"),
+    ] {
+        assert!(matches!(
+            plan(&input, &request(&input, vec![op])),
+            Err(FormEditError::Invalid {
+                reason: "used_standard_commands",
+                ..
+            })
+        ));
+    }
+    let (result, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![edit(FormTarget::Element { id: 6 }, "ChangeRowSet")],
+        ),
+    )
+    .unwrap();
+    assert!(
+        result
+            .output()
+            .contains("<ChangeRowSet>false</ChangeRowSet>")
+    );
+}
+
+#[test]
+fn decoration_and_tooltip_do_not_expose_field_read_only() {
+    for kind in ["LabelDecoration", "PictureDecoration", "ExtendedTooltip"] {
+        let kind = crate::project::forms::ElementKind::from_xml_name(kind).unwrap();
+        let fields = crate::project::forms::authoring_properties(kind);
+        assert!(fields.iter().all(|field| field.name != "ReadOnly"));
+    }
+    let field = crate::project::forms::ElementKind::CalendarField;
+    assert!(
+        crate::project::forms::authoring_properties(field)
+            .iter()
+            .any(|field| field.name == "ReadOnly")
+    );
+}
+
+#[test]
+fn popup_and_button_group_use_distinct_representation_values() {
+    let input = source(
+        "<ChildItems><Popup name='More' id='1'><Representation>Picture</Representation></Popup><ButtonGroup name='Commands' id='2'/></ChildItems>",
+    );
+    let edit = |id, value| {
+        plan(
+            &input,
+            &request(
+                &input,
+                vec![FormOperation::SetProperty {
+                    target: FormTarget::Element { id },
+                    property: property("Representation", value),
+                }],
+            ),
+        )
+    };
+    assert!(edit(1, "Text").is_ok());
+    assert!(edit(1, "Compact").is_err());
+    assert!(edit(2, "Compact").is_ok());
+    assert!(edit(2, "Text").is_err());
+}
+
+#[test]
+fn button_type_is_an_enum_and_remains_writable_after_an_edit() {
+    let input = source(
+        "<ChildItems><Button name='Choose' id='1'><Type>UsualButton</Type></Button></ChildItems>",
+    );
+    let target = FormTarget::Element { id: 1 };
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::SetProperty {
+                target: target.clone(),
+                property: property("Type", "Hyperlink"),
+            }],
+        ),
+    )
+    .unwrap();
+    assert!(edit.output().contains("<Type>Hyperlink</Type>"));
+    let schema = super::inspect_draft(edit.output(), true).unwrap();
+    let button = schema
+        .nodes
+        .iter()
+        .find(|node| node.target == target)
+        .unwrap();
+    assert!(
+        button
+            .properties
+            .iter()
+            .any(|field| field.property.key.name == "Type" && field.writable)
+    );
+}
+
+#[test]
 fn type_descriptions_share_numeric_validation_and_resolve_namespaces_by_identity() {
     let input = empty_form();
     let operation = |property| FormOperation::AddDefinition {

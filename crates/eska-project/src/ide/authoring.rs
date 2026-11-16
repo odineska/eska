@@ -1,6 +1,9 @@
 //! Structural metadata and form clients share plans, discovery and stable domain failures.
 
+use std::collections::BTreeMap;
+
 use eska_project_core::project::{
+    forms::PlatformPropertyValue,
     metadata_edit::snapshot_bytes,
     metadata_form_edit::{FormEditError, FormEditPlan, FormEditResult, FormEditSchema},
     metadata_objects::{ObjectError, ObjectPlan, ObjectRequest, ObjectResult, ObjectSchema},
@@ -162,7 +165,7 @@ pub fn form_schema(labels: &Labels, schema: &FormEditSchema) -> Value {
         .map(|kind| &kind.catalog)
         .chain(schema.definition_kinds.iter().map(|kind| &kind.catalog));
     let mut property_captions = serde_json::Map::new();
-    let mut choice_captions = serde_json::Map::new();
+    let mut choice_captions = BTreeMap::<_, serde_json::Map<String, Value>>::new();
     for field in catalogs.flatten() {
         property_captions.entry(field.id).or_insert_with(|| {
             let key = eska_project_core::project::metadata_model::PropertyKey {
@@ -175,29 +178,28 @@ pub fn form_schema(labels: &Labels, schema: &FormEditSchema) -> Value {
                     .unwrap_or_else(|| field.id.to_owned())
             })
         });
-        if !field.enum_captions.is_empty() {
-            choice_captions.entry(field.id).or_insert_with(|| {
-                Value::Object(
-                    field
-                        .enum_captions
-                        .iter()
-                        .map(|(value, key)| {
-                            (
-                                (*value).to_owned(),
-                                editing::paired(labels, |locale| {
-                                    locale
-                                        .form_choice_caption(key)
-                                        .unwrap_or_else(|| (*value).to_owned())
-                                }),
-                            )
-                        })
-                        .collect(),
-                )
+        let automatic = match field.default {
+            PlatformPropertyValue::Auto => Some(("Auto", "auto")),
+            PlatformPropertyValue::AutoStretch => Some(("Auto", "autoStretch")),
+            _ => None,
+        }
+        .filter(|_| field.values.contains(&"Auto"));
+        for (value, key) in automatic
+            .into_iter()
+            .chain(field.enum_captions.iter().copied())
+        {
+            let choices = choice_captions.entry(field.id).or_default();
+            choices.entry(value.to_owned()).or_insert_with(|| {
+                editing::paired(labels, |locale| {
+                    locale
+                        .form_choice_caption(key)
+                        .unwrap_or_else(|| value.to_owned())
+                })
             });
         }
     }
     result["propertyCaptions"] = Value::Object(property_captions);
-    result["choiceCaptions"] = Value::Object(choice_captions);
+    result["choiceCaptions"] = json!(choice_captions);
     result["schemaVersion"] = json!(1);
     result["path"] = dto::path(&schema.path);
     result["requestSchemas"] = request_schemas();

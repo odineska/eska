@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::project::{
     forms::FormParseError,
-    metadata_edit::{EditError, EditPlan, Replacement},
+    metadata_edit::{EditError, EditPlan, Replacement, SavedEdit},
     metadata_model::{MetadataProperty, ObjectId, PropertyKey},
     metadata_rename::NameError,
     metadata_workspace::{RefreshReport, WorkspaceError},
@@ -24,10 +24,10 @@ use crate::project::{
 
 pub use appearance::AppearanceRule;
 pub use document::{empty_form, plan};
-pub(crate) use document::{plan_complete, removed_targets};
+pub(crate) use document::{plan_with_steps, removed_targets};
 pub use schema::{
-    FormDefinitionSchema, FormEditNode, FormEditProperty, FormEditSchema, FormElementKindSchema,
-    child_kinds, inspect,
+    FormDefinitionSchema, FormDraftSchema, FormEditNode, FormEditProperty, FormEditSchema,
+    FormElementKindSchema, child_kinds, inspect, inspect_draft,
 };
 pub use types::FormTypeOption;
 pub(crate) use types::{type_options, type_reference};
@@ -190,6 +190,7 @@ pub(crate) struct FormChanges {
     pub edit: EditPlan,
     pub assigned_ids: Vec<AssignedFormId>,
     pub removed: Vec<RemovedFormTarget>,
+    pub steps: Vec<SavedEdit>,
 }
 
 impl FormEditPlan {
