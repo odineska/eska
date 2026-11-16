@@ -37,6 +37,11 @@ const RULES: &[Rule] = &[
         domain: "Document",
     },
     Rule {
+        owner: "Column",
+        property: "References",
+        domain: "DocumentAttribute",
+    },
+    Rule {
         owner: "ChartOfCalculationTypes",
         property: "BaseCalculationTypes",
         domain: "ChartOfCalculationTypes",

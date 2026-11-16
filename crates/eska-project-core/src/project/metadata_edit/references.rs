@@ -39,6 +39,7 @@ pub fn accepts(domain: &str, parts: &[(MetadataKind, &str)]) -> bool {
             ],
         )
         | ("Document", [(K::Document, _)])
+        | ("DocumentAttribute", [(K::Document, _), (K::Attribute, _)])
         | (
             "FunctionalOptionParameterUse",
             [(K::Catalog, _)] | [(K::InformationRegister, _), (K::Dimension, _)],

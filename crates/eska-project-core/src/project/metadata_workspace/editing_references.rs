@@ -226,24 +226,24 @@ impl ProjectSession {
         &mut self,
         domain: &str,
     ) -> Result<Vec<PropertyReferenceChoice>, PropertyEditError> {
-        if matches!(
-            domain,
-            "FunctionalOptionParameterUse" | "FunctionalOptionLocation"
-        ) {
-            let owners: Vec<_> = self
-                .objects
-                .values()
-                .filter(|object| {
-                    object.parent.is_none()
-                        && (object.kind == MetadataKind::InformationRegister
-                            || domain == "FunctionalOptionLocation"
-                                && object.kind == MetadataKind::Catalog)
-                })
-                .map(|object| object.id.clone())
-                .collect();
-            for owner in owners {
-                self.children(&NodeId::Object(owner), TreeOptions::default())?;
-            }
+        let owners: Vec<_> = self
+            .objects
+            .values()
+            .filter(|object| {
+                object.parent.is_none()
+                    && matches!(
+                        (domain, object.kind),
+                        (
+                            "FunctionalOptionParameterUse" | "FunctionalOptionLocation",
+                            MetadataKind::InformationRegister
+                        ) | ("FunctionalOptionLocation", MetadataKind::Catalog)
+                            | ("DocumentAttribute", MetadataKind::Document)
+                    )
+            })
+            .map(|object| object.id.clone())
+            .collect();
+        for owner in owners {
+            self.children(&NodeId::Object(owner), TreeOptions::default())?;
         }
         let mut choices = Vec::new();
         for object in self.objects.values() {

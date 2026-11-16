@@ -101,6 +101,18 @@ fn copy_request(source: ObjectId, name: &str) -> ObjectRequest {
     }
 }
 
+fn create_request(kind: MetadataKind, name: &str, parent: Option<ObjectId>) -> ObjectRequest {
+    ObjectRequest::Create {
+        kind,
+        name: name.to_owned(),
+        parent,
+        template: None,
+        property_values: BTreeMap::new(),
+        property_references: BTreeMap::new(),
+        property_types: BTreeMap::new(),
+    }
+}
+
 #[test]
 fn deep_copy_preserves_original_resources_and_allocates_owned_identity() {
     let stand = Stand::new();
@@ -541,4 +553,187 @@ fn copy_protects_read_dependencies_and_rechecks_them_under_batch_lease() {
         Err(ObjectError::Edit(EditError::Conflict))
     ));
     assert!(!stand.source().join("Documents/Twin.xml").exists());
+}
+
+#[test]
+fn nested_service_handlers_are_required_and_parameter_has_native_xdto_default() {
+    use crate::project::metadata_edit::{ScalarSchema, initial_field};
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let service = create_request(MetadataKind::WebService, "Service", None);
+    let plan = project.preview_object(&service).unwrap();
+    let service = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    let route = create_request(
+        MetadataKind::URLTemplate,
+        "Route",
+        Some(id(MetadataKind::HTTPService, "Api", None)),
+    );
+    let plan = project.preview_object(&route).unwrap();
+    let route = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    for (kind, name, parent, required) in [
+        (
+            MetadataKind::Operation,
+            "Run",
+            service.clone(),
+            "ProcedureName",
+        ),
+        (MetadataKind::Method, "Get", route, "Handler"),
+    ] {
+        let schema = project.object_schema(Some(&parent)).unwrap();
+        assert_eq!(schema.required_properties[kind.as_str()], [required]);
+        assert!(matches!(
+            initial_field(kind, required),
+            Some(ScalarSchema::Text { domain: None })
+        ));
+        let mut request = create_request(kind, name, Some(parent));
+        assert!(
+            matches!(project.preview_object(&request), Err(ObjectError::Invalid { field, reason: "required_property" }) if field == required)
+        );
+        if let ObjectRequest::Create {
+            property_values, ..
+        } = &mut request
+        {
+            property_values.insert(required.to_owned(), "HandleRequest".to_owned());
+        }
+        let plan = project.preview_object(&request).unwrap();
+        project.apply_object(&plan.prepared).unwrap();
+    }
+    let parameter = create_request(
+        MetadataKind::Parameter,
+        "Argument",
+        Some(id(MetadataKind::Operation, "Run", Some(&service))),
+    );
+    let plan = project.preview_object(&parameter).unwrap();
+    project.apply_object(&plan.prepared).unwrap();
+    let input = fs::read_to_string(stand.source().join("WebServices/Service.xml")).unwrap();
+    let parsed = roxmltree::Document::parse(&input).unwrap();
+    let parameter = parsed
+        .descendants()
+        .find(|node| node.has_tag_name((xml::MD, "Parameter")))
+        .unwrap();
+    assert!(
+        !parameter
+            .descendants()
+            .any(|node| node.has_tag_name((xml::MD, "Type")))
+    );
+    let value = parameter
+        .descendants()
+        .find(|node| node.has_tag_name((xml::MD, "XDTOValueType")))
+        .unwrap();
+    assert_eq!(value.text(), Some("xs:string"));
+    assert_eq!(
+        value.lookup_namespace_uri(Some("xs")),
+        Some("http://www.w3.org/2001/XMLSchema")
+    );
+}
+
+#[test]
+fn journal_column_requires_declared_document_attributes_with_discoverable_choices() {
+    use crate::project::metadata_objects::ObjectInitialChoices;
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let mut journal = create_request(MetadataKind::DocumentJournal, "Journal", None);
+    if let ObjectRequest::Create {
+        property_references,
+        ..
+    } = &mut journal
+    {
+        property_references.insert(
+            "RegisteredDocuments".to_owned(),
+            vec!["Document.Origin".to_owned()],
+        );
+    }
+    let plan = project.preview_object(&journal).unwrap();
+    let journal = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    let schema = project.object_schema(Some(&journal)).unwrap();
+    assert_eq!(schema.required_properties["column"], ["References"]);
+    assert_eq!(schema.reference_properties["column"], ["References"]);
+    let fields = project
+        .object_initial_fields(Some(&journal), MetadataKind::Column)
+        .unwrap();
+    let choices = fields
+        .iter()
+        .find(|field| field.property == "References")
+        .unwrap();
+    let ObjectInitialChoices::References { multiple, choices } = &choices.choices else {
+        panic!("references selector required");
+    };
+    assert!(*multiple);
+    assert!(
+        choices
+            .iter()
+            .any(|choice| choice.value == "Document.Origin.Attribute.Self")
+    );
+    let mut column = create_request(MetadataKind::Column, "Value", Some(journal));
+    assert!(matches!(
+        project.preview_object(&column),
+        Err(ObjectError::Invalid {
+            field: "References",
+            reason: "required_property"
+        })
+    ));
+    if let ObjectRequest::Create {
+        property_references,
+        ..
+    } = &mut column
+    {
+        property_references.insert("References".to_owned(), vec!["HTTPService.Api".to_owned()]);
+    }
+    assert!(project.preview_object(&column).is_err());
+    if let ObjectRequest::Create {
+        property_references,
+        ..
+    } = &mut column
+    {
+        property_references.insert(
+            "References".to_owned(),
+            vec!["Document.Origin.Attribute.Missing".to_owned()],
+        );
+    }
+    assert!(project.preview_object(&column).is_err());
+    if let ObjectRequest::Create {
+        property_references,
+        ..
+    } = &mut column
+    {
+        property_references.insert(
+            "References".to_owned(),
+            vec!["Document.Origin.Attribute.Self".to_owned()],
+        );
+    }
+    let plan = project.preview_object(&column).unwrap();
+    project.apply_object(&plan.prepared).unwrap();
+    let input = fs::read_to_string(stand.source().join("DocumentJournals/Journal.xml")).unwrap();
+    let parsed = roxmltree::Document::parse(&input).unwrap();
+    let value = parsed
+        .descendants()
+        .find(|node| {
+            node.has_tag_name((xml::XR, "Item"))
+                && node
+                    .parent()
+                    .is_some_and(|parent| parent.has_tag_name((xml::MD, "References")))
+        })
+        .unwrap();
+    assert_eq!(value.text(), Some("Document.Origin.Attribute.Self"));
+    let (prefix, name) = value
+        .attribute(("http://www.w3.org/2001/XMLSchema-instance", "type"))
+        .unwrap()
+        .split_once(':')
+        .unwrap();
+    assert_eq!(name, "MDObjectRef");
+    assert_eq!(value.lookup_namespace_uri(Some(prefix)), Some(xml::XR));
 }

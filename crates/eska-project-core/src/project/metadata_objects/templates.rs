@@ -18,6 +18,9 @@ pub const fn required_properties(kind: MetadataKind) -> &'static [&'static str] 
         K::BusinessProcess => &["Task"],
         K::DocumentJournal => &["RegisteredDocuments"],
         K::Sequence => &["Documents"],
+        K::Operation => &["ProcedureName"],
+        K::Method => &["Handler"],
+        K::Column => &["References"],
         _ => &[],
     }
 }
@@ -246,7 +249,8 @@ fn defaults(kind: MetadataKind, name: &str) -> String {
         K::WebService => format!("<Namespace>urn:eska:{name}</Namespace><DescriptorFileName>{name}.1cws</DescriptorFileName>"),
         K::Language => format!("<LanguageCode>{name}</LanguageCode>"),
         K::XDTOPackage => format!("<Namespace>urn:eska:{name}</Namespace>"),
-        K::Constant | K::SessionParameter | K::DefinedType | K::CommonAttribute | K::Attribute | K::Dimension | K::Resource | K::AddressingAttribute | K::AccountingFlag | K::ExtDimensionAccountingFlag | K::Parameter => "<Type><v8:Type>xs:string</v8:Type><v8:StringQualifiers><v8:Length>0</v8:Length><v8:AllowedLength>Variable</v8:AllowedLength></v8:StringQualifiers></Type>".to_owned(),
+        K::Parameter => "<XDTOValueType>xs:string</XDTOValueType>".to_owned(),
+        K::Constant | K::SessionParameter | K::DefinedType | K::CommonAttribute | K::Attribute | K::Dimension | K::Resource | K::AddressingAttribute | K::AccountingFlag | K::ExtDimensionAccountingFlag => "<Type><v8:Type>xs:string</v8:Type><v8:StringQualifiers><v8:Length>0</v8:Length><v8:AllowedLength>Variable</v8:AllowedLength></v8:StringQualifiers></Type>".to_owned(),
         _ => String::new(),
     }
 }
