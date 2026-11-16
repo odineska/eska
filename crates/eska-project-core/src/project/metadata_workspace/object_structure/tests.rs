@@ -113,6 +113,40 @@ fn create_request(kind: MetadataKind, name: &str, parent: Option<ObjectId>) -> O
     }
 }
 
+fn property_values(mut request: ObjectRequest, values: &[(&str, &str)]) -> ObjectRequest {
+    let (ObjectRequest::Create {
+        property_values, ..
+    }
+    | ObjectRequest::Copy {
+        property_values, ..
+    }) = &mut request
+    else {
+        panic!("property overrides belong to create/copy requests");
+    };
+    property_values.extend(
+        values
+            .iter()
+            .map(|(key, value)| ((*key).to_owned(), (*value).to_owned())),
+    );
+    request
+}
+
+fn create_with_properties(
+    project: &mut ProjectSession,
+    kind: MetadataKind,
+    name: &str,
+    parent: Option<&ObjectId>,
+    values: &[(&str, &str)],
+) -> ObjectId {
+    let request = property_values(create_request(kind, name, parent.cloned()), values);
+    let plan = project.preview_object(&request).unwrap();
+    project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap()
+}
+
 #[test]
 fn deep_copy_preserves_original_resources_and_allocates_owned_identity() {
     let stand = Stand::new();
@@ -336,6 +370,174 @@ fn copied_http_service_requires_explicit_unique_property_override() {
             .unwrap()
             .contains("<RootURL>second</RootURL>")
     );
+}
+
+#[test]
+fn http_route_uniqueness_uses_only_its_immediate_service_owner() {
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let service = id(MetadataKind::HTTPService, "Api", None);
+    let schema = project.object_schema(Some(&service)).unwrap();
+    assert_eq!(schema.unique_properties["url-template"], ["Template"]);
+    let route = create_with_properties(
+        project,
+        MetadataKind::URLTemplate,
+        "Route",
+        Some(&service),
+        &[("Template", "/native")],
+    );
+    let request = copy_request(route.clone(), "RouteTwin");
+    assert!(matches!(
+        project.preview_object(&request),
+        Err(ObjectError::PropertyConflict { property, value, object })
+            if property == "Template" && value == "/native" && object == route
+    ));
+    let plan = project
+        .preview_object(&property_values(request, &[("Template", "/another")]))
+        .unwrap();
+    assert!(plan.inputs.contains(&PathBuf::from("HTTPServices/Api.xml")));
+    project.apply_object(&plan.prepared).unwrap();
+    create_with_properties(
+        project,
+        MetadataKind::URLTemplate,
+        "CaseDistinct",
+        Some(&service),
+        &[("Template", "/NATIVE")],
+    );
+    let other = create_with_properties(project, MetadataKind::HTTPService, "Other", None, &[]);
+    create_with_properties(
+        project,
+        MetadataKind::URLTemplate,
+        "Route",
+        Some(&other),
+        &[("Template", "/native")],
+    );
+}
+
+#[test]
+fn http_method_uniqueness_uses_exact_sibling_ranges_and_declared_enum_choices() {
+    use crate::project::metadata_objects::ObjectInitialChoices;
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let service = id(MetadataKind::HTTPService, "Api", None);
+    let first = create_with_properties(
+        project,
+        MetadataKind::URLTemplate,
+        "First",
+        Some(&service),
+        &[("Template", "/first")],
+    );
+    let second = create_with_properties(
+        project,
+        MetadataKind::URLTemplate,
+        "Second",
+        Some(&service),
+        &[("Template", "/second")],
+    );
+    assert_eq!(
+        project
+            .object_schema(Some(&first))
+            .unwrap()
+            .unique_properties["method"],
+        ["HTTPMethod"]
+    );
+    let fields = project
+        .object_initial_fields(Some(&first), MetadataKind::Method)
+        .unwrap();
+    let field = fields
+        .iter()
+        .find(|field| field.property == "HTTPMethod")
+        .unwrap();
+    assert!(matches!(
+        &field.choices,
+        ObjectInitialChoices::Values { domain, values }
+            if domain == "HTTPMethod" && values.iter().any(|value| value == "GET")
+                && values.iter().any(|value| value == "POST")
+    ));
+    let method = create_with_properties(
+        project,
+        MetadataKind::Method,
+        "Read",
+        Some(&first),
+        &[("Handler", "HandleRequest"), ("HTTPMethod", "GET")],
+    );
+    for (name, value) in [("Read", "GET"), ("Write", "POST")] {
+        create_with_properties(
+            project,
+            MetadataKind::Method,
+            name,
+            Some(&second),
+            &[("Handler", "HandleRequest"), ("HTTPMethod", value)],
+        );
+    }
+    let request = copy_request(method.clone(), "Write");
+    assert!(matches!(
+        project.preview_object(&request),
+        Err(ObjectError::PropertyConflict { property, value, object })
+            if property == "HTTPMethod" && value == "GET" && object == method
+    ));
+    let plan = project
+        .preview_object(&property_values(request, &[("HTTPMethod", "POST")]))
+        .unwrap();
+    project.apply_object(&plan.prepared).unwrap();
+    let request = property_values(copy_request(method, "Change"), &[("HTTPMethod", "PATCH")]);
+    let plan = project.preview_object(&request).unwrap();
+    let path = stand.source().join("HTTPServices/Api.xml");
+    let changed = fs::read_to_string(&path)
+        .unwrap()
+        .replace("/second", "/changed");
+    fs::write(&path, &changed).unwrap();
+    assert!(matches!(
+        project.apply_object(&plan.prepared),
+        Err(ObjectError::Edit(EditError::Conflict))
+    ));
+    assert_eq!(fs::read_to_string(path).unwrap(), changed);
+}
+
+#[test]
+fn omitted_http_fields_conflict_with_explicit_platform_defaults() {
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let service = id(MetadataKind::HTTPService, "Api", None);
+    let route = create_with_properties(
+        project,
+        MetadataKind::URLTemplate,
+        "ImplicitRoute",
+        Some(&service),
+        &[],
+    );
+    let method = create_with_properties(
+        project,
+        MetadataKind::Method,
+        "ImplicitMethod",
+        Some(&route),
+        &[("Handler", "HandleRequest")],
+    );
+    for (source, key, default) in [(&route, "Template", "/*"), (&method, "HTTPMethod", "GET")] {
+        for values in [Vec::new(), vec![(key, default)]] {
+            let request = property_values(copy_request(source.clone(), "Twin"), &values);
+            assert!(matches!(
+                project.preview_object(&request),
+                Err(ObjectError::PropertyConflict { property, value, object })
+                    if property == key && value == default && object == *source
+            ));
+        }
+    }
+    let request = property_values(copy_request(route, "EmptyRoute"), &[("Template", "")]);
+    let plan = project.preview_object(&request).unwrap();
+    let empty = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    assert!(matches!(
+        project.preview_object(&copy_request(empty.clone(), "EmptyTwin")),
+        Err(ObjectError::PropertyConflict { property, value, object })
+            if property == "Template" && value.is_empty() && object == empty
+    ));
 }
 
 #[test]

@@ -71,7 +71,7 @@ pub fn object_schema_for(
             let mut value = match field.choices {
                 ObjectInitialChoices::Types(choices) => json!({"kind":"types","multiple":true,"options":choices.iter().map(|choice| editing::type_choice(labels,choice)).collect::<Vec<_>>()}),
                 ObjectInitialChoices::References { multiple, choices } => json!({"kind":"references","multiple":multiple,"options":choices.iter().map(|choice| editing::reference_choice(labels,choice)).collect::<Vec<_>>()}),
-                ObjectInitialChoices::Values { domain, values } => json!({"kind":"values","multiple":false,"options":values.into_iter().map(|value| json!({"caption":editing::paired(labels,|locale| locale.enum_caption(domain,&value).unwrap_or_else(|| editing::reference_caption(locale,&value))),"value":value})).collect::<Vec<_>>()}),
+                ObjectInitialChoices::Values { domain, values } => json!({"kind":"values","multiple":false,"options":values.into_iter().map(|value| json!({"caption":editing::paired(labels,|locale| locale.enum_caption(&domain,&value).unwrap_or_else(|| editing::reference_caption(locale,&value))),"value":value})).collect::<Vec<_>>()}),
             };
             value["property"] = json!(field.property);
             value

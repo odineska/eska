@@ -11,7 +11,7 @@ use crate::project::{
 };
 
 impl ProjectSession {
-    /// Discover allowed values for required properties without creating a temporary metadata object.
+    /// Discover allowed values for required and unique properties without creating a temporary object.
     ///
     /// # Errors
     /// Rejects unsupported kinds/owners or unreadable reference declarations.
@@ -25,7 +25,13 @@ impl ProjectSession {
         }
         let id = ObjectId::from_parts(parent, kind.as_str(), "Object");
         let mut result = Vec::new();
-        for property in templates::required_properties(kind) {
+        let mut properties = templates::required_properties(kind).to_vec();
+        if let Some(property) = templates::unique_property(kind)
+            && !properties.contains(&property)
+        {
+            properties.push(property);
+        }
+        for property in properties {
             let choices = if let Some(rule) = type_sets::rule(&id, property) {
                 ObjectInitialChoices::Types(
                     self.type_set_choices(rule.domain).map_err(property_error)?,
@@ -64,15 +70,18 @@ impl ProjectSession {
                                 .map(|object| format!("CommandGroup.{}", object.name)),
                         );
                         ObjectInitialChoices::Values {
-                            domain: "StandardCommandsGroup",
+                            domain: "StandardCommandsGroup".to_owned(),
                             values,
                         }
+                    }
+                    Some(ScalarSchema::Enum { domain, values }) => {
+                        ObjectInitialChoices::Values { domain, values }
                     }
                     _ => continue,
                 }
             };
             result.push(ObjectInitialField {
-                property: (*property).to_owned(),
+                property: property.to_owned(),
                 choices,
             });
         }

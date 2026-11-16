@@ -127,7 +127,7 @@ pub enum ObjectInitialChoices {
         choices: Vec<super::metadata_workspace::PropertyReferenceChoice>,
     },
     Values {
-        domain: &'static str,
+        domain: String,
         values: Vec<String>,
     },
 }

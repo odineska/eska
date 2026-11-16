@@ -29,6 +29,8 @@ pub const fn unique_property(kind: MetadataKind) -> Option<&'static str> {
     match kind {
         MetadataKind::HTTPService => Some("RootURL"),
         MetadataKind::WebService => Some("DescriptorFileName"),
+        MetadataKind::URLTemplate => Some("Template"),
+        MetadataKind::Method => Some("HTTPMethod"),
         _ => None,
     }
 }

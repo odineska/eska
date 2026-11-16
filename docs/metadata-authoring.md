@@ -65,8 +65,9 @@ eska metadata inspect --object 'document:ВыдачаЗайма'
 Подписи возвращаются сразу для `ru-RU` и `en-US`.
 
 После выбора вида запросите `object-schema --kind KIND`. В `initialFields`
-появятся допустимые варианты обязательных полей: типы источников подписки,
-ссылки на существующие документы, задачи и реквизиты, группы команд.
+появятся допустимые варианты обязательных полей и полей с уникальностью:
+типы источников подписки, ссылки на существующие документы, задачи и реквизиты,
+группы команд и HTTP-методы.
 `kind` поля определяет форму значения, `multiple` — возможность выбрать
 несколько вариантов, `options` содержит машинные ключи и обе подписи.
 Варианты вычисляются только для выбранного вида, общий запрос схемы не
@@ -144,7 +145,17 @@ eska metadata copy --plan copy-plan.json --no-input --format json
 ```bash
 eska metadata copy --source 'http-service:Api' --name ApiCopy --set RootURL=api-copy --no-input --format json
 eska metadata copy --source 'web-service:Api' --name ApiCopy --set DescriptorFileName=ApiCopy.1cws --no-input --format json
+eska metadata copy --source 'http-service:Api/url-template:Route' --name AnotherRoute --set Template=/another --no-input --format json
+eska metadata copy --source 'http-service:Api/url-template:Route/method:Read' --name Write --set HTTPMethod=POST --no-input --format json
 ```
+
+Шаблон `Template` уникален внутри своего HTTP-сервиса, а `HTTPMethod` — внутри
+своего шаблона URL. У разных владельцев одинаковые значения разрешены.
+Регистр символов шаблона учитывается: `/path` и `/PATH` различаются.
+Если свойство отсутствует в XML, платформа использует `Template=/*` и
+`HTTPMethod=GET`; проверка коллизий учитывает эти значения. Явно заданный
+пустой `Template` остаётся пустым и также не может повторяться у того же владельца.
+При конфликте CLI возвращает `object_property_conflict` до записи файлов.
 
 Копия регистра не включается автоматически в движения чужих документов.
 Список `RegisterRecords` меняется отдельным проверяемым запросом

@@ -6,7 +6,7 @@ use crate::project::{
         EditError, EditPlan, EditableField, EditingDocument, PropertyChange, Replacement,
         ScalarSchema, escape_xml, snapshot,
     },
-    metadata_model::{MetadataKind, ObjectId},
+    metadata_model::{MetadataKind, NodeId, ObjectId},
     metadata_objects::{
         ObjectError, ObjectPlan, ObjectRequest, invalid,
         inventory::{Inputs, text},
@@ -244,29 +244,37 @@ impl ProjectSession {
             .descendants()
             .find(|node| node.is_element() && node.range() == range)
             .ok_or(EditError::Conflict)?;
-        let value = xml::properties(node)?
-            .children()
-            .find(|node| node.has_tag_name((xml::MD, key)))
-            .and_then(|node| node.text())
-            .unwrap_or_default();
-        if value.is_empty() {
+        let value = unique_value(node, kind, key)?;
+        if value.is_empty() && kind != MetadataKind::URLTemplate {
             return Err(invalid("propertyValues", "required_property"));
+        }
+        let parent = id.parent();
+        if let Some(parent) = &parent {
+            self.children(
+                &NodeId::Object(parent.clone()),
+                crate::project::configurator::TreeOptions::default(),
+            )?;
         }
         let candidates: Vec<_> = self
             .objects
             .values()
-            .filter(|object| object.kind == kind && object.parent.is_none() && object.id != *id)
+            .filter(|object| object.kind == kind && object.parent == parent && object.id != *id)
             .map(|object| object.id.clone())
             .collect();
         for candidate in candidates {
             let context = self.object_context(&candidate, inputs)?;
             let document = xml::document(&context.input)?;
-            if document.descendants().any(|node| {
-                node.has_tag_name((xml::MD, key))
-                    && node.text().is_some_and(|other| {
-                        crate::project::metadata_rename::same_name(other, value)
-                    })
-            }) {
+            let node = document
+                .descendants()
+                .find(|node| node.is_element() && node.range() == context.range)
+                .ok_or(EditError::Conflict)?;
+            let other = unique_value(node, kind, key)?;
+            let equal = if kind == MetadataKind::URLTemplate {
+                other == value
+            } else {
+                crate::project::metadata_rename::same_name(other, value)
+            };
+            if equal {
                 return Err(ObjectError::PropertyConflict {
                     property: key.to_owned(),
                     value: value.to_owned(),
@@ -276,6 +284,23 @@ impl ProjectSession {
         }
         Ok(())
     }
+}
+
+/// Omitted HTTP fields use platform defaults; an explicit empty URL template stays empty.
+fn unique_value<'a>(
+    node: roxmltree::Node<'a, 'a>,
+    kind: MetadataKind,
+    key: &str,
+) -> Result<&'a str, ObjectError> {
+    let default = match kind {
+        MetadataKind::URLTemplate => "/*",
+        MetadataKind::Method => "GET",
+        _ => "",
+    };
+    Ok(xml::properties(node)?
+        .children()
+        .find(|node| node.has_tag_name((xml::MD, key)))
+        .map_or(default, |node| node.text().unwrap_or_default()))
 }
 
 fn property_field(
