@@ -12,6 +12,7 @@ mod ignore;
 pub mod init;
 pub mod local_settings;
 pub mod metadata;
+pub mod metadata_create;
 mod metadata_disk_cache;
 pub mod metadata_edit;
 pub mod metadata_model;

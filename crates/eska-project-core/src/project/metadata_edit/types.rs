@@ -362,9 +362,9 @@ pub(super) fn line_range(input: &str, range: std::ops::Range<usize>) -> std::ops
 }
 
 /// Detect indentation without converting tabs, spaces or mixed line endings elsewhere.
-pub(super) fn indentation(input: &str, start: usize) -> Option<&str> {
+pub fn indentation(input: &str, start: usize) -> Option<&str> {
     let prefix = &input[..start];
-    let indent = &prefix[prefix.rfind('\n').map_or(0, |index| index + 1)..];
+    let indent = &prefix[prefix.rfind(['\n', '\r']).map_or(0, |index| index + 1)..];
     indent
         .chars()
         .all(|character| matches!(character, ' ' | '\t'))
@@ -372,14 +372,11 @@ pub(super) fn indentation(input: &str, start: usize) -> Option<&str> {
 }
 
 /// Newly inserted lines follow the first observed source line ending.
-pub(super) fn newline(input: &str) -> &str {
-    if input
-        .find('\n')
-        .is_some_and(|index| index > 0 && input.as_bytes()[index - 1] == b'\r')
-    {
-        "\r\n"
-    } else {
-        "\n"
+pub fn newline(input: &str) -> &str {
+    match input.find(['\r', '\n']).map(|index| &input[index..]) {
+        Some(ending) if ending.starts_with("\r\n") => "\r\n",
+        Some(ending) if ending.starts_with('\r') => "\r",
+        _ => "\n",
     }
 }
 
