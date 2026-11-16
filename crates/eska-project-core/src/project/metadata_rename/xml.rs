@@ -242,7 +242,11 @@ impl ReferenceRename {
             && node
                 .parent_element()
                 .is_some_and(|parent| parent.has_tag_name((RIGHTS, "object")));
-        if node.has_tag_name((XR, "DataPath")) || role_object || metadata_reference_property(node) {
+        if node.has_tag_name((XR, "DataPath"))
+            || role_object
+            || metadata_reference_property(node)
+            || metadata_field_reference(node)
+        {
             return self.path_reference(value);
         }
         None
@@ -306,6 +310,22 @@ impl ReferenceRename {
             });
         }
     }
+}
+
+/// Standard attributes are path suffixes of their owning metadata object, not standalone kinds.
+fn metadata_field_reference(node: Node<'_, '_>) -> bool {
+    node.has_tag_name((XR, "Field"))
+        && node.parent_element().is_some_and(|parent| {
+            parent.tag_name().namespace() == Some(MD)
+                && matches!(parent.tag_name().name(), "InputByString" | "DataLockFields")
+                && parent.parent_element().is_some_and(|properties| {
+                    properties.has_tag_name((MD, "Properties"))
+                        && properties.parent_element().is_some_and(|owner| {
+                            owner.tag_name().namespace() == Some(MD)
+                                && MetadataKind::from_xml_tag(owner.tag_name().name()).is_ok()
+                        })
+                })
+        })
 }
 
 /// Unannotated fields need their actual class/domain binding; matching a property name alone is unsafe.

@@ -15,6 +15,23 @@ fn catalog() -> ReferenceRename {
     .expect("rename")
 }
 
+#[test]
+fn standard_attribute_fields_remap_the_owner_in_dom_and_streaming_contexts() {
+    for padding in [String::new(), " ".repeat(600_000)] {
+        let input = format!(
+            "<MetaDataObject xmlns='{MD}' xmlns:xr='{XR}'><Catalog><Properties><InputByString><xr:Field>Catalog.Old.StandardAttribute.Description</xr:Field></InputByString><DataLockFields><xr:Field>Catalog.Old.Attribute.Code</xr:Field></DataLockFields><Comment>{padding}</Comment><Other><xr:Field>Catalog.Old.StandardAttribute.Description</xr:Field></Other></Properties></Catalog></MetaDataObject>"
+        );
+        let analysis = catalog().analyze_xml(&input, &[]).unwrap();
+        assert_eq!(analysis.replacements.len(), 2);
+        let output = apply(&input, &analysis);
+        assert!(
+            output.contains("<InputByString><xr:Field>Catalog.Новый.StandardAttribute.Description")
+        );
+        assert!(output.contains("<DataLockFields><xr:Field>Catalog.Новый.Attribute.Code"));
+        assert!(output.contains("<Other><xr:Field>Catalog.Old.StandardAttribute.Description"));
+    }
+}
+
 /// Apply only backend-produced ranges to inspect exact-byte preservation.
 fn apply(input: &str, analysis: &XmlAnalysis) -> String {
     let mut candidate = input.to_owned();
