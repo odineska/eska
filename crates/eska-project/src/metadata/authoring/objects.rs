@@ -69,6 +69,14 @@ pub(super) fn run(
     let (_, args, _) = options(command)?;
     let interactive = super::interactive(args, format);
     let plan = match loaded {
+        // Applying a saved plan already validates its inputs and output under the core write guard.
+        // A second CLI preview would repeat the complete reference scan of a large configuration.
+        Some(Loaded::Plan(prepared)) if !args.dry_run => {
+            return project
+                .apply_object(&prepared)
+                .map(|result| shared::object_result(&result))
+                .map_err(shared::object_failure);
+        }
         Some(Loaded::Plan(prepared)) => project.preview_prepared_object(&prepared),
         Some(Loaded::Request(request)) => project.preview_object(&request),
         None => {
@@ -97,6 +105,11 @@ pub(super) fn run_configuration(
         return Err(super::failure("invalid_request"));
     };
     let plan = match loaded {
+        Some(Loaded::Plan(prepared)) if !args.source.dry_run => {
+            return bootstrap::apply(project, &prepared)
+                .map(|result| shared::object_result(&result))
+                .map_err(shared::object_failure);
+        }
         Some(Loaded::Plan(prepared)) => bootstrap::preview_prepared(project, &prepared),
         Some(Loaded::Request(request)) => bootstrap::preview(project, &request),
         None => bootstrap::preview(
