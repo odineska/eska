@@ -247,6 +247,7 @@ fn constrain_form_appearance(result: &mut Value, minor: u32) {
         return;
     };
     result.remove("dynamicListAppearance");
+    result.remove("typeOptions");
     if minor < 51 {
         for key in [
             "conditionalAppearance",

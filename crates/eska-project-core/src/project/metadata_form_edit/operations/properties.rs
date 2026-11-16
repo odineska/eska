@@ -31,6 +31,9 @@ pub(super) fn set(
         if existing == *property {
             return Ok(Vec::new());
         }
+        if current.has_tag_name((FORM_NAMESPACE, "Type")) {
+            super::super::types::validate(current)?;
+        }
         if existing.qualifiers == property.qualifiers
             && let MetadataValue::Text(text) = &property.value
             && matches!(existing.value, MetadataValue::Text(_))

@@ -27,8 +27,10 @@ pub(crate) use document::plan_complete;
 pub use document::{empty_form, plan};
 pub use schema::{
     FormDefinitionSchema, FormEditNode, FormEditProperty, FormEditSchema, FormElementKindSchema,
-    inspect,
+    child_kinds, inspect,
 };
+pub use types::FormTypeOption;
+pub(crate) use types::{type_options, type_reference};
 
 /// Integer identities belong to elements; definition names remain stable CLI selectors.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

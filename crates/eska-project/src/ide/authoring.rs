@@ -204,6 +204,56 @@ pub fn form_schema(labels: &Labels, schema: &FormEditSchema) -> Value {
     result
 }
 
+pub fn form_type_options(
+    labels: &Labels,
+    project: &eska_project_core::project::metadata_workspace::ProjectSession,
+) -> Value {
+    let choices: Vec<_> = project
+        .form_type_options()
+        .iter()
+        .map(|option| {
+            let mut choice = editing::type_choice(labels, &option.choice);
+            let key = &option.choice.key;
+            if option.member == "TypeSet" && !key.name.contains('.') {
+                let family = if matches!(key.name.as_str(), "AnyRef" | "AnyIBRef") {
+                    key.name.as_str()
+                } else {
+                    key.name.trim_end_matches("Ref")
+                };
+                choice["caption"] = labels.caption(&format!("platform-type-set-{family}"));
+            } else if key.name.contains('.') {
+                choice["caption"] = editing::paired(labels, |locale| {
+                    super::property_presentation::qualified_type_caption(locale, key)
+                        .unwrap_or_else(|| key.name.clone())
+                });
+            }
+            choice["member"] = json!(option.member);
+            if let Some((name, defaults)) = option.qualifier() {
+                choice["qualifier"] = json!({"name":name,"defaults":defaults});
+            }
+            choice
+        })
+        .collect();
+    let limits = eska_project_core::project::metadata_create::capabilities().limits;
+    json!({"choices":choices,"limits":limits,"qualifiers":form_type_qualifiers(labels)})
+}
+
+fn form_type_qualifiers(labels: &Labels) -> Value {
+    let fields: &[(&str, &[&str])] = &[
+        ("Length", &[]),
+        ("Digits", &[]),
+        ("FractionDigits", &[]),
+        ("AllowedLength", &["Variable", "Fixed"]),
+        ("AllowedSign", &["Any", "Nonnegative"]),
+        ("DateFractions", &["Date", "Time", "DateTime"]),
+    ];
+    Value::Object(fields.iter().map(|(name, values)| {
+        let caption = labels.caption(&format!("platform-property-core-{name}"));
+        let choices: Vec<_> = values.iter().map(|value| json!({"value":value,"caption":labels.caption(&format!("platform-value-{name}-{value}"))})).collect();
+        ((*name).to_owned(), json!({"caption":caption,"choices":choices}))
+    }).collect())
+}
+
 pub fn form_plan(plan: &FormEditPlan) -> Value {
     json!({
         "schemaVersion":1,"operation":"form-edit","valid":true,"changed":!plan.is_empty(),

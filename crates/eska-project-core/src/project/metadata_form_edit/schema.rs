@@ -94,6 +94,8 @@ pub fn inspect(
                     let property = metadata_parser::values::property(node, &mut Vec::new());
                     let writable = writable
                         && node.tag_name().name() != "Events"
+                        && (!node.has_tag_name((FORM_NAMESPACE, "Type"))
+                            || super::types::validate(node).is_ok())
                         && supported_value(&property.value);
                     FormEditProperty { property, writable }
                 })
@@ -138,13 +140,7 @@ pub fn inspect(
             .map(|kind| FormElementKindSchema {
                 kind,
                 catalog: authoring_properties(kind),
-                child_kinds: ElementKind::ALL
-                    .iter()
-                    .copied()
-                    .filter(|child| {
-                        *child != ElementKind::Form && operations::layout_kind(kind, *child).is_ok()
-                    })
-                    .collect(),
+                child_kinds: child_kinds(kind),
             })
             .collect(),
         conditional_appearance: appearance::inspect(document.root_element()),
@@ -157,6 +153,18 @@ pub fn inspect(
             })
             .collect(),
     })
+}
+
+/// Both drag targets and the semantic move planner follow the same parent/child rules.
+#[must_use]
+pub fn child_kinds(kind: ElementKind) -> Vec<ElementKind> {
+    ElementKind::ALL
+        .iter()
+        .copied()
+        .filter(|child| {
+            *child != ElementKind::Form && operations::layout_kind(kind, *child).is_ok()
+        })
+        .collect()
 }
 
 pub(super) fn catalog(node: Node<'_, '_>) -> Vec<AuthoringProperty> {

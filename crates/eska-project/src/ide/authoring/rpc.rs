@@ -40,9 +40,20 @@ pub(in crate::ide) fn query(
         }
         "metadata/formEditSchema" => {
             let form: ObjectId = params::decode(&args["form"])?;
+            let include_types = args
+                .get("includeTypes")
+                .map(params::decode::<bool>)
+                .transpose()?
+                .unwrap_or(false);
             project
                 .form_edit_schema(&form)
-                .map(|schema| super::form_schema(labels, &schema))
+                .map(|schema| {
+                    let mut result = super::form_schema(labels, &schema);
+                    if include_types {
+                        result["typeOptions"] = super::form_type_options(labels, project);
+                    }
+                    result
+                })
                 .map_err(super::form_failure)
         }
         "metadata/previewFormEdit" => {

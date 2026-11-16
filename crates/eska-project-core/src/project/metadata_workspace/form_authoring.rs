@@ -8,7 +8,7 @@ use crate::project::{
     metadata_edit::{EditError, snapshot},
     metadata_form_edit::{
         self, FormChanges, FormEditError, FormEditPlan, FormEditRequest, FormEditResult,
-        FormEditSchema, PreparedFormEdit, RemovedFormTarget,
+        FormEditSchema, FormTypeOption, PreparedFormEdit, RemovedFormTarget,
     },
     metadata_model::{MetadataKind, ObjectId},
     metadata_rename::{
@@ -29,6 +29,12 @@ impl ProjectSession {
         let (path, input) = current.form_authoring_source(form)?;
         let writable = current.form_authoring_writable(form, &path)?;
         metadata_form_edit::inspect(form, path, &input, writable)
+    }
+
+    /// Use the current project declarations without opening unrelated source files.
+    #[must_use]
+    pub fn form_type_options(&self) -> Vec<FormTypeOption> {
+        metadata_form_edit::type_options(&self.objects)
     }
 
     /// Compute a semantic preview with deterministic local identity allocation.
@@ -154,9 +160,9 @@ impl ProjectSession {
                 .into_iter()
                 .filter(|reference| {
                     reference.property.namespace.as_deref() == Some("http://v8.1c.ru/8.1/data/core")
-                        && reference.property.name == "Type"
+                        && matches!(reference.property.name.as_str(), "Type" | "TypeSet")
                 })
-                .filter_map(|reference| crate::project::forms::metadata_type_id(&reference.target))
+                .filter_map(|reference| metadata_form_edit::type_reference(&reference.target))
                 .collect())
         };
         let before = targets(input)?;

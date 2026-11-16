@@ -66,7 +66,7 @@ pub(super) fn supported(key: &PropertyKey) -> bool {
 }
 
 /// Qualifier names and defaults follow the platform's XML `TypeDescription` representation.
-pub(super) fn qualifier(
+pub fn qualifier(
     key: &PropertyKey,
 ) -> Option<(&'static str, &'static [(&'static str, &'static str)])> {
     if key.namespace.as_deref() != Some(XS) {
@@ -246,7 +246,7 @@ pub fn validate_description(
     validate_members(parent, |key, set| !set && accepts(key))
 }
 
-pub(super) fn validate_members(
+pub fn validate_members(
     parent: Node<'_, '_>,
     accepts: impl Fn(&PropertyKey, bool) -> bool,
 ) -> Result<(), EditError> {

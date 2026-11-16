@@ -175,6 +175,7 @@ fn additions() -> Vec<Value> {
     vec![
         json!({"kind":"addDefinition","section":"attribute","name":"Amount","properties":[data_type(XS,"xs","decimal")]}),
         json!({"kind":"addDefinition","section":"attribute","name":"Rows","properties":[data_type(CORE,"v8","ValueTable")]}),
+        json!({"kind":"addDefinition","section":"attribute","name":"CompositeValue","properties":[composite_type()]}),
         json!({"kind":"addDefinition","section":"attribute","parent":{"kind":"attribute","name":"Rows"},"name":"Quantity","properties":[data_type(XS,"xs","decimal")]}),
         json!({"kind":"addDefinition","section":"command","name":"Run"}),
         json!({"kind":"addDefinition","section":"parameter","name":"Mode","properties":[data_type(XS,"xs","string")]}),
@@ -185,6 +186,28 @@ fn additions() -> Vec<Value> {
         json!({"kind":"setProperty","target":{"kind":"root"},"property":text("Width","80")}),
         json!({"kind":"setEvent","target":{"kind":"root"},"event":"OnOpen","handler":"NativeOnOpen"}),
     ]
+}
+
+fn composite_type() -> Value {
+    let key = |kind, namespace| json!({"QualifiedText":{"text":kind,"key":{"namespace":namespace,"name":kind}}});
+    let qualifier = |name, values: &[(&str, &str)]| {
+        property(
+            CORE,
+            name,
+            &json!({"Record":values.iter()
+        .map(|(name, value)| property(CORE, name, &json!({"Text":value}))).collect::<Vec<_>>() }),
+        )
+    };
+    property(
+        FORM,
+        "Type",
+        &json!({"Record":[
+            property(CORE,"Type",&key("string",XS)), property(CORE,"Type",&key("decimal",XS)),
+            property(CORE,"TypeSet",&key("AnyRef","http://v8.1c.ru/8.1/data/enterprise/current-config")),
+            qualifier("NumberQualifiers",&[("Digits","18"),("FractionDigits","4"),("AllowedSign","Nonnegative")]),
+            qualifier("StringQualifiers",&[("Length","72"),("AllowedLength","Variable")])
+        ]}),
+    )
 }
 
 fn add_list_rule(stand: &Stand) {
@@ -220,6 +243,24 @@ fn assert_export(xml: &str) {
     assert!(xml.contains(">Amount</dcsset:field>"));
     let document = Document::parse(xml).unwrap();
     let root = document.root_element();
+    let composite = root
+        .descendants()
+        .find(|node| node.attribute("name") == Some("CompositeValue"))
+        .unwrap();
+    let composite = &xml[composite.range()];
+    for value in [
+        "xs:string",
+        "xs:decimal",
+        "cfg:AnyIBRef",
+        "FractionDigits>4",
+        "Length>72",
+        "Nonnegative",
+    ] {
+        assert!(
+            composite.contains(value),
+            "composite type lost {value}: {composite}"
+        );
+    }
     let dynamic = root
         .descendants()
         .find(|node| node.attribute("name") == Some("PostingRows"))
