@@ -144,6 +144,73 @@ fn subtree_copy_rekeys_nested_ids_but_preserves_data_binding_events_and_unknown_
 }
 
 #[test]
+fn copied_table_commands_follow_the_copied_element_but_keep_external_links() {
+    let input = source(
+        "<ChildItems><UsualGroup name='Group' id='1'><ChildItems><Table name='Rows' id='2'><DataPath>DataRows</DataPath><Events><Event name='OnChange'>RowsOnChange</Event></Events><AutoCommandBar name='RowsBar' id='3'><CommandSource>Item.rows</CommandSource><ChildItems><Button name='AddRow' id='4'><CommandName>Form.Item.ROWS.StandardCommand.Add</CommandName></Button></ChildItems></AutoCommandBar></Table><Button name='External' id='5'><CommandName>Form.Item.Outside.StandardCommand.Add</CommandName><Item>Outside</Item><c:CommandName>Form.Item.Rows.StandardCommand.Add</c:CommandName></Button><Button name='Custom' id='6'><CommandName>Form.Command.Rows</CommandName><Element>Rows</Element></Button></ChildItems></UsualGroup><Table name='Outside' id='7'/></ChildItems>",
+    );
+    let (edit, assigned) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::CopyElement {
+                target: FormTarget::Element { id: 1 },
+                parent: FormTarget::Root {},
+                before: None,
+                name: "GroupCopy".to_owned(),
+            }],
+        ),
+    )
+    .unwrap();
+    let document = document::xml(edit.output()).unwrap();
+    let copied = document::target(&document, &assigned[0].target).unwrap();
+    let table = copied
+        .descendants()
+        .find(|node| node.has_tag_name((FORM_NAMESPACE, "Table")))
+        .unwrap();
+    assert_eq!(table.attribute("name"), Some("Rows_Copy1"));
+    let values = |namespace, property| {
+        copied
+            .descendants()
+            .filter(|node| node.has_tag_name((namespace, property)))
+            .filter_map(|node| node.text())
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(values(FORM_NAMESPACE, "CommandSource"), ["Item.Rows_Copy1"]);
+    assert_eq!(
+        values(FORM_NAMESPACE, "CommandName"),
+        [
+            "Form.Item.Rows_Copy1.StandardCommand.Add",
+            "Form.Item.Outside.StandardCommand.Add",
+            "Form.Command.Rows",
+        ]
+    );
+    assert_eq!(values(FORM_NAMESPACE, "Element"), ["Rows_Copy1"]);
+    assert_eq!(values(FORM_NAMESPACE, "Item"), ["Outside"]);
+    assert_eq!(values(FORM_NAMESPACE, "DataPath"), ["DataRows"]);
+    assert_eq!(values(FORM_NAMESPACE, "Event"), ["RowsOnChange"]);
+    assert_eq!(
+        values("urn:custom", "CommandName"),
+        ["Form.Item.Rows.StandardCommand.Add"]
+    );
+    let original = document::xml(&input).unwrap();
+    let original = document::target(&original, &FormTarget::Element { id: 1 }).unwrap();
+    assert!(edit.output().contains(&input[original.range()]));
+    assert!(matches!(
+        plan(
+            edit.output(),
+            &request(
+                edit.output(),
+                vec![FormOperation::Remove {
+                    target: document::target_of(table).unwrap(),
+                    force: false,
+                }],
+            ),
+        ),
+        Err(FormEditError::References { .. })
+    ));
+}
+
+#[test]
 fn move_preserves_namespace_bindings_and_refuses_cycles_and_invalid_page_nesting() {
     let input = source(
         "<ChildItems><UsualGroup name='Outer' id='1' xmlns:c='urn:origin'><ChildItems><UsualGroup name='Inner' id='2'><c:Raw>c:Type</c:Raw></UsualGroup></ChildItems></UsualGroup><UsualGroup name='Target' id='3' xmlns:c='urn:destination'/></ChildItems>",

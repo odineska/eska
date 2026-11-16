@@ -10,7 +10,7 @@ use super::super::{FormEditError, FormElementSpec, FormTarget, document, invalid
 use crate::project::{
     forms::{ElementFamily, ElementKind, FORM_NAMESPACE, authoring_properties},
     metadata_edit::{EditPlan, Replacement, escape_attribute, text_plan},
-    metadata_rename::validate_name,
+    metadata_rename::{same_name, validate_name},
 };
 
 pub(super) fn add(
@@ -87,10 +87,8 @@ pub(super) fn copy(
         let property = item.tag_name().name();
         let replacement = if super::id_reference(property) {
             ids.get(value).cloned()
-        } else if matches!(property, "Element" | "Item") {
-            remap_name(value, &names)
         } else {
-            None
+            remap_name(property, value, &names)
         };
         if let Some(value) = replacement {
             changes.extend(
@@ -356,16 +354,11 @@ fn kind_from_spec(spec: &FormElementSpec) -> Result<ElementKind, FormEditError> 
     kind(&spec.kind)
 }
 
-fn remap_name(value: &str, names: &BTreeMap<String, String>) -> Option<String> {
-    names.iter().find_map(|(old, new)| {
-        if value == old {
-            return Some(new.clone());
-        }
-        value
-            .strip_prefix(old)
-            .filter(|rest| rest.starts_with('.'))
-            .map(|rest| format!("{new}{rest}"))
-    })
+fn remap_name(property: &str, value: &str, names: &BTreeMap<String, String>) -> Option<String> {
+    let (prefix, name, suffix) = super::element_name_reference(property, value)?;
+    names
+        .iter()
+        .find_map(|(old, new)| same_name(old, name).then(|| format!("{prefix}{new}{suffix}")))
 }
 
 /// Preserve inherited bindings when moving under a different namespace scope.

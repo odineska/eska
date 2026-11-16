@@ -161,20 +161,31 @@ pub(super) fn id_reference(name: &str) -> bool {
     ) || name.ends_with("ElementId")
 }
 
+/// Named element links include an optional command/source prefix and a command suffix.
+/// Their namespace is distinct from form commands, attributes and BSL method names.
+pub(super) fn element_name_reference<'a>(
+    property: &str,
+    value: &'a str,
+) -> Option<(&'a str, &'a str, &'a str)> {
+    let reference = match property {
+        "Element" | "Item" => value,
+        "CommandSource" => value.strip_prefix("Item.")?,
+        "CommandName" => value.strip_prefix("Form.Item.")?,
+        _ => return None,
+    };
+    let offset = value.len() - reference.len();
+    let end = reference.find('.').unwrap_or(reference.len());
+    (end != 0).then_some((&value[..offset], &reference[..end], &reference[end..]))
+}
+
 /// Designer keeps element, attribute and command names in independent namespaces.
 fn named_reference(property: &str, value: &str, target: &FormTarget, element_name: &str) -> bool {
     let (name, reference, descendants) = match target {
-        FormTarget::Element { .. } => {
-            let reference = match property {
-                "Element" | "Item" => Some(value),
-                "CommandSource" => value.strip_prefix("Item."),
-                "CommandName" => value
-                    .strip_prefix("Form.Item.")
-                    .and_then(|value| value.split('.').next()),
-                _ => None,
-            };
-            (element_name, reference, false)
-        }
+        FormTarget::Element { .. } => (
+            element_name,
+            element_name_reference(property, value).map(|(_, name, _)| name),
+            false,
+        ),
         FormTarget::Attribute { name } => (
             name.as_str(),
             (property.ends_with("DataPath") || matches!(property, "DataSource" | "Path"))
