@@ -17,6 +17,19 @@ use eska_project_core::project::{
 use serde::Deserialize;
 use serde_json::{Value, json};
 
+/// Source mutations share write permission and late-cancellation policy across the transport.
+pub(super) fn writes(method: &str) -> bool {
+    matches!(
+        method,
+        "metadata/updateProperty"
+            | "metadata/undoProperty"
+            | "metadata/renameApply"
+            | "metadata/create"
+            | "metadata/applyObject"
+            | "metadata/applyFormEdit"
+    )
+}
+
 /// Recognize request-only methods before validating metadata parameters.
 pub(super) fn is_method(method: &str) -> bool {
     matches!(
@@ -34,6 +47,12 @@ pub(super) fn is_method(method: &str) -> bool {
             | "metadata/creationSchema"
             | "metadata/previewCreate"
             | "metadata/create"
+            | "metadata/objectSchema"
+            | "metadata/previewObject"
+            | "metadata/applyObject"
+            | "metadata/formEditSchema"
+            | "metadata/previewFormEdit"
+            | "metadata/applyFormEdit"
             | "metadata/supportFiles"
             | "metadata/supportObjects"
             | "metadata/root"
@@ -59,30 +78,7 @@ impl Server {
         events: &mut Vec<Value>,
     ) -> Result<Value, Value> {
         let input: params::Context = params::decode(args)?;
-        if matches!(
-            method,
-            "metadata/creationSchema" | "metadata/previewCreate" | "metadata/create"
-        ) && self.client_minor < 48
-        {
-            return Err(error(-32601));
-        }
-        if method == "metadata/revealSource" && self.client_minor < 24 {
-            return Err(error(-32601));
-        }
-        if method == "metadata/supportObjects" && self.client_minor < 25 {
-            return Err(error(-32601));
-        }
-        if matches!(method, "metadata/renamePreview" | "metadata/renameApply")
-            && self.client_minor < 9
-        {
-            return Err(error(-32601));
-        }
-        if method == "metadata/propertyReferenceChoices" && self.client_minor < 7 {
-            return Err(error(-32601));
-        }
-        if method == "metadata/propertyValueChoices" && self.client_minor < 8 {
-            return Err(error(-32601));
-        }
+        check_client_version(self.client_minor, method, args)?;
 
         if self
             .session
@@ -119,28 +115,12 @@ impl Server {
         );
         result
             .map(|mut result| {
-                if method == "metadata/creationSchema" && !self.property_editing {
-                    result["writable"] = json!(false);
-                }
-                if self.client_minor < 9 {
-                    let schema = if method == "metadata/propertyEditing" {
-                        Some(&mut result)
-                    } else {
-                        result.get_mut("editing")
-                    };
-                    if let Some(schema) = schema.and_then(Value::as_object_mut) {
-                        for key in ["renameAvailable", "undoRename", "redoRename"] {
-                            schema.remove(key);
-                        }
-                    }
-                }
-                if self.client_minor < 11 {
-                    if method == "metadata/propertyEditing" {
-                        super::editing::retain_legacy_fields(&mut result, self.client_minor);
-                    } else if let Some(editing) = result.get_mut("editing") {
-                        super::editing::retain_legacy_fields(editing, self.client_minor);
-                    }
-                }
+                constrain_schema(
+                    &mut result,
+                    method,
+                    self.client_minor,
+                    self.property_editing,
+                );
                 result["sessionId"] = json!(session.id);
                 result["projectId"] = json!(state.id);
                 result["generation"] = json!(project.generation().to_string());
@@ -155,6 +135,69 @@ impl Server {
                 }
                 failure
             })
+    }
+}
+
+fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Value> {
+    let required = match method {
+        "metadata/objectSchema"
+        | "metadata/previewObject"
+        | "metadata/applyObject"
+        | "metadata/formEditSchema"
+        | "metadata/previewFormEdit"
+        | "metadata/applyFormEdit" => 49,
+        "metadata/creationSchema" | "metadata/previewCreate" | "metadata/create" => 48,
+        "metadata/revealSource" => 24,
+        "metadata/supportObjects" => 25,
+        "metadata/renamePreview" | "metadata/renameApply" => 9,
+        "metadata/propertyReferenceChoices" => 7,
+        "metadata/propertyValueChoices" => 8,
+        _ => 0,
+    };
+    if minor < required {
+        return Err(error(-32601));
+    }
+    if minor < 49
+        && matches!(
+            method,
+            "metadata/previewProperty" | "metadata/updateProperty"
+        )
+        && matches!(
+            args["change"]["kind"].as_str(),
+            Some("references" | "types")
+        )
+    {
+        return Err(error(-32602));
+    }
+    Ok(())
+}
+
+fn constrain_schema(result: &mut Value, method: &str, minor: u32, writable: bool) {
+    if !writable {
+        match method {
+            "metadata/creationSchema" | "metadata/formEditSchema" => {
+                result["writable"] = json!(false);
+            }
+            "metadata/objectSchema" => result["operations"] = json!([]),
+            _ => (),
+        }
+    }
+    let schema = if method == "metadata/propertyEditing" {
+        Some(result)
+    } else {
+        result.get_mut("editing")
+    };
+    if let Some(schema) = schema {
+        if minor < 9
+            && let Some(schema) = schema.as_object_mut()
+        {
+            for key in ["renameAvailable", "undoRename", "redoRename"] {
+                schema.remove(key);
+            }
+        }
+        if minor < 49 {
+            super::editing::retain_legacy_fields(schema, minor);
+        }
     }
 }
 
@@ -186,6 +229,13 @@ fn metadata_request(
             super::creation::query(labels, project, method, args)
         }
         "metadata/create" => super::creation::apply(session, state, project, args, events),
+        "metadata/objectSchema"
+        | "metadata/previewObject"
+        | "metadata/formEditSchema"
+        | "metadata/previewFormEdit" => super::authoring::query(labels, project, method, args),
+        "metadata/applyObject" | "metadata/applyFormEdit" => {
+            super::authoring::apply(session, state, project, method, args, events)
+        }
         _ => metadata_read(labels, session, state, project, method, args, events),
     }
 }

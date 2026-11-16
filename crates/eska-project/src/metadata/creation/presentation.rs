@@ -37,7 +37,7 @@ pub(super) fn success(value: &Value, locale: &Localizer) {
     }
 }
 
-pub(super) fn error(error: &Value, locale: &Localizer) {
+pub(in crate::metadata) fn error(error: &Value, locale: &Localizer) {
     let error = error.get("data").unwrap_or(error);
     let code = error["kind"].as_str().unwrap_or("unknown_error");
     if code == "creation_arguments_required" {

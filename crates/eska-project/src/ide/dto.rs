@@ -50,6 +50,14 @@ impl Labels {
             if !kinds.is_empty() && matches!(value.id, NodeId::Object(_)) {
                 result["creationKinds"] = json!(kinds);
             }
+            if matches!(value.id, NodeId::Object(_)) {
+                result["objectCreation"] = json!(
+                    !eska_project_core::project::configurator::ConfiguratorSchema::collections(
+                        kind
+                    )
+                    .is_empty()
+                );
+            }
         }
         result
     }

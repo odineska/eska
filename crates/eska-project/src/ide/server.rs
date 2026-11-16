@@ -128,14 +128,7 @@ impl Server {
             _ => &[],
         };
         params::optional_fields(args, optional)?;
-        if matches!(
-            method,
-            "metadata/updateProperty"
-                | "metadata/undoProperty"
-                | "metadata/renameApply"
-                | "metadata/create"
-        ) && !self.property_editing
-        {
+        if super::metadata::writes(method) && !self.property_editing {
             return Err(domain(
                 "property_read_only",
                 json!({"reason":"client_read_only"}),
@@ -263,6 +256,14 @@ impl Server {
                 "schemaVersion":1,"enabled":self.property_editing,
                 "preparedPlans":true,
             });
+        }
+        if self.client_minor >= 49 {
+            result["capabilities"]["referenceListEditing"] = json!(self.property_editing);
+            result["capabilities"]["typeListEditing"] = json!(self.property_editing);
+            result["capabilities"]["metadataObjects"] =
+                json!({"schemaVersion":1,"enabled":self.property_editing,"preparedPlans":true});
+            result["capabilities"]["formAuthoring"] =
+                json!({"schemaVersion":1,"enabled":self.property_editing,"preparedPlans":true});
         }
         if self.client_minor >= 25 {
             result["capabilities"]["supportObjects"] = json!(true);

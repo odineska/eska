@@ -16,8 +16,8 @@ use std::{
 
 mod creation;
 mod editing;
-mod forms;
 mod form_authoring;
+mod forms;
 mod query;
 mod renaming;
 mod source_navigation;

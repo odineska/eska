@@ -2845,3 +2845,72 @@ capability; новые методы для них возвращают `-32601`.
 требует отдельной проверки зависимостей удаляемого объекта. Предыдущая
 история свойств изменённого дескриптора инвалидируется; история остальных
 дескрипторов сохраняется.
+
+### API 1.49. Объекты и семантическое редактирование форм
+
+Клиенты minor 49 получают `metadataObjects` и `formAuthoring` с полями
+`{schemaVersion:1,enabled,preparedPlans:true}`, а также `referenceListEditing`
+и `typeListEditing`. Запись требует прежнего `allowPropertyEdits:true`.
+Для старых клиентов новые методы недоступны (`-32601`), новые виды полей
+`references`/`types` скрыты; передача этих новых изменений отклоняется.
+
+Каждый метод принимает обычные `sessionId`, `projectId`, `generation`:
+
+| Метод | Дополнительные параметры | Результат |
+| --- | --- | --- |
+| `metadata/objectSchema` | необязательные `parent`, `kind` | `operations`, виды, обязательные свойства, списки ссылок/типов, JSON Schema запросов |
+| `metadata/previewObject` | `request` | Проверенный план создания, копирования или удаления |
+| `metadata/applyObject` | `prepared` | `objectId`, снимок результата, `changed:true` |
+| `metadata/formEditSchema` | `form` | Снимок формы, узлы, общие каталоги свойств/событий и операций |
+| `metadata/previewFormEdit` | `request` | План изменения формы с назначенными ID |
+| `metadata/applyFormEdit` | `prepared` | `form`, `snapshot`, `assignedIds`, `changed` |
+
+Запросы и их ограничения совпадают с [CLI](metadata-authoring.md). JSON Schema
+из `requestSchemas` описывает CLI-оболочку `{schemaVersion:1,request:...}`;
+в RPC передаётся только её `request`. Виды объектов в запросе используют
+значения модели (`Document`), а `kindOptions.key` — CLI-ключи (`document`).
+`requiredProperties`, `referenceProperties`, `typeProperties` индексируются
+CLI-ключом вида. Подписи выдаются сразу в двух локалях из существующих словарей.
+
+`uniqueProperties` указывает свойства с отдельной уникальностью; их подписи
+также включены в `propertyCaptions`. При конфликте `object_property_conflict`
+возвращает `details:{property,value,objectId}` для исправления конкретного поля.
+Выбор нового имени сам по себе не меняет, например, `RootURL`.
+
+При переданном `kind` (значение модели, например `EventSubscription`) ответ
+дополнительно содержит `selectedKind` и `initialFields`. Каждый элемент:
+`{property,kind:"types"|"references"|"values",multiple,options}`.
+Типы используют обычные варианты `propertyTypeChoices`; ссылки —
+`propertyReferenceChoices`; значения — `{value,caption}`. При `references`
+с `multiple:false` значение передаётся в `propertyValues`, при `multiple:true` —
+в `propertyReferences`; `types` попадает в `propertyTypes`. Свободные текстовые
+поля не имеют списка вариантов. Начальные варианты и редактор уже существующего
+объекта используют одни доменные правила.
+
+План объекта содержит `prepared:{request,sourceSnapshot,identities,
+expectedOutputSnapshot}`, `files`, `directories`, `inputs` и `references`.
+`files` — список `{path,action,before,after}`: `path` в wire-формате, состояния —
+`null` либо `{bytes,snapshot}`. Байты ресурсов не отправляются по RPC.
+`inputs` перечисляет прочитанные зависимости относительно каталога исходников.
+`references` содержит путь, диапазон, причину и признак подтверждённой ссылки.
+План формы содержит `prepared:{request,sourceSnapshot,expectedOutputSnapshot}`,
+`source`, `inputs`, `changes` и `assignedIds`. Снимок зависимостей учитывает
+модуль, прочитанный при проверке удаления; изменения модуля запрещают старый apply.
+
+Поля отображения плана не исполняются: backend повторно вычисляет результат
+из семантического запроса и проверяет исходные/итоговые снимки. Клиент проверяет
+несохранённые буферы для всех `inputs` и изменяемых файлов перед записью.
+После проверки diff он отправляет только `prepared`; весь большой preview
+не нужно укладывать в лимит RPC-запроса 1 МиБ.
+
+Новые узлы могут содержать `objectCreation:true`; это подсказка для меню,
+окончательную доступность определяет схема и повторный preflight. Для read-only
+клиента `operations` пуст, `formEditSchema.writable:false`, apply возвращает
+`property_read_only`. Выбранный проект передаётся явно, без выбора первой папки.
+
+Запись использует существующие защиту источников, блокировку и восстановление;
+многофайловые изменения публикуются через общий журнал. Успешная мутация
+отправляет `metadata/changed` до подтверждения. Автоматический повтор apply
+после потери ответа запрещён. `object_committed_refresh_required` и
+`form_committed_refresh_required` означают уже выполненную запись с необходимостью
+перечитать сессию. Структурные операции не входят в скалярную историю Undo/Redo.

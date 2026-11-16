@@ -2,6 +2,7 @@
 
 mod activity;
 mod analyzer;
+pub(crate) mod authoring;
 pub(crate) mod creation;
 pub(crate) mod dto;
 pub(crate) mod editing;
@@ -20,7 +21,7 @@ pub(crate) mod renaming;
 mod runtime;
 mod server;
 
-pub(crate) const API_MINOR: u32 = 48;
+pub(crate) const API_MINOR: u32 = 49;
 
 /// Run a persistent framed protocol session without human output on stdout.
 #[must_use]

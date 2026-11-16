@@ -2,6 +2,7 @@
 
 /// Namespace-aware property or qualifier key; prefixes do not participate in equality.
 #[derive(serde::Serialize, serde::Deserialize, Clone, Debug, Eq, PartialEq)]
+#[serde(deny_unknown_fields)]
 pub struct PropertyKey {
     pub namespace: Option<String>,
     pub name: String,
@@ -9,6 +10,7 @@ pub struct PropertyKey {
 
 /// A property and its qualified value annotations, preserving unknown property names.
 #[derive(serde::Serialize, serde::Deserialize, Clone, Debug, Eq, PartialEq)]
+#[serde(deny_unknown_fields)]
 pub struct MetadataProperty {
     pub key: PropertyKey,
     pub qualifiers: Vec<(PropertyKey, String)>,
@@ -17,6 +19,7 @@ pub struct MetadataProperty {
 
 /// One localized value, retaining its language key and content without UI locale selection.
 #[derive(serde::Serialize, serde::Deserialize, Clone, Debug, Eq, PartialEq)]
+#[serde(deny_unknown_fields)]
 pub struct LocalizedText {
     pub language: String,
     pub content: String,
@@ -24,6 +27,7 @@ pub struct LocalizedText {
 
 /// Structured metadata values, independent of the parser's DOM and its source representation.
 #[derive(serde::Serialize, serde::Deserialize, Clone, Debug, Eq, PartialEq)]
+#[serde(deny_unknown_fields)]
 pub enum MetadataValue {
     Text(String),
     /// An XML type reference with its original spelling and resolved namespace identity.

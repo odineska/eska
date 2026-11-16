@@ -5,6 +5,7 @@ use eska_presentation::arguments::project::metadata::{MetadataCommand, OutputFor
 
 use std::{io::Read, path::Path, process::ExitCode};
 
+mod authoring;
 mod creation;
 mod renaming;
 
@@ -26,6 +27,9 @@ impl MetadataHandler<'_> {
     /// Emit exactly one stable JSON envelope; source inspection never starts disk caching.
     #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
+        if authoring::handles(&self.args.command) {
+            return authoring::run(self.args, project_dir, localizer);
+        }
         if matches!(
             self.args.command,
             MetadataCommand::Add(_) | MetadataCommand::CreateSchema(_)
@@ -54,9 +58,6 @@ impl MetadataHandler<'_> {
             .map_err(|error| editing::failure(error.into()))?;
         let labels = dto::Labels::new().map_err(|_| failure("localization_failed"))?;
         match &self.args.command {
-            MetadataCommand::Add(_) | MetadataCommand::CreateSchema(_) => {
-                Err(failure("invalid_request"))
-            }
             MetadataCommand::RenamePreview(args) => {
                 let request = read_input(&args.input, &["schemaVersion", "objectId", "newName"])?;
                 renaming::preview(project, &request)
@@ -135,6 +136,7 @@ impl MetadataHandler<'_> {
                 }
                 apply(&labels, project, &request)
             }
+            _ => Err(failure("invalid_request")),
         }
     }
 }
@@ -233,6 +235,11 @@ fn read_input(path: &Path, allowed: &[&str]) -> Result<Value, Value> {
 
 /// Requests and saved plans have the same bounded file/stdin input path.
 fn read_json(path: &Path) -> Result<Value, Value> {
+    read_json_limited(path, 1_048_576)
+}
+
+/// Semantic requests stay small; multi-file display plans may use a separate documented bound.
+fn read_json_limited(path: &Path, limit: u64) -> Result<Value, Value> {
     let mut bytes = Vec::new();
     let input: Box<dyn Read> = if path == Path::new("-") {
         Box::new(std::io::stdin())
@@ -240,10 +247,10 @@ fn read_json(path: &Path) -> Result<Value, Value> {
         Box::new(std::fs::File::open(path).map_err(|_| failure("input_unavailable"))?)
     };
     input
-        .take(1_048_577)
+        .take(limit + 1)
         .read_to_end(&mut bytes)
         .map_err(|_| failure("input_unavailable"))?;
-    if bytes.len() > 1_048_576 {
+    if bytes.len() as u64 > limit {
         return Err(failure("input_too_large"));
     }
     serde_json::from_slice(&bytes).map_err(|_| failure("invalid_request"))

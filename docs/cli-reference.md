@@ -20,7 +20,17 @@
 | [`eska`](#command-eska) | Инструментарий разработки проектов 1С:Предприятие |
 | [`eska add`](#command-eska-add) | Подключить БСП к внешнему отчёту или обработке |
 | [`eska update`](#command-eska-update) | Обновить установленную ESKA |
-| [`eska metadata`](#command-eska-metadata) | Чтение и изменение существующих свойств метаданных через JSON |
+| [`eska metadata`](#command-eska-metadata) | Чтение, изменение и создание метаданных Designer XML |
+| [`eska metadata create`](#command-eska-metadata-create) | Создать объект метаданных, при необходимости на основе существующего. |
+| [`eska metadata copy`](#command-eska-metadata-copy) | Создать полную копию объекта с новыми идентификаторами, модулями и ресурсами. |
+| [`eska metadata delete`](#command-eska-metadata-delete) | Удалить объект и его файлы после проверки входящих ссылок. |
+| [`eska metadata object-schema`](#command-eska-metadata-object-schema) | Получить допустимые типы объектов, ограничения и JSON Schema запросов. |
+| [`eska metadata form-schema`](#command-eska-metadata-form-schema) | Получить структуру формы, свойства и события для редактирования. |
+| [`eska metadata form-edit`](#command-eska-metadata-form-edit) | Проверить или применить семантические изменения формы из JSON. |
+| [`eska metadata recover`](#command-eska-metadata-recover) | Проверить или восстановить прерванную запись метаданных, включая создание начальной конфигурации. |
+| [`eska metadata list`](#command-eska-metadata-list) | Найти объекты в выбранном родителе без рекурсивного обхода конфигурации. |
+| [`eska metadata add`](#command-eska-metadata-add) | Добавить реквизит или табличную часть через общую модель метаданных |
+| [`eska metadata create-schema`](#command-eska-metadata-create-schema) | Прочитать доступные операции создания, владельцев, типы и ограничения |
 | [`eska ide`](#command-eska-ide) | Постоянный read-only процесс для IDE |
 | [`eska build`](#command-eska-build) | Собрать нативный артефакт 1С из Designer XML |
 | [`eska check`](#command-eska-check) | Полная проверка Designer XML и BSL для CI |
@@ -72,7 +82,7 @@ eska 0.22.0
 Команды:
   add       Подключить БСП к внешнему отчёту или обработке
   update    Обновить установленную ESKA
-  metadata  Чтение и изменение существующих свойств метаданных через JSON
+  metadata  Чтение, изменение и создание метаданных Designer XML
   ide       Постоянный read-only процесс для IDE
   build     Собрать нативный артефакт 1С из Designer XML
   check     Полная проверка Designer XML и BSL для CI
@@ -161,11 +171,21 @@ Options:
 <summary>eska metadata: синтаксис и все параметры</summary>
 
 ```text
-Чтение и изменение существующих свойств метаданных через JSON
+Чтение, изменение и создание метаданных Designer XML
 
 Usage: eska metadata [OPTIONS] <COMMAND>
 
 Commands:
+  create           Создать объект метаданных, при необходимости на основе существующего.
+  copy             Создать полную копию объекта с новыми идентификаторами, модулями и ресурсами.
+  delete           Удалить объект и его файлы после проверки входящих ссылок.
+  object-schema    Получить допустимые типы объектов, ограничения и JSON Schema запросов.
+  form-schema      Получить структуру формы, свойства и события для редактирования.
+  form-edit        Проверить или применить семантические изменения формы из JSON.
+  recover          Проверить или восстановить прерванную запись метаданных, включая создание начальной конфигурации.
+  list             Найти объекты в выбранном родителе без рекурсивного обхода конфигурации.
+  add              Добавить реквизит или табличную часть через общую модель метаданных
+  create-schema    Прочитать доступные операции создания, владельцев, типы и ограничения
   inspect          Прочитать свойства и схему допустимых изменений
   types            Получить допустимые типы существующего поля
   choices          Получить допустимые ссылки на метаданные для существующего поля
@@ -179,8 +199,296 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
   -h, --help                   Показать справку
+```
+
+</details>
+
+<a id="command-eska-metadata-create"></a>
+
+<details>
+<summary>eska metadata create: синтаксис и все параметры</summary>
+
+```text
+Создать объект метаданных, при необходимости на основе существующего.
+
+Usage: eska metadata create [OPTIONS]
+
+Options:
+      --kind <KIND>                 Ключ типа из object-schema, например catalog, document или common-module.
+      --lang <ЛОКАЛЬ>               Выбрать язык интерфейса
+      --name <NAME>                 Имя нового элемента в конфигурации
+      --project-dir <КАТАЛОГ>       Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+      --parent <PARENT>             Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --template <TEMPLATE>         Идентификатор существующего объекта того же типа, используемого как образец.
+      --set <PROPERTY=VALUE>        Явное значение скалярного свойства; можно повторять. Идентификаторы менять нельзя.
+      --reference <PROPERTY=VALUE>  Ссылка в свойстве-списке; повторяйте для нескольких значений, например RegisterRecords=AccumulationRegister.Остатки.
+      --type <PROPERTY=TYPE>        Тип в свойстве-списке; повторяйте для составного типа, например Source=cfg:DocumentObject.Заказ или Type=xs:string.
+      --input <INPUT>               Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>                 Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --dry-run                     Вернуть подготовленный план создания без записи исходников
+      --no-input                    Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                        Показать справку
+  -p, --project <PROJECT>           Выбрать один проект рабочего пространства
+      --format <FORMAT>             Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-copy"></a>
+
+<details>
+<summary>eska metadata copy: синтаксис и все параметры</summary>
+
+```text
+Создать полную копию объекта с новыми идентификаторами, модулями и ресурсами.
+
+Usage: eska metadata copy [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>               Выбрать язык интерфейса
+      --source <SOURCE>             Идентификатор копируемого объекта из metadata list или inspect.
+      --name <NAME>                 Имя нового элемента в конфигурации
+      --project-dir <КАТАЛОГ>       Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+      --parent <PARENT>             Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --set <PROPERTY=VALUE>        Явное значение скалярного свойства; можно повторять. Идентификаторы менять нельзя.
+      --reference <PROPERTY=VALUE>  Ссылка в свойстве-списке; повторяйте для нескольких значений, например RegisterRecords=AccumulationRegister.Остатки.
+      --type <PROPERTY=TYPE>        Тип в свойстве-списке; повторяйте для составного типа, например Source=cfg:DocumentObject.Заказ или Type=xs:string.
+      --input <INPUT>               Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>                 Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --dry-run                     Вернуть подготовленный план создания без записи исходников
+      --no-input                    Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                        Показать справку
+  -p, --project <PROJECT>           Выбрать один проект рабочего пространства
+      --format <FORMAT>             Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-delete"></a>
+
+<details>
+<summary>eska metadata delete: синтаксис и все параметры</summary>
+
+```text
+Удалить объект и его файлы после проверки входящих ссылок.
+
+Usage: eska metadata delete [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --object <OBJECT>        ID объекта из metadata inspect; по умолчанию корневой объект
+      --force                  Разрешить удаление с обнаруженными входящими ссылками; ссылки останутся неразрешёнными.
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+      --yes                    Подтвердить удаление без интерактивного запроса. Не заменяет проверку ссылок и --force.
+      --input <INPUT>          Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>            Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --dry-run                Вернуть подготовленный план создания без записи исходников
+      --no-input               Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-object-schema"></a>
+
+<details>
+<summary>eska metadata object-schema: синтаксис и все параметры</summary>
+
+```text
+Получить допустимые типы объектов, ограничения и JSON Schema запросов.
+
+Usage: eska metadata object-schema [OPTIONS]
+
+Options:
+      --kind <KIND>            Ключ типа из object-schema, например catalog, document или common-module.
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --parent <PARENT>        Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-form-schema"></a>
+
+<details>
+<summary>eska metadata form-schema: синтаксис и все параметры</summary>
+
+```text
+Получить структуру формы, свойства и события для редактирования.
+
+Usage: eska metadata form-schema [OPTIONS] --form <FORM>
+
+Options:
+      --form <FORM>            Идентификатор формы из metadata list или inspect.
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+  -h, --help                   Показать справку
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-form-edit"></a>
+
+<details>
+<summary>eska metadata form-edit: синтаксис и все параметры</summary>
+
+```text
+Проверить или применить семантические изменения формы из JSON.
+
+Usage: eska metadata form-edit [OPTIONS]
+
+Options:
+      --input <INPUT>          Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --plan <PLAN>            Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+      --dry-run                Вернуть подготовленный план создания без записи исходников
+      --no-input               Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-recover"></a>
+
+<details>
+<summary>eska metadata recover: синтаксис и все параметры</summary>
+
+```text
+Проверить или восстановить прерванную запись метаданных, включая создание начальной конфигурации.
+
+Usage: eska metadata recover [OPTIONS] <INPUT>
+
+Arguments:
+  <INPUT>  Файл запроса JSON или - для чтения stdin
+
+Options:
+  -h, --help                   Показать справку
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-list"></a>
+
+<details>
+<summary>eska metadata list: синтаксис и все параметры</summary>
+
+```text
+Найти объекты в выбранном родителе без рекурсивного обхода конфигурации.
+
+Usage: eska metadata list [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --parent <PARENT>        Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --kind <KIND>            Ключ типа из object-schema, например catalog, document или common-module.
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+      --search <SEARCH>        Отфильтровать объекты по части идентификатора или имени без учёта регистра.
+      --limit <LIMIT>          Максимальное число объектов в ответе (1–500). [default: 100]
+      --after <AFTER>          Курсор nextAfter из предыдущей страницы; не включает указанный объект.
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-add"></a>
+
+<details>
+<summary>eska metadata add: синтаксис и все параметры</summary>
+
+```text
+Добавить реквизит или табличную часть через общую модель метаданных
+
+Usage: eska metadata add [OPTIONS] [KIND]
+
+Arguments:
+  [KIND]  Создаваемый элемент: реквизит или табличная часть [possible values: attribute, table-part]
+
+Options:
+      --lang <ЛОКАЛЬ>
+          Выбрать язык интерфейса
+      --owner <OWNER>
+          ID существующего владельца: справочника, документа или поддерживаемой табличной части
+      --name <NAME>
+          Имя нового элемента в конфигурации
+      --project-dir <КАТАЛОГ>
+          Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+      --type <VALUE_TYPE>
+          Тип реквизита: string, number, boolean, date или reference; для составного типа используйте --input
+      --reference <REFERENCE>
+          ID существующего объекта метаданных для ссылочного типа
+      --length <LENGTH>
+          Длина строки; значения по умолчанию доступны в create-schema
+      --digits <DIGITS>
+          Общая разрядность числа
+      --fraction-digits <FRACTION_DIGITS>
+          Число знаков дробной части
+      --nonnegative
+          Разрешить только неотрицательные числа
+      --fixed-length
+          Использовать фиксированную длину строки
+      --date-fractions <DATE_FRACTIONS>
+          Дата, время или дата и время [possible values: date, time, date-time]
+      --synonym <LANGUAGE=TEXT>
+          Локализованный синоним в виде LANGUAGE=TEXT; можно повторить для нескольких языков
+      --comment <COMMENT>
+          Комментарий разработчика
+      --snapshot <SNAPSHOT>
+          Требовать снимок владельца из create-schema; для точного применения предпросмотра используйте --plan
+      --input <INPUT>
+          Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>
+          Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --interactive
+          Интерактивно выбрать владельца и свойства, затем проверить изменения
+      --no-input
+          Отключить все вопросы; при нехватке параметров вернуть ошибку
+      --dry-run
+          Вернуть подготовленный план создания без записи исходников
+  -h, --help
+          Показать справку
+  -p, --project <PROJECT>
+          Выбрать один проект рабочего пространства
+      --format <FORMAT>
+          Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-metadata-create-schema"></a>
+
+<details>
+<summary>eska metadata create-schema: синтаксис и все параметры</summary>
+
+```text
+Прочитать доступные операции создания, владельцев, типы и ограничения
+
+Usage: eska metadata create-schema [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --owner <OWNER>          ID существующего владельца: справочника, документа или поддерживаемой табличной части
+  -h, --help                   Показать справку
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -822,7 +1130,7 @@ Options:
   -h, --help                   Показать справку
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -845,7 +1153,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -868,7 +1176,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -891,7 +1199,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -914,7 +1222,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -937,7 +1245,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -960,7 +1268,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -983,7 +1291,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1087,7 +1395,17 @@ Options:
 | [`eska-project settings-local`](#command-eska-project-settings-local) | Прочитать, проверить или сохранить локальные профили запуска |
 | [`eska-project new`](#command-eska-project-new) | Создать проект Designer XML без инициализации Git |
 | [`eska-project init`](#command-eska-project-init) | Подключить существующую выгрузку Designer XML без инициализации Git |
-| [`eska-project metadata`](#command-eska-project-metadata) | Чтение и изменение существующих свойств метаданных через JSON |
+| [`eska-project metadata`](#command-eska-project-metadata) | Чтение, изменение и создание метаданных Designer XML |
+| [`eska-project metadata create`](#command-eska-project-metadata-create) | Создать объект метаданных, при необходимости на основе существующего. |
+| [`eska-project metadata copy`](#command-eska-project-metadata-copy) | Создать полную копию объекта с новыми идентификаторами, модулями и ресурсами. |
+| [`eska-project metadata delete`](#command-eska-project-metadata-delete) | Удалить объект и его файлы после проверки входящих ссылок. |
+| [`eska-project metadata object-schema`](#command-eska-project-metadata-object-schema) | Получить допустимые типы объектов, ограничения и JSON Schema запросов. |
+| [`eska-project metadata form-schema`](#command-eska-project-metadata-form-schema) | Получить структуру формы, свойства и события для редактирования. |
+| [`eska-project metadata form-edit`](#command-eska-project-metadata-form-edit) | Проверить или применить семантические изменения формы из JSON. |
+| [`eska-project metadata recover`](#command-eska-project-metadata-recover) | Проверить или восстановить прерванную запись метаданных, включая создание начальной конфигурации. |
+| [`eska-project metadata list`](#command-eska-project-metadata-list) | Найти объекты в выбранном родителе без рекурсивного обхода конфигурации. |
+| [`eska-project metadata add`](#command-eska-project-metadata-add) | Добавить реквизит или табличную часть через общую модель метаданных |
+| [`eska-project metadata create-schema`](#command-eska-project-metadata-create-schema) | Прочитать доступные операции создания, владельцев, типы и ограничения |
 | [`eska-project version`](#command-eska-project-version) | Показать или изменить версию проекта 1С |
 | [`eska-project analyzer-config status`](#command-eska-project-analyzer-config-status) | Проверить актуальность без записи файлов |
 | [`eska-project analyzer-config prepare`](#command-eska-project-analyzer-config-prepare) | Проверить и подготовить выбранный контекст |
@@ -1194,7 +1512,7 @@ eska-project 0.22.0
   context          Определить контекст выбранного приложения
   new              Создать проект Designer XML без инициализации Git
   init             Подключить существующую выгрузку Designer XML без инициализации Git
-  metadata         Чтение и изменение существующих свойств метаданных через JSON
+  metadata         Чтение, изменение и создание метаданных Designer XML
   version          Показать или изменить версию проекта 1С
 Параметры:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
@@ -1394,11 +1712,21 @@ Options:
 <summary>eska-project metadata: синтаксис и все параметры</summary>
 
 ```text
-Чтение и изменение существующих свойств метаданных через JSON
+Чтение, изменение и создание метаданных Designer XML
 
 Usage: eska-project metadata [OPTIONS] <COMMAND>
 
 Commands:
+  create           Создать объект метаданных, при необходимости на основе существующего.
+  copy             Создать полную копию объекта с новыми идентификаторами, модулями и ресурсами.
+  delete           Удалить объект и его файлы после проверки входящих ссылок.
+  object-schema    Получить допустимые типы объектов, ограничения и JSON Schema запросов.
+  form-schema      Получить структуру формы, свойства и события для редактирования.
+  form-edit        Проверить или применить семантические изменения формы из JSON.
+  recover          Проверить или восстановить прерванную запись метаданных, включая создание начальной конфигурации.
+  list             Найти объекты в выбранном родителе без рекурсивного обхода конфигурации.
+  add              Добавить реквизит или табличную часть через общую модель метаданных
+  create-schema    Прочитать доступные операции создания, владельцев, типы и ограничения
   inspect          Прочитать свойства и схему допустимых изменений
   types            Получить допустимые типы существующего поля
   choices          Получить допустимые ссылки на метаданные для существующего поля
@@ -1412,8 +1740,296 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
   -h, --help                   Показать справку
+```
+
+</details>
+
+<a id="command-eska-project-metadata-create"></a>
+
+<details>
+<summary>eska-project metadata create: синтаксис и все параметры</summary>
+
+```text
+Создать объект метаданных, при необходимости на основе существующего.
+
+Usage: eska-project metadata create [OPTIONS]
+
+Options:
+      --kind <KIND>                 Ключ типа из object-schema, например catalog, document или common-module.
+      --lang <ЛОКАЛЬ>               Выбрать язык интерфейса
+      --name <NAME>                 Имя нового элемента в конфигурации
+      --project-dir <КАТАЛОГ>       Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --parent <PARENT>             Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --template <TEMPLATE>         Идентификатор существующего объекта того же типа, используемого как образец.
+      --set <PROPERTY=VALUE>        Явное значение скалярного свойства; можно повторять. Идентификаторы менять нельзя.
+      --reference <PROPERTY=VALUE>  Ссылка в свойстве-списке; повторяйте для нескольких значений, например RegisterRecords=AccumulationRegister.Остатки.
+      --type <PROPERTY=TYPE>        Тип в свойстве-списке; повторяйте для составного типа, например Source=cfg:DocumentObject.Заказ или Type=xs:string.
+      --input <INPUT>               Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>                 Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --dry-run                     Вернуть подготовленный план создания без записи исходников
+      --no-input                    Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                        Показать справку
+  -p, --project <PROJECT>           Выбрать один проект рабочего пространства
+      --format <FORMAT>             Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-copy"></a>
+
+<details>
+<summary>eska-project metadata copy: синтаксис и все параметры</summary>
+
+```text
+Создать полную копию объекта с новыми идентификаторами, модулями и ресурсами.
+
+Usage: eska-project metadata copy [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>               Выбрать язык интерфейса
+      --source <SOURCE>             Идентификатор копируемого объекта из metadata list или inspect.
+      --name <NAME>                 Имя нового элемента в конфигурации
+      --project-dir <КАТАЛОГ>       Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --parent <PARENT>             Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --set <PROPERTY=VALUE>        Явное значение скалярного свойства; можно повторять. Идентификаторы менять нельзя.
+      --reference <PROPERTY=VALUE>  Ссылка в свойстве-списке; повторяйте для нескольких значений, например RegisterRecords=AccumulationRegister.Остатки.
+      --type <PROPERTY=TYPE>        Тип в свойстве-списке; повторяйте для составного типа, например Source=cfg:DocumentObject.Заказ или Type=xs:string.
+      --input <INPUT>               Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>                 Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --dry-run                     Вернуть подготовленный план создания без записи исходников
+      --no-input                    Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                        Показать справку
+  -p, --project <PROJECT>           Выбрать один проект рабочего пространства
+      --format <FORMAT>             Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-delete"></a>
+
+<details>
+<summary>eska-project metadata delete: синтаксис и все параметры</summary>
+
+```text
+Удалить объект и его файлы после проверки входящих ссылок.
+
+Usage: eska-project metadata delete [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --object <OBJECT>        ID объекта из metadata inspect; по умолчанию корневой объект
+      --force                  Разрешить удаление с обнаруженными входящими ссылками; ссылки останутся неразрешёнными.
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --yes                    Подтвердить удаление без интерактивного запроса. Не заменяет проверку ссылок и --force.
+      --input <INPUT>          Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>            Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --dry-run                Вернуть подготовленный план создания без записи исходников
+      --no-input               Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-object-schema"></a>
+
+<details>
+<summary>eska-project metadata object-schema: синтаксис и все параметры</summary>
+
+```text
+Получить допустимые типы объектов, ограничения и JSON Schema запросов.
+
+Usage: eska-project metadata object-schema [OPTIONS]
+
+Options:
+      --kind <KIND>            Ключ типа из object-schema, например catalog, document или common-module.
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --parent <PARENT>        Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-form-schema"></a>
+
+<details>
+<summary>eska-project metadata form-schema: синтаксис и все параметры</summary>
+
+```text
+Получить структуру формы, свойства и события для редактирования.
+
+Usage: eska-project metadata form-schema [OPTIONS] --form <FORM>
+
+Options:
+      --form <FORM>            Идентификатор формы из metadata list или inspect.
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+  -h, --help                   Показать справку
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-form-edit"></a>
+
+<details>
+<summary>eska-project metadata form-edit: синтаксис и все параметры</summary>
+
+```text
+Проверить или применить семантические изменения формы из JSON.
+
+Usage: eska-project metadata form-edit [OPTIONS]
+
+Options:
+      --input <INPUT>          Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --plan <PLAN>            Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --dry-run                Вернуть подготовленный план создания без записи исходников
+      --no-input               Отключить все вопросы; при нехватке параметров вернуть ошибку
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-recover"></a>
+
+<details>
+<summary>eska-project metadata recover: синтаксис и все параметры</summary>
+
+```text
+Проверить или восстановить прерванную запись метаданных, включая создание начальной конфигурации.
+
+Usage: eska-project metadata recover [OPTIONS] <INPUT>
+
+Arguments:
+  <INPUT>  Файл запроса JSON или - для чтения stdin
+
+Options:
+  -h, --help                   Показать справку
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-list"></a>
+
+<details>
+<summary>eska-project metadata list: синтаксис и все параметры</summary>
+
+```text
+Найти объекты в выбранном родителе без рекурсивного обхода конфигурации.
+
+Usage: eska-project metadata list [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --parent <PARENT>        Идентификатор родителя; по умолчанию — корень проекта, для копии — исходный родитель.
+      --kind <KIND>            Ключ типа из object-schema, например catalog, document или common-module.
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --search <SEARCH>        Отфильтровать объекты по части идентификатора или имени без учёта регистра.
+      --limit <LIMIT>          Максимальное число объектов в ответе (1–500). [default: 100]
+      --after <AFTER>          Курсор nextAfter из предыдущей страницы; не включает указанный объект.
+  -h, --help                   Показать справку
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-add"></a>
+
+<details>
+<summary>eska-project metadata add: синтаксис и все параметры</summary>
+
+```text
+Добавить реквизит или табличную часть через общую модель метаданных
+
+Usage: eska-project metadata add [OPTIONS] [KIND]
+
+Arguments:
+  [KIND]  Создаваемый элемент: реквизит или табличная часть [possible values: attribute, table-part]
+
+Options:
+      --lang <ЛОКАЛЬ>
+          Выбрать язык интерфейса
+      --owner <OWNER>
+          ID существующего владельца: справочника, документа или поддерживаемой табличной части
+      --name <NAME>
+          Имя нового элемента в конфигурации
+      --project-dir <КАТАЛОГ>
+          Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --type <VALUE_TYPE>
+          Тип реквизита: string, number, boolean, date или reference; для составного типа используйте --input
+      --reference <REFERENCE>
+          ID существующего объекта метаданных для ссылочного типа
+      --length <LENGTH>
+          Длина строки; значения по умолчанию доступны в create-schema
+      --digits <DIGITS>
+          Общая разрядность числа
+      --fraction-digits <FRACTION_DIGITS>
+          Число знаков дробной части
+      --nonnegative
+          Разрешить только неотрицательные числа
+      --fixed-length
+          Использовать фиксированную длину строки
+      --date-fractions <DATE_FRACTIONS>
+          Дата, время или дата и время [possible values: date, time, date-time]
+      --synonym <LANGUAGE=TEXT>
+          Локализованный синоним в виде LANGUAGE=TEXT; можно повторить для нескольких языков
+      --comment <COMMENT>
+          Комментарий разработчика
+      --snapshot <SNAPSHOT>
+          Требовать снимок владельца из create-schema; для точного применения предпросмотра используйте --plan
+      --input <INPUT>
+          Файл запроса создания в JSON с версией схемы, либо - для stdin
+      --plan <PLAN>
+          Сохранённый JSON-вывод add --dry-run, либо - для stdin; сохраняет рассмотренные идентификаторы
+      --interactive
+          Интерактивно выбрать владельца и свойства, затем проверить изменения
+      --no-input
+          Отключить все вопросы; при нехватке параметров вернуть ошибку
+      --dry-run
+          Вернуть подготовленный план создания без записи исходников
+  -h, --help
+          Показать справку
+  -p, --project <PROJECT>
+          Выбрать один проект рабочего пространства
+      --format <FORMAT>
+          Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
+```
+
+</details>
+
+<a id="command-eska-project-metadata-create-schema"></a>
+
+<details>
+<summary>eska-project metadata create-schema: синтаксис и все параметры</summary>
+
+```text
+Прочитать доступные операции создания, владельцев, типы и ограничения
+
+Usage: eska-project metadata create-schema [OPTIONS]
+
+Options:
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --owner <OWNER>          ID существующего владельца: справочника, документа или поддерживаемой табличной части
+  -h, --help                   Показать справку
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+  -p, --project <PROJECT>      Выбрать один проект рабочего пространства
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1533,7 +2149,7 @@ Options:
   -h, --help                   Показать справку
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1556,7 +2172,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1579,7 +2195,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1602,7 +2218,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1625,7 +2241,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1648,7 +2264,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1671,7 +2287,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>
@@ -1694,7 +2310,7 @@ Options:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
   -p, --project <PROJECT>      Выбрать один проект рабочего пространства
-      --format <FORMAT>        Формат машинного вывода [default: json] [possible values: json]
+      --format <FORMAT>        Формат вывода; add использует human, прежние операции и create-schema — JSON [possible values: human, json]
 ```
 
 </details>

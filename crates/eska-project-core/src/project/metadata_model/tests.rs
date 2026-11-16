@@ -3,6 +3,27 @@ use std::collections::BTreeSet;
 use super::*;
 use crate::project::{ProjectConfiguration, ProjectName, ProjectType, SourceFormat};
 
+#[test]
+fn semantic_values_reject_unknown_json_fields_at_every_nested_boundary() {
+    use serde_json::json;
+    let key = json!({"namespace":null,"name":"AnyPreservedXmlName"});
+    let property = json!({"key":key,"qualifiers":[],"value":{"Text":"unchanged"}});
+    assert!(serde_json::from_value::<MetadataProperty>(property.clone()).is_ok());
+    let mut unknown_property = property.clone();
+    unknown_property["caption"] = json!("must not disappear silently");
+    assert!(serde_json::from_value::<MetadataProperty>(unknown_property).is_err());
+    let mut unknown_key = property;
+    unknown_key["key"]["ns"] = json!("misspelled namespace");
+    assert!(serde_json::from_value::<MetadataProperty>(unknown_key).is_err());
+    for value in [
+        json!({"QualifiedText":{"text":"x:Any","key":key,"extra":true}}),
+        json!({"TypedText":{"text":"value","key":key,"extra":true}}),
+        json!({"Localized":[{"language":"ru","content":"Текст","extra":true}]}),
+    ] {
+        assert!(serde_json::from_value::<MetadataValue>(value).is_err());
+    }
+}
+
 /// Construct an object with an intentionally repeated UUID, as real fixtures allow.
 fn object(kind: MetadataKind, name: &str, parent: Option<ObjectId>) -> MetadataObject {
     MetadataObject::new(kind, name.to_owned(), "same-uuid".to_owned(), parent)

@@ -25,6 +25,7 @@ mod shelves;
 mod update;
 
 mod metadata;
+mod metadata_authoring;
 
 mod delegation;
 

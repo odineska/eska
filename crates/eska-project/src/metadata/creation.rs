@@ -1,8 +1,8 @@
 //! Human and machine entry points for semantic creation share one backend transaction.
 
 mod arguments;
-mod presentation;
-mod prompt;
+pub(super) mod presentation;
+pub(super) mod prompt;
 
 use std::{io::IsTerminal, path::Path, process::ExitCode};
 

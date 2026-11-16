@@ -32,6 +32,11 @@ pub(super) fn retain_legacy_fields(schema: &mut Value, minor: u32) {
         fields.retain(|field| {
             let keep = (minor >= 10 || field["linked"] != true)
                 && (minor >= 11 || field["schema"]["kind"] != "unsignedInteger")
+                && (minor >= 49
+                    || !matches!(
+                        field["schema"]["kind"].as_str(),
+                        Some("references" | "types")
+                    ))
                 && (minor >= 8
                     || matches!(
                         field["schema"]["kind"].as_str(),
@@ -51,6 +56,12 @@ pub(super) fn retain_legacy_fields(schema: &mut Value, minor: u32) {
                 properties.push(json!({"key":key,"reason":"client_version"}));
             }
         }
+    }
+    if minor < 49
+        && let Some(schema) = schema.as_object_mut()
+    {
+        schema.remove("referenceLists");
+        schema.remove("typeLists");
     }
 }
 
@@ -100,6 +111,12 @@ pub fn describe(
             if matches!(field.schema, ScalarSchema::Reference { .. }) {
                 value["caption"] = paired(labels, |locale| reference_caption(locale, &field.value));
             }
+            if let ScalarSchema::References { values, .. } = &field.schema {
+                value["options"] = json!(values.iter().map(|value| json!({"value":value,"caption":paired(labels, |locale| reference_caption(locale, value))})).collect::<Vec<_>>());
+            }
+            if let ScalarSchema::Types { keys, .. } = &field.schema {
+                value["options"] = json!(keys.iter().map(|key| json!({"key":key,"caption":type_caption(labels,key)})).collect::<Vec<_>>());
+            }
             if let ScalarSchema::Value { key, types, .. } = &field.schema {
                 value["schema"]["types"] = json!(types.iter().map(|choice| {
                     let mut choice_json = json!(choice);
@@ -131,6 +148,8 @@ pub fn describe(
         "contextSnapshot":state.context_snapshot,"linkedObjects":state.linked_objects,
         "undoLinked":state.undo == Some(eska_project_core::project::metadata_workspace::HistoryOperation::Linked),"redoLinked":state.redo == Some(eska_project_core::project::metadata_workspace::HistoryOperation::Linked),
         "profile":state.properties.profile,"readOnlyProperties":state.properties.read_only_properties,"fields":fields,"undo":state.undo.is_some(),"redo":state.redo.is_some(),"addRemove":false,
+        "referenceLists":state.properties.fields.iter().any(|field| matches!(field.schema, ScalarSchema::References { .. })),
+        "typeLists":state.properties.fields.iter().any(|field| matches!(field.schema, ScalarSchema::Types { .. })),
         "renameAvailable":rename_available,"undoRename":state.undo == Some(eska_project_core::project::metadata_workspace::HistoryOperation::Rename),"redoRename":state.redo == Some(eska_project_core::project::metadata_workspace::HistoryOperation::Rename)}),
     )
 }
@@ -158,15 +177,21 @@ pub fn reference_choices(
     let choices = project
         .property_reference_choices(id, path)
         .map_err(failure)?;
-    Ok(json!({"choices":choices.iter().map(|choice| {
-        let mut value = json!({
-            "value":choice.value,"objectId":choice.object.id,
-            "caption":paired(labels, |locale| reference_caption(locale, &choice.value)),
-            "metadataKind":choice.object.kind.as_str()
-        });
-        if let Some(name) = &choice.standard_attribute { value["standardAttribute"] = json!(name); }
-        value
-    }).collect::<Vec<_>>()}))
+    Ok(
+        json!({"choices":choices.iter().map(|choice| reference_choice(labels,choice)).collect::<Vec<_>>()}),
+    )
+}
+
+pub(super) fn reference_choice(
+    labels: &Labels,
+    choice: &eska_project_core::project::metadata_workspace::PropertyReferenceChoice,
+) -> Value {
+    let mut value = json!({"value":choice.value,"objectId":choice.object.id,
+        "caption":paired(labels, |locale| reference_caption(locale, &choice.value)),"metadataKind":choice.object.kind.as_str()});
+    if let Some(name) = &choice.standard_attribute {
+        value["standardAttribute"] = json!(name);
+    }
+    value
 }
 
 /// A typed value's reference domain includes empty references and existing enum/predefined values.
@@ -283,7 +308,7 @@ pub fn failure(error: PropertyEditError) -> Value {
 }
 
 /// Both caption variants are returned together so callers never localize enum identifiers.
-fn paired(
+pub(super) fn paired(
     labels: &Labels,
     format: impl Fn(&eska_presentation::localization::Localizer) -> String,
 ) -> Value {
@@ -291,7 +316,10 @@ fn paired(
 }
 
 /// Keep field scope visible and localize implicit standard names without inventing tree identities.
-fn reference_caption(locale: &eska_presentation::localization::Localizer, raw: &str) -> String {
+pub(super) fn reference_caption(
+    locale: &eska_presentation::localization::Localizer,
+    raw: &str,
+) -> String {
     if raw.is_empty() {
         return locale.text("platform-presentation-unset");
     }
@@ -334,7 +362,7 @@ fn type_caption(labels: &Labels, key: &PropertyKey) -> Value {
 }
 
 /// Type choices show the owning metadata category and synonym without changing the stored key.
-fn type_choice(labels: &Labels, choice: &PropertyTypeChoice) -> Value {
+pub(super) fn type_choice(labels: &Labels, choice: &PropertyTypeChoice) -> Value {
     let caption = choice.object.as_ref().map_or_else(
         || type_caption(labels, &choice.key),
         |object| {

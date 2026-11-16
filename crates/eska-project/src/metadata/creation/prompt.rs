@@ -435,7 +435,7 @@ fn number(
     }
 }
 
-fn required_text(locale: &Localizer, label: &str) -> Result<String, Value> {
+pub(in crate::metadata) fn required_text(locale: &Localizer, label: &str) -> Result<String, Value> {
     loop {
         let value = line(locale, label, None)?;
         if eska_project_core::project::metadata_rename::validate_name(&value).is_ok() {
@@ -445,7 +445,11 @@ fn required_text(locale: &Localizer, label: &str) -> Result<String, Value> {
     }
 }
 
-fn line(locale: &Localizer, label: &str, default: Option<&str>) -> Result<String, Value> {
+pub(in crate::metadata) fn line(
+    locale: &Localizer,
+    label: &str,
+    default: Option<&str>,
+) -> Result<String, Value> {
     let default_label = default
         .map(|value| {
             locale.format(
@@ -484,7 +488,7 @@ fn line(locale: &Localizer, label: &str, default: Option<&str>) -> Result<String
     .to_owned())
 }
 
-fn choose(
+pub(in crate::metadata) fn choose(
     locale: &Localizer,
     label: &str,
     choices: &[(String, String)],
@@ -530,7 +534,7 @@ fn choose(
     }
 }
 
-pub(super) fn confirm(locale: &Localizer) -> Result<bool, Value> {
+pub(in crate::metadata) fn confirm(locale: &Localizer) -> Result<bool, Value> {
     eprintln!("{}", locale.text("metadata-create-confirm"));
     let result = confirm_overwrite(|| false).map_err(|_| failure("creation_prompt_failed"));
     eprintln!();
