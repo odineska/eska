@@ -44,7 +44,22 @@ impl Labels {
             ChildrenState::Unloaded => "unloaded",
             ChildrenState::Error => "error",
         };
-        json!({"id":node_id(&value.id),"metadataKind":value.metadata_kind.map(MetadataKind::as_str),"parent":value.parent.as_ref().map(node_id),"label":label,"state":state,"expandedByDefault":value.expanded_by_default,"rootSection":value.root_section,"diagnostics":value.diagnostics.iter().map(diagnostic).collect::<Vec<_>>()})
+        let mut result = json!({"id":node_id(&value.id),"metadataKind":value.metadata_kind.map(MetadataKind::as_str),"parent":value.parent.as_ref().map(node_id),"label":label,"state":state,"expandedByDefault":value.expanded_by_default,"rootSection":value.root_section,"diagnostics":value.diagnostics.iter().map(diagnostic).collect::<Vec<_>>()});
+        if let Some(kind) = value.metadata_kind {
+            let kinds = eska_project_core::project::metadata_create::kinds_for_owner(kind);
+            if !kinds.is_empty() && matches!(value.id, NodeId::Object(_)) {
+                result["creationKinds"] = json!(kinds);
+            }
+            if matches!(value.id, NodeId::Object(_)) {
+                result["objectCreation"] = json!(
+                    !eska_project_core::project::configurator::ConfiguratorSchema::collections(
+                        kind
+                    )
+                    .is_empty()
+                );
+            }
+        }
+        result
     }
 }
 

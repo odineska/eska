@@ -29,7 +29,13 @@ impl EditPlan {
     /// Returns a conflict, unsafe path, read-only source or filesystem error. No
     /// delete-then-rename fallback is used when replacement is unavailable.
     pub fn publish(&self, root: &Path, relative: &Path) -> Result<(), EditError> {
-        publish_bytes(root, relative, &self.original, &self.updated, None)
+        publish_bytes(
+            root,
+            relative,
+            self.original.as_bytes(),
+            self.updated.as_bytes(),
+            None,
+        )
     }
 }
 
@@ -41,6 +47,23 @@ pub fn publish_snapshot_in(
     updated: &str,
     staging: &Path,
 ) -> Result<(), EditError> {
+    publish_binary_in(
+        root,
+        relative,
+        original.as_bytes(),
+        updated.as_bytes(),
+        staging,
+    )
+}
+
+/// Binary resources and textual metadata share the same exact-byte replacement boundary.
+pub fn publish_binary_in(
+    root: &Path,
+    relative: &Path,
+    original: &[u8],
+    updated: &[u8],
+    staging: &Path,
+) -> Result<(), EditError> {
     publish_bytes(root, relative, original, updated, Some(staging))
 }
 
@@ -48,8 +71,8 @@ pub fn publish_snapshot_in(
 fn publish_bytes(
     root: &Path,
     relative: &Path,
-    original: &str,
-    updated: &str,
+    original: &[u8],
+    updated: &[u8],
     staging: Option<&Path>,
 ) -> Result<(), EditError> {
     let path = checked_path(root, relative)?;
@@ -73,7 +96,7 @@ fn publish_bytes(
     } else {
         temporary(parent)?
     };
-    file.write_all(updated.as_bytes()).map_err(EditError::Io)?;
+    file.write_all(updated).map_err(EditError::Io)?;
     file.set_permissions(permissions.clone())
         .map_err(EditError::Io)?;
     file.sync_all().map_err(EditError::Io)?;
@@ -118,14 +141,14 @@ fn checked_path(root: &Path, relative: &Path) -> Result<PathBuf, EditError> {
 }
 
 /// Bound rereads even if an external process grows the file between metadata and open.
-fn compare(path: &Path, expected: &str) -> Result<(), EditError> {
+fn compare(path: &Path, expected: &[u8]) -> Result<(), EditError> {
     let mut actual = Vec::new();
     fs::File::open(path)
         .map_err(EditError::Io)?
         .take(expected.len() as u64 + 1)
         .read_to_end(&mut actual)
         .map_err(EditError::Io)?;
-    if actual != expected.as_bytes() {
+    if actual != expected {
         return Err(EditError::Conflict);
     }
     Ok(())

@@ -15,7 +15,7 @@
 `eska-debug-<version>-<target>.zip`. В архиве находятся бинарник, манифест
 и лицензии. Установить только адаптер можно через `components.py install
 --component eska-debug --manifest <release.json> --root <directory>` либо
-`cargo install --locked eska-debug`. Для работы адаптера .NET не нужен.
+`cargo install --locked eska-debug`.
 
 Для сборки из исходников используйте `cargo build --release -p eska-debug` и скопируйте
 `target/release/eska-debug` (Windows — `eska-debug.exe`) в нужный каталог.
@@ -134,8 +134,8 @@ URL развёрнутой копии в `debugUrl`. Для клиентской
 ## Пример для VS Code
 
 Для VS Code отладочный `type` объявляется расширением. В каталоге
-[standalone-vscode](examples/standalone-vscode) есть декларативный `package.json`
-без JavaScript и зависимостей. Скопируйте его и бинарник в один каталог, затем
+[standalone-vscode](examples/standalone-vscode) есть готовый `package.json`.
+Скопируйте его и бинарник в один каталог, затем
 откройте VS Code с `--extensionDevelopmentPath=<этот каталог>`. Параметр `program`
 в манифесте запускает `eska-debug standalone`. [Документация VS Code](https://code.visualstudio.com/api/references/contribution-points#contributes.debuggers)
 
@@ -162,16 +162,6 @@ URL развёрнутой копии в `debugUrl`. Для клиентской
 Оставляйте локальные адреса и настройки аутентификации вне общего
 `launch.json`, если они относятся к вашей машине. Адаптер переданные параметры
 не сохраняет.
-
-## Переход с OnecDebugAdapter
-
-Создайте конфигурацию с типом `onec-http` из примера или настройте внешний
-stdio-адаптер в своём DAP-клиенте. Перенесите адрес `dbgs` в `debugServerUrl`,
-путь к основной XML-выгрузке в `sourceRoot`, пути к выгрузкам расширений в
-`extensionRoots`. Для запуска укажите `runner` и перенесите прежнее `infoBase`
-в `registeredInfobase.name` или задайте `infobase` явно. Конфигурации
-другого расширения используют собственные аргументы запуска и поля запроса.
-Проверьте `attach` на тестовой базе, затем добавьте параметры `launch`.
 
 ## Проверка
 

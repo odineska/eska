@@ -2,6 +2,60 @@
 
 use crate::project::metadata_model::MetadataKind;
 
+/// Native command groups coexist with named metadata groups in the same Designer property.
+pub const COMMAND_GROUPS: &[&str] = &[
+    "NavigationPanelOrdinary",
+    "NavigationPanelImportant",
+    "NavigationPanelSeeAlso",
+    "ActionsPanelCreate",
+    "ActionsPanelTools",
+    "ActionsPanelReports",
+    "FormCommandBarImportant",
+    "FormCommandBarCreateBasedOn",
+    "FormNavigationPanelGoTo",
+    "FormNavigationPanelImportant",
+    "FormNavigationPanelSeeAlso",
+];
+
+pub fn command_group(value: &str) -> bool {
+    COMMAND_GROUPS.contains(&value)
+        || parts(value)
+            .is_some_and(|parts| matches!(parts.as_slice(), [(MetadataKind::CommandGroup, _)]))
+}
+
+pub fn accepts(domain: &str, parts: &[(MetadataKind, &str)]) -> bool {
+    use MetadataKind as K;
+    match (domain, parts) {
+        (
+            "BasicRegister",
+            [
+                (
+                    K::InformationRegister
+                    | K::AccumulationRegister
+                    | K::AccountingRegister
+                    | K::CalculationRegister,
+                    _,
+                ),
+            ],
+        )
+        | ("Document", [(K::Document, _)])
+        | ("DocumentAttribute", [(K::Document, _), (K::Attribute, _)])
+        | (
+            "FunctionalOptionParameterUse",
+            [(K::Catalog, _)] | [(K::InformationRegister, _), (K::Dimension, _)],
+        )
+        | (
+            "FunctionalOptionLocation",
+            [(K::Constant, _)]
+            | [(K::Catalog, _), (K::Attribute, _)]
+            | [(K::InformationRegister, _), (K::Attribute | K::Resource, _)],
+        ) => true,
+        ("MdObject", [first, ..]) => first.0 != K::Configuration,
+        _ => target(domain)
+            .is_some_and(|(kind, _)| parts.last().is_some_and(|(target, _)| *target == kind)),
+    }
+}
+
 /// Only reviewed direct references and owner-specific form classes are editable selectors.
 pub fn target(domain: &str) -> Option<(MetadataKind, Option<MetadataKind>)> {
     use MetadataKind as K;

@@ -137,6 +137,15 @@ pub fn escape(value: &str) -> Result<String, EditError> {
     Ok(result)
 }
 
+/// Preserve values in either quote style, including whitespace normalized by an XML attribute.
+pub fn escape_attribute(value: &str) -> Result<String, EditError> {
+    Ok(escape(value)?
+        .replace('"', "&quot;")
+        .replace('\'', "&apos;")
+        .replace('\n', "&#10;")
+        .replace('\t', "&#9;"))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

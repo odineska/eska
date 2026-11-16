@@ -113,6 +113,14 @@ const ONE: PlatformPropertyValue = PlatformPropertyValue::Number(1);
 const DEFAULT: PlatformPropertyValue = Choice("default");
 const HEIGHT: Row = Row::new("Height", Layout, Number, ZERO);
 
+pub(super) fn authoring(table: bool) -> Vec<&'static Row> {
+    if table {
+        TABLE.iter().collect()
+    } else {
+        COLUMN_GROUP.iter().collect()
+    }
+}
+
 const TABLE: &[Row] = &[
     NAME,
     TITLE,

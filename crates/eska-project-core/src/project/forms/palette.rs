@@ -1,5 +1,6 @@
 //! The Designer palette describes applicable settings separately from declared XML.
 
+mod authoring;
 mod button;
 mod checkbox;
 mod command;
@@ -9,6 +10,8 @@ mod input_field;
 mod pages;
 mod root_form;
 mod table;
+
+pub use authoring::{AuthoringProperty, AuthoringSource, authoring_properties};
 
 use std::collections::{HashMap, HashSet};
 

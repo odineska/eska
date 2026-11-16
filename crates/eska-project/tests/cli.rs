@@ -16,6 +16,8 @@ use support::TestDir;
 mod add;
 #[path = "cli/libraries.rs"]
 mod libraries;
+#[path = "cli/metadata_creation.rs"]
+mod metadata_creation;
 
 /// New/init share role-aware enrollment and reject ambiguous changes before creating files.
 #[test]

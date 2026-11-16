@@ -1077,6 +1077,32 @@ fn data_type(namespace: &str, name: &str) -> PropertyChange {
     }
 }
 
+/// Aggregate membership and scalar qualifiers retain separate, type-specific editing domains.
+fn assert_decimal_type_fields(fields: &[crate::backend::project::metadata_edit::EditableField]) {
+    use crate::backend::project::metadata_edit::{ScalarSchema, TypeDomain};
+    let aggregate = fields
+        .iter()
+        .find(|field| field.path.len() == 1 && field.path[0].key.name == "Type")
+        .unwrap();
+    assert!(
+        matches!(&aggregate.schema, ScalarSchema::Types { domain: TypeDomain::Value, keys }
+        if keys.len() == 1 && keys[0].namespace.as_deref() == Some("http://www.w3.org/2001/XMLSchema") && keys[0].name == "decimal")
+    );
+    let precision = fields
+        .iter()
+        .find(|field| {
+            field
+                .path
+                .last()
+                .is_some_and(|step| step.key.name == "Digits")
+        })
+        .unwrap();
+    assert!(matches!(
+        precision.schema,
+        ScalarSchema::Integer { min: 2, max: 38 }
+    ));
+}
+
 #[test]
 fn existing_attribute_type_uses_declared_choices_and_validates_qualifier_dependencies() {
     use crate::backend::project::metadata_edit::ScalarSchema;
@@ -1098,7 +1124,7 @@ fn existing_attribute_type_uses_declared_choices_and_validates_qualifier_depende
     let id = object(MetadataKind::Attribute, "Amount", Some(catalog));
     project.reveal_declared_object(&id).unwrap();
     let editing = project.property_editing(&id).unwrap();
-    assert_eq!(editing.properties.fields.len(), 4);
+    assert_decimal_type_fields(&editing.properties.fields);
     let field = editing
         .properties
         .fields

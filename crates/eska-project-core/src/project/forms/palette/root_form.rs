@@ -80,6 +80,10 @@ pub(super) fn definitions(
         .map(|definition| (definition, true))
 }
 
+pub(super) fn authoring() -> Vec<&'static PaletteDefinition> {
+    FORM.iter().collect()
+}
+
 const FORM: &[PaletteDefinition] = {
     use PaletteCategory::{Appearance, Layout, Main, Usage};
     use PaletteDefinition as Row;

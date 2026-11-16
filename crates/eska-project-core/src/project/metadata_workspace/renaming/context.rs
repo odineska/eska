@@ -76,6 +76,18 @@ impl ProjectSession {
             .descendants()
             .find(|node| node.is_element() && node.range() == target.range)
             .ok_or(EditError::Conflict)?;
+        if crate::project::metadata_rename::is_owner_field(object.kind) {
+            let owner = node
+                .parent_element()
+                .and_then(|node| node.parent_element())
+                .ok_or(EditError::InvalidXml)?;
+            crate::project::metadata_rename::validate_standard_child_name(
+                owner.tag_name().name(),
+                object.kind,
+                new_name,
+            )
+            .map_err(RenameError::Name)?;
+        }
         let properties = node
             .children()
             .find(|node| node.has_tag_name((MD, "Properties")))
@@ -158,29 +170,18 @@ impl ProjectSession {
     }
 }
 
-/// Register fields share one namespace across dimensions, resources and attributes (EDT validator).
-fn shared_namespace(parent: Option<&ObjectId>, left: MetadataKind, right: MetadataKind) -> bool {
+/// Native fields share their owner's namespace across attributes, tables and register fields.
+pub(in crate::project::metadata_workspace) fn shared_namespace(
+    parent: Option<&ObjectId>,
+    left: MetadataKind,
+    right: MetadataKind,
+) -> bool {
     if left == right {
         return true;
     }
-    let register = parent.is_some_and(|id| {
-        id.as_str().split_once(':').is_some_and(|(kind, _)| {
-            matches!(
-                kind,
-                "accounting-register"
-                    | "accumulation-register"
-                    | "calculation-register"
-                    | "information-register"
-            )
-        })
-    });
-    let field = |kind| {
-        matches!(
-            kind,
-            MetadataKind::Dimension | MetadataKind::Resource | MetadataKind::Attribute
-        )
-    };
-    register && field(left) && field(right)
+    parent.is_some()
+        && crate::project::metadata_rename::is_owner_field(left)
+        && crate::project::metadata_rename::is_owner_field(right)
 }
 
 impl RenameContext {

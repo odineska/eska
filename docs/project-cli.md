@@ -16,7 +16,14 @@ eska-project --project-dir demo validate --format json
 eska-project --project-dir demo context --format json
 eska-project --project-dir demo version --format json
 eska-project --project-dir demo metadata inspect
+eska-project --project-dir demo metadata add --interactive
 ```
+
+Создание реквизитов и табличных частей, discovery и точные планы для скриптов
+описаны в [руководстве CLI метаданных](metadata-creation.md).
+Создание начальной конфигурации, копирование и удаление полных объектов,
+семантические правки форм и JSON Schema для ИИ описаны в
+[руководстве по структурным операциям](metadata-authoring.md).
 
 `new` создаёт манифест и пустой source без генерации XML; требует тип.
 `init` определяет тип по существующему корневому XML.

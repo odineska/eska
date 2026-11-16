@@ -21,7 +21,7 @@ const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
 
 /// The module list is proven from declarations; every extra read must agree with the final inventory hash.
 #[derive(Default)]
-pub(super) struct Environment {
+pub(in crate::project::metadata_workspace) struct Environment {
     pub globals: GlobalBindings,
     modules: BTreeSet<PathBuf>,
     snapshots: BTreeMap<PathBuf, String>,
@@ -105,6 +105,11 @@ impl Environment {
     /// Implicit contexts which have not been checked remain explicitly uncertain in preview.
     pub fn known_module(&self, path: &Path) -> bool {
         self.modules.contains(path)
+    }
+
+    /// Structural copy must retain every input used to resolve global bindings in its saved plan.
+    pub const fn input_snapshots(&self) -> &BTreeMap<PathBuf, String> {
+        &self.snapshots
     }
 
     /// A global declaration changed between discovery and scanning cannot authorize a stale binding.

@@ -4,25 +4,54 @@ use crate::localization::Localizer;
 use clap::{Args, Subcommand, ValueEnum};
 use std::path::PathBuf;
 
+mod authoring;
+mod creation;
+pub use authoring::{
+    AuthoringInput, FormSchemaArgs, MetadataListArgs, ObjectCopyArgs, ObjectCreateArgs,
+    ObjectDeleteArgs, ObjectSchemaArgs,
+};
+pub use creation::{AddArgs, CreationKind, CreationSchemaArgs, CreationTypeArgs, DateFractions};
+
 #[derive(Debug, Args)]
 pub struct MetadataArgs {
     #[command(subcommand)]
     pub command: MetadataCommand,
     #[arg(short = 'p', long, global = true)]
     pub project: Option<String>,
-    #[arg(long, global = true, value_enum, default_value_t = OutputFormat::Json)]
-    pub format: OutputFormat,
+    #[arg(long, global = true, value_enum)]
+    pub format: Option<OutputFormat>,
     #[arg(short, long, action = clap::ArgAction::Help)]
     pub help: Option<bool>,
 }
 
-#[derive(Clone, Copy, Debug, ValueEnum)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
 pub enum OutputFormat {
+    Human,
     Json,
 }
 
 #[derive(Debug, Subcommand)]
 pub enum MetadataCommand {
+    #[command(disable_help_flag = true)]
+    Create(ObjectCreateArgs),
+    #[command(disable_help_flag = true)]
+    Copy(ObjectCopyArgs),
+    #[command(disable_help_flag = true)]
+    Delete(ObjectDeleteArgs),
+    #[command(disable_help_flag = true)]
+    ObjectSchema(ObjectSchemaArgs),
+    #[command(disable_help_flag = true)]
+    FormSchema(FormSchemaArgs),
+    #[command(disable_help_flag = true)]
+    FormEdit(AuthoringInput),
+    #[command(disable_help_flag = true)]
+    Recover(InputArgs),
+    #[command(disable_help_flag = true)]
+    List(MetadataListArgs),
+    #[command(disable_help_flag = true)]
+    Add(Box<AddArgs>),
+    #[command(disable_help_flag = true)]
+    CreateSchema(CreationSchemaArgs),
     #[command(disable_help_flag = true)]
     Inspect(InspectArgs),
     #[command(disable_help_flag = true)]
@@ -77,6 +106,7 @@ pub fn localize(mut command: clap::Command, locale: &Localizer) -> clap::Command
         "rename-preview",
         "rename-apply",
         "rename-recovery",
+        "recover",
     ] {
         command = command.mut_subcommand(name, |command| {
             let command = command
@@ -91,5 +121,5 @@ pub fn localize(mut command: clap::Command, locale: &Localizer) -> clap::Command
             }
         });
     }
-    command
+    authoring::localize(creation::localize(command, locale), locale)
 }

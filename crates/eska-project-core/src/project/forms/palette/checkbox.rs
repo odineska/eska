@@ -87,6 +87,10 @@ const UNBOUND_TYPE: PaletteDefinition = PaletteDefinition::new(
 )
 .with_source(SettingSource::Unmapped);
 
+pub(super) fn authoring() -> Vec<&'static PaletteDefinition> {
+    CHECKBOX.iter().collect()
+}
+
 const CHECKBOX: &[PaletteDefinition] = {
     use PaletteCategory::{Appearance, Layout, Main, Usage};
     use PaletteDefinition as Row;

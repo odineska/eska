@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{ProjectSession, QueryDocumentError, QuerySessionError, WorkspaceError};
 use crate::project::{
-    metadata_model::MetadataKind,
+    metadata_model::{MetadataKind, standard_name},
     metadata_parser::{self, PropertiesMode},
     query::QueryError,
 };
@@ -334,40 +334,6 @@ fn choice(category: MetadataKind, name: &str, russian: &str, english: &str) -> Q
         alias: name.to_owned(),
         virtual_table: None,
     }
-}
-
-/// Standard spelling is shared across configurations; owner-dependent availability comes from the existing field provider.
-fn standard_name(english: &str) -> Option<&'static str> {
-    Some(match english {
-        "Ref" => "Ссылка",
-        "DeletionMark" => "ПометкаУдаления",
-        "Predefined" => "Предопределенный",
-        "PredefinedDataName" => "ИмяПредопределенныхДанных",
-        "Code" => "Код",
-        "Description" => "Наименование",
-        "Parent" => "Родитель",
-        "IsFolder" => "ЭтоГруппа",
-        "Owner" => "Владелец",
-        "Date" => "Дата",
-        "Number" => "Номер",
-        "Posted" => "Проведен",
-        "LineNumber" => "НомерСтроки",
-        "Active" => "Активность",
-        "Recorder" => "Регистратор",
-        "Period" => "Период",
-        "RecordType" => "ВидДвижения",
-        "RegistrationPeriod" => "ПериодРегистрации",
-        "Account" => "Счет",
-        "PeriodAdjustment" => "УточнениеПериода",
-        "Started" => "Стартован",
-        "Completed" => "Завершен",
-        "Executed" => "Выполнена",
-        "Type" => "Вид",
-        "OffBalance" => "Забалансовый",
-        "Order" => "Порядок",
-        "ValueType" => "ТипЗначения",
-        _ => return None,
-    })
 }
 
 /// Metadata names use Unicode case folding consistently for base and extension overlays.

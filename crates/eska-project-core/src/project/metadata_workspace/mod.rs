@@ -2,13 +2,16 @@
 
 mod activity;
 mod cache;
+mod creation;
 mod editing;
 mod editing_choice_fields;
 mod editing_history;
 mod editing_linked;
 mod editing_references;
 mod editing_values;
+mod form_authoring;
 mod forms;
+mod object_structure;
 mod property_reference;
 mod query;
 mod query_catalog;

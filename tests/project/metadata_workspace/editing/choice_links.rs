@@ -204,16 +204,53 @@ fn choice_link_wrapper_requires_exact_namespace_and_record_fields() {
         "<r:Link><r:Unknown/>",
         "<r:Link><r:Name>Extra</r:Name>",
     ] {
-        let (directory, workspace, id, file, original) = fixture(false);
-        drop(workspace);
-        fs::write(&file, original.replace("<r:Link>", replacement)).unwrap();
-        let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
-        let state = workspace
+        let (directory, mut workspace, id, file, original) = fixture(false);
+        let valid = workspace
             .project_mut(&ProjectScope::Standalone)
             .unwrap()
             .property_editing(&id)
             .unwrap();
-        assert!(state.properties.fields.is_empty());
+        let name = field(&valid.properties.fields, "Name", 0);
+        drop(workspace);
+        let changed = original.replace("<r:Link>", replacement);
+        fs::write(&file, &changed).unwrap();
+        let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+        let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+        let state = project.property_editing(&id).unwrap();
+        assert!(!state.properties.fields.iter().any(|field| {
+            field
+                .path
+                .first()
+                .is_some_and(|step| step.key.name == "ChoiceParameterLinks")
+        }));
+        assert!(
+            state
+                .properties
+                .read_only_properties
+                .iter()
+                .any(|property| property.key.name == "ChoiceParameterLinks")
+        );
+        assert!(
+            state
+                .properties
+                .fields
+                .iter()
+                .any(|field| field.path.len() == 1
+                    && field.path[0].key.name == "Type"
+                    && matches!(field.schema, ScalarSchema::Types { .. }))
+        );
+        let change = PropertyChange::Text {
+            value: "OtherName".into(),
+        };
+        assert!(matches!(
+            project.preview_property(&id, &state.properties.snapshot, None, &name.path, &change),
+            Err(PropertyEditError::Edit(EditError::UnsupportedValue))
+        ));
+        assert!(matches!(
+            project.update_property(&id, &state.properties.snapshot, None, &name.path, &change),
+            Err(PropertyEditError::Edit(EditError::UnsupportedValue))
+        ));
+        assert_eq!(fs::read_to_string(&file).unwrap(), changed);
     }
 }
 

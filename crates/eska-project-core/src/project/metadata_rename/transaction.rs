@@ -1,6 +1,6 @@
 //! A rename journal owns synced staged bytes; publication and recovery use exact-source comparisons.
 
-mod io;
+pub mod io;
 mod properties;
 mod recovery;
 #[cfg(test)]
@@ -71,6 +71,10 @@ pub struct RecoveryStatus {
 }
 
 impl Guard {
+    pub(crate) fn journal_root(&self) -> &Path {
+        &self.directory
+    }
+
     /// Serialize metadata writes without waiting or accepting aliases in service paths.
     pub fn acquire(project: &Path) -> Result<Self, EditError> {
         let service = io::directory(project, Path::new(".eska"))?;
@@ -92,6 +96,7 @@ impl Guard {
 
     /// A pending journal prevents scalar writes from invalidating recoverable rename bytes.
     pub fn check_clear(&self, source: &Path) -> Result<(), EditError> {
+        crate::project::metadata_write::check_clear(self, source)?;
         let path = io::path(&self.directory, Path::new("rename"))?;
         if path.try_exists().map_err(EditError::Io)? {
             let status = self.recovery_status(source)?;
@@ -357,7 +362,7 @@ fn cleanup_preparation(directory: &Path) -> Result<(), EditError> {
 }
 
 /// Publish the terminal marker atomically, so a killed process never exposes a partial decision.
-fn finish(directory: &Path, state: &[u8]) -> Result<(), EditError> {
+pub fn finish(directory: &Path, state: &[u8]) -> Result<(), EditError> {
     let temporary = io::path(directory, Path::new("finish.tmp"))?;
     if temporary.try_exists().map_err(EditError::Io)? {
         fs::remove_file(&temporary).map_err(EditError::Io)?;

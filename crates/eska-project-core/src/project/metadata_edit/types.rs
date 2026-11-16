@@ -66,7 +66,9 @@ pub(super) fn supported(key: &PropertyKey) -> bool {
 }
 
 /// Qualifier names and defaults follow the platform's XML `TypeDescription` representation.
-fn qualifier(key: &PropertyKey) -> Option<(&'static str, &'static [(&'static str, &'static str)])> {
+pub(super) fn qualifier(
+    key: &PropertyKey,
+) -> Option<(&'static str, &'static [(&'static str, &'static str)])> {
     if key.namespace.as_deref() != Some(XS) {
         return None;
     }
@@ -220,9 +222,9 @@ fn qualifier_edits(
 }
 
 /// The platform serializes qualifier groups in this order after the type members.
-fn order(name: &str) -> u8 {
+pub(super) fn order(name: &str) -> u8 {
     match name {
-        "Type" => 0,
+        "Type" | "TypeSet" => 0,
         "NumberQualifiers" => 1,
         "StringQualifiers" => 2,
         "DateQualifiers" => 3,
@@ -233,15 +235,34 @@ fn order(name: &str) -> u8 {
 
 /// Refuse opaque groups instead of discarding their attributes, comments or unknown children.
 pub(super) fn validate_shape(parent: Node<'_, '_>) -> Result<(), EditError> {
+    validate_description(parent, supported)
+}
+
+/// Form attributes also allow runtime container/object types while sharing qualifier invariants.
+pub fn validate_description(
+    parent: Node<'_, '_>,
+    accepts: fn(&PropertyKey) -> bool,
+) -> Result<(), EditError> {
+    validate_members(parent, |key, set| !set && accepts(key))
+}
+
+pub(super) fn validate_members(
+    parent: Node<'_, '_>,
+    accepts: impl Fn(&PropertyKey, bool) -> bool,
+) -> Result<(), EditError> {
     let mut names = std::collections::BTreeSet::new();
     let mut types = std::collections::BTreeSet::new();
     for child in parent.children().filter(Node::is_element) {
         if child.tag_name().namespace() != Some(CORE) {
             return Err(EditError::UnsupportedValue);
         }
-        if child.tag_name().name() == "Type" {
+        if matches!(child.tag_name().name(), "Type" | "TypeSet") {
             let value = key(child).ok_or(EditError::UnsupportedValue)?;
-            if !supported(&value) || !types.insert((value.namespace, value.name)) {
+            if child.attributes().len() != 0
+                || child.children().any(|node| !node.is_text())
+                || !accepts(&value, child.tag_name().name() == "TypeSet")
+                || !types.insert((value.namespace, value.name))
+            {
                 return Err(EditError::UnsupportedValue);
             }
             continue;
@@ -270,13 +291,19 @@ pub(super) fn validate_shape(parent: Node<'_, '_>) -> Result<(), EditError> {
         {
             return Err(EditError::UnsupportedValue);
         }
-        validate_numbers(child)?;
+        let minimum =
+            u32::from(parent.tag_name().namespace() != Some(crate::project::forms::FORM_NAMESPACE));
+        validate_number_range(child, minimum)?;
     }
     Ok(())
 }
 
 /// Precision constrains the scale, so validating the two fields independently is insufficient.
 pub(super) fn validate_numbers(node: Node<'_, '_>) -> Result<(), EditError> {
+    validate_number_range(node, 1)
+}
+
+fn validate_number_range(node: Node<'_, '_>, minimum: u32) -> Result<(), EditError> {
     if !node.has_tag_name((CORE, "NumberQualifiers")) {
         return Ok(());
     }
@@ -287,7 +314,9 @@ pub(super) fn validate_numbers(node: Node<'_, '_>) -> Result<(), EditError> {
             .and_then(|text| text.parse::<u32>().ok())
     };
     match (number("Digits"), number("FractionDigits")) {
-        (Some(digits), Some(fraction)) if (1..=38).contains(&digits) && fraction <= digits => {
+        (Some(digits), Some(fraction))
+            if (minimum..=38).contains(&digits) && fraction <= digits =>
+        {
             Ok(())
         }
         _ => Err(EditError::InvalidValue),
@@ -318,7 +347,7 @@ pub(super) fn qname(
 }
 
 /// Render only a newly required qualifier group using the document's existing prefix and layout.
-fn qualifier_xml(
+pub(super) fn qualifier_xml(
     input: &str,
     anchor: Node<'_, '_>,
     name: &str,
@@ -362,9 +391,9 @@ pub(super) fn line_range(input: &str, range: std::ops::Range<usize>) -> std::ops
 }
 
 /// Detect indentation without converting tabs, spaces or mixed line endings elsewhere.
-pub(super) fn indentation(input: &str, start: usize) -> Option<&str> {
+pub fn indentation(input: &str, start: usize) -> Option<&str> {
     let prefix = &input[..start];
-    let indent = &prefix[prefix.rfind('\n').map_or(0, |index| index + 1)..];
+    let indent = &prefix[prefix.rfind(['\n', '\r']).map_or(0, |index| index + 1)..];
     indent
         .chars()
         .all(|character| matches!(character, ' ' | '\t'))
@@ -372,14 +401,11 @@ pub(super) fn indentation(input: &str, start: usize) -> Option<&str> {
 }
 
 /// Newly inserted lines follow the first observed source line ending.
-pub(super) fn newline(input: &str) -> &str {
-    if input
-        .find('\n')
-        .is_some_and(|index| index > 0 && input.as_bytes()[index - 1] == b'\r')
-    {
-        "\r\n"
-    } else {
-        "\n"
+pub fn newline(input: &str) -> &str {
+    match input.find(['\r', '\n']).map(|index| &input[index..]) {
+        Some(ending) if ending.starts_with("\r\n") => "\r\n",
+        Some(ending) if ending.starts_with('\r') => "\r",
+        _ => "\n",
     }
 }
 
@@ -449,5 +475,23 @@ mod tests {
                 .output(),
             input
         );
+    }
+
+    #[test]
+    fn zero_precision_is_runtime_form_only() {
+        let contents = "<v:Type>x:decimal</v:Type><v:NumberQualifiers><v:Digits>0</v:Digits><v:FractionDigits>0</v:FractionDigits><v:AllowedSign>Any</v:AllowedSign></v:NumberQualifiers>";
+        for (namespace, valid) in [
+            (crate::project::forms::FORM_NAMESPACE, true),
+            (super::super::schema::MD, false),
+        ] {
+            let input = format!(
+                "<Type xmlns='{namespace}' xmlns:v='{CORE}' xmlns:x='{XS}'>{contents}</Type>"
+            );
+            let document = roxmltree::Document::parse(&input).unwrap();
+            assert_eq!(
+                validate_description(document.root_element(), supported).is_ok(),
+                valid
+            );
+        }
     }
 }

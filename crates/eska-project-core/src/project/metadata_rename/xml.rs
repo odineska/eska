@@ -143,7 +143,7 @@ impl ReferenceRename {
                 }
                 seen += 1;
                 self.collect_text(input, node, Some(self.new_name.clone()), &mut result);
-            } else {
+            } else if !metadata_declaration_name(node) {
                 let replacement = self.text_reference(node);
                 self.collect_text(input, node, replacement, &mut result);
             }
@@ -242,7 +242,11 @@ impl ReferenceRename {
             && node
                 .parent_element()
                 .is_some_and(|parent| parent.has_tag_name((RIGHTS, "object")));
-        if node.has_tag_name((XR, "DataPath")) || role_object || metadata_reference_property(node) {
+        if node.has_tag_name((XR, "DataPath"))
+            || role_object
+            || metadata_reference_property(node)
+            || metadata_field_reference(node)
+        {
             return self.path_reference(value);
         }
         None
@@ -306,6 +310,66 @@ impl ReferenceRename {
             });
         }
     }
+}
+
+/// A declaration names its own metadata object; equal local names do not imply a cross-owner link.
+/// The resolver supplies selected declaration ranges separately, so those still receive their edit.
+fn metadata_declaration_name(node: Node<'_, '_>) -> bool {
+    if node.tag_name().namespace() != Some(MD)
+        || node.attributes().len() != 0
+        || node.children().any(|child| !child.is_text())
+        || node.text().is_none_or(|name| validate_name(name).is_err())
+    {
+        return false;
+    }
+    let Some(parent) = node.parent_element() else {
+        return false;
+    };
+    if node.has_tag_name((MD, "Name")) && parent.has_tag_name((MD, "Properties")) {
+        return parent.parent_element().is_some_and(metadata_declaration);
+    }
+    MetadataKind::from_xml_tag(node.tag_name().name()).is_ok()
+        && parent.has_tag_name((MD, "ChildObjects"))
+        && parent.parent_element().is_some_and(metadata_declaration)
+}
+
+fn metadata_declaration(mut node: Node<'_, '_>) -> bool {
+    loop {
+        if node.tag_name().namespace() != Some(MD)
+            || MetadataKind::from_xml_tag(node.tag_name().name()).is_err()
+        {
+            return false;
+        }
+        let Some(parent) = node.parent_element() else {
+            return false;
+        };
+        if parent.has_tag_name((MD, "MetaDataObject")) {
+            return parent.parent_element().is_none();
+        }
+        if !parent.has_tag_name((MD, "ChildObjects")) {
+            return false;
+        }
+        let Some(owner) = parent.parent_element() else {
+            return false;
+        };
+        node = owner;
+    }
+}
+
+/// Standard attributes are path suffixes of their owning metadata object, not standalone kinds.
+fn metadata_field_reference(node: Node<'_, '_>) -> bool {
+    node.has_tag_name((XR, "Field"))
+        && node.parent_element().is_some_and(|parent| {
+            parent.tag_name().namespace() == Some(MD)
+                && matches!(parent.tag_name().name(), "InputByString" | "DataLockFields")
+                && parent.parent_element().is_some_and(|properties| {
+                    properties.has_tag_name((MD, "Properties"))
+                        && properties.parent_element().is_some_and(|owner| {
+                            owner.tag_name().namespace() == Some(MD)
+                                && MetadataKind::from_xml_tag(owner.tag_name().name()).is_ok()
+                        })
+                })
+        })
 }
 
 /// Unannotated fields need their actual class/domain binding; matching a property name alone is unsafe.

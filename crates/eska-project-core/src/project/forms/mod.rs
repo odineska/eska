@@ -38,8 +38,8 @@ pub use handlers::{
     handler_source, handlers,
 };
 pub use palette::{
-    PaletteCaption, PaletteCategory, PaletteEditor, PaletteRow, PaletteValue,
-    PlatformPropertyValue, PropertyPalette,
+    AuthoringProperty, AuthoringSource, PaletteCaption, PaletteCategory, PaletteEditor, PaletteRow,
+    PaletteValue, PlatformPropertyValue, PropertyPalette, authoring_properties,
 };
 pub use parsing::parse;
 pub use pictures::{ButtonRepresentation, FormPicture, FormPictureSelection};
@@ -49,6 +49,7 @@ pub use presentation::{
     FormPresentation, FormScriptVariant, InspectorDataField, NumberSign, PresentationText,
     TableColumnAppearance, TabularTotalCaption, present,
 };
+pub(crate) use references::metadata_type_id;
 pub use references::{FormReference, ReferenceSlot};
 pub use resources::FormResource;
 pub use style_data::{FormStyleData, StyleValue};

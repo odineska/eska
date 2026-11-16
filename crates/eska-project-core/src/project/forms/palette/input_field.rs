@@ -277,6 +277,13 @@ const EMPTY_DATA_PATH: PaletteDefinition =
 
 // Native Configurator 8.3.27, Version8_3_27, in ordinary forms and value table columns.
 // Keep the rows in native order. A rule omits settings absent in the selected context.
+pub(super) fn authoring() -> Vec<&'static PaletteDefinition> {
+    INPUT_FIELD
+        .iter()
+        .map(|setting| &setting.definition)
+        .collect()
+}
+
 const INPUT_FIELD: &[Setting] = {
     use PaletteCategory::{Appearance, Layout, Main, Usage};
     use PaletteEditor::{

@@ -3,11 +3,13 @@
 mod identity;
 mod kind;
 mod project;
+mod standard;
 mod value;
 
 pub use identity::{CollectionKind, ModuleRole, NodeId, ObjectId, ProjectScope, ScopedNodeId};
 pub use kind::{MetadataKind, UnknownMetadataKind};
 pub use project::{MetadataProject, MetadataProjectError};
+pub(crate) use standard::standard_name;
 pub use value::{LocalizedText, MetadataProperty, MetadataValue, PropertyKey, ValueIssue};
 
 /// One real metadata object, without XML buffers, source paths or presentation labels.

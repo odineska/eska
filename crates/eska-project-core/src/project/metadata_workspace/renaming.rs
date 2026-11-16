@@ -1,7 +1,7 @@
 //! Rename previews resolve declarations through the same source and support boundaries as editing.
 
-mod bsl;
-mod context;
+pub(super) mod bsl;
+pub(super) mod context;
 mod history;
 
 use std::{collections::BTreeMap, fmt::Write, path::PathBuf};
@@ -220,7 +220,7 @@ impl ProjectSession {
     }
 
     /// A source at project root must not include Git internals, disposable caches or build output.
-    fn rename_exclusions(&self) -> Vec<PathBuf> {
+    pub(super) fn rename_exclusions(&self) -> Vec<PathBuf> {
         let project = self.project();
         let mut excluded = vec![PathBuf::from(".git"), PathBuf::from(".eska")];
         let output = project.root().join(
