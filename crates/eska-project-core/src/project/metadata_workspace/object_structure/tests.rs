@@ -306,6 +306,225 @@ fn inline_copy_keeps_siblings_and_renames_only_selected_declaration() {
 }
 
 #[test]
+fn structural_mutations_share_reserved_names_and_attribute_table_namespace() {
+    use crate::project::metadata_rename::NameError;
+    use crate::project::metadata_workspace::RenameError;
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let owner = id(MetadataKind::Document, "Origin", None);
+    let source = id(MetadataKind::Attribute, "Self", Some(&owner));
+    let before = fs::read(stand.source().join("Documents/Origin.xml")).unwrap();
+    for name in [
+        "Ref",
+        "Ссылка",
+        "Number",
+        "Номер",
+        "ThisObject",
+        "ЭтотОбъект",
+    ] {
+        for kind in [MetadataKind::Attribute, MetadataKind::TabularSection] {
+            assert!(
+                matches!(
+                    project.preview_object(&create_request(kind, name, Some(owner.clone()))),
+                    Err(ObjectError::Name(NameError::ReservedProperty))
+                ),
+                "{kind:?}: {name}"
+            );
+        }
+        assert!(
+            matches!(
+                project.preview_object(&copy_request(source.clone(), name)),
+                Err(ObjectError::Name(NameError::ReservedProperty))
+            ),
+            "copy attribute: {name}"
+        );
+        assert!(matches!(
+            project.preview_rename(&source, name),
+            Err(RenameError::Name(NameError::ReservedProperty))
+        ));
+    }
+    assert!(matches!(
+        project.preview_object(&create_request(
+            MetadataKind::TabularSection,
+            "self",
+            Some(owner.clone())
+        )),
+        Err(ObjectError::Collision(_))
+    ));
+    assert_eq!(
+        fs::read(stand.source().join("Documents/Origin.xml")).unwrap(),
+        before
+    );
+
+    let table = create_with_properties(
+        project,
+        MetadataKind::TabularSection,
+        "Lines",
+        Some(&owner),
+        &[],
+    );
+    assert!(matches!(
+        project.preview_object(&create_request(
+            MetadataKind::Attribute,
+            "LINES",
+            Some(owner.clone())
+        )),
+        Err(ObjectError::Collision(_))
+    ));
+    assert!(matches!(
+        project.preview_object(&copy_request(source.clone(), "lines")),
+        Err(ObjectError::Collision(_))
+    ));
+    assert!(matches!(
+        project.preview_rename(&source, "lines"),
+        Err(RenameError::Collision(_))
+    ));
+    assert!(matches!(
+        project.preview_object(&copy_request(table.clone(), "Ref")),
+        Err(ObjectError::Name(NameError::ReservedProperty))
+    ));
+    assert!(matches!(
+        project.preview_rename(&table, "Ref"),
+        Err(RenameError::Name(NameError::ReservedProperty))
+    ));
+    for name in ["LineNumber", "НомерСтроки"] {
+        assert!(matches!(
+            project.preview_object(&create_request(
+                MetadataKind::Attribute,
+                name,
+                Some(table.clone())
+            )),
+            Err(ObjectError::Name(NameError::ReservedProperty))
+        ));
+    }
+    // Form names belong to a separate namespace and may match standard or custom fields.
+    for name in ["Ref", "Self", "Lines"] {
+        project
+            .preview_object(&create_request(
+                MetadataKind::Form,
+                name,
+                Some(owner.clone()),
+            ))
+            .unwrap();
+    }
+}
+
+#[test]
+fn owner_fields_reserve_disabled_standard_fields() {
+    use crate::project::{metadata_rename::NameError, metadata_workspace::RenameError};
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    for (owner_kind, field_kind, name) in [
+        (
+            MetadataKind::AccumulationRegister,
+            MetadataKind::Dimension,
+            "Period",
+        ),
+        (
+            MetadataKind::AccumulationRegister,
+            MetadataKind::Resource,
+            "Регистратор",
+        ),
+        (
+            MetadataKind::InformationRegister,
+            MetadataKind::Resource,
+            "Период",
+        ),
+        (
+            MetadataKind::InformationRegister,
+            MetadataKind::Dimension,
+            "Recorder",
+        ),
+        (
+            MetadataKind::Task,
+            MetadataKind::AddressingAttribute,
+            "Date",
+        ),
+        (
+            MetadataKind::ChartOfAccounts,
+            MetadataKind::AccountingFlag,
+            "Description",
+        ),
+    ] {
+        let owner =
+            create_with_properties(project, owner_kind, field_kind.designer_tag(), None, &[]);
+        let source = create_with_properties(project, field_kind, "Original", Some(&owner), &[]);
+        assert!(
+            matches!(
+                project.preview_object(&create_request(field_kind, name, Some(owner.clone()))),
+                Err(ObjectError::Name(NameError::ReservedProperty))
+            ),
+            "{owner_kind:?}/{field_kind:?}: {name}"
+        );
+        assert!(matches!(
+            project.preview_object(&copy_request(source.clone(), name)),
+            Err(ObjectError::Name(NameError::ReservedProperty))
+        ));
+        assert!(matches!(
+            project.preview_rename(&source, name),
+            Err(RenameError::Name(NameError::ReservedProperty))
+        ));
+        assert!(matches!(
+            project.preview_object(&create_request(
+                MetadataKind::Attribute,
+                "original",
+                Some(owner)
+            )),
+            Err(ObjectError::Collision(_))
+        ));
+    }
+}
+
+#[test]
+fn subconto_flags_and_commands_keep_separate_namespaces() {
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let owner = create_with_properties(project, MetadataKind::ChartOfAccounts, "Ledger", None, &[]);
+    create_with_properties(
+        project,
+        MetadataKind::Attribute,
+        "AttributeName",
+        Some(&owner),
+        &[],
+    );
+    create_with_properties(
+        project,
+        MetadataKind::AccountingFlag,
+        "FlagName",
+        Some(&owner),
+        &[],
+    );
+    for name in ["Ref", "Description", "AttributeName", "FlagName"] {
+        let flag = create_with_properties(
+            project,
+            MetadataKind::ExtDimensionAccountingFlag,
+            name,
+            Some(&owner),
+            &[],
+        );
+        project
+            .preview_rename(&flag, &format!("{name}Other"))
+            .unwrap();
+    }
+    // The special namespace also remains separate when copying or renaming existing flags.
+    let source = id(
+        MetadataKind::ExtDimensionAccountingFlag,
+        "Ref",
+        Some(&owner),
+    );
+    project.preview_rename(&source, "Code").unwrap();
+    let copied = project
+        .preview_object(&copy_request(source, "DeletionMark"))
+        .unwrap();
+    project.apply_object(&copied.prepared).unwrap();
+    let command = create_with_properties(project, MetadataKind::Command, "Ref", Some(&owner), &[]);
+    project.preview_rename(&command, "Description").unwrap();
+}
+
+#[test]
 fn blank_form_and_catalog_use_native_identity_slots_and_shared_schema() {
     let stand = Stand::new();
     let mut workspace = stand.workspace();

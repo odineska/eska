@@ -68,6 +68,120 @@ fn call(
     result
 }
 
+fn field_fixture() -> TestDir {
+    let root = fixture();
+    call(
+        &root,
+        "ru-RU",
+        &[
+            "create",
+            "--kind",
+            "document",
+            "--name",
+            "Order",
+            "--no-input",
+        ],
+        None,
+        true,
+    );
+    for (kind, name) in [("attribute", "Value"), ("tabular-section", "Lines")] {
+        call(
+            &root,
+            "ru-RU",
+            &[
+                "create",
+                "--kind",
+                kind,
+                "--parent",
+                "document:Order",
+                "--name",
+                name,
+                "--no-input",
+            ],
+            None,
+            true,
+        );
+    }
+    root
+}
+
+#[test]
+fn structural_names_reject_standard_fields_and_cross_kind_collisions_without_writes() {
+    let root = field_fixture();
+    let path = root.0.join("src/Documents/Order.xml");
+    let before = fs::read(&path).unwrap();
+    let configuration = fs::read(root.0.join("src/Configuration.xml")).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        for name in ["Ref", "Ссылка", "Номер"] {
+            for kind in ["attribute", "tabular-section"] {
+                let error = call(
+                    &root,
+                    locale,
+                    &[
+                        "create",
+                        "--kind",
+                        kind,
+                        "--parent",
+                        "document:Order",
+                        "--name",
+                        name,
+                        "--no-input",
+                    ],
+                    None,
+                    false,
+                );
+                assert_eq!(error["error"]["kind"], "creation_invalid_name");
+                assert_eq!(error["error"]["details"]["reason"], "reserved_property");
+            }
+            for source in [
+                "document:Order/attribute:Value",
+                "document:Order/tabular-section:Lines",
+            ] {
+                let error = call(
+                    &root,
+                    locale,
+                    &["copy", "--source", source, "--name", name, "--no-input"],
+                    None,
+                    false,
+                );
+                assert_eq!(error["error"]["kind"], "creation_invalid_name");
+                let error = call(
+                    &root,
+                    locale,
+                    &["rename-preview", "-"],
+                    Some(&json!({"schemaVersion":1,"objectId":source,"newName":name})),
+                    false,
+                );
+                assert_eq!(error["error"]["kind"], "rename_invalid_name");
+            }
+        }
+        for (kind, name) in [("attribute", "lines"), ("tabular-section", "VALUE")] {
+            let error = call(
+                &root,
+                locale,
+                &[
+                    "create",
+                    "--kind",
+                    kind,
+                    "--parent",
+                    "document:Order",
+                    "--name",
+                    name,
+                    "--no-input",
+                ],
+                None,
+                false,
+            );
+            assert_eq!(error["error"]["kind"], "creation_collision");
+        }
+        assert_eq!(fs::read(&path).unwrap(), before);
+        assert_eq!(
+            fs::read(root.0.join("src/Configuration.xml")).unwrap(),
+            configuration
+        );
+    }
+}
+
 #[test]
 fn authoring_discovery_create_copy_and_delete_are_composable_in_both_locales() {
     for locale in ["ru-RU", "en-US"] {

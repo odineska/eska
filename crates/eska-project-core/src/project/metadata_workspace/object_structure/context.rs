@@ -242,6 +242,12 @@ impl ProjectSession {
         if !allowed || kind == MetadataKind::PredefinedItem {
             return Err(ObjectError::Unsupported(kind));
         }
+        crate::project::metadata_rename::validate_standard_child_name(
+            context.kind.designer_tag(),
+            kind,
+            name,
+        )
+        .map_err(ObjectError::Name)?;
         let id = ObjectId::from_parts(parent, kind.as_str(), name);
         let parsed = metadata_parser::parse(
             &context.input,

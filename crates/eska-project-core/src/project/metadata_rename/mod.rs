@@ -7,8 +7,8 @@ mod name;
 pub(crate) mod transaction;
 mod xml;
 
-pub(crate) use name::validate_common_module_name;
 pub use name::{NameError, validate_name};
+pub(crate) use name::{is_owner_field, validate_common_module_name, validate_standard_child_name};
 pub use xml::{ReferenceRename, XmlAnalysis};
 
 use std::ops::Range;

@@ -1,5 +1,6 @@
 //! Identifier constraints follow the audited EDT `NameValidator`, including UTF-16 limits.
 
+use crate::project::metadata_model::{MetadataKind, standard_name};
 use unicode_general_category::{GeneralCategory, get_general_category};
 
 /// An identifier failure is independent of UI locale and never silently fixes user input.
@@ -11,6 +12,60 @@ pub enum NameError {
     InvalidStart,
     InvalidCharacter,
     ReservedProperty,
+}
+
+/// Subconto accounting flags, commands and forms have their own namespace, unlike owner fields.
+pub const fn is_owner_field(kind: MetadataKind) -> bool {
+    matches!(
+        kind,
+        MetadataKind::Attribute
+            | MetadataKind::TabularSection
+            | MetadataKind::Dimension
+            | MetadataKind::Resource
+            | MetadataKind::AddressingAttribute
+            | MetadataKind::AccountingFlag
+    )
+}
+
+/// Native name reservation includes disabled standard fields and is shared by every mutation.
+pub fn validate_standard_child_name(
+    owner: &str,
+    kind: MetadataKind,
+    name: &str,
+) -> Result<(), NameError> {
+    if !is_owner_field(kind) {
+        return Ok(());
+    }
+    let mut standard = crate::project::metadata_edit::choice_fields::standard::fields_for(
+        owner,
+        "DontUse",
+        &|property| match property {
+            "CodeLength"
+            | "DescriptionLength"
+            | "NumberLength"
+            | "OrderLength"
+            | "PeriodAdjustmentLength" => Some("1"),
+            "Hierarchical" | "ActionPeriodUse" => Some("true"),
+            "HierarchyType" => Some("HierarchyFoldersAndItems"),
+            "WriteMode" => Some("RecorderSubordinate"),
+            "InformationRegisterPeriodicity" => Some("Second"),
+            "RegisterType" => Some("Balance"),
+            "ChartOfAccounts" => Some("ChartOfAccounts.Present"),
+            "Correspondence" => Some("false"),
+            _ => None,
+        },
+        true,
+    );
+    if owner != "TabularSection" {
+        standard.push("ThisObject");
+    }
+    if standard.iter().any(|english| {
+        super::same_name(english, name)
+            || standard_name(english).is_some_and(|russian| super::same_name(russian, name))
+    }) {
+        return Err(NameError::ReservedProperty);
+    }
+    Ok(())
 }
 
 /// Non-global common modules exclude reserved properties, with native-verified legacy exceptions.

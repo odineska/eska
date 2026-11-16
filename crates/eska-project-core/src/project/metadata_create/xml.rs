@@ -11,9 +11,9 @@ use crate::project::{
         EditError, EditPlan, Replacement, escape_xml, snapshot, types::indentation,
         xml_replacements,
     },
-    metadata_model::{MetadataKind, ObjectId, standard_name},
+    metadata_model::{MetadataKind, ObjectId},
     metadata_parser::{self, PropertiesMode},
-    metadata_rename::{NameError, same_name, validate_name},
+    metadata_rename::{same_name, validate_name, validate_standard_child_name},
 };
 
 /// Descriptor ancestry is supplied by the checked source resolver, never inferred from filesystem paths.
@@ -47,7 +47,12 @@ pub fn plan(
         &request.name,
     );
     validate_owner(node, owner.metadata.kind(), prepared)?;
-    validate_name_context(node, &request.name, &object_id)?;
+    validate_name_context(
+        node,
+        request.kind.metadata_kind(),
+        &request.name,
+        &object_id,
+    )?;
     prepared.identity.validate(request.kind, &document)?;
     let type_keys = super::types::validate(request, references)?;
     let child = node
@@ -154,6 +159,7 @@ fn validate_text(prepared: &PreparedCreate) -> Result<(), CreationError> {
 
 fn validate_name_context(
     owner: Node<'_, '_>,
+    kind: MetadataKind,
     name: &str,
     id: &ObjectId,
 ) -> Result<(), CreationError> {
@@ -180,28 +186,7 @@ fn validate_name_context(
     {
         return Err(CreationError::Collision(id.clone()));
     }
-    // Native name reservation survives disabling code, hierarchy or owner fields.
-    let mut standard = crate::project::metadata_edit::choice_fields::standard::fields_for(
-        owner.tag_name().name(),
-        "DontUse",
-        &|property| match property {
-            "CodeLength" | "DescriptionLength" | "NumberLength" => Some("1"),
-            "Hierarchical" => Some("true"),
-            "HierarchyType" => Some("HierarchyFoldersAndItems"),
-            _ => None,
-        },
-        true,
-    );
-    if !owner.has_tag_name((MD, "TabularSection")) {
-        standard.push("ThisObject");
-    }
-    if standard.iter().any(|english| {
-        same_name(english, name)
-            || standard_name(english).is_some_and(|russian| same_name(russian, name))
-    }) {
-        return Err(CreationError::Name(NameError::ReservedProperty));
-    }
-    Ok(())
+    validate_standard_child_name(owner.tag_name().name(), kind, name).map_err(CreationError::Name)
 }
 
 /// Insert adjacent to existing metadata peers; opaque nodes and whitespace retain their exact bytes.
