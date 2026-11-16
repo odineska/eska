@@ -25,8 +25,7 @@ VS Code обменивается с `eska-debug` сообщениями DAP по
 
 ESKA использует [DAP](https://github.com/microsoft/debug-adapter-protocol/blob/main/debugAdapterProtocol.json)
 для интерфейса IDE и проверенный на платформе HTTP-обмен для управления
-предметами 1С. Возможности OnecDebugAdapter учитываются при определении
-минимального функционального набора. Пользовательская семантика и пределы
+предметами 1С. Пользовательская семантика и пределы
 операций определяются контрактом ESKA и проверяются в установленном VSIX.
 
 - Из проекта можно запустить или подключить отладку в профиле `test` либо
@@ -549,12 +548,10 @@ VS Code отправил один DAP `evaluate` с контекстом `repl` 
 и вернул `42` через Evaluate. Внешний клиент пережил оба сеанса.
 Коммит Explorer `c5b568c`.
 
-В исходнике OnecDebugAdapter на `1d2889c6` шаг передаёт в `dbgs` предмет
-и действие. Значение `singleThread` влияет на `allThreadsContinued` в ответе
-DAP на `continue`, в запросе `RdbgStepRequest` оно отсутствует. В ESKA
-`supportsSingleThreadExecutionRequests` равен `false`. События `continued`
-отражают фактическое возобновление предметов, которое в описанном выше
-живом сценарии затронуло оба потока. [Обработчик Continue](https://github.com/akpaevj/onec-debug-adapter/blob/1d2889c64c6559f49a24eac8cf99134edb6d9714/Services/V8DebugAdapter.cs#L212-L225) · [Запрос шага](https://github.com/akpaevj/onec-debug-adapter/blob/1d2889c64c6559f49a24eac8cf99134edb6d9714/Services/V8DebugAdapter.cs#L298-L307)
+В ESKA `supportsSingleThreadExecutionRequests` равен `false`: продолжение
+выполнения одного предмета может возобновить связанные предметы. События
+`continued` отражают фактическое возобновление, которое в описанном выше
+живом сценарии затронуло оба потока.
 
 Пять release-сеансов `native_dap_release_series` с `ESKA_DEBUG_TIMINGS=1`.
 Время DAP включает ожидание платформы, время HTTP измерено до получения
