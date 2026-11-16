@@ -9,11 +9,15 @@ mod hierarchy;
 pub(crate) mod lengths;
 pub(crate) mod numbering;
 mod patch;
-pub(crate) use patch::{escape as escape_xml, escape_attribute, replacements_plan as xml_replacements, text_plan};
+pub(crate) use patch::{
+    escape as escape_xml, escape_attribute, replacements_plan as xml_replacements, text_plan,
+};
+pub(crate) mod reference_lists;
 pub(crate) mod references;
 mod schema;
 mod standard;
 pub(crate) mod type_links;
+pub(crate) mod type_sets;
 pub(crate) mod types;
 pub(crate) mod value_schema;
 mod values;
@@ -26,7 +30,9 @@ pub(crate) use document::ReadOnlyProperty;
 pub use document::{EditableField, FieldStep, PropertyChange, PropertyEditing};
 pub use numbering::linked_field as linked_numbering_field;
 pub use references::parts as reference_parts;
+pub(crate) use schema::initial_field;
 pub use schema::{ScalarSchema, TextDomain, ValueDomain};
+pub use type_sets::TypeDomain;
 pub use value_schema::reference_prefix;
 pub use value_schema::{EditableValueType, ValueConstraints};
 
@@ -83,7 +89,11 @@ pub fn snapshot(input: &str) -> String {
 /// Hash exact bytes, including binary resources and original line endings.
 #[must_use]
 pub fn snapshot_bytes(input: &[u8]) -> String {
-    Sha256::digest(input)
+    snapshot_digest(&Sha256::digest(input))
+}
+
+pub(crate) fn snapshot_digest(digest: &[u8]) -> String {
+    digest
         .iter()
         .fold(String::with_capacity(64), |mut output, byte| {
             let _ = write!(output, "{byte:02x}");

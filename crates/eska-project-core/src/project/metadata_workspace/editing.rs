@@ -83,6 +83,9 @@ impl ProjectSession {
             .iter()
             .find(|field| field.path == path)
             .ok_or(EditError::UnsupportedValue)?;
+        if let ScalarSchema::Types { domain, .. } = field.schema {
+            return self.type_set_choices(domain);
+        }
         let (reference_only, parameter) = match field.schema {
             ScalarSchema::DataType { reference_only, .. } => (reference_only, false),
             ScalarSchema::Value {
@@ -142,6 +145,76 @@ impl ProjectSession {
         Ok(choices)
     }
 
+    pub(super) fn type_set_choices(
+        &mut self,
+        domain: crate::project::metadata_edit::TypeDomain,
+    ) -> Result<Vec<PropertyTypeChoice>, PropertyEditError> {
+        use crate::project::metadata_edit::{TypeDomain, type_sets, types};
+        use crate::project::metadata_model::PropertyKey;
+        if domain == TypeDomain::EventSource {
+            let owners: Vec<_> = self
+                .objects
+                .values()
+                .filter(|object| {
+                    object.kind == MetadataKind::CalculationRegister && object.parent.is_none()
+                })
+                .map(|object| object.id.clone())
+                .collect();
+            for owner in owners {
+                self.children(
+                    &super::NodeId::Object(owner),
+                    crate::project::configurator::TreeOptions::default(),
+                )?;
+            }
+        }
+        let mut choices: Vec<_> = types::PRIMITIVES
+            .iter()
+            .filter(|_| domain == TypeDomain::Value)
+            .map(|(namespace, name)| PropertyTypeChoice {
+                key: PropertyKey {
+                    namespace: Some((*namespace).to_owned()),
+                    name: (*name).to_owned(),
+                },
+                object: None,
+            })
+            .collect();
+        for (family, kind) in type_sets::families(domain) {
+            if domain == TypeDomain::EventSource && kind != MetadataKind::DefinedType {
+                choices.push(PropertyTypeChoice {
+                    key: PropertyKey {
+                        namespace: Some(types::CFG.to_owned()),
+                        name: family.clone(),
+                    },
+                    object: None,
+                });
+            }
+            choices.extend(
+                self.objects
+                    .values()
+                    .filter(|object| {
+                        object.kind == kind
+                            && (object.parent.is_none() || kind == MetadataKind::Recalculation)
+                            && &object.id != self.source.root().id()
+                    })
+                    .map(|object| PropertyTypeChoice {
+                        key: PropertyKey {
+                            namespace: Some(types::CFG.to_owned()),
+                            name: object
+                                .parent
+                                .as_ref()
+                                .and_then(|parent| self.objects.get(parent))
+                                .map_or_else(
+                                    || format!("{family}.{}", object.name),
+                                    |parent| format!("{family}.{}.{}", parent.name, object.name),
+                                ),
+                        },
+                        object: Some(object.clone()),
+                    }),
+            );
+        }
+        Ok(choices)
+    }
+
     /// Validate and preview using precisely the same planner as mutation, with no writes.
     ///
     /// # Errors
@@ -177,6 +250,24 @@ impl ProjectSession {
         self.validate_property_reference(id, path, change)?;
         self.validate_property_value(id, path, change)?;
         let document = self.editing_document(id, &location, &input)?;
+        if let PropertyChange::Types { keys } = change {
+            let fields = document.inspect()?;
+            let field = fields
+                .fields
+                .iter()
+                .find(|field| field.path == path)
+                .ok_or(EditError::UnsupportedValue)?;
+            let crate::project::metadata_edit::ScalarSchema::Types { domain, .. } = field.schema
+            else {
+                return Err(EditError::UnsupportedValue.into());
+            };
+            crate::project::metadata_edit::type_sets::validate(domain, keys)?;
+            for key in keys {
+                if let Some(parts) = crate::project::metadata_edit::type_sets::target(domain, key) {
+                    self.property_reference(&parts)?;
+                }
+            }
+        }
         let plan = document.update(expected, path, change)?;
         let modern = document.modern;
         self.validate_predefined_constraints(id, &plan)?;

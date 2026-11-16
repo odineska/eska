@@ -18,6 +18,7 @@ pub(super) const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 #[serde(rename_all = "camelCase")]
 pub enum TextDomain {
     ChoiceParameterName,
+    CommandGroup,
 }
 
 /// Broad parameter values fetch project-specific reference types only when a selector is opened.
@@ -61,11 +62,19 @@ pub enum ScalarSchema {
         key: PropertyKey,
         reference_only: bool,
     },
+    Types {
+        domain: super::type_sets::TypeDomain,
+        keys: Vec<PropertyKey>,
+    },
     Reference {
         domain: String,
         nullable: bool,
         #[serde(skip_serializing_if = "Option::is_none")]
         reference_type: Option<PropertyKey>,
+    },
+    References {
+        domain: String,
+        values: Vec<String>,
     },
     Value {
         #[serde(skip_serializing_if = "Option::is_none")]
@@ -86,6 +95,9 @@ impl ScalarSchema {
             Self::Text {
                 domain: Some(TextDomain::ChoiceParameterName),
             } => super::choice_links::valid_name(value),
+            Self::Text {
+                domain: Some(TextDomain::CommandGroup),
+            } => super::references::command_group(value),
             Self::Boolean => matches!(value, "true" | "false" | "1" | "0"),
             Self::Integer { min, max } => value
                 .parse::<i64>()
@@ -95,7 +107,10 @@ impl ScalarSchema {
                 .is_ok_and(|number| (*min..=*max).contains(&number)),
             Self::Decimal { nullable } => (*nullable && value.is_empty()) || decimal(value),
             Self::Enum { values, .. } => values.iter().any(|candidate| candidate == value),
-            Self::DataType { .. } | Self::Value { .. } => false,
+            Self::DataType { .. }
+            | Self::Types { .. }
+            | Self::Value { .. }
+            | Self::References { .. } => false,
             Self::Reference {
                 domain, nullable, ..
             } => {
@@ -104,11 +119,8 @@ impl ScalarSchema {
                         domain.as_str(),
                         super::choice_fields::DOMAIN | super::type_links::DOMAIN
                     ) && super::choice_fields::valid_path(value))
-                    || super::references::parts(value).is_some_and(|parts| {
-                        super::references::target(domain).is_some_and(|(kind, _)| {
-                            parts.last().is_some_and(|(target, _)| *target == kind)
-                        })
-                    })
+                    || super::references::parts(value)
+                        .is_some_and(|parts| super::references::accepts(domain, &parts))
             }
         };
         valid.then_some(()).ok_or(EditError::InvalidValue)
@@ -157,6 +169,13 @@ pub(super) fn object_class(id: &ObjectId) -> String {
     } else {
         ""
     };
+    if prefix.is_empty()
+        && let Some(kind) = crate::project::metadata_model::MetadataKind::ALL
+            .iter()
+            .find(|kind| kind.as_str() == current)
+    {
+        return kind.designer_tag().to_owned();
+    }
     [prefix, current]
         .into_iter()
         .filter(|part| !part.is_empty())
@@ -203,6 +222,22 @@ pub(super) fn field_type(
             && (modern || profile == "8.3.27"))
             .then_some(kind)
     })
+}
+
+/// Creation selectors consult the exact same catalog and special domain rules as existing fields.
+pub fn initial_field(
+    kind: crate::project::metadata_model::MetadataKind,
+    property: &str,
+) -> Option<ScalarSchema> {
+    let owner = kind.designer_tag();
+    let input = format!(
+        "<MetaDataObject xmlns='{MD}'><{owner}><Properties><{property}/></Properties></{owner}></MetaDataObject>"
+    );
+    let document = roxmltree::Document::parse(&input).ok()?;
+    let node = document
+        .descendants()
+        .find(|node| node.has_tag_name((MD, property)))?;
+    scalar(node, Some(field_type(owner, node, true, false)?), false)
 }
 
 /// Read-only identities and payload format switches cannot be changed as scalar properties.
@@ -258,6 +293,24 @@ pub(super) fn scalar(
             domain: Some(TextDomain::ChoiceParameterName),
         });
     }
+    if model_type == "CommandGroup" && node.has_tag_name((MD, "Group")) {
+        return Some(ScalarSchema::Text {
+            domain: Some(TextDomain::CommandGroup),
+        });
+    }
+    if model_type == "MdObject"
+        && node.has_tag_name((MD, "Location"))
+        && node
+            .parent_element()
+            .and_then(|parent| parent.parent_element())
+            .is_some_and(|owner| owner.has_tag_name((MD, "FunctionalOption")))
+    {
+        return Some(ScalarSchema::Reference {
+            domain: "FunctionalOptionLocation".to_owned(),
+            nullable: false,
+            reference_type: None,
+        });
+    }
     if model_type == super::choice_fields::DOMAIN && super::choice_fields::is_path(node) {
         return Some(ScalarSchema::Reference {
             domain: model_type.to_owned(),
@@ -302,29 +355,30 @@ pub(super) fn scalar(
     }
     let mut result = schema(model_type, modern)?;
     if let ScalarSchema::Integer { min, max } = &mut result {
-        match (
-            node.tag_name().namespace(),
-            node.parent().map(|parent| parent.tag_name().name()),
-            node.tag_name().name(),
-        ) {
-            (Some(CORE), Some("NumberQualifiers"), "Digits") => {
-                *min = sibling_number(node, "FractionDigits").unwrap_or(0).max(1);
-                *max = 38;
-            }
-            (Some(CORE), Some("NumberQualifiers"), "FractionDigits") => {
-                *min = 0;
-                *max = sibling_number(node, "Digits")?;
-            }
-            (Some(CORE), Some("StringQualifiers" | "BinaryDataQualifiers"), "Length") => {
-                *min = 0;
-            }
-            (Some(MD), Some("Properties"), name) => {
-                (*min, *max) = metadata_integer(node, name)?;
-            }
-            _ => return None,
-        }
+        (*min, *max) = integer_bounds(node)?;
     }
     Some(result)
+}
+
+fn integer_bounds(node: Node<'_, '_>) -> Option<(i64, i64)> {
+    match (
+        node.tag_name().namespace(),
+        node.parent().map(|parent| parent.tag_name().name()),
+        node.tag_name().name(),
+    ) {
+        (Some(CORE), Some("NumberQualifiers"), "Digits") => Some((
+            sibling_number(node, "FractionDigits").unwrap_or(0).max(1),
+            38,
+        )),
+        (Some(CORE), Some("NumberQualifiers"), "FractionDigits") => {
+            Some((0, sibling_number(node, "Digits")?))
+        }
+        (Some(CORE), Some("StringQualifiers" | "BinaryDataQualifiers"), "Length") => {
+            Some((0, i64::from(i32::MAX)))
+        }
+        (Some(MD), Some("Properties"), name) => metadata_integer(node, name),
+        _ => None,
+    }
 }
 
 /// Value annotations select only supported XML Schema primitives in their bound namespace.

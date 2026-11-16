@@ -13,6 +13,7 @@ use crate::file_lock::FileLock;
 #[derive(Debug)]
 pub struct SourceLease {
     _files: Vec<FileLock>,
+    _gate: Option<FileLock>,
     root: PathBuf,
     names: Vec<String>,
 }
@@ -24,12 +25,9 @@ impl SourceLease {
     /// Returns `WouldBlock` for a competing writer and IO errors for unsafe or unavailable lock storage.
     pub fn acquire(root: &Path, paths: &[PathBuf]) -> io::Result<Self> {
         let directory = directory(root, true)?;
-        let mut names = paths
-            .iter()
-            .map(|path| key(path))
-            .collect::<io::Result<Vec<_>>>()?;
-        names.sort();
-        names.dedup();
+        // Registration is serialized with batch readers; ordinary leases retain only their files.
+        let _gate = gate(&directory, true)?;
+        let names = names(paths)?;
         let mut files = Vec::new();
         for name in &names {
             let path = directory.join(name);
@@ -38,9 +36,38 @@ impl SourceLease {
         }
         Ok(Self {
             _files: files,
+            _gate: None,
             root: fs::canonicalize(root)?,
             names,
         })
+    }
+
+    /// Protect a large dependency set without retaining one descriptor or creating a lock per input.
+    ///
+    /// # Errors
+    /// Rejects an active input writer or a competing registration. Existing unrelated leases remain
+    /// owned by their callers; new registrations are rejected until this batch capability is released.
+    pub fn acquire_batch(root: &Path, paths: &[PathBuf]) -> io::Result<Self> {
+        let directory = directory(root, true)?;
+        let gate = gate(&directory, true)?;
+        let names = names(paths)?;
+        check_names(&directory, &names)?;
+        Ok(Self {
+            _files: Vec::new(),
+            _gate: gate,
+            root: fs::canonicalize(root)?,
+            names,
+        })
+    }
+
+    /// Check a dependency set under one short gate without creating persistent lock files.
+    ///
+    /// # Errors
+    /// Returns the same ownership and storage errors as checking one source.
+    pub fn check_many(root: &Path, paths: &[PathBuf]) -> io::Result<()> {
+        let directory = directory(root, false)?;
+        let _gate = gate(&directory, false)?;
+        check_names(&directory, &names(paths)?)
     }
 
     /// A checked publisher may bypass only the exact source lease it already owns in this project.
@@ -57,15 +84,37 @@ impl SourceLease {
     /// Returns `WouldBlock` while a competing query/writer owns this source; unsafe storage fails closed.
     pub fn check(root: &Path, path: &Path) -> io::Result<()> {
         let directory = directory(root, false)?;
-        let path = directory.join(key(path)?);
-        match fs::symlink_metadata(&path) {
-            Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(()),
-            Err(error) => Err(error),
-            Ok(_) => {
-                let file = open(&path, false)?;
-                lock(file).map(drop)
-            }
+        let _gate = gate(&directory, false)?;
+        check_names(&directory, &[key(path)?])
+    }
+}
+
+fn names(paths: &[PathBuf]) -> io::Result<Vec<String>> {
+    let mut names = paths
+        .iter()
+        .map(|path| key(path))
+        .collect::<io::Result<Vec<_>>>()?;
+    names.sort();
+    names.dedup();
+    Ok(names)
+}
+
+fn check_names(directory: &Path, names: &[String]) -> io::Result<()> {
+    for name in names {
+        match open(&directory.join(name), false) {
+            Err(error) if error.kind() == io::ErrorKind::NotFound => (),
+            Err(error) => return Err(error),
+            Ok(file) => drop(lock(file)?),
         }
+    }
+    Ok(())
+}
+
+fn gate(directory: &Path, create: bool) -> io::Result<Option<FileLock>> {
+    match open(&directory.join("batch.lock"), create) {
+        Err(error) if !create && error.kind() == io::ErrorKind::NotFound => Ok(None),
+        Err(error) => Err(error),
+        Ok(file) => lock(file).map(Some),
     }
 }
 
@@ -165,5 +214,111 @@ mod tests {
         );
         drop(next);
         SourceLease::check(&directory.0, &source).unwrap();
+    }
+
+    #[test]
+    fn batch_rejects_an_active_input_and_releases_its_gate_after_failure() {
+        let directory = TestDir::new();
+        let source = directory.0.join("Module.bsl");
+        fs::write(&source, "A=1;").unwrap();
+        let active = SourceLease::acquire(&directory.0, std::slice::from_ref(&source)).unwrap();
+        assert_eq!(
+            SourceLease::acquire_batch(&directory.0, std::slice::from_ref(&source))
+                .unwrap_err()
+                .kind(),
+            io::ErrorKind::WouldBlock
+        );
+        assert_eq!(
+            SourceLease::check_many(&directory.0, std::slice::from_ref(&source))
+                .unwrap_err()
+                .kind(),
+            io::ErrorKind::WouldBlock
+        );
+        drop(active);
+        let batch =
+            SourceLease::acquire_batch(&directory.0, std::slice::from_ref(&source)).unwrap();
+        assert!(batch.owns(&directory.0, &source).unwrap());
+        assert_eq!(
+            SourceLease::acquire(&directory.0, std::slice::from_ref(&source))
+                .unwrap_err()
+                .kind(),
+            io::ErrorKind::WouldBlock
+        );
+        assert_eq!(
+            SourceLease::check(&directory.0, &source)
+                .unwrap_err()
+                .kind(),
+            io::ErrorKind::WouldBlock
+        );
+        drop(batch);
+        SourceLease::acquire(&directory.0, std::slice::from_ref(&source)).unwrap();
+    }
+
+    #[test]
+    fn batch_retains_unrelated_owner_and_rejects_new_registrations() {
+        let directory = TestDir::new();
+        let input = directory.0.join("Input.bsl");
+        let other = directory.0.join("Other.bsl");
+        let new = directory.0.join("New.bsl");
+        for source in [&input, &other, &new] {
+            fs::write(source, "").unwrap();
+        }
+        let owner = SourceLease::acquire(&directory.0, std::slice::from_ref(&other)).unwrap();
+        let batch = SourceLease::acquire_batch(&directory.0, std::slice::from_ref(&input)).unwrap();
+        assert!(!batch.owns(&directory.0, &other).unwrap());
+        assert!(owner.owns(&directory.0, &other).unwrap());
+        assert_eq!(
+            SourceLease::acquire_batch(&directory.0, std::slice::from_ref(&new))
+                .unwrap_err()
+                .kind(),
+            io::ErrorKind::WouldBlock
+        );
+        assert_eq!(
+            SourceLease::acquire(&directory.0, std::slice::from_ref(&new))
+                .unwrap_err()
+                .kind(),
+            io::ErrorKind::WouldBlock
+        );
+        drop(batch);
+        assert_eq!(
+            SourceLease::check(&directory.0, &other).unwrap_err().kind(),
+            io::ErrorKind::WouldBlock
+        );
+        drop(owner);
+        SourceLease::check(&directory.0, &other).unwrap();
+    }
+
+    #[test]
+    fn large_batch_creates_only_one_lock_file_and_retains_one_handle() {
+        let directory = TestDir::new();
+        let paths: Vec<_> = (0..1500)
+            .map(|index| {
+                let path = directory.0.join(format!("{index}.bsl"));
+                fs::write(&path, "").unwrap();
+                path
+            })
+            .collect();
+        SourceLease::check_many(&directory.0, &paths).unwrap();
+        assert!(!directory.0.join(".eska").exists());
+        let batch = SourceLease::acquire_batch(&directory.0, &paths).unwrap();
+        let SourceLease {
+            _files: files,
+            _gate: gate,
+            ..
+        } = &batch;
+        assert!(
+            files.is_empty(),
+            "a large batch must not consume one FD per source"
+        );
+        assert!(gate.is_some());
+        assert_eq!(
+            fs::read_dir(directory.0.join(".eska/source-locks"))
+                .unwrap()
+                .count(),
+            1
+        );
+        assert!(batch.owns(&directory.0, &paths[1499]).unwrap());
+        drop(batch);
+        SourceLease::check_many(&directory.0, &paths).unwrap();
     }
 }

@@ -159,7 +159,11 @@ impl ProjectSession {
 }
 
 /// Register fields share one namespace across dimensions, resources and attributes (EDT validator).
-fn shared_namespace(parent: Option<&ObjectId>, left: MetadataKind, right: MetadataKind) -> bool {
+pub(in crate::project::metadata_workspace) fn shared_namespace(
+    parent: Option<&ObjectId>,
+    left: MetadataKind,
+    right: MetadataKind,
+) -> bool {
     if left == right {
         return true;
     }

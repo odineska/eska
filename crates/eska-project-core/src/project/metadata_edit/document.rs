@@ -31,6 +31,12 @@ pub enum PropertyChange {
         key: Option<PropertyKey>,
         value: String,
     },
+    References {
+        values: Vec<String>,
+    },
+    Types {
+        keys: Vec<PropertyKey>,
+    },
 }
 
 /// An existing scalar and its backend-owned editing domain.
@@ -88,10 +94,37 @@ impl EditingDocument<'_> {
             .find(|node| node.has_tag_name((schema::MD, "Properties")))
             .ok_or(EditError::UnsupportedValue)?;
         let class = schema::object_class(self.id);
+        let type_rules: Vec<_> = super::type_sets::rules(self.id).collect();
         let mut fields = Vec::new();
         let mut read_only_properties = Vec::new();
         for (node, step) in children(properties) {
             let count = fields.len();
+            if let Some(rule) = type_rules
+                .iter()
+                .copied()
+                .find(|rule| rule.property == node.tag_name().name())
+                .filter(|_| node.tag_name().namespace() == Some(schema::MD))
+                && let Ok(schema) = super::type_sets::schema(rule, Some(node))
+            {
+                fields.push(EditableField {
+                    path: vec![step.clone()],
+                    value: String::new(),
+                    schema,
+                    language: None,
+                });
+            }
+            if let Some(rule) = super::reference_lists::rule(&class, node.tag_name().name())
+                .filter(|_| node.tag_name().namespace() == Some(schema::MD))
+                && let Ok(schema) = super::reference_lists::schema(rule, Some(node))
+            {
+                fields.push(EditableField {
+                    path: vec![step],
+                    value: String::new(),
+                    schema,
+                    language: None,
+                });
+                continue;
+            }
             let kind = schema::field_type(&class, node, true, self.modern);
             self.visit(node, kind, &mut vec![step.clone()], &mut fields);
             if fields.len() == count {
@@ -110,6 +143,26 @@ impl EditingDocument<'_> {
                     },
                 });
             }
+        }
+        for rule in super::reference_lists::rules(&class).filter(|rule| {
+            !properties
+                .children()
+                .any(|node| node.has_tag_name((schema::MD, rule.property)))
+        }) {
+            fields.push(container_field(
+                rule.property,
+                super::reference_lists::schema(rule, None)?,
+            ));
+        }
+        for rule in type_rules.into_iter().filter(|rule| {
+            !properties
+                .children()
+                .any(|node| node.has_tag_name((schema::MD, rule.property)))
+        }) {
+            fields.push(container_field(
+                rule.property,
+                super::type_sets::schema(rule, None)?,
+            ));
         }
         Ok(PropertyEditing {
             snapshot: snapshot(self.input),
@@ -138,22 +191,7 @@ impl EditingDocument<'_> {
             .iter()
             .find(|field| field.path == path)
             .ok_or(EditError::UnsupportedValue)?;
-        match (&field.schema, change) {
-            (ScalarSchema::Value { domain, types, .. }, PropertyChange::Value { key, value }) => {
-                super::value_schema::validate_change(*domain, types, key.as_ref(), value)?;
-            }
-            (ScalarSchema::Value { .. }, _) | (_, PropertyChange::Value { .. }) => {
-                return Err(EditError::InvalidValue);
-            }
-            (ScalarSchema::DataType { reference_only, .. }, PropertyChange::DataType { key }) => {
-                if *reference_only && key.namespace.as_deref() != Some(super::types::CFG) {
-                    return Err(EditError::InvalidValue);
-                }
-            }
-            (ScalarSchema::DataType { .. }, PropertyChange::Text { .. })
-            | (_, PropertyChange::DataType { .. }) => return Err(EditError::InvalidValue),
-            (schema, PropertyChange::Text { value }) => schema.validate(value)?,
-        }
+        validate_change(field, change)?;
         let parsed = self.parsed(self.input)?;
         let object = parsed
             .objects
@@ -169,6 +207,9 @@ impl EditingDocument<'_> {
             .children()
             .find(|node| node.has_tag_name((schema::MD, "Properties")))
             .ok_or(EditError::UnsupportedValue)?;
+        if let Some(plan) = self.insert_missing(node, path, change)? {
+            return Ok(plan);
+        }
         for step in path {
             node = children(node)
                 .into_iter()
@@ -177,6 +218,18 @@ impl EditingDocument<'_> {
                 .ok_or(EditError::UnsupportedValue)?;
         }
         let plan = match change {
+            PropertyChange::Types { keys } => {
+                let ScalarSchema::Types { domain, .. } = &field.schema else {
+                    return Err(EditError::InvalidValue);
+                };
+                super::type_sets::replace(self.input, node, *domain, keys)?
+            }
+            PropertyChange::References { values } => {
+                let ScalarSchema::References { domain, .. } = &field.schema else {
+                    return Err(EditError::InvalidValue);
+                };
+                super::reference_lists::replace(self.input, node, domain, values)?
+            }
             PropertyChange::Text { value }
                 if matches!(field.schema, ScalarSchema::Decimal { nullable: true }) =>
             {
@@ -207,6 +260,38 @@ impl EditingDocument<'_> {
             return Err(EditError::UnsupportedValue);
         }
         Ok(plan)
+    }
+
+    fn insert_missing(
+        &self,
+        properties: Node<'_, '_>,
+        path: &[FieldStep],
+        change: &PropertyChange,
+    ) -> Result<Option<EditPlan>, EditError> {
+        let Some(step) = path.first().filter(|_| path.len() == 1) else {
+            return Ok(None);
+        };
+        if properties
+            .children()
+            .any(|child| child.has_tag_name((schema::MD, step.key.name.as_str())))
+        {
+            return Ok(None);
+        }
+        let plan = match change {
+            PropertyChange::References { values } => {
+                let class = schema::object_class(self.id);
+                let rule = super::reference_lists::rule(&class, &step.key.name)
+                    .ok_or(EditError::UnsupportedValue)?;
+                super::reference_lists::insert(self.input, properties, rule, values)?
+            }
+            PropertyChange::Types { keys } => {
+                let rule = super::type_sets::rule(self.id, &step.key.name)
+                    .ok_or(EditError::UnsupportedValue)?;
+                super::type_sets::insert(self.input, properties, rule, keys)?
+            }
+            _ => return Ok(None),
+        };
+        Ok(Some(plan))
     }
 
     /// Core parsing keeps object identity and inline descriptor handling identical to reading.
@@ -310,6 +395,21 @@ impl EditingDocument<'_> {
             self.visit(child, kind, path, fields);
             path.pop();
         }
+    }
+}
+
+fn container_field(name: &str, schema: ScalarSchema) -> EditableField {
+    EditableField {
+        path: vec![FieldStep {
+            key: PropertyKey {
+                namespace: Some(schema::MD.to_owned()),
+                name: name.to_owned(),
+            },
+            occurrence: 0,
+        }],
+        value: String::new(),
+        schema,
+        language: None,
     }
 }
 
@@ -461,4 +561,41 @@ fn children<'a, 'input>(node: Node<'a, 'input>) -> Vec<(Node<'a, 'input>, FieldS
         result.push((child, FieldStep { key, occurrence }));
     }
     result
+}
+
+fn validate_change(field: &EditableField, change: &PropertyChange) -> Result<(), EditError> {
+    match (&field.schema, change) {
+        (ScalarSchema::Types { domain, .. }, PropertyChange::Types { keys }) => {
+            super::type_sets::validate(*domain, keys)?;
+        }
+        (ScalarSchema::References { domain, .. }, PropertyChange::References { values }) => {
+            super::reference_lists::validate(domain, values)?;
+        }
+        (ScalarSchema::Value { domain, types, .. }, PropertyChange::Value { key, value }) => {
+            super::value_schema::validate_change(*domain, types, key.as_ref(), value)?;
+        }
+        (
+            ScalarSchema::Value { .. }
+            | ScalarSchema::References { .. }
+            | ScalarSchema::Types { .. },
+            _,
+        )
+        | (
+            _,
+            PropertyChange::Value { .. }
+            | PropertyChange::References { .. }
+            | PropertyChange::Types { .. },
+        ) => {
+            return Err(EditError::InvalidValue);
+        }
+        (ScalarSchema::DataType { reference_only, .. }, PropertyChange::DataType { key }) => {
+            if *reference_only && key.namespace.as_deref() != Some(super::types::CFG) {
+                return Err(EditError::InvalidValue);
+            }
+        }
+        (ScalarSchema::DataType { .. }, PropertyChange::Text { .. })
+        | (_, PropertyChange::DataType { .. }) => return Err(EditError::InvalidValue),
+        (schema, PropertyChange::Text { value }) => schema.validate(value)?,
+    }
+    Ok(())
 }

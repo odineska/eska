@@ -17,6 +17,7 @@ mod metadata_disk_cache;
 pub mod metadata_edit;
 pub mod metadata_form_edit;
 pub mod metadata_model;
+pub mod metadata_objects;
 pub mod metadata_parser;
 pub mod metadata_rename;
 pub mod metadata_workspace;

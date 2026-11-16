@@ -15,6 +15,7 @@ use super::{
     metadata_workspace::{RefreshReport, WorkspaceError},
 };
 
+pub(crate) use identities::allocate_uuid;
 pub(crate) use schema::{MD, XS};
 pub use schema::{capabilities, kinds_for_owner, supported_owner_kinds};
 pub(crate) use xml::plan;

@@ -9,12 +9,12 @@ impl CreationIdentity {
     pub(crate) fn generate(kind: CreationKind) -> Result<Self, CreationError> {
         let generated = || -> Result<GeneratedIdentity, CreationError> {
             Ok(GeneratedIdentity {
-                type_id: uuid()?,
-                value_id: uuid()?,
+                type_id: allocate_uuid().map_err(CreationError::Random)?,
+                value_id: allocate_uuid().map_err(CreationError::Random)?,
             })
         };
         Ok(Self {
-            uuid: uuid()?,
+            uuid: allocate_uuid().map_err(CreationError::Random)?,
             table: (kind == CreationKind::TablePart)
                 .then(generated)
                 .transpose()?,
@@ -72,9 +72,9 @@ const fn invalid(reason: &'static str) -> CreationError {
 }
 
 /// UUID v4 uses only OS entropy; independent checkouts must never allocate the same logical identity.
-fn uuid() -> Result<String, CreationError> {
+pub fn allocate_uuid() -> Result<String, getrandom::Error> {
     let mut bytes = [0_u8; 16];
-    getrandom::fill(&mut bytes).map_err(CreationError::Random)?;
+    getrandom::fill(&mut bytes)?;
     bytes[6] = (bytes[6] & 0x0f) | 0x40;
     bytes[8] = (bytes[8] & 0x3f) | 0x80;
     let mut value = String::with_capacity(36);

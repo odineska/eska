@@ -4,8 +4,8 @@ use super::{ObjectSummary, ProjectSession, PropertyEditError};
 use crate::project::{
     configurator::TreeOptions,
     metadata_edit::{
-        EditError, FieldStep, PropertyChange, ScalarSchema, choice_fields, references, type_links,
-        types,
+        EditError, FieldStep, PropertyChange, ScalarSchema, choice_fields, reference_lists,
+        references, type_links, types,
     },
     metadata_model::{MetadataKind, NodeId, ObjectId, PropertyKey},
 };
@@ -34,6 +34,9 @@ impl ProjectSession {
             .iter()
             .find(|field| field.path == path)
             .ok_or(EditError::UnsupportedValue)?;
+        if let ScalarSchema::References { domain, .. } = &field.schema {
+            return self.reference_list_choices(domain);
+        }
         let ScalarSchema::Reference {
             domain,
             reference_type,
@@ -42,6 +45,9 @@ impl ProjectSession {
         else {
             return Err(EditError::UnsupportedValue.into());
         };
+        if domain == "FunctionalOptionLocation" {
+            return self.reference_list_choices(domain);
+        }
         if matches!(domain.as_str(), choice_fields::DOMAIN | type_links::DOMAIN) {
             return self.property_link_fields(id, path);
         }
@@ -145,6 +151,24 @@ impl ProjectSession {
         path: &[FieldStep],
         change: &PropertyChange,
     ) -> Result<(), PropertyEditError> {
+        if let PropertyChange::References { values } = change {
+            let editing = self.property_fields(id)?;
+            let field = editing
+                .properties
+                .fields
+                .iter()
+                .find(|field| field.path == path)
+                .ok_or(EditError::UnsupportedValue)?;
+            let ScalarSchema::References { domain, .. } = &field.schema else {
+                return Err(EditError::UnsupportedValue.into());
+            };
+            reference_lists::validate(domain, values)?;
+            for value in values {
+                let parts = references::parts(value).ok_or(EditError::InvalidValue)?;
+                self.property_reference(&parts)?;
+            }
+            return Ok(());
+        }
         let PropertyChange::Text { value } = change else {
             return Ok(());
         };
@@ -155,6 +179,16 @@ impl ProjectSession {
             .iter()
             .find(|field| field.path == path)
             .ok_or(EditError::UnsupportedValue)?;
+        if matches!(
+            field.schema,
+            ScalarSchema::Text {
+                domain: Some(crate::project::metadata_edit::TextDomain::CommandGroup)
+            }
+        ) && !references::COMMAND_GROUPS.contains(&value.as_str())
+        {
+            let parts = references::parts(value).ok_or(EditError::InvalidValue)?;
+            self.property_reference(&parts)?;
+        }
         if let ScalarSchema::Reference {
             nullable,
             ref domain,
@@ -162,6 +196,14 @@ impl ProjectSession {
         } = field.schema
         {
             if value.is_empty() && nullable {
+                return Ok(());
+            }
+            if domain == "FunctionalOptionLocation" {
+                let parts = references::parts(value).ok_or(EditError::InvalidValue)?;
+                if !references::accepts(domain, &parts) {
+                    return Err(EditError::InvalidValue.into());
+                }
+                self.property_reference(&parts)?;
                 return Ok(());
             }
             if !self
@@ -178,5 +220,55 @@ impl ProjectSession {
             self.property_reference(&parts)?;
         }
         Ok(())
+    }
+
+    pub(super) fn reference_list_choices(
+        &mut self,
+        domain: &str,
+    ) -> Result<Vec<PropertyReferenceChoice>, PropertyEditError> {
+        if matches!(
+            domain,
+            "FunctionalOptionParameterUse" | "FunctionalOptionLocation"
+        ) {
+            let owners: Vec<_> = self
+                .objects
+                .values()
+                .filter(|object| {
+                    object.parent.is_none()
+                        && (object.kind == MetadataKind::InformationRegister
+                            || domain == "FunctionalOptionLocation"
+                                && object.kind == MetadataKind::Catalog)
+                })
+                .map(|object| object.id.clone())
+                .collect();
+            for owner in owners {
+                self.children(&NodeId::Object(owner), TreeOptions::default())?;
+            }
+        }
+        let mut choices = Vec::new();
+        for object in self.objects.values() {
+            let Ok(parts) = crate::project::designer_source::identity_parts(&object.id) else {
+                continue;
+            };
+            let borrowed: Vec<_> = parts
+                .iter()
+                .map(|part| (part.kind, part.name.as_str()))
+                .collect();
+            if !reference_lists::accepts(domain, &borrowed) {
+                continue;
+            }
+            let value = borrowed
+                .iter()
+                .flat_map(|(kind, name)| [kind.designer_tag(), *name])
+                .collect::<Vec<_>>()
+                .join(".");
+            choices.push(PropertyReferenceChoice {
+                value,
+                object: object.clone(),
+                standard_attribute: None,
+            });
+        }
+        choices.sort_by(|left, right| left.value.cmp(&right.value));
+        Ok(choices)
     }
 }
