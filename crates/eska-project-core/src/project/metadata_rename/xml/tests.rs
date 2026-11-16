@@ -123,6 +123,67 @@ fn nested_identity_does_not_rename_equal_names_under_another_owner() {
     assert!(apply(&input, &analysis).contains("Catalog.Other.TabularSection.Old"));
 }
 
+#[test]
+fn owned_declaration_names_are_not_unknown_incoming_references() {
+    let rename = ReferenceRename::new(
+        &[
+            ("WebService".to_owned(), "Service".to_owned()),
+            ("Operation".to_owned(), "Run".to_owned()),
+            ("Parameter".to_owned(), "Old".to_owned()),
+        ],
+        "New",
+        &[],
+    )
+    .unwrap();
+    let input = format!(
+        "<MetaDataObject xmlns='{MD}'><WebService><Properties><Name>Service</Name></Properties><ChildObjects><Operation><Properties><Name>Run</Name></Properties><ChildObjects><Parameter><Properties><Name>Old</Name></Properties></Parameter></ChildObjects></Operation><Operation><Properties><Name>Other</Name><Comment>Old</Comment></Properties><ChildObjects><Parameter><Properties><Name>Old</Name><Details><Name>Old</Name></Details><Foreign xmlns='urn:other'><Properties><Name>Old</Name></Properties></Foreign></Properties></Parameter></ChildObjects></Operation></ChildObjects></WebService></MetaDataObject>"
+    );
+    let parsed = Document::parse(&input).unwrap();
+    let selected = parsed
+        .descendants()
+        .find(|node| node.has_tag_name((MD, "Name")) && node.text() == Some("Old"))
+        .unwrap()
+        .range();
+    let plain = rename.analyze_dom(&input, &[]).unwrap();
+    let stream = rename.analyze_streaming(&input).unwrap();
+    assert_eq!(plain.replacements, []);
+    assert_eq!(
+        plain.uncertain.len(),
+        3,
+        "comment and unverified nested/foreign Names still require review"
+    );
+    assert_eq!(plain.uncertain, stream.uncertain);
+    let selected = rename.analyze_xml(&input, &[selected]).unwrap();
+    assert_eq!(selected.replacements.len(), 1);
+    assert!(apply(&input, &selected).contains("<Name>New</Name>"));
+    assert_eq!(selected.uncertain.len(), 3);
+}
+
+#[test]
+fn separate_child_declarations_keep_their_own_parent_namespace() {
+    let rename = ReferenceRename::new(
+        &[
+            ("Catalog".to_owned(), "Source".to_owned()),
+            ("Form".to_owned(), "Old".to_owned()),
+        ],
+        "New",
+        &[],
+    )
+    .unwrap();
+    let input = format!(
+        "<MetaDataObject xmlns='{MD}'><Catalog><Properties><Name>Other</Name><Unknown><ChildObjects><Form>Old</Form></ChildObjects></Unknown></Properties><ChildObjects><Form>Old</Form></ChildObjects></Catalog></MetaDataObject>"
+    );
+    let dom = rename.analyze_dom(&input, &[]).unwrap();
+    let streaming = rename.analyze_streaming(&input).unwrap();
+    assert_eq!(dom.replacements, []);
+    assert_eq!(
+        dom.uncertain.len(),
+        1,
+        "an unverified ChildObjects wrapper is not a declaration"
+    );
+    assert_eq!(dom.uncertain, streaming.uncertain);
+}
+
 /// The same string may be a reference or a comment according to the metadata schema.
 #[test]
 fn metadata_property_domain_decides_whether_identical_text_is_a_reference() {

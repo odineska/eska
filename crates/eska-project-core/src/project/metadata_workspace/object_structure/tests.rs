@@ -737,3 +737,71 @@ fn journal_column_requires_declared_document_attributes_with_discoverable_choice
     assert_eq!(name, "MDObjectRef");
     assert_eq!(value.lookup_namespace_uri(Some(prefix)), Some(xml::XR));
 }
+
+#[test]
+fn deleting_an_inline_twin_preserves_same_named_declarations_in_other_owners() {
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let request = create_request(MetadataKind::WebService, "Service", None);
+    let plan = project.preview_object(&request).unwrap();
+    let service = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    let mut request = create_request(MetadataKind::Operation, "Run", Some(service));
+    if let ObjectRequest::Create {
+        property_values, ..
+    } = &mut request
+    {
+        property_values.insert("ProcedureName".to_owned(), "HandleRequest".to_owned());
+    }
+    let plan = project.preview_object(&request).unwrap();
+    let operation = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    let request = create_request(MetadataKind::Parameter, "Argument", Some(operation.clone()));
+    let plan = project.preview_object(&request).unwrap();
+    let parameter = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    let plan = project
+        .preview_object(&copy_request(parameter, "ArgumentTwin"))
+        .unwrap();
+    let parameter_twin = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    let plan = project
+        .preview_object(&copy_request(operation, "RunTwin"))
+        .unwrap();
+    let other_operation = project
+        .apply_object(&plan.prepared)
+        .unwrap()
+        .object_id
+        .unwrap();
+    let request = ObjectRequest::Delete {
+        object: parameter_twin.clone(),
+        force: false,
+    };
+    let plan = project.preview_object(&request).unwrap();
+    assert!(
+        plan.references.is_empty(),
+        "another owner's local declaration is not an incoming reference: {:?}",
+        plan.references
+    );
+    project.apply_object(&plan.prepared).unwrap();
+    assert!(project.reveal_declared_object(&parameter_twin).is_err());
+    let other_parameter = id(
+        MetadataKind::Parameter,
+        "ArgumentTwin",
+        Some(&other_operation),
+    );
+    assert!(project.reveal_declared_object(&other_parameter).is_ok());
+}
