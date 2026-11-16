@@ -19,6 +19,7 @@
 | Использовать дерево, поиск и файловые группы | [Explorer](user-guide.md#explorer), [модель дерева](configurator-tree.md), [поиск](metadata-search.md) |
 | Отключить подпроекты и скрыть их | [Активность](user-guide.md#activity) |
 | Изменить свойство, тип или имя объекта | [Свойства](user-guide.md#properties), [CLI и формат запросов](metadata-editing.md) |
+| Добавить реквизит или табличную часть через CLI | [Интерактивный мастер, JSON и планы создания](metadata-creation.md) |
 | Разобраться с поддержкой и read-only | [Правила поддержки](support-policy.md), [объяснение пользователю](user-guide.md#support) |
 | Редактировать запрос XML или BSL | [Редактор запросов](user-guide.md#queries), [API сессий](ide-protocol.md) |
 | Использовать конструктор запросов | [Полный набор операций](user-guide.md#constructor) |

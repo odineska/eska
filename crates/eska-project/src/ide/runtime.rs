@@ -449,6 +449,7 @@ fn commits_state(method: &str) -> bool {
             | "metadata/updateProperty"
             | "metadata/undoProperty"
             | "metadata/renameApply"
+            | "metadata/create"
             | "analyzer/configPrepare"
             | "analyzer/migrationApply"
             | "analyzer/acquire"

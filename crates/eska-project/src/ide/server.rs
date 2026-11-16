@@ -64,7 +64,7 @@ pub(super) struct Server {
     pub(super) recovery: super::query::RecoveryState,
     pub(super) recovery_root: Option<std::path::PathBuf>,
     pub(super) source_root: Option<std::path::PathBuf>,
-    property_editing: bool,
+    pub(super) property_editing: bool,
     serial: u64,
     round_robin: usize,
 }
@@ -130,7 +130,10 @@ impl Server {
         params::optional_fields(args, optional)?;
         if matches!(
             method,
-            "metadata/updateProperty" | "metadata/undoProperty" | "metadata/renameApply"
+            "metadata/updateProperty"
+                | "metadata/undoProperty"
+                | "metadata/renameApply"
+                | "metadata/create"
         ) && !self.property_editing
         {
             return Err(domain(
@@ -254,6 +257,12 @@ impl Server {
         let mut result = json!({"apiVersion":{"major":1,"minor":super::API_MINOR},"server":{"name":self.identity.name(),"version":env!("CARGO_PKG_VERSION")},"capabilities":{"analyzerConfiguration":self.client_minor>=12,"propertyEditing":self.property_editing,"unsignedIntegerProperties":self.property_editing && self.client_minor >= 11,"linkedPropertyEdits":self.property_editing && self.client_minor >= 10,"metadataRename":self.property_editing && self.client_minor >= 9,"propertyPresentation":true,"picturePreview":true,"supportFiles":true,"supportPolicy":true,"selfUpdate":matches!(self.identity,Identity::Legacy),"designerXml":true,"readOnly":!self.property_editing,"diskCache":true,"search":true,"clientFileEvents":true,"batch":true,"multiContext":false,"supportedProjectTypes":["configuration","extension","processing","report"]},"limits":{"maxHeaderBytes":8192,"maxRequestBytes":1_048_576,"maxResponseBytes":67_108_864,"maxDepth":64,"maxBatchItems":16,"maxPendingRequests":128,"maxQueuedBytes":4_194_304}});
         if self.client_minor >= 24 {
             result["capabilities"]["sourceNavigation"] = json!(true);
+        }
+        if self.client_minor >= 48 {
+            result["capabilities"]["metadataCreation"] = json!({
+                "schemaVersion":1,"enabled":self.property_editing,
+                "preparedPlans":true,
+            });
         }
         if self.client_minor >= 25 {
             result["capabilities"]["supportObjects"] = json!(true);

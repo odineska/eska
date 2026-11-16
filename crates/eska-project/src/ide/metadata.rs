@@ -31,6 +31,9 @@ pub(super) fn is_method(method: &str) -> bool {
             | "metadata/undoProperty"
             | "metadata/renamePreview"
             | "metadata/renameApply"
+            | "metadata/creationSchema"
+            | "metadata/previewCreate"
+            | "metadata/create"
             | "metadata/supportFiles"
             | "metadata/supportObjects"
             | "metadata/root"
@@ -56,6 +59,13 @@ impl Server {
         events: &mut Vec<Value>,
     ) -> Result<Value, Value> {
         let input: params::Context = params::decode(args)?;
+        if matches!(
+            method,
+            "metadata/creationSchema" | "metadata/previewCreate" | "metadata/create"
+        ) && self.client_minor < 48
+        {
+            return Err(error(-32601));
+        }
         if method == "metadata/revealSource" && self.client_minor < 24 {
             return Err(error(-32601));
         }
@@ -109,6 +119,9 @@ impl Server {
         );
         result
             .map(|mut result| {
+                if method == "metadata/creationSchema" && !self.property_editing {
+                    result["writable"] = json!(false);
+                }
                 if self.client_minor < 9 {
                     let schema = if method == "metadata/propertyEditing" {
                         Some(&mut result)
@@ -155,6 +168,35 @@ fn metadata_request(
     project: &mut ProjectSession,
     events: &mut Vec<Value>,
 ) -> Result<Value, Value> {
+    check_metadata_request(project, state, method, args)?;
+    match method {
+        "metadata/propertyEditing"
+        | "metadata/propertyTypeChoices"
+        | "metadata/propertyReferenceChoices"
+        | "metadata/propertyValueChoices"
+        | "metadata/previewProperty" => super::editing::query(labels, project, method, args),
+        "metadata/updateProperty" | "metadata/undoProperty" => {
+            update_property(labels, session, state, project, method, args, events)
+        }
+        "metadata/renamePreview" => super::renaming::preview(project, args),
+        "metadata/renameApply" => {
+            super::renaming::apply(labels, session, state, project, args, events)
+        }
+        "metadata/creationSchema" | "metadata/previewCreate" => {
+            super::creation::query(labels, project, method, args)
+        }
+        "metadata/create" => super::creation::apply(session, state, project, args, events),
+        _ => metadata_read(labels, session, state, project, method, args, events),
+    }
+}
+
+/// Every metadata action observes the same generation and recovery boundary before reading inputs.
+fn check_metadata_request(
+    project: &ProjectSession,
+    state: &ProjectState,
+    method: &str,
+    args: &Value,
+) -> Result<(), Value> {
     let generation = params::counter(args["generation"].as_str().ok_or_else(|| error(-32602))?)?;
     if state.reopen {
         return Err(domain(
@@ -173,19 +215,19 @@ fn metadata_request(
             .check_generation(generation)
             .map_err(|failure| errors::workspace(&failure))?;
     }
+    Ok(())
+}
+
+fn metadata_read(
+    labels: &dto::Labels,
+    session: &str,
+    state: &mut ProjectState,
+    project: &mut ProjectSession,
+    method: &str,
+    args: &Value,
+    events: &mut Vec<Value>,
+) -> Result<Value, Value> {
     match method {
-        "metadata/propertyEditing"
-        | "metadata/propertyTypeChoices"
-        | "metadata/propertyReferenceChoices"
-        | "metadata/propertyValueChoices"
-        | "metadata/previewProperty" => super::editing::query(labels, project, method, args),
-        "metadata/updateProperty" | "metadata/undoProperty" => {
-            update_property(labels, session, state, project, method, args, events)
-        }
-        "metadata/renamePreview" => super::renaming::preview(project, args),
-        "metadata/renameApply" => {
-            super::renaming::apply(labels, session, state, project, args, events)
-        }
         "metadata/supportFiles" => support_files(project, args),
         "metadata/supportObjects" => support_objects(project, args),
         "metadata/support" => {

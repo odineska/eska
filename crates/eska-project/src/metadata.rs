@@ -1,10 +1,11 @@
 //! Machine-oriented property inspection and mutation using the same backend as the IDE.
 
-use eska_presentation::arguments::project::metadata::MetadataCommand;
 pub use eska_presentation::arguments::project::metadata::{MetadataArgs, localize};
+use eska_presentation::arguments::project::metadata::{MetadataCommand, OutputFormat};
 
 use std::{io::Read, path::Path, process::ExitCode};
 
+mod creation;
 mod renaming;
 
 use serde_json::{Value, json};
@@ -24,21 +25,19 @@ struct MetadataHandler<'a> {
 impl MetadataHandler<'_> {
     /// Emit exactly one stable JSON envelope; source inspection never starts disk caching.
     #[must_use]
-    pub fn run(&self, project_dir: &Path, _localizer: &Localizer) -> ExitCode {
-        let result = self.execute(project_dir);
-        match result {
-            Ok(result) => {
-                println!("{}", json!({"schema_version":1,"result":result}));
-                ExitCode::SUCCESS
-            }
-            Err(error) => {
-                println!(
-                    "{}",
-                    json!({"schema_version":1,"error":error.get("data").unwrap_or(&error)})
-                );
-                ExitCode::FAILURE
-            }
+    pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
+        if matches!(
+            self.args.command,
+            MetadataCommand::Add(_) | MetadataCommand::CreateSchema(_)
+        ) {
+            return creation::run(self.args, project_dir, localizer);
         }
+        if self.args.format == Some(OutputFormat::Human) {
+            eprintln!("{}", localizer.text("metadata-create-human-only-add"));
+            return ExitCode::from(2);
+        }
+        let result = self.execute(project_dir);
+        json_result(result)
     }
 
     /// Each process selects exactly one manifest-backed project, including workspace members.
@@ -55,6 +54,9 @@ impl MetadataHandler<'_> {
             .map_err(|error| editing::failure(error.into()))?;
         let labels = dto::Labels::new().map_err(|_| failure("localization_failed"))?;
         match &self.args.command {
+            MetadataCommand::Add(_) | MetadataCommand::CreateSchema(_) => {
+                Err(failure("invalid_request"))
+            }
             MetadataCommand::RenamePreview(args) => {
                 let request = read_input(&args.input, &["schemaVersion", "objectId", "newName"])?;
                 renaming::preview(project, &request)
@@ -137,6 +139,23 @@ impl MetadataHandler<'_> {
     }
 }
 
+/// Every metadata JSON operation emits one locale-independent result envelope.
+fn json_result(result: Result<Value, Value>) -> ExitCode {
+    match result {
+        Ok(result) => {
+            println!("{}", json!({"schema_version":1,"result":result}));
+            ExitCode::SUCCESS
+        }
+        Err(error) => {
+            println!(
+                "{}",
+                json!({"schema_version":1,"error":error.get("data").unwrap_or(&error)})
+            );
+            ExitCode::FAILURE
+        }
+    }
+}
+
 /// Apply the same verified plan exposed by check, returning a fresh editing schema.
 fn apply(
     labels: &dto::Labels,
@@ -201,6 +220,19 @@ fn inspect(
 
 /// Bound input files and stdin identically, rejecting unknown operation envelope members.
 fn read_input(path: &Path, allowed: &[&str]) -> Result<Value, Value> {
+    let value = read_json(path)?;
+    if value["schemaVersion"] != 1
+        || value
+            .as_object()
+            .is_none_or(|object| object.keys().any(|key| !allowed.contains(&key.as_str())))
+    {
+        return Err(failure("invalid_request"));
+    }
+    Ok(value)
+}
+
+/// Requests and saved plans have the same bounded file/stdin input path.
+fn read_json(path: &Path) -> Result<Value, Value> {
     let mut bytes = Vec::new();
     let input: Box<dyn Read> = if path == Path::new("-") {
         Box::new(std::io::stdin())
@@ -214,15 +246,7 @@ fn read_input(path: &Path, allowed: &[&str]) -> Result<Value, Value> {
     if bytes.len() > 1_048_576 {
         return Err(failure("input_too_large"));
     }
-    let value: Value = serde_json::from_slice(&bytes).map_err(|_| failure("invalid_request"))?;
-    if value["schemaVersion"] != 1
-        || value
-            .as_object()
-            .is_none_or(|object| object.keys().any(|key| !allowed.contains(&key.as_str())))
-    {
-        return Err(failure("invalid_request"));
-    }
-    Ok(value)
+    serde_json::from_slice(&bytes).map_err(|_| failure("invalid_request"))
 }
 
 /// CLI-only input failures share the stable code/details shape of domain errors.
