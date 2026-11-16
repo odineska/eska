@@ -51,7 +51,7 @@ impl ProjectSession {
                 property_types,
                 ..
             } => (property_values, property_references, property_types),
-            ObjectRequest::Delete { .. } => return Ok(()),
+            ObjectRequest::Delete { .. } | ObjectRequest::CreateModule { .. } => return Ok(()),
         };
         let id = plan.object_id.as_ref().ok_or(EditError::Conflict)?;
         let (owner, paths) = self

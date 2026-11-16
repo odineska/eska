@@ -399,6 +399,7 @@ fn tree_node_dto_exposes_authoritative_kind() {
             state: ChildrenState::Unloaded,
             expanded_by_default: false,
             root_section: false,
+            module_creation: false,
             diagnostics: Vec::new(),
         };
         assert_eq!(labels.node(&node)["metadataKind"], kind.as_str());

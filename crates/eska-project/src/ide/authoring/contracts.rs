@@ -38,6 +38,7 @@ pub fn request_schemas() -> Value {
     let mut form_envelope = envelope(form);
     form_envelope["$defs"] = form_definitions();
     json!({
+        "create-module":envelope(object(json!({"operation":{"const":"create-module"},"owner":string,"role":{"type":"string"}}), &["operation","owner","role"])),
         "create":envelope(create),"copy":envelope(copy),"delete":envelope(delete),"form-edit":form_envelope,
     })
 }

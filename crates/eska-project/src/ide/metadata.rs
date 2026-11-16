@@ -154,6 +154,12 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
         "metadata/propertyValueChoices" => 8,
         _ => 0,
     };
+    if minor < 50
+        && (args["request"]["operation"] == "create-module"
+            || args["prepared"]["request"]["operation"] == "create-module")
+    {
+        return Err(error(-32602));
+    }
     if minor < required {
         return Err(error(-32601));
     }
@@ -173,6 +179,19 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
 }
 
 fn constrain_schema(result: &mut Value, method: &str, minor: u32, writable: bool) {
+    if method == "metadata/objectSchema"
+        && (minor < 50 || !writable)
+        && let Some(result) = result.as_object_mut()
+    {
+        result.remove("moduleOptions");
+        result.remove("moduleRoles");
+        if let Some(schemas) = result
+            .get_mut("requestSchemas")
+            .and_then(Value::as_object_mut)
+        {
+            schemas.remove("create-module");
+        }
+    }
     if !writable {
         match method {
             "metadata/creationSchema" | "metadata/formEditSchema" => {

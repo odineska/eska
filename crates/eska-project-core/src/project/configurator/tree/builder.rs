@@ -73,6 +73,11 @@ pub(super) fn build(
     }
     let root_id = tree.root.clone();
     for node in tree.nodes.values_mut() {
+        if let (NodeId::Object(owner), Some(kind)) = (&node.id, node.metadata_kind) {
+            node.module_creation = schema.modules(owner, kind).iter().any(|role| {
+                !matches!(modules.get(owner), Some(ModuleAvailability::Loaded(present)) if present.contains(role))
+            });
+        }
         if matches!(
             node.id,
             NodeId::Collection {
@@ -104,6 +109,7 @@ fn insert_object(
         children: Vec::new(),
         state,
         expanded_by_default: false,
+        module_creation: false,
         root_section: false,
         diagnostics: Vec::new(),
     };
@@ -224,6 +230,7 @@ fn build_modules(
                     children: Vec::new(),
                     state: ChildrenState::Empty,
                     expanded_by_default: false,
+                    module_creation: false,
                     root_section: false,
                     diagnostics: Vec::new(),
                 },
@@ -262,6 +269,7 @@ fn group(
                 children: Vec::new(),
                 state: ChildrenState::Empty,
                 expanded_by_default: false,
+                module_creation: false,
                 root_section,
                 diagnostics: Vec::new(),
             },

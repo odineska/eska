@@ -131,3 +131,46 @@ fn authoring_never_writes_for_old_or_read_only_clients_and_hides_new_property_sh
         client.finish();
     }
 }
+
+#[test]
+fn module_creation_requires_new_writable_client_and_preserves_owner_identity() {
+    let directory = source();
+    fs::remove_file(directory.0.join("src/Ext/SessionModule.bsl")).unwrap();
+    for (minor, writable) in [(49, true), (50, false), (50, true)] {
+        let mut client = Client::new("ru-RU");
+        initialize(&mut client, minor, writable);
+        let open = client.open(&directory.0);
+        let schema = client.ok("metadata/objectSchema", context(&open, json!({})));
+        assert_eq!(
+            schema.get("moduleOptions").is_some(),
+            minor >= 50 && writable
+        );
+        let request = json!({"operation":"create-module","owner":open["projects"][0]["root"]["objectId"],"role":"session"});
+        let preview = client.request(
+            "metadata/previewObject",
+            context(&open, json!({"request":request})),
+        );
+        if minor < 50 {
+            assert!(preview.get("error").is_some());
+        } else if writable {
+            assert!(preview.get("error").is_none(), "{preview}");
+            let plan = &preview["result"];
+            let result = client.ok(
+                "metadata/applyObject",
+                context(&open, json!({"prepared":plan["prepared"]})),
+            );
+            assert_eq!(result["objectId"], request["owner"]);
+            assert!(directory.0.join("src/Ext/SessionModule.bsl").is_file());
+        } else {
+            // Read-only clients can inspect a preview but cannot publish it.
+            let plan = &preview["result"];
+            let result = client.request(
+                "metadata/applyObject",
+                context(&open, json!({"prepared":plan["prepared"]})),
+            );
+            assert!(result.get("error").is_some());
+            assert!(!directory.0.join("src/Ext/SessionModule.bsl").exists());
+        }
+        client.finish();
+    }
+}

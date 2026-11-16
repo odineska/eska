@@ -21,6 +21,16 @@ pub struct AuthoringInput {
 }
 
 #[derive(Clone, Debug, Args)]
+pub struct ModuleCreateArgs {
+    #[arg(long, conflicts_with_all = ["input", "plan"])]
+    pub owner: Option<String>,
+    #[arg(long, conflicts_with_all = ["input", "plan"])]
+    pub role: Option<String>,
+    #[command(flatten)]
+    pub source: AuthoringInput,
+}
+
+#[derive(Clone, Debug, Args)]
 pub struct ObjectCreateArgs {
     #[arg(long, conflicts_with_all = ["input", "plan"])]
     pub kind: Option<String>,
@@ -107,6 +117,7 @@ pub struct MetadataListArgs {
 pub(super) fn localize(mut command: clap::Command, locale: &Localizer) -> clap::Command {
     for name in [
         "create",
+        "create-module",
         "copy",
         "delete",
         "object-schema",

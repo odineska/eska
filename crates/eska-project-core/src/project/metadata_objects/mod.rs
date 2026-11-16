@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{
     metadata_edit::EditError,
-    metadata_model::{MetadataKind, ObjectId, PropertyKey},
+    metadata_model::{MetadataKind, ModuleRole, ObjectId, PropertyKey},
     metadata_rename::NameError,
     metadata_workspace::{RefreshReport, WorkspaceError},
     metadata_write::{DirectoryChange, FileChange},
@@ -27,6 +27,10 @@ use super::{
     deny_unknown_fields
 )]
 pub enum ObjectRequest {
+    CreateModule {
+        owner: ObjectId,
+        role: ModuleRole,
+    },
     Copy {
         source: ObjectId,
         name: String,
@@ -106,6 +110,7 @@ pub struct ObjectSchema {
     pub schema_version: u32,
     pub kinds: Vec<MetadataKind>,
     pub parent: Option<ObjectId>,
+    pub module_roles: Vec<ModuleRole>,
     pub operations: Vec<&'static str>,
     pub prepared_plans: bool,
     pub required_properties: BTreeMap<String, Vec<String>>,

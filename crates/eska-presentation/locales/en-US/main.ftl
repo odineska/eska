@@ -1352,3 +1352,10 @@ metadata-authoring-invalid-form = The form XML contains errors or an unsupported
 metadata-authoring-target-missing = Form target not found. Use form-schema to discover its current structure.
 metadata-authoring-error-field = Field: { $field }
 metadata-recover-about = Inspect or restore interrupted metadata writes, including initial configuration creation.
+
+metadata-authoring-create-module-about = Create a missing module with a supported role
+metadata-authoring-owner-help = ID of the existing module owner
+metadata-authoring-role-help = Module role from object-schema (for example object or manager)
+metadata-module-role-prompt = Choose a missing module
+
+metadata-authoring-operation-create-module = module creation

@@ -63,6 +63,7 @@ pub fn schema() -> ObjectSchema {
     ObjectSchema {
         schema_version: 1,
         kinds: vec![MetadataKind::Configuration],
+        module_roles: Vec::new(),
         parent: None,
         operations: vec!["create"],
         prepared_plans: true,

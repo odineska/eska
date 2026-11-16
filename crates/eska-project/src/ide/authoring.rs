@@ -33,6 +33,15 @@ pub fn object_schema(labels: &Labels, schema: &ObjectSchema) -> Value {
             }))
             .collect::<Vec<_>>()
     );
+    result["moduleOptions"] = json!(
+        schema
+            .module_roles
+            .iter()
+            .map(|role| json!({
+                "role":role, "caption":labels.caption(&format!("tree-module-{}",role.as_str())),
+            }))
+            .collect::<Vec<_>>()
+    );
     result["requestSchemas"] = request_schemas();
     result["propertyCaptions"] = Value::Object(
         schema
@@ -106,6 +115,7 @@ pub fn object_result(result: &ObjectResult) -> Value {
 pub const fn object_operation(request: &ObjectRequest) -> &'static str {
     match request {
         ObjectRequest::Create { .. } => "create",
+        ObjectRequest::CreateModule { .. } => "create-module",
         ObjectRequest::Copy { .. } => "copy",
         ObjectRequest::Delete { .. } => "delete",
     }

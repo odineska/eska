@@ -769,3 +769,92 @@ fn authoring_can_start_from_an_empty_scaffold_without_handwritten_designer_xml()
         assert_eq!(fs::read(path).unwrap(), before);
     }
 }
+
+#[test]
+fn module_authoring_discovers_roles_and_creates_each_only_once_in_both_locales() {
+    for locale in ["ru-RU", "en-US"] {
+        let root = field_fixture();
+        let schema = call(
+            &root,
+            locale,
+            &["object-schema", "--parent", "document:Order"],
+            None,
+            true,
+        );
+        let data = &schema["result"];
+        assert_eq!(data["moduleRoles"], json!(["object", "manager"]));
+        assert!(data["requestSchemas"]["create-module"].is_object());
+        let before = fs::read(root.0.join("src/Documents/Order.xml")).unwrap();
+        for (role, file) in [
+            ("object", "ObjectModule.bsl"),
+            ("manager", "ManagerModule.bsl"),
+        ] {
+            let plan = call(
+                &root,
+                locale,
+                &[
+                    "create-module",
+                    "--owner",
+                    "document:Order",
+                    "--role",
+                    role,
+                    "--dry-run",
+                ],
+                None,
+                true,
+            );
+            assert_eq!(plan["result"]["operation"], "create-module");
+            assert_eq!(plan["result"]["prepared"]["identities"], json!({}));
+            assert!(!root.0.join("src/Documents/Order/Ext").join(file).exists());
+            let result = call(
+                &root,
+                locale,
+                &["create-module", "--input", "-"],
+                Some(&json!({"schemaVersion":1,"request":plan["result"]["prepared"]["request"]})),
+                true,
+            );
+            assert_eq!(result["result"]["objectId"], "document:Order");
+            assert_eq!(
+                fs::read(root.0.join("src/Documents/Order/Ext").join(file)).unwrap(),
+                b""
+            );
+            let duplicate = call(
+                &root,
+                locale,
+                &["create-module", "--owner", "document:Order", "--role", role],
+                None,
+                false,
+            );
+            assert_eq!(duplicate["error"]["kind"], "object_invalid");
+        }
+        for role in ["module", "record-set", "arbitrary"] {
+            let error = call(
+                &root,
+                locale,
+                &["create-module", "--owner", "document:Order", "--role", role],
+                None,
+                false,
+            );
+            assert_eq!(
+                error["error"]["kind"],
+                if role == "arbitrary" {
+                    "object_input_invalid"
+                } else {
+                    "object_invalid"
+                }
+            );
+        }
+        assert_eq!(
+            fs::read(root.0.join("src/Documents/Order.xml")).unwrap(),
+            before
+        );
+        let final_schema = call(
+            &root,
+            locale,
+            &["object-schema", "--parent", "document:Order"],
+            None,
+            true,
+        );
+        assert_eq!(final_schema["result"]["moduleRoles"], json!([]));
+    }
+}

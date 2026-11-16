@@ -55,7 +55,8 @@ eska metadata inspect --object 'document:ВыдачаЗайма'
   обязательные поля, свойства со списками ссылок и типов, подписи из общих словарей платформы;
 - `uniqueProperties`: свойства, которые копия должна изменить при совпадении
   с существующим объектом, например `RootURL` HTTP-сервиса;
-- `requestSchemas`: JSON Schema запросов `create`, `copy`, `delete` и `form-edit`;
+- `moduleRoles` и `moduleOptions`: отсутствующие допустимые роли модулей и их локализованные названия;
+- `requestSchemas`: JSON Schema запросов `create`, `create-module`, `copy`, `delete` и `form-edit`;
 - `preparedPlans`: возможность проверить и затем применить точный сохранённый план.
 
 В CLI ключ вида имеет форму `common-module`, `document`, `catalog`.
@@ -97,6 +98,34 @@ eska metadata create --kind form --parent 'document:Order' --name Main --no-inpu
 возвращённый `add`, а не самостоятельно собранный путь.
 Подробности типов, квалификаторов и составных типов — в
 [руководстве по реквизитам](metadata-creation.md).
+
+### Добавить модуль
+
+Роли модуля принадлежат владельцу. Получите допустимые отсутствующие роли из
+`object-schema --parent ID`, затем создайте нужный модуль:
+
+```bash
+eska metadata object-schema --parent 'document:Order' --format json
+eska metadata create-module --owner 'document:Order' --role object --dry-run --format json
+eska metadata create-module --owner 'document:Order' --role object --no-input --format json
+eska metadata create-module --owner 'document:Order' --role manager --no-input --format json
+```
+
+У документа допускаются только `object` и `manager`, у регистра — роли из его
+схемы. Без `--role` интерактивный CLI предлагает отсутствующие модули. Путь и имя
+файла выбирает backend; произвольный файл создать нельзя. Модуль не имеет своего
+UUID: `objectId` результата — его владелец. Повторная попытка, существующий `.bin`,
+изменившиеся исходники и запрет редактирования останавливают запись.
+
+Команда поддерживает общий формат `--input`, `--plan` и `--dry-run`. Например,
+семантический запрос для ИИ:
+
+```json
+{"schemaVersion":1,"request":{"operation":"create-module","owner":"document:Order","role":"manager"}}
+```
+
+Модули управляемых форм создаются у формы, а не у её документа. Для обычных
+двоичных форм создание BSL-модуля этим способом не поддерживается.
 
 `--set PROPERTY=VALUE` задаёт проверяемое скалярное свойство; параметр можно
 повторять. `--reference PROPERTY=VALUE` задаёт элементы списка ссылок:
