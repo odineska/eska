@@ -191,6 +191,16 @@ pub struct SavedEdit {
 }
 
 impl SavedEdit {
+    /// Check availability without reading or reconstructing the stored XML fragments.
+    #[must_use]
+    pub fn matches_snapshot(&self, snapshot: &str, undo: bool) -> bool {
+        snapshot
+            == if undo {
+                self.after.as_str()
+            } else {
+                self.before.as_str()
+            }
+    }
     /// Construct an inverse plan only when the complete source still matches that history step.
     ///
     /// # Errors

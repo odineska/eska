@@ -1,8 +1,13 @@
 //! Checked byte-level operations retain unknown XML and all untouched source bytes.
 
+use std::collections::HashSet;
+
 use roxmltree::{Document, Node};
 
-use super::{AssignedFormId, FormChanges, FormEditError, FormEditRequest, FormTarget, invalid};
+use super::{
+    AssignedFormId, FormChanges, FormEditError, FormEditRequest, FormTarget, RemovedFormTarget,
+    invalid,
+};
 use crate::project::{
     forms::{self, ElementKind, FORM_NAMESPACE, FormIssue},
     metadata_edit::{EditError, EditPlan, Replacement, snapshot, xml_replacements},
@@ -115,6 +120,26 @@ pub(super) fn validate(input: &str) -> Result<(), FormEditError> {
 pub(super) fn xml(input: &str) -> Result<Document<'_>, FormEditError> {
     crate::project::metadata_parser::parse_xml(input, 500_000)
         .map_err(|_| EditError::InvalidXml.into())
+}
+
+pub fn removed_targets(before: &str, after: &str) -> Result<Vec<RemovedFormTarget>, FormEditError> {
+    let before = xml(before)?;
+    let after = xml(after)?;
+    let remaining: HashSet<_> = after.descendants().filter_map(named_target).collect();
+    Ok(before
+        .descendants()
+        .filter_map(named_target)
+        .filter(|target| !remaining.contains(target))
+        .map(|(target, name)| RemovedFormTarget {
+            target,
+            names: vec![name],
+            force: false,
+        })
+        .collect())
+}
+
+fn named_target(node: Node<'_, '_>) -> Option<(FormTarget, String)> {
+    Some((target_of(node)?, node.attribute("name")?.to_lowercase()))
 }
 
 pub(super) fn child<'a, 'input>(node: Node<'a, 'input>, name: &str) -> Option<Node<'a, 'input>> {

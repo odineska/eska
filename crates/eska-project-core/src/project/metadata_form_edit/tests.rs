@@ -1032,7 +1032,7 @@ fn dynamic_list_rules_preserve_other_scopes_and_dcs_settings() {
     let other = "<Attribute name='Other' id='2'><Type><v8:Type>cfg:DynamicList</v8:Type></Type></Attribute>";
     let settings = "http://v8.1c.ru/8.1/data-composition-system/settings";
     let input = source(&format!(
-        r#"
+        r"
         <ChildItems><Table name='List' id='1'><DataPath>Rows</DataPath><ChildItems>
           <InputField name='RowAmount' id='2'><DataPath>Rows.Amount</DataPath></InputField>
         </ChildItems></Table></ChildItems>
@@ -1042,7 +1042,7 @@ fn dynamic_list_rules_preserve_other_scopes_and_dcs_settings() {
             <Settings xsi:type='DynamicList'>{query}<ListSettings>{filter}
                 <s:conditionalAppearance>{preferences}</s:conditionalAppearance>
             </ListSettings></Settings></Attribute>{other}
-        </Attributes>"#
+        </Attributes>"
     ));
     let rule = serde_json::json!({
         "fields":[{"name":"Amount","enabled":true}],

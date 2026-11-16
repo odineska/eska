@@ -156,11 +156,11 @@ impl ProjectSession {
             .checked_add(1)
             .ok_or(WorkspaceError::GenerationExhausted)?;
         let histories: Vec<_> = self
-            .property_history
+            .edit_history
             .keys()
             .filter(|id| {
                 self.source
-                    .object_descriptor(id)
+                    .object_descriptor(id.object())
                     .ok()
                     .flatten()
                     .is_some_and(|location| {
@@ -171,7 +171,7 @@ impl ProjectSession {
             .collect();
         guard.publish_files(self.project().source(), &plan.files, &plan.directories)?;
         for id in histories {
-            self.property_history.remove(&id);
+            self.edit_history.remove(&id);
         }
         let paths: Vec<_> = plan.files.iter().map(|file| file.path.clone()).collect();
         let refresh = self

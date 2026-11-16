@@ -20,7 +20,7 @@ impl ProjectSession {
         let source = self.source.reopen().map_err(WorkspaceError::Source)?;
         let mut fresh = Self::open(source)?;
         fresh.generation = self.generation;
-        fresh.property_history = std::mem::take(&mut self.property_history);
+        fresh.edit_history = std::mem::take(&mut self.edit_history);
         fresh.source_protections = std::mem::take(&mut self.source_protections);
         *self = fresh;
         Ok(())

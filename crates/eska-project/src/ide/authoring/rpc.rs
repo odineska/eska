@@ -63,6 +63,11 @@ pub(in crate::ide) fn query(
                 .map(|plan| super::form_plan(&plan))
                 .map_err(super::form_failure)
         }
+        "metadata/formEditHistory" => {
+            let form: ObjectId = params::decode(&args["form"])?;
+            let expected: String = params::decode(&args["snapshot"])?;
+            Ok(json!(project.form_edit_history(&form, &expected)))
+        }
         _ => Err(error(-32601)),
     }
 }
@@ -92,10 +97,17 @@ pub(in crate::ide) fn apply(
                 })
                 .map_err(super::object_failure)
         }
-        "metadata/applyFormEdit" => {
-            let prepared: PreparedFormEdit = params::decode(&args["prepared"])?;
-            project
-                .apply_form_edit(&prepared)
+        "metadata/applyFormEdit" | "metadata/replayFormEdit" => {
+            let result = if method == "metadata/applyFormEdit" {
+                let prepared: PreparedFormEdit = params::decode(&args["prepared"])?;
+                project.apply_form_edit(&prepared)
+            } else {
+                let form: ObjectId = params::decode(&args["form"])?;
+                let snapshot: String = params::decode(&args["snapshot"])?;
+                let undo: bool = params::decode(&args["undo"])?;
+                project.replay_form_edit(&form, &snapshot, undo)
+            };
+            result
                 .map(|result| {
                     (
                         super::form_result(&result),

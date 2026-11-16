@@ -2988,3 +2988,14 @@ expectedOutputSnapshot}`, `files`, `directories`, `inputs` и `references`.
 есть `Type` и `TypeSet`, подписи и квалификаторы. Операции `addDefinition`
 и `setProperty` используют прежний типизированный `Record`. Открытие
 свойств элементов, которым тип не нужен, обходится без каталога типов.
+
+`capabilities.formAuthoring.layoutParents` содержит допустимые виды дочерних
+элементов для перетаскивания. Сохранение перемещения использует `moveElement`
+и прежний механизм проверки снимка.
+
+`capabilities.formAuthoring.history` включает `metadata/formEditHistory` и
+`metadata/replayFormEdit`. Оба метода принимают `form` и `snapshot` сохранённого
+payload. Первый возвращает `undo` и `redo` для заданного снимка. Второй
+принимает `undo: true` для отмены или `false` для повтора. Обратные правки
+хранит сервер в текущей сессии подключения. Метод проверяет права, файл и
+его зависимости, затем возвращает обновлённый снимок и `metadata/changed`.

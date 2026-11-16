@@ -238,3 +238,88 @@ fn conditional_appearance_requires_minor_51_and_discovery_negotiates_editor() {
         client.finish();
     }
 }
+
+#[test]
+fn saved_form_edits_replay_exact_bytes_and_respect_new_references() {
+    let directory = source();
+    let mut client = Client::new("ru-RU");
+    let hello = initialize(&mut client, 52, true);
+    assert_eq!(hello["capabilities"]["formAuthoring"]["history"], true);
+    let mut opened = client.open(&directory.0);
+    let form = "common-form:History";
+    let plan = client.ok(
+        "metadata/previewObject",
+        context(
+            &opened,
+            json!({"request":{"operation":"create","kind":"CommonForm","name":"History"}}),
+        ),
+    );
+    let created = client.ok(
+        "metadata/applyObject",
+        context(&opened, json!({"prepared":plan["prepared"]})),
+    );
+    opened["projects"][0]["generation"] = created["generation"].clone();
+    let path = directory.0.join("src/CommonForms/History/Ext/Form.xml");
+    let before = fs::read(&path).unwrap();
+    let schema = client.ok(
+        "metadata/formEditSchema",
+        context(&opened, json!({"form":form,"includeTypes":true})),
+    );
+    assert!(
+        schema["typeOptions"]["choices"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|choice| choice["key"]["name"] == "AnyRef" && choice["member"] == "TypeSet")
+    );
+    let plan = client.ok("metadata/previewFormEdit", context(&opened, json!({"request":{
+        "form":form,"snapshot":schema["snapshot"],"operations":[{"kind":"addElement","parent":{"kind":"root"},"element":{"kind":"InputField","name":"HistoryField"}}]
+    }})));
+    let applied = client.ok(
+        "metadata/applyFormEdit",
+        context(&opened, json!({"prepared":plan["prepared"]})),
+    );
+    opened["projects"][0]["generation"] = applied["generation"].clone();
+    let after = fs::read(&path).unwrap();
+    let history = client.ok(
+        "metadata/formEditHistory",
+        context(&opened, json!({"form":form,"snapshot":applied["snapshot"]})),
+    );
+    assert_eq!(history["undo"], true);
+    assert_eq!(history["redo"], false);
+
+    let module = path.parent().unwrap().join("Form/Module.bsl");
+    fs::create_dir_all(module.parent().unwrap()).unwrap();
+    fs::write(
+        &module,
+        "Процедура Use()\n    Элементы.HistoryField.Видимость = Истина;\nКонецПроцедуры\n",
+    )
+    .unwrap();
+    let undo = json!({"form":form,"snapshot":applied["snapshot"],"undo":true});
+    let refused = client.request("metadata/replayFormEdit", context(&opened, undo.clone()));
+    assert_eq!(refused["error"]["data"]["kind"], "form_references");
+    assert_eq!(fs::read(&path).unwrap(), after);
+    fs::remove_file(module).unwrap();
+
+    let result = client.ok("metadata/replayFormEdit", context(&opened, undo.clone()));
+    assert_eq!(result["snapshot"], schema["snapshot"]);
+    assert_eq!(fs::read(&path).unwrap(), before);
+    opened["projects"][0]["generation"] = result["generation"].clone();
+    let result = client.ok(
+        "metadata/replayFormEdit",
+        context(
+            &opened,
+            json!({"form":form,"snapshot":result["snapshot"],"undo":false}),
+        ),
+    );
+    opened["projects"][0]["generation"] = result["generation"].clone();
+    assert_eq!(result["snapshot"], applied["snapshot"]);
+    assert_eq!(fs::read(&path).unwrap(), after);
+
+    let external = [after, b"\n".to_vec()].concat();
+    fs::write(&path, &external).unwrap();
+    let conflict = client.request("metadata/replayFormEdit", context(&opened, undo));
+    assert_eq!(conflict["error"]["data"]["kind"], "property_conflict");
+    assert_eq!(fs::read(path).unwrap(), external);
+    client.finish();
+}

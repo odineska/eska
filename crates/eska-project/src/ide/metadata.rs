@@ -27,6 +27,7 @@ pub(super) fn writes(method: &str) -> bool {
             | "metadata/create"
             | "metadata/applyObject"
             | "metadata/applyFormEdit"
+            | "metadata/replayFormEdit"
     )
 }
 
@@ -51,8 +52,10 @@ pub(super) fn is_method(method: &str) -> bool {
             | "metadata/previewObject"
             | "metadata/applyObject"
             | "metadata/formEditSchema"
+            | "metadata/formEditHistory"
             | "metadata/previewFormEdit"
             | "metadata/applyFormEdit"
+            | "metadata/replayFormEdit"
             | "metadata/supportFiles"
             | "metadata/supportObjects"
             | "metadata/root"
@@ -146,6 +149,7 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
         | "metadata/formEditSchema"
         | "metadata/previewFormEdit"
         | "metadata/applyFormEdit" => 49,
+        "metadata/formEditHistory" | "metadata/replayFormEdit" => 52,
         "metadata/creationSchema" | "metadata/previewCreate" | "metadata/create" => 48,
         "metadata/revealSource" => 24,
         "metadata/supportObjects" => 25,
@@ -354,8 +358,9 @@ fn metadata_request(
         "metadata/objectSchema"
         | "metadata/previewObject"
         | "metadata/formEditSchema"
+        | "metadata/formEditHistory"
         | "metadata/previewFormEdit" => super::authoring::query(labels, project, method, args),
-        "metadata/applyObject" | "metadata/applyFormEdit" => {
+        "metadata/applyObject" | "metadata/applyFormEdit" | "metadata/replayFormEdit" => {
             super::authoring::apply(session, state, project, method, args, events)
         }
         _ => metadata_read(labels, session, state, project, method, args, events),

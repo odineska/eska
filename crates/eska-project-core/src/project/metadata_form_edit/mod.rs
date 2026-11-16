@@ -23,8 +23,8 @@ use crate::project::{
 };
 
 pub use appearance::AppearanceRule;
-pub(crate) use document::plan_complete;
 pub use document::{empty_form, plan};
+pub(crate) use document::{plan_complete, removed_targets};
 pub use schema::{
     FormDefinitionSchema, FormEditNode, FormEditProperty, FormEditSchema, FormElementKindSchema,
     child_kinds, inspect,
@@ -33,7 +33,7 @@ pub use types::FormTypeOption;
 pub(crate) use types::{type_options, type_reference};
 
 /// Integer identities belong to elements; definition names remain stable CLI selectors.
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 #[serde(tag = "kind", rename_all = "camelCase", deny_unknown_fields)]
 pub enum FormTarget {
     Root {},
@@ -220,6 +220,12 @@ pub struct FormEditResult {
     pub snapshot: String,
     pub assigned_ids: Vec<AssignedFormId>,
     pub refresh: Option<RefreshReport>,
+}
+
+#[derive(Debug, Default, Serialize)]
+pub struct FormEditHistory {
+    pub undo: bool,
+    pub redo: bool,
 }
 
 #[derive(Debug)]

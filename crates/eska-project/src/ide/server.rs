@@ -222,6 +222,7 @@ impl Server {
             }
             if self.client_minor >= 52 {
                 capabilities["formAuthoring"]["listAppearance"] = json!(self.property_editing);
+                capabilities["formAuthoring"]["history"] = json!(self.property_editing);
                 if self.property_editing {
                     use eska_project_core::project::{
                         forms::ElementKind, metadata_form_edit::child_kinds,

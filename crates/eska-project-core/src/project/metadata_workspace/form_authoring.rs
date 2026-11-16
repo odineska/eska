@@ -2,13 +2,16 @@
 
 use std::{collections::BTreeMap, fmt::Write, path::PathBuf};
 
-use super::{ProjectSession, WorkspaceError};
+use super::{
+    ProjectSession, RefreshReport, WorkspaceError,
+    editing_history::{EditedSource, HistoryStep},
+};
 use crate::project::{
     designer_source::SourceRole,
-    metadata_edit::{EditError, snapshot},
+    metadata_edit::{EditError, EditPlan, snapshot},
     metadata_form_edit::{
-        self, FormChanges, FormEditError, FormEditPlan, FormEditRequest, FormEditResult,
-        FormEditSchema, FormTypeOption, PreparedFormEdit, RemovedFormTarget,
+        self, FormChanges, FormEditError, FormEditHistory, FormEditPlan, FormEditRequest,
+        FormEditResult, FormEditSchema, FormTypeOption, PreparedFormEdit, RemovedFormTarget,
     },
     metadata_model::{MetadataKind, ObjectId},
     metadata_rename::{
@@ -109,17 +112,104 @@ impl ProjectSession {
                 refresh: None,
             });
         }
+        let after = snapshot(plan.output());
+        let history = plan.edit.history();
+        let refresh = self.publish_form_plan(&plan.path, &plan.input_snapshots, &plan.edit);
+        if refresh.is_ok() || matches!(&refresh, Err(FormEditError::Committed(_))) {
+            self.record_edit(
+                EditedSource::Form(prepared.request.form.clone()),
+                HistoryStep::Scalar(history),
+            );
+        }
+        Ok(FormEditResult {
+            form: prepared.request.form.clone(),
+            snapshot: after,
+            assigned_ids: plan.assigned_ids,
+            refresh: Some(refresh?),
+        })
+    }
+
+    /// A webview may inspect session history without receiving its replacement bytes.
+    #[must_use]
+    pub fn form_edit_history(&self, form: &ObjectId, expected: &str) -> FormEditHistory {
+        let Some(history) = self.edit_history.get(&EditedSource::Form(form.clone())) else {
+            return FormEditHistory::default();
+        };
+        let ready = |step: Option<&HistoryStep>, undo| matches!(step, Some(HistoryStep::Scalar(edit)) if edit.matches_snapshot(expected, undo));
+        FormEditHistory {
+            undo: ready(history.undo.last(), true),
+            redo: ready(history.redo.last(), false),
+        }
+    }
+
+    /// Replay a backend-owned form edit under the same guard and dependency checks as a new edit.
+    ///
+    /// # Errors
+    /// Rejects stale snapshots, changed permissions, external references and missing history.
+    pub fn replay_form_edit(
+        &mut self,
+        form: &ObjectId,
+        expected: &str,
+        undo: bool,
+    ) -> Result<FormEditResult, FormEditError> {
+        let guard = Guard::acquire(self.project().root())?;
+        guard.check_clear(self.project().source())?;
+        let source = EditedSource::Form(form.clone());
+        let history = self
+            .edit_history
+            .get(&source)
+            .ok_or(EditError::HistoryUnavailable)?;
+        let step = if undo {
+            history.undo.last()
+        } else {
+            history.redo.last()
+        };
+        let Some(HistoryStep::Scalar(saved)) = step else {
+            return Err(EditError::HistoryUnavailable.into());
+        };
+        let mut current = self.form_authoring_current()?;
+        let (path, input) = current.form_authoring_source(form)?;
+        if !current.form_authoring_writable(form, &path)? {
+            return Err(EditError::ReadOnly.into());
+        }
+        if snapshot(&input) != expected {
+            return Err(EditError::Conflict.into());
+        }
+        let edit = saved.replay(&input, undo)?;
+        let step = HistoryStep::Scalar(saved.clone());
+        current.form_new_type_references(&input, edit.output())?;
+        let removals = metadata_form_edit::removed_targets(&input, edit.output())?;
+        let mut inputs = BTreeMap::from([(path.clone(), expected.to_owned())]);
+        current.form_removed_references(form, &removals, &mut inputs)?;
+        let after = snapshot(edit.output());
+        let refresh = self.publish_form_plan(&path, &inputs, &edit);
+        if refresh.is_ok() || matches!(&refresh, Err(FormEditError::Committed(_))) {
+            self.advance_edit(&source, step, undo);
+        }
+        Ok(FormEditResult {
+            form: form.clone(),
+            snapshot: after,
+            assigned_ids: Vec::new(),
+            refresh: Some(refresh?),
+        })
+    }
+
+    fn publish_form_plan(
+        &mut self,
+        path: &PathBuf,
+        inputs: &BTreeMap<PathBuf, String>,
+        edit: &EditPlan,
+    ) -> Result<RefreshReport, FormEditError> {
         let _lease = SourceLease::acquire(
             self.project().root(),
-            &plan
-                .inputs
-                .iter()
+            &inputs
+                .keys()
                 .map(|path| self.project().source().join(path))
                 .collect::<Vec<_>>(),
         )
         .map_err(lock_error)?;
         // A dependency may change between preflight and lease acquisition; protect the reviewed set.
-        for (path, expected) in &plan.input_snapshots {
+        for (path, expected) in inputs {
             let absolute = self
                 .source
                 .checked_file(path)
@@ -133,17 +223,9 @@ impl ProjectSession {
         self.generation
             .checked_add(1)
             .ok_or(WorkspaceError::GenerationExhausted)?;
-        let after = snapshot(plan.output());
-        plan.edit.publish(self.project().source(), &plan.path)?;
-        let refresh = self
-            .changed_paths(std::slice::from_ref(&plan.path))
-            .map_err(|error| FormEditError::Committed(Box::new(error)))?;
-        Ok(FormEditResult {
-            form: prepared.request.form.clone(),
-            snapshot: after,
-            assigned_ids: plan.assigned_ids,
-            refresh: Some(refresh),
-        })
+        edit.publish(self.project().source(), path)?;
+        self.changed_paths(std::slice::from_ref(path))
+            .map_err(|error| FormEditError::Committed(Box::new(error)))
     }
 
     fn form_authoring_current(&self) -> Result<Self, FormEditError> {

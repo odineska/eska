@@ -348,7 +348,11 @@ impl ProjectSession {
         let writable = self.can_edit(id, &location.path)?
             && std::fs::metadata(self.project().source().join(&location.path))
                 .is_ok_and(|metadata| !metadata.permissions().readonly());
-        let history = self.property_history.get(id);
+        let history = self
+            .edit_history
+            .get(&super::editing_history::EditedSource::Descriptor(
+                id.clone(),
+            ));
         Ok(EditingSnapshot {
             properties,
             path: location.path,
@@ -414,8 +418,10 @@ impl ProjectSession {
             return Err(EditError::Conflict.into());
         }
         let history = self
-            .property_history
-            .get(id)
+            .edit_history
+            .get(&super::editing_history::EditedSource::Descriptor(
+                id.clone(),
+            ))
             .ok_or(EditError::HistoryUnavailable)?;
         let step = if undo {
             history.undo.last()
