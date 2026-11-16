@@ -186,12 +186,7 @@ pub(super) fn validate_property(
     node: Node<'_, '_>,
     property: &MetadataProperty,
 ) -> Result<Option<AuthoringProperty>, FormEditError> {
-    if property.key.namespace.as_deref() == Some(FORM_NAMESPACE)
-        && (structural(&property.key.name)
-            || document::element(node).is_some()
-                && ElementKind::from_xml_name(&property.key.name).is_some()
-                && property.key.name != "Type")
-    {
+    if structural_property(node, &property.key) {
         return Err(invalid("property", "structural_property"));
     }
     if property.key.namespace.as_deref() != Some(FORM_NAMESPACE) {
@@ -218,6 +213,15 @@ pub(super) fn validate_property(
         return Err(invalid("property", "unknown_property"));
     }
     Ok(definition)
+}
+
+/// Element subtrees have identities and incoming references; only structural operations may remove them.
+pub(super) fn structural_property(node: Node<'_, '_>, key: &PropertyKey) -> bool {
+    key.namespace.as_deref() == Some(FORM_NAMESPACE)
+        && (structural(&key.name)
+            || document::element(node).is_some()
+                && ElementKind::from_xml_name(&key.name).is_some()
+                && key.name != "Type")
 }
 
 pub(super) fn validate_value(

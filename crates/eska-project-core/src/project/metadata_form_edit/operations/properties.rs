@@ -121,7 +121,7 @@ pub(super) fn remove(
     key: &PropertyKey,
 ) -> Result<Vec<Replacement>, FormEditError> {
     unique_property(node, key)?;
-    if key.namespace.as_deref() == Some(FORM_NAMESPACE) && schema::structural(&key.name) {
+    if schema::structural_property(node, key) {
         return Err(invalid("property", "structural_property"));
     }
     if key.namespace.as_deref() == Some(FORM_NAMESPACE)

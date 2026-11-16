@@ -354,6 +354,49 @@ fn removal_requires_explicit_force_for_live_form_references() {
 }
 
 #[test]
+fn removing_properties_cannot_bypass_auxiliary_element_reference_checks() {
+    let input = source(
+        "<AutoCommandBar name='FormCommandBar' id='-1'/><ChildItems><InputField name='Value' id='1'><Visible>false</Visible><ContextMenu name='Menu' id='2'/><ExtendedTooltip name='Hint' id='3'/></InputField></ChildItems>",
+    );
+    for (target, key) in [
+        (FormTarget::Root {}, "AutoCommandBar"),
+        (FormTarget::Element { id: 1 }, "ContextMenu"),
+        (FormTarget::Element { id: 1 }, "ExtendedTooltip"),
+    ] {
+        for operation in [
+            FormOperation::RemoveProperty {
+                target: target.clone(),
+                key: render::key(FORM_NAMESPACE, key),
+            },
+            FormOperation::SetProperty {
+                target,
+                property: property(key, ""),
+            },
+        ] {
+            assert!(matches!(
+                plan(&input, &request(&input, vec![operation])),
+                Err(FormEditError::Invalid {
+                    field: "property",
+                    reason: "structural_property"
+                })
+            ));
+        }
+    }
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::RemoveProperty {
+                target: FormTarget::Element { id: 1 },
+                key: render::key(FORM_NAMESPACE, "Visible"),
+            }],
+        ),
+    )
+    .unwrap();
+    assert_eq!(edit.output(), input.replace("<Visible>false</Visible>", ""));
+}
+
+#[test]
 fn removing_copied_group_keeps_bindings_to_same_named_attributes() {
     let input = source(
         "<ChildItems><UsualGroup name='Group' id='1'><ChildItems><InputField name='Amount' id='2'><DataPath>Amount</DataPath></InputField></ChildItems></UsualGroup></ChildItems><Attributes><Attribute name='Amount' id='1'><Type/></Attribute></Attributes>",
