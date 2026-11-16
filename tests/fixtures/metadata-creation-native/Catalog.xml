@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Catalog uuid="d938f5f4-5fc8-47e3-98e3-b657c3dbd280">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.NativeGoods" category="Object">
+				<xr:TypeId>16c97428-ea90-4d34-96d1-a5d7c00e2d60</xr:TypeId>
+				<xr:ValueId>d2b9b657-387d-4fee-a298-5b2998c98e94</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.NativeGoods" category="Ref">
+				<xr:TypeId>705082b2-045e-4455-ad36-a3bf83efb722</xr:TypeId>
+				<xr:ValueId>70ee2449-1aaf-49c4-b452-5f1a1f8d6808</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.NativeGoods" category="Selection">
+				<xr:TypeId>fd4620f3-8ac8-4b18-91de-035586a09980</xr:TypeId>
+				<xr:ValueId>f96fc925-f0e0-420d-9471-745e322f2e99</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.NativeGoods" category="List">
+				<xr:TypeId>7dc95c6c-d74f-4768-b81b-6cfa664577f4</xr:TypeId>
+				<xr:ValueId>f72720e8-5224-41ea-a26f-ec3e52c2101b</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.NativeGoods" category="Manager">
+				<xr:TypeId>6f932bc6-8da5-490f-ac49-1fbfecfbd3fc</xr:TypeId>
+				<xr:ValueId>0bd850e3-5796-4b2b-b59a-7de725c66c5b</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>NativeGoods</Name>
+			<Synonym/>
+			<Comment/>
+			<Hierarchical>false</Hierarchical>
+			<HierarchyType>HierarchyFoldersAndItems</HierarchyType>
+			<LimitLevelCount>false</LimitLevelCount>
+			<LevelCount>2</LevelCount>
+			<FoldersOnTop>true</FoldersOnTop>
+			<UseStandardCommands>true</UseStandardCommands>
+			<Owners/>
+			<SubordinationUse>ToItems</SubordinationUse>
+			<CodeLength>9</CodeLength>
+			<DescriptionLength>25</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CodeSeries>WholeCatalog</CodeSeries>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<DefaultPresentation>AsDescription</DefaultPresentation>
+			<Characteristics/>
+			<PredefinedDataUpdate>Auto</PredefinedDataUpdate>
+			<EditType>InDialog</EditType>
+			<QuickChoice>false</QuickChoice>
+			<ChoiceMode>BothWays</ChoiceMode>
+			<InputByString>
+				<xr:Field>Catalog.NativeGoods.StandardAttribute.Description</xr:Field>
+				<xr:Field>Catalog.NativeGoods.StandardAttribute.Code</xr:Field>
+			</InputByString>
+			<SearchStringModeOnInputByString>Begin</SearchStringModeOnInputByString>
+			<FullTextSearchOnInputByString>DontUse</FullTextSearchOnInputByString>
+			<ChoiceDataGetModeOnInputByString>Directly</ChoiceDataGetModeOnInputByString>
+			<DefaultObjectForm/>
+			<DefaultFolderForm/>
+			<DefaultListForm/>
+			<DefaultChoiceForm/>
+			<DefaultFolderChoiceForm/>
+			<AuxiliaryObjectForm/>
+			<AuxiliaryFolderForm/>
+			<AuxiliaryListForm/>
+			<AuxiliaryChoiceForm/>
+			<AuxiliaryFolderChoiceForm/>
+			<IncludeHelpInContents>false</IncludeHelpInContents>
+			<BasedOn/>
+			<DataLockFields/>
+			<DataLockControlMode>Managed</DataLockControlMode>
+			<FullTextSearch>Use</FullTextSearch>
+			<ObjectPresentation/>
+			<ExtendedObjectPresentation/>
+			<ListPresentation/>
+			<ExtendedListPresentation/>
+			<Explanation/>
+			<CreateOnInput>Use</CreateOnInput>
+			<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+			<DataHistory>DontUse</DataHistory>
+			<UpdateDataHistoryImmediatelyAfterWrite>false</UpdateDataHistoryImmediatelyAfterWrite>
+			<ExecuteAfterWriteDataHistoryVersionProcessing>false</ExecuteAfterWriteDataHistoryVersionProcessing>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="b39236d8-a54b-4ea0-9d09-bc6150bf650a">
+				<Properties>
+					<Name>Text</Name>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>200</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="d79acf67-2947-42b4-a3ec-c16e8cd80d94">
+				<Properties>
+					<Name>Amount</Name>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>15</v8:Digits>
+							<v8:FractionDigits>2</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="cbaa4c8f-c8ab-4084-8482-b18482481df3">
+				<Properties>
+					<Name>When</Name>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+						<v8:DateQualifiers>
+							<v8:DateFractions>DateTime</v8:DateFractions>
+						</v8:DateQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="76950f84-79fa-4d96-acee-e1dd1fd091b8">
+				<Properties>
+					<Name>Active</Name>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="89e478cd-3511-4ca2-880e-364681445564">
+				<Properties>
+					<Name>Reference</Name>
+					<Type>
+						<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="defbe9d9-2629-4ad4-ae74-a557c739c5c4">
+				<Properties>
+					<Name>Mixed</Name>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>200</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+						<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<TabularSection uuid="6ed800e8-d321-4c00-9be1-eaf225db8572">
+				<InternalInfo>
+					<xr:GeneratedType name="CatalogTabularSection.NativeGoods.Lines" category="TabularSection">
+						<xr:TypeId>98b86d22-bd71-4feb-a97b-443aa22a2033</xr:TypeId>
+						<xr:ValueId>a36d8716-87c3-4bf5-b119-106e276ad612</xr:ValueId>
+					</xr:GeneratedType>
+					<xr:GeneratedType name="CatalogTabularSectionRow.NativeGoods.Lines" category="TabularSectionRow">
+						<xr:TypeId>d6ab4a3f-fbef-477c-948b-55d7d9857ac2</xr:TypeId>
+						<xr:ValueId>8dfab407-c2c2-4718-bc4f-02b962fe4861</xr:ValueId>
+					</xr:GeneratedType>
+				</InternalInfo>
+				<Properties>
+					<Name>Lines</Name>
+				</Properties>
+				<ChildObjects>
+					<Attribute uuid="09b92365-e7c1-450a-ba73-e46f1a751d19">
+						<Properties>
+							<Name>Text</Name>
+							<Type>
+								<v8:Type>xs:string</v8:Type>
+								<v8:StringQualifiers>
+									<v8:Length>200</v8:Length>
+									<v8:AllowedLength>Variable</v8:AllowedLength>
+								</v8:StringQualifiers>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="d88837b4-0777-4c49-8ca7-16de08ed3984">
+						<Properties>
+							<Name>Amount</Name>
+							<Type>
+								<v8:Type>xs:decimal</v8:Type>
+								<v8:NumberQualifiers>
+									<v8:Digits>15</v8:Digits>
+									<v8:FractionDigits>2</v8:FractionDigits>
+									<v8:AllowedSign>Any</v8:AllowedSign>
+								</v8:NumberQualifiers>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="110fae66-a8a1-4228-acfe-45ac39f6c460">
+						<Properties>
+							<Name>When</Name>
+							<Type>
+								<v8:Type>xs:dateTime</v8:Type>
+								<v8:DateQualifiers>
+									<v8:DateFractions>DateTime</v8:DateFractions>
+								</v8:DateQualifiers>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="bb256873-e807-47e7-8620-812deaece696">
+						<Properties>
+							<Name>Active</Name>
+							<Type>
+								<v8:Type>xs:boolean</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="ccbb9760-e14a-487d-82ba-31dc8c7c8797">
+						<Properties>
+							<Name>Reference</Name>
+							<Type>
+								<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="d9257fef-6b57-4c1e-ac2f-9b2337de96d6">
+						<Properties>
+							<Name>Mixed</Name>
+							<Type>
+								<v8:Type>xs:string</v8:Type>
+								<v8:StringQualifiers>
+									<v8:Length>200</v8:Length>
+									<v8:AllowedLength>Variable</v8:AllowedLength>
+								</v8:StringQualifiers>
+								<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+				</ChildObjects>
+			</TabularSection>
+			<TabularSection uuid="3ad5d396-8f00-4a37-981f-bd7fcdb7ac8e">
+				<InternalInfo>
+					<xr:GeneratedType name="CatalogTabularSection.NativeGoods.MinimalLines" category="TabularSection">
+						<xr:TypeId>3597824e-67d3-4bd5-b34d-13c5d6c74934</xr:TypeId>
+						<xr:ValueId>5fbaaefe-36f1-4312-a61d-d405b8094c56</xr:ValueId>
+					</xr:GeneratedType>
+					<xr:GeneratedType name="CatalogTabularSectionRow.NativeGoods.MinimalLines" category="TabularSectionRow">
+						<xr:TypeId>f1f5fd4c-5811-4f05-935d-8081a12e20c4</xr:TypeId>
+						<xr:ValueId>c353f3da-8e69-4e64-82c7-471235abf87a</xr:ValueId>
+					</xr:GeneratedType>
+				</InternalInfo>
+				<Properties>
+					<Name>MinimalLines</Name>
+				</Properties>
+				<ChildObjects>
+					<Attribute uuid="bdc18fa6-d2b6-4a9b-8c61-401421230d40">
+						<Properties>
+							<Name>Enabled</Name>
+							<Type>
+								<v8:Type>xs:boolean</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+				</ChildObjects>
+			</TabularSection>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

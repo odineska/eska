@@ -1,0 +1,727 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 / ALT 10 Distrobox",
+  "database": "file",
+  "scope": "native Designer XML contract and public CLI to native platform roundtrip",
+  "positive_matrix": {
+    "owners": [
+      "Catalog",
+      "Document"
+    ],
+    "attribute_positions": [
+      "owner",
+      "tabular_section"
+    ],
+    "types": [
+      "string(200,variable)",
+      "number(15,2,any)",
+      "date(DateTime)",
+      "boolean",
+      "CatalogRef.NativeGoods",
+      "string+CatalogRef.NativeGoods"
+    ],
+    "attributes_per_owner": 13,
+    "tabular_sections_per_owner": 2,
+    "import": "passed",
+    "apply": "passed",
+    "export": "passed",
+    "attribute_uuids": "preserved",
+    "type_qualifiers": "preserved",
+    "tabular_generated_ids": "preserved"
+  },
+  "external_artifacts": {
+    "processing": "EPF build/unpack passed; 12 object UUIDs preserved",
+    "report": "ERF build/unpack passed; 12 object UUIDs preserved",
+    "types": [
+      "boolean",
+      "string(200,variable)",
+      "number(15,2,any)",
+      "date(DateTime)",
+      "string+number"
+    ],
+    "reference_types": "not tested",
+    "tabular_type_prefixes": {
+      "processing": [
+        "DataProcessorTabularSection",
+        "DataProcessorTabularSectionRow"
+      ],
+      "report": [
+        "ReportTabularSection",
+        "ReportTabularSectionRow"
+      ]
+    },
+    "name_normalization": "External-prefixed tabular names were normalized by platform; core now generates canonical names, not only preserved UUIDs"
+  },
+  "tabular_without_internal_info": "import rejected",
+  "stale_config_dump_info": {
+    "full_import": "passed",
+    "partial_owner_import": "passed",
+    "source_dump_info_bytes": "unchanged"
+  },
+  "constraints": [
+    {
+      "case": "string-0-Variable",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:string"
+          ],
+          [
+            "Length",
+            "0"
+          ],
+          [
+            "AllowedLength",
+            "Variable"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "string-0-Fixed",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:string"
+          ],
+          [
+            "Length",
+            "0"
+          ],
+          [
+            "AllowedLength",
+            "Variable"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "string-1024-Variable",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:string"
+          ],
+          [
+            "Length",
+            "1024"
+          ],
+          [
+            "AllowedLength",
+            "Variable"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "string-1025-Variable",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 102,
+      "error": "[ERROR] В процессе обновления информационной базы произошла критическая ошибка Ошибка SDBL: Слишком большое значение описателя длины. (pos=476)\n[WARN] Обновление конфигурации базы данных отменено\n"
+    },
+    {
+      "case": "string-1025-Fixed",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods.Реквизит.LongText - Для строки фиксированной длины запрещено задавать длину строки более 100 символов\n"
+    },
+    {
+      "case": "string-100000-Variable",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 102,
+      "error": "[ERROR] В процессе обновления информационной базы произошла критическая ошибка Ошибка SDBL: Слишком большое значение описателя длины. (pos=478)\n[WARN] Обновление конфигурации базы данных отменено\n"
+    },
+    {
+      "case": "string-2147483647-Variable",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 102,
+      "error": "[ERROR] В процессе обновления информационной базы произошла критическая ошибка Ошибка SDBL: Слишком большое значение описателя длины. (pos=482)\n[WARN] Обновление конфигурации базы данных отменено\n"
+    },
+    {
+      "case": "string-2147483647-Fixed",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods.Реквизит.LongText - Для строки фиксированной длины запрещено задавать длину строки более 100 символов\n"
+    },
+    {
+      "case": "number-1-0",
+      "name": "TestNumber",
+      "owner": "document",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:decimal"
+          ],
+          [
+            "Digits",
+            "1"
+          ],
+          [
+            "FractionDigits",
+            "0"
+          ],
+          [
+            "AllowedSign",
+            "Any"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "number-38-38",
+      "name": "TestNumber",
+      "owner": "document",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:decimal"
+          ],
+          [
+            "Digits",
+            "38"
+          ],
+          [
+            "FractionDigits",
+            "38"
+          ],
+          [
+            "AllowedSign",
+            "Any"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "number-0-0",
+      "name": "TestNumber",
+      "owner": "document",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:decimal"
+          ],
+          [
+            "Digits",
+            "0"
+          ],
+          [
+            "FractionDigits",
+            "0"
+          ],
+          [
+            "AllowedSign",
+            "Any"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "number-39-0",
+      "name": "TestNumber",
+      "owner": "document",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:decimal"
+          ],
+          [
+            "Digits",
+            "38"
+          ],
+          [
+            "FractionDigits",
+            "0"
+          ],
+          [
+            "AllowedSign",
+            "Any"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "number-15-16",
+      "name": "TestNumber",
+      "owner": "document",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:decimal"
+          ],
+          [
+            "Digits",
+            "15"
+          ],
+          [
+            "FractionDigits",
+            "15"
+          ],
+          [
+            "AllowedSign",
+            "Any"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "reserved-catalog-Code",
+      "name": "Code",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Code\n"
+    },
+    {
+      "case": "reserved-catalog-Код",
+      "name": "Код",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Код\n"
+    },
+    {
+      "case": "reserved-catalog-Description",
+      "name": "Description",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Description\n"
+    },
+    {
+      "case": "reserved-catalog-Наименование",
+      "name": "Наименование",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Наименование\n[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n"
+    },
+    {
+      "case": "reserved-document-Date",
+      "name": "Date",
+      "owner": "document",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Документ.PostingProbe - Недопустимое имя реквизита - Date\n[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n"
+    },
+    {
+      "case": "reserved-document-Дата",
+      "name": "Дата",
+      "owner": "document",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Документ.PostingProbe - Недопустимое имя реквизита - Дата\n"
+    },
+    {
+      "case": "reserved-document-Posted",
+      "name": "Posted",
+      "owner": "document",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Документ.PostingProbe - Недопустимое имя реквизита - Posted\n[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n"
+    },
+    {
+      "case": "reserved-document-Проведен",
+      "name": "Проведен",
+      "owner": "document",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Документ.PostingProbe - Недопустимое имя реквизита - Проведен\n"
+    },
+    {
+      "case": "reserved-catalog-LineNumber",
+      "name": "LineNumber",
+      "owner": "catalog",
+      "row": true,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods.ТабличнаяЧасть.Lines - Недопустимое имя реквизита - LineNumber\n"
+    },
+    {
+      "case": "reserved-catalog-НомерСтроки",
+      "name": "НомерСтроки",
+      "owner": "catalog",
+      "row": true,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods.ТабличнаяЧасть.Lines - Недопустимое имя реквизита - НомерСтроки\n"
+    },
+    {
+      "case": "reserved-catalog-Lines",
+      "name": "Lines",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Справочник.NativeGoods - Задано одинаковое имя для реквизита и табличной части - Lines\n[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n"
+    },
+    {
+      "case": "reserved-document-ThisObject",
+      "name": "ThisObject",
+      "owner": "document",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Документ.PostingProbe - Недопустимое имя реквизита - ThisObject\n"
+    },
+    {
+      "case": "reserved-document-ЭтотОбъект",
+      "name": "ЭтотОбъект",
+      "owner": "document",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Документ.PostingProbe - Недопустимое имя реквизита - ЭтотОбъект\n"
+    },
+    {
+      "case": "string-100-Fixed",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0,
+      "types": [
+        [
+          [
+            "Type",
+            "xs:string"
+          ],
+          [
+            "Length",
+            "100"
+          ],
+          [
+            "AllowedLength",
+            "Fixed"
+          ]
+        ]
+      ]
+    },
+    {
+      "case": "string-101-Fixed",
+      "name": "LongText",
+      "owner": "catalog",
+      "row": false,
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods.Реквизит.LongText - Для строки фиксированной длины запрещено задавать длину строки более 100 символов\n"
+    }
+  ],
+  "limitations": [
+    "Other platform versions and Windows not checked",
+    "Server DBMS not checked",
+    "Borrowed extension metadata not checked",
+    "External metadata references into configuration not checked",
+    "Explorer UI acceptance separate",
+    "Runtime BSL access for unusual method-like attribute names not tested"
+  ],
+  "child_order_and_disabled_standard_fields": [
+    {
+      "case": "AfterTables",
+      "import": 0,
+      "error": "",
+      "apply": 0
+    },
+    {
+      "case": "Code",
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Code\n"
+    },
+    {
+      "case": "Код",
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Код\n"
+    },
+    {
+      "case": "Description",
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Description\n"
+    },
+    {
+      "case": "Наименование",
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Наименование\n"
+    },
+    {
+      "case": "Parent",
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Parent\n"
+    },
+    {
+      "case": "Родитель",
+      "import": 255,
+      "error": "[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Родитель\n[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n"
+    },
+    {
+      "case": "Owner",
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Owner\n"
+    },
+    {
+      "case": "Владелец",
+      "import": 255,
+      "error": "[ERROR] Операция невозможна: при выполнении импорта конфигурации из XML обнаружены критичные ошибки\n[ERROR] Справочник.NativeGoods - Недопустимое имя реквизита - Владелец\n"
+    }
+  ],
+  "runtime_member_name_probe": [
+    {
+      "name": "Write",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Записать",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "DataExchange",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "ОбменДанными",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "AdditionalProperties",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "ДополнительныеСвойства",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Metadata",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Метаданные",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "If",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Если",
+      "owner": "catalog",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Count",
+      "owner": "catalog",
+      "row": true,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Количество",
+      "owner": "catalog",
+      "row": true,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Write",
+      "owner": "document",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    },
+    {
+      "name": "Записать",
+      "owner": "document",
+      "row": false,
+      "import": 0,
+      "apply": 0,
+      "export": 0
+    }
+  ],
+  "runtime_member_access": "not tested",
+  "row_this_object": {
+    "names": [
+      "ThisObject",
+      "ЭтотОбъект"
+    ],
+    "owners": [
+      "Catalog.TabularSection",
+      "Document.TabularSection"
+    ],
+    "import": "passed",
+    "apply": "passed",
+    "export": "passed",
+    "core_validation": "reserved only outside TabularSection"
+  },
+  "cli_acceptance": {
+    "implementation": "eska-project 0.31.1 / codex/metadata-creation",
+    "native_integration_tests": 3,
+    "result": "passed",
+    "native_test_duration_seconds": 16.15,
+    "creations": {
+      "configuration": 44,
+      "epf": 8,
+      "erf": 8,
+      "total": 60
+    },
+    "configuration_owners": [
+      "Catalog",
+      "Document",
+      "Catalog.TabularSection",
+      "Document.TabularSection"
+    ],
+    "external_owners": [
+      "ExternalDataProcessor",
+      "ExternalReport",
+      "ExternalDataProcessor.TabularSection",
+      "ExternalReport.TabularSection"
+    ],
+    "scalar_cases": [
+      "string(variable,0)",
+      "string(variable,1024)",
+      "string(fixed,1)",
+      "string(fixed,100)",
+      "number(0,0,any)",
+      "number(1,0,any)",
+      "number(38,38,any)",
+      "number(15,2,nonnegative)",
+      "date(Date)",
+      "date(Time)",
+      "date(DateTime)",
+      "boolean",
+      "CatalogRef.NativeGoods"
+    ],
+    "composite_cases": [
+      "string+number+date+boolean+CatalogRef.NativeGoods",
+      "string+number+date+boolean"
+    ],
+    "source_variants": [
+      "self-closing ChildObjects with BOM and CRLF",
+      "missing ChildObjects"
+    ],
+    "reviewed_plan": {
+      "preview_language": "ru-RU",
+      "replay_and_apply_language": "en-US",
+      "dry_run_source_bytes": "unchanged",
+      "saved_plan": "identical on replay including generated UUIDs",
+      "apply_bytes": "exactly equal to approved replacements",
+      "unrelated_source_files": "unchanged"
+    },
+    "native_roundtrip": {
+      "configuration": [
+        "import",
+        "apply",
+        "export"
+      ],
+      "external": [
+        "eska-build build",
+        "eska-build unpack"
+      ],
+      "uuid": "preserved",
+      "name": "preserved",
+      "types_and_qualifiers": "preserved",
+      "comment_and_synonym": "preserved",
+      "generated_type_name_category_type_id_value_id": "preserved"
+    },
+    "validation_commands": [
+      "cargo build -p eska-project -p eska-build",
+      "ESKA_TEST_ROOT=<sibling-playground> ESKA_NATIVE_IBCMD=<installed-ibcmd> cargo test --test native_metadata_creation -- --ignored --nocapture",
+      "cargo clippy --test native_metadata_creation -- -D warnings"
+    ],
+    "strict_targeted_clippy": "passed"
+  }
+}

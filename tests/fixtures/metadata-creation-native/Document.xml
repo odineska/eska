@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Document uuid="4838cd3f-7fc9-41e9-935b-ddea6278207d">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.PostingProbe" category="Object">
+				<xr:TypeId>308c77ad-e927-403f-af97-dc7ec94ab3f7</xr:TypeId>
+				<xr:ValueId>72761423-3f14-4a18-8e78-daae18445337</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.PostingProbe" category="Ref">
+				<xr:TypeId>831c23a5-16da-4fde-8485-ded7612863ce</xr:TypeId>
+				<xr:ValueId>cb46d375-2960-4077-9701-0fbccc7c79ed</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.PostingProbe" category="Selection">
+				<xr:TypeId>f40f7024-bb58-4260-b925-781a6ed2d982</xr:TypeId>
+				<xr:ValueId>9bb4e8bf-78da-42d3-877a-67829e0b7c85</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.PostingProbe" category="List">
+				<xr:TypeId>866a89cc-2fdf-494a-bca9-dbb54a9f0e08</xr:TypeId>
+				<xr:ValueId>c178daa2-3086-40ed-80a9-5f93481139d6</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.PostingProbe" category="Manager">
+				<xr:TypeId>a5858eaf-1646-4d1c-8938-f6f19cff0463</xr:TypeId>
+				<xr:ValueId>88461677-c1dc-450d-86da-1f6da845e637</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>PostingProbe</Name>
+			<NumberType>String</NumberType>
+			<NumberLength>9</NumberLength>
+			<NumberAllowedLength>Variable</NumberAllowedLength>
+			<NumberPeriodicity>Nonperiodical</NumberPeriodicity>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<Posting>Allow</Posting>
+			<RealTimePosting>Deny</RealTimePosting>
+			<DataLockControlMode>Managed</DataLockControlMode>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="22b695bd-ee8c-45fa-ac80-31fe331ef243">
+				<Properties>
+					<Name>Text</Name>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>200</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="cd88d3d6-6cac-41a6-9090-fe108774f55a">
+				<Properties>
+					<Name>Amount</Name>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>15</v8:Digits>
+							<v8:FractionDigits>2</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="969d08e8-2d30-46bd-9cf7-e11631261dd5">
+				<Properties>
+					<Name>When</Name>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+						<v8:DateQualifiers>
+							<v8:DateFractions>DateTime</v8:DateFractions>
+						</v8:DateQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="236a6309-1b10-4529-a045-24e3d8d1baa2">
+				<Properties>
+					<Name>Active</Name>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="6ba7a647-1ea5-4a91-88c8-0d3ba5ccecfc">
+				<Properties>
+					<Name>Reference</Name>
+					<Type>
+						<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="f1f8a6ad-87c6-4595-a3fb-fc6dcf21afbe">
+				<Properties>
+					<Name>Mixed</Name>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>200</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+						<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<TabularSection uuid="2286e505-0626-4d2d-9493-3da90a710fbd">
+				<InternalInfo>
+					<xr:GeneratedType name="DocumentTabularSection.PostingProbe.Lines" category="TabularSection">
+						<xr:TypeId>7f4c727c-22ea-461f-a501-43d567b6875e</xr:TypeId>
+						<xr:ValueId>28d3c25e-c8db-4a44-9683-e445aeedd69e</xr:ValueId>
+					</xr:GeneratedType>
+					<xr:GeneratedType name="DocumentTabularSectionRow.PostingProbe.Lines" category="TabularSectionRow">
+						<xr:TypeId>df8adcec-a614-43a8-85ff-36f80e00cfc7</xr:TypeId>
+						<xr:ValueId>d2650eb1-f257-4828-af7b-06b9677425ff</xr:ValueId>
+					</xr:GeneratedType>
+				</InternalInfo>
+				<Properties>
+					<Name>Lines</Name>
+				</Properties>
+				<ChildObjects>
+					<Attribute uuid="a0c9021c-aa71-41b8-ace7-1ceca70d32d2">
+						<Properties>
+							<Name>Text</Name>
+							<Type>
+								<v8:Type>xs:string</v8:Type>
+								<v8:StringQualifiers>
+									<v8:Length>200</v8:Length>
+									<v8:AllowedLength>Variable</v8:AllowedLength>
+								</v8:StringQualifiers>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="4e98c085-a70f-4e70-abce-ee63674ed1ac">
+						<Properties>
+							<Name>Amount</Name>
+							<Type>
+								<v8:Type>xs:decimal</v8:Type>
+								<v8:NumberQualifiers>
+									<v8:Digits>15</v8:Digits>
+									<v8:FractionDigits>2</v8:FractionDigits>
+									<v8:AllowedSign>Any</v8:AllowedSign>
+								</v8:NumberQualifiers>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="206c4c21-ba4b-42ae-821e-14197e7f2acd">
+						<Properties>
+							<Name>When</Name>
+							<Type>
+								<v8:Type>xs:dateTime</v8:Type>
+								<v8:DateQualifiers>
+									<v8:DateFractions>DateTime</v8:DateFractions>
+								</v8:DateQualifiers>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="e3988d84-a6df-4933-8036-a34d539e9b2a">
+						<Properties>
+							<Name>Active</Name>
+							<Type>
+								<v8:Type>xs:boolean</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="47c62d35-19aa-4c75-be8b-6d0d4d72f147">
+						<Properties>
+							<Name>Reference</Name>
+							<Type>
+								<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+					<Attribute uuid="4a8f4d97-dee3-4bee-8f35-31bda2c0ad1a">
+						<Properties>
+							<Name>Mixed</Name>
+							<Type>
+								<v8:Type>xs:string</v8:Type>
+								<v8:StringQualifiers>
+									<v8:Length>200</v8:Length>
+									<v8:AllowedLength>Variable</v8:AllowedLength>
+								</v8:StringQualifiers>
+								<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+				</ChildObjects>
+			</TabularSection>
+			<TabularSection uuid="c36ae6da-b94a-4089-a45c-7245764e701d">
+				<InternalInfo>
+					<xr:GeneratedType name="DocumentTabularSection.PostingProbe.MinimalLines" category="TabularSection">
+						<xr:TypeId>80367228-641e-4aab-bfce-0e0e2469ee2f</xr:TypeId>
+						<xr:ValueId>26c4fbcd-2f83-4f3d-a439-12063246a83f</xr:ValueId>
+					</xr:GeneratedType>
+					<xr:GeneratedType name="DocumentTabularSectionRow.PostingProbe.MinimalLines" category="TabularSectionRow">
+						<xr:TypeId>86a64550-8b44-4b27-800c-6be92048b4e1</xr:TypeId>
+						<xr:ValueId>02670b1c-58c2-40e3-a951-9ff26cbe68af</xr:ValueId>
+					</xr:GeneratedType>
+				</InternalInfo>
+				<Properties>
+					<Name>MinimalLines</Name>
+				</Properties>
+				<ChildObjects>
+					<Attribute uuid="312beb9a-a667-45bb-9112-6199e13eb635">
+						<Properties>
+							<Name>Enabled</Name>
+							<Type>
+								<v8:Type>xs:boolean</v8:Type>
+							</Type>
+						</Properties>
+					</Attribute>
+				</ChildObjects>
+			</TabularSection>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>
