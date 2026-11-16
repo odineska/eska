@@ -25,6 +25,7 @@ pub fn run() {
         ]),
     );
     edit(&stand, "form-add", &additions());
+    add_list_rule(&stand);
     edit(
         &stand,
         "form-appearance",
@@ -186,14 +187,50 @@ fn additions() -> Vec<Value> {
     ]
 }
 
+fn add_list_rule(stand: &Stand) {
+    let settings = json!({
+        "key":{"namespace":FORM,"name":"Settings"},
+        "qualifiers":[[{"namespace":"http://www.w3.org/2001/XMLSchema-instance","name":"type"},"DynamicList"]],
+        "value":{"Record":[text("ManualQuery","false"),text("DynamicDataRead","true"),text("MainTable","Document.PostingProbe")]}
+    });
+    edit(
+        stand,
+        "form-list-appearance",
+        &[
+            json!({"kind":"addDefinition","section":"attribute","name":"PostingRows","properties":[
+                data_type("http://v8.1c.ru/8.1/data/enterprise/current-config","cfg","DynamicList"),settings
+            ]}),
+            json!({"kind":"setListConditionalAppearance","attribute":"PostingRows","rules":[{
+                "fields":[{"name":"Number","enabled":true}],"conditions":[{
+                    "kind":"comparison","enabled":true,"field":"Number","operator":"InList",
+                    "operand":{"kind":"values","value":[
+                        {"kind":"string","value":"A001"},
+                        {"kind":"string","value":"A002"}
+                    ]}
+                }],"format":[{"parameter":"background","enabled":true,"value":{"kind":"color","value":"#112233"}}]
+            }]}),
+        ],
+    );
+}
+
 fn assert_export(xml: &str) {
     assert!(xml.contains("ConditionalAppearance"));
     assert!(xml.contains("#AAEECC"));
     assert!(xml.contains("FilterItemGroup"));
     assert!(xml.contains(">Amount</dcsset:field>"));
-
     let document = Document::parse(xml).unwrap();
     let root = document.root_element();
+    let dynamic = root
+        .descendants()
+        .find(|node| node.attribute("name") == Some("PostingRows"))
+        .unwrap();
+    let dynamic = &xml[dynamic.range()];
+    for value in ["InList", "A001", "A002", "#112233"] {
+        assert!(
+            dynamic.contains(value),
+            "list appearance lost {value}: {dynamic}"
+        );
+    }
     assert_eq!(
         root.children()
             .find(|node| node.has_tag_name((FORM, "Width")))

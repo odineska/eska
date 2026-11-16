@@ -289,7 +289,7 @@ pub fn reference_prefix(key: &PropertyKey) -> Option<String> {
 }
 
 /// 1C date values are timezone-free calendar values with second precision and years 1 through 9999.
-fn date(value: &str, fractions: &str) -> bool {
+pub fn date(value: &str, fractions: &str) -> bool {
     let bytes = value.as_bytes();
     if bytes.len() != 19
         || bytes[4] != b'-'

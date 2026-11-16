@@ -197,30 +197,43 @@ fn conditional_appearance_requires_minor_51_and_discovery_negotiates_editor() {
     );
     client.finish();
 
-    for minor in [50, 51] {
+    for minor in [50, 51, 52] {
         let mut client = Client::new("en-US");
         let hello = initialize(&mut client, minor, true);
         let capability = &hello["capabilities"]["formAuthoring"]["interactive"];
-        assert_eq!(capability.as_bool(), (minor == 51).then_some(true));
+        assert_eq!(capability.as_bool(), (minor >= 51).then_some(true));
+        assert_eq!(
+            hello["capabilities"]["formAuthoring"]["listAppearance"].as_bool(),
+            (minor >= 52).then_some(true)
+        );
         let opened = client.open(&directory.0);
         let form = "common-form:Conditional";
         let schema = client.ok(
             "metadata/formEditSchema",
             context(&opened, json!({"form":form})),
         );
-        assert_eq!(schema["conditionalAppearance"].is_object(), minor == 51);
+        assert_eq!(schema["conditionalAppearance"].is_object(), minor >= 51);
+        assert_eq!(schema["dynamicListAppearance"].is_array(), minor >= 52);
         let object_schema = client.ok("metadata/objectSchema", context(&opened, json!({})));
         assert_eq!(
             object_schema["requestSchemas"]["form-edit"]["$defs"]["appearanceRule"].is_object(),
-            minor == 51
+            minor >= 51
         );
         let response = client.request("metadata/previewFormEdit", context(&opened, json!({
             "request":{"form":form,"snapshot":schema["snapshot"],"operations":[{"kind":"setConditionalAppearance","rules":[]}]}
         })));
-        if minor == 51 {
+        if minor >= 51 {
             assert_eq!(response["result"]["changed"], false);
         } else {
             assert_eq!(response["error"]["code"], -32602);
+        }
+        let list = client.request("metadata/previewFormEdit", context(&opened, json!({
+            "request":{"form":form,"snapshot":schema["snapshot"],"operations":[{"kind":"setListConditionalAppearance","attribute":"UnknownList","rules":[]}]}
+        })));
+        if minor < 52 {
+            assert_eq!(list["error"]["code"], -32602);
+        } else {
+            assert_ne!(list["error"]["code"].as_i64(), Some(-32602));
         }
         client.finish();
     }

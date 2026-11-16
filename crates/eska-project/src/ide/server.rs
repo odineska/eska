@@ -220,6 +220,9 @@ impl Server {
             if self.client_minor >= 51 {
                 capabilities["formAuthoring"]["interactive"] = json!(self.property_editing);
             }
+            if self.client_minor >= 52 {
+                capabilities["formAuthoring"]["listAppearance"] = json!(self.property_editing);
+            }
         }
     }
 

@@ -17,6 +17,7 @@ use super::{
 mod contracts;
 mod discovery;
 mod rpc;
+pub(super) use contracts::form_definitions;
 pub use contracts::request_schemas;
 pub use discovery::{ListOptions, list};
 pub(super) use rpc::{apply, query};

@@ -163,7 +163,7 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
     if minor < required {
         return Err(error(-32601));
     }
-    if minor < 51
+    if minor < 52
         && matches!(
             method,
             "metadata/previewFormEdit" | "metadata/applyFormEdit"
@@ -175,9 +175,18 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
             &args["prepared"]["request"]["operations"]
         };
         if operations.as_array().is_some_and(|items| {
-            items
-                .iter()
-                .any(|item| item["kind"] == "setConditionalAppearance")
+            items.iter().any(|item| match item["kind"].as_str() {
+                Some("setListConditionalAppearance") => true,
+                Some("setConditionalAppearance") => {
+                    minor < 51
+                        || item["rules"].as_array().is_some_and(|rules| {
+                            rules
+                                .iter()
+                                .any(|rule| extended_conditions(&rule["conditions"]))
+                        })
+                }
+                _ => false,
+            })
         }) {
             return Err(error(-32602));
         }
@@ -197,13 +206,31 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
     Ok(())
 }
 
-fn constrain_form_operations(result: &mut Value) {
+fn extended_conditions(conditions: &Value) -> bool {
+    conditions.as_array().is_some_and(|items| {
+        items.iter().any(|item| {
+            matches!(
+                item["operator"].as_str(),
+                Some("InList" | "NotInList" | "InListByHierarchy" | "NotInListByHierarchy")
+            ) || matches!(item["operand"]["kind"].as_str(), Some("date" | "values"))
+                || extended_conditions(&item["items"])
+        })
+    })
+}
+
+fn constrain_form_operations(result: &mut Value, minor: u32) {
     let Some(definitions) = result
         .get_mut("requestSchemas")
         .and_then(|value| value["form-edit"]["$defs"].as_object_mut())
     else {
         return;
     };
+    if let Value::Object(legacy) = super::authoring::form_definitions(false) {
+        *definitions = legacy;
+    }
+    if minor >= 51 {
+        return;
+    }
     if let Some(items) = definitions
         .get_mut("formOperation")
         .and_then(|value| value["oneOf"].as_array_mut())
@@ -215,21 +242,43 @@ fn constrain_form_operations(result: &mut Value) {
     }
 }
 
-fn constrain_schema(result: &mut Value, method: &str, minor: u32, writable: bool) {
+fn constrain_form_appearance(result: &mut Value, minor: u32) {
+    let Some(result) = result.as_object_mut() else {
+        return;
+    };
+    result.remove("dynamicListAppearance");
     if minor < 51 {
-        if method == "metadata/formEditSchema"
-            && let Some(result) = result.as_object_mut()
-        {
-            for key in [
-                "conditionalAppearance",
-                "propertyCaptions",
-                "choiceCaptions",
-            ] {
-                result.remove(key);
+        for key in [
+            "conditionalAppearance",
+            "propertyCaptions",
+            "choiceCaptions",
+        ] {
+            result.remove(key);
+        }
+    } else if let Some(Value::Object(appearance)) = result.get_mut("conditionalAppearance") {
+        if let Some(Value::Array(comparisons)) = appearance.get_mut("comparisons") {
+            comparisons.retain(|item| item["usesList"] != true);
+            for item in comparisons.iter_mut().filter_map(Value::as_object_mut) {
+                item.remove("usesList");
             }
         }
+        if let Some(Value::Array(rules)) = appearance.get_mut("rules") {
+            for rule in rules {
+                if extended_conditions(&rule["conditions"]) {
+                    rule["conditions"] = Value::Null;
+                }
+            }
+        }
+    }
+}
+
+fn constrain_schema(result: &mut Value, method: &str, minor: u32, writable: bool) {
+    if minor < 52 {
+        if method == "metadata/formEditSchema" {
+            constrain_form_appearance(result, minor);
+        }
         if matches!(method, "metadata/formEditSchema" | "metadata/objectSchema") {
-            constrain_form_operations(result);
+            constrain_form_operations(result, minor);
         }
     }
     if method == "metadata/objectSchema"

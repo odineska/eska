@@ -1023,3 +1023,84 @@ fn conditional_appearance_rejects_new_rules_with_unknown_formatted_fields() {
         })
     ));
 }
+
+#[test]
+fn dynamic_list_rules_preserve_other_scopes_and_dcs_settings() {
+    let query = "<QueryText>SELECT Amount FROM Document.Test</QueryText>";
+    let preferences = "<s:viewMode>QuickAccess</s:viewMode><s:userSettingID>keep</s:userSettingID>";
+    let filter = "<s:filter><!--keep exactly--></s:filter>";
+    let other = "<Attribute name='Other' id='2'><Type><v8:Type>cfg:DynamicList</v8:Type></Type></Attribute>";
+    let settings = "http://v8.1c.ru/8.1/data-composition-system/settings";
+    let input = source(&format!(
+        r#"
+        <ChildItems><Table name='List' id='1'><DataPath>Rows</DataPath><ChildItems>
+          <InputField name='RowAmount' id='2'><DataPath>Rows.Amount</DataPath></InputField>
+        </ChildItems></Table></ChildItems>
+        <Attributes xmlns:cfg='http://v8.1c.ru/8.1/data/enterprise/current-config' xmlns:v8='http://v8.1c.ru/8.1/data/core'
+            xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:s='{settings}'>
+          <Attribute name='Rows' id='1'><Type><v8:Type>cfg:DynamicList</v8:Type></Type>
+            <Settings xsi:type='DynamicList'>{query}<ListSettings>{filter}
+                <s:conditionalAppearance>{preferences}</s:conditionalAppearance>
+            </ListSettings></Settings></Attribute>{other}
+        </Attributes>"#
+    ));
+    let rule = serde_json::json!({
+        "fields":[{"name":"Amount","enabled":true}],
+        "conditions":[{"kind":"comparison","enabled":true,"field":"Amount","operator":"InList",
+            "operand":{"kind":"values","value":[
+                {"kind":"number","value":"1.5"},
+                {"kind":"string","value":"<tag>&"},
+                {"kind":"date","value":"2026-11-16T14:20:00"}
+            ]}}],
+        "format":[{"parameter":"foreground","enabled":true,"value":{"kind":"color","value":"#123456"}}]
+    });
+    let op = |name: &str, rules| {
+        serde_json::from_value(serde_json::json!({
+            "kind":"setListConditionalAppearance","attribute":name,"rules":rules
+        }))
+        .unwrap()
+    };
+    let (edited, _) = plan(
+        &input,
+        &request(&input, vec![op("Rows", vec![rule.clone()])]),
+    )
+    .unwrap();
+    let output = edited.output();
+    for original in [query, preferences, filter, other] {
+        assert!(output.contains(original));
+    }
+    assert!(output.contains("&lt;tag&gt;&amp;"));
+    let schema = inspect(&form_id(), "Form.xml".into(), output, true).unwrap();
+    assert_eq!(schema.dynamic_list_appearance[0].fields, ["Amount"]);
+    assert_eq!(schema.dynamic_list_appearance[1].attribute, "Other");
+    let saved = serde_json::to_value(
+        &schema.dynamic_list_appearance[0]
+            .appearance
+            .as_ref()
+            .unwrap()
+            .rules,
+    )
+    .unwrap();
+    assert_eq!(saved[0]["conditions"], rule["conditions"]);
+    assert_eq!(output.matches("<dcsset:right ").count(), 3);
+    let replay =
+        serde_json::json!({"kind":"setListConditionalAppearance","attribute":"Rows","rules":saved});
+    let (same, _) = plan(
+        output,
+        &request(output, vec![serde_json::from_value(replay).unwrap()]),
+    )
+    .unwrap();
+    assert_eq!(same.output(), output);
+    let (created, _) = plan(output, &request(output, vec![op("Other", vec![rule])])).unwrap();
+    assert_eq!(
+        inspect(&form_id(), "Form.xml".into(), created.output(), true)
+            .unwrap()
+            .dynamic_list_appearance[1]
+            .appearance
+            .as_ref()
+            .unwrap()
+            .rules
+            .len(),
+        1
+    );
+}

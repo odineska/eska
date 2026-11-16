@@ -2970,3 +2970,15 @@ expectedOutputSnapshot}`, `files`, `directories`, `inputs` и `references`.
 `metadata/applyFormEdit`. Клиенты minor < 51 продолжают получать прежние
 варианты операций. Семантический JSON и локальные правила описаны в
 [руководстве CLI](metadata-authoring.md#условное-оформление-формы).
+
+### API 1.52. Оформление динамических списков
+
+`capabilities.formAuthoring.listAppearance` обозначает поддержку
+`setListConditionalAppearance` и условий со списками значений. Схема формы
+возвращает `dynamicListAppearance`, сравнения содержат `usesList`. Для
+`setListConditionalAppearance` ключ `attribute` указывает реквизит списка.
+Выбор правил, сохранение неизвестных частей и replay проверенного плана
+работают так же, как для формы. У minor 51 новые условия представлены
+неизменяемой секцией `null`. Так клиент может редактировать прежние параметры
+оформления в этих правилах. Контракт операции описан в
+[руководстве CLI](metadata-authoring.md#условное-оформление-динамического-списка).

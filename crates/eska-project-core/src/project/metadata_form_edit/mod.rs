@@ -92,6 +92,10 @@ pub enum FormOperation {
     SetConditionalAppearance {
         rules: Vec<AppearanceRule>,
     },
+    SetListConditionalAppearance {
+        attribute: String,
+        rules: Vec<AppearanceRule>,
+    },
     SetProperty {
         target: FormTarget,
         property: MetadataProperty,

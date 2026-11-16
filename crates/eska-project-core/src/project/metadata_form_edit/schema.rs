@@ -61,6 +61,7 @@ pub struct FormEditSchema {
     pub element_kinds: Vec<FormElementKindSchema>,
     pub definition_kinds: Vec<FormDefinitionSchema>,
     pub conditional_appearance: Option<appearance::AppearanceSchema>,
+    pub dynamic_list_appearance: Vec<appearance::ListAppearanceSchema>,
 }
 
 /// Inspect exactly one managed-form payload, including existing properties unknown to the palette.
@@ -147,6 +148,7 @@ pub fn inspect(
             })
             .collect(),
         conditional_appearance: appearance::inspect(document.root_element()),
+        dynamic_list_appearance: appearance::inspect_lists(document.root_element()),
         definition_kinds: ["Attribute", "Column", "Command", "Parameter"]
             .into_iter()
             .map(|kind| FormDefinitionSchema {

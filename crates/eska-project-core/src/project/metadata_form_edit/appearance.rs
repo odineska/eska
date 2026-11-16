@@ -1,6 +1,7 @@
 //! Form-level conditional appearance is stored with the form's attributes, in DCS namespaces.
 
 mod codec;
+mod lists;
 
 use std::collections::HashSet;
 
@@ -23,6 +24,8 @@ const XSI: &str = "http://www.w3.org/2001/XMLSchema-instance";
 const XS: &str = "http://www.w3.org/2001/XMLSchema";
 const MAX_RULES: usize = 512;
 const MAX_ROWS: usize = 512;
+
+pub(super) use lists::{ListAppearanceSchema, change_list, inspect_lists};
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -83,10 +86,14 @@ pub enum AppearanceOperator {
     LessOrEqual,
     Filled,
     NotFilled,
+    InList,
+    NotInList,
+    InListByHierarchy,
+    NotInListByHierarchy,
 }
 
 impl AppearanceOperator {
-    const ALL: [Self; 8] = [
+    const ALL: [Self; 12] = [
         Self::Equal,
         Self::NotEqual,
         Self::Greater,
@@ -95,10 +102,21 @@ impl AppearanceOperator {
         Self::LessOrEqual,
         Self::Filled,
         Self::NotFilled,
+        Self::InList,
+        Self::NotInList,
+        Self::InListByHierarchy,
+        Self::NotInListByHierarchy,
     ];
 
     const fn needs_operand(self) -> bool {
         !matches!(self, Self::Filled | Self::NotFilled)
+    }
+
+    const fn uses_list(self) -> bool {
+        matches!(
+            self,
+            Self::InList | Self::NotInList | Self::InListByHierarchy | Self::NotInListByHierarchy
+        )
     }
 }
 
@@ -115,6 +133,8 @@ pub enum AppearanceOperand {
     Boolean(bool),
     Number(String),
     Reference(String),
+    Date(String),
+    Values(Vec<Self>),
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
@@ -230,6 +250,7 @@ pub struct AppearanceSchema {
 pub struct AppearanceComparisonOption {
     pub operator: AppearanceOperator,
     pub needs_operand: bool,
+    pub uses_list: bool,
 }
 
 #[derive(Clone, Copy, Debug, Serialize)]
@@ -240,8 +261,11 @@ pub struct AppearanceParameterOption {
 }
 
 pub(super) fn inspect(root: Node<'_, '_>) -> Option<AppearanceSchema> {
-    let block = container(root).ok()?;
-    let rules = rule_nodes(block)
+    inspect_rules(container(root).ok()?, false)
+}
+
+fn inspect_rules(block: Option<Node<'_, '_>>, dynamic: bool) -> Option<AppearanceSchema> {
+    let rules = rule_nodes(block, dynamic)
         .ok()?
         .into_iter()
         .enumerate()
@@ -254,6 +278,7 @@ pub(super) fn inspect(root: Node<'_, '_>) -> Option<AppearanceSchema> {
             .map(|operator| AppearanceComparisonOption {
                 operator,
                 needs_operand: operator.needs_operand(),
+                uses_list: operator.uses_list(),
             })
             .collect(),
         parameters: AppearanceParameter::ALL
@@ -288,6 +313,7 @@ fn container<'a, 'input>(
 
 fn rule_nodes<'a, 'input>(
     block: Option<Node<'a, 'input>>,
+    dynamic: bool,
 ) -> Result<Vec<Node<'a, 'input>>, FormEditError> {
     let Some(block) = block else {
         return Ok(Vec::new());
@@ -296,7 +322,7 @@ fn rule_nodes<'a, 'input>(
     for node in block.children() {
         if node.has_tag_name((SETTINGS, "item")) {
             rules.push(node);
-        } else if node.is_element()
+        } else if node.is_element() && !dynamic
             || node.is_text() && !node.text().unwrap_or("").trim().is_empty()
         {
             return Err(invalid("conditionalAppearance", "unsupported_section"));
@@ -347,11 +373,7 @@ pub(super) fn change(
     root: Node<'_, '_>,
     edits: &[AppearanceRule],
 ) -> Result<Vec<Replacement>, FormEditError> {
-    if edits.len() > MAX_RULES {
-        return Err(invalid("conditionalAppearance", "too_many_rules"));
-    }
     let block = container(root)?;
-    let originals = rule_nodes(block)?;
     let scope = block
         .or_else(|| document::child(root, "Attributes"))
         .unwrap_or(root);
@@ -360,6 +382,41 @@ pub(super) fn change(
         .filter(|node| document::is_element(*node))
         .filter_map(|node| node.attribute("name"))
         .collect();
+    let originals = rule_nodes(block, false)?;
+    let rules = render_rules(input, scope, &originals, edits, |name| {
+        available.contains(name)
+    })?;
+    if let Some(block) = block {
+        return replace_rules(input, block, &originals, &rules);
+    }
+    if rules.is_empty() {
+        return Ok(Vec::new());
+    }
+    let tag = render::tag(scope, "ConditionalAppearance");
+    let fragment = format!("<{tag}>{}</{tag}>", rules.join(""));
+    if scope != root {
+        return Ok(vec![document::insert(input, scope, &fragment, None)?]);
+    }
+    let tag = render::tag(root, "Attributes");
+    let before = document::child(root, "Commands").or_else(|| document::child(root, "Parameters"));
+    Ok(vec![document::insert(
+        input,
+        root,
+        &format!("<{tag}>{fragment}</{tag}>"),
+        before,
+    )?])
+}
+
+fn render_rules(
+    input: &str,
+    scope: Node<'_, '_>,
+    originals: &[Node<'_, '_>],
+    edits: &[AppearanceRule],
+    allowed: impl Fn(&str) -> bool,
+) -> Result<Vec<String>, FormEditError> {
+    if edits.len() > MAX_RULES {
+        return Err(invalid("conditionalAppearance", "too_many_rules"));
+    }
     let mut reused = HashSet::new();
     let mut rules = Vec::with_capacity(edits.len());
     for edit in edits {
@@ -383,7 +440,7 @@ pub(super) fn change(
             if fields.len() > MAX_ROWS
                 || fields.iter().any(|field| {
                     !names.insert(&field.name)
-                        || !(available.contains(field.name.as_str())
+                        || !(allowed(&field.name)
                             || previous.iter().any(|old| old.name == field.name))
                 })
             {
@@ -397,45 +454,40 @@ pub(super) fn change(
         });
     }
 
-    if let Some(block) = block {
-        let mut replacements: Vec<_> = originals
-            .iter()
-            .enumerate()
-            .filter_map(|(index, node)| {
-                let range = node.range();
-                let text = rules.get(index).map_or("", String::as_str);
-                (input[range.clone()] != *text).then(|| Replacement {
-                    range,
-                    text: text.to_owned(),
-                })
+    Ok(rules)
+}
+
+fn replace_rules(
+    input: &str,
+    block: Node<'_, '_>,
+    originals: &[Node<'_, '_>],
+    rules: &[String],
+) -> Result<Vec<Replacement>, FormEditError> {
+    let mut replacements: Vec<_> = originals
+        .iter()
+        .enumerate()
+        .filter_map(|(index, node)| {
+            let range = node.range();
+            let text = rules.get(index).map_or("", String::as_str);
+            (input[range.clone()] != *text).then(|| Replacement {
+                range,
+                text: text.to_owned(),
             })
-            .collect();
-        if rules.len() > originals.len() {
-            replacements.push(document::insert(
-                input,
-                block,
-                &rules[originals.len()..].join(""),
-                None,
-            )?);
-        }
-        return Ok(replacements);
+        })
+        .collect();
+    if rules.len() > originals.len() {
+        // List preferences are sibling elements after the actual rules.
+        let before = originals
+            .last()
+            .map_or_else(|| block.first_element_child(), Node::next_sibling_element);
+        replacements.push(document::insert(
+            input,
+            block,
+            &rules[originals.len()..].join(""),
+            before,
+        )?);
     }
-    if rules.is_empty() {
-        return Ok(Vec::new());
-    }
-    let tag = render::tag(scope, "ConditionalAppearance");
-    let fragment = format!("<{tag}>{}</{tag}>", rules.join(""));
-    if scope != root {
-        return Ok(vec![document::insert(input, scope, &fragment, None)?]);
-    }
-    let tag = render::tag(root, "Attributes");
-    let before = document::child(root, "Commands").or_else(|| document::child(root, "Parameters"));
-    Ok(vec![document::insert(
-        input,
-        root,
-        &format!("<{tag}>{fragment}</{tag}>"),
-        before,
-    )?])
+    Ok(replacements)
 }
 
 fn update_rule(

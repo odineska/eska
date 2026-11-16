@@ -43,6 +43,9 @@ pub(super) fn apply(
         FormOperation::SetConditionalAppearance { rules } => {
             super::appearance::change(input, xml.root_element(), rules)
         }
+        FormOperation::SetListConditionalAppearance { attribute, rules } => {
+            super::appearance::change_list(input, xml, attribute, rules)
+        }
         FormOperation::SetProperty { target, property } => {
             properties::set(input, document::target(xml, target)?, property)
         }

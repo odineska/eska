@@ -8,7 +8,7 @@ use super::{
     CORE, DCS, FontEffect, FormEditError, MAX_ROWS, SETTINGS, UI, XS, XSI, invalid, simple_text,
 };
 use crate::project::{
-    metadata_edit::{escape_attribute, escape_xml},
+    metadata_edit::{escape_attribute, escape_xml, value_schema::date},
     metadata_model::LocalizedText,
 };
 
@@ -53,7 +53,7 @@ fn children(node: Node<'_, '_>, namespace: &str, names: &[&str]) -> bool {
     })
 }
 
-fn one<'a, 'input>(
+pub(super) fn one<'a, 'input>(
     node: Node<'a, 'input>,
     namespace: &str,
     name: &str,
@@ -181,8 +181,16 @@ fn condition(node: Node<'_, '_>, depth: usize, count: &mut usize) -> Option<Appe
     let operator = AppearanceOperator::ALL
         .into_iter()
         .find(|operator| operator.token() == comparison)?;
-    let operand = match one(node, SETTINGS, "right").ok()? {
-        Some(right) if operator.needs_operand() => Some(read_operand(right)?),
+    let mut rights = node
+        .children()
+        .filter(|node| node.has_tag_name((SETTINGS, "right")));
+    let operand = match rights.next() {
+        Some(first) if operator.needs_operand() && operator.uses_list() => {
+            Some(read_list_operand(first, rights)?)
+        }
+        Some(first) if operator.needs_operand() && rights.next().is_none() => {
+            Some(read_scalar(first)?)
+        }
         None if !operator.needs_operand() => None,
         _ => return None,
     };
@@ -194,7 +202,33 @@ fn condition(node: Node<'_, '_>, depth: usize, count: &mut usize) -> Option<Appe
     })
 }
 
-fn read_operand(node: Node<'_, '_>) -> Option<AppearanceOperand> {
+fn read_list_operand<'a, 'input>(
+    first: Node<'a, 'input>,
+    mut remaining: impl Iterator<Item = Node<'a, 'input>>,
+) -> Option<AppearanceOperand> {
+    // Designer XML expands populated lists as consecutive right operands, including singleton lists.
+    if typed(first, CORE, "ValueListType") && only_type(first) {
+        if remaining.next().is_some() {
+            return None;
+        }
+        return Some(AppearanceOperand::Values(read_values(first)?));
+    }
+    let mut values = std::iter::once(first)
+        .chain(remaining)
+        .take(MAX_ROWS + 1)
+        .map(read_scalar)
+        .collect::<Option<Vec<_>>>()?;
+    if values.len() == 1 && matches!(values[0], AppearanceOperand::Field(_)) {
+        return values.pop();
+    }
+    (values.len() <= MAX_ROWS
+        && !values
+            .iter()
+            .any(|value| matches!(value, AppearanceOperand::Field(_))))
+    .then_some(AppearanceOperand::Values(values))
+}
+
+fn read_scalar(node: Node<'_, '_>) -> Option<AppearanceOperand> {
     if !only_type(node) {
         return None;
     }
@@ -209,9 +243,52 @@ fn read_operand(node: Node<'_, '_>) -> Option<AppearanceOperand> {
         Some(AppearanceOperand::Number(value))
     } else if typed(node, XS, "boolean") {
         Some(AppearanceOperand::Boolean(boolean(&value)?))
+    } else if typed(node, XS, "dateTime") && date(&value, "DateTime") {
+        Some(AppearanceOperand::Date(value))
     } else {
         None
     }
+}
+
+fn list_id(node: Node<'_, '_>) -> Option<i64> {
+    (only_type(node) && (node.attribute((XSI, "type")).is_none() || typed(node, XS, "decimal")))
+        .then(|| scalar(node)?.trim().parse().ok())
+        .flatten()
+}
+
+fn read_values(node: Node<'_, '_>) -> Option<Vec<AppearanceOperand>> {
+    if !children(node, CORE, &["valueType", "item", "lastId"]) {
+        return None;
+    }
+    if let Some(kind) = one(node, CORE, "valueType").ok()?
+        && (kind.attributes().len() != 0 || !children(kind, CORE, &[]))
+    {
+        return None;
+    }
+    let mut ids = HashSet::new();
+    let mut items = Vec::new();
+    for item in node
+        .children()
+        .filter(|child| child.has_tag_name((CORE, "item")))
+    {
+        if items.len() == MAX_ROWS
+            || item.attributes().len() != 0
+            || !children(item, CORE, &["value", "id"])
+        {
+            return None;
+        }
+        let value = read_scalar(one(item, CORE, "value").ok()??)?;
+        if matches!(value, AppearanceOperand::Field(_)) {
+            return None;
+        }
+        let id = list_id(one(item, CORE, "id").ok()??)?;
+        if id < 0 || !ids.insert(id) {
+            return None;
+        }
+        items.push(value);
+    }
+    let last_id = list_id(one(node, CORE, "lastId").ok()??)?;
+    (last_id >= ids.into_iter().max().unwrap_or(-1)).then_some(items)
 }
 
 pub(super) fn settings(node: Node<'_, '_>) -> Option<Vec<AppearanceSetting>> {
@@ -350,7 +427,7 @@ fn valid_name(value: &str) -> bool {
     !value.is_empty() && value.chars().all(|c| c.is_alphanumeric() || c == '_')
 }
 
-fn path(value: &str) -> bool {
+pub(super) fn path(value: &str) -> bool {
     value.len() <= 2048 && value.split('.').all(valid_name)
 }
 
@@ -374,11 +451,15 @@ impl AppearanceOperator {
             Self::LessOrEqual => "LessOrEqual",
             Self::Filled => "Filled",
             Self::NotFilled => "NotFilled",
+            Self::InList => "InList",
+            Self::NotInList => "NotInList",
+            Self::InListByHierarchy => "InListByHierarchy",
+            Self::NotInListByHierarchy => "NotInListByHierarchy",
         }
     }
 }
 
-fn fragment(scope: Node<'_, '_>, tag: &str, content: &str) -> String {
+pub(super) fn fragment(scope: Node<'_, '_>, tag: &str, content: &str) -> String {
     let mut declarations = String::new();
     for &(prefix, namespace) in PREFIXES {
         // QName-valued attributes and scalar colors/fonts need bindings too.
@@ -491,31 +572,12 @@ fn render_condition(
             }
             let use_tag = use_value("dcsset", *enabled);
             let field = escape_xml(field)?;
-            let operator = operator.token();
+            let comparison = operator.token();
             let _ = write!(
                 output,
-                "<dcsset:item xsi:type=\"dcsset:FilterItemComparison\">{use_tag}<dcsset:left xsi:type=\"dcscor:Field\">{field}</dcsset:left><dcsset:comparisonType>{operator}</dcsset:comparisonType>"
+                "<dcsset:item xsi:type=\"dcsset:FilterItemComparison\">{use_tag}<dcsset:left xsi:type=\"dcscor:Field\">{field}</dcsset:left><dcsset:comparisonType>{comparison}</dcsset:comparisonType>"
             );
-            if let Some(operand) = operand {
-                let (kind, value) = match operand {
-                    AppearanceOperand::Field(value) if path(value) => {
-                        ("dcscor:Field", escape_xml(value)?)
-                    }
-                    AppearanceOperand::Reference(value) if path(value) => {
-                        ("dcscor:DesignTimeValue", escape_xml(value)?)
-                    }
-                    AppearanceOperand::Number(value) if decimal(value) => {
-                        ("xs:decimal", value.clone())
-                    }
-                    AppearanceOperand::String(value) => ("xs:string", escape_xml(value)?),
-                    AppearanceOperand::Boolean(value) => ("xs:boolean", value.to_string()),
-                    _ => return Err(invalid("conditionalAppearance", "invalid_operand")),
-                };
-                let _ = write!(
-                    output,
-                    "<dcsset:right xsi:type=\"{kind}\">{value}</dcsset:right>"
-                );
-            }
+            render_operand(output, *operator, operand.as_ref())?;
         }
         AppearanceCondition::Group {
             enabled,
@@ -541,6 +603,64 @@ fn render_condition(
         }
     }
     output.push_str("</dcsset:item>");
+    Ok(())
+}
+
+fn render_operand(
+    output: &mut String,
+    operator: AppearanceOperator,
+    operand: Option<&AppearanceOperand>,
+) -> Result<(), FormEditError> {
+    let Some(operand) = operand else {
+        return Ok(());
+    };
+    if let AppearanceOperand::Values(values) = operand {
+        if !operator.uses_list() {
+            return Err(invalid("conditionalAppearance", "unexpected_value_list"));
+        }
+        return render_values(output, values);
+    }
+    render_scalar(output, operand)
+}
+
+fn render_scalar(output: &mut String, value: &AppearanceOperand) -> Result<(), FormEditError> {
+    let (kind, value) = match value {
+        AppearanceOperand::Field(value) if path(value) => ("dcscor:Field", escape_xml(value)?),
+        AppearanceOperand::Reference(value) if path(value) => {
+            ("dcscor:DesignTimeValue", escape_xml(value)?)
+        }
+        AppearanceOperand::Number(value) if decimal(value) => ("xs:decimal", value.clone()),
+        AppearanceOperand::Date(value) if date(value, "DateTime") => ("xs:dateTime", value.clone()),
+        AppearanceOperand::String(value) => ("xs:string", escape_xml(value)?),
+        AppearanceOperand::Boolean(value) => ("xs:boolean", value.to_string()),
+        _ => return Err(invalid("conditionalAppearance", "invalid_operand")),
+    };
+    let _ = write!(
+        output,
+        "<dcsset:right xsi:type=\"{kind}\">{value}</dcsset:right>"
+    );
+    Ok(())
+}
+
+fn render_values(output: &mut String, values: &[AppearanceOperand]) -> Result<(), FormEditError> {
+    if values.len() > MAX_ROWS {
+        return Err(invalid("conditionalAppearance", "invalid_value_list"));
+    }
+    if values.is_empty() {
+        output.push_str(concat!(
+            "<dcsset:right xsi:type=\"v8:ValueListType\"><v8:valueType/>",
+            "<v8:lastId xsi:type=\"xs:decimal\">-1</v8:lastId></dcsset:right>"
+        ));
+    }
+    for value in values {
+        if matches!(
+            value,
+            AppearanceOperand::Field(_) | AppearanceOperand::Values(_)
+        ) {
+            return Err(invalid("conditionalAppearance", "invalid_value_list_item"));
+        }
+        render_scalar(output, value)?;
+    }
     Ok(())
 }
 
