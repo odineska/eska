@@ -163,6 +163,25 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
     if minor < required {
         return Err(error(-32601));
     }
+    if minor < 51
+        && matches!(
+            method,
+            "metadata/previewFormEdit" | "metadata/applyFormEdit"
+        )
+    {
+        let operations = if method == "metadata/previewFormEdit" {
+            &args["request"]["operations"]
+        } else {
+            &args["prepared"]["request"]["operations"]
+        };
+        if operations.as_array().is_some_and(|items| {
+            items
+                .iter()
+                .any(|item| item["kind"] == "setConditionalAppearance")
+        }) {
+            return Err(error(-32602));
+        }
+    }
     if minor < 49
         && matches!(
             method,
@@ -178,7 +197,41 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
     Ok(())
 }
 
+fn constrain_form_operations(result: &mut Value) {
+    let Some(definitions) = result
+        .get_mut("requestSchemas")
+        .and_then(|value| value["form-edit"]["$defs"].as_object_mut())
+    else {
+        return;
+    };
+    if let Some(items) = definitions
+        .get_mut("formOperation")
+        .and_then(|value| value["oneOf"].as_array_mut())
+    {
+        items.retain(|item| item["properties"]["kind"]["const"] != "setConditionalAppearance");
+    }
+    for key in ["appearanceRule", "appearanceCondition", "appearanceValue"] {
+        definitions.remove(key);
+    }
+}
+
 fn constrain_schema(result: &mut Value, method: &str, minor: u32, writable: bool) {
+    if minor < 51 {
+        if method == "metadata/formEditSchema"
+            && let Some(result) = result.as_object_mut()
+        {
+            for key in [
+                "conditionalAppearance",
+                "propertyCaptions",
+                "choiceCaptions",
+            ] {
+                result.remove(key);
+            }
+        }
+        if matches!(method, "metadata/formEditSchema" | "metadata/objectSchema") {
+            constrain_form_operations(result);
+        }
+    }
     if method == "metadata/objectSchema"
         && (minor < 50 || !writable)
         && let Some(result) = result.as_object_mut()

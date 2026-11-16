@@ -851,3 +851,175 @@ fn new_definitions_and_events_use_the_destination_container_namespace() {
         assert_eq!(node.tag_name().namespace(), Some(FORM_NAMESPACE));
     }
 }
+
+#[test]
+fn conditional_appearance_roundtrips_typed_values_and_blocks_dangling_element_links() {
+    let input = source(
+        "<ChildItems><InputField name='AmountField' id='1'/></ChildItems><Attributes><Attribute name='Amount' id='1'/></Attributes>",
+    );
+    let operation = serde_json::from_value(serde_json::json!({
+        "kind":"setConditionalAppearance",
+        "rules":[{
+            "original":null,"enabled":false,
+            "fields":[{"name":"AmountField","enabled":true}],
+            "conditions":[{"kind":"group","enabled":true,"group":"OrGroup","items":[
+                {"kind":"comparison","enabled":true,"field":"Amount","operator":"Less","operand":{"kind":"number","value":"1.5"}},
+                {"kind":"comparison","enabled":false,"field":"Amount","operator":"NotFilled","operand":null}
+            ]}],
+            "format":[
+                {"parameter":"background","enabled":true,"value":{"kind":"color","value":"#FFEEDD"}},
+                {"parameter":"font","enabled":true,"value":{"kind":"font","value":{"reference":"sys:DefaultGUIFont","effects":["bold"],"scale":null}}},
+                {"parameter":"text","enabled":true,"value":{"kind":"localized","value":[{"language":"ru","content":"< 1,5 & пусто"}]}}
+            ]
+        }]
+    })).unwrap();
+    let (changed, _) = plan(&input, &request(&input, vec![operation])).unwrap();
+    let output = changed.output();
+    assert!(output.starts_with("\u{feff}<?xml version='1.0'?>\r\n"));
+    assert!(output.contains("<!--keep exactly-->"));
+    let schema = inspect(&form_id(), "Form.xml".into(), output, true).unwrap();
+    let rules = schema.conditional_appearance.unwrap().rules;
+    assert_eq!(rules.len(), 1);
+    assert_eq!(rules[0].enabled, Some(false));
+    assert_eq!(rules[0].format.as_ref().map(Vec::len), Some(3));
+    assert_eq!(rules[0].conditions.as_ref().map(Vec::len), Some(1));
+    let (same, _) = plan(
+        output,
+        &request(
+            output,
+            vec![FormOperation::SetConditionalAppearance { rules }],
+        ),
+    )
+    .unwrap();
+    assert_eq!(same.output(), output);
+    for target in [
+        FormTarget::Element { id: 1 },
+        FormTarget::Attribute {
+            name: "Amount".to_owned(),
+        },
+    ] {
+        assert!(matches!(
+            plan(
+                output,
+                &request(
+                    output,
+                    vec![FormOperation::Remove {
+                        target,
+                        force: false
+                    }]
+                )
+            ),
+            Err(FormEditError::References { .. })
+        ));
+    }
+}
+
+#[test]
+fn appearance_edit_preserves_unsupported_filter_and_other_rule_bytes() {
+    let unknown = concat!(
+        "<s:filter><!--comment--><s:item xsi:type='s:FilterItemComparison'>",
+        "<s:left xsi:type='d:Field'>Attr</s:left><s:comparisonType>InList</s:comparisonType>",
+        "<s:right xsi:type='c:ValueListType'><c:future/></s:right></s:item></s:filter>"
+    );
+    let existing =
+        format!("<s:item><s:selection/><c:Unknown flag='yes'/>{unknown}<s:appearance/></s:item>");
+    let untouched = "<s:item><!--retained--><s:selection/><s:filter/><s:appearance/></s:item>";
+    let input = source(&format!(
+        "<Attributes><ConditionalAppearance xmlns:s='{}' xmlns:d='{}' xmlns:xsi='{}'>\r\n{existing}<!--gap-->{untouched}\r\n</ConditionalAppearance></Attributes>",
+        "http://v8.1c.ru/8.1/data-composition-system/settings",
+        "http://v8.1c.ru/8.1/data-composition-system/core",
+        "http://www.w3.org/2001/XMLSchema-instance",
+    ));
+    let mut rules = inspect(&form_id(), "Form.xml".into(), &input, true)
+        .unwrap()
+        .conditional_appearance
+        .unwrap()
+        .rules;
+    assert_eq!(rules[0].conditions, None);
+    rules[0].enabled = Some(false);
+    rules[0].format = Some(vec![
+        serde_json::from_value(serde_json::json!({
+            "parameter":"foreground","enabled":true,"value":{"kind":"color","value":"#FEEC02"}
+        }))
+        .unwrap(),
+    ]);
+    rules.swap(0, 1);
+    let (edited, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::SetConditionalAppearance {
+                rules: rules.clone(),
+            }],
+        ),
+    )
+    .unwrap();
+    assert!(edited.output().contains(unknown));
+    assert!(edited.output().contains(untouched));
+    assert!(edited.output().contains("<c:Unknown flag='yes'/>"));
+    assert!(edited.output().contains("<!--gap-->"));
+    assert!(edited.output().find(untouched).unwrap() < edited.output().find(unknown).unwrap());
+    rules[1].conditions = Some(Vec::new());
+    assert!(matches!(
+        plan(
+            &input,
+            &request(
+                &input,
+                vec![FormOperation::SetConditionalAppearance { rules }]
+            )
+        ),
+        Err(FormEditError::Invalid {
+            reason: "unsupported_rule_section",
+            ..
+        })
+    ));
+}
+
+#[test]
+fn conditional_appearance_inserts_missing_sections_in_designer_order() {
+    use serde_json::json;
+
+    for existing in ["<s:item/>", "<s:item><s:appearance/></s:item>"] {
+        let input = source(&format!(
+            "<ChildItems><InputField name='AmountField' id='1'/></ChildItems><Attributes><ConditionalAppearance xmlns:s='http://v8.1c.ru/8.1/data-composition-system/settings'>{existing}</ConditionalAppearance></Attributes>"
+        ));
+        let operation = serde_json::from_value(json!({
+            "kind":"setConditionalAppearance",
+            "rules":[{"original":0,"enabled":false,"fields":[{"name":"AmountField","enabled":true}],"conditions":[
+                {"kind":"comparison","enabled":true,"field":"Amount","operator":"NotFilled","operand":null}
+            ],"format":[{"parameter":"visible","enabled":true,"value":{"kind":"boolean","value":false}}]}]
+        })).unwrap();
+        let (edit, _) = plan(&input, &request(&input, vec![operation])).unwrap();
+        let xml = document::xml(edit.output()).unwrap();
+        let rule = xml
+            .descendants()
+            .find(|node| node.has_tag_name("ConditionalAppearance"))
+            .and_then(|node| node.first_element_child())
+            .unwrap();
+        let sections: Vec<_> = rule
+            .children()
+            .filter(roxmltree::Node::is_element)
+            .map(|node| node.tag_name().name())
+            .collect();
+        assert_eq!(sections, ["use", "selection", "filter", "appearance"]);
+    }
+}
+
+#[test]
+fn conditional_appearance_rejects_new_rules_with_unknown_formatted_fields() {
+    let input = empty_form();
+    let operation = serde_json::from_value(serde_json::json!({
+        "kind":"setConditionalAppearance",
+        "rules":[{"fields":[{"name":"Missing","enabled":true}],"format":[
+            {"parameter":"visible","enabled":true,"value":{"kind":"boolean","value":false}}
+        ]}]
+    }))
+    .unwrap();
+    assert!(matches!(
+        plan(&input, &request(&input, vec![operation])),
+        Err(FormEditError::Invalid {
+            reason: "invalid_formatted_field",
+            ..
+        })
+    ));
+}

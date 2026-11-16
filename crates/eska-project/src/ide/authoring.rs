@@ -153,8 +153,50 @@ pub fn object_failure(error: ObjectError) -> Value {
     }
 }
 
-pub fn form_schema(schema: &FormEditSchema) -> Value {
+pub fn form_schema(labels: &Labels, schema: &FormEditSchema) -> Value {
     let mut result = json!(schema);
+    let catalogs = schema
+        .element_kinds
+        .iter()
+        .map(|kind| &kind.catalog)
+        .chain(schema.definition_kinds.iter().map(|kind| &kind.catalog));
+    let mut property_captions = serde_json::Map::new();
+    let mut choice_captions = serde_json::Map::new();
+    for field in catalogs.flatten() {
+        property_captions.entry(field.id).or_insert_with(|| {
+            let key = eska_project_core::project::metadata_model::PropertyKey {
+                namespace: Some(eska_project_core::project::forms::FORM_NAMESPACE.to_owned()),
+                name: field.id.to_owned(),
+            };
+            editing::paired(labels, |locale| {
+                locale
+                    .property_caption(None, &key)
+                    .unwrap_or_else(|| field.id.to_owned())
+            })
+        });
+        if !field.enum_captions.is_empty() {
+            choice_captions.entry(field.id).or_insert_with(|| {
+                Value::Object(
+                    field
+                        .enum_captions
+                        .iter()
+                        .map(|(value, key)| {
+                            (
+                                (*value).to_owned(),
+                                editing::paired(labels, |locale| {
+                                    locale
+                                        .form_choice_caption(key)
+                                        .unwrap_or_else(|| (*value).to_owned())
+                                }),
+                            )
+                        })
+                        .collect(),
+                )
+            });
+        }
+    }
+    result["propertyCaptions"] = Value::Object(property_captions);
+    result["choiceCaptions"] = Value::Object(choice_captions);
     result["schemaVersion"] = json!(1);
     result["path"] = dto::path(&schema.path);
     result["requestSchemas"] = request_schemas();

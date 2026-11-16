@@ -42,7 +42,7 @@ pub(in crate::ide) fn query(
             let form: ObjectId = params::decode(&args["form"])?;
             project
                 .form_edit_schema(&form)
-                .map(|schema| super::form_schema(&schema))
+                .map(|schema| super::form_schema(labels, &schema))
                 .map_err(super::form_failure)
         }
         "metadata/previewFormEdit" => {

@@ -1,5 +1,6 @@
 //! Semantic managed-form changes over the existing lossless form/property models.
 
+mod appearance;
 mod document;
 mod operations;
 mod render;
@@ -21,6 +22,7 @@ use crate::project::{
     metadata_workspace::{RefreshReport, WorkspaceError},
 };
 
+pub use appearance::AppearanceRule;
 pub(crate) use document::plan_complete;
 pub use document::{empty_form, plan};
 pub use schema::{
@@ -87,6 +89,9 @@ pub struct FormElementSpec {
     deny_unknown_fields
 )]
 pub enum FormOperation {
+    SetConditionalAppearance {
+        rules: Vec<AppearanceRule>,
+    },
     SetProperty {
         target: FormTarget,
         property: MetadataProperty,

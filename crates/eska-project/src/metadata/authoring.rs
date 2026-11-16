@@ -151,7 +151,7 @@ fn execute(
         }
         MetadataCommand::FormSchema(args) => project
             .form_edit_schema(&input::object_id(&args.form)?)
-            .map(|schema| shared::form_schema(&schema))
+            .map(|schema| shared::form_schema(&labels, &schema))
             .map_err(shared::form_failure),
         MetadataCommand::FormEdit(args) => edit_form(project, args),
         MetadataCommand::CreateModule(_)

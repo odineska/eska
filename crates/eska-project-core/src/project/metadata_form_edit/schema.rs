@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use roxmltree::Node;
 use serde::Serialize;
 
-use super::{FormEditError, FormTarget, document, invalid};
+use super::{FormEditError, FormTarget, appearance, document, invalid, operations};
 use crate::project::{
     forms::{
         AuthoringProperty, AuthoringSource, ElementKind, FORM_NAMESPACE, PaletteEditor,
@@ -31,6 +31,8 @@ pub struct FormEditNode {
     pub kind: String,
     pub name: Option<String>,
     pub properties: Vec<FormEditProperty>,
+    pub qualifiers: Vec<(PropertyKey, String)>,
+    pub layout_child: bool,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -38,6 +40,7 @@ pub struct FormEditNode {
 pub struct FormElementKindSchema {
     pub kind: ElementKind,
     pub catalog: Vec<AuthoringProperty>,
+    pub child_kinds: Vec<ElementKind>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -57,6 +60,7 @@ pub struct FormEditSchema {
     pub nodes: Vec<FormEditNode>,
     pub element_kinds: Vec<FormElementKindSchema>,
     pub definition_kinds: Vec<FormDefinitionSchema>,
+    pub conditional_appearance: Option<appearance::AppearanceSchema>,
 }
 
 /// Inspect exactly one managed-form payload, including existing properties unknown to the palette.
@@ -94,6 +98,25 @@ pub fn inspect(
                 })
                 .collect();
             Some(FormEditNode {
+                layout_child: node.parent().is_some_and(|parent| {
+                    parent.has_tag_name((FORM_NAMESPACE, "ChildItems"))
+                        && document::element(node).is_some()
+                }),
+                qualifiers: node
+                    .attributes()
+                    .filter(|attr| {
+                        attr.namespace().is_none() && !matches!(attr.name(), "id" | "name")
+                    })
+                    .map(|attr| {
+                        (
+                            PropertyKey {
+                                namespace: None,
+                                name: attr.name().to_owned(),
+                            },
+                            attr.value().to_owned(),
+                        )
+                    })
+                    .collect(),
                 target,
                 parent: node.ancestors().skip(1).find_map(document::target_of),
                 kind: node.tag_name().name().to_owned(),
@@ -114,8 +137,16 @@ pub fn inspect(
             .map(|kind| FormElementKindSchema {
                 kind,
                 catalog: authoring_properties(kind),
+                child_kinds: ElementKind::ALL
+                    .iter()
+                    .copied()
+                    .filter(|child| {
+                        *child != ElementKind::Form && operations::layout_kind(kind, *child).is_ok()
+                    })
+                    .collect(),
             })
             .collect(),
+        conditional_appearance: appearance::inspect(document.root_element()),
         definition_kinds: ["Attribute", "Column", "Command", "Parameter"]
             .into_iter()
             .map(|kind| FormDefinitionSchema {
@@ -171,6 +202,12 @@ pub(super) fn definition_catalog(kind: &str) -> Vec<AuthoringProperty> {
             editor: *editor,
             default: PlatformPropertyValue::Unknown,
             values: Vec::new(),
+            category: if matches!(editor, PaletteEditor::Event) {
+                crate::project::forms::PaletteCategory::Events
+            } else {
+                crate::project::forms::PaletteCategory::Main
+            },
+            enum_captions: &[],
         })
         .collect()
 }
@@ -178,7 +215,14 @@ pub(super) fn definition_catalog(kind: &str) -> Vec<AuthoringProperty> {
 pub(super) fn structural(name: &str) -> bool {
     matches!(
         name,
-        "ChildItems" | "Attributes" | "Commands" | "Parameters" | "BaseForm" | "Columns" | "Events"
+        "ChildItems"
+            | "Attributes"
+            | "Commands"
+            | "Parameters"
+            | "BaseForm"
+            | "Columns"
+            | "Events"
+            | "ConditionalAppearance"
     )
 }
 

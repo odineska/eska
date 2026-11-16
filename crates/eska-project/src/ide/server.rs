@@ -203,6 +203,26 @@ impl Server {
         }
     }
 
+    fn authoring_capabilities(&self, capabilities: &mut Value) {
+        if self.client_minor >= 48 {
+            capabilities["metadataCreation"] = json!({
+                "schemaVersion":1,"enabled":self.property_editing,
+                "preparedPlans":true,
+            });
+        }
+        if self.client_minor >= 49 {
+            capabilities["referenceListEditing"] = json!(self.property_editing);
+            capabilities["typeListEditing"] = json!(self.property_editing);
+            capabilities["metadataObjects"] =
+                json!({"schemaVersion":1,"enabled":self.property_editing,"preparedPlans":true});
+            capabilities["formAuthoring"] =
+                json!({"schemaVersion":1,"enabled":self.property_editing,"preparedPlans":true});
+            if self.client_minor >= 51 {
+                capabilities["formAuthoring"]["interactive"] = json!(self.property_editing);
+            }
+        }
+    }
+
     /// Negotiate API independently of the crate version and retain only the handshake state.
     fn initialize(&mut self, args: &Value) -> Result<Value, Value> {
         #[derive(Deserialize)]
@@ -251,20 +271,7 @@ impl Server {
         if self.client_minor >= 24 {
             result["capabilities"]["sourceNavigation"] = json!(true);
         }
-        if self.client_minor >= 48 {
-            result["capabilities"]["metadataCreation"] = json!({
-                "schemaVersion":1,"enabled":self.property_editing,
-                "preparedPlans":true,
-            });
-        }
-        if self.client_minor >= 49 {
-            result["capabilities"]["referenceListEditing"] = json!(self.property_editing);
-            result["capabilities"]["typeListEditing"] = json!(self.property_editing);
-            result["capabilities"]["metadataObjects"] =
-                json!({"schemaVersion":1,"enabled":self.property_editing,"preparedPlans":true});
-            result["capabilities"]["formAuthoring"] =
-                json!({"schemaVersion":1,"enabled":self.property_editing,"preparedPlans":true});
-        }
+        self.authoring_capabilities(&mut result["capabilities"]);
         if self.client_minor >= 25 {
             result["capabilities"]["supportObjects"] = json!(true);
         }

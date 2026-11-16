@@ -24,6 +24,9 @@ pub struct AuthoringProperty {
     pub editor: PaletteEditor,
     pub default: PlatformPropertyValue,
     pub values: Vec<&'static str>,
+    pub category: super::PaletteCategory,
+    #[serde(skip)]
+    pub enum_captions: &'static [(&'static str, &'static str)],
 }
 
 /// Includes conditional settings so clients may build a new element before it has a binding.
@@ -67,6 +70,8 @@ pub fn authoring_properties(kind: ElementKind) -> Vec<AuthoringProperty> {
             editor: definition.editor,
             default: definition.absent,
             values,
+            category: definition.category,
+            enum_captions: definition.enum_captions,
         });
     }
     output

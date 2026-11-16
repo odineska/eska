@@ -174,3 +174,54 @@ fn module_creation_requires_new_writable_client_and_preserves_owner_identity() {
         client.finish();
     }
 }
+
+#[test]
+fn conditional_appearance_requires_minor_51_and_discovery_negotiates_editor() {
+    let directory = source();
+    let mut client = Client::new("ru-RU");
+    let hello = initialize(&mut client, 51, true);
+    assert_eq!(hello["capabilities"]["formAuthoring"]["interactive"], true);
+    let opened = client.open(&directory.0);
+    let preview = client.ok(
+        "metadata/previewObject",
+        context(
+            &opened,
+            json!({
+                "request":{"operation":"create","kind":"CommonForm","name":"Conditional"}
+            }),
+        ),
+    );
+    client.ok(
+        "metadata/applyObject",
+        context(&opened, json!({"prepared":preview["prepared"]})),
+    );
+    client.finish();
+
+    for minor in [50, 51] {
+        let mut client = Client::new("en-US");
+        let hello = initialize(&mut client, minor, true);
+        let capability = &hello["capabilities"]["formAuthoring"]["interactive"];
+        assert_eq!(capability.as_bool(), (minor == 51).then_some(true));
+        let opened = client.open(&directory.0);
+        let form = "common-form:Conditional";
+        let schema = client.ok(
+            "metadata/formEditSchema",
+            context(&opened, json!({"form":form})),
+        );
+        assert_eq!(schema["conditionalAppearance"].is_object(), minor == 51);
+        let object_schema = client.ok("metadata/objectSchema", context(&opened, json!({})));
+        assert_eq!(
+            object_schema["requestSchemas"]["form-edit"]["$defs"]["appearanceRule"].is_object(),
+            minor == 51
+        );
+        let response = client.request("metadata/previewFormEdit", context(&opened, json!({
+            "request":{"form":form,"snapshot":schema["snapshot"],"operations":[{"kind":"setConditionalAppearance","rules":[]}]}
+        })));
+        if minor == 51 {
+            assert_eq!(response["result"]["changed"], false);
+        } else {
+            assert_eq!(response["error"]["code"], -32602);
+        }
+        client.finish();
+    }
+}

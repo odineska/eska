@@ -678,6 +678,69 @@ fn authoring_form_operations_use_discovered_snapshot_and_return_allocated_ids() 
 }
 
 #[test]
+fn authoring_plans_conditional_appearance_independently_of_locale() {
+    let root = fixture();
+    call(
+        &root,
+        "ru-RU",
+        &["create", "--kind", "common-form", "--name", "Editor"],
+        None,
+        true,
+    );
+    let schema = |locale| {
+        call(
+            &root,
+            locale,
+            &["form-schema", "--form", "common-form:Editor"],
+            None,
+            true,
+        )
+    };
+    let original = schema("ru-RU");
+    assert_eq!(original, schema("en-US"));
+    assert_eq!(
+        original["result"]["conditionalAppearance"]["rules"],
+        json!([])
+    );
+    let form = root.0.join("src/CommonForms/Editor/Ext/Form.xml");
+    let content = fs::read(&form).unwrap();
+    let appearance = json!({"schemaVersion":1,"request":{
+        "form":"common-form:Editor","snapshot":original["result"]["snapshot"],
+        "operations":[{"kind":"setConditionalAppearance","rules":[{
+            "fields":[],"conditions":[],"format":[
+                {"parameter":"background","enabled":true,"value":{"kind":"color","value":"#C0FFEE"}}
+            ]
+        }]}]
+    }});
+    let preview = |locale| {
+        call(
+            &root,
+            locale,
+            &["form-edit", "--input", "-", "--dry-run"],
+            Some(&appearance),
+            true,
+        )
+    };
+    let reviewed = preview("ru-RU");
+    assert_eq!(preview("en-US"), reviewed);
+    assert_eq!(fs::read(&form).unwrap(), content);
+    call(
+        &root,
+        "ru-RU",
+        &["form-edit", "--plan", "-", "--no-input"],
+        Some(&reviewed),
+        true,
+    );
+    assert!(fs::read_to_string(form).unwrap().contains("#C0FFEE"));
+    let saved = schema("en-US");
+    assert_eq!(saved, schema("ru-RU"));
+    assert_eq!(
+        saved["result"]["conditionalAppearance"]["rules"][0]["format"][0]["value"]["value"],
+        "#C0FFEE"
+    );
+}
+
+#[test]
 fn authoring_can_start_from_an_empty_scaffold_without_handwritten_designer_xml() {
     for locale in ["ru-RU", "en-US"] {
         let parent = TestDir::new();

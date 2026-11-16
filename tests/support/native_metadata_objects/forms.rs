@@ -25,6 +25,21 @@ pub fn run() {
         ]),
     );
     edit(&stand, "form-add", &additions());
+    edit(
+        &stand,
+        "form-appearance",
+        &[json!({
+            "kind":"setConditionalAppearance","rules":[{
+                "original":null,"enabled":true,"fields":[{"name":"Amount","enabled":true}],
+                "conditions":[{"kind":"group","group":"AndGroup","enabled":true,"items":[
+                    {"kind":"comparison","enabled":true,"field":"Amount","operator":"Less","operand":{"kind":"number","value":"10"}},
+                    {"kind":"comparison","enabled":true,"field":"Amount","operator":"Filled","operand":null}
+                ]}],
+                "format":[{"parameter":"background","enabled":true,"value":{"kind":"color","value":"#AAEECC"}},
+                    {"parameter":"visible","enabled":true,"value":{"kind":"boolean","value":true}}]
+            }]
+        })],
+    );
     let initial = schema(&stand);
     reject_structural_removal(&stand, &initial);
     edit(
@@ -172,6 +187,11 @@ fn additions() -> Vec<Value> {
 }
 
 fn assert_export(xml: &str) {
+    assert!(xml.contains("ConditionalAppearance"));
+    assert!(xml.contains("#AAEECC"));
+    assert!(xml.contains("FilterItemGroup"));
+    assert!(xml.contains(">Amount</dcsset:field>"));
+
     let document = Document::parse(xml).unwrap();
     let root = document.root_element();
     assert_eq!(

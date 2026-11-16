@@ -5,6 +5,12 @@ use eska_project_core::project::metadata_model::{MetadataKind, PropertyKey};
 use super::Localizer;
 
 impl Localizer {
+    /// Resolve editor choices from the same palette catalog as the inspector.
+    #[must_use]
+    pub fn form_choice_caption(&self, key: &str) -> Option<String> {
+        self.optional_text(&format!("form-palette-value-{key}"))
+    }
+
     /// Resolve contextual captions first, retaining `QName` boundaries for unknown extensions.
     #[must_use]
     pub fn property_caption(
