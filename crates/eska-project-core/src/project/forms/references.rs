@@ -113,7 +113,7 @@ fn object_id(parent: Option<&ObjectId>, kind: MetadataKind, name: &str) -> Optio
         .then(|| ObjectId::from_parts(parent, kind.as_str(), name))
 }
 
-pub(super) fn metadata_type_id(key: &PropertyKey) -> Option<ObjectId> {
+pub fn metadata_type_id(key: &PropertyKey) -> Option<ObjectId> {
     if key.namespace.as_deref() != Some(CONFIG) {
         return None;
     }

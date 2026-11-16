@@ -10,6 +10,7 @@ mod editing_linked;
 mod editing_references;
 mod editing_values;
 mod forms;
+mod form_authoring;
 mod property_reference;
 mod query;
 mod query_catalog;

@@ -68,6 +68,10 @@ enum Rule {
     MaxHeight,
 }
 
+pub(super) fn authoring() -> Vec<&'static Row> {
+    ROWS.iter().map(|(row, _)| row).collect()
+}
+
 const ROWS: &[(Row, Rule)] = &[
     (NAME, Rule::Always),
     (TITLE, Rule::Always),

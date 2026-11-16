@@ -9,7 +9,7 @@ mod hierarchy;
 pub(crate) mod lengths;
 pub(crate) mod numbering;
 mod patch;
-pub(crate) use patch::{escape as escape_xml, replacements_plan as xml_replacements, text_plan};
+pub(crate) use patch::{escape as escape_xml, escape_attribute, replacements_plan as xml_replacements, text_plan};
 pub(crate) mod references;
 mod schema;
 mod standard;

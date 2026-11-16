@@ -146,6 +146,23 @@ const STATUS_ALIGN: Row = Row::new("HorizontalAlign", Layout, Enum, Auto)
     .with_source(Property("HorizontalLocation"))
     .with_enum_captions(HORIZONTAL_ALIGN);
 
+pub(super) fn authoring(kind: ElementKind) -> Vec<&'static Row> {
+    match kind {
+        ElementKind::AutoCommandBar => AUTO_COMMAND_BAR.iter().collect(),
+        ElementKind::CommandBar | ElementKind::ButtonGroup | ElementKind::Popup => {
+            COMMAND_GROUP.iter().collect()
+        }
+        _ => OWNED
+            .iter()
+            .chain(STANDALONE)
+            .chain(ADDITION_USAGE)
+            .chain(SEARCH_APPEARANCE)
+            .chain(STATUS_APPEARANCE)
+            .chain(ADDITION_SIZE)
+            .collect(),
+    }
+}
+
 const AUTO_COMMAND_BAR: &[Row] = &[
     IMPORTANCE,
     super::common::AUTO_FILL,

@@ -1,0 +1,629 @@
+use super::{
+    FormDefinitionKind, FormEditError, FormEditRequest, FormElementSpec, FormOperation, FormTarget,
+    document, empty_form, inspect, plan, render,
+};
+use crate::project::{
+    forms::{ElementKind, FORM_NAMESPACE, parse},
+    metadata_edit::{EditError, snapshot},
+    metadata_model::{MetadataProperty, MetadataValue, ObjectId, PropertyKey},
+};
+
+fn form_id() -> ObjectId {
+    ObjectId::from_parts(None, "CommonForm", "Test")
+}
+
+fn request(input: &str, operations: Vec<FormOperation>) -> FormEditRequest {
+    FormEditRequest {
+        form: form_id(),
+        snapshot: snapshot(input),
+        operations,
+    }
+}
+
+fn property(name: &str, text: &str) -> MetadataProperty {
+    MetadataProperty {
+        key: render::key(FORM_NAMESPACE, name),
+        qualifiers: Vec::new(),
+        value: MetadataValue::Text(text.to_owned()),
+    }
+}
+
+fn spec(kind: &str, name: &str) -> FormElementSpec {
+    FormElementSpec {
+        kind: kind.to_owned(),
+        name: name.to_owned(),
+        properties: Vec::new(),
+        children: Vec::new(),
+        auxiliary: Vec::new(),
+    }
+}
+
+fn source(body: &str) -> String {
+    format!(
+        "\u{feff}<?xml version='1.0'?>\r\n<Form xmlns='{FORM_NAMESPACE}' xmlns:c='urn:custom'>\r\n<!--keep exactly-->{body}<c:Extra c:flag='yes'>opaque &amp; data</c:Extra>\r\n</Form>\r\n"
+    )
+}
+
+#[test]
+fn blank_form_has_native_autobar_and_independent_definition_identity_spaces() {
+    let input = empty_form();
+    let operations = vec![
+        FormOperation::AddElement {
+            parent: FormTarget::Root {},
+            before: None,
+            element: spec("InputField", "Value"),
+        },
+        FormOperation::AddDefinition {
+            section: FormDefinitionKind::Attribute,
+            parent: None,
+            name: "Rows".into(),
+            properties: Vec::new(),
+        },
+        FormOperation::AddDefinition {
+            section: FormDefinitionKind::Attribute,
+            parent: Some(FormTarget::Attribute {
+                name: "Rows".into(),
+            }),
+            name: "Quantity".into(),
+            properties: Vec::new(),
+        },
+        FormOperation::AddDefinition {
+            section: FormDefinitionKind::Command,
+            parent: None,
+            name: "Run".into(),
+            properties: Vec::new(),
+        },
+        FormOperation::AddDefinition {
+            section: FormDefinitionKind::Parameter,
+            parent: None,
+            name: "Mode".into(),
+            properties: Vec::new(),
+        },
+    ];
+    let (edit, ids) = plan(&input, &request(&input, operations)).unwrap();
+    assert_eq!(
+        ids.iter().map(|item| item.id).collect::<Vec<_>>(),
+        [Some(1), Some(1), Some(1), Some(1), None]
+    );
+    let form = parse("test", edit.output().to_owned()).unwrap();
+    assert_eq!(form.diagnostics, []);
+    assert_eq!(
+        form.root.auxiliary[0].kind,
+        Some(ElementKind::AutoCommandBar)
+    );
+    let schema = inspect(&form_id(), "Ext/Form.xml".into(), edit.output(), true).unwrap();
+    assert!(schema.nodes.iter().any(|node| node.target
+        == FormTarget::Attribute {
+            name: "Rows.Quantity".into()
+        }));
+    assert!(!edit.output().contains("Parameter name=\"Mode\" id="));
+}
+
+#[test]
+fn subtree_copy_rekeys_nested_ids_but_preserves_data_binding_events_and_unknown_xml() {
+    let input = source(
+        "<ChildItems><UsualGroup name='Group' id='10'><ChildItems><InputField name='Amount' id='11'><DataPath>Amount</DataPath><Events><Event name='OnChange'>AmountOnChange</Event></Events><c:Opaque x='1'/><ContextMenu name='Menu' id='12'/></InputField><Button name='Action' id='13'><AssociatedTableElementId>11</AssociatedTableElementId></Button></ChildItems></UsualGroup></ChildItems>",
+    );
+    let operation = FormOperation::CopyElement {
+        target: FormTarget::Element { id: 10 },
+        parent: FormTarget::Root {},
+        before: None,
+        name: "GroupCopy".into(),
+    };
+    let request = request(&input, vec![operation]);
+    let (edit, ids) = plan(&input, &request).unwrap();
+    let (again, repeated) = plan(&input, &request).unwrap();
+    assert_eq!(edit.output(), again.output());
+    assert_eq!(ids, repeated);
+    assert_eq!(
+        ids.iter().map(|item| item.id).collect::<Vec<_>>(),
+        [Some(14), Some(15), Some(16), Some(17)]
+    );
+    assert_eq!(
+        edit.output().matches("<DataPath>Amount</DataPath>").count(),
+        2
+    );
+    assert_eq!(edit.output().matches("<c:Opaque x='1'/>").count(), 2);
+    assert_eq!(edit.output().matches(">AmountOnChange</Event>").count(), 2);
+    assert!(
+        edit.output()
+            .contains("<AssociatedTableElementId>15</AssociatedTableElementId>")
+    );
+    assert!(
+        edit.output()
+            .starts_with("\u{feff}<?xml version='1.0'?>\r\n")
+    );
+    assert!(
+        edit.output()
+            .ends_with("<c:Extra c:flag='yes'>opaque &amp; data</c:Extra>\r\n</Form>\r\n")
+    );
+    assert_eq!(
+        parse("test", edit.output().to_owned()).unwrap().diagnostics,
+        []
+    );
+}
+
+#[test]
+fn move_preserves_namespace_bindings_and_refuses_cycles_and_invalid_page_nesting() {
+    let input = source(
+        "<ChildItems><UsualGroup name='Outer' id='1' xmlns:c='urn:origin'><ChildItems><UsualGroup name='Inner' id='2'><c:Raw>c:Type</c:Raw></UsualGroup></ChildItems></UsualGroup><UsualGroup name='Target' id='3' xmlns:c='urn:destination'/></ChildItems>",
+    );
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::MoveElement {
+                target: FormTarget::Element { id: 2 },
+                parent: FormTarget::Element { id: 3 },
+                before: None,
+            }],
+        ),
+    )
+    .unwrap();
+    let xml = document::xml(edit.output()).unwrap();
+    let moved = document::target(&xml, &FormTarget::Element { id: 2 }).unwrap();
+    assert_eq!(moved.lookup_namespace_uri(Some("c")), Some("urn:origin"));
+    assert!(
+        moved
+            .children()
+            .any(|node| node.has_tag_name(("urn:origin", "Raw")))
+    );
+    for operation in [
+        FormOperation::MoveElement {
+            target: FormTarget::Element { id: 1 },
+            parent: FormTarget::Element { id: 2 },
+            before: None,
+        },
+        FormOperation::AddElement {
+            parent: FormTarget::Root {},
+            before: None,
+            element: spec("Page", "Wrong"),
+        },
+    ] {
+        assert!(matches!(
+            plan(&input, &request(&input, vec![operation])),
+            Err(FormEditError::Invalid { .. })
+        ));
+    }
+}
+
+#[test]
+fn scalar_property_and_events_keep_other_bytes_and_validate_known_domains() {
+    let input = source(
+        "<ChildItems><InputField name='Value' id='1'><Visible>true</Visible><Events><Event name='OnChange'>OldHandler</Event></Events></InputField></ChildItems>",
+    );
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![
+                FormOperation::SetProperty {
+                    target: FormTarget::Element { id: 1 },
+                    property: property("Visible", "false"),
+                },
+                FormOperation::SetEvent {
+                    target: FormTarget::Element { id: 1 },
+                    event: "OnChange".into(),
+                    handler: Some("NewHandler".into()),
+                },
+            ],
+        ),
+    )
+    .unwrap();
+    assert_eq!(
+        edit.output(),
+        input
+            .replace("<Visible>true", "<Visible>false")
+            .replace(">OldHandler<", ">NewHandler<")
+    );
+    for operation in [
+        FormOperation::SetProperty {
+            target: FormTarget::Element { id: 1 },
+            property: property("Visible", "perhaps"),
+        },
+        FormOperation::SetEvent {
+            target: FormTarget::Element { id: 1 },
+            event: "ImaginaryEvent".into(),
+            handler: Some("Handler".into()),
+        },
+        FormOperation::SetProperty {
+            target: FormTarget::Element { id: 1 },
+            property: property("ChildItems", "x"),
+        },
+    ] {
+        assert!(matches!(
+            plan(&input, &request(&input, vec![operation])),
+            Err(FormEditError::Invalid { .. })
+        ));
+    }
+    let (same, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::SetProperty {
+                target: FormTarget::Element { id: 1 },
+                property: property("Visible", "true"),
+            }],
+        ),
+    )
+    .unwrap();
+    assert!(same.is_empty());
+}
+
+#[test]
+fn removal_requires_explicit_force_for_live_form_references() {
+    let input = source(
+        "<ChildItems><InputField name='Value' id='1'><DataPath>Value</DataPath></InputField></ChildItems><Attributes><Attribute name='Value' id='1'><Type/></Attribute></Attributes>",
+    );
+    let target = FormTarget::Attribute {
+        name: "Value".into(),
+    };
+    assert!(matches!(
+        plan(
+            &input,
+            &request(
+                &input,
+                vec![FormOperation::Remove {
+                    target: target.clone(),
+                    force: false
+                }]
+            )
+        ),
+        Err(FormEditError::References { .. })
+    ));
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::Remove {
+                target,
+                force: true,
+            }],
+        ),
+    )
+    .unwrap();
+    assert!(!edit.output().contains("<Attribute name="));
+    assert!(edit.output().contains("<DataPath>Value</DataPath>"));
+}
+
+#[test]
+fn prepared_input_rejects_stale_snapshot_and_ambiguous_ids_and_extra_fields() {
+    let input = empty_form();
+    let mut stale = request(&input, Vec::new());
+    stale.snapshot = "wrong".into();
+    assert!(matches!(
+        plan(&input, &stale),
+        Err(FormEditError::Edit(EditError::Conflict))
+    ));
+    let duplicate = source(
+        "<ChildItems><InputField name='One' id='1'/><InputField name='Two' id='1'/></ChildItems>",
+    );
+    assert!(matches!(
+        plan(&duplicate, &request(&duplicate, Vec::new())),
+        Err(FormEditError::Invalid { .. })
+    ));
+    assert!(serde_json::from_str::<FormTarget>(r#"{"kind":"root","unexpected":1}"#).is_err());
+    assert!(
+        serde_json::from_str::<FormTarget>(r#"{"kind":"element","id":1,"unexpected":1}"#).is_err()
+    );
+    let borrowed = source("<BaseForm/>");
+    assert!(matches!(
+        plan(&borrowed, &request(&borrowed, Vec::new())),
+        Err(FormEditError::Invalid {
+            reason: "borrowed_form",
+            ..
+        })
+    ));
+}
+
+fn type_property(digits: &str, fraction: &str) -> MetadataProperty {
+    let core = "http://v8.1c.ru/8.1/data/core";
+    let part = |name: &str, text: &str| MetadataProperty {
+        key: render::key(core, name),
+        qualifiers: Vec::new(),
+        value: MetadataValue::Text(text.into()),
+    };
+    MetadataProperty {
+        key: render::key(FORM_NAMESPACE, "Type"),
+        qualifiers: Vec::new(),
+        value: MetadataValue::Record(vec![
+            MetadataProperty {
+                key: render::key(core, "Type"),
+                qualifiers: Vec::new(),
+                value: MetadataValue::QualifiedText {
+                    text: "ignored:decimal".into(),
+                    key: PropertyKey {
+                        namespace: Some("http://www.w3.org/2001/XMLSchema".into()),
+                        name: "decimal".into(),
+                    },
+                },
+            },
+            MetadataProperty {
+                key: render::key(core, "NumberQualifiers"),
+                qualifiers: Vec::new(),
+                value: MetadataValue::Record(vec![
+                    part("Digits", digits),
+                    part("FractionDigits", fraction),
+                    part("AllowedSign", "Any"),
+                ]),
+            },
+        ]),
+    }
+}
+
+#[test]
+fn type_descriptions_share_numeric_validation_and_resolve_namespaces_by_identity() {
+    let input = empty_form();
+    let operation = |property| FormOperation::AddDefinition {
+        section: FormDefinitionKind::Attribute,
+        parent: None,
+        name: "Amount".into(),
+        properties: vec![property],
+    };
+    let (edit, _) = plan(
+        &input,
+        &request(&input, vec![operation(type_property("12", "2"))]),
+    )
+    .unwrap();
+    assert!(!edit.output().contains("ignored:"));
+    assert!(edit.output().contains("xs:decimal"));
+    assert!(
+        plan(
+            &input,
+            &request(&input, vec![operation(type_property("0", "0"))])
+        )
+        .is_ok()
+    );
+    for (digits, fraction) in [("0", "1"), ("39", "2"), ("5", "6")] {
+        assert!(
+            plan(
+                &input,
+                &request(&input, vec![operation(type_property(digits, fraction))])
+            )
+            .is_err()
+        );
+    }
+    assert!(
+        plan(
+            &input,
+            &request(&input, vec![operation(property("Type", "garbage"))])
+        )
+        .is_err()
+    );
+}
+
+#[test]
+fn structured_attributes_escape_both_quotes_and_preserve_whitespace() {
+    let input = source("<c:Custom><c:Child value='before'/></c:Custom>");
+    let value = "double\" single' & < >\t\n\r";
+    let property = MetadataProperty {
+        key: render::key("urn:custom", "Custom"),
+        qualifiers: Vec::new(),
+        value: MetadataValue::Record(vec![MetadataProperty {
+            key: render::key("urn:custom", "Child"),
+            qualifiers: vec![(
+                PropertyKey {
+                    namespace: None,
+                    name: "value".into(),
+                },
+                value.into(),
+            )],
+            value: MetadataValue::Text(String::new()),
+        }]),
+    };
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::SetProperty {
+                target: FormTarget::Root {},
+                property,
+            }],
+        ),
+    )
+    .unwrap();
+    let xml = document::xml(edit.output()).unwrap();
+    let child = xml
+        .descendants()
+        .find(|node| node.has_tag_name(("urn:custom", "Child")))
+        .unwrap();
+    assert_eq!(child.attribute("value"), Some(value));
+}
+
+#[test]
+fn structured_values_inherit_the_rendered_namespace_scope() {
+    let input = source("<c:Custom/>");
+    let property = MetadataProperty {
+        key: render::key("urn:custom", "Custom"),
+        qualifiers: Vec::new(),
+        value: MetadataValue::Record(vec![MetadataProperty {
+            key: PropertyKey {
+                namespace: None,
+                name: "Bare".into(),
+            },
+            qualifiers: Vec::new(),
+            value: MetadataValue::Record(vec![
+                property("Width", "10"),
+                MetadataProperty {
+                    key: render::key("urn:nested", "Inner"),
+                    qualifiers: Vec::new(),
+                    value: MetadataValue::Record(vec![MetadataProperty {
+                        key: render::key("urn:nested", "Value"),
+                        qualifiers: Vec::new(),
+                        value: MetadataValue::Text("nested".into()),
+                    }]),
+                },
+            ]),
+        }]),
+    };
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::SetProperty {
+                target: FormTarget::Root {},
+                property,
+            }],
+        ),
+    )
+    .unwrap();
+    let xml = document::xml(edit.output()).unwrap();
+    for (name, namespace) in [
+        ("Custom", Some("urn:custom")),
+        ("Bare", None),
+        ("Width", Some(FORM_NAMESPACE)),
+        ("Inner", Some("urn:nested")),
+        ("Value", Some("urn:nested")),
+    ] {
+        let node = xml
+            .descendants()
+            .find(|node| node.is_element() && node.tag_name().name() == name)
+            .unwrap();
+        assert_eq!(
+            node.tag_name()
+                .namespace()
+                .filter(|namespace| !namespace.is_empty()),
+            namespace,
+            "{name}"
+        );
+    }
+}
+
+#[test]
+fn copy_and_move_preserve_absent_default_namespace_and_destination_child_scope() {
+    let input = format!(
+        "<f:Form xmlns:f='{FORM_NAMESPACE}'><f:ChildItems><f:InputField name='Value' id='1'><Opaque/></f:InputField><f:UsualGroup name='Target' id='2' xmlns='{FORM_NAMESPACE}'><ChildItems xmlns:f='urn:foreign'/></f:UsualGroup></f:ChildItems></f:Form>"
+    );
+    for operation in [
+        FormOperation::CopyElement {
+            target: FormTarget::Element { id: 1 },
+            parent: FormTarget::Element { id: 2 },
+            before: None,
+            name: "Copy".into(),
+        },
+        FormOperation::MoveElement {
+            target: FormTarget::Element { id: 1 },
+            parent: FormTarget::Element { id: 2 },
+            before: None,
+        },
+    ] {
+        let (edit, _) = plan(&input, &request(&input, vec![operation])).unwrap();
+        let xml = document::xml(edit.output()).unwrap();
+        let target = document::target(&xml, &FormTarget::Element { id: 2 }).unwrap();
+        let field = target
+            .descendants()
+            .find(|node| node.has_tag_name((FORM_NAMESPACE, "InputField")))
+            .unwrap();
+        let opaque = field.first_element_child().unwrap();
+        assert!(opaque.tag_name().namespace().is_none_or(str::is_empty));
+    }
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::AddElement {
+                parent: FormTarget::Element { id: 2 },
+                before: None,
+                element: spec("InputField", "NewValue"),
+            }],
+        ),
+    )
+    .unwrap();
+    let xml = document::xml(edit.output()).unwrap();
+    let new = document::target(&xml, &FormTarget::Element { id: 3 }).unwrap();
+    assert!(new.has_tag_name((FORM_NAMESPACE, "InputField")));
+}
+
+#[test]
+fn numeric_booleans_and_foreign_properties_are_not_element_references() {
+    let input = source(
+        "<ChildItems><UsualGroup name='Group' id='1'><ChildItems><Button name='Run' id='2'><DefaultItem>1</DefaultItem><DefaultButton>1</DefaultButton><c:ElementId>1</c:ElementId><AssociatedTableElementId>1</AssociatedTableElementId></Button></ChildItems></UsualGroup></ChildItems>",
+    );
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::CopyElement {
+                target: FormTarget::Element { id: 1 },
+                parent: FormTarget::Root {},
+                before: None,
+                name: "GroupCopy".into(),
+            }],
+        ),
+    )
+    .unwrap();
+    assert_eq!(
+        edit.output()
+            .matches("<DefaultItem>1</DefaultItem>")
+            .count(),
+        2
+    );
+    assert_eq!(
+        edit.output()
+            .matches("<DefaultButton>1</DefaultButton>")
+            .count(),
+        2
+    );
+    assert_eq!(
+        edit.output()
+            .matches("<c:ElementId>1</c:ElementId>")
+            .count(),
+        2
+    );
+    assert!(
+        edit.output()
+            .contains("<AssociatedTableElementId>3</AssociatedTableElementId>")
+    );
+
+    let input = source(
+        "<ChildItems><InputField name='Value' id='1'/><Button name='Run' id='2'><DefaultItem>1</DefaultItem><DefaultButton>1</DefaultButton></Button></ChildItems>",
+    );
+    assert!(
+        plan(
+            &input,
+            &request(
+                &input,
+                vec![FormOperation::Remove {
+                    target: FormTarget::Element { id: 1 },
+                    force: false,
+                }]
+            )
+        )
+        .is_ok()
+    );
+}
+
+#[test]
+fn new_definitions_and_events_use_the_destination_container_namespace() {
+    let input = format!(
+        "<Form xmlns='{FORM_NAMESPACE}' xmlns:f='{FORM_NAMESPACE}'><f:Attributes xmlns='urn:foreign'/><f:Events xmlns='urn:foreign'/></Form>"
+    );
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![
+                FormOperation::AddDefinition {
+                    section: FormDefinitionKind::Attribute,
+                    parent: None,
+                    name: "Value".into(),
+                    properties: Vec::new(),
+                },
+                FormOperation::SetEvent {
+                    target: FormTarget::Root {},
+                    event: "OnOpen".into(),
+                    handler: Some("Open".into()),
+                },
+            ],
+        ),
+    )
+    .unwrap();
+    let xml = document::xml(edit.output()).unwrap();
+    for name in ["Attribute", "Type", "Event"] {
+        let node = xml
+            .descendants()
+            .find(|node| node.is_element() && node.tag_name().name() == name)
+            .unwrap();
+        assert_eq!(node.tag_name().namespace(), Some(FORM_NAMESPACE));
+    }
+}

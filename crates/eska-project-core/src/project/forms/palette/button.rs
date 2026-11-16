@@ -98,6 +98,10 @@ const BAR_TYPE: PaletteDefinition = PaletteDefinition::new(
 )
 .with_enum_captions(TYPE_CAPTIONS);
 
+pub(super) fn authoring() -> Vec<&'static PaletteDefinition> {
+    BUTTON.iter().collect()
+}
+
 const BUTTON: &[PaletteDefinition] = {
     use PaletteCategory::{Appearance, Layout, Main, Usage};
     use PaletteDefinition as Row;
