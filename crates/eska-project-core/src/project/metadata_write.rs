@@ -385,3 +385,36 @@ fn cleanup(staging: &Path) -> Result<(), EditError> {
 }
 
 pub(crate) use recovery::{check_clear, recover, recovery_status};
+
+/// Inspect either structural or rename recovery without requiring a readable root descriptor.
+///
+/// # Errors
+/// Rejects busy, corrupt or unsafe journals.
+pub fn inspect_project_recovery(project: &super::Project) -> Result<RecoveryStatus, EditError> {
+    Guard::acquire(project.root())?.recovery_status(project.source())
+}
+
+/// Restore a reviewed transaction even if interrupted creation left no root descriptor yet.
+///
+/// # Errors
+/// Rejects changed tokens, protected source leases and files changed outside the transaction.
+pub fn recover_project(project: &super::Project, expected: &str) -> Result<(), EditError> {
+    let guard = Guard::acquire(project.root())?;
+    let status = guard.recovery_status(project.source())?;
+    let paths: Vec<_> = status
+        .files
+        .iter()
+        .map(|path| project.source().join(path))
+        .filter(|path| path.is_file())
+        .collect();
+    let _lease = super::source_lock::SourceLease::acquire_batch(project.root(), &paths).map_err(
+        |error| {
+            if error.kind() == std::io::ErrorKind::WouldBlock {
+                EditError::Busy
+            } else {
+                EditError::Io(error)
+            }
+        },
+    )?;
+    guard.recover(project.source(), expected)
+}

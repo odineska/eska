@@ -1,5 +1,7 @@
 //! Structural metadata operations preserve owned resources and distinguish identity from references.
 
+pub mod bootstrap;
+
 pub(crate) mod inventory;
 pub(crate) mod templates;
 pub(crate) mod xml;
