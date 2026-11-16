@@ -12,6 +12,9 @@ use std::{
 impl Guard {
     /// Inspect interrupted publication without changing source files or discarding a journal.
     pub fn recovery_status(&self, source: &Path) -> Result<RecoveryStatus, EditError> {
+        if let Some(status) = crate::project::metadata_write::recovery_status(self, source)? {
+            return Ok(status);
+        }
         let directory = io::path(&self.directory, Path::new("rename"))?;
         if !directory.try_exists().map_err(EditError::Io)? {
             return Ok(RecoveryStatus {
@@ -63,6 +66,9 @@ impl Guard {
 
     /// Restore a reviewed interrupted journal; an already committed journal only needs cleanup.
     pub fn recover(&self, source: &Path, expected: &str) -> Result<(), EditError> {
+        if crate::project::metadata_write::recover(self, source, expected)? {
+            return Ok(());
+        }
         let status = self.recovery_status(source)?;
         if status.snapshot.as_deref() != Some(expected) || !status.conflicts.is_empty() {
             return Err(EditError::Conflict);

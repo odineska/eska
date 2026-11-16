@@ -11,7 +11,16 @@ use std::{
 };
 
 /// Reject aliases and special entries at every component, including a not-yet-created final path.
-pub(super) fn path(root: &Path, relative: &Path) -> Result<PathBuf, EditError> {
+pub fn path(root: &Path, relative: &Path) -> Result<PathBuf, EditError> {
+    resolve(root, relative, false)
+}
+
+/// Structural creation may plan missing parents; every existing component is still checked.
+pub fn planned_path(root: &Path, relative: &Path) -> Result<PathBuf, EditError> {
+    resolve(root, relative, true)
+}
+
+fn resolve(root: &Path, relative: &Path, missing_parents: bool) -> Result<PathBuf, EditError> {
     if relative.as_os_str().is_empty()
         || relative
             .components()
@@ -37,7 +46,9 @@ pub(super) fn path(root: &Path, relative: &Path) -> Result<PathBuf, EditError> {
                 return Err(EditError::UnsafePath);
             }
             Ok(_) => (),
-            Err(error) if error.kind() == io::ErrorKind::NotFound && index + 1 == count => (),
+            Err(error)
+                if error.kind() == io::ErrorKind::NotFound
+                    && (missing_parents || index + 1 == count) => {}
             Err(error) => return Err(EditError::Io(error)),
         }
     }
@@ -60,7 +71,7 @@ pub(super) fn directory(root: &Path, relative: &Path) -> Result<PathBuf, EditErr
 }
 
 /// Persist owned journal entries exclusively; an existing file can never be silently replaced.
-pub(super) fn create(path: &Path, bytes: &[u8]) -> Result<(), EditError> {
+pub fn create(path: &Path, bytes: &[u8]) -> Result<(), EditError> {
     let mut file = OpenOptions::new()
         .write(true)
         .create_new(true)
@@ -71,11 +82,7 @@ pub(super) fn create(path: &Path, bytes: &[u8]) -> Result<(), EditError> {
 }
 
 /// A payload digest includes exact file names, bytes and empty directories, without following links.
-pub(super) fn tree_hash(
-    root: &Path,
-    relative: &Path,
-    directory: bool,
-) -> Result<String, EditError> {
+pub fn tree_hash(root: &Path, relative: &Path, directory: bool) -> Result<String, EditError> {
     tree_hash_with(root, relative, directory, &BTreeMap::new())
 }
 

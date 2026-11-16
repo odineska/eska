@@ -18,6 +18,7 @@ pub(crate) mod types;
 pub(crate) mod value_schema;
 mod values;
 mod write;
+pub(crate) use write::publish_binary_in;
 pub(crate) use write::publish_snapshot_in;
 
 pub(crate) use document::EditingDocument;
@@ -76,7 +77,13 @@ pub enum EditError {
 /// Identify the exact source bytes, including BOM and line endings.
 #[must_use]
 pub fn snapshot(input: &str) -> String {
-    Sha256::digest(input.as_bytes())
+    snapshot_bytes(input.as_bytes())
+}
+
+/// Hash exact bytes, including binary resources and original line endings.
+#[must_use]
+pub fn snapshot_bytes(input: &[u8]) -> String {
+    Sha256::digest(input)
         .iter()
         .fold(String::with_capacity(64), |mut output, byte| {
             let _ = write!(output, "{byte:02x}");
