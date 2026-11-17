@@ -7,11 +7,11 @@ use crate::ide::{
 use eska_project_core::project::{
     forms::{
         ComposedForm, EffectiveDefinition, EffectiveElement, ElementIdentity, ElementKey,
-        ElementPresentation, FormDependency, FormDependencyRole, FormPart, FormPicture,
-        FormPictureSelection, FormPreparation, FormPreview, FormReference, PropertySource,
-        ReferenceSlot, SourcedProperty,
+        ElementPresentation, FormDependency, FormDependencyRole, FormHandler, FormHandlerOwner,
+        FormPart, FormPicture, FormPictureSelection, FormPreparation, FormPreview, FormReference,
+        PropertySource, ReferenceSlot, SourcedProperty,
     },
-    metadata_model::{MetadataKind, MetadataProperty, MetadataValue},
+    metadata_model::{MetadataKind, MetadataProperty, MetadataValue, PropertyKey},
 };
 use serde_json::{Value, json};
 use std::collections::{HashMap, HashSet};
@@ -30,6 +30,23 @@ pub(super) fn preparation(value: &FormPreparation) -> Value {
         "roots":value.roots.iter().map(|root|dto::path(root)).collect::<Vec<_>>(),
         "forms":value.forms.iter().map(|input|json!({"id":input.id,"root":dto::path(&input.root),"path":dto::path(&input.path)})).collect::<Vec<_>>()})
 }
+fn handler(labels: &Labels, value: &FormHandler) -> Value {
+    let owner = match &value.owner {
+        FormHandlerOwner::Element(value) => json!({"kind":"element","identity":identity(value)}),
+        FormHandlerOwner::Command(name) => json!({"kind":"command","name":name}),
+    };
+    let key = PropertyKey {
+        namespace: Some(eska_project_core::project::forms::FORM_NAMESPACE.into()),
+        name: value.event.clone(),
+    };
+    let caption = dto::translations(
+        labels.ru.property_caption(None, &key),
+        labels.en.property_caption(None, &key),
+    );
+    json!({"owner":owner,"event":value.event,"name":value.name,
+        "caption":caption,"origin":origin(&value.origin)})
+}
+
 type References<'a> = HashMap<&'a str, &'a [FormReference]>;
 
 fn property(labels: &Labels, references: &References<'_>, value: &SourcedProperty) -> Value {
@@ -237,10 +254,10 @@ pub(super) fn model(
     if handlers.len() > eska_project_core::project::forms::MAX_FORM_ELEMENTS {
         return Err(super::limit());
     }
-    let handlers=handlers.iter().map(|handler|json!({"owner":match &handler.owner {
-        eska_project_core::project::forms::FormHandlerOwner::Element(value)=>json!({"kind":"element","identity":identity(value)}),
-        eska_project_core::project::forms::FormHandlerOwner::Command(name)=>json!({"kind":"command","name":name}),
-    },"event":handler.event,"name":handler.name,"origin":origin(&handler.origin)})).collect::<Vec<_>>();
+    let handlers = handlers
+        .iter()
+        .map(|value| handler(labels, value))
+        .collect::<Vec<_>>();
     let definition = |value| definition(labels, &references, value, api_minor);
     let mut model = json!({"root":element(labels,&references,&preview.form,&preview.form.root,&presentations,api_minor),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(definition).collect::<Vec<_>>(),
         "commands":preview.form.commands.iter().map(definition).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(definition).collect::<Vec<_>>(),
@@ -304,4 +321,50 @@ fn inspector_fields(labels: &Labels, preview: &FormPreview) -> Vec<Value> {
         }
         row
     }).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn inspector_preserves_raw_values_but_exposes_localized_settings_and_boolean_controls() {
+        let make = |namespace: &str, name: &str, value| MetadataProperty {
+            key: PropertyKey {
+                namespace: Some(namespace.into()),
+                name: name.into(),
+            },
+            value,
+            qualifiers: Vec::new(),
+        };
+        let settings = "http://v8.1c.ru/8.1/data-composition-system/settings";
+        let form = eska_project_core::project::forms::FORM_NAMESPACE;
+        let field = make(
+            form,
+            "ListSettings",
+            MetadataValue::Record(vec![
+                make(form, "ManualQuery", MetadataValue::Text("false".into())),
+                make(settings, "orderType", MetadataValue::Text("Desc".into())),
+                make(
+                    "urn:custom",
+                    "ManualQuery",
+                    MetadataValue::Text("false".into()),
+                ),
+                make(form, "Comment", MetadataValue::Text("RadioButtons".into())),
+            ]),
+        );
+        let wire = dto::property_record(&Labels::new().unwrap(), MetadataKind::Form, &field);
+        assert_eq!(wire["caption"]["ru-RU"], "Настройки списка");
+        assert_eq!(wire["caption"]["en-US"], "List settings");
+        let fields = wire["value"]["fields"].as_array().unwrap();
+        assert_eq!(fields[0]["caption"]["ru-RU"], "Произвольный запрос");
+        assert_eq!(fields[0]["value"]["scalarType"], "boolean");
+        assert_eq!(fields[0]["value"]["text"], "false");
+        assert_eq!(fields[1]["value"]["caption"]["ru-RU"], "По убыванию");
+        assert_eq!(fields[1]["value"]["text"], "Desc");
+        assert!(fields[2]["caption"].is_null());
+        assert!(fields[2]["value"]["scalarType"].is_null());
+        assert!(fields[3]["value"]["caption"].is_null());
+        assert_eq!(fields[3]["value"]["text"], "RadioButtons");
+    }
 }

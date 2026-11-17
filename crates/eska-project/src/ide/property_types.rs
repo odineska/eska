@@ -117,6 +117,23 @@ fn is_boolean(
 ) -> bool {
     use MetadataKind as K;
     let namespace = key.namespace.as_deref();
+    if owner == K::Form
+        && matches!(
+            (namespace, key.name.as_str()),
+            (
+                Some(
+                    "http://v8.1c.ru/8.1/data-composition-system/settings"
+                        | "http://v8.1c.ru/8.1/data/core"
+                ),
+                "use"
+            ) | (
+                Some("http://v8.1c.ru/8.1/data-composition-system/schema"),
+                "useRestriction" | "valueListAllowed"
+            )
+        )
+    {
+        return true;
+    }
     if namespace == Some(FORM) && owner == K::Form {
         return FORM_BOOLEAN_PROPERTIES.contains(&key.name.as_str());
     }
@@ -189,6 +206,27 @@ fn is_boolean(
 
 /// Boolean form settings also appear inside auxiliary records and data attributes.
 const FORM_BOOLEAN_PROPERTIES: &[&str] = &[
+    "SettingsNamedItemDetailedRepresentation",
+    "KeyParameter",
+    "ManualQuery",
+    "DynamicDataRead",
+    "ChoiceListButton",
+    "Hiperlink",
+    "TypeDomainEnabled",
+    "AutoSaveUserSettings",
+    "ShowMonthsPanel",
+    "AutoMaxRowsCount",
+    "ModifiesSavedData",
+    "ShowGrid",
+    "ShowHeaders",
+    "Edit",
+    "ShowPercent",
+    "EqualColumnsWidth",
+    "ShowCellNames",
+    "ShowRowAndColumnNames",
+    "ThreeState",
+    "ShowCurrentDate",
+    "ScrollOnCompress",
     "Visible",
     "Enabled",
     "ReadOnly",

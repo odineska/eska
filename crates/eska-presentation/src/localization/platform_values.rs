@@ -23,8 +23,25 @@ impl Localizer {
         key: &PropertyKey,
         text: &str,
     ) -> Option<String> {
-        if key.namespace.as_deref() == Some(SETTINGS) && key.name == "comparisonType" {
-            return self.enum_caption("ComparisonType", text);
+        if key.namespace.as_deref() == Some(SETTINGS) {
+            let domain = match key.name.as_str() {
+                "comparisonType" => Some("ComparisonType"),
+                "viewMode" | "itemsViewMode" => Some("DataCompositionViewMode"),
+                "orderType" => Some("DataCompositionOrder"),
+                "groupType" => Some("DataCompositionGroup"),
+                "periodAdditionType" => Some("PeriodAdditionType"),
+                _ => None,
+            };
+            if let Some(domain) = domain {
+                return self.enum_caption(domain, text);
+            }
+        }
+        if key.namespace.as_deref() == Some(CORE)
+            && key.name == "variant"
+            && root.namespace.as_deref() == Some(FORM)
+            && root.name == "Period"
+        {
+            return self.enum_caption("StandardPeriodVariant", text);
         }
         if key.namespace.as_deref() == Some(FORM)
             && key.name == "Field"
@@ -62,6 +79,16 @@ impl Localizer {
                 "UsePostingMode" => Some("PostingModeUse"),
                 "PictureSize" => Some("PictureSize"),
                 "CommandGroup" => Some("StandardCommandsGroup"),
+                "FillCheck" => Some("FillChecking"),
+                "RadioButtonType" => Some("RadioButtonType"),
+                "ChildItemsWidth" => Some("ChildItemsWidth"),
+                "ReportFormType" => Some("ReportFormType"),
+                "AutoShowState" => Some("AutoShowState"),
+                "ReportResultViewMode" => Some("ReportResultViewMode"),
+                "ViewMode" => Some("ViewMode"),
+                "ViewScalingMode" => Some("ViewScalingMode"),
+                "SelectionShowMode" => Some("SelectionShowMode"),
+                "AutoShowOpenButtonMode" => Some("AutoShowOpenButtonMode"),
                 _ => None,
             }
         {
@@ -250,10 +277,14 @@ impl Localizer {
 /// Common form settings have the same meaning in top-level and nested records.
 fn form_value(property: &str, value: &str) -> Option<&'static str> {
     Some(match (property, value) {
+        ("ChildrenAlign", "ItemsLeftTitlesLeft") => "itemsLeftTitlesLeft",
+        ("ChildrenAlign", "ItemsRightTitlesLeft") => "itemsRightTitlesLeft",
+        ("ChildrenAlign", "ItemsLeftTitlesRight") => "itemsLeftTitlesRight",
+        ("ChildrenAlign", "ItemsRightTitlesRight") => "itemsRightTitlesRight",
         ("Group", "Horizontal") => "horizontal",
         ("Group", "AlwaysHorizontal") => "alwaysHorizontal",
         ("Behavior", "Usual") => "usual",
-        ("Representation" | "TitleLocation", "None") => "none",
+        ("Representation" | "TitleLocation" | "ChildrenAlign", "None") => "none",
         ("EditMode", "EnterOnInput") => "enterOnInput",
         ("ControlRepresentation", "Picture") => "picture",
         ("Type", "Hyperlink") => "hyperlink",
@@ -266,12 +297,22 @@ fn form_value(property: &str, value: &str) -> Option<&'static str> {
         ("Group", "HorizontalIfPossible") => "horizontalIfPossible",
         ("ThroughAlign", "Use") => "use",
         ("ThroughAlign", "DontUse") => "doNotUse",
-        ("TitleLocation" | "HorizontalAlign" | "GroupHorizontalAlign", "Left") => "left",
-        ("TitleLocation" | "HorizontalAlign" | "GroupHorizontalAlign", "Right") => "right",
+        (
+            "TitleLocation" | "HorizontalAlign" | "GroupHorizontalAlign" | "HorizontalLocation",
+            "Left",
+        ) => "left",
+        (
+            "TitleLocation" | "HorizontalAlign" | "GroupHorizontalAlign" | "HorizontalLocation",
+            "Right",
+        ) => "right",
         ("TitleLocation" | "VerticalAlign" | "GroupVerticalAlign", "Top") => "top",
         ("TitleLocation" | "VerticalAlign" | "GroupVerticalAlign", "Bottom") => "bottom",
         (
-            "HorizontalAlign" | "VerticalAlign" | "GroupHorizontalAlign" | "GroupVerticalAlign",
+            "HorizontalAlign"
+            | "VerticalAlign"
+            | "GroupHorizontalAlign"
+            | "GroupVerticalAlign"
+            | "HorizontalLocation",
             "Center",
         ) => "center",
         (
@@ -284,7 +325,8 @@ fn form_value(property: &str, value: &str) -> Option<&'static str> {
             | "GroupVerticalAlign"
             | "ThroughAlign"
             | "HorizontalStretch"
-            | "VerticalStretch",
+            | "VerticalStretch"
+            | "ViewModeApplicationOnSetReportResult",
             "Auto",
         ) => "auto",
         _ => return None,
@@ -388,6 +430,73 @@ fn nested_type(
 mod tests {
     use super::*;
     use crate::localization::Locale;
+
+    #[test]
+    fn form_settings_translate_only_their_scoped_platform_values() {
+        for (locale, expected) in [
+            (Locale::RuRu, "Переключатели"),
+            (Locale::EnUs, "Radio buttons"),
+        ] {
+            let localizer = Localizer::try_new(locale).unwrap();
+            let key = PropertyKey {
+                namespace: Some(FORM.into()),
+                name: "RadioButtonType".into(),
+            };
+            assert_eq!(
+                localizer
+                    .property_value_caption(MetadataKind::Form, &key, &[], &key, "RadioButtons")
+                    .as_deref(),
+                Some(expected)
+            );
+            let custom = PropertyKey {
+                namespace: Some("urn:extension".into()),
+                ..key.clone()
+            };
+            assert_eq!(
+                localizer.property_value_caption(
+                    MetadataKind::Form,
+                    &custom,
+                    &[],
+                    &custom,
+                    "RadioButtons"
+                ),
+                None
+            );
+            let comment = PropertyKey {
+                name: "Comment".into(),
+                ..key
+            };
+            assert_eq!(
+                localizer.property_value_caption(
+                    MetadataKind::Form,
+                    &comment,
+                    &[],
+                    &comment,
+                    "RadioButtons"
+                ),
+                None
+            );
+            let order = PropertyKey {
+                namespace: Some(SETTINGS.into()),
+                name: "orderType".into(),
+            };
+            assert!(
+                localizer
+                    .property_value_caption(MetadataKind::Form, &order, &[], &order, "Desc")
+                    .is_some()
+            );
+            assert_eq!(
+                localizer.property_value_caption(
+                    MetadataKind::Form,
+                    &order,
+                    &[],
+                    &order,
+                    "FutureOrder"
+                ),
+                None
+            );
+        }
+    }
 
     /// The frozen EDT enum inventory and supplemental Designer tokens have both captions.
     #[test]

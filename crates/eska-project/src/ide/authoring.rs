@@ -3,7 +3,7 @@
 use std::collections::BTreeMap;
 
 use eska_project_core::project::{
-    forms::PlatformPropertyValue,
+    forms::{AuthoringProperty, PlatformPropertyValue},
     metadata_edit::snapshot_bytes,
     metadata_form_edit::{FormEditError, FormEditPlan, FormEditResult, FormEditSchema},
     metadata_objects::{ObjectError, ObjectPlan, ObjectRequest, ObjectResult, ObjectSchema},
@@ -159,6 +159,12 @@ pub fn object_failure(error: ObjectError) -> Value {
 
 pub fn form_schema(labels: &Labels, schema: &FormEditSchema) -> Value {
     let mut result = json!(schema);
+    for (index, kind) in schema.element_kinds.iter().enumerate() {
+        result["elementKinds"][index]["catalog"] = form_catalog(labels, &kind.catalog);
+    }
+    for (index, kind) in schema.definition_kinds.iter().enumerate() {
+        result["definitionKinds"][index]["catalog"] = form_catalog(labels, &kind.catalog);
+    }
     let catalogs = schema
         .element_kinds
         .iter()
@@ -204,6 +210,36 @@ pub fn form_schema(labels: &Labels, schema: &FormEditSchema) -> Value {
     result["path"] = dto::path(&schema.path);
     result["requestSchemas"] = request_schemas();
     result
+}
+
+/// Authoring may encode a concrete XML default; map it back to the shared display key.
+fn form_catalog(labels: &Labels, fields: &[AuthoringProperty]) -> Value {
+    json!(
+        fields
+            .iter()
+            .map(|field| {
+                let default = if let PlatformPropertyValue::Choice(value) = field.default {
+                    PlatformPropertyValue::Choice(
+                        field
+                            .enum_captions
+                            .iter()
+                            .find_map(|(token, key)| (*token == value).then_some(*key))
+                            .unwrap_or(value),
+                    )
+                } else {
+                    field.default
+                };
+                let mut value = json!(field);
+                if let Some(caption) = dto::translations(
+                    labels.ru.form_default_caption(default),
+                    labels.en.form_default_caption(default),
+                ) {
+                    value["defaultCaption"] = caption;
+                }
+                value
+            })
+            .collect::<Vec<_>>()
+    )
 }
 
 pub fn form_type_options(

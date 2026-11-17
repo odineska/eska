@@ -1,6 +1,9 @@
 //! Presentation-only captions for the open-ended Designer XML vocabulary.
 
-use eska_project_core::project::metadata_model::{MetadataKind, PropertyKey};
+use eska_project_core::project::{
+    forms::PlatformPropertyValue,
+    metadata_model::{MetadataKind, PropertyKey},
+};
 
 use super::Localizer;
 
@@ -9,6 +12,22 @@ impl Localizer {
     #[must_use]
     pub fn form_choice_caption(&self, key: &str) -> Option<String> {
         self.optional_text(&format!("form-palette-value-{key}"))
+    }
+
+    /// Use the same labels for an absent inspector value and an editor's reset option.
+    #[must_use]
+    pub fn form_default_caption(&self, value: PlatformPropertyValue) -> Option<String> {
+        let key = match value {
+            PlatformPropertyValue::Auto => "auto",
+            PlatformPropertyValue::AutoStretch => "autoStretch",
+            PlatformPropertyValue::Choice(value) => value,
+            PlatformPropertyValue::Dialog => "open",
+            PlatformPropertyValue::Unknown => "unknown",
+            PlatformPropertyValue::Boolean(_)
+            | PlatformPropertyValue::Number(_)
+            | PlatformPropertyValue::Empty => return None,
+        };
+        self.form_choice_caption(key)
     }
 
     /// Resolve contextual captions first, retaining `QName` boundaries for unknown extensions.
@@ -33,6 +52,7 @@ impl Localizer {
             "http://v8.1c.ru/8.3/xcf/predef" => "predef",
             "http://v8.1c.ru/8.3/xcf/logform" => "form",
             "http://v8.1c.ru/8.1/data-composition-system/settings" => "settings",
+            "http://v8.1c.ru/8.1/data-composition-system/schema" => "schema",
             _ => return None,
         };
         if let Some(owner) = owner {
