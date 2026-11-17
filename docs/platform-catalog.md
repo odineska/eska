@@ -7,15 +7,15 @@
 ## Ресурсы
 
 - `crates/eska-presentation/locales/{ru-RU,en-US}/main.ftl` — интерфейс CLI, сообщения и диагностика ESKA.
-- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-8.3.27.ftl` — базовый словарь: 424 подписи
-  свойств/вложенных полей и 81 ранее существовавшая подпись дерева.
+- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-8.3.27.ftl` — базовый словарь
+  свойств, вложенных полей, палитр и дерева.
 - `crates/eska-presentation/locales/{ru-RU,en-US}/platform-8.5.1.ftl` — 16 дополнительных подписей.
-- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-values.ftl` — 785 подписей значений: 678 членов
-  135 перечислений EDT, дополнительные токены Designer, встроенные типы,
+- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-values.ftl` — подписи значений
+  перечислений, дополнительные токены Designer, встроенные типы,
   стандартные реквизиты, события и группы команд.
 - [platform-values.tsv](../crates/eska-presentation/locales/platform-values.tsv) — тип, имя, литерал и FTL-ключ
   каждого значения; тексты переводов остаются только в FTL.
-- [platform-catalog.tsv](../crates/eska-presentation/locales/platform-catalog.tsv) — 440 идентичностей
+- [platform-catalog.tsv](../crates/eska-presentation/locales/platform-catalog.tsv) — идентичности
   подписей: Fluent key, XML namespace, имя, контекст владельца, версия каталога.
 - [platform-coverage.tsv](../crates/eska-presentation/locales/platform-coverage.tsv) — соответствие
   свойств модели экспорта словарю: 2 639 вхождений, 328 разных XML-имён.
