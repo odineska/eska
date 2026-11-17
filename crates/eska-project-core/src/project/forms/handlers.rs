@@ -1,4 +1,10 @@
-//! Read-only handler navigation follows effective XML provenance and checked form modules.
+//! Handler navigation and authoring follow effective XML provenance and checked form modules.
+
+mod authoring;
+mod edit;
+mod signatures;
+pub use authoring::{FormHandlerEditSource, handler_edit_source};
+pub use edit::{HandlerEditError, HandlerEditPlan, handler_edit_plan};
 
 use std::{ops::Range, path::PathBuf};
 

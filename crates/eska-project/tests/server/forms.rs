@@ -18,6 +18,9 @@ mod standalone_additions;
 #[path = "forms_table_palette.rs"]
 mod table_palette;
 
+#[path = "forms_handler_authoring.rs"]
+mod handler_authoring;
+
 const PATH: &str = "CommonForms/Preview/Ext/Form.xml";
 const INPUT: &str = "\u{feff}<Form xmlns=\"http://v8.1c.ru/8.3/xcf/logform\"><ChildItems><InputField name=\"Поле\" id=\"9223372036854775807\"><Title>Исходный</Title></InputField></ChildItems></Form>\r\n";
 

@@ -190,8 +190,6 @@ const FORM: &[PaletteDefinition] = {
         event("OnMainServerAvailabilityChange"),
         event("BeforeReopenFromOtherServer"),
         event("OnReopenFromOtherServer"),
-        event("OnClientApplicationSuspend"),
-        event("OnClientApplicationResume"),
         event("OnPasteFromClipboard"),
     ]
 };
