@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-17",
+  "issue": "https://github.com/odineska/eska/issues/239",
+  "implementation": {
+    "repository": "odineska/eska-vscode-explorer",
+    "revision": "53d4830",
+    "baseline": "164abff",
+    "agent_model": "gpt-6.1-sol"
+  },
+  "change": "При масштабировании Linux-превью неактивные кнопки полей используют исходные варианты плотности атласа вместе с активными",
+  "design": {
+    "inactive_rgb": "255 - (255 - channel) * 0.51",
+    "opaque_ink": "#4d4d4d становится #a4a4a4 с учётом округления",
+    "preserved": ["Прозрачность", "Белые детали", "Пользовательский фон", "Активная кнопка открытия в поле только для чтения", "Приоритет пользовательской и явно пустой картинки", "Настольный растр при 100%", "Разделитель стрелок счётчика"],
+    "public_api_changes": false,
+    "new_dependencies": false
+  },
+  "native_validation": {
+    "environment": "VS Code 1.109, Linux ARM64",
+    "locales": ["ru", "en"],
+    "result": "PASS",
+    "forms": 10,
+    "fields": 110,
+    "compared_pixels_per_locale_at_100_percent": 631421,
+    "open_at_75_percent": {
+      "baseline_inactive": {"ink_pixels": 27, "bounds": [7, 7]},
+      "final_inactive": {"ink_pixels": 33, "bounds": [9, 9]},
+      "final_read_only_active": {"ink_pixels": 33, "bounds": [9, 9]}
+    },
+    "open_at_125_percent": {
+      "final_inactive": {"ink_pixels": 45, "bounds": [12, 12]},
+      "final_read_only_active": {"ink_pixels": 45, "bounds": [12, 12]}
+    },
+    "negative_control": "Новый тест на исходном bundle воспроизвёл потерю пикселей неактивного значка открытия на 75%"
+  },
+  "chromium_validation": {
+    "source": "Собранный webview Explorer с сохранёнными моделями реальных тестовых форм",
+    "result": "PASS",
+    "scales": [75, 125],
+    "device_pixel_ratios": [1, 2],
+    "fractional_offsets": [0, 0.25, 0.5, 0.75],
+    "open_comparisons": 32,
+    "calendar_comparisons": 4,
+    "maximum_channel_error": 1,
+    "authored_background": "#314159",
+    "coverage": "Исходная геометрия Open, его активный и неактивный тон; календарь только для чтения с принудительными ChoiceButton/OpenButton на цветном фоне; сохранение белых деталей; отдельная проверка стрелок счётчика и разделителя"
+  },
+  "checks": {
+    "explorer": {"typecheck": "PASS", "compile": "PASS", "node_passed": 941, "node_skipped": 14, "node_failed": 0},
+    "node_environment": {"ESKA_TEST_ROOT": "<absolute sibling eska-playground>", "ESKA_TEST_BINARY": "<absolute eska>/target/debug/eska-project"},
+    "rust": {"fmt": "PASS", "check": "PASS", "strict_clippy": "PASS", "passed": 1826, "ignored": 59, "failed": 0},
+    "rust_test_environment": {"ESKA_TEST_ROOT": "<absolute sibling eska-playground>"},
+    "independent_review": "Замечаний по итоговому коду нет"
+  },
+  "artifacts": {
+    "rendering": "../eska-playground/scaled-input-states-4kxhku",
+    "rust": "../eska-playground/forms-scaled-controls-gq66cd6q",
+    "archive": "../eska-form-reference/1c-8.3.27.2342/analysis/scaled-input-states-2026-11-17"
+  },
+  "limits": [
+    "Windows в этом этапе не проверялся",
+    "Отдельной пиксельной проверки неактивного значка choice при дробном масштабе нет",
+    "Контуры календаря и калькулятора веб-клиента не объявляются побайтным настольным эталоном при дробном масштабе",
+    "Флажки, переключатели и интерактивные состояния не изменялись; отдельный дефект в них не подтверждён",
+    "Полная матрица всех контролов, состояний и масштабов этим этапом не закрывается"
+  ]
+}
