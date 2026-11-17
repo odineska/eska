@@ -635,11 +635,16 @@ fn properties(
         let properties = project
             .standard_attribute_properties(&node)
             .map_err(|failure| errors::workspace(&failure))?;
+        let label = project
+            .node(&node)
+            .map_err(|failure| errors::workspace(&failure))?
+            .label
+            .clone();
         let mut presentation = super::property_presentation::Presenter::new(labels, project, kind);
         let values: Vec<_> = properties
             .iter()
             .map(|property| {
-                let mut value = dto::standard_attribute_property(labels, kind, property);
+                let mut value = dto::standard_attribute_property(labels, kind, &label, property);
                 presentation.annotate(property, &mut value);
                 value
             })

@@ -41,6 +41,8 @@ pub struct ProjectSession {
     pub(super) generation: u64,
     /// A root setting belongs to the session even when its descriptor leaves the bounded LRU.
     pub(super) standard_attribute_compatibility: String,
+    /// Only expanded standard groups record their explicitly referenced metadata dependencies.
+    pub(super) standard_attribute_dependencies: BTreeMap<ObjectId, BTreeSet<ObjectId>>,
     pub(super) support_rules: super::support::RuleCache,
     pub(super) support_cache: Option<super::support::SupportCache>,
     pub(super) support_descriptors: super::support::SupportDescriptors,
@@ -67,6 +69,7 @@ impl ProjectSession {
             by_path: BTreeMap::new(),
             generation: 0,
             standard_attribute_compatibility: String::new(),
+            standard_attribute_dependencies: BTreeMap::new(),
             support_cache: None,
             support_descriptors: super::support::SupportDescriptors::default(),
             support_rules: super::support::RuleCache::default(),
@@ -146,6 +149,21 @@ impl ProjectSession {
                 ChildrenState::Unloaded | ChildrenState::Error
             )
             && let Err(error) = self.expand_predefined(owner)
+        {
+            if let Some(node) = self.nodes.get_mut(id) {
+                node.state = ChildrenState::Error;
+            }
+            return Err(error);
+        }
+        if let NodeId::Collection {
+            owner,
+            kind: CollectionKind::StandardAttributes,
+        } = id
+            && matches!(
+                self.node(id)?.state,
+                ChildrenState::Unloaded | ChildrenState::Error
+            )
+            && let Err(error) = self.expand_standard_attributes(owner)
         {
             if let Some(node) = self.nodes.get_mut(id) {
                 node.state = ChildrenState::Error;

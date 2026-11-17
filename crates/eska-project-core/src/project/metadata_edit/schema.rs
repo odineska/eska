@@ -424,7 +424,9 @@ fn metadata_integer(node: Node<'_, '_>, name: &str) -> Option<(i64, i64)> {
     match (owner.tag_name().namespace(), owner.tag_name().name(), name) {
         (Some(MD), "TabularSection", "LineNumberLength") => Some((5, 9)),
         (Some(MD), "Catalog", "LevelCount") => Some((2, 10)),
-        (Some(MD), "ChartOfAccounts", "MaxExtDimensionCount") => Some((0, 50)),
+        (Some(MD), "ChartOfAccounts", "MaxExtDimensionCount") => {
+            Some((0, i64::from(super::ext_dimensions::MAX_COUNT)))
+        }
         (Some(MD), "AccountingRegister", "PeriodAdjustmentLength") => Some((0, 3)),
         (Some(MD), "ScheduledJob", "RestartCountOnFailure" | "RestartIntervalOnFailure") => {
             Some((0, 1_000_000))

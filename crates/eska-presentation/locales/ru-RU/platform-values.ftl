@@ -2446,3 +2446,12 @@ platform-value-AutoShowOpenButtonMode-Auto = { form-palette-value-auto }
 platform-value-AutoShowOpenButtonMode-Always = Всегда
 platform-value-AutoShowOpenButtonMode-Never = Никогда
 platform-value-PeriodAdditionType-None = Не дополнять
+
+# Native Designer 8.3.27 standard attributes; numbered fields follow the assigned chart.
+platform-value-StandardAttribute-BegOfActionPeriod = { platform-value-StandardAttribute-ActionPeriodBegin }
+platform-value-StandardAttribute-EndOfActionPeriod = { platform-value-StandardAttribute-ActionPeriodEnd }
+platform-value-StandardAttribute-BegOfBasePeriod = { platform-value-StandardAttribute-BasePeriodBegin }
+platform-value-StandardAttribute-EndOfBasePeriod = { platform-value-StandardAttribute-BasePeriodEnd }
+platform-value-StandardAttribute-ReversingEntry = Сторно
+platform-value-StandardAttribute-ExtDimension = Субконто { $index }
+platform-value-StandardAttribute-ExtDimensionType = Вид субконто { $index }

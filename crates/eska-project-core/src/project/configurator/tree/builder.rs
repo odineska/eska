@@ -206,26 +206,17 @@ fn build_standard_attributes(
         &NodeId::Object(owner.clone()),
         false,
     );
+    if object.metadata.kind() == MetadataKind::AccountingRegister {
+        // Numbered subaccounts require just the explicitly assigned chart, loaded on expansion.
+        if let Some(node) = tree.nodes.get_mut(&parent) {
+            node.state = ChildrenState::Unloaded;
+        }
+        return;
+    }
     for name in names {
-        let id = NodeId::StandardAttribute {
-            owner: owner.clone(),
-            name: name.into(),
-        };
-        tree.nodes.insert(
-            id.clone(),
-            TreeNode {
-                id: id.clone(),
-                metadata_kind: None,
-                parent: None,
-                label: TreeLabel::Key(format!("platform-value-StandardAttribute-{name}")),
-                children: Vec::new(),
-                state: ChildrenState::Empty,
-                expanded_by_default: false,
-                root_section: false,
-                module_creation: false,
-                diagnostics: Vec::new(),
-            },
-        );
+        let node = TreeNode::standard_attribute(owner, object.metadata.kind(), name.into());
+        let id = node.id.clone();
+        tree.nodes.insert(id.clone(), node);
         attach(tree, &id, &parent);
     }
 }

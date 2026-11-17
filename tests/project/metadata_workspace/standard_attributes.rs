@@ -3,6 +3,8 @@
 use super::*;
 use crate::backend::project::metadata_model::MetadataValue;
 
+pub(super) mod accounting;
+
 pub(super) fn descriptor(kind: &str, name: &str, properties: &str, children: &str) -> String {
     format!(
         "<MetaDataObject xmlns='http://v8.1c.ru/8.3/MDClasses' xmlns:r='http://v8.1c.ru/8.3/xcf/readable'><{kind} uuid='00000000-0000-0000-0000-000000000001'><Properties><Name>{name}</Name>{properties}</Properties><ChildObjects>{children}</ChildObjects></{kind}></MetaDataObject>"
@@ -145,11 +147,16 @@ fn standard_attribute_overrides_and_availability_follow_refresh() {
     fs::write(directory.0.join("src/Catalogs/Goods.xml"), descriptor("Catalog", "Goods", "<CodeLength>0</CodeLength><DescriptionLength>0</DescriptionLength><Hierarchical>false</Hierarchical>", "")).unwrap();
     project.refresh(&NodeId::Object(owner.clone())).unwrap();
     let nodes = attributes(project, &owner);
-    assert!(!nodes.contains(&code));
-    assert!(matches!(
-        project.standard_attribute_properties(&code),
-        Err(WorkspaceError::UnknownNode(_))
-    ));
+    assert!(nodes.contains(&code));
+    let fields = project.standard_attribute_properties(&code).unwrap();
+    assert!(!fields.iter().any(|field| field.key.name == "Comment"));
+    let value_type = fields
+        .iter()
+        .find(|field| field.key.name == "Type")
+        .unwrap();
+    assert!(
+        matches!(&value_type.value, MetadataValue::Record(fields) if matches!(&fields[1].value, MetadataValue::Record(values) if values[0].value == MetadataValue::Text("0".into())))
+    );
 }
 
 #[test]
@@ -169,11 +176,25 @@ fn standard_attribute_settings_are_isolated_between_projects() {
         attributes(left.project_mut(&ProjectScope::Standalone).unwrap(), &owner).contains(&code)
     );
     assert!(
-        !attributes(
+        attributes(
             right.project_mut(&ProjectScope::Standalone).unwrap(),
             &owner
         )
         .contains(&code)
+    );
+    let left = left
+        .project_mut(&ProjectScope::Standalone)
+        .unwrap()
+        .standard_attribute_properties(&code)
+        .unwrap();
+    let right = right
+        .project_mut(&ProjectScope::Standalone)
+        .unwrap()
+        .standard_attribute_properties(&code)
+        .unwrap();
+    assert_ne!(
+        left, right,
+        "The same virtual identity retains project-local type qualifiers"
     );
 }
 

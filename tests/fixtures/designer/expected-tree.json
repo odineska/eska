@@ -9,12 +9,7 @@
     ["group:accounting-register:Проводки#form", "object:accounting-register:Проводки", "tree-collection-form", "Empty", false],
     ["group:accounting-register:Проводки#command", "object:accounting-register:Проводки", "tree-collection-command", "Empty", false],
     ["group:accounting-register:Проводки#template", "object:accounting-register:Проводки", "tree-collection-template", "Empty", false],
-    ["group:accounting-register:Проводки#standard-attributes", "object:accounting-register:Проводки", "tree-collection-standard-attributes", "NonEmpty", false],
-    ["standard:accounting-register:Проводки#Active", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-Active", "Empty", false],
-    ["standard:accounting-register:Проводки#LineNumber", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-LineNumber", "Empty", false],
-    ["standard:accounting-register:Проводки#Recorder", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-Recorder", "Empty", false],
-    ["standard:accounting-register:Проводки#Period", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-Period", "Empty", false],
-    ["standard:accounting-register:Проводки#RecordType", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-RecordType", "Empty", false]
+    ["group:accounting-register:Проводки#standard-attributes", "object:accounting-register:Проводки", "tree-collection-standard-attributes", "Unloaded", false]
   ],
   "accumulation-register": [
     ["object:accumulation-register:Остатки", null, "name:Остатки", "NonEmpty", false],
@@ -48,7 +43,14 @@
     ["standard:calculation-register:Начисления#RegistrationPeriod", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-RegistrationPeriod", "Empty", false],
     ["standard:calculation-register:Начисления#Active", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-Active", "Empty", false],
     ["standard:calculation-register:Начисления#LineNumber", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-LineNumber", "Empty", false],
-    ["standard:calculation-register:Начисления#Recorder", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-Recorder", "Empty", false]
+    ["standard:calculation-register:Начисления#Recorder", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-Recorder", "Empty", false],
+    ["standard:calculation-register:Начисления#CalculationType", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-CalculationType", "Empty", false],
+    ["standard:calculation-register:Начисления#ActionPeriod", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-ActionPeriod", "Empty", false],
+    ["standard:calculation-register:Начисления#BegOfActionPeriod", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-BegOfActionPeriod", "Empty", false],
+    ["standard:calculation-register:Начисления#EndOfActionPeriod", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-EndOfActionPeriod", "Empty", false],
+    ["standard:calculation-register:Начисления#BegOfBasePeriod", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-BegOfBasePeriod", "Empty", false],
+    ["standard:calculation-register:Начисления#EndOfBasePeriod", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-EndOfBasePeriod", "Empty", false],
+    ["standard:calculation-register:Начисления#ReversingEntry", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-ReversingEntry", "Empty", false]
   ],
   "catalog": [
     ["object:catalog:Контрагенты", null, "name:Контрагенты", "NonEmpty", false],
@@ -72,7 +74,12 @@
     ["group:catalog:Контрагенты#standard-attributes", "object:catalog:Контрагенты", "tree-collection-standard-attributes", "NonEmpty", false],
     ["standard:catalog:Контрагенты#Ref", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Ref", "Empty", false],
     ["standard:catalog:Контрагенты#DeletionMark", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-DeletionMark", "Empty", false],
-    ["standard:catalog:Контрагенты#Predefined", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Predefined", "Empty", false]
+    ["standard:catalog:Контрагенты#Predefined", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Predefined", "Empty", false],
+    ["standard:catalog:Контрагенты#Code", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Code", "Empty", false],
+    ["standard:catalog:Контрагенты#Description", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Description", "Empty", false],
+    ["standard:catalog:Контрагенты#Parent", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Parent", "Empty", false],
+    ["standard:catalog:Контрагенты#IsFolder", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-IsFolder", "Empty", false],
+    ["standard:catalog:Контрагенты#Owner", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Owner", "Empty", false]
   ],
   "configuration": [
     ["object:configuration:ТестоваяКонфигурация", null, "name:ТестоваяКонфигурация", "NonEmpty", false],
@@ -148,7 +155,12 @@
     ["group:information-register:Курсы#attribute", "object:information-register:Курсы", "tree-collection-attribute", "Empty", false],
     ["group:information-register:Курсы#form", "object:information-register:Курсы", "tree-collection-form", "Empty", false],
     ["group:information-register:Курсы#command", "object:information-register:Курсы", "tree-collection-command", "Empty", false],
-    ["group:information-register:Курсы#template", "object:information-register:Курсы", "tree-collection-template", "Empty", false]
+    ["group:information-register:Курсы#template", "object:information-register:Курсы", "tree-collection-template", "Empty", false],
+    ["group:information-register:Курсы#standard-attributes", "object:information-register:Курсы", "tree-collection-standard-attributes", "NonEmpty", false],
+    ["standard:information-register:Курсы#Active", "group:information-register:Курсы#standard-attributes", "platform-value-StandardAttribute-Active", "Empty", false],
+    ["standard:information-register:Курсы#LineNumber", "group:information-register:Курсы#standard-attributes", "platform-value-StandardAttribute-LineNumber", "Empty", false],
+    ["standard:information-register:Курсы#Recorder", "group:information-register:Курсы#standard-attributes", "platform-value-StandardAttribute-Recorder", "Empty", false],
+    ["standard:information-register:Курсы#Period", "group:information-register:Курсы#standard-attributes", "platform-value-StandardAttribute-Period", "Empty", false]
   ],
   "processing": [
     ["object:data-processor:Обработка", null, "name:Обработка", "NonEmpty", false],

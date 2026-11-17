@@ -94,6 +94,7 @@ fn snapshot(tree: &ConfiguratorTree, id: &NodeId, output: &mut Vec<Value>) {
     let label = match &node.label {
         TreeLabel::Name(name) => format!("name:{name}"),
         TreeLabel::Key(key) => key.clone(),
+        TreeLabel::IndexedKey { key, index } => format!("{key}:{index}"),
     };
     output.push(json!([
         node_id(id),

@@ -1172,6 +1172,13 @@ fn standard_attribute(name: &str) -> bool {
             | "BusinessProcess"
             | "RoutePoint"
             | "ExchangeDate"
+            | "CalculationType"
+            | "ReversingEntry"
+            | "ActionPeriod"
+            | "BegOfActionPeriod"
+            | "EndOfActionPeriod"
+            | "BegOfBasePeriod"
+            | "EndOfBasePeriod"
     )
 }
 pub(super) fn metadata_property<'a>(
@@ -1300,12 +1307,16 @@ pub fn standard_type_for<'a>(
         | "Executed"
         | "ThisNode"
         | "OffBalance"
-        | "ActionPeriodIsBasic" => FieldValueKind::Boolean,
-        "Date" | "Period" | "RegistrationPeriod" | "ExchangeDate" => FieldValueKind::Date,
+        | "ActionPeriodIsBasic"
+        | "ReversingEntry" => FieldValueKind::Boolean,
+        "Date" | "Period" | "RegistrationPeriod" | "ExchangeDate" | "ActionPeriod"
+        | "BegOfActionPeriod" | "EndOfActionPeriod" | "BegOfBasePeriod" | "EndOfBasePeriod" => {
+            FieldValueKind::Date
+        }
         "LineNumber" | "SentNo" | "ReceivedNo" | "PeriodAdjustment" => FieldValueKind::Number,
         "Order" if owner.metadata.kind() == MetadataKind::Enum => FieldValueKind::Number,
         "Parent" | "Ref" | "Owner" | "Recorder" | "HeadTask" | "BusinessProcess" | "RoutePoint"
-        | "Account" => FieldValueKind::Reference,
+        | "Account" | "CalculationType" => FieldValueKind::Reference,
         "RecordType" | "Type" | "ValueType" => FieldValueKind::Document,
         "Code" | "Number"
             if property(&format!("{name}Type"))
@@ -1323,28 +1334,43 @@ pub fn standard_type_for<'a>(
         "Order" => "OrderLength",
         _ => "",
     };
-    let mut length = property(length_key)
-        .and_then(|value| appearance::text(&value.value))
-        .and_then(|value| value.parse().ok());
+    let mut length = if name == "PredefinedDataName" {
+        Some(256)
+    } else {
+        property(length_key)
+            .and_then(|value| appearance::text(&value.value))
+            .and_then(|value| value.parse().ok())
+    };
     let digits = if kind == FieldValueKind::Number && matches!(name, "Number" | "Code") {
         length.take()
     } else {
-        (name == "LineNumber").then(|| {
-            property("LineNumberLength")
+        match name {
+            "LineNumber" => Some(
+                property("LineNumberLength")
+                    .and_then(|value| appearance::text(&value.value))
+                    .and_then(|value| value.parse().ok())
+                    .unwrap_or(9),
+            ),
+            "SentNo" | "ReceivedNo" => Some(10),
+            "PeriodAdjustment" => property("PeriodAdjustmentLength")
                 .and_then(|value| appearance::text(&value.value))
-                .and_then(|value| value.parse().ok())
-                .unwrap_or(9)
-        })
+                .and_then(|value| value.parse().ok()),
+            _ => None,
+        }
     };
     let types = standard_types(name, owner, property, kind);
     FieldType {
         kind,
         length,
         digits,
-        fraction: (kind == FieldValueKind::Number).then_some(0),
+        fraction: (kind == FieldValueKind::Number && name != "Order").then_some(0),
+        allowed_sign: matches!(
+            name,
+            "LineNumber" | "SentNo" | "ReceivedNo" | "PeriodAdjustment"
+        )
+        .then_some(NumberSign::Nonnegative),
         date_parts: (kind == FieldValueKind::Date).then(|| "DateTime".into()),
         types,
-        ..FieldType::default()
     }
 }
 /// Concrete owner references and platform type families keep field properties unambiguous.
@@ -1356,10 +1382,7 @@ fn standard_types<'a>(
 ) -> Vec<PropertyKey> {
     let mut types = Vec::new();
     if name == "Ref" && owner.metadata.kind() == MetadataKind::DocumentJournal {
-        types.push(PropertyKey {
-            namespace: Some(references::CONFIG.into()),
-            name: "DocumentRef".into(),
-        });
+        reference_list_types(property("RegisteredDocuments"), "Document", &mut types);
     } else if matches!(name, "Ref" | "Parent") {
         types.push(PropertyKey {
             namespace: Some(references::CONFIG.into()),
@@ -1369,22 +1392,8 @@ fn standard_types<'a>(
                 owner.metadata.name()
             ),
         });
-    } else if name == "Owner"
-        && let Some(MetadataProperty {
-            value: MetadataValue::Record(owners),
-            ..
-        }) = property("Owners")
-    {
-        for owner in owners {
-            if let Some(name) =
-                appearance::text(&owner.value).and_then(|value| value.strip_prefix("Catalog."))
-            {
-                types.push(PropertyKey {
-                    namespace: Some(references::CONFIG.into()),
-                    name: format!("CatalogRef.{name}"),
-                });
-            }
-        }
+    } else if name == "Owner" {
+        reference_list_types(property("Owners"), "Catalog", &mut types);
     }
     let system_type = match name {
         "RecordType" if owner.metadata.kind() == MetadataKind::AccumulationRegister => {
@@ -1407,23 +1416,32 @@ fn standard_types<'a>(
             name: name.into(),
         });
     }
-    if name == "Account"
-        && let Some(account) = property("ChartOfAccounts")
+    let referenced_kind = match name {
+        "Account" => Some("ChartOfAccounts"),
+        "CalculationType" => Some("ChartOfCalculationTypes"),
+        "HeadTask" => Some("Task"),
+        _ => None,
+    };
+    if let Some(referenced_kind) = referenced_kind
+        && let Some(target) = property(referenced_kind)
             .and_then(|value| appearance::text(&value.value))
-            .and_then(|value| value.strip_prefix("ChartOfAccounts."))
+            .and_then(|value| value.strip_prefix(referenced_kind))
+            .and_then(|value| value.strip_prefix('.'))
     {
         types.push(PropertyKey {
             namespace: Some(references::CONFIG.into()),
-            name: format!("ChartOfAccountsRef.{account}"),
+            name: format!("{referenced_kind}Ref.{target}"),
         });
     }
     if kind == FieldValueKind::Reference && types.is_empty() {
         let family = match name {
             "Recorder" => "DocumentRef",
+            "Ref" if owner.metadata.kind() == MetadataKind::DocumentJournal => "DocumentRef",
             "HeadTask" => "TaskRef",
             "BusinessProcess" => "BusinessProcessRef",
             "RoutePoint" => "BusinessProcessRoutePointRef",
             "Account" => "ChartOfAccountsRef",
+            "CalculationType" => "ChartOfCalculationTypesRef",
             _ => "AnyRef",
         };
         types.push(PropertyKey {
@@ -1432,6 +1450,35 @@ fn standard_types<'a>(
         });
     }
     types
+}
+
+/// Only native list items with the requested metadata prefix contribute reference alternatives.
+fn reference_list_types(
+    property: Option<&MetadataProperty>,
+    kind: &str,
+    output: &mut Vec<PropertyKey>,
+) {
+    let Some(MetadataProperty {
+        value: MetadataValue::Record(items),
+        ..
+    }) = property
+    else {
+        return;
+    };
+    for item in items.iter().filter(|item| {
+        item.key.namespace.as_deref() == Some("http://v8.1c.ru/8.3/xcf/readable")
+            && item.key.name == "Item"
+    }) {
+        if let Some(name) = appearance::text(&item.value)
+            .and_then(|value| value.strip_prefix(kind))
+            .and_then(|value| value.strip_prefix('.'))
+        {
+            output.push(PropertyKey {
+                namespace: Some(references::CONFIG.into()),
+                name: format!("{kind}Ref.{name}"),
+            });
+        }
+    }
 }
 
 fn enum_choices(value_type: &FieldType, resources: &[FormResource]) -> Vec<PresentationText> {

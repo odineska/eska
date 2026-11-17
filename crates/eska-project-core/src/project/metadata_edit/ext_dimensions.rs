@@ -6,6 +6,7 @@ use super::{EditError, schema::MD};
 use crate::project::metadata_model::PropertyKey;
 
 const PREDEF: &str = "http://v8.1c.ru/8.3/xcf/predef";
+pub(super) const MAX_COUNT: u32 = 50;
 
 /// Designer disables the count when no characteristic type plan is selected.
 pub(super) fn read_only_reason(node: Node<'_, '_>) -> Option<&'static str> {
@@ -133,7 +134,7 @@ fn count(properties: Node<'_, '_>) -> Result<usize, EditError> {
     value(properties, "MaxExtDimensionCount")
         .parse::<usize>()
         .ok()
-        .filter(|count| *count <= 50)
+        .filter(|count| *count <= MAX_COUNT as usize)
         .ok_or_else(|| incompatible("MaxExtDimensionCount"))
 }
 

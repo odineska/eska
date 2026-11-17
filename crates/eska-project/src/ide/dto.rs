@@ -1,6 +1,6 @@
 //! Explicit protocol DTO conversion; internal serde representations are not the wire format.
 
-use eska_presentation::localization::{Locale, Localizer};
+use eska_presentation::localization::{Locale, LocalizationValue, Localizer};
 use eska_project_core::project::{
     configurator::{ChildrenState, TreeLabel, TreeNode},
     designer_source::{SourceLocation, SourceRole},
@@ -30,14 +30,22 @@ impl Labels {
     pub(super) fn caption(&self, key: &str) -> Value {
         json!({"ru-RU":self.ru.text(key),"en-US":self.en.text(key)})
     }
+    pub(super) fn label(&self, value: &TreeLabel) -> Value {
+        match value {
+            TreeLabel::Name(text) => json!({"kind":"name","text":text}),
+            TreeLabel::Key(key) => json!({"kind":"key","key":key,"translations":self.caption(key)}),
+            TreeLabel::IndexedKey { key, index } => {
+                let arguments = [("index", LocalizationValue::Number(i64::from(*index)))];
+                json!({"kind":"key","key":key,"translations":{
+                    "ru-RU":self.ru.format(key, &arguments),
+                    "en-US":self.en.format(key, &arguments)
+                }})
+            }
+        }
+    }
     /// Project one node without serializing its potentially large children list.
     pub fn node(&self, value: &TreeNode) -> Value {
-        let label = match &value.label {
-            TreeLabel::Name(text) => json!({"kind":"name","text":text}),
-            TreeLabel::Key(key) => {
-                json!({"kind":"key","key":key,"translations":{"ru-RU":self.ru.text(key),"en-US":self.en.text(key)}})
-            }
-        };
+        let label = self.label(&value.label);
         let state = match value.state {
             ChildrenState::Empty => "empty",
             ChildrenState::NonEmpty => "non_empty",
@@ -137,6 +145,7 @@ pub(super) fn property_record(
 pub(super) fn standard_attribute_property(
     labels: &Labels,
     owner: MetadataKind,
+    label: &TreeLabel,
     value: &MetadataProperty,
 ) -> Value {
     use eska_project_core::project::metadata_model::PropertyKey;
@@ -153,11 +162,8 @@ pub(super) fn standard_attribute_property(
     } else {
         property_record(labels, owner, value)
     };
-    if value.key.name == "Name"
-        && let MetadataValue::Text(name) = &value.value
-    {
-        result["value"]["caption"] =
-            labels.caption(&format!("platform-value-StandardAttribute-{name}"));
+    if value.key.name == "Name" {
+        result["value"]["caption"] = labels.label(label)["translations"].clone();
     }
     // The virtual node intentionally has no editable source range.
     result["range"] = json!({"start":0,"end":0});

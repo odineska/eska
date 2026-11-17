@@ -25,6 +25,7 @@ pub enum ChildrenState {
 pub enum TreeLabel {
     Name(String),
     Key(String),
+    IndexedKey { key: String, index: u32 },
 }
 
 /// One stable tree node; virtual parents are separate from metadata's logical ancestry.
@@ -45,6 +46,52 @@ pub struct TreeNode {
 }
 
 impl TreeNode {
+    /// Numbered subaccounts share a localized pattern rather than embedding translated names.
+    pub(crate) fn standard_attribute(
+        owner: &ObjectId,
+        owner_kind: MetadataKind,
+        name: String,
+    ) -> Self {
+        let label = ["ExtDimensionType", "ExtDimension"]
+            .into_iter()
+            .find_map(|prefix| {
+                name.strip_prefix(prefix)?
+                    .parse()
+                    .ok()
+                    .map(|index| TreeLabel::IndexedKey {
+                        key: format!("platform-value-StandardAttribute-{prefix}"),
+                        index,
+                    })
+            })
+            .unwrap_or_else(|| {
+                TreeLabel::Key(
+                    if owner_kind == MetadataKind::DocumentJournal && name == "Type" {
+                        "platform-property-md-Type".into()
+                    } else {
+                        format!("platform-value-StandardAttribute-{name}")
+                    },
+                )
+            });
+        Self {
+            id: NodeId::StandardAttribute {
+                owner: owner.clone(),
+                name,
+            },
+            metadata_kind: None,
+            parent: Some(NodeId::Collection {
+                owner: owner.clone(),
+                kind: crate::project::metadata_model::CollectionKind::StandardAttributes,
+            }),
+            label,
+            children: Vec::new(),
+            state: ChildrenState::Empty,
+            expanded_by_default: false,
+            root_section: false,
+            module_creation: false,
+            diagnostics: Vec::new(),
+        }
+    }
+
     /// Empty known leaves cannot expand; unloaded and failed branches may be opened or retried.
     #[must_use]
     pub fn can_expand(&self) -> bool {
@@ -111,6 +158,7 @@ pub enum TreeError {
     EmptyDescriptor,
     DuplicateObject(ObjectId),
     MissingChild(ObjectId),
+    InvalidStandardAttributeCount { owner: ObjectId, value: String },
 }
 
 impl ConfiguratorTree {

@@ -86,3 +86,63 @@ fn process_standard_attributes_are_localized_read_only_and_version_gated() {
         }
     }
 }
+
+#[test]
+fn process_numbered_standard_attributes_have_shared_indexed_captions_and_types() {
+    let directory = TestDir::new();
+    crate::project::metadata_workspace::standard_attributes::accounting::fixture(&directory.0, 2);
+    let owner = json!({"kind":"object", "objectId":"accounting-register:Entries"});
+    let group = json!({"kind":"collection", "owner":"accounting-register:Entries", "collection":{"kind":"standardAttributes"}});
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(locale);
+        client.ok("initialize", json!({"apiVersion":{"major":1,"minor":54},"client":{"name":"numbered-standard-attributes","version":"1"},"locale":locale}));
+        let open = client.open(&directory.0);
+        client.ok("metadata/children", context(&open, json!({"node":owner})));
+        let children = client.ok("metadata/children", context(&open, json!({"node":group})));
+        for (name, ru, en) in [
+            ("ExtDimension2", "Субконто 2", "Extra dimension 2"),
+            (
+                "ExtDimensionType2",
+                "Вид субконто 2",
+                "Extra dimension type 2",
+            ),
+        ] {
+            let id = json!({"kind":"standardAttribute", "owner":"accounting-register:Entries", "name":name});
+            let node = children["nodes"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|node| node["id"] == id)
+                .unwrap();
+            assert_eq!(
+                node["label"]["translations"]["ru-RU"]
+                    .as_str()
+                    .unwrap()
+                    .replace(['\u{2068}', '\u{2069}'], ""),
+                ru
+            );
+            assert_eq!(
+                node["label"]["translations"]["en-US"]
+                    .as_str()
+                    .unwrap()
+                    .replace(['\u{2068}', '\u{2069}'], ""),
+                en
+            );
+            let properties = client.ok("metadata/properties", context(&open, json!({"node":id})));
+            assert_eq!(
+                properties["properties"][0]["value"]["caption"],
+                node["label"]["translations"]
+            );
+            assert_eq!(properties["readOnly"], true);
+            assert_eq!(properties["sourceAvailable"], false);
+            assert_ne!(
+                properties["properties"][1]["presentation"]["items"]
+                    .as_array()
+                    .unwrap()
+                    .as_slice(),
+                &[] as &[serde_json::Value]
+            );
+        }
+        client.finish();
+    }
+}

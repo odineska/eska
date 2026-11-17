@@ -2,7 +2,7 @@
 
 use eska_project_core::project::metadata_model::{MetadataKind, PropertyKey};
 
-use super::{Localizer, platform_value_types::PROPERTY_ENUMS};
+use super::{LocalizationValue, Localizer, platform_value_types::PROPERTY_ENUMS};
 
 const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
 const CORE: &str = "http://v8.1c.ru/8.1/data/core";
@@ -114,6 +114,20 @@ impl Localizer {
     /// Preserve unknown enum tokens, including future platform additions.
     #[must_use]
     pub fn enum_caption(&self, domain: &str, token: &str) -> Option<String> {
+        if domain == "StandardAttribute" {
+            for prefix in ["ExtDimensionType", "ExtDimension"] {
+                if let Some(index) = token.strip_prefix(prefix) {
+                    let index = index
+                        .parse::<u32>()
+                        .ok()
+                        .filter(|value| *value > 0 && value.to_string() == index)?;
+                    return Some(self.format(
+                        &format!("platform-value-StandardAttribute-{prefix}"),
+                        &[("index", LocalizationValue::Number(i64::from(index)))],
+                    ));
+                }
+            }
+        }
         if !token
             .bytes()
             .all(|byte| byte.is_ascii_alphanumeric() || byte == b'_')
@@ -495,6 +509,41 @@ mod tests {
                 ),
                 None
             );
+        }
+    }
+
+    /// Numbered XML names use the same patterns as virtual tree nodes.
+    #[test]
+    fn numbered_standard_attributes_reuse_localized_patterns() {
+        for (locale, value, kind) in [
+            (Locale::RuRu, "Субконто 2", "Вид субконто 2"),
+            (Locale::EnUs, "Extra dimension 2", "Extra dimension type 2"),
+        ] {
+            let localizer = Localizer::try_new(locale).unwrap();
+            assert_eq!(
+                localizer
+                    .enum_caption("StandardAttribute", "ExtDimension2")
+                    .unwrap()
+                    .replace(['\u{2068}', '\u{2069}'], ""),
+                value
+            );
+            assert_eq!(
+                localizer
+                    .enum_caption("StandardAttribute", "ExtDimensionType2")
+                    .unwrap()
+                    .replace(['\u{2068}', '\u{2069}'], ""),
+                kind
+            );
+            for name in [
+                "ExtDimension",
+                "ExtDimensionType",
+                "ExtDimensionTypeFuture",
+                "ExtDimension0",
+                "ExtDimension+2",
+                "ExtDimension02",
+            ] {
+                assert_eq!(localizer.enum_caption("StandardAttribute", name), None);
+            }
         }
     }
 
