@@ -361,15 +361,19 @@
     "installed_target_suites_both_locales": [
       "header-layout",
       "command-overflow",
-      "inspector-tree-focused"
+      "inspector-tree-focused",
+      "inspector-navigation"
     ],
-    "test_root": "<absolute sibling eska-playground>"
+    "test_root": "<absolute sibling eska-playground>",
+    "strict_suite_comparison": {
+      "command-bars": "Исходное расхождение RightParentFixed повторилось в обеих локалях",
+      "button-links": "Исходная отметка uncalibrated link font reported повторилась в обеих локалях"
+    }
   },
   "limits": [
     "На промежуточной ширине около 994 px у «Закрытия займа» порог переноса автоматических подписей отличается от Конфигуратора.",
     "Русский отчёт при сопоставимой ширине имеет рамку 1079 px против 1075 px в Конфигураторе.",
     "Строгие проверки command-bars и button-links в ru/en повторили исходные расхождения геометрии RightParentFixed и статуса калибровки шрифта соответственно.",
-    "Полный inspector-navigation в en воспроизводит прежний тайм-аут workspace preferences delivered. Целевые сценарии раскрытия дерева прошли в обеих локалях на финальном VSIX.",
     "Сопоставление с Конфигуратором выполнено для Linux при 96 DPI. Windows и полное совпадение всех пикселей вне проверенной матрицы остаются отдельной приёмкой."
   ],
   "artifacts": "../eska-form-reference/1c-8.3.27.2342/analysis/buhmfo-layout-menu-2026-11-17"
