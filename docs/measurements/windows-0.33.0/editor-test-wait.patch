@@ -1,0 +1,5 @@
+--- a/test/form-editor-host.cjs
++++ b/test/form-editor-host.cjs
+@@ -203 +203 @@
+-    assert.ok(await click(ui, action('save')));
++    await until(() => click(ui, action('save')), 'save enabled after the undo acknowledgement');

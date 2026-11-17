@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "issue": "https://github.com/odineska/eska/issues/239",
+  "scope": "Windows-приёмка опубликованной ESKA 0.33.0 и нового редактора форм через Explorer 0.1.24.",
+  "versions": {
+    "eska": "0.33.0",
+    "explorer": "0.1.24",
+    "platform": "8.3.27.2342"
+  },
+  "releases": {
+    "eska": "https://github.com/odineska/eska/releases/tag/v0.33.0",
+    "explorer": "https://github.com/odineska/eska-vscode-explorer/releases/tag/v0.1.24"
+  },
+  "environment": {
+    "os": "Майкрософт Windows 11 IoT Корпоративная LTSC",
+    "version": "10.0.26100",
+    "build": "26100",
+    "architecture": "64-разрядная",
+    "vscode": "1.144.0",
+    "node": "v24.22.2",
+    "python": "Python 3.14.10"
+  },
+  "inputs": {
+    "coreSourceTagCommitPrefix": "071faa5",
+    "explorerSourceTagCommitPrefix": "63541e2",
+    "vsixSha256": "00683777e01f4bca4edbde4f2cb57b733ce0b6dd5b90c2df6bd1b91943fcb5ee",
+    "verifiedRuntimeFiles": 1264,
+    "runtimeMatchesTaggedSourcesAndInstalledVsix": true
+  },
+  "checks": {
+    "componentInstall": {
+      "passed": true,
+      "version": "0.33.0",
+      "hashesVerified": [
+        "components.py",
+        "eska-0.33.0-x86_64-pc-windows-msvc.zip",
+        "eska-build-0.33.0-x86_64-pc-windows-msvc.zip",
+        "eska-check-0.33.0-x86_64-pc-windows-msvc.zip",
+        "eska-debug-0.33.0-x86_64-pc-windows-msvc.zip",
+        "eska-fmt-0.33.0-x86_64-pc-windows-msvc.zip",
+        "eska-installer.ps1",
+        "eska-project-0.33.0-x86_64-pc-windows-msvc.zip",
+        "eska-vcs-0.33.0-x86_64-pc-windows-msvc.zip",
+        "eska-x86_64-pc-windows-msvc.zip",
+        "eska-x86_64-pc-windows-msvc.zip.sha256",
+        "release-x86_64-pc-windows-msvc.json"
+      ],
+      "components": [
+        "eska",
+        "eska-build",
+        "eska-check",
+        "eska-debug",
+        "eska-fmt",
+        "eska-project",
+        "eska-vcs"
+      ]
+    },
+    "fullInstaller": {
+      "passed": true,
+      "version": "0.33.0",
+      "components": [
+        "eska",
+        "eska-build",
+        "eska-check",
+        "eska-debug",
+        "eska-fmt",
+        "eska-project",
+        "eska-vcs"
+      ],
+      "receipt_isolated": true,
+      "component_ownership_transferred": true,
+      "component_transition_scenarios": 3,
+      "uniform_versions": true,
+      "verified_assets": 14
+    },
+    "explorerTypesAndCompile": "passed",
+    "node": {
+      "tests": 886,
+      "passed": 854,
+      "skipped": 32,
+      "failed": 0,
+      "backend": "published Windows binaries"
+    },
+    "nativeForms": {
+      "passed": true,
+      "details": "Семантические CLI-операции, сохранённые планы ru/en, составные типы, события, таблицы, условное оформление, полное копирование; импорт, применение и обратная выгрузка 1С, затем удаление и повторный roundtrip."
+    },
+    "nativeNewConfiguration": {
+      "passed": true,
+      "details": "Создание через опубликованный eska.exe и импорт/применение/обратная выгрузка 1С."
+    },
+    "editor": {
+      "en": {
+        "passed": true,
+        "locale": "en",
+        "nativeWindow": true,
+        "liveDraft": true,
+        "exactSave": true,
+        "groupedUndo": true,
+        "propertySearch": true,
+        "attributeDrop": [
+          "inside",
+          "before"
+        ],
+        "draftRecovery": true,
+        "externalConflict": true,
+        "dirtySourceAlias": true,
+        "conditionalAppearance": true,
+        "hostDriver": {
+          "suiteBodyMs": 13610.025499999998
+        }
+      },
+      "ru": {
+        "passed": true,
+        "locale": "ru",
+        "nativeWindow": true,
+        "liveDraft": true,
+        "exactSave": true,
+        "groupedUndo": true,
+        "propertySearch": true,
+        "attributeDrop": [
+          "inside",
+          "before"
+        ],
+        "draftRecovery": true,
+        "externalConflict": true,
+        "dirtySourceAlias": true,
+        "conditionalAppearance": true,
+        "hostDriver": {
+          "suiteBodyMs": 19619.7779
+        }
+      }
+    },
+    "complexForms": {
+      "passed": true,
+      "locale": "ru",
+      "results": [
+        {
+          "form": "DataProcessors/РаботаСТранзакциями/Forms/ФормаСписка/Ext/Form.xml",
+          "updateMs": 1017,
+          "widths": [
+            {
+              "width": 1080,
+              "height": 230,
+              "layout": "columns",
+              "preview": 1065
+            },
+            {
+              "width": 660,
+              "height": 215,
+              "layout": "columns",
+              "preview": 645
+            },
+            {
+              "width": 960,
+              "height": 215,
+              "layout": "columns",
+              "preview": 945
+            }
+          ],
+          "edits": "conditional appearance for a dynamic list, two typed values, exact save and history"
+        },
+        {
+          "form": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+          "updateMs": 1043,
+          "widths": [
+            {
+              "width": 1080,
+              "height": 230,
+              "layout": "columns",
+              "preview": 1065
+            },
+            {
+              "width": 660,
+              "height": 230,
+              "layout": "columns",
+              "preview": 645
+            },
+            {
+              "width": 960,
+              "height": 230,
+              "layout": "columns",
+              "preview": 945
+            }
+          ],
+          "edits": "composite reference type and matching drag from tree and preview"
+        }
+      ],
+      "hostDriver": {
+        "suiteBodyMs": 36737.1182
+      }
+    },
+    "sourceIntegrity": {
+      "copiedFiles": 8866,
+      "unchangedAfterChecks": true,
+      "existingUserProjectModified": false
+    }
+  },
+  "testHarnessFindings": [
+    {
+      "file": "eska/tests/support/native_metadata_objects/mod.rs",
+      "problem": "ibcmd отвергает канонический Windows-путь с префиксом verbatim.",
+      "adjustment": "Существующий native_path применён только на границе аргументов ibcmd, включая --data.",
+      "patch": "native-test-windows.patch"
+    },
+    {
+      "file": "eska-vscode-explorer/test/form-editor-host.cjs",
+      "problem": "Нажатие Save сразу после изменения backend-черновика опережает подтверждение Undo в UI.",
+      "adjustment": "Ожидание доступности Save через существующий until без изменения критериев результата.",
+      "patch": "editor-test-wait.patch"
+    },
+    {
+      "file": "eska-vscode-explorer/test/form-editor-stalingrad-host.cjs",
+      "problem": "Прямое строковое сравнение пути не учитывает представления Windows.",
+      "adjustment": "Существующий sameSourcePath из webview-host; диагностический контекст при таймауте.",
+      "patch": "complex-test-path.patch"
+    }
+  ],
+  "applicationCodeModified": false,
+  "publishedArtifactsModified": false,
+  "evidenceRootFromRepository": "../eska-playground/acceptance-0.33.0-win-20261117-100429",
+  "limitations": [
+    "Полная матрица каждого свойства каждого типа элемента относительно Конфигуратора и разные аппаратные DPI не проверены.",
+    "Действующий read:project scope отсутствует: Issue #239 открыта, её описание указывает «На проверке», поле Projects напрямую не подтверждено и не изменялось.",
+    "Полный Rust fmt/check/Clippy/test не повторялся: код приложения не менялся; выполнены два целевых native integration tests.",
+    "Патчи применены только к тестам исходных снимков релизов внутри playground. Текущая ветка репозитория не содержит нового native test helper; перенос исправлений в основную ветку этой проверкой не выполнялся."
+  ],
+  "testPatchDirectoryFromRepository": "docs/measurements/windows-0.33.0",
+  "testPatchFormat": "Unified diff without context; use git apply --unidiff-zero only against the recorded release source snapshots after review."
+}

@@ -1,0 +1,11 @@
+--- a/test/form-editor-stalingrad-host.cjs
++++ b/test/form-editor-stalingrad-host.cjs
+@@ -5 +5 @@
+-const { frame, until } = require('./webview-host.cjs');
++const { frame, until, sameSourcePath } = require('./webview-host.cjs');
+@@ -170 +170 @@
+-      view = [...explorer.formPreview.views.values()].find(item => item.path === file);
++      view = [...explorer.formPreview.views.values()].find(item => sameSourcePath(item.path, file));
+@@ -172 +172 @@
+-    }, 'editable complex form');
++    }, 'editable complex form').catch(error => { error.message += ' ' + JSON.stringify({file, views:[...explorer.formPreview.views.values()].map(item=>({path:item.path,phase:item.phase,status:item.editor?.status,writable:item.editor?.schema?.writable}))}); throw error; });
