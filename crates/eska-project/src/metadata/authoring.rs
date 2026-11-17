@@ -23,7 +23,8 @@ use crate::ide::{authoring as shared, dto, editing};
 pub(super) const fn handles(command: &MetadataCommand) -> bool {
     matches!(
         command,
-        MetadataCommand::Create(_)
+        MetadataCommand::CreateModule(_)
+            | MetadataCommand::Create(_)
             | MetadataCommand::Copy(_)
             | MetadataCommand::Delete(_)
             | MetadataCommand::ObjectSchema(_)
@@ -37,7 +38,8 @@ pub(super) const fn handles(command: &MetadataCommand) -> bool {
 pub(super) fn run(args: &MetadataArgs, directory: &Path, locale: &Localizer) -> ExitCode {
     let mutation = matches!(
         args.command,
-        MetadataCommand::Create(_)
+        MetadataCommand::CreateModule(_)
+            | MetadataCommand::Create(_)
             | MetadataCommand::Copy(_)
             | MetadataCommand::Delete(_)
             | MetadataCommand::FormEdit(_)
@@ -149,10 +151,17 @@ fn execute(
         }
         MetadataCommand::FormSchema(args) => project
             .form_edit_schema(&input::object_id(&args.form)?)
-            .map(|schema| shared::form_schema(&schema))
+            .map(|schema| {
+                let mut result = shared::form_schema(&labels, &schema);
+                result["typeOptions"] = shared::form_type_options(&labels, project);
+                result
+            })
             .map_err(shared::form_failure),
         MetadataCommand::FormEdit(args) => edit_form(project, args),
-        MetadataCommand::Create(_) | MetadataCommand::Copy(_) | MetadataCommand::Delete(_) => {
+        MetadataCommand::CreateModule(_)
+        | MetadataCommand::Create(_)
+        | MetadataCommand::Copy(_)
+        | MetadataCommand::Delete(_) => {
             objects::run(project, &args.command, locale, format, loaded)
         }
         _ => Err(failure("invalid_request")),

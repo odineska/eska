@@ -52,7 +52,7 @@ impl Labels {
             }
             if matches!(value.id, NodeId::Object(_)) {
                 result["objectCreation"] = json!(
-                    !eska_project_core::project::configurator::ConfiguratorSchema::collections(
+                    value.module_creation || !eska_project_core::project::configurator::ConfiguratorSchema::collections(
                         kind
                     )
                     .is_empty()

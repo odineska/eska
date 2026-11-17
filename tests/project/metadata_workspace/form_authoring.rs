@@ -7,7 +7,7 @@ use crate::backend::project::{
     forms::FORM_NAMESPACE,
     metadata_edit::{EditError, snapshot},
     metadata_form_edit::{
-        FormEditError, FormEditRequest, FormElementSpec, FormOperation, FormTarget,
+        FormEditError, FormEditRequest, FormElementSpec, FormOperation, FormTarget, inspect_draft,
     },
     metadata_model::{MetadataProperty, MetadataValue, PropertyKey},
     source_lock::SourceLease,
@@ -93,6 +93,65 @@ fn form_preview_is_read_only_and_apply_keeps_payload_identity_and_other_files() 
     ));
     let schema = project.form_edit_schema(&form_id()).unwrap();
     assert_eq!(schema.nodes.len(), 3);
+}
+
+#[test]
+fn draft_preview_and_grouped_save_keep_each_action_in_history() {
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    let path = directory.0.join("src").join(PATH);
+    let original = fs::read_to_string(&path).unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let mut request = add_request(project.form_edit_schema(&form_id()).unwrap().snapshot);
+    let first = project.preview_form_edit(&request).unwrap();
+    let expected_intermediate = first.output().to_owned();
+    request.operations.push(FormOperation::SetProperty {
+        target: first.assigned_ids[0].target.clone(),
+        property: MetadataProperty {
+            key: PropertyKey {
+                namespace: Some(FORM_NAMESPACE.into()),
+                name: "United".into(),
+            },
+            qualifiers: Vec::new(),
+            value: MetadataValue::Text("false".into()),
+        },
+    });
+    let final_plan = project.preview_form_edit(&request).unwrap();
+    let draft = inspect_draft(final_plan.output(), true).unwrap();
+    assert!(draft.nodes.iter().any(|node| {
+        node.name.as_deref() == Some("Group")
+            && node.properties.iter().any(|field| {
+                field.property.key.name == "United"
+                    && field.property.value == MetadataValue::Text("false".into())
+            })
+    }));
+    assert_eq!(fs::read_to_string(&path).unwrap(), original);
+    assert!(
+        project
+            .apply_form_edit_steps(&final_plan.prepared, &[0, 2])
+            .is_err()
+    );
+    assert_eq!(fs::read_to_string(&path).unwrap(), original);
+    let saved = project
+        .apply_form_edit_steps(&final_plan.prepared, &[1, 2])
+        .unwrap();
+    let undone = project
+        .replay_form_edit(&form_id(), &saved.snapshot, true)
+        .unwrap();
+    assert_eq!(fs::read_to_string(&path).unwrap(), expected_intermediate);
+    let before = project
+        .replay_form_edit(&form_id(), &undone.snapshot, true)
+        .unwrap();
+    assert_eq!(fs::read_to_string(&path).unwrap(), original);
+    let redone = project
+        .replay_form_edit(&form_id(), &before.snapshot, false)
+        .unwrap();
+    assert_eq!(fs::read_to_string(&path).unwrap(), expected_intermediate);
+    project
+        .replay_form_edit(&form_id(), &redone.snapshot, false)
+        .unwrap();
+    assert_eq!(fs::read_to_string(&path).unwrap(), final_plan.output());
 }
 
 #[test]

@@ -5,6 +5,7 @@ mod copying;
 mod creating;
 mod deleting;
 mod discovery;
+mod modules;
 mod properties;
 #[cfg(test)]
 mod tests;
@@ -37,6 +38,11 @@ impl ProjectSession {
             return Err(ObjectError::Unsupported(MetadataKind::Configuration));
         }
         let parent = self.canonical_parent(parent);
+        let module_owner = parent
+            .as_ref()
+            .unwrap_or_else(|| self.source.root().id())
+            .clone();
+        let module_roles = self.missing_module_roles(&module_owner)?;
         let kinds = if let Some(parent) = parent.as_ref() {
             let object = self.reveal_declared_object(parent)?;
             ConfiguratorSchema::collections(object.kind).to_vec()
@@ -94,6 +100,7 @@ impl ProjectSession {
                 .collect(),
             kinds,
             parent,
+            module_roles,
             operations: vec!["create", "copy", "delete"],
             prepared_plans: true,
         })
@@ -149,11 +156,11 @@ impl ProjectSession {
             .checked_add(1)
             .ok_or(WorkspaceError::GenerationExhausted)?;
         let histories: Vec<_> = self
-            .property_history
+            .edit_history
             .keys()
             .filter(|id| {
                 self.source
-                    .object_descriptor(id)
+                    .object_descriptor(id.object())
                     .ok()
                     .flatten()
                     .is_some_and(|location| {
@@ -164,7 +171,7 @@ impl ProjectSession {
             .collect();
         guard.publish_files(self.project().source(), &plan.files, &plan.directories)?;
         for id in histories {
-            self.property_history.remove(&id);
+            self.edit_history.remove(&id);
         }
         let paths: Vec<_> = plan.files.iter().map(|file| file.path.clone()).collect();
         let refresh = self
@@ -196,6 +203,9 @@ impl ProjectSession {
         }
         let mut inputs = Inputs::default();
         let mut plan = match request {
+            ObjectRequest::CreateModule { owner, role } => {
+                current.create_module(owner, *role, request, &mut inputs)?
+            }
             ObjectRequest::Copy {
                 source,
                 name,
@@ -292,10 +302,13 @@ impl ProjectSession {
                 return Err(EditError::ReadOnly.into());
             }
         }
-        let permission_paths: Vec<_> = existing
+        let mut permission_paths: Vec<_> = existing
             .into_iter()
             .filter(|path| path != std::path::Path::new("ConfigDumpInfo.xml"))
             .collect();
+        if matches!(plan.prepared.request, ObjectRequest::CreateModule { .. }) {
+            permission_paths.extend(plan.files.iter().map(|file| file.path.clone()));
+        }
         let support = self.support_files(&permission_paths)?;
         if !support.diagnostics.is_empty()
             || support

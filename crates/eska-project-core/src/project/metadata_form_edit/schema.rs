@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use roxmltree::Node;
 use serde::Serialize;
 
-use super::{FormEditError, FormTarget, document, invalid};
+use super::{FormEditError, FormTarget, appearance, document, invalid, operations};
 use crate::project::{
     forms::{
         AuthoringProperty, AuthoringSource, ElementKind, FORM_NAMESPACE, PaletteEditor,
@@ -31,6 +31,8 @@ pub struct FormEditNode {
     pub kind: String,
     pub name: Option<String>,
     pub properties: Vec<FormEditProperty>,
+    pub qualifiers: Vec<(PropertyKey, String)>,
+    pub layout_child: bool,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -38,6 +40,7 @@ pub struct FormEditNode {
 pub struct FormElementKindSchema {
     pub kind: ElementKind,
     pub catalog: Vec<AuthoringProperty>,
+    pub child_kinds: Vec<ElementKind>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -57,6 +60,17 @@ pub struct FormEditSchema {
     pub nodes: Vec<FormEditNode>,
     pub element_kinds: Vec<FormElementKindSchema>,
     pub definition_kinds: Vec<FormDefinitionSchema>,
+    pub conditional_appearance: Option<appearance::AppearanceSchema>,
+    pub dynamic_list_appearance: Vec<appearance::ListAppearanceSchema>,
+}
+
+/// Mutable parts of the schema derived from the exact bytes in a checked plan.
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FormDraftSchema {
+    pub nodes: Vec<FormEditNode>,
+    pub conditional_appearance: Option<appearance::AppearanceSchema>,
+    pub dynamic_list_appearance: Vec<appearance::ListAppearanceSchema>,
 }
 
 /// Inspect exactly one managed-form payload, including existing properties unknown to the palette.
@@ -70,6 +84,43 @@ pub fn inspect(
     writable: bool,
 ) -> Result<FormEditSchema, FormEditError> {
     document::validate(input)?;
+    let FormDraftSchema {
+        nodes,
+        conditional_appearance,
+        dynamic_list_appearance,
+    } = inspect_draft(input, writable)?;
+    Ok(FormEditSchema {
+        form: form.clone(),
+        path,
+        snapshot: snapshot(input),
+        writable,
+        nodes,
+        element_kinds: ElementKind::ALL
+            .iter()
+            .copied()
+            .map(|kind| FormElementKindSchema {
+                kind,
+                catalog: authoring_properties(kind),
+                child_kinds: child_kinds(kind),
+            })
+            .collect(),
+        conditional_appearance,
+        dynamic_list_appearance,
+        definition_kinds: ["Attribute", "Column", "Command", "Parameter"]
+            .into_iter()
+            .map(|kind| FormDefinitionSchema {
+                kind,
+                catalog: definition_catalog(kind),
+            })
+            .collect(),
+    })
+}
+
+/// Inspect the result of a validated form-edit plan.
+///
+/// # Errors
+/// Returns a malformed XML error if its input is not parseable.
+pub fn inspect_draft(input: &str, writable: bool) -> Result<FormDraftSchema, FormEditError> {
     let document = document::xml(input)?;
     let nodes = document
         .root_element()
@@ -89,11 +140,33 @@ pub fn inspect(
                     let property = metadata_parser::values::property(node, &mut Vec::new());
                     let writable = writable
                         && node.tag_name().name() != "Events"
+                        && (!node.has_tag_name((FORM_NAMESPACE, "Type"))
+                            || !node.parent().is_some_and(defines_data_type)
+                            || super::types::validate(node).is_ok())
                         && supported_value(&property.value);
                     FormEditProperty { property, writable }
                 })
                 .collect();
             Some(FormEditNode {
+                layout_child: node.parent().is_some_and(|parent| {
+                    parent.has_tag_name((FORM_NAMESPACE, "ChildItems"))
+                        && document::element(node).is_some()
+                }),
+                qualifiers: node
+                    .attributes()
+                    .filter(|attr| {
+                        attr.namespace().is_none() && !matches!(attr.name(), "id" | "name")
+                    })
+                    .map(|attr| {
+                        (
+                            PropertyKey {
+                                namespace: None,
+                                name: attr.name().to_owned(),
+                            },
+                            attr.value().to_owned(),
+                        )
+                    })
+                    .collect(),
                 target,
                 parent: node.ancestors().skip(1).find_map(document::target_of),
                 kind: node.tag_name().name().to_owned(),
@@ -102,28 +175,23 @@ pub fn inspect(
             })
         })
         .collect();
-    Ok(FormEditSchema {
-        form: form.clone(),
-        path,
-        snapshot: snapshot(input),
-        writable,
+    Ok(FormDraftSchema {
         nodes,
-        element_kinds: ElementKind::ALL
-            .iter()
-            .copied()
-            .map(|kind| FormElementKindSchema {
-                kind,
-                catalog: authoring_properties(kind),
-            })
-            .collect(),
-        definition_kinds: ["Attribute", "Column", "Command", "Parameter"]
-            .into_iter()
-            .map(|kind| FormDefinitionSchema {
-                kind,
-                catalog: definition_catalog(kind),
-            })
-            .collect(),
+        conditional_appearance: appearance::inspect(document.root_element()),
+        dynamic_list_appearance: appearance::inspect_lists(document.root_element()),
     })
+}
+
+/// Both drag targets and the semantic move planner follow the same parent/child rules.
+#[must_use]
+pub fn child_kinds(kind: ElementKind) -> Vec<ElementKind> {
+    ElementKind::ALL
+        .iter()
+        .copied()
+        .filter(|child| {
+            *child != ElementKind::Form && operations::layout_kind(kind, *child).is_ok()
+        })
+        .collect()
 }
 
 pub(super) fn catalog(node: Node<'_, '_>) -> Vec<AuthoringProperty> {
@@ -131,6 +199,11 @@ pub(super) fn catalog(node: Node<'_, '_>) -> Vec<AuthoringProperty> {
         || definition_catalog(node.tag_name().name()),
         authoring_properties,
     )
+}
+
+pub(super) fn defines_data_type(node: Node<'_, '_>) -> bool {
+    node.tag_name().namespace() == Some(FORM_NAMESPACE)
+        && matches!(node.tag_name().name(), "Attribute" | "Column" | "Parameter")
 }
 
 pub(super) fn definition_catalog(kind: &str) -> Vec<AuthoringProperty> {
@@ -171,6 +244,12 @@ pub(super) fn definition_catalog(kind: &str) -> Vec<AuthoringProperty> {
             editor: *editor,
             default: PlatformPropertyValue::Unknown,
             values: Vec::new(),
+            category: if matches!(editor, PaletteEditor::Event) {
+                crate::project::forms::PaletteCategory::Events
+            } else {
+                crate::project::forms::PaletteCategory::Main
+            },
+            enum_captions: &[],
         })
         .collect()
 }
@@ -178,7 +257,14 @@ pub(super) fn definition_catalog(kind: &str) -> Vec<AuthoringProperty> {
 pub(super) fn structural(name: &str) -> bool {
     matches!(
         name,
-        "ChildItems" | "Attributes" | "Commands" | "Parameters" | "BaseForm" | "Columns" | "Events"
+        "ChildItems"
+            | "Attributes"
+            | "Commands"
+            | "Parameters"
+            | "BaseForm"
+            | "Columns"
+            | "Events"
+            | "ConditionalAppearance"
     )
 }
 

@@ -1352,3 +1352,10 @@ metadata-authoring-invalid-form = XML формы содержит ошибки �
 metadata-authoring-target-missing = Элемент формы не найден. Получите актуальную структуру через form-schema.
 metadata-authoring-error-field = Поле: { $field }
 metadata-recover-about = Проверить или восстановить прерванную запись метаданных, включая создание начальной конфигурации.
+
+metadata-authoring-create-module-about = Создать отсутствующий модуль поддерживаемой роли
+metadata-authoring-owner-help = ID существующего владельца модуля
+metadata-authoring-role-help = Роль модуля из object-schema (например object или manager)
+metadata-module-role-prompt = Выберите отсутствующий модуль
+
+metadata-authoring-operation-create-module = создание модуля

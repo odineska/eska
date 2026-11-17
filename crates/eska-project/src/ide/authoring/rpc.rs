@@ -1,7 +1,7 @@
 //! IDE mutations retain the same commit, read-only and refresh boundaries as property edits.
 
 use eska_project_core::project::{
-    metadata_form_edit::{FormEditRequest, PreparedFormEdit},
+    metadata_form_edit::{FormEditRequest, PreparedFormEdit, inspect_draft},
     metadata_model::ObjectId,
     metadata_objects::{ObjectRequest, PreparedObject},
     metadata_workspace::ProjectSession,
@@ -40,17 +40,43 @@ pub(in crate::ide) fn query(
         }
         "metadata/formEditSchema" => {
             let form: ObjectId = params::decode(&args["form"])?;
+            let include_types = args
+                .get("includeTypes")
+                .map(params::decode::<bool>)
+                .transpose()?
+                .unwrap_or(false);
             project
                 .form_edit_schema(&form)
-                .map(|schema| super::form_schema(&schema))
+                .map(|schema| {
+                    let mut result = super::form_schema(labels, &schema);
+                    if include_types {
+                        result["typeOptions"] = super::form_type_options(labels, project);
+                    }
+                    result
+                })
                 .map_err(super::form_failure)
         }
         "metadata/previewFormEdit" => {
             let request: FormEditRequest = params::decode(&args["request"])?;
-            project
+            let include_draft = args
+                .get("includeDraft")
+                .map(params::decode::<bool>)
+                .transpose()?
+                .unwrap_or(false);
+            let plan = project
                 .preview_form_edit(&request)
-                .map(|plan| super::form_plan(&plan))
-                .map_err(super::form_failure)
+                .map_err(super::form_failure)?;
+            let mut result = super::form_plan(&plan);
+            if include_draft {
+                result["draft"] =
+                    json!(inspect_draft(plan.output(), true).map_err(super::form_failure)?);
+            }
+            Ok(result)
+        }
+        "metadata/formEditHistory" => {
+            let form: ObjectId = params::decode(&args["form"])?;
+            let expected: String = params::decode(&args["snapshot"])?;
+            Ok(json!(project.form_edit_history(&form, &expected)))
         }
         _ => Err(error(-32601)),
     }
@@ -81,10 +107,22 @@ pub(in crate::ide) fn apply(
                 })
                 .map_err(super::object_failure)
         }
-        "metadata/applyFormEdit" => {
-            let prepared: PreparedFormEdit = params::decode(&args["prepared"])?;
-            project
-                .apply_form_edit(&prepared)
+        "metadata/applyFormEdit" | "metadata/replayFormEdit" => {
+            let result = if method == "metadata/applyFormEdit" {
+                let prepared: PreparedFormEdit = params::decode(&args["prepared"])?;
+                let steps = args
+                    .get("steps")
+                    .map(params::decode::<Vec<usize>>)
+                    .transpose()?
+                    .unwrap_or_default();
+                project.apply_form_edit_steps(&prepared, &steps)
+            } else {
+                let form: ObjectId = params::decode(&args["form"])?;
+                let snapshot: String = params::decode(&args["snapshot"])?;
+                let undo: bool = params::decode(&args["undo"])?;
+                project.replay_form_edit(&form, &snapshot, undo)
+            };
+            result
                 .map(|result| {
                     (
                         super::form_result(&result),

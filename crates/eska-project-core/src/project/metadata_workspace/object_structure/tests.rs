@@ -1226,3 +1226,255 @@ fn deleting_an_inline_twin_preserves_same_named_declarations_in_other_owners() {
     );
     assert!(project.reveal_declared_object(&other_parameter).is_ok());
 }
+
+#[test]
+fn modules_use_owner_roles_and_never_overwrite_existing_sources() {
+    use crate::project::metadata_model::ModuleRole;
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let owner = id(MetadataKind::Document, "Origin", None);
+    let descriptor_before = fs::read(stand.source().join("Documents/Origin.xml")).unwrap();
+    let object_before =
+        fs::read(stand.source().join("Documents/Origin/Ext/ObjectModule.bsl")).unwrap();
+    assert_eq!(
+        project.object_schema(Some(&owner)).unwrap().module_roles,
+        vec![ModuleRole::Manager]
+    );
+    let request = ObjectRequest::CreateModule {
+        owner: owner.clone(),
+        role: ModuleRole::Manager,
+    };
+    let plan = project.preview_object(&request).unwrap();
+    assert!(plan.prepared.identities.is_empty());
+    assert_eq!(plan.files.len(), 1);
+    assert_eq!(
+        plan.files[0].path,
+        Path::new("Documents/Origin/Ext/ManagerModule.bsl")
+    );
+    assert!(!stand.source().join(&plan.files[0].path).exists());
+    project.apply_object(&plan.prepared).unwrap();
+    assert_eq!(
+        fs::read(stand.source().join(&plan.files[0].path)).unwrap(),
+        b""
+    );
+    assert_eq!(
+        project.object_schema(Some(&owner)).unwrap().module_roles,
+        Vec::<ModuleRole>::new()
+    );
+    for role in [
+        ModuleRole::Manager,
+        ModuleRole::Object,
+        ModuleRole::Module,
+        ModuleRole::RecordSet,
+    ] {
+        assert!(
+            project
+                .preview_object(&ObjectRequest::CreateModule {
+                    owner: owner.clone(),
+                    role
+                })
+                .is_err()
+        );
+    }
+    assert_eq!(
+        fs::read(stand.source().join("Documents/Origin.xml")).unwrap(),
+        descriptor_before
+    );
+    assert_eq!(
+        fs::read(stand.source().join("Documents/Origin/Ext/ObjectModule.bsl")).unwrap(),
+        object_before
+    );
+}
+
+#[test]
+fn module_creation_preserves_binary_modules_and_rechecks_absence() {
+    use crate::project::metadata_model::ModuleRole;
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let owner = id(MetadataKind::Document, "Origin", None);
+    let request = ObjectRequest::CreateModule {
+        owner: owner.clone(),
+        role: ModuleRole::Manager,
+    };
+    let plan = project.preview_object(&request).unwrap();
+    stand.write("Documents/Origin/Ext/ManagerModule.bin", "protected binary");
+    assert!(project.apply_object(&plan.prepared).is_err());
+    assert_eq!(
+        project.object_schema(Some(&owner)).unwrap().module_roles,
+        Vec::<ModuleRole>::new()
+    );
+    assert!(
+        !stand
+            .source()
+            .join("Documents/Origin/Ext/ManagerModule.bsl")
+            .exists()
+    );
+    assert_eq!(
+        fs::read(
+            stand
+                .source()
+                .join("Documents/Origin/Ext/ManagerModule.bin")
+        )
+        .unwrap(),
+        b"protected binary"
+    );
+}
+
+#[test]
+fn module_roles_cover_registers_forms_inline_commands_and_configuration() {
+    use crate::project::metadata_model::ModuleRole;
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let doc = id(MetadataKind::Document, "Origin", None);
+    let form = id(MetadataKind::Form, "Main", Some(&doc));
+    let command = create_with_properties(project, MetadataKind::Command, "Action", Some(&doc), &[]);
+    let register = create_with_properties(
+        project,
+        MetadataKind::InformationRegister,
+        "Data",
+        None,
+        &[],
+    );
+    let module = create_with_properties(project, MetadataKind::CommonModule, "Logic", None, &[]);
+    for (owner, roles, paths) in [
+        (
+            id(MetadataKind::Configuration, "Demo", None),
+            vec![
+                ModuleRole::ManagedApplication,
+                ModuleRole::OrdinaryApplication,
+                ModuleRole::Session,
+                ModuleRole::ExternalConnection,
+            ],
+            vec![
+                "Ext/ManagedApplicationModule.bsl",
+                "Ext/OrdinaryApplicationModule.bsl",
+                "Ext/SessionModule.bsl",
+                "Ext/ExternalConnectionModule.bsl",
+            ],
+        ),
+        (
+            register,
+            vec![ModuleRole::Manager, ModuleRole::RecordSet],
+            vec![
+                "InformationRegisters/Data/Ext/ManagerModule.bsl",
+                "InformationRegisters/Data/Ext/RecordSetModule.bsl",
+            ],
+        ),
+        (
+            command,
+            vec![ModuleRole::Command],
+            vec!["Documents/Origin/Commands/Action/Ext/CommandModule.bsl"],
+        ),
+        (
+            form,
+            vec![ModuleRole::Module],
+            vec!["Documents/Origin/Forms/Main/Ext/Form/Module.bsl"],
+        ),
+        (
+            module,
+            vec![ModuleRole::Module],
+            vec!["CommonModules/Logic/Ext/Module.bsl"],
+        ),
+    ] {
+        assert_eq!(
+            project.object_schema(Some(&owner)).unwrap().module_roles,
+            roles
+        );
+        for (role, path) in roles.into_iter().zip(paths) {
+            let plan = project
+                .preview_object(&ObjectRequest::CreateModule {
+                    owner: owner.clone(),
+                    role,
+                })
+                .unwrap();
+            assert_eq!(plan.files[0].path, Path::new(path));
+            project.apply_object(&plan.prepared).unwrap();
+            assert!(stand.source().join(path).is_file());
+        }
+        assert_eq!(
+            project.object_schema(Some(&owner)).unwrap().module_roles,
+            Vec::<ModuleRole>::new()
+        );
+    }
+}
+
+#[test]
+fn module_creation_rechecks_source_permissions_and_descriptor_snapshot() {
+    use crate::project::metadata_model::ModuleRole;
+    let stand = Stand::new();
+    let mut workspace = stand.workspace();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let request = ObjectRequest::CreateModule {
+        owner: id(MetadataKind::Document, "Origin", None),
+        role: ModuleRole::Manager,
+    };
+    let plan = project.preview_object(&request).unwrap();
+    let path = stand.source().join("Documents/Origin.xml");
+    let original = fs::read(&path).unwrap();
+    fs::write(
+        &path,
+        format!("{}\n", String::from_utf8(original.clone()).unwrap()),
+    )
+    .unwrap();
+    assert!(matches!(
+        project.apply_object(&plan.prepared),
+        Err(ObjectError::Edit(EditError::Conflict))
+    ));
+    fs::write(path, original).unwrap();
+    stand.write("Ext/ParentConfigurations.bin", "invalid support rules");
+    assert!(matches!(
+        project.preview_object(&request),
+        Err(ObjectError::Edit(EditError::ReadOnly))
+    ));
+    assert!(
+        !stand
+            .source()
+            .join("Documents/Origin/Ext/ManagerModule.bsl")
+            .exists()
+    );
+}
+
+#[test]
+fn external_modules_preserve_direct_and_wrapped_layouts() {
+    use crate::project::metadata_model::{ModuleRole, NodeId};
+    for wrapped in [false, true] {
+        let stand = Stand::new();
+        // Replace only this test's disposable source fixture.
+        fs::remove_dir_all(stand.source()).unwrap();
+        fs::write(stand.0.join("eska.toml"), "[project]\ntype='processing'\n").unwrap();
+        stand.write(
+            "External.xml",
+            &descriptor("ExternalDataProcessor", "External", 11, "", ""),
+        );
+        if wrapped {
+            fs::create_dir_all(stand.source().join("External/Forms")).unwrap();
+        }
+        let mut workspace = stand.workspace();
+        let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+        let NodeId::Object(owner) = project.root().clone() else {
+            panic!("root object");
+        };
+        assert_eq!(
+            project.object_schema(Some(&owner)).unwrap().module_roles,
+            vec![ModuleRole::Object]
+        );
+        let request = ObjectRequest::CreateModule {
+            owner,
+            role: ModuleRole::Object,
+        };
+        let plan = project.preview_object(&request).unwrap();
+        assert_eq!(
+            plan.files[0].path,
+            Path::new(if wrapped {
+                "External/Ext/ObjectModule.bsl"
+            } else {
+                "Ext/ObjectModule.bsl"
+            })
+        );
+        project.apply_object(&plan.prepared).unwrap();
+        assert!(stand.source().join(&plan.files[0].path).is_file());
+    }
+}

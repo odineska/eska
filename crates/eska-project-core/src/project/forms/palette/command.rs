@@ -39,26 +39,23 @@ pub(super) fn group_definitions(
         (ButtonGroup | Popup, Some(Form)) => &EMPTY_TYPE,
         _ => return None,
     };
-    Some(COMMAND_GROUP.iter().filter_map(move |row| {
-        let row = match row.id {
-            "Type" => type_row,
-            "View" if kind != ButtonGroup => return None,
-            "Representation"
-            | "Picture"
-            | "Shape"
-            | "ShapeRepresentation"
-            | "BackColor"
-            | "BorderColor"
-                if kind != Popup =>
-            {
-                return None;
-            }
-            "HorizontalAlign" if kind != CommandBar => return None,
-            "HorizontalAlignInGroup" | "VerticalAlignInGroup" if kind == Popup => return None,
-            _ => row,
-        };
-        Some((row, true))
-    }))
+    Some(group_rows(kind).map(move |row| (if row.id == "Type" { type_row } else { row }, true)))
+}
+
+fn group_rows(kind: ElementKind) -> impl Iterator<Item = &'static Row> {
+    use ElementKind::{ButtonGroup, CommandBar, Popup};
+    COMMAND_GROUP.iter().filter(move |row| match row.id {
+        "View" => kind == ButtonGroup,
+        "Representation"
+        | "Picture"
+        | "Shape"
+        | "ShapeRepresentation"
+        | "BackColor"
+        | "BorderColor" => kind == Popup,
+        "HorizontalAlign" => kind == CommandBar,
+        "HorizontalAlignInGroup" | "VerticalAlignInGroup" => kind != Popup,
+        _ => true,
+    })
 }
 
 pub(super) fn addition_definitions(
@@ -150,7 +147,7 @@ pub(super) fn authoring(kind: ElementKind) -> Vec<&'static Row> {
     match kind {
         ElementKind::AutoCommandBar => AUTO_COMMAND_BAR.iter().collect(),
         ElementKind::CommandBar | ElementKind::ButtonGroup | ElementKind::Popup => {
-            COMMAND_GROUP.iter().collect()
+            group_rows(kind).collect()
         }
         _ => OWNED
             .iter()

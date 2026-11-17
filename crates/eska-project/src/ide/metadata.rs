@@ -27,6 +27,7 @@ pub(super) fn writes(method: &str) -> bool {
             | "metadata/create"
             | "metadata/applyObject"
             | "metadata/applyFormEdit"
+            | "metadata/replayFormEdit"
     )
 }
 
@@ -51,8 +52,10 @@ pub(super) fn is_method(method: &str) -> bool {
             | "metadata/previewObject"
             | "metadata/applyObject"
             | "metadata/formEditSchema"
+            | "metadata/formEditHistory"
             | "metadata/previewFormEdit"
             | "metadata/applyFormEdit"
+            | "metadata/replayFormEdit"
             | "metadata/supportFiles"
             | "metadata/supportObjects"
             | "metadata/root"
@@ -146,6 +149,7 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
         | "metadata/formEditSchema"
         | "metadata/previewFormEdit"
         | "metadata/applyFormEdit" => 49,
+        "metadata/formEditHistory" | "metadata/replayFormEdit" => 52,
         "metadata/creationSchema" | "metadata/previewCreate" | "metadata/create" => 48,
         "metadata/revealSource" => 24,
         "metadata/supportObjects" => 25,
@@ -154,8 +158,48 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
         "metadata/propertyValueChoices" => 8,
         _ => 0,
     };
+    if minor < 50
+        && (args["request"]["operation"] == "create-module"
+            || args["prepared"]["request"]["operation"] == "create-module")
+    {
+        return Err(error(-32602));
+    }
     if minor < required {
         return Err(error(-32601));
+    }
+    if minor < 53
+        && (method == "metadata/previewFormEdit" && args.get("includeDraft").is_some()
+            || method == "metadata/applyFormEdit" && args.get("steps").is_some())
+    {
+        return Err(error(-32602));
+    }
+    if minor < 52
+        && matches!(
+            method,
+            "metadata/previewFormEdit" | "metadata/applyFormEdit"
+        )
+    {
+        let operations = if method == "metadata/previewFormEdit" {
+            &args["request"]["operations"]
+        } else {
+            &args["prepared"]["request"]["operations"]
+        };
+        if operations.as_array().is_some_and(|items| {
+            items.iter().any(|item| match item["kind"].as_str() {
+                Some("setListConditionalAppearance") => true,
+                Some("setConditionalAppearance") => {
+                    minor < 51
+                        || item["rules"].as_array().is_some_and(|rules| {
+                            rules
+                                .iter()
+                                .any(|rule| extended_conditions(&rule["conditions"]))
+                        })
+                }
+                _ => false,
+            })
+        }) {
+            return Err(error(-32602));
+        }
     }
     if minor < 49
         && matches!(
@@ -172,7 +216,95 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
     Ok(())
 }
 
+fn extended_conditions(conditions: &Value) -> bool {
+    conditions.as_array().is_some_and(|items| {
+        items.iter().any(|item| {
+            matches!(
+                item["operator"].as_str(),
+                Some("InList" | "NotInList" | "InListByHierarchy" | "NotInListByHierarchy")
+            ) || matches!(item["operand"]["kind"].as_str(), Some("date" | "values"))
+                || extended_conditions(&item["items"])
+        })
+    })
+}
+
+fn constrain_form_operations(result: &mut Value, minor: u32) {
+    let Some(definitions) = result
+        .get_mut("requestSchemas")
+        .and_then(|value| value["form-edit"]["$defs"].as_object_mut())
+    else {
+        return;
+    };
+    if let Value::Object(legacy) = super::authoring::form_definitions(false) {
+        *definitions = legacy;
+    }
+    if minor >= 51 {
+        return;
+    }
+    if let Some(items) = definitions
+        .get_mut("formOperation")
+        .and_then(|value| value["oneOf"].as_array_mut())
+    {
+        items.retain(|item| item["properties"]["kind"]["const"] != "setConditionalAppearance");
+    }
+    for key in ["appearanceRule", "appearanceCondition", "appearanceValue"] {
+        definitions.remove(key);
+    }
+}
+
+fn constrain_form_appearance(result: &mut Value, minor: u32) {
+    let Some(result) = result.as_object_mut() else {
+        return;
+    };
+    result.remove("dynamicListAppearance");
+    result.remove("typeOptions");
+    if minor < 51 {
+        for key in [
+            "conditionalAppearance",
+            "propertyCaptions",
+            "choiceCaptions",
+        ] {
+            result.remove(key);
+        }
+    } else if let Some(Value::Object(appearance)) = result.get_mut("conditionalAppearance") {
+        if let Some(Value::Array(comparisons)) = appearance.get_mut("comparisons") {
+            comparisons.retain(|item| item["usesList"] != true);
+            for item in comparisons.iter_mut().filter_map(Value::as_object_mut) {
+                item.remove("usesList");
+            }
+        }
+        if let Some(Value::Array(rules)) = appearance.get_mut("rules") {
+            for rule in rules {
+                if extended_conditions(&rule["conditions"]) {
+                    rule["conditions"] = Value::Null;
+                }
+            }
+        }
+    }
+}
+
 fn constrain_schema(result: &mut Value, method: &str, minor: u32, writable: bool) {
+    if minor < 52 {
+        if method == "metadata/formEditSchema" {
+            constrain_form_appearance(result, minor);
+        }
+        if matches!(method, "metadata/formEditSchema" | "metadata/objectSchema") {
+            constrain_form_operations(result, minor);
+        }
+    }
+    if method == "metadata/objectSchema"
+        && (minor < 50 || !writable)
+        && let Some(result) = result.as_object_mut()
+    {
+        result.remove("moduleOptions");
+        result.remove("moduleRoles");
+        if let Some(schemas) = result
+            .get_mut("requestSchemas")
+            .and_then(Value::as_object_mut)
+        {
+            schemas.remove("create-module");
+        }
+    }
     if !writable {
         match method {
             "metadata/creationSchema" | "metadata/formEditSchema" => {
@@ -232,8 +364,9 @@ fn metadata_request(
         "metadata/objectSchema"
         | "metadata/previewObject"
         | "metadata/formEditSchema"
+        | "metadata/formEditHistory"
         | "metadata/previewFormEdit" => super::authoring::query(labels, project, method, args),
-        "metadata/applyObject" | "metadata/applyFormEdit" => {
+        "metadata/applyObject" | "metadata/applyFormEdit" | "metadata/replayFormEdit" => {
             super::authoring::apply(session, state, project, method, args, events)
         }
         _ => metadata_read(labels, session, state, project, method, args, events),

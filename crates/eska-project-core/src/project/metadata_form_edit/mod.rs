@@ -1,5 +1,6 @@
 //! Semantic managed-form changes over the existing lossless form/property models.
 
+mod appearance;
 mod document;
 mod operations;
 mod render;
@@ -15,21 +16,24 @@ use serde::{Deserialize, Serialize};
 
 use crate::project::{
     forms::FormParseError,
-    metadata_edit::{EditError, EditPlan, Replacement},
+    metadata_edit::{EditError, EditPlan, Replacement, SavedEdit},
     metadata_model::{MetadataProperty, ObjectId, PropertyKey},
     metadata_rename::NameError,
     metadata_workspace::{RefreshReport, WorkspaceError},
 };
 
-pub(crate) use document::plan_complete;
+pub use appearance::AppearanceRule;
 pub use document::{empty_form, plan};
+pub(crate) use document::{plan_with_steps, removed_targets};
 pub use schema::{
-    FormDefinitionSchema, FormEditNode, FormEditProperty, FormEditSchema, FormElementKindSchema,
-    inspect,
+    FormDefinitionSchema, FormDraftSchema, FormEditNode, FormEditProperty, FormEditSchema,
+    FormElementKindSchema, child_kinds, inspect, inspect_draft,
 };
+pub use types::FormTypeOption;
+pub(crate) use types::{type_options, type_reference};
 
 /// Integer identities belong to elements; definition names remain stable CLI selectors.
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 #[serde(tag = "kind", rename_all = "camelCase", deny_unknown_fields)]
 pub enum FormTarget {
     Root {},
@@ -87,6 +91,13 @@ pub struct FormElementSpec {
     deny_unknown_fields
 )]
 pub enum FormOperation {
+    SetConditionalAppearance {
+        rules: Vec<AppearanceRule>,
+    },
+    SetListConditionalAppearance {
+        attribute: String,
+        rules: Vec<AppearanceRule>,
+    },
     SetProperty {
         target: FormTarget,
         property: MetadataProperty,
@@ -179,6 +190,7 @@ pub(crate) struct FormChanges {
     pub edit: EditPlan,
     pub assigned_ids: Vec<AssignedFormId>,
     pub removed: Vec<RemovedFormTarget>,
+    pub steps: Vec<SavedEdit>,
 }
 
 impl FormEditPlan {
@@ -209,6 +221,12 @@ pub struct FormEditResult {
     pub snapshot: String,
     pub assigned_ids: Vec<AssignedFormId>,
     pub refresh: Option<RefreshReport>,
+}
+
+#[derive(Debug, Default, Serialize)]
+pub struct FormEditHistory {
+    pub undo: bool,
+    pub redo: bool,
 }
 
 #[derive(Debug)]

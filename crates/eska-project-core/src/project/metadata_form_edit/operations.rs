@@ -3,6 +3,7 @@
 mod definitions;
 mod elements;
 mod properties;
+pub(super) use elements::layout_kind;
 
 use roxmltree::Document;
 
@@ -39,6 +40,12 @@ pub(super) fn apply(
         values: assigned,
     };
     match operation {
+        FormOperation::SetConditionalAppearance { rules } => {
+            super::appearance::change(input, xml.root_element(), rules)
+        }
+        FormOperation::SetListConditionalAppearance { attribute, rules } => {
+            super::appearance::change_list(input, xml, attribute, rules)
+        }
         FormOperation::SetProperty { target, property } => {
             properties::set(input, document::target(xml, target)?, property)
         }
@@ -132,10 +139,18 @@ fn references(xml: &Document<'_>, removed: roxmltree::Node<'_, '_>) -> Vec<Strin
         .collect();
     let mut paths = Vec::new();
     for node in xml.descendants().filter(roxmltree::Node::is_element) {
-        if node.tag_name().namespace() != Some(crate::project::forms::FORM_NAMESPACE)
-            || removed.range().contains(&node.range().start)
+        if removed.range().contains(&node.range().start)
             || node.children().any(|child| child.is_element())
         {
+            continue;
+        }
+        if targets
+            .iter()
+            .any(|(target, name)| super::appearance::references(node, target, name))
+        {
+            paths.push(format!("ConditionalAppearance@{}", node.range().start));
+        }
+        if node.tag_name().namespace() != Some(crate::project::forms::FORM_NAMESPACE) {
             continue;
         }
         let Some(text) = node.text() else {

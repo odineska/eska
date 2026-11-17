@@ -76,7 +76,10 @@ impl fmt::Display for ObjectId {
 }
 
 /// Module role within its owner, separate from a real metadata object's identity.
-#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[derive(
+    Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd, serde::Serialize, serde::Deserialize,
+)]
+#[serde(rename_all = "kebab-case")]
 pub enum ModuleRole {
     Module,
     Object,

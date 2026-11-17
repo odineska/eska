@@ -39,6 +39,8 @@ pub struct TreeNode {
     pub state: ChildrenState,
     pub expanded_by_default: bool,
     pub root_section: bool,
+    /// A supported module role may still be absent; discovery checks exact files before writing.
+    pub module_creation: bool,
     pub diagnostics: Vec<Diagnostic>,
 }
 

@@ -263,11 +263,11 @@ impl ProjectSession {
 
     fn forget_descriptor_history(&mut self, path: &std::path::Path) {
         let ids: Vec<_> = self
-            .property_history
+            .edit_history
             .keys()
             .filter(|id| {
                 self.source
-                    .object_descriptor(id)
+                    .object_descriptor(id.object())
                     .ok()
                     .flatten()
                     .is_some_and(|location| location.path == path)
@@ -275,7 +275,7 @@ impl ProjectSession {
             .cloned()
             .collect();
         for id in ids {
-            self.property_history.remove(&id);
+            self.edit_history.remove(&id);
         }
     }
 }

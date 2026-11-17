@@ -2,13 +2,16 @@
 
 use std::{collections::BTreeMap, fmt::Write, path::PathBuf};
 
-use super::{ProjectSession, WorkspaceError};
+use super::{
+    ProjectSession, RefreshReport, WorkspaceError,
+    editing_history::{EditedSource, HistoryStep},
+};
 use crate::project::{
     designer_source::SourceRole,
-    metadata_edit::{EditError, snapshot},
+    metadata_edit::{EditError, EditPlan, SavedEdit, snapshot},
     metadata_form_edit::{
-        self, FormChanges, FormEditError, FormEditPlan, FormEditRequest, FormEditResult,
-        FormEditSchema, PreparedFormEdit, RemovedFormTarget,
+        self, FormChanges, FormEditError, FormEditHistory, FormEditPlan, FormEditRequest,
+        FormEditResult, FormEditSchema, FormTypeOption, PreparedFormEdit, RemovedFormTarget,
     },
     metadata_model::{MetadataKind, ObjectId},
     metadata_rename::{
@@ -31,14 +34,28 @@ impl ProjectSession {
         metadata_form_edit::inspect(form, path, &input, writable)
     }
 
+    /// Use the current project declarations without opening unrelated source files.
+    #[must_use]
+    pub fn form_type_options(&self) -> Vec<FormTypeOption> {
+        metadata_form_edit::type_options(&self.objects)
+    }
+
     /// Compute a semantic preview with deterministic local identity allocation.
     ///
     /// # Errors
     /// Rejects stale snapshots, unsafe operations or unavailable source write permissions.
     pub fn preview_form_edit(
-        &mut self,
+        &self,
         request: &FormEditRequest,
     ) -> Result<FormEditPlan, FormEditError> {
+        self.preview_form_steps(request, &[]).map(|(plan, _)| plan)
+    }
+
+    fn preview_form_steps(
+        &self,
+        request: &FormEditRequest,
+        boundaries: &[usize],
+    ) -> Result<(FormEditPlan, Vec<SavedEdit>), FormEditError> {
         let mut current = self.form_authoring_current()?;
         let (path, input) = current.form_authoring_source(&request.form)?;
         if !current.form_authoring_writable(&request.form, &path)? {
@@ -48,11 +65,12 @@ impl ProjectSession {
             edit,
             assigned_ids,
             removed,
-        } = metadata_form_edit::plan_complete(&input, request)?;
+            steps,
+        } = metadata_form_edit::plan_with_steps(&input, request, boundaries)?;
         current.form_new_type_references(&input, edit.output())?;
         let mut inputs = BTreeMap::from([(path.clone(), snapshot(&input))]);
         current.form_removed_references(&request.form, &removed, &mut inputs)?;
-        Ok(FormEditPlan {
+        let plan = FormEditPlan {
             path,
             inputs: inputs.keys().cloned().collect(),
             prepared: PreparedFormEdit {
@@ -63,7 +81,8 @@ impl ProjectSession {
             assigned_ids,
             edit,
             input_snapshots: inputs,
-        })
+        };
+        Ok((plan, steps))
     }
 
     /// Reconstruct an approved preview; client-supplied XML is never accepted as a write capability.
@@ -71,7 +90,7 @@ impl ProjectSession {
     /// # Errors
     /// Rejects source changes or a result hash that differs from the reviewed semantic request.
     pub fn preview_prepared_form_edit(
-        &mut self,
+        &self,
         prepared: &PreparedFormEdit,
     ) -> Result<FormEditPlan, FormEditError> {
         let plan = self.preview_form_edit(&prepared.request)?;
@@ -92,9 +111,26 @@ impl ProjectSession {
         &mut self,
         prepared: &PreparedFormEdit,
     ) -> Result<FormEditResult, FormEditError> {
+        self.apply_form_edit_steps(prepared, &[])
+    }
+
+    /// Publish the final draft atomically and retain the individual user actions for replay.
+    ///
+    /// # Errors
+    /// In addition to publication errors, rejects inconsistent operation boundaries.
+    pub fn apply_form_edit_steps(
+        &mut self,
+        prepared: &PreparedFormEdit,
+        boundaries: &[usize],
+    ) -> Result<FormEditResult, FormEditError> {
         let guard = Guard::acquire(self.project().root())?;
         guard.check_clear(self.project().source())?;
-        let plan = self.preview_prepared_form_edit(prepared)?;
+        let (plan, mut steps) = self.preview_form_steps(&prepared.request, boundaries)?;
+        if plan.prepared.expected_output_snapshot != prepared.expected_output_snapshot
+            || plan.prepared.source_snapshot != prepared.source_snapshot
+        {
+            return Err(EditError::Conflict.into());
+        }
         if plan.is_empty() {
             return Ok(FormEditResult {
                 form: prepared.request.form.clone(),
@@ -103,17 +139,108 @@ impl ProjectSession {
                 refresh: None,
             });
         }
+        let after = snapshot(plan.output());
+        if boundaries.is_empty() {
+            steps.push(plan.edit.history());
+        }
+        let refresh = self.publish_form_plan(&plan.path, &plan.input_snapshots, &plan.edit);
+        if refresh.is_ok() || matches!(&refresh, Err(FormEditError::Committed(_))) {
+            for step in steps {
+                self.record_edit(
+                    EditedSource::Form(prepared.request.form.clone()),
+                    HistoryStep::Scalar(step),
+                );
+            }
+        }
+        Ok(FormEditResult {
+            form: prepared.request.form.clone(),
+            snapshot: after,
+            assigned_ids: plan.assigned_ids,
+            refresh: Some(refresh?),
+        })
+    }
+
+    /// A webview may inspect session history without receiving its replacement bytes.
+    #[must_use]
+    pub fn form_edit_history(&self, form: &ObjectId, expected: &str) -> FormEditHistory {
+        let Some(history) = self.edit_history.get(&EditedSource::Form(form.clone())) else {
+            return FormEditHistory::default();
+        };
+        let ready = |step: Option<&HistoryStep>, undo| matches!(step, Some(HistoryStep::Scalar(edit)) if edit.matches_snapshot(expected, undo));
+        FormEditHistory {
+            undo: ready(history.undo.last(), true),
+            redo: ready(history.redo.last(), false),
+        }
+    }
+
+    /// Replay a backend-owned form edit under the same guard and dependency checks as a new edit.
+    ///
+    /// # Errors
+    /// Rejects stale snapshots, changed permissions, external references and missing history.
+    pub fn replay_form_edit(
+        &mut self,
+        form: &ObjectId,
+        expected: &str,
+        undo: bool,
+    ) -> Result<FormEditResult, FormEditError> {
+        let guard = Guard::acquire(self.project().root())?;
+        guard.check_clear(self.project().source())?;
+        let source = EditedSource::Form(form.clone());
+        let history = self
+            .edit_history
+            .get(&source)
+            .ok_or(EditError::HistoryUnavailable)?;
+        let step = if undo {
+            history.undo.last()
+        } else {
+            history.redo.last()
+        };
+        let Some(HistoryStep::Scalar(saved)) = step else {
+            return Err(EditError::HistoryUnavailable.into());
+        };
+        let mut current = self.form_authoring_current()?;
+        let (path, input) = current.form_authoring_source(form)?;
+        if !current.form_authoring_writable(form, &path)? {
+            return Err(EditError::ReadOnly.into());
+        }
+        if snapshot(&input) != expected {
+            return Err(EditError::Conflict.into());
+        }
+        let edit = saved.replay(&input, undo)?;
+        let step = HistoryStep::Scalar(saved.clone());
+        current.form_new_type_references(&input, edit.output())?;
+        let removals = metadata_form_edit::removed_targets(&input, edit.output())?;
+        let mut inputs = BTreeMap::from([(path.clone(), expected.to_owned())]);
+        current.form_removed_references(form, &removals, &mut inputs)?;
+        let after = snapshot(edit.output());
+        let refresh = self.publish_form_plan(&path, &inputs, &edit);
+        if refresh.is_ok() || matches!(&refresh, Err(FormEditError::Committed(_))) {
+            self.advance_edit(&source, step, undo);
+        }
+        Ok(FormEditResult {
+            form: form.clone(),
+            snapshot: after,
+            assigned_ids: Vec::new(),
+            refresh: Some(refresh?),
+        })
+    }
+
+    fn publish_form_plan(
+        &mut self,
+        path: &PathBuf,
+        inputs: &BTreeMap<PathBuf, String>,
+        edit: &EditPlan,
+    ) -> Result<RefreshReport, FormEditError> {
         let _lease = SourceLease::acquire(
             self.project().root(),
-            &plan
-                .inputs
-                .iter()
+            &inputs
+                .keys()
                 .map(|path| self.project().source().join(path))
                 .collect::<Vec<_>>(),
         )
         .map_err(lock_error)?;
         // A dependency may change between preflight and lease acquisition; protect the reviewed set.
-        for (path, expected) in &plan.input_snapshots {
+        for (path, expected) in inputs {
             let absolute = self
                 .source
                 .checked_file(path)
@@ -127,17 +254,9 @@ impl ProjectSession {
         self.generation
             .checked_add(1)
             .ok_or(WorkspaceError::GenerationExhausted)?;
-        let after = snapshot(plan.output());
-        plan.edit.publish(self.project().source(), &plan.path)?;
-        let refresh = self
-            .changed_paths(std::slice::from_ref(&plan.path))
-            .map_err(|error| FormEditError::Committed(Box::new(error)))?;
-        Ok(FormEditResult {
-            form: prepared.request.form.clone(),
-            snapshot: after,
-            assigned_ids: plan.assigned_ids,
-            refresh: Some(refresh),
-        })
+        edit.publish(self.project().source(), path)?;
+        self.changed_paths(std::slice::from_ref(path))
+            .map_err(|error| FormEditError::Committed(Box::new(error)))
     }
 
     fn form_authoring_current(&self) -> Result<Self, FormEditError> {
@@ -154,9 +273,9 @@ impl ProjectSession {
                 .into_iter()
                 .filter(|reference| {
                     reference.property.namespace.as_deref() == Some("http://v8.1c.ru/8.1/data/core")
-                        && reference.property.name == "Type"
+                        && matches!(reference.property.name.as_str(), "Type" | "TypeSet")
                 })
-                .filter_map(|reference| crate::project::forms::metadata_type_id(&reference.target))
+                .filter_map(|reference| metadata_form_edit::type_reference(&reference.target))
                 .collect())
         };
         let before = targets(input)?;

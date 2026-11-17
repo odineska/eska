@@ -6,7 +6,7 @@ use crate::project::{
     activity::{RootSummary, State, path_key},
     designer_source::{self, SourceError},
     discovery::DiscoveryContext,
-    metadata_model::{ObjectId, ProjectScope},
+    metadata_model::ProjectScope,
     selection::{SelectionIntent, select_projects},
 };
 use std::collections::BTreeMap;
@@ -18,7 +18,7 @@ pub struct SuspendedProject {
     summary: RootSummary,
     generation: u64,
     cached: bool,
-    history: BTreeMap<ObjectId, super::editing_history::PropertyHistory>,
+    history: BTreeMap<super::editing_history::EditedSource, super::editing_history::EditHistory>,
     protections: super::source_protection::SourceProtections,
 }
 
@@ -190,7 +190,7 @@ impl MetadataWorkspace {
             summary,
             generation,
             cached,
-            history: previous.property_history,
+            history: previous.edit_history,
             protections: previous.source_protections,
         }))
     }
@@ -241,7 +241,7 @@ impl PreparedResume<'_> {
     /// Publish the prepared active session only after the caller has saved its preference.
     pub fn commit(self) {
         let mut active = self.active;
-        active.property_history = self.previous.history;
+        active.edit_history = self.previous.history;
         active.source_protections = self.previous.protections;
         self.workspace.projects.push(active);
     }

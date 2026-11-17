@@ -160,7 +160,10 @@ fn layout_parent(parent: Node<'_, '_>, child: ElementKind) -> Result<(), FormEdi
     layout_kind(parent, child)
 }
 
-fn layout_kind(parent: ElementKind, child: ElementKind) -> Result<(), FormEditError> {
+pub(in super::super) fn layout_kind(
+    parent: ElementKind,
+    child: ElementKind,
+) -> Result<(), FormEditError> {
     if !matches!(
         parent.family(),
         ElementFamily::Root | ElementFamily::Group | ElementFamily::Table

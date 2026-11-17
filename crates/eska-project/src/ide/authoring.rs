@@ -1,6 +1,9 @@
 //! Structural metadata and form clients share plans, discovery and stable domain failures.
 
+use std::collections::BTreeMap;
+
 use eska_project_core::project::{
+    forms::PlatformPropertyValue,
     metadata_edit::snapshot_bytes,
     metadata_form_edit::{FormEditError, FormEditPlan, FormEditResult, FormEditSchema},
     metadata_objects::{ObjectError, ObjectPlan, ObjectRequest, ObjectResult, ObjectSchema},
@@ -17,6 +20,7 @@ use super::{
 mod contracts;
 mod discovery;
 mod rpc;
+pub(super) use contracts::form_definitions;
 pub use contracts::request_schemas;
 pub use discovery::{ListOptions, list};
 pub(super) use rpc::{apply, query};
@@ -30,6 +34,15 @@ pub fn object_schema(labels: &Labels, schema: &ObjectSchema) -> Value {
             .map(|kind| json!({
                 "key":kind.as_str(), "value":kind,
                 "caption":labels.caption(&format!("platform-kind-{}", kind.as_str())),
+            }))
+            .collect::<Vec<_>>()
+    );
+    result["moduleOptions"] = json!(
+        schema
+            .module_roles
+            .iter()
+            .map(|role| json!({
+                "role":role, "caption":labels.caption(&format!("tree-module-{}",role.as_str())),
             }))
             .collect::<Vec<_>>()
     );
@@ -106,6 +119,7 @@ pub fn object_result(result: &ObjectResult) -> Value {
 pub const fn object_operation(request: &ObjectRequest) -> &'static str {
     match request {
         ObjectRequest::Create { .. } => "create",
+        ObjectRequest::CreateModule { .. } => "create-module",
         ObjectRequest::Copy { .. } => "copy",
         ObjectRequest::Delete { .. } => "delete",
     }
@@ -143,12 +157,103 @@ pub fn object_failure(error: ObjectError) -> Value {
     }
 }
 
-pub fn form_schema(schema: &FormEditSchema) -> Value {
+pub fn form_schema(labels: &Labels, schema: &FormEditSchema) -> Value {
     let mut result = json!(schema);
+    let catalogs = schema
+        .element_kinds
+        .iter()
+        .map(|kind| &kind.catalog)
+        .chain(schema.definition_kinds.iter().map(|kind| &kind.catalog));
+    let mut property_captions = serde_json::Map::new();
+    let mut choice_captions = BTreeMap::<_, serde_json::Map<String, Value>>::new();
+    for field in catalogs.flatten() {
+        property_captions.entry(field.id).or_insert_with(|| {
+            let key = eska_project_core::project::metadata_model::PropertyKey {
+                namespace: Some(eska_project_core::project::forms::FORM_NAMESPACE.to_owned()),
+                name: field.id.to_owned(),
+            };
+            editing::paired(labels, |locale| {
+                locale
+                    .property_caption(None, &key)
+                    .unwrap_or_else(|| field.id.to_owned())
+            })
+        });
+        let automatic = match field.default {
+            PlatformPropertyValue::Auto => Some(("Auto", "auto")),
+            PlatformPropertyValue::AutoStretch => Some(("Auto", "autoStretch")),
+            _ => None,
+        }
+        .filter(|_| field.values.contains(&"Auto"));
+        for (value, key) in automatic
+            .into_iter()
+            .chain(field.enum_captions.iter().copied())
+        {
+            let choices = choice_captions.entry(field.id).or_default();
+            choices.entry(value.to_owned()).or_insert_with(|| {
+                editing::paired(labels, |locale| {
+                    locale
+                        .form_choice_caption(key)
+                        .unwrap_or_else(|| value.to_owned())
+                })
+            });
+        }
+    }
+    result["propertyCaptions"] = Value::Object(property_captions);
+    result["choiceCaptions"] = json!(choice_captions);
     result["schemaVersion"] = json!(1);
     result["path"] = dto::path(&schema.path);
     result["requestSchemas"] = request_schemas();
     result
+}
+
+pub fn form_type_options(
+    labels: &Labels,
+    project: &eska_project_core::project::metadata_workspace::ProjectSession,
+) -> Value {
+    let choices: Vec<_> = project
+        .form_type_options()
+        .iter()
+        .map(|option| {
+            let mut choice = editing::type_choice(labels, &option.choice);
+            let key = &option.choice.key;
+            if option.member == "TypeSet" && !key.name.contains('.') {
+                let family = if matches!(key.name.as_str(), "AnyRef" | "AnyIBRef") {
+                    key.name.as_str()
+                } else {
+                    key.name.trim_end_matches("Ref")
+                };
+                choice["caption"] = labels.caption(&format!("platform-type-set-{family}"));
+            } else if key.name.contains('.') {
+                choice["caption"] = editing::paired(labels, |locale| {
+                    super::property_presentation::qualified_type_caption(locale, key)
+                        .unwrap_or_else(|| key.name.clone())
+                });
+            }
+            choice["member"] = json!(option.member);
+            if let Some((name, defaults)) = option.qualifier() {
+                choice["qualifier"] = json!({"name":name,"defaults":defaults});
+            }
+            choice
+        })
+        .collect();
+    let limits = eska_project_core::project::metadata_create::capabilities().limits;
+    json!({"choices":choices,"limits":limits,"qualifiers":form_type_qualifiers(labels)})
+}
+
+fn form_type_qualifiers(labels: &Labels) -> Value {
+    let fields: &[(&str, &[&str])] = &[
+        ("Length", &[]),
+        ("Digits", &[]),
+        ("FractionDigits", &[]),
+        ("AllowedLength", &["Variable", "Fixed"]),
+        ("AllowedSign", &["Any", "Nonnegative"]),
+        ("DateFractions", &["Date", "Time", "DateTime"]),
+    ];
+    Value::Object(fields.iter().map(|(name, values)| {
+        let caption = labels.caption(&format!("platform-property-core-{name}"));
+        let choices: Vec<_> = values.iter().map(|value| json!({"value":value,"caption":labels.caption(&format!("platform-value-{name}-{value}"))})).collect();
+        ((*name).to_owned(), json!({"caption":caption,"choices":choices}))
+    }).collect())
 }
 
 pub fn form_plan(plan: &FormEditPlan) -> Value {

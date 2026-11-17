@@ -74,6 +74,28 @@ struct Locations {
 }
 
 impl DesignerSource {
+    /// Resolve fixed module destinations using the same layout rules as source navigation.
+    pub(crate) fn module_candidates(
+        &self,
+        owner: &ObjectId,
+        role: ModuleRole,
+    ) -> Result<Vec<PathBuf>, SourceError> {
+        let locations = self.locations(owner)?;
+        if !locations.inline.is_empty() && locations.command_bases.is_none() {
+            return Err(SourceError::UnsupportedModule { role });
+        }
+        let Some(descriptor) = self.unique_existing(&locations.descriptors)? else {
+            return Ok(Vec::new());
+        };
+        let file = MODULE_FILES
+            .iter()
+            .find_map(|&(candidate, file)| (candidate == role).then_some(file))
+            .ok_or(SourceError::UnsupportedModule { role })?;
+        let bases = locations
+            .command_bases
+            .unwrap_or_else(|| self.artifact_bases(&descriptor, locations.root));
+        Ok(module_paths(&bases, locations.kind, role, file))
+    }
     /// Read a common picture without allowing preview failures to hide its properties.
     #[must_use]
     pub fn picture_preview(&self, id: &ObjectId) -> PicturePreview {
@@ -366,20 +388,7 @@ impl DesignerSource {
         role: ModuleRole,
         file: &str,
     ) -> Result<Option<PathBuf>, SourceError> {
-        let paths: Vec<_> = bases
-            .iter()
-            .map(|base| {
-                let ext = base.join("Ext");
-                if role == ModuleRole::Module
-                    && matches!(kind, MetadataKind::Form | MetadataKind::CommonForm)
-                {
-                    ext.join("Form").join(file)
-                } else {
-                    ext.join(file)
-                }
-            })
-            .collect();
-        self.unique_existing(&paths)
+        self.unique_existing(&module_paths(bases, kind, role, file))
     }
 
     /// Inspect only the selected owner's payload directory, never the entire source tree.
@@ -481,6 +490,27 @@ pub fn decode(id: &ObjectId) -> Result<Vec<LogicalLocation>, SourceError> {
                 });
             }
             Ok(LogicalLocation { kind, name })
+        })
+        .collect()
+}
+
+fn module_paths(
+    bases: &[PathBuf],
+    kind: MetadataKind,
+    role: ModuleRole,
+    file: &str,
+) -> Vec<PathBuf> {
+    bases
+        .iter()
+        .map(|base| {
+            let ext = base.join("Ext");
+            if role == ModuleRole::Module
+                && matches!(kind, MetadataKind::Form | MetadataKind::CommonForm)
+            {
+                ext.join("Form").join(file)
+            } else {
+                ext.join(file)
+            }
         })
         .collect()
 }

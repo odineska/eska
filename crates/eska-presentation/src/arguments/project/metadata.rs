@@ -7,8 +7,8 @@ use std::path::PathBuf;
 mod authoring;
 mod creation;
 pub use authoring::{
-    AuthoringInput, FormSchemaArgs, MetadataListArgs, ObjectCopyArgs, ObjectCreateArgs,
-    ObjectDeleteArgs, ObjectSchemaArgs,
+    AuthoringInput, FormSchemaArgs, MetadataListArgs, ModuleCreateArgs, ObjectCopyArgs,
+    ObjectCreateArgs, ObjectDeleteArgs, ObjectSchemaArgs,
 };
 pub use creation::{AddArgs, CreationKind, CreationSchemaArgs, CreationTypeArgs, DateFractions};
 
@@ -34,6 +34,8 @@ pub enum OutputFormat {
 pub enum MetadataCommand {
     #[command(disable_help_flag = true)]
     Create(ObjectCreateArgs),
+    #[command(disable_help_flag = true)]
+    CreateModule(ModuleCreateArgs),
     #[command(disable_help_flag = true)]
     Copy(ObjectCopyArgs),
     #[command(disable_help_flag = true)]

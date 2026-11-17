@@ -43,7 +43,8 @@ pub struct ProjectSession {
     pub(super) support_cache: Option<super::support::SupportCache>,
     pub(super) support_descriptors: super::support::SupportDescriptors,
     pub(super) fingerprints: BTreeMap<PathBuf, [u8; 32]>,
-    pub(super) property_history: BTreeMap<ObjectId, super::editing_history::PropertyHistory>,
+    pub(super) edit_history:
+        BTreeMap<super::editing_history::EditedSource, super::editing_history::EditHistory>,
     pub(super) source_protections: super::source_protection::SourceProtections,
 }
 
@@ -67,7 +68,7 @@ impl ProjectSession {
             support_descriptors: super::support::SupportDescriptors::default(),
             support_rules: super::support::RuleCache::default(),
             fingerprints: BTreeMap::new(),
-            property_history: BTreeMap::new(),
+            edit_history: BTreeMap::new(),
             source_protections: super::source_protection::SourceProtections::default(),
         };
         let id = session.source.root().id().clone();

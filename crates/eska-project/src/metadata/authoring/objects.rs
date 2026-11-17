@@ -22,7 +22,10 @@ pub(super) enum Loaded {
 pub(super) fn load(command: &MetadataCommand) -> Result<Option<Loaded>, Value> {
     if !matches!(
         command,
-        MetadataCommand::Create(_) | MetadataCommand::Copy(_) | MetadataCommand::Delete(_)
+        MetadataCommand::CreateModule(_)
+            | MetadataCommand::Create(_)
+            | MetadataCommand::Copy(_)
+            | MetadataCommand::Delete(_)
     ) {
         return Ok(None);
     }
@@ -170,6 +173,7 @@ fn finish(
 fn options(command: &MetadataCommand) -> Result<(&'static str, &AuthoringInput, bool), Value> {
     match command {
         MetadataCommand::Create(args) => Ok(("create", &args.source, false)),
+        MetadataCommand::CreateModule(args) => Ok(("create-module", &args.source, false)),
         MetadataCommand::Copy(args) => Ok(("copy", &args.input, false)),
         MetadataCommand::Delete(args) => Ok(("delete", &args.source, args.yes)),
         _ => Err(super::failure("invalid_request")),
@@ -220,6 +224,32 @@ fn request(
                 property_references: input::references(&args.property_references)?,
                 property_types: input::types(&args.property_types)?,
             })
+        }
+        MetadataCommand::CreateModule(args) => {
+            let owner = selector(args.owner.as_deref(), "owner", locale, interactive)?;
+            let value = if let Some(role) = &args.role {
+                role.clone()
+            } else if interactive {
+                let schema = project
+                    .object_schema(Some(&owner))
+                    .map_err(shared::object_failure)?;
+                let choices = schema
+                    .module_roles
+                    .iter()
+                    .map(|role| {
+                        (
+                            role.as_str().to_owned(),
+                            locale.text(&format!("tree-module-{}", role.as_str())),
+                        )
+                    })
+                    .collect::<Vec<_>>();
+                prompt::choose(locale, "metadata-module-role-prompt", &choices, None)?
+            } else {
+                return Err(input::required(&["role"]));
+            };
+            let role = serde_json::from_value(serde_json::json!(value))
+                .map_err(|_| input::invalid("role", "unsupported_module"))?;
+            Ok(ObjectRequest::CreateModule { owner, role })
         }
         MetadataCommand::Copy(args) => Ok(ObjectRequest::Copy {
             source: selector(args.source.as_deref(), "source", locale, interactive)?,

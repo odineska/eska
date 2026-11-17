@@ -576,6 +576,119 @@ fn type_property(digits: &str, fraction: &str) -> MetadataProperty {
 }
 
 #[test]
+fn editing_flags_preserves_active_standard_commands() {
+    let input = source(
+        r#"<ChildItems>
+        <Button name="Customize" id="1"><CommandName>Form.StandardCommand.CustomizeForm</CommandName></Button>
+        <Table name="Folders" id="2"><ContextMenu name="Menu" id="3"><ChildItems>
+        <Button name="Remove" id="4"><CommandName>Delete</CommandName></Button>
+        </ChildItems></ContextMenu><ChildItems/></Table>
+        <Button name="Create" id="5"><CommandName>Form.Item.Folders.StandardCommand.Create</CommandName></Button>
+        <Table name="Items" id="6"><ChildItems/></Table>
+        </ChildItems>"#,
+    );
+    let edit = |target, name| FormOperation::SetProperty {
+        target,
+        property: property(name, "false"),
+    };
+    for op in [
+        edit(FormTarget::Root {}, "Customizable"),
+        edit(FormTarget::Element { id: 2 }, "ChangeRowSet"),
+    ] {
+        assert!(matches!(
+            plan(&input, &request(&input, vec![op])),
+            Err(FormEditError::Invalid {
+                reason: "used_standard_commands",
+                ..
+            })
+        ));
+    }
+    let (result, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![edit(FormTarget::Element { id: 6 }, "ChangeRowSet")],
+        ),
+    )
+    .unwrap();
+    assert!(
+        result
+            .output()
+            .contains("<ChangeRowSet>false</ChangeRowSet>")
+    );
+}
+
+#[test]
+fn decoration_and_tooltip_do_not_expose_field_read_only() {
+    for kind in ["LabelDecoration", "PictureDecoration", "ExtendedTooltip"] {
+        let kind = crate::project::forms::ElementKind::from_xml_name(kind).unwrap();
+        let fields = crate::project::forms::authoring_properties(kind);
+        assert!(fields.iter().all(|field| field.name != "ReadOnly"));
+    }
+    let field = crate::project::forms::ElementKind::CalendarField;
+    assert!(
+        crate::project::forms::authoring_properties(field)
+            .iter()
+            .any(|field| field.name == "ReadOnly")
+    );
+}
+
+#[test]
+fn popup_and_button_group_use_distinct_representation_values() {
+    let input = source(
+        "<ChildItems><Popup name='More' id='1'><Representation>Picture</Representation></Popup><ButtonGroup name='Commands' id='2'/></ChildItems>",
+    );
+    let edit = |id, value| {
+        plan(
+            &input,
+            &request(
+                &input,
+                vec![FormOperation::SetProperty {
+                    target: FormTarget::Element { id },
+                    property: property("Representation", value),
+                }],
+            ),
+        )
+    };
+    assert!(edit(1, "Text").is_ok());
+    assert!(edit(1, "Compact").is_err());
+    assert!(edit(2, "Compact").is_ok());
+    assert!(edit(2, "Text").is_err());
+}
+
+#[test]
+fn button_type_is_an_enum_and_remains_writable_after_an_edit() {
+    let input = source(
+        "<ChildItems><Button name='Choose' id='1'><Type>UsualButton</Type></Button></ChildItems>",
+    );
+    let target = FormTarget::Element { id: 1 };
+    let (edit, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::SetProperty {
+                target: target.clone(),
+                property: property("Type", "Hyperlink"),
+            }],
+        ),
+    )
+    .unwrap();
+    assert!(edit.output().contains("<Type>Hyperlink</Type>"));
+    let schema = super::inspect_draft(edit.output(), true).unwrap();
+    let button = schema
+        .nodes
+        .iter()
+        .find(|node| node.target == target)
+        .unwrap();
+    assert!(
+        button
+            .properties
+            .iter()
+            .any(|field| field.property.key.name == "Type" && field.writable)
+    );
+}
+
+#[test]
 fn type_descriptions_share_numeric_validation_and_resolve_namespaces_by_identity() {
     let input = empty_form();
     let operation = |property| FormOperation::AddDefinition {
@@ -850,4 +963,257 @@ fn new_definitions_and_events_use_the_destination_container_namespace() {
             .unwrap();
         assert_eq!(node.tag_name().namespace(), Some(FORM_NAMESPACE));
     }
+}
+
+#[test]
+fn conditional_appearance_roundtrips_typed_values_and_blocks_dangling_element_links() {
+    let input = source(
+        "<ChildItems><InputField name='AmountField' id='1'/></ChildItems><Attributes><Attribute name='Amount' id='1'/></Attributes>",
+    );
+    let operation = serde_json::from_value(serde_json::json!({
+        "kind":"setConditionalAppearance",
+        "rules":[{
+            "original":null,"enabled":false,
+            "fields":[{"name":"AmountField","enabled":true}],
+            "conditions":[{"kind":"group","enabled":true,"group":"OrGroup","items":[
+                {"kind":"comparison","enabled":true,"field":"Amount","operator":"Less","operand":{"kind":"number","value":"1.5"}},
+                {"kind":"comparison","enabled":false,"field":"Amount","operator":"NotFilled","operand":null}
+            ]}],
+            "format":[
+                {"parameter":"background","enabled":true,"value":{"kind":"color","value":"#FFEEDD"}},
+                {"parameter":"font","enabled":true,"value":{"kind":"font","value":{"reference":"sys:DefaultGUIFont","effects":["bold"],"scale":null}}},
+                {"parameter":"text","enabled":true,"value":{"kind":"localized","value":[{"language":"ru","content":"< 1,5 & пусто"}]}}
+            ]
+        }]
+    })).unwrap();
+    let (changed, _) = plan(&input, &request(&input, vec![operation])).unwrap();
+    let output = changed.output();
+    assert!(output.starts_with("\u{feff}<?xml version='1.0'?>\r\n"));
+    assert!(output.contains("<!--keep exactly-->"));
+    let schema = inspect(&form_id(), "Form.xml".into(), output, true).unwrap();
+    let rules = schema.conditional_appearance.unwrap().rules;
+    assert_eq!(rules.len(), 1);
+    assert_eq!(rules[0].enabled, Some(false));
+    assert_eq!(rules[0].format.as_ref().map(Vec::len), Some(3));
+    assert_eq!(rules[0].conditions.as_ref().map(Vec::len), Some(1));
+    let (same, _) = plan(
+        output,
+        &request(
+            output,
+            vec![FormOperation::SetConditionalAppearance { rules }],
+        ),
+    )
+    .unwrap();
+    assert_eq!(same.output(), output);
+    for target in [
+        FormTarget::Element { id: 1 },
+        FormTarget::Attribute {
+            name: "Amount".to_owned(),
+        },
+    ] {
+        assert!(matches!(
+            plan(
+                output,
+                &request(
+                    output,
+                    vec![FormOperation::Remove {
+                        target,
+                        force: false
+                    }]
+                )
+            ),
+            Err(FormEditError::References { .. })
+        ));
+    }
+}
+
+#[test]
+fn appearance_edit_preserves_unsupported_filter_and_other_rule_bytes() {
+    let unknown = concat!(
+        "<s:filter><!--comment--><s:item xsi:type='s:FilterItemComparison'>",
+        "<s:left xsi:type='d:Field'>Attr</s:left><s:comparisonType>InList</s:comparisonType>",
+        "<s:right xsi:type='c:ValueListType'><c:future/></s:right></s:item></s:filter>"
+    );
+    let existing =
+        format!("<s:item><s:selection/><c:Unknown flag='yes'/>{unknown}<s:appearance/></s:item>");
+    let untouched = "<s:item><!--retained--><s:selection/><s:filter/><s:appearance/></s:item>";
+    let input = source(&format!(
+        "<Attributes><ConditionalAppearance xmlns:s='{}' xmlns:d='{}' xmlns:xsi='{}'>\r\n{existing}<!--gap-->{untouched}\r\n</ConditionalAppearance></Attributes>",
+        "http://v8.1c.ru/8.1/data-composition-system/settings",
+        "http://v8.1c.ru/8.1/data-composition-system/core",
+        "http://www.w3.org/2001/XMLSchema-instance",
+    ));
+    let mut rules = inspect(&form_id(), "Form.xml".into(), &input, true)
+        .unwrap()
+        .conditional_appearance
+        .unwrap()
+        .rules;
+    assert_eq!(rules[0].conditions, None);
+    rules[0].enabled = Some(false);
+    rules[0].format = Some(vec![
+        serde_json::from_value(serde_json::json!({
+            "parameter":"foreground","enabled":true,"value":{"kind":"color","value":"#FEEC02"}
+        }))
+        .unwrap(),
+    ]);
+    rules.swap(0, 1);
+    let (edited, _) = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::SetConditionalAppearance {
+                rules: rules.clone(),
+            }],
+        ),
+    )
+    .unwrap();
+    assert!(edited.output().contains(unknown));
+    assert!(edited.output().contains(untouched));
+    assert!(edited.output().contains("<c:Unknown flag='yes'/>"));
+    assert!(edited.output().contains("<!--gap-->"));
+    assert!(edited.output().find(untouched).unwrap() < edited.output().find(unknown).unwrap());
+    rules[1].conditions = Some(Vec::new());
+    assert!(matches!(
+        plan(
+            &input,
+            &request(
+                &input,
+                vec![FormOperation::SetConditionalAppearance { rules }]
+            )
+        ),
+        Err(FormEditError::Invalid {
+            reason: "unsupported_rule_section",
+            ..
+        })
+    ));
+}
+
+#[test]
+fn conditional_appearance_inserts_missing_sections_in_designer_order() {
+    use serde_json::json;
+
+    for existing in ["<s:item/>", "<s:item><s:appearance/></s:item>"] {
+        let input = source(&format!(
+            "<ChildItems><InputField name='AmountField' id='1'/></ChildItems><Attributes><ConditionalAppearance xmlns:s='http://v8.1c.ru/8.1/data-composition-system/settings'>{existing}</ConditionalAppearance></Attributes>"
+        ));
+        let operation = serde_json::from_value(json!({
+            "kind":"setConditionalAppearance",
+            "rules":[{"original":0,"enabled":false,"fields":[{"name":"AmountField","enabled":true}],"conditions":[
+                {"kind":"comparison","enabled":true,"field":"Amount","operator":"NotFilled","operand":null}
+            ],"format":[{"parameter":"visible","enabled":true,"value":{"kind":"boolean","value":false}}]}]
+        })).unwrap();
+        let (edit, _) = plan(&input, &request(&input, vec![operation])).unwrap();
+        let xml = document::xml(edit.output()).unwrap();
+        let rule = xml
+            .descendants()
+            .find(|node| node.has_tag_name("ConditionalAppearance"))
+            .and_then(|node| node.first_element_child())
+            .unwrap();
+        let sections: Vec<_> = rule
+            .children()
+            .filter(roxmltree::Node::is_element)
+            .map(|node| node.tag_name().name())
+            .collect();
+        assert_eq!(sections, ["use", "selection", "filter", "appearance"]);
+    }
+}
+
+#[test]
+fn conditional_appearance_rejects_new_rules_with_unknown_formatted_fields() {
+    let input = empty_form();
+    let operation = serde_json::from_value(serde_json::json!({
+        "kind":"setConditionalAppearance",
+        "rules":[{"fields":[{"name":"Missing","enabled":true}],"format":[
+            {"parameter":"visible","enabled":true,"value":{"kind":"boolean","value":false}}
+        ]}]
+    }))
+    .unwrap();
+    assert!(matches!(
+        plan(&input, &request(&input, vec![operation])),
+        Err(FormEditError::Invalid {
+            reason: "invalid_formatted_field",
+            ..
+        })
+    ));
+}
+
+#[test]
+fn dynamic_list_rules_preserve_other_scopes_and_dcs_settings() {
+    let query = "<QueryText>SELECT Amount FROM Document.Test</QueryText>";
+    let preferences = "<s:viewMode>QuickAccess</s:viewMode><s:userSettingID>keep</s:userSettingID>";
+    let filter = "<s:filter><!--keep exactly--></s:filter>";
+    let other = "<Attribute name='Other' id='2'><Type><v8:Type>cfg:DynamicList</v8:Type></Type></Attribute>";
+    let settings = "http://v8.1c.ru/8.1/data-composition-system/settings";
+    let input = source(&format!(
+        r"
+        <ChildItems><Table name='List' id='1'><DataPath>Rows</DataPath><ChildItems>
+          <InputField name='RowAmount' id='2'><DataPath>Rows.Amount</DataPath></InputField>
+        </ChildItems></Table></ChildItems>
+        <Attributes xmlns:cfg='http://v8.1c.ru/8.1/data/enterprise/current-config' xmlns:v8='http://v8.1c.ru/8.1/data/core'
+            xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:s='{settings}'>
+          <Attribute name='Rows' id='1'><Type><v8:Type>cfg:DynamicList</v8:Type></Type>
+            <Settings xsi:type='DynamicList'>{query}<ListSettings>{filter}
+                <s:conditionalAppearance>{preferences}</s:conditionalAppearance>
+            </ListSettings></Settings></Attribute>{other}
+        </Attributes>"
+    ));
+    let rule = serde_json::json!({
+        "fields":[{"name":"Amount","enabled":true}],
+        "conditions":[{"kind":"comparison","enabled":true,"field":"Amount","operator":"InList",
+            "operand":{"kind":"values","value":[
+                {"kind":"number","value":"1.5"},
+                {"kind":"string","value":"<tag>&"},
+                {"kind":"date","value":"2026-11-16T14:20:00"}
+            ]}}],
+        "format":[{"parameter":"foreground","enabled":true,"value":{"kind":"color","value":"#123456"}}]
+    });
+    let op = |name: &str, rules| {
+        serde_json::from_value(serde_json::json!({
+            "kind":"setListConditionalAppearance","attribute":name,"rules":rules
+        }))
+        .unwrap()
+    };
+    let (edited, _) = plan(
+        &input,
+        &request(&input, vec![op("Rows", vec![rule.clone()])]),
+    )
+    .unwrap();
+    let output = edited.output();
+    for original in [query, preferences, filter, other] {
+        assert!(output.contains(original));
+    }
+    assert!(output.contains("&lt;tag&gt;&amp;"));
+    let schema = inspect(&form_id(), "Form.xml".into(), output, true).unwrap();
+    assert_eq!(schema.dynamic_list_appearance[0].fields, ["Amount"]);
+    assert_eq!(schema.dynamic_list_appearance[1].attribute, "Other");
+    let saved = serde_json::to_value(
+        &schema.dynamic_list_appearance[0]
+            .appearance
+            .as_ref()
+            .unwrap()
+            .rules,
+    )
+    .unwrap();
+    assert_eq!(saved[0]["conditions"], rule["conditions"]);
+    assert_eq!(output.matches("<dcsset:right ").count(), 3);
+    let replay =
+        serde_json::json!({"kind":"setListConditionalAppearance","attribute":"Rows","rules":saved});
+    let (same, _) = plan(
+        output,
+        &request(output, vec![serde_json::from_value(replay).unwrap()]),
+    )
+    .unwrap();
+    assert_eq!(same.output(), output);
+    let (created, _) = plan(output, &request(output, vec![op("Other", vec![rule])])).unwrap();
+    assert_eq!(
+        inspect(&form_id(), "Form.xml".into(), created.output(), true)
+            .unwrap()
+            .dynamic_list_appearance[1]
+            .appearance
+            .as_ref()
+            .unwrap()
+            .rules
+            .len(),
+        1
+    );
 }

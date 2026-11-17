@@ -131,3 +131,195 @@ fn authoring_never_writes_for_old_or_read_only_clients_and_hides_new_property_sh
         client.finish();
     }
 }
+
+#[test]
+fn module_creation_requires_new_writable_client_and_preserves_owner_identity() {
+    let directory = source();
+    fs::remove_file(directory.0.join("src/Ext/SessionModule.bsl")).unwrap();
+    for (minor, writable) in [(49, true), (50, false), (50, true)] {
+        let mut client = Client::new("ru-RU");
+        initialize(&mut client, minor, writable);
+        let open = client.open(&directory.0);
+        let schema = client.ok("metadata/objectSchema", context(&open, json!({})));
+        assert_eq!(
+            schema.get("moduleOptions").is_some(),
+            minor >= 50 && writable
+        );
+        let request = json!({"operation":"create-module","owner":open["projects"][0]["root"]["objectId"],"role":"session"});
+        let preview = client.request(
+            "metadata/previewObject",
+            context(&open, json!({"request":request})),
+        );
+        if minor < 50 {
+            assert!(preview.get("error").is_some());
+        } else if writable {
+            assert!(preview.get("error").is_none(), "{preview}");
+            let plan = &preview["result"];
+            let result = client.ok(
+                "metadata/applyObject",
+                context(&open, json!({"prepared":plan["prepared"]})),
+            );
+            assert_eq!(result["objectId"], request["owner"]);
+            assert!(directory.0.join("src/Ext/SessionModule.bsl").is_file());
+        } else {
+            // Read-only clients can inspect a preview but cannot publish it.
+            let plan = &preview["result"];
+            let result = client.request(
+                "metadata/applyObject",
+                context(&open, json!({"prepared":plan["prepared"]})),
+            );
+            assert!(result.get("error").is_some());
+            assert!(!directory.0.join("src/Ext/SessionModule.bsl").exists());
+        }
+        client.finish();
+    }
+}
+
+#[test]
+fn conditional_appearance_requires_minor_51_and_discovery_negotiates_editor() {
+    let directory = source();
+    let mut client = Client::new("ru-RU");
+    let hello = initialize(&mut client, 51, true);
+    assert_eq!(hello["capabilities"]["formAuthoring"]["interactive"], true);
+    let opened = client.open(&directory.0);
+    let preview = client.ok(
+        "metadata/previewObject",
+        context(
+            &opened,
+            json!({
+                "request":{"operation":"create","kind":"CommonForm","name":"Conditional"}
+            }),
+        ),
+    );
+    client.ok(
+        "metadata/applyObject",
+        context(&opened, json!({"prepared":preview["prepared"]})),
+    );
+    client.finish();
+
+    for minor in [50, 51, 52] {
+        let mut client = Client::new("en-US");
+        let hello = initialize(&mut client, minor, true);
+        let capability = &hello["capabilities"]["formAuthoring"]["interactive"];
+        assert_eq!(capability.as_bool(), (minor >= 51).then_some(true));
+        assert_eq!(
+            hello["capabilities"]["formAuthoring"]["listAppearance"].as_bool(),
+            (minor >= 52).then_some(true)
+        );
+        let opened = client.open(&directory.0);
+        let form = "common-form:Conditional";
+        let schema = client.ok(
+            "metadata/formEditSchema",
+            context(&opened, json!({"form":form})),
+        );
+        assert_eq!(schema["conditionalAppearance"].is_object(), minor >= 51);
+        assert_eq!(schema["dynamicListAppearance"].is_array(), minor >= 52);
+        let object_schema = client.ok("metadata/objectSchema", context(&opened, json!({})));
+        assert_eq!(
+            object_schema["requestSchemas"]["form-edit"]["$defs"]["appearanceRule"].is_object(),
+            minor >= 51
+        );
+        let response = client.request("metadata/previewFormEdit", context(&opened, json!({
+            "request":{"form":form,"snapshot":schema["snapshot"],"operations":[{"kind":"setConditionalAppearance","rules":[]}]}
+        })));
+        if minor >= 51 {
+            assert_eq!(response["result"]["changed"], false);
+        } else {
+            assert_eq!(response["error"]["code"], -32602);
+        }
+        let list = client.request("metadata/previewFormEdit", context(&opened, json!({
+            "request":{"form":form,"snapshot":schema["snapshot"],"operations":[{"kind":"setListConditionalAppearance","attribute":"UnknownList","rules":[]}]}
+        })));
+        if minor < 52 {
+            assert_eq!(list["error"]["code"], -32602);
+        } else {
+            assert_ne!(list["error"]["code"].as_i64(), Some(-32602));
+        }
+        client.finish();
+    }
+}
+
+#[test]
+fn saved_form_edits_replay_exact_bytes_and_respect_new_references() {
+    let directory = source();
+    let mut client = Client::new("ru-RU");
+    let hello = initialize(&mut client, 52, true);
+    assert_eq!(hello["capabilities"]["formAuthoring"]["history"], true);
+    let mut opened = client.open(&directory.0);
+    let form = "common-form:History";
+    let plan = client.ok(
+        "metadata/previewObject",
+        context(
+            &opened,
+            json!({"request":{"operation":"create","kind":"CommonForm","name":"History"}}),
+        ),
+    );
+    let created = client.ok(
+        "metadata/applyObject",
+        context(&opened, json!({"prepared":plan["prepared"]})),
+    );
+    opened["projects"][0]["generation"] = created["generation"].clone();
+    let path = directory.0.join("src/CommonForms/History/Ext/Form.xml");
+    let before = fs::read(&path).unwrap();
+    let schema = client.ok(
+        "metadata/formEditSchema",
+        context(&opened, json!({"form":form,"includeTypes":true})),
+    );
+    assert!(
+        schema["typeOptions"]["choices"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|choice| choice["key"]["name"] == "AnyRef" && choice["member"] == "TypeSet")
+    );
+    let plan = client.ok("metadata/previewFormEdit", context(&opened, json!({"request":{
+        "form":form,"snapshot":schema["snapshot"],"operations":[{"kind":"addElement","parent":{"kind":"root"},"element":{"kind":"InputField","name":"HistoryField"}}]
+    }})));
+    let applied = client.ok(
+        "metadata/applyFormEdit",
+        context(&opened, json!({"prepared":plan["prepared"]})),
+    );
+    opened["projects"][0]["generation"] = applied["generation"].clone();
+    let after = fs::read(&path).unwrap();
+    let history = client.ok(
+        "metadata/formEditHistory",
+        context(&opened, json!({"form":form,"snapshot":applied["snapshot"]})),
+    );
+    assert_eq!(history["undo"], true);
+    assert_eq!(history["redo"], false);
+
+    let module = path.parent().unwrap().join("Form/Module.bsl");
+    fs::create_dir_all(module.parent().unwrap()).unwrap();
+    fs::write(
+        &module,
+        "Процедура Use()\n    Элементы.HistoryField.Видимость = Истина;\nКонецПроцедуры\n",
+    )
+    .unwrap();
+    let undo = json!({"form":form,"snapshot":applied["snapshot"],"undo":true});
+    let refused = client.request("metadata/replayFormEdit", context(&opened, undo.clone()));
+    assert_eq!(refused["error"]["data"]["kind"], "form_references");
+    assert_eq!(fs::read(&path).unwrap(), after);
+    fs::remove_file(module).unwrap();
+
+    let result = client.ok("metadata/replayFormEdit", context(&opened, undo.clone()));
+    assert_eq!(result["snapshot"], schema["snapshot"]);
+    assert_eq!(fs::read(&path).unwrap(), before);
+    opened["projects"][0]["generation"] = result["generation"].clone();
+    let result = client.ok(
+        "metadata/replayFormEdit",
+        context(
+            &opened,
+            json!({"form":form,"snapshot":result["snapshot"],"undo":false}),
+        ),
+    );
+    opened["projects"][0]["generation"] = result["generation"].clone();
+    assert_eq!(result["snapshot"], applied["snapshot"]);
+    assert_eq!(fs::read(&path).unwrap(), after);
+
+    let external = [after, b"\n".to_vec()].concat();
+    fs::write(&path, &external).unwrap();
+    let conflict = client.request("metadata/replayFormEdit", context(&opened, undo));
+    assert_eq!(conflict["error"]["data"]["kind"], "property_conflict");
+    assert_eq!(fs::read(path).unwrap(), external);
+    client.finish();
+}
