@@ -634,7 +634,7 @@ fn table_command_menu(
     sources: &SourceItems<'_>,
 ) -> Vec<Vec<super::AutoCommandItem>> {
     let table = match element.kind {
-        Some(ElementKind::Table) if super::commands::autofill(element) => element,
+        Some(ElementKind::Table) => element,
         Some(ElementKind::CommandBar) => {
             let Some(table) = super::commands::table_source(element, sources) else {
                 return Vec::new();
@@ -650,7 +650,18 @@ fn table_command_menu(
         binding = bind(table, form, resources);
         &binding.value_type
     };
+    let automatic = element.kind != Some(ElementKind::Table) || super::commands::autofill(element);
     if !super::commands::is_dynamic_list(value_type) {
+        if !table.declares_columns() {
+            return Vec::new();
+        }
+        return if automatic {
+            super::table_commands::ordinary_sections(table)
+        } else {
+            super::table_commands::ordinary_authored_commands(table)
+        };
+    }
+    if !automatic {
         return Vec::new();
     }
     let source = binding_path(table, form)
@@ -658,7 +669,7 @@ fn table_command_menu(
         .and_then(|(attribute, _)| main_table_id(attribute))
         .and_then(|id| effective_metadata(&id, resources))
         .map(|(_, owner)| owner);
-    super::table_commands::sections(table, source, resources)
+    super::table_commands::dynamic_sections(table, source, resources)
 }
 
 fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {

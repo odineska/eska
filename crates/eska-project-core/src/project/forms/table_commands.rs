@@ -1,7 +1,8 @@
-//! Design-time additional menus for dynamic lists. Commands carry no executable behavior.
+//! Design-time additional menus for tables. Commands carry no executable behavior.
 
 use super::{
-    AutoCommandItem, EffectiveElement, FormPicture, FormResource, PresentationText, PropertySource,
+    AutoCommandItem, EffectiveElement, ElementKind, FormPicture, FormResource, PresentationText,
+    PropertySource,
     appearance::text,
     commands::{effective_metadata, excludes, metadata_caption, metadata_text},
     presentation::metadata_property,
@@ -11,7 +12,88 @@ use crate::project::{
     metadata_parser::ParsedObject,
 };
 
-pub(super) fn sections(
+pub(super) fn ordinary_sections(table: &EffectiveElement) -> Vec<Vec<AutoCommandItem>> {
+    let mut primary = Vec::new();
+    if allows_row_set_change(table) {
+        primary.extend(["Add", "Copy", "Change", "Delete"].map(ordinary_item));
+    } else {
+        primary.push(ordinary_item("Change"));
+    }
+    primary.push(ordinary_item("EndEdit"));
+    primary.push(item("FindByCurrentValue"));
+    primary.extend([find_item(table), ordinary_item("CancelSearch")]);
+
+    let mut result = vec![primary];
+    let mut output = Vec::new();
+    if allows_row_order_change(table) {
+        result.push(["MoveUp", "MoveDown"].map(ordinary_item).into());
+        output.extend(["SortListAsc", "SortListDesc"].map(ordinary_item));
+    }
+    output.push(ordinary_item("OutputList"));
+    result.push(output);
+    retain_available(table, result)
+}
+
+/// A manual bar keeps the picture and shortcut of its explicitly authored standard commands.
+pub(super) fn ordinary_authored_commands(table: &EffectiveElement) -> Vec<Vec<AutoCommandItem>> {
+    fn declares(elements: &[EffectiveElement], reference: &str) -> bool {
+        elements.iter().any(|element| {
+            element.scalar("CommandName") == Some(reference)
+                || element.kind == Some(ElementKind::ButtonGroup)
+                    && declares(&element.children, reference)
+        })
+    }
+    let Some(name) = table.name.as_deref() else {
+        return Vec::new();
+    };
+    let Some(bar) = table
+        .auxiliary
+        .iter()
+        .find(|item| item.kind == Some(ElementKind::AutoCommandBar))
+    else {
+        return Vec::new();
+    };
+    let mut sections = ordinary_sections(table);
+    for group in &mut sections {
+        group.retain(|item| {
+            item.key
+                .strip_prefix("Table.")
+                .is_some_and(|key| declares(&bar.children, &format!("Form.Item.{name}.{key}")))
+        });
+    }
+    sections.retain(|group| !group.is_empty());
+    sections
+}
+
+pub(super) fn allows_row_set_change(table: &EffectiveElement) -> bool {
+    !matches!(table.scalar("ChangeRowSet"), Some("false" | "0"))
+}
+
+pub(super) fn allows_row_order_change(table: &EffectiveElement) -> bool {
+    !matches!(table.scalar("ChangeRowOrder"), Some("false" | "0"))
+}
+
+fn ordinary_item(name: &str) -> AutoCommandItem {
+    let mut command = AutoCommandItem::standard("Table", name, false);
+    command.shortcut = match name {
+        "Add" => Some("Ins"),
+        "Copy" => Some("F9"),
+        "Change" => Some("F2"),
+        "Delete" => Some("Del"),
+        "EndEdit" => Some("Shift+F2"),
+        "CancelSearch" => Some("Ctrl+Q"),
+        "MoveUp" => Some("Ctrl+Shift+Up"),
+        "MoveDown" => Some("Ctrl+Shift+Down"),
+        _ => None,
+    };
+    command.picture = Some(picture(name));
+    if name == "EndEdit" {
+        command.caption = caption("TableEndEdit");
+    }
+    command
+}
+
+pub(super) fn dynamic_sections(
     table: &EffectiveElement,
     owner: Option<&ParsedObject>,
     resources: &[FormResource],
@@ -97,6 +179,13 @@ pub(super) fn sections(
         output.push(search_control(table));
     }
     result.push(output);
+    retain_available(table, result)
+}
+
+fn retain_available(
+    table: &EffectiveElement,
+    mut result: Vec<Vec<AutoCommandItem>>,
+) -> Vec<Vec<AutoCommandItem>> {
     for group in &mut result {
         group.retain_mut(|item| {
             if excluded(table, item) {

@@ -246,6 +246,11 @@ pub(super) fn table_items(
     };
     commands
         .iter()
+        .filter(|name| match **name {
+            "Add" => super::table_commands::allows_row_set_change(element),
+            "MoveUp" | "MoveDown" => super::table_commands::allows_row_order_change(element),
+            _ => true,
+        })
         .filter(|name| !excludes(element, name))
         .map(|name| AutoCommandItem::standard("Table", name, false))
         .collect()

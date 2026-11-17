@@ -48,6 +48,127 @@ fn keys(groups: &[Vec<AutoCommandItem>]) -> Vec<Vec<&str>> {
         .collect()
 }
 
+fn ordinary_menu(properties: &str, columns: bool) -> Vec<ElementPresentation> {
+    let column = if columns {
+        r#"<InputField name="Text" id="12"><DataPath>Rows.Text</DataPath></InputField>"#
+    } else {
+        ""
+    };
+    let xml = format!(
+        r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core">
+        <ChildItems><Table name="Rows" id="11"><DataPath>Rows</DataPath>{properties}
+        <ChildItems>{column}</ChildItems></Table>
+        <CommandBar name="External" id="13"><CommandSource>Item.Rows</CommandSource></CommandBar></ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Type><v8:Type>v8:ValueTable</v8:Type></Type></Attribute></Attributes>
+        </Form>"#
+    );
+    let document = parse("ordinary-table", xml).unwrap();
+    present(&compose(&document, &[]), &[document], &[]).elements
+}
+
+#[test]
+fn ordinary_table_menu_matches_native_groups_and_shortcuts_even_when_read_only() {
+    for properties in ["", "<ReadOnly>true</ReadOnly><Output>Disable</Output>"] {
+        let views = ordinary_menu(properties, true);
+        let menu = &views[1].table_command_menu;
+        assert_eq!(
+            keys(menu),
+            [
+                vec![
+                    "Add",
+                    "Copy",
+                    "Change",
+                    "Delete",
+                    "EndEdit",
+                    "FindByCurrentValue",
+                    "Find",
+                    "CancelSearch"
+                ],
+                vec!["MoveUp", "MoveDown"],
+                vec!["SortListAsc", "SortListDesc", "OutputList"]
+            ]
+        );
+        assert_eq!(keys(&views.last().unwrap().table_command_menu), keys(menu));
+        assert_eq!(
+            menu[0].iter().map(|item| item.shortcut).collect::<Vec<_>>(),
+            [
+                Some("Ins"),
+                Some("F9"),
+                Some("F2"),
+                Some("Del"),
+                Some("Shift+F2"),
+                Some("Ctrl+Alt+F"),
+                Some("Alt+F"),
+                Some("Ctrl+Q")
+            ]
+        );
+        assert_eq!(menu[1][0].shortcut, Some("Ctrl+Shift+Up"));
+        assert!(menu[0][5].picture.is_none());
+        assert!(
+            menu.iter()
+                .flatten()
+                .all(|item| item.enabled != Some(false))
+        );
+        assert!(matches!(
+            &menu[0][6].caption,
+            PresentationText::Standard { key } if key == "command.AdvancedSearch"
+        ));
+    }
+}
+
+#[test]
+fn ordinary_table_menu_obeys_row_permissions_search_placement_and_autofill() {
+    let cases = ordinary_menu(
+        "<ChangeRowSet>false</ChangeRowSet><ChangeRowOrder>false</ChangeRowOrder>
+        <SearchStringLocation>None</SearchStringLocation>
+        <CommandSet><ExcludedCommand>EndEdit</ExcludedCommand></CommandSet>",
+        true,
+    );
+    let table = &cases[1];
+    assert!(table.auto_command_items.is_empty());
+    assert_eq!(
+        keys(&table.table_command_menu),
+        [
+            vec!["Change", "FindByCurrentValue", "Find", "CancelSearch"],
+            vec!["OutputList"]
+        ]
+    );
+    let find = &table.table_command_menu[0][2];
+    assert_eq!(find.shortcut, Some("Ctrl+F"));
+    assert!(matches!(
+        &find.caption,
+        PresentationText::Standard { key } if key == "command.Find"
+    ));
+
+    let manual = ordinary_menu(
+        r#"<AutoCommandBar name="RowsBar" id="14"><Autofill>false</Autofill></AutoCommandBar>"#,
+        true,
+    );
+    assert!(manual[1].table_command_menu.is_empty());
+    assert_eq!(keys(&manual.last().unwrap().table_command_menu).len(), 3);
+    let manual_with_commands = ordinary_menu(
+        r#"<AutoCommandBar name="RowsBar" id="14"><Autofill>false</Autofill><ChildItems>
+            <Button name="Search" id="15"><CommandName>Form.Item.Rows.StandardCommand.Find</CommandName>
+                <LocationInCommandBar>InAdditionalSubmenu</LocationInCommandBar></Button>
+            <ButtonGroup name="Group" id="16"><ChildItems>
+                <Button name="Finish" id="17"><CommandName>Form.Item.Rows.StandardCommand.EndEdit</CommandName></Button>
+            </ChildItems></ButtonGroup>
+        </ChildItems></AutoCommandBar>"#,
+        true,
+    );
+    assert_eq!(
+        keys(&manual_with_commands[1].table_command_menu),
+        [vec!["EndEdit", "Find"]]
+    );
+    assert!(manual_with_commands[1].auto_command_items.is_empty());
+    let no_grid = ordinary_menu("", false);
+    assert!(
+        no_grid
+            .iter()
+            .all(|element| element.table_command_menu.is_empty())
+    );
+}
+
 #[test]
 fn catalog_menu_contains_native_actions_sections_shortcuts_and_search_submenu() {
     let resources = [resource(
