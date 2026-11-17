@@ -1272,6 +1272,15 @@ fn form_button_palette_distinguishes_a_missing_type_by_parent_kind() {
     client.finish();
 }
 
+fn assert_no_application_module_events(rows: &[Value]) {
+    for id in ["OnClientApplicationSuspend", "OnClientApplicationResume"] {
+        assert!(
+            rows.iter().all(|row| row["id"] != format!("platform:{id}")),
+            "application-module event {id} must not be advertised on a form"
+        );
+    }
+}
+
 #[test]
 fn form_root_palette_agrees_with_native_defaults_and_settings_visibility() {
     let native: Value = serde_json::from_str(ROOT_PALETTE).unwrap();
@@ -1293,11 +1302,14 @@ fn form_root_palette_agrees_with_native_defaults_and_settings_visibility() {
         };
         let inspected = rows(&mut client, &opened, true);
         let baseline = inspected["rows"].as_array().unwrap();
-        assert_eq!(baseline.len(), 58);
-        for (row, expected) in baseline
+        assert_eq!(baseline.len(), 56);
+        let expected_baseline = expected
             .iter()
-            .zip(expected.iter().filter(|row| row["when"].is_null()))
-        {
+            .filter(|row| row["when"].is_null())
+            .collect::<Vec<_>>();
+        assert_eq!(baseline.len(), expected_baseline.len());
+        assert_no_application_module_events(baseline);
+        for (row, expected) in baseline.iter().zip(expected_baseline) {
             assert_native_row(row, expected, locale);
         }
         for category in inspected["categories"].as_array().unwrap() {
@@ -1324,17 +1336,20 @@ fn form_root_palette_agrees_with_native_defaults_and_settings_visibility() {
                 .as_array()
                 .unwrap()
                 .len(),
-            58
+            56
         );
         let explicit = INPUT.replace("<ChildItems>", &format!("{ROOT_OVERRIDES}<ChildItems>"));
         let updated = update_input(&mut client, &context, &updated, 3, &explicit);
         let inspection = rows(&mut client, &updated, true);
         let actual = inspection["rows"].as_array().unwrap();
-        assert_eq!(actual.len(), 59);
-        for (row, expected) in actual
+        assert_eq!(actual.len(), 57);
+        let expected_explicit = expected
             .iter()
-            .zip(expected.iter().filter(|row| row["when"] != "catalogObject"))
-        {
+            .filter(|row| row["when"] != "catalogObject")
+            .collect::<Vec<_>>();
+        assert_eq!(actual.len(), expected_explicit.len());
+        assert_no_application_module_events(actual);
+        for (row, expected) in actual.iter().zip(expected_explicit) {
             assert_eq!(
                 row["id"],
                 format!("platform:{}", expected["nativeKey"].as_str().unwrap())
@@ -1486,7 +1501,7 @@ fn form_root_palette_uses_the_catalog_owner_and_effective_main_attribute() {
         rows.retain(|row| !row["category"].is_null());
         rows
     };
-    assert_eq!(rows(&mut client, &opened).len(), 58);
+    assert_eq!(rows(&mut client, &opened).len(), 56);
 
     let bound = FORM.replace(
         "<Attributes/>",
@@ -1499,14 +1514,16 @@ fn form_root_palette_uses_the_catalog_owner_and_effective_main_attribute() {
     let updated = update_input(&mut client, &context, &opened, 2, &bound);
     let actual = rows(&mut client, &updated);
     let native: Value = serde_json::from_str(ROOT_PALETTE).unwrap();
-    assert_eq!(actual.len(), 66);
-    for (row, expected) in actual.iter().zip(
-        native["rows"]
-            .as_array()
-            .unwrap()
-            .iter()
-            .filter(|row| row["when"] != "saveList"),
-    ) {
+    assert_eq!(actual.len(), 64);
+    let expected = native["rows"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|row| row["when"] != "saveList")
+        .collect::<Vec<_>>();
+    assert_eq!(actual.len(), expected.len());
+    assert_no_application_module_events(&actual);
+    for (row, expected) in actual.iter().zip(expected) {
         assert_eq!(
             row["id"],
             format!("platform:{}", expected["nativeKey"].as_str().unwrap())
@@ -1516,10 +1533,10 @@ fn form_root_palette_uses_the_catalog_owner_and_effective_main_attribute() {
         }
     }
     let unbound = update_input(&mut client, &context, &updated, 3, FORM);
-    assert_eq!(rows(&mut client, &unbound).len(), 58);
+    assert_eq!(rows(&mut client, &unbound).len(), 56);
     let list = bound.replace("cfg:CatalogObject.ProbeOwner", "cfg:DynamicList");
     let list = update_input(&mut client, &context, &unbound, 4, &list);
-    assert_eq!(rows(&mut client, &list).len(), 58);
+    assert_eq!(rows(&mut client, &list).len(), 56);
     client.finish();
     assert_eq!(fs::read_to_string(payload).unwrap(), FORM);
 }
