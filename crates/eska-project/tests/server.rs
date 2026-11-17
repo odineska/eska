@@ -23,6 +23,8 @@ mod support;
 mod recovery;
 #[path = "server/source_navigation.rs"]
 mod source_navigation;
+#[path = "server/source_labels.rs"]
+mod source_labels;
 #[path = "server/support_objects.rs"]
 mod support_objects;
 

@@ -290,6 +290,9 @@ impl Server {
         if self.client_minor >= 24 {
             result["capabilities"]["sourceNavigation"] = json!(true);
         }
+        if self.client_minor >= 54 {
+            result["capabilities"]["sourceLabels"] = json!(true);
+        }
         self.authoring_capabilities(&mut result["capabilities"]);
         if self.client_minor >= 25 {
             result["capabilities"]["supportObjects"] = json!(true);

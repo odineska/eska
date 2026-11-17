@@ -66,6 +66,7 @@ pub(super) fn is_method(method: &str) -> bool {
             | "metadata/search"
             | "metadata/reveal"
             | "metadata/revealSource"
+            | "metadata/sourceLabels"
             | "metadata/refresh"
             | "metadata/index"
             | "metadata/indexErrors"
@@ -152,6 +153,7 @@ fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Va
         "metadata/formEditHistory" | "metadata/replayFormEdit" => 52,
         "metadata/creationSchema" | "metadata/previewCreate" | "metadata/create" => 48,
         "metadata/revealSource" => 24,
+        "metadata/sourceLabels" => 54,
         "metadata/supportObjects" => 25,
         "metadata/renamePreview" | "metadata/renameApply" => 9,
         "metadata/propertyReferenceChoices" => 7,
@@ -469,6 +471,11 @@ fn metadata_read(
         }
         "metadata/search" => search(project, args),
         "metadata/revealSource" => reveal_source(labels, project, args),
+        "metadata/sourceLabels" => super::source_labels::labels(
+            labels,
+            project.project().configuration().project_type(),
+            args,
+        ),
         "metadata/reveal" => {
             let id: ObjectId = params::decode(&args["objectId"])?;
             let ancestry = reveal_ancestry(project, &id)?;
