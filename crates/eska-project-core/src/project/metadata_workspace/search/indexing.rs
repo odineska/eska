@@ -52,7 +52,7 @@ impl ProjectSession {
     ) -> Result<(), WorkspaceError> {
         let parsed = self.load(owner, PropertiesMode::Summary)?;
         let mut diagnostics = parsed.diagnostics.clone();
-        let tree = ConfiguratorTree::build(&self.schema, &parsed, &BTreeMap::new())
+        let tree = ConfiguratorTree::build(&self.schema, &parsed, &BTreeMap::new(), "")
             .map_err(WorkspaceError::Tree)?;
         self.verify_source(owner)?;
         let references: BTreeSet<_> = parsed

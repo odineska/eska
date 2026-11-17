@@ -284,17 +284,11 @@ fn value_caption(
 }
 
 fn absent(labels: &Labels, default: PlatformPropertyValue) -> Value {
-    let caption = match default {
-        PlatformPropertyValue::Auto => Some("auto"),
-        PlatformPropertyValue::AutoStretch => Some("autoStretch"),
-        PlatformPropertyValue::Choice(value) => Some(value),
-        PlatformPropertyValue::Dialog => Some("open"),
-        PlatformPropertyValue::Unknown => Some("unknown"),
-        PlatformPropertyValue::Boolean(_)
-        | PlatformPropertyValue::Number(_)
-        | PlatformPropertyValue::Empty => None,
-    };
-    json!({"kind":"absent","default":default,"caption":caption.map(|key|translate(labels,&format!("form-palette-value-{key}")))})
+    let caption = super::super::dto::translations(
+        labels.ru.form_default_caption(default),
+        labels.en.form_default_caption(default),
+    );
+    json!({"kind":"absent","default":default,"caption":caption})
 }
 
 fn translate(labels: &Labels, key: &str) -> Value {

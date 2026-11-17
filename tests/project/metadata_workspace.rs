@@ -21,6 +21,7 @@ mod forms;
 mod query;
 mod renaming;
 mod source_navigation;
+mod standard_attributes;
 
 /// Copy static fixtures into a uniquely owned playground directory.
 fn copy(source: &Path, target: &Path) {
@@ -126,7 +127,10 @@ fn workspace_walks_four_project_types_without_writing_files() {
                 other => panic!("{case}: {other:?}"),
             }
             let sources = session.source(&id).unwrap();
-            if matches!(id, NodeId::Collection { .. }) {
+            if matches!(
+                id,
+                NodeId::Collection { .. } | NodeId::StandardAttribute { .. }
+            ) {
                 assert_eq!(sources, []);
             } else {
                 assert_ne!(sources, []);

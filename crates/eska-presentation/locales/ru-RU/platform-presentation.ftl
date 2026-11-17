@@ -134,3 +134,5 @@ platform-type-set-BusinessProcess = Любой бизнес-процесс
 platform-type-set-Task = Любая задача
 platform-type-set-Report = Любой отчет
 platform-type-set-DataProcessor = Любая обработка
+
+platform-type-set-BusinessProcessRoutePointRef = Ссылка на точку маршрута бизнес-процесса

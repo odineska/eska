@@ -75,3 +75,84 @@ pub(super) fn navigate(
     }
     Ok(result)
 }
+
+#[derive(Deserialize)]
+struct EditTarget {
+    revision: String,
+    target: eska_project_core::project::metadata_form_edit::FormTarget,
+    event: String,
+    input: Option<Input>,
+}
+
+pub(super) fn edit(
+    context: &Context<'_>,
+    entry: &Entry,
+    queries: &query::State,
+    plan: bool,
+    args: &Value,
+) -> Result<Value, Value> {
+    if entry.last_error.is_some() {
+        return Err(failure("stale_form_model"));
+    }
+    let request: EditTarget = params::decode(args)?;
+    if params::counter(&request.revision)? != entry.revision {
+        return Err(failure("stale_form_revision"));
+    }
+    if plan != request.input.is_some() {
+        return Err(error(-32602));
+    }
+    let module = context
+        .project
+        .form_handler_edit_source(
+            &entry.node,
+            entry.application.as_deref(),
+            &entry.preview,
+            &request.target,
+            &request.event,
+            context.activity,
+        )
+        .map_err(preview_error)?
+        .ok_or_else(|| failure("handler_unavailable"))?;
+    let mut result = json!({"source":module.source.id, "root":dto::path(&module.source.root), "path":dto::path(&module.source.path), "name":module.source.name,
+        "exists":module.exists,"bound":module.bound, "revision":entry.revision.to_string()});
+    if let Some(input) = request.input {
+        if input.source != module.source.id || input.version.is_empty() {
+            return Err(failure("foreign_handler_input"));
+        }
+        let text = queries
+            .input_text(
+                &entry.key,
+                input.text.as_deref(),
+                input.buffer_id.as_deref(),
+            )?
+            .ok_or_else(|| error(-32602))?;
+        let edit = forms::handler_edit_plan(text, &module).map_err(|error| match error {
+            forms::HandlerEditError::Lookup(forms::HandlerLookupError::TooLarge) => limit(),
+            forms::HandlerEditError::Lookup(forms::HandlerLookupError::Ambiguous) => {
+                failure("handler_ambiguous")
+            }
+            forms::HandlerEditError::Unavailable => failure("handler_unavailable"),
+            _ => failure("handler_module_invalid"),
+        })?;
+        let output = edit.change.as_ref().map_or_else(
+            || text.to_owned(),
+            |change| {
+                format!(
+                    "{}{}{}",
+                    &text[..change.range.start],
+                    change.text,
+                    &text[change.range.end..]
+                )
+            },
+        );
+        result["snapshot"] = json!(snapshot(text));
+        result["outputSnapshot"] = json!(snapshot(&output));
+        result["range"] = json!(edit.range);
+        result["version"] = json!(input.version);
+        result["change"] = edit.change.map_or(
+            Value::Null,
+            |change| json!({"range":change.range, "text":change.text}),
+        );
+    }
+    Ok(result)
+}

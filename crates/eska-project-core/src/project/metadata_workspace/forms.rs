@@ -63,6 +63,31 @@ impl ProjectSession {
         forms::handler_source(&context, owner, preview, index).map_err(FormPreviewError::Form)
     }
 
+    /// Resolve an editable event and its checked existing or missing module destination.
+    ///
+    /// # Errors
+    /// Returns changed ownership/context or checked source failures.
+    pub fn form_handler_edit_source(
+        &self,
+        node: &NodeId,
+        application: Option<&str>,
+        preview: &FormPreview,
+        target: &crate::project::metadata_form_edit::FormTarget,
+        event: &str,
+        activity: Option<&crate::project::activity::State>,
+    ) -> Result<Option<forms::FormHandlerEditSource>, FormPreviewError> {
+        let (owner, context) = self.form_context(node, application, activity)?;
+        forms::handler_edit_source(
+            &context,
+            self.project().source(),
+            owner,
+            preview,
+            target,
+            event,
+        )
+        .map_err(FormPreviewError::Form)
+    }
+
     fn form_context<'a>(
         &self,
         node: &'a NodeId,

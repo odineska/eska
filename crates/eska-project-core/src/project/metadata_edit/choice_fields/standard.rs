@@ -1,7 +1,50 @@
-//! Fixed source fields and their owner-dependent availability in the installed EDT model.
+//! Platform standard fields and their owner-dependent availability in Designer XML.
 
 use super::child;
+use crate::project::{
+    metadata_model::{MetadataProperty, MetadataValue},
+    metadata_parser::ParsedObject,
+};
 use roxmltree::Node;
+
+/// Metadata exposes latent settings too: a disabled data field can still be inspected in Designer.
+pub fn parsed_fields(owner: &ParsedObject, compatibility: &str) -> Vec<&'static str> {
+    catalog(
+        owner.metadata.kind().designer_tag(),
+        compatibility,
+        &|name| scalar(owner, name),
+    )
+}
+
+pub fn scalar<'a>(owner: &'a ParsedObject, name: &str) -> Option<&'a str> {
+    property(owner, name).and_then(|field| match &field.value {
+        MetadataValue::Text(value)
+        | MetadataValue::QualifiedText { text: value, .. }
+        | MetadataValue::TypedText { text: value, .. } => Some(value.as_str()),
+        _ => None,
+    })
+}
+
+/// Match the reviewed native editor limit without manufacturing fields from invalid counts.
+pub fn extra_dimension_count(value: &str) -> Option<u32> {
+    value
+        .parse()
+        .ok()
+        .filter(|count| *count <= super::super::ext_dimensions::MAX_COUNT)
+}
+
+/// Ignore foreign fields with a colliding local name.
+pub fn property<'a>(owner: &'a ParsedObject, name: &str) -> Option<&'a MetadataProperty> {
+    owner
+        .properties
+        .as_ref()?
+        .iter()
+        .find(|field| {
+            field.property.key.namespace.as_deref() == Some(super::MD)
+                && field.property.key.name == name
+        })
+        .map(|field| &field.property)
+}
 
 /// Only metadata owners with a reviewed choice-field provider participate.
 pub(super) fn supported(kind: &str) -> bool {
@@ -9,6 +52,8 @@ pub(super) fn supported(kind: &str) -> bool {
         kind,
         "Catalog"
             | "Document"
+            | "DocumentJournal"
+            | "Enum"
             | "Report"
             | "DataProcessor"
             | "ExternalReport"
@@ -49,6 +94,18 @@ pub fn fields_for<'a>(
     value: &dyn Fn(&str) -> Option<&'a str>,
     has_owners: bool,
 ) -> Vec<&'static str> {
+    catalog(kind, compatibility, value)
+        .into_iter()
+        .filter(|name| available(kind, name, value, has_owners))
+        .collect()
+}
+
+/// One metadata catalog feeds both the read-only tree and applicable data-field choices.
+fn catalog<'a>(
+    kind: &str,
+    compatibility: &str,
+    value: &dyn Fn(&str) -> Option<&'a str>,
+) -> Vec<&'static str> {
     let mut result = match kind {
         "Catalog"
         | "ChartOfAccounts"
@@ -58,16 +115,28 @@ pub fn fields_for<'a>(
             if newer_than(compatibility, 2) {
                 fields.push("PredefinedDataName");
             }
-            for (property, name) in [("CodeLength", "Code"), ("DescriptionLength", "Description")] {
-                if positive(value, property) {
-                    fields.push(name);
-                }
-            }
+            fields.extend(["Code", "Description"]);
             fields
         }
         "Document" => vec!["Ref", "DeletionMark", "Date", "Posted"],
-        "BusinessProcess" => vec!["Ref", "DeletionMark", "Date", "Started", "Completed"],
-        "Task" => vec!["Ref", "DeletionMark", "Date", "Executed"],
+        "DocumentJournal" => vec!["Type", "Ref", "Date", "Posted", "DeletionMark", "Number"],
+        "Enum" => vec!["Ref", "Order"],
+        "BusinessProcess" => vec![
+            "Ref",
+            "DeletionMark",
+            "Date",
+            "Started",
+            "Completed",
+            "HeadTask",
+        ],
+        "Task" => vec![
+            "Ref",
+            "DeletionMark",
+            "Date",
+            "Executed",
+            "BusinessProcess",
+            "RoutePoint",
+        ],
         "ExchangePlan" => vec![
             "Ref",
             "DeletionMark",
@@ -76,69 +145,60 @@ pub fn fields_for<'a>(
             "SentNo",
             "ReceivedNo",
             "ThisNode",
+            "ExchangeDate",
         ],
         "TabularSection" => vec!["LineNumber"],
         "AccumulationRegister" | "AccountingRegister" => {
             vec!["Active", "LineNumber", "Recorder", "Period"]
         }
-        "CalculationRegister" => vec!["RegistrationPeriod", "Active", "LineNumber", "Recorder"],
-        "InformationRegister" if value("WriteMode") == Some("RecorderSubordinate") => {
+        "CalculationRegister" => vec![
+            "RegistrationPeriod",
+            "Active",
+            "LineNumber",
+            "Recorder",
+            "CalculationType",
+            "ActionPeriod",
+            "BegOfActionPeriod",
+            "EndOfActionPeriod",
+            "BegOfBasePeriod",
+            "EndOfBasePeriod",
+            "ReversingEntry",
+        ],
+        "InformationRegister" => {
             vec!["Active", "LineNumber", "Recorder"]
         }
         _ => Vec::new(),
     };
-    append_conditional(kind, value, has_owners, compatibility, &mut result);
+    append_metadata(kind, value, compatibility, &mut result);
     result
 }
 
-/// Keep availability predicates separate from the owner's unconditional fixed fields.
-fn append_conditional<'a>(
+/// Version-dependent additions differ from data availability: old platforms lack the metadata field.
+fn append_metadata<'a>(
     kind: &str,
     value: &dyn Fn(&str) -> Option<&'a str>,
-    has_owners: bool,
     compatibility: &str,
     result: &mut Vec<&'static str>,
 ) {
     match kind {
-        "Catalog" => {
-            if enabled(value, "Hierarchical") {
-                result.push("Parent");
-                if value("HierarchyType") == Some("HierarchyFoldersAndItems") {
-                    result.push("IsFolder");
-                }
-            }
-            if has_owners {
-                result.push("Owner");
-            }
-        }
+        "Catalog" => result.extend(["Parent", "IsFolder", "Owner"]),
         "ChartOfAccounts" => {
-            result.extend(["Parent", "Type", "OffBalance"]);
-            if positive(value, "OrderLength") {
-                result.push("Order");
-            }
+            result.extend(["Parent", "Type", "OffBalance", "Order"]);
         }
-        "ChartOfCalculationTypes" if enabled(value, "ActionPeriodUse") => {
+        "ChartOfCalculationTypes" => {
             result.push("ActionPeriodIsBasic");
         }
         "ChartOfCharacteristicTypes" => {
-            result.push("ValueType");
-            if enabled(value, "Hierarchical") {
-                result.extend(["Parent", "IsFolder"]);
-            }
+            result.extend(["ValueType", "Parent", "IsFolder"]);
         }
-        "InformationRegister"
-            if value("InformationRegisterPeriodicity")
-                .is_some_and(|value| value != "Nonperiodical") =>
-        {
+        "InformationRegister" => {
             result.push("Period");
         }
         "AccumulationRegister" if value("RegisterType") == Some("Balance") => {
             result.push("RecordType");
         }
         "AccountingRegister" => {
-            if value("ChartOfAccounts").is_some_and(|value| !value.is_empty()) {
-                result.push("Account");
-            }
+            result.push("Account");
             if !enabled(value, "Correspondence") {
                 result.push("RecordType");
             }
@@ -147,14 +207,53 @@ fn append_conditional<'a>(
             }
         }
         "Document" | "BusinessProcess" | "Task" => {
-            if positive(value, "NumberLength") {
-                result.push("Number");
-            }
-            if kind == "Task" && positive(value, "DescriptionLength") {
+            result.push("Number");
+            if kind == "Task" {
                 result.push("Description");
             }
         }
         _ => (),
+    }
+}
+
+/// Disabled metadata settings must never become writable data paths or query columns.
+fn available<'a>(
+    kind: &str,
+    name: &str,
+    value: &dyn Fn(&str) -> Option<&'a str>,
+    has_owners: bool,
+) -> bool {
+    match name {
+        "Code" | "Description" if kind != "ExchangePlan" => {
+            positive(value, &format!("{name}Length"))
+        }
+        "Number" if kind != "DocumentJournal" => positive(value, "NumberLength"),
+        "Parent" if kind != "ChartOfAccounts" => enabled(value, "Hierarchical"),
+        "IsFolder" => {
+            enabled(value, "Hierarchical")
+                && (kind != "Catalog" || value("HierarchyType") == Some("HierarchyFoldersAndItems"))
+        }
+        "Owner" => has_owners,
+        "Order" if kind == "ChartOfAccounts" => positive(value, "OrderLength"),
+        "ActionPeriodIsBasic" => enabled(value, "ActionPeriodUse"),
+        "Active" | "LineNumber" | "Recorder" if kind == "InformationRegister" => {
+            value("WriteMode") == Some("RecorderSubordinate")
+        }
+        "Period" if kind == "InformationRegister" => {
+            value("InformationRegisterPeriodicity").is_some_and(|value| value != "Nonperiodical")
+        }
+        "RecordType" if kind == "AccumulationRegister" => value("RegisterType") == Some("Balance"),
+        "RecordType" if kind == "AccountingRegister" => !enabled(value, "Correspondence"),
+        "Account" => value("ChartOfAccounts").is_some_and(|value| !value.is_empty()),
+        "CalculationType" => {
+            value("ChartOfCalculationTypes").is_some_and(|value| !value.is_empty())
+        }
+        "ActionPeriod" | "BegOfActionPeriod" | "EndOfActionPeriod" => {
+            enabled(value, "ActionPeriod")
+        }
+        "BegOfBasePeriod" | "EndOfBasePeriod" => enabled(value, "BasePeriod"),
+        "Type" if kind == "DocumentJournal" => false,
+        _ => true,
     }
 }
 
@@ -184,3 +283,6 @@ fn enabled<'a>(value: &dyn Fn(&str) -> Option<&'a str>, name: &str) -> bool {
 fn text<'a>(properties: Node<'a, '_>, name: &str) -> Option<&'a str> {
     child(properties, name)?.text()
 }
+
+#[cfg(test)]
+mod tests;

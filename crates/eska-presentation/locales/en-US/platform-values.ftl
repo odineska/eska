@@ -2407,3 +2407,51 @@ platform-value-StyleReference-accentcolor = Accent color
 platform-value-StyleReference-activitycolor = Activity color
 platform-value-StyleReference-navigationcolor = Navigation color
 platform-value-StyleReference-auxiliarynavigationcolor = Auxiliary navigation color
+
+# Platform standard attributes and their implicit type domains.
+platform-value-StandardAttribute-RoutePoint = Route point
+platform-value-StandardAttribute-ExchangeDate = Exchange date
+platform-value-PrimitiveType-Type = Type
+platform-value-PrimitiveType-TypeDescription = Type description
+platform-value-PrimitiveType-AccountType = Account type
+platform-value-PrimitiveType-AccumulationRecordType = Accumulation record type
+platform-value-PrimitiveType-AccountingRecordType = Accounting record type
+
+# Scoped values from form and dynamic-list settings.
+platform-value-RadioButtonType-Auto = { form-palette-value-auto }
+platform-value-RadioButtonType-RadioButtons = Radio buttons
+platform-value-RadioButtonType-Tumbler = { form-palette-value-tumblers }
+platform-value-ChildItemsWidth-Equal = Equal
+platform-value-ChildItemsWidth-LeftNarrowest = Left narrowest
+platform-value-ChildItemsWidth-LeftWidest = Left widest
+platform-value-ChildItemsWidth-LeftWide = Left wide
+platform-value-DataCompositionViewMode-Normal = Normal
+platform-value-DataCompositionViewMode-Inaccessible = Inaccessible
+platform-value-DataCompositionOrder-Asc = Ascending
+platform-value-DataCompositionOrder-Desc = Descending
+platform-value-DataCompositionGroup-AndGroup = AND group
+platform-value-DataCompositionGroup-OrGroup = OR group
+platform-value-DataCompositionGroup-NotGroup = NOT group
+platform-value-DataCompositionGroup-Items = Items
+platform-value-ReportFormType-Settings = Settings
+platform-value-ReportFormType-Main = Main
+platform-value-ReportFormType-Variant = Variant
+platform-value-SelectionShowMode-WhenActive = When active
+platform-value-SelectionShowMode-Always = Always
+platform-value-AutoShowState-Auto = { form-palette-value-auto }
+platform-value-AutoShowState-DontShow = Do not show
+platform-value-ViewMode-All = All
+platform-value-ViewScalingMode-Normal = Normal
+platform-value-AutoShowOpenButtonMode-Auto = { form-palette-value-auto }
+platform-value-AutoShowOpenButtonMode-Always = Always
+platform-value-AutoShowOpenButtonMode-Never = Never
+platform-value-PeriodAdditionType-None = Do not complete
+
+# Native Designer 8.3.27 standard attributes; numbered fields follow the assigned chart.
+platform-value-StandardAttribute-BegOfActionPeriod = { platform-value-StandardAttribute-ActionPeriodBegin }
+platform-value-StandardAttribute-EndOfActionPeriod = { platform-value-StandardAttribute-ActionPeriodEnd }
+platform-value-StandardAttribute-BegOfBasePeriod = { platform-value-StandardAttribute-BasePeriodBegin }
+platform-value-StandardAttribute-EndOfBasePeriod = { platform-value-StandardAttribute-BasePeriodEnd }
+platform-value-StandardAttribute-ReversingEntry = Reversing entry
+platform-value-StandardAttribute-ExtDimension = Extra dimension { $index }
+platform-value-StandardAttribute-ExtDimensionType = Extra dimension type { $index }

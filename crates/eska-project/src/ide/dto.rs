@@ -1,6 +1,6 @@
 //! Explicit protocol DTO conversion; internal serde representations are not the wire format.
 
-use eska_presentation::localization::{Locale, Localizer};
+use eska_presentation::localization::{Locale, LocalizationValue, Localizer};
 use eska_project_core::project::{
     configurator::{ChildrenState, TreeLabel, TreeNode},
     designer_source::{SourceLocation, SourceRole},
@@ -30,14 +30,22 @@ impl Labels {
     pub(super) fn caption(&self, key: &str) -> Value {
         json!({"ru-RU":self.ru.text(key),"en-US":self.en.text(key)})
     }
+    pub(super) fn label(&self, value: &TreeLabel) -> Value {
+        match value {
+            TreeLabel::Name(text) => json!({"kind":"name","text":text}),
+            TreeLabel::Key(key) => json!({"kind":"key","key":key,"translations":self.caption(key)}),
+            TreeLabel::IndexedKey { key, index } => {
+                let arguments = [("index", LocalizationValue::Number(i64::from(*index)))];
+                json!({"kind":"key","key":key,"translations":{
+                    "ru-RU":self.ru.format(key, &arguments),
+                    "en-US":self.en.format(key, &arguments)
+                }})
+            }
+        }
+    }
     /// Project one node without serializing its potentially large children list.
     pub fn node(&self, value: &TreeNode) -> Value {
-        let label = match &value.label {
-            TreeLabel::Name(text) => json!({"kind":"name","text":text}),
-            TreeLabel::Key(key) => {
-                json!({"kind":"key","key":key,"translations":{"ru-RU":self.ru.text(key),"en-US":self.en.text(key)}})
-            }
-        };
+        let label = self.label(&value.label);
         let state = match value.state {
             ChildrenState::Empty => "empty",
             ChildrenState::NonEmpty => "non_empty",
@@ -67,6 +75,9 @@ impl Labels {
 pub fn node_id(value: &NodeId) -> Value {
     match value {
         NodeId::Object(id) => json!({"kind":"object","objectId":id.as_str()}),
+        NodeId::StandardAttribute { owner, name } => {
+            json!({"kind":"standardAttribute","owner":owner.as_str(),"name":name})
+        }
         NodeId::Module { owner, role } => {
             json!({"kind":"module","owner":owner.as_str(),"role":role.as_str()})
         }
@@ -79,6 +90,7 @@ pub fn node_id(value: &NodeId) -> Value {
                     json!({"kind":"metadata","metadataKind":kind.as_str()})
                 }
                 CollectionKind::Common => json!({"kind":"common"}),
+                CollectionKind::StandardAttributes => json!({"kind":"standardAttributes"}),
                 CollectionKind::Modules => json!({"kind":"modules"}),
                 CollectionKind::Unsupported => json!({"kind":"unsupported"}),
             };
@@ -127,6 +139,35 @@ pub(super) fn property_record(
     value: &MetadataProperty,
 ) -> Value {
     field(labels, owner, &value.key, &mut Vec::new(), value)
+}
+
+/// Preserve the standard-attribute XML context when presenting saved overrides without its wrappers.
+pub(super) fn standard_attribute_property(
+    labels: &Labels,
+    owner: MetadataKind,
+    label: &TreeLabel,
+    value: &MetadataProperty,
+) -> Value {
+    use eska_project_core::project::metadata_model::PropertyKey;
+    let root = PropertyKey {
+        namespace: Some("http://v8.1c.ru/8.3/MDClasses".into()),
+        name: "StandardAttributes".into(),
+    };
+    let attribute = PropertyKey {
+        namespace: Some("http://v8.1c.ru/8.3/xcf/readable".into()),
+        name: "StandardAttribute".into(),
+    };
+    let mut result = if value.key.namespace == attribute.namespace {
+        field(labels, owner, &root, &mut vec![&root, &attribute], value)
+    } else {
+        property_record(labels, owner, value)
+    };
+    if value.key.name == "Name" {
+        result["value"]["caption"] = labels.label(label)["translations"].clone();
+    }
+    // The virtual node intentionally has no editable source range.
+    result["range"] = json!({"start":0,"end":0});
+    result
 }
 
 /// Nested record fields retain repeats and qualifiers rather than becoming a JSON map.

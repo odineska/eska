@@ -95,6 +95,7 @@ impl ProjectSession {
         self.node(id)?;
         let owner = match id {
             NodeId::Object(owner)
+            | NodeId::StandardAttribute { owner, .. }
             | NodeId::Collection { owner, .. }
             | NodeId::Module { owner, .. } => owner,
         };
@@ -161,6 +162,16 @@ impl ProjectSession {
                 affected: Vec::new(),
             });
         }
+        let dependents = self
+            .standard_attribute_dependencies
+            .iter()
+            .filter(|(_, dependencies)| {
+                dependencies
+                    .iter()
+                    .any(|dependency| owners.contains(dependency))
+            })
+            .map(|(owner, _)| owner.clone());
+        let owners: BTreeSet<_> = owners.iter().cloned().chain(dependents).collect();
         self.generation = self
             .generation
             .checked_add(1)
@@ -175,7 +186,7 @@ impl ProjectSession {
                 self.cancel_search_index();
             }
         }
-        for owner in owners {
+        for owner in &owners {
             if !full {
                 self.search_index.invalidate(owner, &root);
             }
@@ -210,6 +221,7 @@ impl ProjectSession {
 
     /// Remove descendants while retaining the owner's stable selectable placeholder.
     fn collapse(&mut self, owner: &ObjectId, affected: &mut BTreeSet<ObjectId>) {
+        self.standard_attribute_dependencies.remove(owner);
         let id = NodeId::Object(owner.clone());
         let mut pending = self
             .nodes
@@ -271,6 +283,7 @@ impl ProjectSession {
         let old_nodes = std::mem::take(&mut self.nodes);
         let old_objects = std::mem::take(&mut self.objects);
         let old_expanded = std::mem::take(&mut self.expanded);
+        let old_compatibility = self.standard_attribute_compatibility.clone();
         self.cache.remove(&self.source.descriptor().to_path_buf());
         self.fingerprints.remove(self.source.descriptor());
         self.by_path.clear();
@@ -288,11 +301,17 @@ impl ProjectSession {
         }
         // Root lists reference top-level owners. Graft only those still declared by the root.
         affected.extend(self.expanded.iter().cloned());
+        let invalid_dependencies = self.invalid_standard_attribute_owners();
+        affected.extend(invalid_dependencies.iter().cloned());
         let retained: Vec<_> = self
             .objects
             .keys()
             .filter(|id| {
-                **id != owner && old_expanded.contains(*id) && !self.expanded.contains(*id)
+                old_compatibility == self.standard_attribute_compatibility
+                    && **id != owner
+                    && old_expanded.contains(*id)
+                    && !self.expanded.contains(*id)
+                    && !invalid_dependencies.contains(*id)
             })
             .cloned()
             .collect();
@@ -327,6 +346,13 @@ impl ProjectSession {
                 affected.insert(id.clone());
             }
         }
+        self.standard_attribute_dependencies
+            .retain(|owner, dependencies| {
+                self.expanded.contains(owner)
+                    && dependencies
+                        .iter()
+                        .all(|dependency| self.objects.contains_key(dependency))
+            });
         let ids: Vec<_> = self.objects.keys().cloned().collect();
         for id in ids {
             self.register_paths(&id)?;

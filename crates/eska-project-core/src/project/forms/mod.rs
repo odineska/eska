@@ -34,7 +34,8 @@ pub use context::{
     FormPreviewInput, load, validate_expanded_data,
 };
 pub use handlers::{
-    FormHandler, FormHandlerOwner, FormHandlerSource, HandlerLookupError, handler_range,
+    FormHandler, FormHandlerEditSource, FormHandlerOwner, FormHandlerSource, HandlerEditError,
+    HandlerEditPlan, HandlerLookupError, handler_edit_plan, handler_edit_source, handler_range,
     handler_source, handlers,
 };
 pub use palette::{
@@ -44,6 +45,7 @@ pub use palette::{
 pub use parsing::parse;
 pub use pictures::{ButtonRepresentation, FormPicture, FormPictureSelection};
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
+pub(crate) use presentation::standard_type_for;
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
     FormPresentation, FormScriptVariant, InspectorDataField, NumberSign, PresentationText,

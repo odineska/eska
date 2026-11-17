@@ -102,6 +102,10 @@ enum Node {
     Object {
         object_id: ObjectId,
     },
+    StandardAttribute {
+        owner: ObjectId,
+        name: String,
+    },
     Module {
         owner: ObjectId,
         role: String,
@@ -119,6 +123,7 @@ enum Collection {
         metadata_kind: String,
     },
     Common,
+    StandardAttributes,
     Modules,
     Unsupported,
 }
@@ -127,6 +132,10 @@ enum Collection {
 pub(super) fn node(value: &Value) -> Result<NodeId, Value> {
     Ok(match decode::<Node>(value)? {
         Node::Object { object_id } => NodeId::Object(object_id),
+        Node::StandardAttribute { owner, name } if !name.is_empty() => {
+            NodeId::StandardAttribute { owner, name }
+        }
+        Node::StandardAttribute { .. } => return Err(error(-32602)),
         Node::Module { owner, role } => {
             let roles = [
                 ModuleRole::Module,
@@ -152,6 +161,7 @@ pub(super) fn node(value: &Value) -> Result<NodeId, Value> {
             owner,
             kind: match collection {
                 Collection::Common => CollectionKind::Common,
+                Collection::StandardAttributes => CollectionKind::StandardAttributes,
                 Collection::Modules => CollectionKind::Modules,
                 Collection::Unsupported => CollectionKind::Unsupported,
                 Collection::Metadata { metadata_kind } => CollectionKind::Metadata(

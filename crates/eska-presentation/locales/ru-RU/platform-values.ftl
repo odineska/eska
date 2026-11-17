@@ -2407,3 +2407,51 @@ platform-value-StyleReference-accentcolor = Цвет акцента
 platform-value-StyleReference-activitycolor = Цвет активности
 platform-value-StyleReference-navigationcolor = Цвет навигации
 platform-value-StyleReference-auxiliarynavigationcolor = Цвет вспомогательной навигации
+
+# Platform standard attributes and their implicit type domains.
+platform-value-StandardAttribute-RoutePoint = Точка маршрута
+platform-value-StandardAttribute-ExchangeDate = Дата обмена
+platform-value-PrimitiveType-Type = Тип
+platform-value-PrimitiveType-TypeDescription = Описание типов
+platform-value-PrimitiveType-AccountType = Вид счета
+platform-value-PrimitiveType-AccumulationRecordType = Вид движения накопления
+platform-value-PrimitiveType-AccountingRecordType = Вид движения бухгалтерии
+
+# Scoped values from form and dynamic-list settings.
+platform-value-RadioButtonType-Auto = { form-palette-value-auto }
+platform-value-RadioButtonType-RadioButtons = Переключатели
+platform-value-RadioButtonType-Tumbler = { form-palette-value-tumblers }
+platform-value-ChildItemsWidth-Equal = Одинаковая
+platform-value-ChildItemsWidth-LeftNarrowest = Левый самый узкий
+platform-value-ChildItemsWidth-LeftWidest = Левый самый широкий
+platform-value-ChildItemsWidth-LeftWide = Левый широкий
+platform-value-DataCompositionViewMode-Normal = Обычный
+platform-value-DataCompositionViewMode-Inaccessible = Недоступен
+platform-value-DataCompositionOrder-Asc = По возрастанию
+platform-value-DataCompositionOrder-Desc = По убыванию
+platform-value-DataCompositionGroup-AndGroup = Группа И
+platform-value-DataCompositionGroup-OrGroup = Группа ИЛИ
+platform-value-DataCompositionGroup-NotGroup = Группа НЕ
+platform-value-DataCompositionGroup-Items = Элементы
+platform-value-ReportFormType-Settings = Настройки
+platform-value-ReportFormType-Main = Основная
+platform-value-ReportFormType-Variant = Вариант
+platform-value-SelectionShowMode-WhenActive = При активизации
+platform-value-SelectionShowMode-Always = Всегда
+platform-value-AutoShowState-Auto = { form-palette-value-auto }
+platform-value-AutoShowState-DontShow = Не отображать
+platform-value-ViewMode-All = Все
+platform-value-ViewScalingMode-Normal = Обычный
+platform-value-AutoShowOpenButtonMode-Auto = { form-palette-value-auto }
+platform-value-AutoShowOpenButtonMode-Always = Всегда
+platform-value-AutoShowOpenButtonMode-Never = Никогда
+platform-value-PeriodAdditionType-None = Не дополнять
+
+# Native Designer 8.3.27 standard attributes; numbered fields follow the assigned chart.
+platform-value-StandardAttribute-BegOfActionPeriod = { platform-value-StandardAttribute-ActionPeriodBegin }
+platform-value-StandardAttribute-EndOfActionPeriod = { platform-value-StandardAttribute-ActionPeriodEnd }
+platform-value-StandardAttribute-BegOfBasePeriod = { platform-value-StandardAttribute-BasePeriodBegin }
+platform-value-StandardAttribute-EndOfBasePeriod = { platform-value-StandardAttribute-BasePeriodEnd }
+platform-value-StandardAttribute-ReversingEntry = Сторно
+platform-value-StandardAttribute-ExtDimension = Субконто { $index }
+platform-value-StandardAttribute-ExtDimensionType = Вид субконто { $index }

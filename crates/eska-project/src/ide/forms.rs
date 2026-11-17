@@ -97,6 +97,9 @@ pub(super) fn capability(minor: u32) -> Value {
     if minor >= 53 {
         result["propertySearch"] = json!(true);
     }
+    if minor >= 54 {
+        result["handlerAuthoring"] = json!(true);
+    }
     result
 }
 pub(super) fn is_method(method: &str) -> bool {
@@ -112,6 +115,8 @@ pub(super) fn is_method(method: &str) -> bool {
             | "form/searchProperties"
             | "form/handlerSource"
             | "form/handlerLocate"
+            | "form/handlerEditSource"
+            | "form/handlerEditPlan"
     )
 }
 impl State {
@@ -203,6 +208,18 @@ impl Server {
                 }
                 "form/searchProperties" if self.client_minor >= 53 => {
                     palette::search(&self.labels, entry, &input.form_session_id, args)?
+                }
+                "form/handlerEditSource" | "form/handlerEditPlan" => {
+                    if self.client_minor < 54 {
+                        return Err(error(-32601));
+                    }
+                    handlers::edit(
+                        &context,
+                        entry,
+                        &self.queries,
+                        method == "form/handlerEditPlan",
+                        args,
+                    )?
                 }
                 "form/handlerSource" | "form/handlerLocate" => {
                     if self.client_minor < 39 {

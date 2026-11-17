@@ -7,15 +7,15 @@
 ## Ресурсы
 
 - `crates/eska-presentation/locales/{ru-RU,en-US}/main.ftl` — интерфейс CLI, сообщения и диагностика ESKA.
-- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-8.3.27.ftl` — базовый словарь: 424 подписи
-  свойств/вложенных полей и 81 ранее существовавшая подпись дерева.
+- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-8.3.27.ftl` — базовый словарь
+  свойств, вложенных полей, палитр и дерева.
 - `crates/eska-presentation/locales/{ru-RU,en-US}/platform-8.5.1.ftl` — 16 дополнительных подписей.
-- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-values.ftl` — 785 подписей значений: 678 членов
-  135 перечислений EDT, дополнительные токены Designer, встроенные типы,
+- `crates/eska-presentation/locales/{ru-RU,en-US}/platform-values.ftl` — подписи значений
+  перечислений, дополнительные токены Designer, встроенные типы,
   стандартные реквизиты, события и группы команд.
 - [platform-values.tsv](../crates/eska-presentation/locales/platform-values.tsv) — тип, имя, литерал и FTL-ключ
   каждого значения; тексты переводов остаются только в FTL.
-- [platform-catalog.tsv](../crates/eska-presentation/locales/platform-catalog.tsv) — 440 идентичностей
+- [platform-catalog.tsv](../crates/eska-presentation/locales/platform-catalog.tsv) — идентичности
   подписей: Fluent key, XML namespace, имя, контекст владельца, версия каталога.
 - [platform-coverage.tsv](../crates/eska-presentation/locales/platform-coverage.tsv) — соответствие
   свойств модели экспорта словарю: 2 639 вхождений, 328 разных XML-имён.
@@ -74,6 +74,20 @@
 которого в EDT нет пары подписей. Остальные три поля без собственной пары
 используют существующие общие подписи (`Content`, `IncludeHelpInContents`,
 `ChoiceDataGetModeOnInputByString`).
+
+## Вложенные свойства редактора форм
+
+Каталог дополнен после просмотра XML 837 форм Stalingrad: настройки
+динамических списков, схемы и настройки СКД, параметры формы, представление
+отчётов, переключатели и события специальных полей. Новые подписи добавляются
+в существующие FTL и реестры TSV для обеих локалей. Имена объектов, обработчиков
+и произвольные строки разработчика не переводятся.
+
+Инспектор и редактируемое значение по умолчанию используют один перевод.
+Ключ подписи (например, `default`) не является XML-значением: возврат к
+платформенному значению удаляет явное свойство. Распознавание перечислений и
+булевых значений ограничено известными namespace и свойствами; одноимённое
+поле стороннего расширения не меняет представление автоматически.
 
 ## Семантика версий
 

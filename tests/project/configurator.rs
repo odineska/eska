@@ -49,7 +49,7 @@ fn project(case: &str) -> (TestDir, DesignerSource) {
 /// Resolve only module paths for the descriptor's already-loaded owners, then project the tree.
 fn tree(source: &DesignerSource, owner: &ObjectId) -> ConfiguratorTree {
     let schema = ConfiguratorSchema::for_source(source);
-    let parsed = metadata_parser::load(source, owner, PropertiesMode::Summary).unwrap();
+    let parsed = metadata_parser::load(source, owner, PropertiesMode::All).unwrap();
     let modules = parsed
         .objects
         .iter()
@@ -66,18 +66,20 @@ fn tree(source: &DesignerSource, owner: &ObjectId) -> ConfiguratorTree {
             )
         })
         .collect();
-    ConfiguratorTree::build(&schema, &parsed, &modules).unwrap()
+    ConfiguratorTree::build(&schema, &parsed, &modules, "").unwrap()
 }
 
 /// Test-only readable IDs preserve object identity independently of translated labels.
 fn node_id(id: &NodeId) -> String {
     match id {
         NodeId::Object(id) => format!("object:{id}"),
+        NodeId::StandardAttribute { owner, name } => format!("standard:{owner}#{name}"),
         NodeId::Module { owner, role } => format!("module:{owner}#{}", role.as_str()),
         NodeId::Collection { owner, kind } => {
             let key = match kind {
                 CollectionKind::Metadata(kind) => kind.as_str(),
                 CollectionKind::Common => "common",
+                CollectionKind::StandardAttributes => "standard-attributes",
                 CollectionKind::Modules => "modules",
                 CollectionKind::Unsupported => "unsupported",
             };
@@ -92,6 +94,7 @@ fn snapshot(tree: &ConfiguratorTree, id: &NodeId, output: &mut Vec<Value>) {
     let label = match &node.label {
         TreeLabel::Name(name) => format!("name:{name}"),
         TreeLabel::Key(key) => key.clone(),
+        TreeLabel::IndexedKey { key, index } => format!("{key}:{index}"),
     };
     output.push(json!([
         node_id(id),
@@ -154,6 +157,7 @@ fn external_object_modules_are_direct_children() {
                 &schema,
                 &parsed,
                 &BTreeMap::from([(owner.clone(), availability.clone())]),
+                "",
             )
             .unwrap();
             let root = projection.node(projection.root()).unwrap();
@@ -212,6 +216,7 @@ fn external_object_forms_keep_their_module_group() {
                 owner.clone(),
                 ModuleAvailability::Loaded(vec![ModuleRole::Module]),
             )]),
+            "",
         )
         .unwrap();
         let root = projection.node(projection.root()).unwrap();
@@ -247,6 +252,7 @@ fn configurator_filters_only_proven_empty_root_sections() {
             source.root().id().clone(),
             ModuleAvailability::Loaded(vec![]),
         )]),
+        "",
     )
     .unwrap();
     let visible = projection
@@ -307,6 +313,7 @@ fn configurator_keeps_unloaded_errors_and_hides_binary_only_modules() {
             &schema,
             &parsed,
             &BTreeMap::from([(owner.id().clone(), availability)]),
+            "",
         )
         .unwrap();
         let children = projection
@@ -326,7 +333,7 @@ fn configurator_preserves_declaration_order_and_unknown_fragments() {
     let schema = ConfiguratorSchema::for_source(&source);
     let xml = "<MetaDataObject xmlns='http://v8.1c.ru/8.3/MDClasses'><Catalog uuid='id'><Properties><Name>Владелец</Name></Properties><ChildObjects><Form>Я</Form><Future>Неизвестный</Future><Form>А</Form><Catalog>НеуместныйТип</Catalog></ChildObjects></Catalog></MetaDataObject>";
     let parsed = metadata_parser::parse(xml, None, PropertiesMode::Summary).unwrap();
-    let projection = ConfiguratorTree::build(&schema, &parsed, &BTreeMap::new()).unwrap();
+    let projection = ConfiguratorTree::build(&schema, &parsed, &BTreeMap::new(), "").unwrap();
     let forms = projection
         .nodes()
         .find(|node| {
@@ -411,7 +418,7 @@ fn configurator_external_source_unknown_children_are_visible() {
     let (_directory, source) = project("configuration");
     let schema = ConfiguratorSchema::for_source(&source);
     let parsed = metadata_parser::parse("<MetaDataObject xmlns='http://v8.1c.ru/8.3/MDClasses'><ExternalDataSource uuid='id'><Properties><Name>Источник</Name></Properties><ChildObjects><Table>Таблица</Table></ChildObjects></ExternalDataSource></MetaDataObject>", None, PropertiesMode::Summary).unwrap();
-    let projection = ConfiguratorTree::build(&schema, &parsed, &BTreeMap::new()).unwrap();
+    let projection = ConfiguratorTree::build(&schema, &parsed, &BTreeMap::new(), "").unwrap();
     let children = projection
         .children(projection.root(), TreeOptions::default())
         .unwrap();
@@ -483,7 +490,7 @@ fn configurator_schema_matrix_checks_every_kind_and_does_not_use_xml_group_order
                 )
             })
             .collect();
-        let projection = ConfiguratorTree::build(&schema, &parsed, &modules).unwrap();
+        let projection = ConfiguratorTree::build(&schema, &parsed, &modules, "").unwrap();
         let collections: Vec<_> = projection
             .children(projection.root(), TreeOptions::default())
             .unwrap()
@@ -559,7 +566,7 @@ fn manual_large_configurator_tree() {
             .unwrap(),
     )]);
     let started = std::time::Instant::now();
-    let projection = ConfiguratorTree::build(&schema, &parsed, &modules).unwrap();
+    let projection = ConfiguratorTree::build(&schema, &parsed, &modules, "").unwrap();
     let elapsed = started.elapsed();
     assert_eq!(
         projection
