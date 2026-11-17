@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-17",
+  "issue": "https://github.com/odineska/eska/issues/239",
+  "target": "Сохранить вид настольной 1С, улучшить точность масштабирования и редактирование форм",
+  "implementation": {
+    "repository": "odineska/eska-vscode-explorer",
+    "revision": "164abff",
+    "commits": ["522652c", "ad854a7", "164abff"]
+  },
+  "environment": {
+    "platform": "1С 8.3.27.2342, Linux ARM64",
+    "editor": "VS Code 1.109, Linux ARM64",
+    "locales": ["ru", "en"],
+    "publication": "http://127.0.0.1:8088/demo/",
+    "database": "Отдельная восстановленная копия демобазы; исходная база пользователя не изменена",
+    "license": "Community-лицензия исходного контейнера; содержимое лицензии не копировалось",
+    "reference_archive": "../eska-form-reference/1c-8.3.27.2342",
+    "test_artifacts": "../eska-playground/web-client-reference-8wjoylot"
+  },
+  "reference_material": {
+    "static_resource_files": 270,
+    "designer_export_files": 844,
+    "contents": [
+      "CSS и JavaScript веб-клиента, шрифты, изображения, курсоры и архивы",
+      "DOM, вычисленные стили и снимки форм, выбора значения, календаря и меню",
+      "Исходные атласы кнопок полей для восьми плотностей",
+      "Галерея 30 подтверждённых стандартных картинок: 240 вариантов плотности",
+      "Полная выгрузка Designer XML демобазы до добавления тестовой галереи",
+      "Извлечённые символы SVG, отдельные кадры атласов и замеры пикселей",
+      "Итоговые протоколы и изображения проверок реализации"
+    ],
+    "integrity": "inventory.json содержит пути, размеры и SHA-256; происхождение описано в README архива",
+    "excluded": ["Лицензии", "Пароли", "Идентификаторы веб-сессий", "Профили браузера"]
+  },
+  "rendering": {
+    "profile": "Настольная 1С; веб-CSS не заменяет геометрию формы",
+    "input_atlas_scales": [85, 100, 125, 150, 175, 200, 300, 400],
+    "input_roles": ["calculator", "calendar", "spin-down", "spin-up", "open", "dropdown", "clear", "choice"],
+    "standard_pictures": ["MoveLeft", "OpenFile", "Refresh", "Post", "EventLog", "CheckAll", "UncheckAll", "DeleteListItemDirectly", "ExchangePlan"],
+    "standard_picture_match": "При 100% разница с настольным эталоном не превышает 1 на канал",
+    "density_selection": "По масштабу формы и DPR, с исходными вариантами платформы",
+    "at_100_percent": "Сохранена прежняя калиброванная настольная отрисовка",
+    "open_at_75_percent": {"ink_color": "#4d4d4d", "ink_pixels": 33, "ink_bounds": [9, 9]},
+    "fallbacks": "Неподтверждённые стандартные картинки, варианты табличного меню, шаблоны и неактивные кнопки полей сохраняют прежнюю отрисовку",
+    "resource_priority": "Явные общие картинки конфигурации и пустой Ref=0 сохраняют приоритет",
+    "runtime": "Ресурсы встроены в bundle; доступ к опубликованной базе не требуется"
+  },
+  "editing": {
+    "coordinates": "Измерение поведения CSS zoom в текущем документе и нормализация DOMRect в координаты указателя",
+    "consumers": ["Перетаскивание", "Горизонтальная прокрутка таблицы", "Позиционирование меню команд"],
+    "insertion_marker": "Отдельный слой поверх непрозрачной поверхности элемента, без перехвата указателя",
+    "history": "Общий редактор и прежний moveElement; обработанные Undo/Redo/Save не передаются повторно в VS Code",
+    "public_api_changes": false
+  },
+  "validation": {
+    "rust": {
+      "commands": ["cargo fmt --check", "cargo check", "cargo clippy --all-targets --all-features -- -D warnings", "ESKA_TEST_ROOT=<absolute sibling eska-playground> cargo test"],
+      "result": "PASS",
+      "passed": 1826,
+      "ignored": 59
+    },
+    "explorer": {
+      "commands": ["npm run check", "npm run compile", "node --test test/*.test.mjs"],
+      "test_environment": {
+        "ESKA_TEST_ROOT": "<absolute sibling eska-playground>",
+        "ESKA_TEST_BINARY": "<absolute eska>/target/debug/eska-project"
+      },
+      "result": "PASS",
+      "passed": 941,
+      "skipped": 14
+    },
+    "native_input_buttons": {
+      "result": "PASS ru/en",
+      "forms": 10,
+      "fields": 110,
+      "compared_pixels_per_locale_at_100_percent": 631421,
+      "scales": [50, 75, 125, 150, 200],
+      "coverage": "Исходный контур открытия на 75%, read-only/disabled, общая картинка, пустой Ref=0, возврат к 100%"
+    },
+    "native_editor": {
+      "result": "PASS ru/en",
+      "frames": ["Встроенное превью", "Откреплённое окно"],
+      "selection_and_insertion_scales": [50, 75, 125, 150, 200],
+      "saved_move_and_undo_redo_scale": 75,
+      "xml_restoration": "Побайтное",
+      "marker_regressions": "Выделенный корень формы и вложенное представление самостоятельного дополнения: обе проверки отдельно воспроизвели дефект при отключении соответствующего исправления",
+      "input": "Доверенные клики через Chromium и DOM-события перетаскивания; отдельный прогон доверенных dragstart/dragover/drop на 75% в обоих окнах"
+    },
+    "native_table_scrollbar": {
+      "result": "PASS ru/en",
+      "scales": [75, 150],
+      "input": "Доверенные клики по центрам отрисованных стрелок"
+    },
+    "native_command_menus": {
+      "result": "PASS ru/en",
+      "scales": [75, 100, 150],
+      "coverage": "Перенос команды в Ещё при сужении, оба уровня меню в границах окна, клавиатурная навигация и возврат той же кнопки после расширения"
+    },
+    "isolated_chromium": {
+      "result": "PASS",
+      "coverage": "DPR 1/2, дробная позиция значка открытия, переключение плотностей стандартных картинок и восстановление настольного растра 100%"
+    }
+  },
+  "limits": [
+    "Новая нативная GUI-проверка Windows не выполнялась",
+    "Физическая мышь не использовалась; доверенный ввод отправлялся через протокол Chromium",
+    "Полное совпадение всех контролов и всех комбинаций свойств при произвольном масштабе и DPI не подтверждено",
+    "Публикация служит локальным эталоном; исполнение BSL в превью не добавлялось"
+  ]
+}
