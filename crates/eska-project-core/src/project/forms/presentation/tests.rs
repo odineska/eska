@@ -150,6 +150,73 @@ fn native_help_command_keeps_its_picture_and_explicit_presentation_overrides() {
 }
 
 #[test]
+fn designer_text_picture_preserves_caption_and_picture_on_command_bar() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:v8="http://v8.1c.ru/8.1/data/core" version="2.20">
+      <AutoCommandBar name="FormCommandBar" id="-1"><ChildItems>
+        <Button name="Inherited" id="1"><Type>CommandBarButton</Type>
+          <CommandName>Form.Command.Refresh</CommandName>
+        </Button>
+        <Button name="Icon" id="2"><Type>CommandBarButton</Type>
+          <CommandName>Form.Command.Refresh</CommandName><Representation>Picture</Representation>
+        </Button>
+        <Button name="Explicit" id="3"><Type>CommandBarButton</Type>
+          <CommandName>Form.Command.IconOnly</CommandName><Representation>TextPicture</Representation>
+        </Button>
+      </ChildItems></AutoCommandBar>
+      <Commands>
+        <Command name="Refresh" id="1">
+          <Title><v8:item><v8:lang>en</v8:lang><v8:content>Refresh table</v8:content></v8:item></Title>
+          <Representation>TextPicture</Representation>
+          <Picture><xr:Ref>StdPicture.Refresh</xr:Ref></Picture></Command>
+        <Command name="IconOnly" id="2">
+          <Title><v8:item><v8:lang>en</v8:lang><v8:content>Refresh table</v8:content></v8:item></Title>
+          <Representation>Picture</Representation>
+          <Picture><xr:Ref>StdPicture.Refresh</xr:Ref></Picture></Command>
+      </Commands>
+    </Form>"#;
+    let document = parse("command-bar-text-picture", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let bar = form
+        .root
+        .auxiliary
+        .iter()
+        .find(|element| element.name.as_deref() == Some("FormCommandBar"))
+        .unwrap();
+    assert_eq!(bar.children.len(), 3);
+    let view = present(&form, &[document], &[]);
+    for (button, expected) in bar.children.iter().zip([
+        ButtonRepresentation::PictureAndText,
+        ButtonRepresentation::Picture,
+        ButtonRepresentation::PictureAndText,
+    ]) {
+        let item = view
+            .elements
+            .iter()
+            .find(|item| item.identity == button.identity)
+            .unwrap();
+        assert_eq!(
+            item.button_representation,
+            Some(expected),
+            "{:?}",
+            button.name
+        );
+        assert!(matches!(
+            &item.picture,
+            Some(super::super::FormPicture::Standard { name }) if name == "Refresh"
+        ));
+        assert!(
+            matches!(
+                &item.caption,
+                PresentationText::Literal { items } if items.iter().any(|item| item.content == "Refresh table")
+            ),
+            "{:?}",
+            item.caption
+        );
+    }
+}
+
+#[test]
 fn native_empty_command_bar_buttons_preserve_picture_only_mode() {
     for xml in [
         include_str!(

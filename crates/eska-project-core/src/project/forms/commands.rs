@@ -105,11 +105,14 @@ impl<'a> ResolvedCommand<'a> {
         }
     }
 
-    pub(super) fn representation<'r>(&self, resources: &'r [FormResource]) -> Option<&'r str> {
+    pub(super) fn representation<'r>(&'r self, resources: &'r [FormResource]) -> Option<&'r str> {
         match self {
+            Self::Local(command) => command
+                .property("Representation")
+                .and_then(|property| text(&property.property.value)),
             Self::Metadata(command) => metadata_property(command, "Representation", resources)
                 .and_then(|property| text(&property.value)),
-            _ => None,
+            Self::Standard(_) => None,
         }
     }
 
