@@ -95,6 +95,7 @@ impl ProjectSession {
         self.node(id)?;
         let owner = match id {
             NodeId::Object(owner)
+            | NodeId::StandardAttribute { owner, .. }
             | NodeId::Collection { owner, .. }
             | NodeId::Module { owner, .. } => owner,
         };
@@ -271,6 +272,7 @@ impl ProjectSession {
         let old_nodes = std::mem::take(&mut self.nodes);
         let old_objects = std::mem::take(&mut self.objects);
         let old_expanded = std::mem::take(&mut self.expanded);
+        let old_compatibility = self.standard_attribute_compatibility.clone();
         self.cache.remove(&self.source.descriptor().to_path_buf());
         self.fingerprints.remove(self.source.descriptor());
         self.by_path.clear();
@@ -292,7 +294,10 @@ impl ProjectSession {
             .objects
             .keys()
             .filter(|id| {
-                **id != owner && old_expanded.contains(*id) && !self.expanded.contains(*id)
+                old_compatibility == self.standard_attribute_compatibility
+                    && **id != owner
+                    && old_expanded.contains(*id)
+                    && !self.expanded.contains(*id)
             })
             .cloned()
             .collect();

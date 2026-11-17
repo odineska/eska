@@ -139,8 +139,10 @@ EOF внутри кадра — exit 2. Broken pipe stdout — exit 1, без д
   клиент получает от сервера; не выводится из имени и не содержит project scope.
 - `NodeId` — discriminated object: `{kind:"object",objectId}`;
   `{kind:"module",owner:ObjectId,role}`;
+  с API 1.54 `{kind:"standardAttribute",owner:ObjectId,name:string}`;
   `{kind:"collection",owner:ObjectId,collection}`.
-  collection: `{kind:"metadata",metadataKind}` или `{kind:"common"|"modules"|"unsupported"}`.
+  collection: `{kind:"metadata",metadataKind}` или `{kind:"common"|"modules"|"unsupported"}`;
+  с API 1.54 также `{kind:"standardAttributes"}`.
   metadataKind — `MetadataKind::as_str()` T60; module role — `ModuleRole::as_str()`.
   Никаких индексов массивов или локализованных подписей в identity.
 - `Text = {language:string,content:string}`; синонимы — массив Text всех языков XML.
@@ -242,7 +244,7 @@ JavaScript не округлял большие значения. Они лок�
 | `metadata/root` | нет | `node:Node` |
 | `metadata/children` | `node:NodeId,hideEmptyRootSections?:bool` (default true) | `nodes:Node[]` в порядке Конфигуратора |
 | `metadata/get` | `objectId` | `object:Object` из уже открытой навигации |
-| `metadata/properties` | `objectId` | `properties:Property[],picture?:PicturePreview` |
+| `metadata/properties` | `objectId` или с API 1.54 `node` стандартного реквизита | `properties:Property[],picture?:PicturePreview,readOnly?:true,sourceAvailable?:false` |
 | `metadata/source` | `node:NodeId` | `sources:[{path:Path,role,inline:[{metadataKind,name}]}]` |
 | `metadata/search` | `text:string,limit?:1..500,synonymLanguage?:string` | `progress:Progress,hits:Hit[],truncated:bool` |
 | `metadata/reveal` | `objectId` найденного или уже известного дереву элемента | `ancestry:NodeId[]` |
@@ -287,6 +289,20 @@ ZIP поддерживает Stored/DEFLATE; распаковки на диск 
 Свойства и диапазоны `Name` используют namespace `http://v8.1c.ru/8.3/xcf/predef`.
 Description доступен в поиске как `synonyms` с языком `und` (XML не задаёт язык).
 Форма существующих запросов и ответов не менялась.
+
+С API 1.54 capability `standardAttributes:true` добавляет группу стандартных
+реквизитов к применимым объектам. Состав задаётся общим каталогом платформы с
+учётом настроек владельца и совместимости; наличие `StandardAttributes` в XML
+не требуется. Например, отключённые код и наименование с длиной `0` не
+показываются, родитель зависит от иерархии, а период регистра — от периодичности.
+У стандартного реквизита нет собственного UUID, ObjectId или источника.
+Его `metadata/properties` принимает `node` вместо `objectId` и возвращает
+вычисленные имя/тип и существующие настройки XML с `readOnly:true` и
+`sourceAvailable:false`. Диапазоны этих виртуальных свойств равны `{start:0,end:0}`
+и не предназначены для перехода в XML. Запрос источника возвращает
+`source_missing` с `reason:"not_file"`; команды создания, изменения и удаления
+объектов не принимают такую identity. Клиенты с согласованным minor меньше 54
+не получают новую группу и не могут запросить стандартные узлы.
 
 Source role: `{kind:"descriptor"}`, `{kind:"payload"}` или `{kind:"module",role}`.
 Виртуальные группы sources не имеют: existing core MissingSource отображается

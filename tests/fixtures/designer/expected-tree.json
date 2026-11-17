@@ -8,7 +8,13 @@
     ["group:accounting-register:Проводки#attribute", "object:accounting-register:Проводки", "tree-collection-attribute", "Empty", false],
     ["group:accounting-register:Проводки#form", "object:accounting-register:Проводки", "tree-collection-form", "Empty", false],
     ["group:accounting-register:Проводки#command", "object:accounting-register:Проводки", "tree-collection-command", "Empty", false],
-    ["group:accounting-register:Проводки#template", "object:accounting-register:Проводки", "tree-collection-template", "Empty", false]
+    ["group:accounting-register:Проводки#template", "object:accounting-register:Проводки", "tree-collection-template", "Empty", false],
+    ["group:accounting-register:Проводки#standard-attributes", "object:accounting-register:Проводки", "tree-collection-standard-attributes", "NonEmpty", false],
+    ["standard:accounting-register:Проводки#Active", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-Active", "Empty", false],
+    ["standard:accounting-register:Проводки#LineNumber", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-LineNumber", "Empty", false],
+    ["standard:accounting-register:Проводки#Recorder", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-Recorder", "Empty", false],
+    ["standard:accounting-register:Проводки#Period", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-Period", "Empty", false],
+    ["standard:accounting-register:Проводки#RecordType", "group:accounting-register:Проводки#standard-attributes", "platform-value-StandardAttribute-RecordType", "Empty", false]
   ],
   "accumulation-register": [
     ["object:accumulation-register:Остатки", null, "name:Остатки", "NonEmpty", false],
@@ -19,7 +25,12 @@
     ["group:accumulation-register:Остатки#attribute", "object:accumulation-register:Остатки", "tree-collection-attribute", "Empty", false],
     ["group:accumulation-register:Остатки#form", "object:accumulation-register:Остатки", "tree-collection-form", "Empty", false],
     ["group:accumulation-register:Остатки#command", "object:accumulation-register:Остатки", "tree-collection-command", "Empty", false],
-    ["group:accumulation-register:Остатки#template", "object:accumulation-register:Остатки", "tree-collection-template", "Empty", false]
+    ["group:accumulation-register:Остатки#template", "object:accumulation-register:Остатки", "tree-collection-template", "Empty", false],
+    ["group:accumulation-register:Остатки#standard-attributes", "object:accumulation-register:Остатки", "tree-collection-standard-attributes", "NonEmpty", false],
+    ["standard:accumulation-register:Остатки#Active", "group:accumulation-register:Остатки#standard-attributes", "platform-value-StandardAttribute-Active", "Empty", false],
+    ["standard:accumulation-register:Остатки#LineNumber", "group:accumulation-register:Остатки#standard-attributes", "platform-value-StandardAttribute-LineNumber", "Empty", false],
+    ["standard:accumulation-register:Остатки#Recorder", "group:accumulation-register:Остатки#standard-attributes", "platform-value-StandardAttribute-Recorder", "Empty", false],
+    ["standard:accumulation-register:Остатки#Period", "group:accumulation-register:Остатки#standard-attributes", "platform-value-StandardAttribute-Period", "Empty", false]
   ],
   "calculation-register": [
     ["object:calculation-register:Начисления", null, "name:Начисления", "NonEmpty", false],
@@ -32,7 +43,12 @@
     ["object:calculation-register:Начисления/recalculation:Перерасчет", "group:calculation-register:Начисления#recalculation", "name:Перерасчет", "Unloaded", false],
     ["group:calculation-register:Начисления#form", "object:calculation-register:Начисления", "tree-collection-form", "Empty", false],
     ["group:calculation-register:Начисления#command", "object:calculation-register:Начисления", "tree-collection-command", "Empty", false],
-    ["group:calculation-register:Начисления#template", "object:calculation-register:Начисления", "tree-collection-template", "Empty", false]
+    ["group:calculation-register:Начисления#template", "object:calculation-register:Начисления", "tree-collection-template", "Empty", false],
+    ["group:calculation-register:Начисления#standard-attributes", "object:calculation-register:Начисления", "tree-collection-standard-attributes", "NonEmpty", false],
+    ["standard:calculation-register:Начисления#RegistrationPeriod", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-RegistrationPeriod", "Empty", false],
+    ["standard:calculation-register:Начисления#Active", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-Active", "Empty", false],
+    ["standard:calculation-register:Начисления#LineNumber", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-LineNumber", "Empty", false],
+    ["standard:calculation-register:Начисления#Recorder", "group:calculation-register:Начисления#standard-attributes", "platform-value-StandardAttribute-Recorder", "Empty", false]
   ],
   "catalog": [
     ["object:catalog:Контрагенты", null, "name:Контрагенты", "NonEmpty", false],
@@ -45,12 +61,18 @@
     ["group:catalog:Контрагенты#tabular-section", "object:catalog:Контрагенты", "tree-collection-tabular-section", "NonEmpty", false],
     ["object:catalog:Контрагенты/tabular-section:Контакты", "group:catalog:Контрагенты#tabular-section", "name:Контакты", "NonEmpty", false],
     ["object:catalog:Контрагенты/tabular-section:Контакты/attribute:Телефон", "object:catalog:Контрагенты/tabular-section:Контакты", "name:Телефон", "Empty", false],
+    ["group:catalog:Контрагенты/tabular-section:Контакты#standard-attributes", "object:catalog:Контрагенты/tabular-section:Контакты", "tree-collection-standard-attributes", "NonEmpty", false],
+    ["standard:catalog:Контрагенты/tabular-section:Контакты#LineNumber", "group:catalog:Контрагенты/tabular-section:Контакты#standard-attributes", "platform-value-StandardAttribute-LineNumber", "Empty", false],
     ["group:catalog:Контрагенты#form", "object:catalog:Контрагенты", "tree-collection-form", "NonEmpty", false],
     ["object:catalog:Контрагенты/form:ФормаЭлемента", "group:catalog:Контрагенты#form", "name:ФормаЭлемента", "Unloaded", false],
     ["group:catalog:Контрагенты#command", "object:catalog:Контрагенты", "tree-collection-command", "NonEmpty", false],
     ["object:catalog:Контрагенты/command:Команда", "group:catalog:Контрагенты#command", "name:Команда", "Unloaded", false],
     ["group:catalog:Контрагенты#template", "object:catalog:Контрагенты", "tree-collection-template", "NonEmpty", false],
-    ["object:catalog:Контрагенты/template:Макет", "group:catalog:Контрагенты#template", "name:Макет", "Unloaded", false]
+    ["object:catalog:Контрагенты/template:Макет", "group:catalog:Контрагенты#template", "name:Макет", "Unloaded", false],
+    ["group:catalog:Контрагенты#standard-attributes", "object:catalog:Контрагенты", "tree-collection-standard-attributes", "NonEmpty", false],
+    ["standard:catalog:Контрагенты#Ref", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Ref", "Empty", false],
+    ["standard:catalog:Контрагенты#DeletionMark", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-DeletionMark", "Empty", false],
+    ["standard:catalog:Контрагенты#Predefined", "group:catalog:Контрагенты#standard-attributes", "platform-value-StandardAttribute-Predefined", "Empty", false]
   ],
   "configuration": [
     ["object:configuration:ТестоваяКонфигурация", null, "name:ТестоваяКонфигурация", "NonEmpty", false],

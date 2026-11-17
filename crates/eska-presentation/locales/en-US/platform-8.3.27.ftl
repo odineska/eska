@@ -67,6 +67,7 @@ tree-collection-parameter = Parameters
 tree-collection-integration-service-channel = Channels
 tree-collection-column = Columns
 tree-collection-addressing-attribute = Addressing attributes
+tree-collection-standard-attributes = Standard attributes
 tree-collection-common = Common
 tree-collection-modules = Modules
 tree-collection-unsupported = Unsupported elements

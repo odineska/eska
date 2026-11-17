@@ -291,6 +291,7 @@ impl Server {
             result["capabilities"]["sourceNavigation"] = json!(true);
         }
         if self.client_minor >= 54 {
+            result["capabilities"]["standardAttributes"] = json!(true);
             result["capabilities"]["sourceLabels"] = json!(true);
         }
         self.authoring_capabilities(&mut result["capabilities"]);

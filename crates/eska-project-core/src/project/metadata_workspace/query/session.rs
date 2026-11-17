@@ -866,7 +866,9 @@ fn reveal_owner(project: &mut ProjectSession, node: &NodeId) -> Result<(), Query
     }
     let owner = match node {
         NodeId::Object(owner) | NodeId::Module { owner, .. } => owner,
-        NodeId::Collection { .. } => return Err(QueryDocumentError::OwnerChanged.into()),
+        NodeId::Collection { .. } | NodeId::StandardAttribute { .. } => {
+            return Err(QueryDocumentError::OwnerChanged.into());
+        }
     };
     project
         .reveal_declared_object(owner)

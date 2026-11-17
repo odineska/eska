@@ -147,6 +147,12 @@ impl Localizer {
                     | "ValueTable"
                     | "ValueListType"
                     | "ValueTree"
+                    | "Type"
+                    | "TypeDescription"
+            ),
+            "http://v8.1c.ru/8.1/data/enterprise" => matches!(
+                key.name.as_str(),
+                "AccountType" | "AccumulationRecordType" | "AccountingRecordType"
             ),
             "http://v8.1c.ru/8.1/data-composition-system/settings" => {
                 key.name == "SettingsComposer"

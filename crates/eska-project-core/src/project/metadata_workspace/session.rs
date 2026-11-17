@@ -39,6 +39,8 @@ pub struct ProjectSession {
     pub(super) search_index: super::search::SearchIndex,
     pub(super) by_path: BTreeMap<PathBuf, ObjectId>,
     pub(super) generation: u64,
+    /// A root setting belongs to the session even when its descriptor leaves the bounded LRU.
+    pub(super) standard_attribute_compatibility: String,
     pub(super) support_rules: super::support::RuleCache,
     pub(super) support_cache: Option<super::support::SupportCache>,
     pub(super) support_descriptors: super::support::SupportDescriptors,
@@ -64,6 +66,7 @@ impl ProjectSession {
             search_index: super::search::SearchIndex::default(),
             by_path: BTreeMap::new(),
             generation: 0,
+            standard_attribute_compatibility: String::new(),
             support_cache: None,
             support_descriptors: super::support::SupportDescriptors::default(),
             support_rules: super::support::RuleCache::default(),
@@ -184,13 +187,14 @@ impl ProjectSession {
     /// Read existing properties from just this object's owning XML, including inline objects.
     ///
     /// Repeated requests use the bounded descriptor cache until invalidation or eviction.
-    /// Source changes without a delivered event are rejected when a descriptor is reread.
+    /// Before publishing a snapshot, reject source changes even without a delivered file event.
     ///
     /// # Errors
     /// Returns unknown objects, absent descriptors, containment or parser failures.
     pub fn properties(&mut self, id: &ObjectId) -> Result<Vec<LocatedProperty>, WorkspaceError> {
         self.object(id)?;
         let parsed = self.load(id, PropertiesMode::All)?;
+        self.verify_source(id)?;
         parsed
             .objects
             .iter()
@@ -221,7 +225,7 @@ impl ProjectSession {
     pub fn source(&self, id: &NodeId) -> Result<Vec<SourceLocation>, WorkspaceError> {
         self.node(id)?;
         let sources: Vec<_> = match id {
-            NodeId::Collection { .. } => return Ok(Vec::new()),
+            NodeId::Collection { .. } | NodeId::StandardAttribute { .. } => return Ok(Vec::new()),
             NodeId::Module { owner, role } => self
                 .source
                 .module(owner, *role)
@@ -250,7 +254,7 @@ impl ProjectSession {
 
     /// Prepare a branch completely before publishing any nodes or object summaries.
     pub(super) fn expand(&mut self, id: &ObjectId) -> Result<(), WorkspaceError> {
-        let parsed = self.load(id, PropertiesMode::Summary)?;
+        let parsed = self.load(id, PropertiesMode::All)?;
         let modules = parsed
             .objects
             .iter()
@@ -265,7 +269,28 @@ impl ProjectSession {
             })
             .collect::<Result<_, _>>()
             .map_err(WorkspaceError::Source)?;
-        let tree = ConfiguratorTree::build(&self.schema, &parsed, &modules)
+        let compatibility = if id == self.source.root().id() {
+            parsed
+                .objects
+                .iter()
+                .find(|object| object.metadata.id() == id)
+                .and_then(|object| {
+                    crate::project::metadata_edit::choice_fields::standard::property(
+                        object,
+                        "CompatibilityMode",
+                    )
+                })
+                .and_then(|field| match &field.value {
+                    crate::project::metadata_model::MetadataValue::Text(value) => {
+                        Some(value.clone())
+                    }
+                    _ => None,
+                })
+                .unwrap_or_default()
+        } else {
+            self.standard_attribute_compatibility.clone()
+        };
+        let tree = ConfiguratorTree::build(&self.schema, &parsed, &modules, &compatibility)
             .map_err(WorkspaceError::Tree)?;
         self.verify_source(id)?;
         for object in &parsed.objects {
@@ -302,6 +327,7 @@ impl ProjectSession {
             self.nodes.insert(node.id.clone(), node);
         }
         self.retain_objects(&parsed)?;
+        self.standard_attribute_compatibility = compatibility;
         Ok(())
     }
 

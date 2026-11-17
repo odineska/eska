@@ -116,6 +116,7 @@ impl ModuleRole {
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum CollectionKind {
     Metadata(MetadataKind),
+    StandardAttributes,
     Modules,
     Common,
     /// Unsupported or malformed fragments are visible rather than silently discarded.
@@ -126,6 +127,11 @@ pub enum CollectionKind {
 #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum NodeId {
     Object(ObjectId),
+    /// Platform-defined fields have no independent UUID, descriptor, or mutation target.
+    StandardAttribute {
+        owner: ObjectId,
+        name: String,
+    },
     Module {
         owner: ObjectId,
         role: ModuleRole,

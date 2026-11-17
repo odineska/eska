@@ -16,6 +16,7 @@ pub(super) fn build(
     schema: &ConfiguratorSchema,
     descriptor: &ParsedDescriptor,
     modules: &BTreeMap<ObjectId, ModuleAvailability>,
+    compatibility: &str,
 ) -> Result<ConfiguratorTree, TreeError> {
     let root = descriptor
         .objects
@@ -56,6 +57,7 @@ pub(super) fn build(
             &kinds,
             modules.get(object.metadata.id()),
         )?;
+        build_standard_attributes(&mut tree, object, compatibility);
     }
     if !descriptor.diagnostics.is_empty() {
         let parent = tree.root.clone();
@@ -183,6 +185,51 @@ fn build_owner(
     Ok(())
 }
 
+/// Standard fields are virtual read-only leaves, independent of XML overrides or UUIDs.
+fn build_standard_attributes(
+    tree: &mut ConfiguratorTree,
+    object: &ParsedObject,
+    compatibility: &str,
+) {
+    let names = crate::project::metadata_edit::choice_fields::standard::parsed_fields(
+        object,
+        compatibility,
+    );
+    if names.is_empty() {
+        return;
+    }
+    let owner = object.metadata.id();
+    let parent = group(
+        tree,
+        owner,
+        CollectionKind::StandardAttributes,
+        &NodeId::Object(owner.clone()),
+        false,
+    );
+    for name in names {
+        let id = NodeId::StandardAttribute {
+            owner: owner.clone(),
+            name: name.into(),
+        };
+        tree.nodes.insert(
+            id.clone(),
+            TreeNode {
+                id: id.clone(),
+                metadata_kind: None,
+                parent: None,
+                label: TreeLabel::Key(format!("platform-value-StandardAttribute-{name}")),
+                children: Vec::new(),
+                state: ChildrenState::Empty,
+                expanded_by_default: false,
+                root_section: false,
+                module_creation: false,
+                diagnostics: Vec::new(),
+            },
+        );
+        attach(tree, &id, &parent);
+    }
+}
+
 /// Only known existing BSL roles become module nodes; an unresolved probe remains visible.
 fn build_modules(
     tree: &mut ConfiguratorTree,
@@ -255,6 +302,7 @@ fn group(
     if !tree.nodes.contains_key(&id) {
         let key = match kind {
             CollectionKind::Metadata(kind) => format!("tree-collection-{}", kind.as_str()),
+            CollectionKind::StandardAttributes => "tree-collection-standard-attributes".into(),
             CollectionKind::Common => "tree-collection-common".into(),
             CollectionKind::Modules => "tree-collection-modules".into(),
             CollectionKind::Unsupported => "tree-collection-unsupported".into(),

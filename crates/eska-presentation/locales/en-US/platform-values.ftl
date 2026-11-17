@@ -2407,3 +2407,12 @@ platform-value-StyleReference-accentcolor = Accent color
 platform-value-StyleReference-activitycolor = Activity color
 platform-value-StyleReference-navigationcolor = Navigation color
 platform-value-StyleReference-auxiliarynavigationcolor = Auxiliary navigation color
+
+# Platform standard attributes and their implicit type domains.
+platform-value-StandardAttribute-RoutePoint = Route point
+platform-value-StandardAttribute-ExchangeDate = Exchange date
+platform-value-PrimitiveType-Type = Type
+platform-value-PrimitiveType-TypeDescription = Type description
+platform-value-PrimitiveType-AccountType = Account type
+platform-value-PrimitiveType-AccumulationRecordType = Accumulation record type
+platform-value-PrimitiveType-AccountingRecordType = Accounting record type

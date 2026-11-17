@@ -144,6 +144,11 @@ impl Presenter<'_> {
 
     /// Generic type sets describe a family; they are not a link to one arbitrary object.
     fn type_set(&self, name: &str) -> Option<Value> {
+        if name == "BusinessProcessRoutePointRef" {
+            return Some(
+                json!({"caption": self.caption("platform-type-set-BusinessProcessRoutePointRef")}),
+            );
+        }
         if matches!(name, "AnyRef" | "AnyIBRef") {
             return Some(json!({"caption": self.caption(&format!("platform-type-set-{name}"))}));
         }

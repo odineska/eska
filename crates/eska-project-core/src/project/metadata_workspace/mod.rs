@@ -22,6 +22,7 @@ mod session;
 mod source_navigation;
 mod source_protection;
 mod source_view;
+mod standard_attributes;
 mod support;
 pub use super::metadata_disk_cache::DiskCacheStats;
 pub use super::metadata_rename::transaction::RecoveryStatus as RenameRecovery;

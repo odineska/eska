@@ -1,7 +1,44 @@
-//! Fixed source fields and their owner-dependent availability in the installed EDT model.
+//! Platform standard fields and their owner-dependent availability in Designer XML.
 
 use super::child;
+use crate::project::{
+    metadata_model::{MetadataProperty, MetadataValue},
+    metadata_parser::ParsedObject,
+};
 use roxmltree::Node;
+
+/// Parsed descriptors use the same availability rules as field-link choices and form data.
+pub fn parsed_fields(owner: &ParsedObject, compatibility: &str) -> Vec<&'static str> {
+    let has_owners = property(owner, "Owners").is_some_and(
+        |field| matches!(&field.value, MetadataValue::Record(items) if !items.is_empty()),
+    );
+    fields_for(
+        owner.metadata.kind().designer_tag(),
+        compatibility,
+        &|name| {
+            property(owner, name).and_then(|field| match &field.value {
+                MetadataValue::Text(value)
+                | MetadataValue::QualifiedText { text: value, .. }
+                | MetadataValue::TypedText { text: value, .. } => Some(value.as_str()),
+                _ => None,
+            })
+        },
+        has_owners,
+    )
+}
+
+/// Ignore foreign fields with a colliding local name.
+pub fn property<'a>(owner: &'a ParsedObject, name: &str) -> Option<&'a MetadataProperty> {
+    owner
+        .properties
+        .as_ref()?
+        .iter()
+        .find(|field| {
+            field.property.key.namespace.as_deref() == Some(super::MD)
+                && field.property.key.name == name
+        })
+        .map(|field| &field.property)
+}
 
 /// Only metadata owners with a reviewed choice-field provider participate.
 pub(super) fn supported(kind: &str) -> bool {
@@ -9,6 +46,8 @@ pub(super) fn supported(kind: &str) -> bool {
         kind,
         "Catalog"
             | "Document"
+            | "DocumentJournal"
+            | "Enum"
             | "Report"
             | "DataProcessor"
             | "ExternalReport"
@@ -66,8 +105,24 @@ pub fn fields_for<'a>(
             fields
         }
         "Document" => vec!["Ref", "DeletionMark", "Date", "Posted"],
-        "BusinessProcess" => vec!["Ref", "DeletionMark", "Date", "Started", "Completed"],
-        "Task" => vec!["Ref", "DeletionMark", "Date", "Executed"],
+        "DocumentJournal" => vec!["Type", "Ref", "Date", "Posted", "DeletionMark", "Number"],
+        "Enum" => vec!["Ref", "Order"],
+        "BusinessProcess" => vec![
+            "Ref",
+            "DeletionMark",
+            "Date",
+            "Started",
+            "Completed",
+            "HeadTask",
+        ],
+        "Task" => vec![
+            "Ref",
+            "DeletionMark",
+            "Date",
+            "Executed",
+            "BusinessProcess",
+            "RoutePoint",
+        ],
         "ExchangePlan" => vec![
             "Ref",
             "DeletionMark",
@@ -76,6 +131,7 @@ pub fn fields_for<'a>(
             "SentNo",
             "ReceivedNo",
             "ThisNode",
+            "ExchangeDate",
         ],
         "TabularSection" => vec!["LineNumber"],
         "AccumulationRegister" | "AccountingRegister" => {
@@ -184,3 +240,6 @@ fn enabled<'a>(value: &dyn Fn(&str) -> Option<&'a str>, name: &str) -> bool {
 fn text<'a>(properties: Node<'a, '_>, name: &str) -> Option<&'a str> {
     child(properties, name)?.text()
 }
+
+#[cfg(test)]
+mod tests;

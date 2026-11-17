@@ -67,6 +67,7 @@ tree-collection-parameter = Параметры
 tree-collection-integration-service-channel = Каналы
 tree-collection-column = Графы
 tree-collection-addressing-attribute = Реквизиты адресации
+tree-collection-standard-attributes = Стандартные реквизиты
 tree-collection-common = Общие
 tree-collection-modules = Модули
 tree-collection-unsupported = Неподдержанные элементы

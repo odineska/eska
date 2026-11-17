@@ -373,7 +373,7 @@ impl ProjectSession {
             SourceRole::Payload => {
                 let owner = match node {
                     NodeId::Object(owner) | NodeId::Module { owner, .. } => owner,
-                    NodeId::Collection { .. } => {
+                    NodeId::Collection { .. } | NodeId::StandardAttribute { .. } => {
                         return Err(QueryError::UnsupportedStructure.into());
                     }
                 };
@@ -398,7 +398,9 @@ impl ProjectSession {
         let policy = self.support_files(&[path.to_path_buf()])?;
         let owner = match node {
             NodeId::Object(owner) | NodeId::Module { owner, .. } => owner,
-            NodeId::Collection { .. } => return Ok((None, false)),
+            NodeId::Collection { .. } | NodeId::StandardAttribute { .. } => {
+                return Ok((None, false));
+            }
         };
         let uuid = policy
             .objects
@@ -418,7 +420,9 @@ impl ProjectSession {
     fn query_descriptor(&self, node: &NodeId) -> Result<(PathBuf, String), QueryDocumentError> {
         let owner = match node {
             NodeId::Object(owner) | NodeId::Module { owner, .. } => owner,
-            NodeId::Collection { .. } => return Err(QueryDocumentError::OwnerChanged),
+            NodeId::Collection { .. } | NodeId::StandardAttribute { .. } => {
+                return Err(QueryDocumentError::OwnerChanged);
+            }
         };
         let descriptor = self
             .source

@@ -2407,3 +2407,12 @@ platform-value-StyleReference-accentcolor = Цвет акцента
 platform-value-StyleReference-activitycolor = Цвет активности
 platform-value-StyleReference-navigationcolor = Цвет навигации
 platform-value-StyleReference-auxiliarynavigationcolor = Цвет вспомогательной навигации
+
+# Platform standard attributes and their implicit type domains.
+platform-value-StandardAttribute-RoutePoint = Точка маршрута
+platform-value-StandardAttribute-ExchangeDate = Дата обмена
+platform-value-PrimitiveType-Type = Тип
+platform-value-PrimitiveType-TypeDescription = Описание типов
+platform-value-PrimitiveType-AccountType = Вид счета
+platform-value-PrimitiveType-AccumulationRecordType = Вид движения накопления
+platform-value-PrimitiveType-AccountingRecordType = Вид движения бухгалтерии

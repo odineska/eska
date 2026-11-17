@@ -143,6 +143,9 @@ impl Server {
 }
 
 fn check_client_version(minor: u32, method: &str, args: &Value) -> Result<(), Value> {
+    if minor < 54 && is_standard_node(&args["node"]) {
+        return Err(error(-32602));
+    }
     let required = match method {
         "metadata/objectSchema"
         | "metadata/previewObject"
@@ -286,6 +289,11 @@ fn constrain_form_appearance(result: &mut Value, minor: u32) {
 }
 
 fn constrain_schema(result: &mut Value, method: &str, minor: u32, writable: bool) {
+    if minor < 54
+        && let Some(nodes) = result.get_mut("nodes").and_then(Value::as_array_mut)
+    {
+        nodes.retain(|node| !is_standard_node(&node["id"]));
+    }
     if minor < 52 {
         if method == "metadata/formEditSchema" {
             constrain_form_appearance(result, minor);
@@ -612,6 +620,32 @@ fn properties(
     project: &mut ProjectSession,
     args: &Value,
 ) -> Result<Value, Value> {
+    if let Some(node) = args.get("node") {
+        if args.get("objectId").is_some() {
+            return Err(error(-32602));
+        }
+        let node = params::node(node)?;
+        let NodeId::StandardAttribute { owner, .. } = &node else {
+            return Err(error(-32602));
+        };
+        let kind = project
+            .object(owner)
+            .map_err(|failure| errors::workspace(&failure))?
+            .kind;
+        let properties = project
+            .standard_attribute_properties(&node)
+            .map_err(|failure| errors::workspace(&failure))?;
+        let mut presentation = super::property_presentation::Presenter::new(labels, project, kind);
+        let values: Vec<_> = properties
+            .iter()
+            .map(|property| {
+                let mut value = dto::standard_attribute_property(labels, kind, property);
+                presentation.annotate(property, &mut value);
+                value
+            })
+            .collect();
+        return Ok(json!({"properties": values, "readOnly":true, "sourceAvailable":false}));
+    }
     let id: ObjectId = params::decode(&args["objectId"])?;
     let owner = project
         .object(&id)
@@ -637,6 +671,11 @@ fn properties(
         result["picture"] = dto::picture(&picture);
     }
     Ok(result)
+}
+
+fn is_standard_node(node: &Value) -> bool {
+    node["kind"] == "standardAttribute"
+        || node["kind"] == "collection" && node["collection"]["kind"] == "standardAttributes"
 }
 
 /// Literal search never schedules indexing implicitly.

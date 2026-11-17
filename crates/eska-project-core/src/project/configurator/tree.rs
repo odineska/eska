@@ -122,8 +122,9 @@ impl ConfiguratorTree {
         schema: &ConfiguratorSchema,
         descriptor: &ParsedDescriptor,
         modules: &BTreeMap<ObjectId, ModuleAvailability>,
+        compatibility: &str,
     ) -> Result<Self, TreeError> {
-        builder::build(schema, descriptor, modules)
+        builder::build(schema, descriptor, modules, compatibility)
     }
 
     /// Project one predefined payload without loading unrelated metadata or modules.

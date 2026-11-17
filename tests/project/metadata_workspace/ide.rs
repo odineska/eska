@@ -21,6 +21,7 @@ mod picture;
 mod presentation;
 mod query;
 mod renaming;
+mod standard_attributes;
 mod unsigned;
 
 struct Client {

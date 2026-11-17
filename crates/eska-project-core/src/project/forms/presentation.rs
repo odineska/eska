@@ -1168,6 +1168,10 @@ fn standard_attribute(name: &str) -> bool {
             | "RegistrationPeriod"
             | "PeriodAdjustment"
             | "Account"
+            | "HeadTask"
+            | "BusinessProcess"
+            | "RoutePoint"
+            | "ExchangeDate"
     )
 }
 pub(super) fn metadata_property<'a>(
@@ -1274,6 +1278,17 @@ fn standard_fields(owner: &ParsedObject, resources: &[FormResource]) -> Vec<&'st
 }
 
 fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -> FieldType {
+    standard_type_for(name, owner, &|name| {
+        metadata_property(owner, name, resources)
+    })
+}
+
+/// Tree properties and form bindings derive standard types from the same owner metadata.
+pub fn standard_type_for<'a>(
+    name: &str,
+    owner: &ParsedObject,
+    property: &dyn Fn(&str) -> Option<&'a MetadataProperty>,
+) -> FieldType {
     let kind = match name {
         "IsFolder"
         | "DeletionMark"
@@ -1286,11 +1301,14 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
         | "ThisNode"
         | "OffBalance"
         | "ActionPeriodIsBasic" => FieldValueKind::Boolean,
-        "Date" | "Period" | "RegistrationPeriod" => FieldValueKind::Date,
+        "Date" | "Period" | "RegistrationPeriod" | "ExchangeDate" => FieldValueKind::Date,
         "LineNumber" | "SentNo" | "ReceivedNo" | "PeriodAdjustment" => FieldValueKind::Number,
-        "Parent" | "Ref" | "Owner" | "Recorder" => FieldValueKind::Reference,
+        "Order" if owner.metadata.kind() == MetadataKind::Enum => FieldValueKind::Number,
+        "Parent" | "Ref" | "Owner" | "Recorder" | "HeadTask" | "BusinessProcess" | "RoutePoint"
+        | "Account" => FieldValueKind::Reference,
+        "RecordType" | "Type" | "ValueType" => FieldValueKind::Document,
         "Code" | "Number"
-            if metadata_property(owner, &format!("{name}Type"), resources)
+            if property(&format!("{name}Type"))
                 .and_then(|value| appearance::text(&value.value))
                 == Some("Number") =>
         {
@@ -1302,23 +1320,47 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
         "Code" => "CodeLength",
         "Description" => "DescriptionLength",
         "Number" => "NumberLength",
+        "Order" => "OrderLength",
         _ => "",
     };
-    let mut length = metadata_property(owner, length_key, resources)
+    let mut length = property(length_key)
         .and_then(|value| appearance::text(&value.value))
         .and_then(|value| value.parse().ok());
     let digits = if kind == FieldValueKind::Number && matches!(name, "Number" | "Code") {
         length.take()
     } else {
         (name == "LineNumber").then(|| {
-            metadata_property(owner, "LineNumberLength", resources)
+            property("LineNumberLength")
                 .and_then(|value| appearance::text(&value.value))
                 .and_then(|value| value.parse().ok())
                 .unwrap_or(9)
         })
     };
+    let types = standard_types(name, owner, property, kind);
+    FieldType {
+        kind,
+        length,
+        digits,
+        fraction: (kind == FieldValueKind::Number).then_some(0),
+        date_parts: (kind == FieldValueKind::Date).then(|| "DateTime".into()),
+        types,
+        ..FieldType::default()
+    }
+}
+/// Concrete owner references and platform type families keep field properties unambiguous.
+fn standard_types<'a>(
+    name: &str,
+    owner: &ParsedObject,
+    property: &dyn Fn(&str) -> Option<&'a MetadataProperty>,
+    kind: FieldValueKind,
+) -> Vec<PropertyKey> {
     let mut types = Vec::new();
-    if matches!(name, "Ref" | "Parent") {
+    if name == "Ref" && owner.metadata.kind() == MetadataKind::DocumentJournal {
+        types.push(PropertyKey {
+            namespace: Some(references::CONFIG.into()),
+            name: "DocumentRef".into(),
+        });
+    } else if matches!(name, "Ref" | "Parent") {
         types.push(PropertyKey {
             namespace: Some(references::CONFIG.into()),
             name: format!(
@@ -1331,7 +1373,7 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
         && let Some(MetadataProperty {
             value: MetadataValue::Record(owners),
             ..
-        }) = metadata_property(owner, "Owners", resources)
+        }) = property("Owners")
     {
         for owner in owners {
             if let Some(name) =
@@ -1344,16 +1386,54 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
             }
         }
     }
-    FieldType {
-        kind,
-        length,
-        digits,
-        fraction: (kind == FieldValueKind::Number).then_some(0),
-        date_parts: (kind == FieldValueKind::Date).then(|| "DateTime".into()),
-        types,
-        ..FieldType::default()
+    let system_type = match name {
+        "RecordType" if owner.metadata.kind() == MetadataKind::AccumulationRegister => {
+            Some("AccumulationRecordType")
+        }
+        "RecordType" => Some("AccountingRecordType"),
+        "Type" if owner.metadata.kind() == MetadataKind::ChartOfAccounts => Some("AccountType"),
+        "Type" => Some("Type"),
+        "ValueType" => Some("TypeDescription"),
+        _ => None,
+    };
+    if let Some(name) = system_type {
+        let namespace = if matches!(name, "Type" | "TypeDescription") {
+            "http://v8.1c.ru/8.1/data/core"
+        } else {
+            "http://v8.1c.ru/8.1/data/enterprise"
+        };
+        types.push(PropertyKey {
+            namespace: Some(namespace.into()),
+            name: name.into(),
+        });
     }
+    if name == "Account"
+        && let Some(account) = property("ChartOfAccounts")
+            .and_then(|value| appearance::text(&value.value))
+            .and_then(|value| value.strip_prefix("ChartOfAccounts."))
+    {
+        types.push(PropertyKey {
+            namespace: Some(references::CONFIG.into()),
+            name: format!("ChartOfAccountsRef.{account}"),
+        });
+    }
+    if kind == FieldValueKind::Reference && types.is_empty() {
+        let family = match name {
+            "Recorder" => "DocumentRef",
+            "HeadTask" => "TaskRef",
+            "BusinessProcess" => "BusinessProcessRef",
+            "RoutePoint" => "BusinessProcessRoutePointRef",
+            "Account" => "ChartOfAccountsRef",
+            _ => "AnyRef",
+        };
+        types.push(PropertyKey {
+            namespace: Some(references::CONFIG.into()),
+            name: family.into(),
+        });
+    }
+    types
 }
+
 fn enum_choices(value_type: &FieldType, resources: &[FormResource]) -> Vec<PresentationText> {
     let Some(name) = value_type
         .types

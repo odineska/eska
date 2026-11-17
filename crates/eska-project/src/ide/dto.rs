@@ -67,6 +67,9 @@ impl Labels {
 pub fn node_id(value: &NodeId) -> Value {
     match value {
         NodeId::Object(id) => json!({"kind":"object","objectId":id.as_str()}),
+        NodeId::StandardAttribute { owner, name } => {
+            json!({"kind":"standardAttribute","owner":owner.as_str(),"name":name})
+        }
         NodeId::Module { owner, role } => {
             json!({"kind":"module","owner":owner.as_str(),"role":role.as_str()})
         }
@@ -79,6 +82,7 @@ pub fn node_id(value: &NodeId) -> Value {
                     json!({"kind":"metadata","metadataKind":kind.as_str()})
                 }
                 CollectionKind::Common => json!({"kind":"common"}),
+                CollectionKind::StandardAttributes => json!({"kind":"standardAttributes"}),
                 CollectionKind::Modules => json!({"kind":"modules"}),
                 CollectionKind::Unsupported => json!({"kind":"unsupported"}),
             };
@@ -127,6 +131,37 @@ pub(super) fn property_record(
     value: &MetadataProperty,
 ) -> Value {
     field(labels, owner, &value.key, &mut Vec::new(), value)
+}
+
+/// Preserve the standard-attribute XML context when presenting saved overrides without its wrappers.
+pub(super) fn standard_attribute_property(
+    labels: &Labels,
+    owner: MetadataKind,
+    value: &MetadataProperty,
+) -> Value {
+    use eska_project_core::project::metadata_model::PropertyKey;
+    let root = PropertyKey {
+        namespace: Some("http://v8.1c.ru/8.3/MDClasses".into()),
+        name: "StandardAttributes".into(),
+    };
+    let attribute = PropertyKey {
+        namespace: Some("http://v8.1c.ru/8.3/xcf/readable".into()),
+        name: "StandardAttribute".into(),
+    };
+    let mut result = if value.key.namespace == attribute.namespace {
+        field(labels, owner, &root, &mut vec![&root, &attribute], value)
+    } else {
+        property_record(labels, owner, value)
+    };
+    if value.key.name == "Name"
+        && let MetadataValue::Text(name) = &value.value
+    {
+        result["value"]["caption"] =
+            labels.caption(&format!("platform-value-StandardAttribute-{name}"));
+    }
+    // The virtual node intentionally has no editable source range.
+    result["range"] = json!({"start":0,"end":0});
+    result
 }
 
 /// Nested record fields retain repeats and qualifiers rather than becoming a JSON map.
