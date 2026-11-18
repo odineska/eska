@@ -68,8 +68,21 @@ pub fn plan(
         return Err(QueryError::Conflict);
     }
     let query = resolve(input, identity)?;
+    plan_resolved(input, &query, value, decisions, line_ending)
+}
+
+/// Both callers extracted this query from the exact input and checked its identity.
+pub(super) fn plan_resolved(
+    input: &str,
+    query: &Query,
+    value: &str,
+    decisions: &[CommentPlacement],
+    line_ending: Option<LineEnding>,
+) -> Result<EditPlan, QueryError> {
+    super::check_size(value)?;
     let normalized;
-    let value = if matches!(identity, QueryIdentity::BslLiteral(_)) {
+    let bsl = matches!(query.identity, QueryIdentity::BslLiteral(_));
+    let value = if bsl {
         normalized = value.replace("\r\n", "\n");
         if normalized.contains('\r')
             || normalized
@@ -85,21 +98,19 @@ pub fn plan(
     if value == query.text && decisions.is_empty() {
         return EditPlan::from_replacements(input, Vec::new()).map_err(|error| patch_error(&error));
     }
-    let placed = placements(&query, value, decisions)?;
-    let result = if matches!(identity, QueryIdentity::BslLiteral(_)) {
-        bsl::plan(input, &query, value, decisions, &placed, line_ending)?
+    let placed = placements(query, value, decisions)?;
+    let result = if bsl {
+        bsl::plan(input, query, value, decisions, &placed, line_ending)?
     } else {
-        xml::plan(input, &query, value, decisions, &placed, line_ending)?
+        xml::plan(input, query, value, decisions, &placed, line_ending)?
     };
     super::check_size(result.output())?;
-    let updated_identity = match identity {
-        QueryIdentity::BslLiteral(_) => {
-            let current = super::read_bsl(result.output(), query.source.start)?;
-            current.identity
-        }
-        _ => identity.clone(),
+    let updated = if bsl {
+        // Replacing the literal can change its end offset.
+        super::read_bsl(result.output(), query.source.start)?
+    } else {
+        resolve(result.output(), &query.identity)?
     };
-    let updated = resolve(result.output(), &updated_identity)?;
     if updated.text != value || updated.comments.len() != placed.len() {
         return Err(QueryError::UnsupportedStructure);
     }
@@ -114,7 +125,7 @@ pub fn plan(
 }
 
 /// Do not accept a caller-supplied range or decoded value in place of checked source structure.
-fn resolve(input: &str, identity: &QueryIdentity) -> Result<Query, QueryError> {
+pub(super) fn resolve(input: &str, identity: &QueryIdentity) -> Result<Query, QueryError> {
     match identity {
         QueryIdentity::BslLiteral(range) => {
             let query = super::read_bsl(input, range.start)?;

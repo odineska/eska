@@ -3,6 +3,7 @@
 use super::{
     CommentPlacement, LineEnding, QueryError, QueryIdentity,
     constructor::lex::{self, Kind, Token},
+    editing::{plan_resolved, resolve},
 };
 use crate::project::metadata_edit::EditPlan;
 
@@ -20,25 +21,9 @@ pub fn format_plan(
     if crate::project::metadata_edit::snapshot(input) != expected_snapshot {
         return Err(QueryError::Conflict);
     }
-    let query = match identity {
-        QueryIdentity::BslLiteral(range) => super::read_bsl(input, range.start)?,
-        _ => super::read_xml(input)?
-            .into_iter()
-            .find(|query| &query.identity == identity)
-            .ok_or(QueryError::NotFound)?,
-    };
-    if &query.identity != identity {
-        return Err(QueryError::Conflict);
-    }
+    let query = resolve(input, identity)?;
     if query.text == formatted {
-        return super::plan(
-            input,
-            expected_snapshot,
-            identity,
-            formatted,
-            &[],
-            line_ending,
-        );
+        return plan_resolved(input, &query, formatted, &[], line_ending);
     }
     let old = lex::tokens(&query.text).map_err(|_| QueryError::UnsupportedStructure)?;
     let bsl = matches!(identity, QueryIdentity::BslLiteral(_));
@@ -95,16 +80,9 @@ pub fn format_plan(
             .zip(&query.comments)
             .all(|(decision, comment)| decision.query_offset == Some(comment.query_offset))
     {
-        return super::plan(input, expected_snapshot, identity, &value, &[], line_ending);
+        decisions.clear();
     }
-    super::plan(
-        input,
-        expected_snapshot,
-        identity,
-        &value,
-        &decisions,
-        line_ending,
-    )
+    plan_resolved(input, &query, &value, &decisions, line_ending)
 }
 
 /// A whitespace anchor follows the next unchanged token; an interior XML comment retains its character offset.
