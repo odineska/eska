@@ -122,11 +122,7 @@ impl<'a> ImportPlan<'a> {
                 self.project.source().to_owned(),
             ));
         }
-        snapshot::capture(&artifact.sources())?;
-        if inspect_identity(&artifact.sources())?.as_ref() != Some(artifact.identity()) {
-            return Err(ArtifactError::SourceChanged(artifact.sources()));
-        }
-        replace_directory(&artifact.sources(), self.project.source())
+        replace_directory(&artifact.verified_sources()?, self.project.source())
     }
 }
 
