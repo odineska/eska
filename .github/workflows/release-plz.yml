@@ -13,7 +13,11 @@ on:
 
 jobs:
   check:
-    uses: ./.github/workflows/ci.yml
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+    uses: ./.github/workflows/release-check.yml
 
   release:
     needs: check
