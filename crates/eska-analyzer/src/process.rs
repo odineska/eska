@@ -4,7 +4,8 @@ use std::{
     ffi::OsStr,
     io::{self, Read},
     path::{Path, PathBuf},
-    process::{ChildStdout, Command, ExitStatus, Stdio},
+    process::{Command, ExitStatus, Stdio},
+    sync::Arc,
     sync::atomic::{AtomicBool, Ordering},
     thread,
     time::{Duration, Instant},
@@ -124,7 +125,7 @@ impl Analyzer<'_> {
         root: &Path,
         args: impl IntoIterator<Item = &'a OsStr>,
     ) -> Result<Output, Error> {
-        let output = self.run_with_stdout(root, args, read_bounded)?;
+        let output = self.run_with_stdout(root, args, |stdout| read_bounded(stdout))?;
         Ok(Output {
             status: output.status,
             stdout: output.stdout,
@@ -137,7 +138,7 @@ impl Analyzer<'_> {
         &self,
         root: &Path,
         args: impl IntoIterator<Item = &'a OsStr>,
-        read_stdout: impl FnOnce(ChildStdout) -> Result<T, Error> + Send + 'static,
+        read_stdout: impl FnOnce(&mut dyn Read) -> Result<T, Error> + Send + 'static,
     ) -> Result<StreamOutput<T>, Error> {
         if self.is_cancelled() {
             return Err(Error::Cancelled);
@@ -160,9 +161,18 @@ impl Analyzer<'_> {
                 "capture pipes unavailable",
             )));
         };
+        let stopped = Arc::new(AtomicBool::new(false));
+        let mut stdout = CapturePipe {
+            pipe: stdout,
+            stopped: Arc::clone(&stopped),
+        };
+        let stderr = CapturePipe {
+            pipe: stderr,
+            stopped: Arc::clone(&stopped),
+        };
         let stdout = match thread::Builder::new()
             .name("eska-analyzer-stdout".into())
-            .spawn(move || read_stdout(stdout))
+            .spawn(move || read_stdout(&mut stdout))
         {
             Ok(reader) => reader,
             Err(source) => {
@@ -173,46 +183,75 @@ impl Analyzer<'_> {
         };
         let stderr = match thread::Builder::new()
             .name("eska-analyzer-stderr".into())
-            .spawn(|| read_bounded(stderr))
+            .spawn(move || read_bounded(stderr))
         {
             Ok(reader) => reader,
             Err(source) => {
+                stopped.store(true, Ordering::Release);
                 let _ = child.kill();
                 let _ = child.wait();
-                let _ = stdout.join();
                 return Err(Error::ProcessIo(source));
             }
         };
         let started = Instant::now();
+        let mut status = None;
         let result = loop {
             if self.is_cancelled() {
                 break Err(Error::Cancelled);
             }
-            if started.elapsed() >= self.timeout {
+            let remaining = self.timeout.saturating_sub(started.elapsed());
+            if remaining.is_zero() {
                 break Err(Error::Timeout);
             }
-            match child.try_wait() {
-                Ok(Some(status)) => break Ok(status),
-                Ok(None) => thread::sleep(Duration::from_millis(10)),
-                Err(source) => break Err(Error::ProcessIo(source)),
+            if status.is_none() {
+                match child.try_wait() {
+                    Ok(exit) => status = exit,
+                    Err(source) => break Err(Error::ProcessIo(source)),
+                }
             }
+            if let Some(status) = status
+                && stdout.is_finished()
+                && stderr.is_finished()
+            {
+                break Ok(status);
+            }
+            thread::sleep(remaining.min(Duration::from_millis(10)));
         };
         if result.is_err() {
-            let _ = child.kill();
-            let _ = child.wait();
+            stopped.store(true, Ordering::Release);
+            if status.is_none() {
+                let _ = child.kill();
+                let _ = child.wait();
+            }
         }
+        // An unowned descendant can hold a pipe open after the direct child was reaped.
+        // On interruption, dropping unfinished handles lets the caller return while reads unwind.
+        let status = result?;
         let stdout = stdout.join();
         let stderr = stderr.join();
         let stdout =
             stdout.map_err(|_| Error::ProcessIo(io::Error::other("stdout reader stopped")))?;
         let stderr =
             stderr.map_err(|_| Error::ProcessIo(io::Error::other("stderr reader stopped")))?;
-        let status = result?;
         Ok(StreamOutput {
             status,
             stdout: stdout?,
             stderr: stderr?,
         })
+    }
+}
+
+struct CapturePipe<R> {
+    pipe: R,
+    stopped: Arc<AtomicBool>,
+}
+
+impl<R: Read> Read for CapturePipe<R> {
+    fn read(&mut self, buffer: &mut [u8]) -> io::Result<usize> {
+        if self.stopped.load(Ordering::Acquire) {
+            return Ok(0);
+        }
+        self.pipe.read(buffer)
     }
 }
 
@@ -229,4 +268,67 @@ fn read_bounded(mut stream: impl Read) -> Result<Vec<u8>, Error> {
         return Err(Error::OutputTooLarge);
     }
     Ok(bytes)
+}
+
+#[cfg(all(test, unix))]
+mod tests {
+    use super::*;
+    use crate::test_support::TestDir;
+
+    fn shell(cancelled: &AtomicBool, timeout: Duration) -> Analyzer<'_> {
+        Analyzer {
+            binary: "sh".into(),
+            timeout,
+            cancelled,
+            connection_closed: None,
+        }
+    }
+
+    #[test]
+    fn deadline_covers_inherited_stderr_after_direct_child_exits() {
+        let directory = TestDir::new();
+        let cancelled = AtomicBool::new(false);
+        let result = shell(&cancelled, Duration::from_millis(300)).run(
+            &directory.0,
+            ["-c", "sleep 2 >/dev/null & exit 0"].map(OsStr::new),
+        );
+        assert!(matches!(result, Err(Error::Timeout)));
+    }
+
+    #[test]
+    fn cancellation_covers_inherited_stderr_after_stdout_reaches_eof() {
+        let directory = TestDir::new();
+        let cancelled = Arc::new(AtomicBool::new(false));
+        let trigger = Arc::clone(&cancelled);
+        let result = shell(&cancelled, Duration::from_secs(1)).run_with_stdout(
+            &directory.0,
+            ["-c", "sleep 2 >/dev/null & exit 0"].map(OsStr::new),
+            move |stdout| {
+                let output = read_bounded(stdout)?;
+                // Leave the worker waiting for the other stream, held open by sleep.
+                thread::sleep(Duration::from_millis(50));
+                trigger.store(true, Ordering::Release);
+                Ok(output)
+            },
+        );
+        assert!(matches!(result, Err(Error::Cancelled)));
+    }
+
+    #[test]
+    fn captures_both_streams_and_preserves_stdout_reader_failure() {
+        let directory = TestDir::new();
+        let cancelled = AtomicBool::new(false);
+        let analyzer = shell(&cancelled, Duration::from_secs(5));
+        let args = ["-c", "printf out; printf err >&2; exit 7"].map(OsStr::new);
+        let output = analyzer.run(&directory.0, args).unwrap();
+        assert_eq!(output.status.code(), Some(7));
+        assert_eq!(output.stdout, b"out");
+        assert_eq!(output.stderr, b"err");
+
+        let result =
+            analyzer.run_with_stdout(&directory.0, ["-c", "exit 0"].map(OsStr::new), |_| {
+                Err::<(), _>(Error::OutputTooLarge)
+            });
+        assert!(matches!(result, Err(Error::OutputTooLarge)));
+    }
 }
