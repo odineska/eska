@@ -15,7 +15,7 @@ ESKA подключает выгрузку Конфигуратора, пров�
 
 - **Метаданные.** Поиск объектов, свойств и исходников. Создание объектов, форм и модулей, копирование с новыми UUID и проверка ссылок перед удалением. Для автоматизации доступны JSON Schema и планы изменений. [Работа с метаданными](docs/metadata-authoring.md)
 - **Управляемые формы.** Изменение свойств, типов и условного оформления в редакторе, перетаскивание элементов, создание обработчиков BSL, автосохранение и отмена. Предпросмотр формы 8.3.27 имеет статус beta. [Редактор форм](docs/user-guide.md#forms)
-- **BSL и запросы.** Подсказки, переходы и диагностика через BSL Analyzer, форматирование BSL и SDBL, отдельные черновики запросов и визуальный конструктор. [Запросы](docs/user-guide.md#queries) · [Форматирование](docs/formatting.md)
+- **BSL и запросы.** Подсказки, переходы и диагностика через BSL Analyzer, форматирование BSL и SDBL, отдельные вкладки запросов с сохранением в исходник через **Ctrl+S** и визуальный конструктор. [Запросы](docs/user-guide.md#queries) · [Форматирование](docs/formatting.md)
 - **Git.** В терминале доступны задачи, история, полки и семантический diff. В панели Explorer можно сравнить и индексировать файлы по именам объектов 1С и создать коммит. [Git в Explorer](docs/user-guide.md#scm) · [Команды VCS](docs/vcs-tool.md)
 
 ## Запуск и отладка 1С
@@ -71,9 +71,9 @@ ESKA подключает выгрузку Конфигуратора, пров�
 </details>
 
 <details>
-<summary>Добавить поле в запрос и применить его к BSL</summary>
+<summary>Изменить запрос и сохранить через Ctrl+S</summary>
 
-[![Добавить поле в запрос и применить его к BSL — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-query.gif)](https://odineska.github.io/eska/docs/#demo-query)
+[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.github.io/eska/docs/#demo-query)
 
 </details>
 
