@@ -141,7 +141,6 @@ pub struct InitArgs {
 }
 
 /// Run standalone operations without locating the full wrapper, Git, a platform or an analyzer.
-#[must_use]
 pub fn run() -> ExitCode {
     let args: Vec<OsString> = std::env::args_os().collect();
     if let Some(code) = eska_presentation::components::tool_contract(

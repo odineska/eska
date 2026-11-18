@@ -57,7 +57,6 @@ struct VersionHandler<'a> {
 
 impl VersionHandler<'_> {
     /// Discover the project and either inspect or narrowly update its version.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let context = match discovery::discover_context(project_dir) {
             Ok(context) => context,

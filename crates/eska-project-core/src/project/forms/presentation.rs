@@ -613,11 +613,10 @@ fn element_commands(
         }
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, sources)
-            .map(|table| {
+            .map_or_default(|table| {
                 let binding = bind(table, form, resources);
                 super::commands::table_items(table, &binding.value_type)
-            })
-            .unwrap_or_default(),
+            }),
         _ => Vec::new(),
     };
     RootCommands {
@@ -823,8 +822,7 @@ pub(super) fn literal(value: &MetadataValue) -> Option<PresentationText> {
 pub(super) fn definition_type(definition: &EffectiveDefinition) -> FieldType {
     definition
         .property("Type")
-        .map(|value| field_type(&value.property.value))
-        .unwrap_or_default()
+        .map_or_default(|value| field_type(&value.property.value))
 }
 pub(super) fn field_type(value: &MetadataValue) -> FieldType {
     let mut result = FieldType::default();
@@ -1095,9 +1093,7 @@ fn metadata_field(
             ..FieldType::default()
         }
     } else {
-        metadata_property(owner, "Type", resources)
-            .map(|value| field_type(&value.value))
-            .unwrap_or_default()
+        metadata_property(owner, "Type", resources).map_or_default(|value| field_type(&value.value))
     };
     FieldBinding {
         caption: Some(caption),
@@ -1649,8 +1645,7 @@ fn column_binding(
         FieldBinding {
             caption: record(&column.value, "Title").and_then(|value| literal(&value.value)),
             value_type: record(&column.value, "Type")
-                .map(|value| field_type(&value.value))
-                .unwrap_or_default(),
+                .map_or_default(|value| field_type(&value.value)),
             source: Some(columns.origin.clone()),
             tabular_total: false,
         },

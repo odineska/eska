@@ -129,7 +129,6 @@ pub fn source_changes(
 
 impl BridgeArgs {
     /// Emit a complete machine response; mutators require an exclusively owned new namespace.
-    #[must_use]
     pub fn run(&self, root: &Path) -> ExitCode {
         let (operation, result): (&str, Result<Value, Value>) = match &self.operation {
             Operation::LibraryCheckout {

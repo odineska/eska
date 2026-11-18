@@ -375,7 +375,7 @@ fn namespace_shadowing_and_empty_containers_preserve_existing_bytes_and_type_ide
             let owner = object(MetadataKind::Document, "Продажа", None);
             let input = request(project, &owner, "НовоеПоле");
             let plan = project.preview_create(&input).unwrap();
-            let mut reproduced = original.clone();
+            let mut reproduced = original;
             for change in plan.replacements().iter().rev() {
                 reproduced.replace_range(change.range.clone(), &change.text);
             }

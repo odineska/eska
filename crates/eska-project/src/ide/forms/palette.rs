@@ -71,12 +71,10 @@ pub(super) fn search(
                         PaletteValue::Absent(default) => absent(labels, default),
                         PaletteValue::Declared { property, .. } => definition
                             .value_caption(&property.property.value)
-                            .map(|caption| json!({"caption":value_caption(labels, caption, preview.presentation.script_variant)}))
-                            .unwrap_or_default(),
+                            .map_or_default(|caption| json!({"caption":value_caption(labels, caption, preview.presentation.script_variant)})),
                         PaletteValue::Qualifier { attribute, .. } => definition
                             .text_caption(&attribute.text)
-                            .map(|caption| json!({"caption":value_caption(labels, caption, preview.presentation.script_variant)}))
-                            .unwrap_or_default(),
+                            .map_or_default(|caption| json!({"caption":value_caption(labels, caption, preview.presentation.script_variant)})),
                         _ => Value::Null,
                     };
                     let value = display["caption"][&input.locale].as_str().unwrap_or(raw);

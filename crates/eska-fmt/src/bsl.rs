@@ -91,7 +91,7 @@ pub fn format(request: &Request, tokens: &[Token<'_>]) -> Result<(String, Range)
                 )?,
             )?;
         } else {
-            append(&mut output, &request.text[source.clone()])?;
+            append(&mut output, &request.text[source])?;
         }
         previous = end;
     }

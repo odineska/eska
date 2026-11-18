@@ -42,8 +42,7 @@ pub(super) fn project(
         object_menu,
     } = owner_type
         .as_ref()
-        .map(|kind| standard_commands(kind, owner.as_ref(), resources))
-        .unwrap_or_default();
+        .map_or_default(|kind| standard_commands(kind, owner.as_ref(), resources));
     let mut bar = CommandBar {
         buttons: inline,
         ..CommandBar::default()
@@ -84,8 +83,7 @@ pub(super) fn project_standalone(
         return RootCommands::default();
     }
     object_type(form)
-        .map(|kind| standard_commands(&kind, owner_id(&kind).as_ref(), resources))
-        .unwrap_or_default()
+        .map_or_default(|kind| standard_commands(&kind, owner_id(&kind).as_ref(), resources))
 }
 
 fn standard_commands(

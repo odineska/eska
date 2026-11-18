@@ -27,7 +27,6 @@ struct SaveHandler<'a> {
 
 impl SaveHandler<'_> {
     /// Discover the project and save its complete current `ChangeSet`.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let context = match discovery::discover_context(project_dir) {
             Ok(context) => context,
@@ -456,8 +455,7 @@ fn render_workspace_draft(
     let scope = (scopes.len() == 1)
         .then(|| scopes.first().copied())
         .flatten()
-        .map(|scope| format!("({scope})"))
-        .unwrap_or_default();
+        .map_or_default(|scope| format!("({scope})"));
     let mut lines = vec![format!("{commit_type}{scope}: {subject}"), String::new()];
     let mut details = BTreeSet::new();
     for project in projects {
@@ -477,8 +475,7 @@ fn render_workspace_draft(
         for event in project.semantic.events() {
             let member = event
                 .member()
-                .map(|member| format!(" — {member}"))
-                .unwrap_or_default();
+                .map_or_default(|member| format!(" — {member}"));
             details.insert(format!(
                 "- {}: {}{} — {}.",
                 localizer.text(changes::semantic_event_key(event.kind())),
@@ -552,8 +549,7 @@ fn render_draft(
     let scope = (scopes.len() == 1)
         .then(|| scopes.first().copied())
         .flatten()
-        .map(|scope| format!("({scope})"))
-        .unwrap_or_default();
+        .map_or_default(|scope| format!("({scope})"));
     let mut lines = vec![format!("{commit_type}{scope}: {subject}"), String::new()];
 
     let mut details = BTreeSet::new();
@@ -569,8 +565,7 @@ fn render_draft(
         }
         let member = event
             .member()
-            .map(|member| format!(" — {member}"))
-            .unwrap_or_default();
+            .map_or_default(|member| format!(" — {member}"));
         details.insert(format!(
             "- {}: {}{}.",
             localizer.text(changes::semantic_event_key(event.kind())),
@@ -679,7 +674,6 @@ fn short_id(id: &str) -> &str {
 }
 
 /// Execute parsed VCS options in the repository owner.
-#[must_use]
 pub fn run(args: &SaveArgs, directory: &Path, localizer: &Localizer) -> ExitCode {
     SaveHandler { args }.run(directory, localizer)
 }

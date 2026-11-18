@@ -274,9 +274,7 @@ impl<'a> DataFields<'a> {
             }
             path.push(name.to_owned());
             let property = record(&column.value, "Type");
-            let value_type = property
-                .map(|field| field_type(&field.value))
-                .unwrap_or_default();
+            let value_type = property.map_or_default(|field| field_type(&field.value));
             self.push(path, None, value_type, property, Some(origin.clone()));
             if let Some(children) = record(&column.value, "Columns") {
                 self.columns(&children.value, origin, path);
@@ -355,7 +353,7 @@ impl<'a> DataFields<'a> {
                 .iter()
                 .find(|object| object.range == origin.range)
         });
-        let name = path.last().map(String::as_str).unwrap_or_default();
+        let name = path.last().map_or_default(String::as_str);
         let mut value_type = binding.value_type;
         let mut type_property = None;
         let mut caption = None;

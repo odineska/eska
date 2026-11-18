@@ -316,7 +316,7 @@ impl ProjectSession {
             .cloned()
             .collect();
         for id in retained {
-            let node_id = NodeId::Object(id.clone());
+            let node_id = NodeId::Object(id);
             let parent = self
                 .nodes
                 .get(&node_id)

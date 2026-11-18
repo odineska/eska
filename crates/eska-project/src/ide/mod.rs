@@ -25,13 +25,11 @@ mod source_labels;
 pub(crate) const API_MINOR: u32 = 54;
 
 /// Run a persistent framed protocol session without human output on stdout.
-#[must_use]
 pub fn run() -> std::process::ExitCode {
     std::process::ExitCode::from(runtime::run(server::Identity::Legacy))
 }
 
 /// Run the standalone project component with its own identity and no monolithic updater capability.
-#[must_use]
 pub fn serve() -> std::process::ExitCode {
     std::process::ExitCode::from(runtime::run(server::Identity::Project))
 }

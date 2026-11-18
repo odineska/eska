@@ -47,7 +47,7 @@ fn workspace_activity_persists_without_reading_disabled_xml_or_changing_cli_scop
         assert_eq!(initial["activity"]["hideDisabled"], false);
         let one = request_context(&initial, 0);
         let two = request_context(&initial, 1);
-        let mut index = one.clone();
+        let mut index = one;
         index["action"] = json!("start");
         client.ok("metadata/index", index);
         let off = activity(&mut client, &initial, 0, false);

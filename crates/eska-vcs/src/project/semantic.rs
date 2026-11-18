@@ -293,9 +293,8 @@ fn analyze_snapshots(
     events: &mut BTreeSet<SemanticEvent>,
     fallbacks: &mut BTreeSet<SemanticFallback>,
 ) {
-    let owners = objects
-        .map(|objects| objects.objects_for_changed_path(snapshot.source_path))
-        .unwrap_or_default();
+    let owners =
+        objects.map_or_default(|objects| objects.objects_for_changed_path(snapshot.source_path));
     let owner = owners.first().map(|value| semantic_object(value));
     let project_type = project.configuration().project_type();
     let Ok(source_bytes) = gix::path::into_bstr(snapshot.source_path) else {

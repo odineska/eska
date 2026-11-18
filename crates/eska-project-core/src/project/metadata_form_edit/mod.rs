@@ -32,15 +32,26 @@ pub use schema::{
 pub use types::FormTypeOption;
 pub(crate) use types::{type_options, type_reference};
 
-/// Integer identities belong to elements; definition names remain stable CLI selectors.
-#[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
-#[serde(tag = "kind", rename_all = "camelCase", deny_unknown_fields)]
-pub enum FormTarget {
-    Root {},
-    Element { id: i64 },
-    Attribute { name: String },
-    Command { name: String },
-    Parameter { name: String },
+pub use wire_type::FormTarget;
+
+mod wire_type {
+    #![expect(
+        clippy::empty_enums,
+        reason = "Serde generates an empty field enum to reject unknown fields on Root {}"
+    )]
+
+    use super::{Deserialize, Serialize};
+
+    /// Integer identities belong to elements; definition names remain stable CLI selectors.
+    #[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
+    #[serde(tag = "kind", rename_all = "camelCase", deny_unknown_fields)]
+    pub enum FormTarget {
+        Root {},
+        Element { id: i64 },
+        Attribute { name: String },
+        Command { name: String },
+        Parameter { name: String },
+    }
 }
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]

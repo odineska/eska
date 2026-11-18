@@ -31,7 +31,6 @@ struct StatusHandler<'a> {
 
 impl StatusHandler<'_> {
     /// Execute the selected VCS operation with localized presentation.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let context = match discovery::discover_context(project_dir) {
             Ok(context) => context,
@@ -658,7 +657,6 @@ const fn head_name(head: HeadState) -> &'static str {
 }
 
 /// Execute parsed VCS options in the repository owner.
-#[must_use]
 pub fn run(args: &StatusArgs, directory: &Path, localizer: &Localizer) -> ExitCode {
     StatusHandler { args }.run(directory, localizer)
 }

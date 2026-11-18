@@ -18,7 +18,6 @@ struct CloneHandler<'a> {
 
 impl CloneHandler<'_> {
     /// Validate and execute one clone request.
-    #[must_use]
     pub fn run(&self, base: &Path, localizer: &Localizer) -> ExitCode {
         let plan = match clone::inspect(
             base,
@@ -114,7 +113,6 @@ fn path_message(localizer: &Localizer, key: &str, path: &Path) -> String {
 }
 
 /// Execute parsed VCS options in the repository owner.
-#[must_use]
 pub fn run(args: &CloneArgs, directory: &Path, localizer: &Localizer) -> ExitCode {
     CloneHandler { args }.run(directory, localizer)
 }

@@ -48,7 +48,6 @@ struct DiffHandler<'a> {
 
 impl DiffHandler<'_> {
     /// Discover the project, inspect its file changes and select one presentation.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let context = match discovery::discover_context(project_dir) {
             Ok(context) => context,
@@ -392,7 +391,6 @@ fn report_error(error: &DiffError, localizer: &Localizer) -> ExitCode {
 }
 
 /// Execute parsed VCS options in the repository owner.
-#[must_use]
 pub fn run(args: &DiffArgs, directory: &Path, localizer: &Localizer) -> ExitCode {
     DiffHandler { args }.run(directory, localizer)
 }

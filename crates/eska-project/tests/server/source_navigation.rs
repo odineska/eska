@@ -59,7 +59,7 @@ fn source_navigation_protocol_is_lazy_versioned_and_locale_independent() {
                     client.request("metadata/index", &status)["progress"]["state"],
                     "not_started"
                 );
-                let mut refresh = context.clone();
+                let mut refresh = context;
                 refresh["node"] = project["root"].clone();
                 client.request("metadata/refresh", &refresh);
                 params["path"] = json!({"value":"Configuration.xml","encoding":"utf-8"});

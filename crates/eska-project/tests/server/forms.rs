@@ -2148,8 +2148,8 @@ fn handler_navigation_uses_checked_modules_and_the_current_editor_snapshot() {
             Path::new("CommonForms/Preview/Ext/Form/Module.bsl")
         );
         let input = json!({"source":source["source"],"version":"7","text":text});
-        let mut locate = target.clone();
-        locate["input"] = input.clone();
+        let mut locate = target;
+        locate["input"] = input;
         let found = client.request("form/handlerLocate", &params(&context, locate.clone()));
         let start = usize::try_from(found["range"]["start"].as_u64().unwrap()).unwrap();
         let end = usize::try_from(found["range"]["end"].as_u64().unwrap()).unwrap();

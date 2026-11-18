@@ -86,13 +86,12 @@ fn item(
         .find(|n| n.has_tag_name((NS, "Description")))
         .and_then(simple_text)
         .filter(|value| !value.is_empty())
-        .map(|content| {
+        .map_or_default(|content| {
             vec![LocalizedText {
                 language: "und".into(),
                 content,
             }]
-        })
-        .unwrap_or_default();
+        });
     let properties = if mode == PropertiesMode::All {
         Some(
             node.children()

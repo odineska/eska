@@ -43,14 +43,13 @@ pub(in crate::metadata) fn error(error: &Value, locale: &Localizer) {
     if code == "creation_arguments_required" {
         let fields = error["details"]["fields"]
             .as_array()
-            .map(|fields| {
+            .map_or_default(|fields| {
                 fields
                     .iter()
                     .filter_map(Value::as_str)
                     .collect::<Vec<_>>()
                     .join(", ")
-            })
-            .unwrap_or_default();
+            });
         eprintln!(
             "{}",
             locale.format(
