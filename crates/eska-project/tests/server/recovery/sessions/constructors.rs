@@ -306,7 +306,7 @@ fn visual_constructor_rpc_binds_catalog_and_operations_to_the_same_revision_and_
         fs::create_dir(root.join("src/Catalogs")).unwrap();
         fs::write(root.join("src/Catalogs/Items.xml"), "<MetaDataObject xmlns='http://v8.1c.ru/8.3/MDClasses'><Catalog uuid='33333333-3333-3333-3333-333333333333'><Properties><Name>Items</Name></Properties><ChildObjects><Attribute uuid='44444444-4444-4444-4444-444444444444'><Properties><Name>Article</Name></Properties></Attribute></ChildObjects></Catalog></MetaDataObject>").unwrap();
         let mut client = Client::new(&root, locale);
-        let binding = source_connect_version(&mut client, &root, &private, locale, 22);
+        let mut binding = source_connect_version(&mut client, &root, &private, locale, 22);
         let state = open_source(&mut client, &binding, XML, false);
         let opened = client.request(
             "query/constructorOpen",
@@ -335,6 +335,36 @@ fn visual_constructor_rpc_binds_catalog_and_operations_to_the_same_revision_and_
                 .iter()
                 .any(|field| field["english"] == "I.Article")
         );
+        let descriptor = root.join("src/Catalogs/Items.xml");
+        fs::write(
+            &descriptor,
+            fs::read_to_string(&descriptor)
+                .unwrap()
+                .replace("<Name>Article</Name>", "<Name>Sku</Name>"),
+        )
+        .unwrap();
+        let request = json!({"query":{"table":"Catalog.Items","qualifier":"I"}});
+        let previous_generation = constructor_args(&binding, &opened, request.clone());
+        let refreshed = client.request(
+            "metadata/refresh",
+            &source_args(
+                &binding,
+                json!({"node":{"kind":"object","objectId":"catalog:Items"}}),
+            ),
+        );
+        assert_ne!(refreshed["generation"], binding["generation"]);
+        assert_eq!(
+            client.response("query/constructorCatalog", &previous_generation)["error"]["data"]["kind"],
+            "stale_generation"
+        );
+        binding["generation"] = refreshed["generation"].clone();
+        let fields = client.request(
+            "query/constructorCatalog",
+            &constructor_args(&binding, &opened, request),
+        );
+        let fields = fields["catalog"]["fields"].as_array().unwrap();
+        assert!(fields.iter().any(|field| field["english"] == "I.Sku"));
+        assert!(!fields.iter().any(|field| field["english"] == "I.Article"));
         let changed = client.request("query/constructorAction", &constructor_args(&binding, &opened,
             json!({"action":{"kind":"compose","statement":0,"selection":null,"expression":{"kind":"source","table":"Catalog.Items","alias":"I"}}})));
         assert!(
