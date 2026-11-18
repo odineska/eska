@@ -39,6 +39,12 @@ struct Cli {
     version: Option<bool>,
 }
 
+impl Cli {
+    const fn has_query_selector(&self) -> bool {
+        self.arguments.query_at.is_some() || self.arguments.query_index.is_some()
+    }
+}
+
 /// The exact pure-text entry precedes locale/config discovery and never writes a source file.
 pub fn run() -> ExitCode {
     let args: Vec<OsString> = std::env::args_os().collect();

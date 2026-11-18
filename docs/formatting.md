@@ -435,7 +435,10 @@ CDATA может стать экранированным текстом внут
 
 `--format json`: `{schema_version:1,formatter_version,mode,files,migration,error}`. Каждая запись files
 содержит path, language, source_sha256, changed, status, edits, effective, diff.
-`source_sha256` — null у исключённого файла и при `--dump-config`: текст не читается.
+После выбора политики для файла ошибка доступа, чтения или подготовки правок
+оставляет запись о нём с `status:"failed"`. Поле `source_sha256` заполняется
+после успешного чтения текста. До этого, в том числе при `--dump-config`
+и для исключённых файлов, его значение равно `null`.
 Status: `unchanged`, `excluded`, `skipped`, `planned`, `applied`, `failed`, `not_applied`.
 Для `skipped` присутствует дополнительное поле `skip_reason` с машинной причиной защиты.
 Error — nullable структурированная ошибка `{code,field,offset?}`; схема и значения
