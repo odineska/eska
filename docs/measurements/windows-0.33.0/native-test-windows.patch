@@ -1,0 +1,18 @@
+--- a/tests/support/native_metadata_objects/mod.rs
++++ b/tests/support/native_metadata_objects/mod.rs
+@@ -13,0 +14 @@
++use eska_project_core::paths::native_path;
+@@ -192 +193 @@
+-                self.source.clone().into(),
++                native_path(&self.source).into_owned().into_os_string(),
+@@ -214 +215,3 @@
+-                self.root.0.join(format!("{label}.cf")).into(),
++                native_path(&self.root.0.join(format!("{label}.cf")))
++                    .into_owned()
++                    .into_os_string(),
+@@ -225 +228 @@
+-                export.clone().into(),
++                native_path(&export).into_owned().into_os_string(),
+@@ -317 +320 @@
+-    result.push(path);
++    result.push(native_path(path).as_os_str());
