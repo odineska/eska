@@ -97,13 +97,13 @@ eska-build --project-dir ./accounting build --dry-run --format json
 Linux и macOS:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -LsSf https://odineska.github.io/eska/install | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://odineska.tech/eska/install | sh
 ```
 
 Windows PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -c "irm https://odineska.github.io/eska/install.ps1 | iex"
+powershell -ExecutionPolicy Bypass -c "irm https://odineska.tech/eska/install.ps1 | iex"
 ```
 
 Скрипт устанавливает **опубликованный** комплект, а не произвольную feature-ветку.
@@ -528,11 +528,11 @@ cache `eska/libraries`; при нестандартном config — в сосе
 В первом скринкасте проект уже подключён; показана именно настройка проводника.
 Скринкасты записаны в русскоязычном интерфейсе Explorer, без звука.
 
-[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.github.io/eska/docs/#demo-setup)
+[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.tech/eska/docs/#demo-setup)
 
 ### Дерево метаданных
 
-[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.github.io/eska/docs/#demo-tree)
+[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.tech/eska/docs/#demo-tree)
 
 В корне показаны конфигурации и подпроекты; разделы метаданных находятся прямо
 внутри проекта. «Общие», коллекции объектов, вложенные реквизиты и табличные части,
@@ -595,9 +595,9 @@ JSON-запросы, `--no-input`, предварительная проверк
 
 Редактирование требует Metadata API 1.53, создание обработчиков — 1.54. Предпросмотр Designer XML 8.3.27 имеет статус beta. Команды и BSL формы выполняются в клиенте 1С. [Свойства, события и ограничения](https://github.com/odineska/eska-vscode-explorer/blob/main/docs/form-preview.md).
 
-[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.github.io/eska/docs/#demo-forms)
+[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.tech/eska/docs/#demo-forms)
 
-[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.github.io/eska/docs/#demo-form-edit)
+[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.tech/eska/docs/#demo-form-edit)
 
 ### Открытие и переход от файла
 
@@ -692,7 +692,7 @@ Unsaved BSL сам по себе не меняет Git-статус. Без вс
 
 Панель использует встроенное расширение Git редактора. Изменённые файлы также отмечаются в дереве метаданных. Команды для терминала описаны в [разделе Git](#daily-work).
 
-[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.github.io/eska/docs/#demo-scm)
+[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.tech/eska/docs/#demo-scm)
 
 <a id="debug"></a>
 
@@ -757,7 +757,7 @@ Standalone-проект этой функцией не отключается. �
 
 ## 10. Свойства и переименование метаданных
 
-[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.github.io/eska/docs/#demo-properties)
+[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.tech/eska/docs/#demo-properties)
 
 Панель **Свойства** читает объект и схему редактирования из ESKA. Редактор не
 угадывает допустимые поля по внешнему виду XML. Read-only поле показывает
@@ -985,7 +985,7 @@ dirty-текст сохраняется с ограничением записи
 поддерживаемых источников предоставляет ESKA. Наличие имени в каталоге не означает
 полного вывода типа выражения или проверки выполнения запроса.
 
-[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.github.io/eska/docs/#demo-query)
+[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.tech/eska/docs/#demo-query)
 
 ### Таблицы, поля и соединения
 
