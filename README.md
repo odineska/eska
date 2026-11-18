@@ -28,49 +28,49 @@ ESKA подключает выгрузку Конфигуратора, пров�
 
 Скринкасты записаны в VS Code с Explorer 0.1.23 и ESKA 0.32.0. Нажмите на изображение, чтобы открыть видео с элементами управления.
 
-<details>
+<details open>
 <summary>Настроить проводник</summary>
 
 [![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.github.io/eska/docs/#demo-setup)
 
 </details>
 
-<details>
+<details open>
 <summary>Найти объект и открыть модуль</summary>
 
 [![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.github.io/eska/docs/#demo-tree)
 
 </details>
 
-<details>
+<details open>
 <summary>Перейти из свойств к XML</summary>
 
 [![Перейти из свойств к XML — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.github.io/eska/docs/#demo-properties)
 
 </details>
 
-<details>
+<details open>
 <summary>Открыть управляемую форму</summary>
 
 [![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.github.io/eska/docs/#demo-forms)
 
 </details>
 
-<details>
+<details open>
 <summary>Изменить заголовок поля формы</summary>
 
 [![Изменить заголовок поля формы — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.github.io/eska/docs/#demo-form-edit)
 
 </details>
 
-<details>
+<details open>
 <summary>Сравнить изменения модулей по именам объектов</summary>
 
 [![Сравнить изменения модулей по именам объектов — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.github.io/eska/docs/#demo-scm)
 
 </details>
 
-<details>
+<details open>
 <summary>Изменить запрос и сохранить через Ctrl+S</summary>
 
 [![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.github.io/eska/docs/#demo-query)
