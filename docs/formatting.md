@@ -2,18 +2,14 @@
 
 ## Статус контракта
 
-T120 реализует политику в общем Rust core: профиль, схема, resolver, migration
-preview/apply и протокол текста. T121 добавляет библиотеку `eska-fmt` с алгоритмом
-BSL, T122 — SDBL и точечную запись встроенных запросов. В T123 готовы
-`eska-fmt` / `eska fmt`, RPC 1.33 и интерфейс Explorer. T144 завершена для
-локальной поставки и Linux/VSCodium; [отчёт приёмки](measurements/t144-formatting.json).
-Анализатор не требуется для разрешения настроек или форматирования.
+Форматирование BSL, SDBL и встроенных запросов доступно через `eska-fmt`,
+`eska fmt` и Explorer. Настройка стиля и форматирование работают без анализатора.
 
 Первичный конфиг — `eska.toml`, секция `[format]`.
 [JSON Schema версии 1](../schemas/format-v1.schema.json) описывает эту секцию,
 а не целый манифест. Численные ограничения и область применения проверяет также
-строгий загрузчик проекта/workspace. Смена версии профиля требует явного выбора;
-новая версия приложения сама не меняет defaults профиля `1c` версии 1.
+загрузчик манифеста проекта или workspace. Поддерживается `profile_version = 1`;
+при отсутствии параметра применяется версия 1.
 
 ## Конфигурация
 
@@ -51,7 +47,8 @@ column_limit = 0
 
 Порядок: разрешённый профиль → workspace common/язык → member common/язык →
 overrides workspace, затем member → параметры операции. В одном списке overrides
-последнее совпадение побеждает. `include` обязательно, `exclude` внутри правила
+последнее совпавшее правило выигрывает для каждого заданного ключа. `include`
+обязательно, `exclude` внутри правила
 отменяет только это правило. Пути относительно объявившего правила `eska.toml`;
 поддерживаются `*`, `?`, `**` и `/`. `**/` совпадает также с нулём каталогов.
 Абсолютные пути, `..`, обратные слеши и классы `[]` в glob не принимаются.
@@ -59,8 +56,9 @@ overrides workspace, затем member → параметры операции. 
 Таблицы наследуют отдельные ключи; скаляры и списки заменяются целиком.
 `exclude=[]` очищает наследованные исключения, `column_limit=0` отключает
 ограничение, `false` сохраняет свой смысл. Исключения не снимают защиту исходников.
-Пользовательские профили объявляются в `format.profiles.<name>` и наследуют
-`based_on`; встроенные `1c` и `eska` переопределить нельзя. Неизвестные профили и циклы
+Пользовательские профили объявляются в `format.profiles.<name>`. Поле `based_on`
+по умолчанию равно `1c`. Встроенные `1c` и `eska` переопределить нельзя.
+Неизвестные профили и циклы
 отклоняются. Параметры отступов редактора не переопределяют стиль проекта.
 
 ## Пресет `eska`
@@ -213,17 +211,20 @@ blank_lines_between_object_groups = 1
 ## Каталог опций версии 1
 
 Общие параметры допустимы в `common`, `bsl`, `sdbl` и соответствующих таблицах
-профилей/overrides. `keyword_case` профиля SDBL по умолчанию `upper`, BSL —
-`canonical`. Типы, диапазоны, enum и остальные defaults входят в JSON Schema.
+профилей и правил. Параметры только для одного языка задаются в таблице этого
+языка. Ниже приведены значения базового профиля `1c` версии 1. Отличия
+профиля по умолчанию описаны в разделе [Пресет `eska`](#пресет-eska).
+При `indent_style = "tab"` итоговый `indent_width` должен быть кратен `tab_width`.
+Типы, диапазоны и допустимые значения перечислены в JSON Schema.
 
-| Ключ | Default | Смысл / English |
+| Ключ | Базовое значение `1c` | Смысл / English |
 | --- | --- | --- |
 | `indent_style` | `tab` | `tab` или `space`; indentation character |
 | `indent_width` | `4` | Колонок на уровень; columns per block |
 | `tab_width` | `4` | Визуальная ширина таба; tab stop width |
 | `continuation_indent_width` | `4` | Добавочный отступ продолжения; continuation columns |
 | `column_limit` | `120` | Ориентир длины, `0` без лимита; soft column limit |
-| `keyword_case` | По языку | `canonical`, `upper`, `lower`, `preserve`; token spelling |
+| `keyword_case` | BSL: `canonical`; SDBL: `upper` | `canonical`, `upper`, `lower`, `preserve`; token spelling |
 | `space_after_comma` | `true` | Пробел после запятой; comma spacing |
 | `space_around_operators` | `true` | Пробелы вокруг бинарных операторов; binary spacing |
 | `space_inside_parentheses` | `false` | Внутренние пробелы скобок; inner parentheses spacing |
@@ -240,7 +241,7 @@ blank_lines_between_object_groups = 1
 | `align_call_arguments` | `false` | Только BSL: колонки запятых соседних одинаковых однострочных вызовов; adjacent call argument columns |
 | `closing_parenthesis_on_new_line` | `false` | Только BSL: отдельная строка закрывающей скобки перенесённого вызова; multiline call closing delimiter |
 | `preserve_existing_line_breaks` | `false` | Только BSL: при `fit` сохранять переносы аргументов/бинарных выражений, а также строку после `=`; retain existing breaks while fitting |
-| `indent_multiline_strings` | `false` | Только BSL: переносить многострочный литерал после `=` и выравнивать отступ перед `|`; multiline string source margins |
+| `indent_multiline_strings` | `false` | Только BSL: переносить литерал после `=` и выравнивать маркеры продолжения; multiline string source margins |
 | `blank_lines_between_methods` | `1` | Только BSL: пустые строки между методами; method separation |
 | `blank_lines_inside_methods` | `0` | Только BSL: минимум пустых строк после объявления и перед концом метода, `0..16`; inner method boundaries |
 | `blank_lines_around_blocks` | `0` | Только BSL: минимум пустых строк между блоком и соседними операциями, `0..16`; control block separation |
@@ -420,22 +421,32 @@ CDATA может стать экранированным текстом внут
 проверяются ESKA. Разовое разрешение редактора их не отменяет.
 
 `eska-fmt [scope]` и `eska fmt [scope]` имеют одинаковые аргументы. Scope — путь
-к файлу или каталогу относительно `--project-dir` (по умолчанию текущий каталог).
+к файлу или каталогу. Относительный путь отсчитывается от `--project-dir`
+(по умолчанию текущий каталог).
 В проекте без scope выбираются BSL/SDBL из Designer source; каталог объекта
-задаётся обычным путём, например `src/Catalogs/Items`. `--member NAME` и
-`--workspace` используют общий resolver выбора ESKA. Отдельный BSL/SDBL-файл
-работает без манифеста с профилем 1С. Существующий ошибочный манифест не игнорируется.
+задаётся обычным путём, например `src/Catalogs/Items`. Чтобы выбрать проекты
+workspace, укажите `--member NAME` для каждого нужного проекта или
+`--workspace` для всех. Отдельный BSL/SDBL-файл форматируется без манифеста
+с профилем `eska` версии 1. Ошибка в существующем манифесте останавливает операцию.
 
 Для явно заданного пути форматтер проверяет компоненты на символические
 ссылки. В workspace путь после разрешения `..` должен принадлежать одному
 из выбранных проектов.
 
 `--check`, `--diff`, `--dump-config` взаимоисключающие и ничего не записывают.
-Без них применяется проверенный план. `--style JSON` задаёт sparse override
-операции; все ключи и происхождение видны в `--dump-config`. Встроенный запрос
-выбирается явно: `--query-at BYTE` для BSL или `--query-index INDEX` для XML,
-индексы и координаты с нуля. Это режим одного файла. `--migrate-config` показывает
-миграцию корневого манифеста workspace/проекта, `--apply-migration` применяет её с backup.
+Для форматирования с записью запустите команду без этих флагов.
+`--style JSON` меняет только указанные ключи на время операции.
+`--dump-config` показывает итоговый стиль и происхождение каждой настройки.
+Для встроенного запроса укажите один файл и один селектор. `--query-at BYTE`
+принимает смещение в байтах UTF-8 в BSL, `--query-index INDEX` выбирает запрос
+в XML. Отсчёт в обоих случаях начинается с нуля.
+
+`--migrate-config` показывает миграцию корневого манифеста,
+`--apply-migration` применяет её с резервной копией. Выберите один режим
+миграции. Он принимает `--project-dir`, `--format` и `--lang` без пути к
+исходнику, выбора проектов, стиля или селектора запроса.
+Справочник CLI описывает все параметры обеих команд.
+[`eska fmt`](cli-reference.md#command-eska-fmt) · [`eska-fmt`](cli-reference.md#command-eska-fmt-default)
 
 `--format json`: `{schema_version:1,formatter_version,mode,files,migration,error}`. Каждая запись files
 содержит path, language, source_sha256, changed, status, edits, effective, diff.
@@ -464,6 +475,7 @@ eska fmt src/Catalogs/Items --diff
 eska fmt --member MyExtension
 eska fmt --workspace --check
 eska-fmt Query.sdbl --dump-config
+eska-fmt Module.bsl --diff --style '{"column_limit":100}'
 eska-fmt Module.bsl --query-at 123 --diff
 eska-fmt Schema.xml --query-index 0
 eska-fmt --migrate-config
