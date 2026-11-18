@@ -9,6 +9,7 @@ use crate::vcs::{
     command::{Error as CommandError, Executor},
     network,
     repository::{Error as RepositoryError, Head, ReferenceTarget, Remote, Repository},
+    shelves::{self, Session},
     workflow::{FinishRequirement, PolicyError},
 };
 
@@ -38,6 +39,7 @@ pub enum FinishError {
     DetachedHead,
     UnbornHead,
     NotTaskBranch,
+    Shelf(shelves::Error),
     BaseBranchMissing {
         branch: String,
     },
@@ -92,19 +94,25 @@ pub fn execute(project: &Project) -> Result<FinishResult, FinishError> {
     if repository.has_in_progress_operation() {
         return Err(FinishError::OperationInProgress);
     }
+    // Serialize the full transition with switch, shelve and unshelve for this repository.
+    let _shelf_session = Session::acquire(&repository).map_err(FinishError::Shelf)?;
     let status = repository.status().map_err(FinishError::Repository)?;
     if status.is_dirty() {
         return Err(FinishError::DirtyWorkspace {
             files: status.entries.len(),
         });
     }
-
     let (task_branch, task_tip) = active_branch(&repository)?;
     let task = policy
         .task_id(&task_branch)
         .ok_or(FinishError::NotTaskBranch)?
         .to_owned();
     let plan = policy.plan(&task).map_err(FinishError::Policy)?;
+    let task_reference = format!("refs/heads/{task_branch}");
+    if plan.delete_local_branch {
+        shelves::ensure_no_shelf(&repository, task_reference.as_bytes())
+            .map_err(FinishError::Shelf)?;
+    }
     let base_reference = format!("refs/heads/{}", plan.base_branch);
     let base_id = reference_id(&repository, &base_reference)?.ok_or_else(|| {
         FinishError::BaseBranchMissing {
@@ -115,14 +123,18 @@ pub fn execute(project: &Project) -> Result<FinishResult, FinishError> {
     let remote = repository
         .remote(policy.remote())
         .map_err(FinishError::Repository)?;
-    let (repository, base_updated) = if let Some(remote) = &remote {
-        update_base_from_remote(project, &repository, remote, &plan, base_id)?
-    } else {
-        (repository, false)
-    };
+    let refreshed = remote
+        .as_ref()
+        .map(|remote| update_base_from_remote(project, &repository, remote, &plan, base_id))
+        .transpose()?;
+    let (repository, base_updated) = refreshed
+        .as_ref()
+        .map_or((&repository, false), |(repository, updated)| {
+            (repository, *updated)
+        });
 
     verify_finish_requirement(
-        &repository,
+        repository,
         remote.as_ref(),
         policy.remote(),
         &plan,
@@ -134,8 +146,10 @@ pub fn execute(project: &Project) -> Result<FinishResult, FinishError> {
         .map_err(FinishError::Switch)?;
     if plan.delete_local_branch {
         let repository = Repository::discover(project.root()).map_err(FinishError::DeleteBranch)?;
+        shelves::ensure_no_shelf(&repository, task_reference.as_bytes())
+            .map_err(FinishError::Shelf)?;
         repository
-            .delete_inactive_reference(&format!("refs/heads/{task_branch}"), task_tip)
+            .delete_inactive_reference(&task_reference, task_tip)
             .map_err(FinishError::DeleteBranch)?;
     }
 

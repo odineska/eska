@@ -124,9 +124,7 @@ pub fn list(repository: &Repository) -> Result<Vec<Shelf>, Error> {
 /// Rejects ambiguous repository state, an existing shelf, or unsupported file kinds.
 pub fn plan(repository: &Repository) -> Result<Shelf, Error> {
     let (branch, base) = preflight(repository)?;
-    if list(repository)?.iter().any(|shelf| shelf.branch == branch) {
-        return Err(Error::Exists);
-    }
+    ensure_no_shelf(repository, &branch)?;
     let status = repository.status()?;
     if status.entries.is_empty() {
         return Err(Error::Empty);
@@ -141,6 +139,14 @@ pub fn plan(repository: &Repository) -> Result<Shelf, Error> {
         created_at: 0,
         files: status.entries.iter().map(shelf_path).collect(),
     })
+}
+
+/// Reject operations that would conflict with a branch's existing shelf.
+pub(crate) fn ensure_no_shelf(repository: &Repository, branch: &[u8]) -> Result<(), Error> {
+    if list(repository)?.iter().any(|shelf| shelf.branch == branch) {
+        return Err(Error::Exists);
+    }
+    Ok(())
 }
 
 /// Validate an entire restoration preview without creating a journal or lock.

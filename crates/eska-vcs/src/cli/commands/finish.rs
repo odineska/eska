@@ -8,8 +8,10 @@ use crate::{
     cli::{
         diagnostics,
         localization::{LocalizationValue, Localizer},
+        shelves,
     },
     project::{discovery, finish},
+    vcs::shelves::Error as ShelfError,
 };
 
 /// Execute the selected VCS operation with localized presentation.
@@ -67,6 +69,8 @@ fn present_error(error: &finish::FinishError, localizer: &Localizer) -> String {
         finish::FinishError::DetachedHead => localizer.text("finish-detached-head"),
         finish::FinishError::UnbornHead => localizer.text("finish-unborn-head"),
         finish::FinishError::NotTaskBranch => localizer.text("finish-not-task-branch"),
+        finish::FinishError::Shelf(ShelfError::Exists) => localizer.text("finish-shelf-exists"),
+        finish::FinishError::Shelf(error) => shelves::present_error(error, localizer),
         finish::FinishError::BaseBranchMissing { branch } => localizer.format(
             "finish-base-missing",
             &[("branch", LocalizationValue::Text(branch))],

@@ -361,6 +361,7 @@ finish-dirty-workspace = Рабочее дерево содержит несох
 finish-detached-head = Нельзя завершить задачу при detached HEAD. Переключитесь на локальную ветку задачи.
 finish-unborn-head = Нельзя завершить задачу в ветке без первого commit.
 finish-not-task-branch = Текущая ветка не является веткой задачи по настроенной workflow policy.
+finish-shelf-exists = У ветки задачи есть полка. Восстановите её командой eska unshelve и сохраните изменения перед завершением.
 finish-base-missing = Локальная базовая ветка { $branch } не найдена.
 finish-remote-base-missing = Репозиторий { $remote } ({ $url }) доступен, но после fetch не найдена базовая ссылка { $reference }.
 finish-remote-required = Удалённый репозиторий { $remote } не настроен; публикацию задачи нельзя подтвердить.

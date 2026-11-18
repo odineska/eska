@@ -428,6 +428,66 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
 }
 
 #[test]
+fn finish_preserves_shelved_work_under_both_branch_policies() {
+    let fixture = TestDir::new();
+    let path = std::env::var_os("PATH").unwrap();
+    for (locale, message) in [
+        ("ru", "У ветки задачи есть полка."),
+        ("en", "The task branch has a shelf."),
+    ] {
+        for delete in [true, false] {
+            let root = fixture.0.join(format!("{locale}-{delete}"));
+            fs::create_dir_all(root.join("src")).unwrap();
+            fs::write(
+                root.join("eska.toml"),
+                format!(
+                    "[project]\ntype='configuration'\n[vcs.workflow]\npreset='custom'\nextends='trunk'\n[vcs.workflow.policy]\ndelete_local_branch={delete}\n"
+                ),
+            )
+            .unwrap();
+            let module = root.join("src/module.bsl");
+            fs::write(&module, b"base\n").unwrap();
+            git(&root, &["init", "--initial-branch=main", "--template="]);
+            git(&root, &["add", "."]);
+            git(&root, &["commit", "-m", "base"]);
+            git(&root, &["switch", "-c", "task/shelved"]);
+            fs::write(&module, b"staged\n").unwrap();
+            git(&root, &["add", "src/module.bsl"]);
+            fs::write(&module, b"worktree\n").unwrap();
+            let original_index = fs::read(root.join(".git/index")).unwrap();
+            json(&tool(&root, &path, locale, &["shelve", "--format", "json"]));
+
+            let finish = tool(&root, &path, locale, &["finish"]);
+            if delete {
+                assert_eq!(finish.status.code(), Some(1), "{finish:?}");
+                assert!(finish.stdout.is_empty(), "{finish:?}");
+                assert!(String::from_utf8(finish.stderr).unwrap().contains(message));
+            } else {
+                assert!(finish.status.success(), "{finish:?}");
+                assert!(finish.stderr.is_empty(), "{finish:?}");
+                assert_eq!(
+                    git(&root, &["branch", "--show-current"]).trim_ascii(),
+                    b"main"
+                );
+                git(&root, &["switch", "task/shelved"]);
+            }
+            assert_eq!(
+                git(&root, &["branch", "--show-current"]).trim_ascii(),
+                b"task/shelved"
+            );
+            json(&tool(
+                &root,
+                &path,
+                locale,
+                &["unshelve", "--format", "json"],
+            ));
+            assert_eq!(fs::read(&module).unwrap(), b"worktree\n");
+            assert_eq!(fs::read(root.join(".git/index")).unwrap(), original_index);
+        }
+    }
+}
+
+#[test]
 fn production_debug_compares_configured_remote_and_protects_local_sources() {
     use eska_project_core::project::discovery;
     use eska_vcs::project::debug_sources::{self, Reason, Status, Update};
