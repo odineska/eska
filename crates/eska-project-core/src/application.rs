@@ -11,7 +11,7 @@ mod snapshot;
 pub use activity::{ActivityProjection, Consumer, ProjectActivity};
 pub use context::{
     AnalysisContext, ContextError, ContextSource, LibrarySelection, SourceRole, resolve,
-    resolve_active,
+    resolve_active, resolve_candidate,
 };
 pub(crate) use policy::RawTools;
 pub use policy::{AnalyzerPolicy, CheckPolicy, ToolSettings};

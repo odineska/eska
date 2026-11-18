@@ -1360,3 +1360,19 @@ metadata-authoring-role-help = Роль модуля из object-schema (нап�
 metadata-module-role-prompt = Выберите отсутствующий модуль
 
 metadata-authoring-operation-create-module = создание модуля
+
+project-document-about = Просмотр и изменение файлов настроек проекта
+project-document-show = Прочитать выбранный файл настроек
+project-document-preview = Проверить предложенные изменения и показать итоговый текст
+project-document-save = Сохранить проверенные изменения в выбранном файле настроек
+project-document-file = Выбрать манифест, правила игнорирования Git или атрибуты Git
+project-document-file-value = ФАЙЛ
+project-document-ready = Настройки проекта готовы.
+project-document-missing = Указанный каталог должен содержать eska.toml.
+project-document-unsafe = Путь к настройкам проекта содержит символическую ссылку или неожиданный тип файла.
+project-document-input = Недопустимый запрос настроек проекта или кодировка файла.
+project-document-invalid = Недопустимый манифест проекта.
+project-document-field = Недопустимое поле настроек проекта: { $field }.
+project-document-io = Не удалось прочитать или записать файл настроек проекта.
+project-document-too-large = Документ настроек проекта превышает допустимый размер.
+project-document-changed = Настройки проекта изменились. Перечитайте их перед сохранением правок.

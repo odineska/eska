@@ -1546,6 +1546,7 @@ Options:
 | [`eska-project analyzer-config`](#command-eska-project-analyzer-config) | Производная конфигурация bsl-analyzer |
 | [`eska-project validate`](#command-eska-project-validate) | Проверить манифесты и корневые дескрипторы Designer XML |
 | [`eska-project context`](#command-eska-project-context) | Определить контекст выбранного приложения |
+| [`eska-project settings-project`](#command-eska-project-settings-project) | Просмотр, проверка и сохранение файлов настроек проекта |
 | [`eska-project settings-local`](#command-eska-project-settings-local) | Просмотр и редактирование локальных настроек запуска проекта |
 | [`eska-project settings-local show`](#command-eska-project-settings-local-show) | Показать текущие настройки и их ревизию |
 | [`eska-project settings-local save`](#command-eska-project-settings-local-save) | Сохранить настройки из JSON-документа на стандартном вводе |
@@ -1577,6 +1578,60 @@ Options:
 | [`eska-project metadata rename-apply`](#command-eska-project-metadata-rename-apply) | Применить проверенный план переименования по снимку источников |
 | [`eska-project metadata rename-recovery`](#command-eska-project-metadata-rename-recovery) | Проверить или восстановить прерванное переименование |
 | [`eska-project version bump`](#command-eska-project-version-bump) | Увеличить один компонент версии проекта |
+
+<a id="command-eska-project-settings-project"></a>
+
+### Файлы настроек проекта
+
+```text
+eska-project --project-dir ПУТЬ settings-project show --file manifest --format json
+eska-project --project-dir ПУТЬ settings-project preview --file ignore --format json
+eska-project --project-dir ПУТЬ settings-project save --file attributes --format json
+```
+
+`--project-dir` указывает на каталог с `eska.toml`. Для отдельного участника
+workspace укажите его каталог. Значения `manifest`, `ignore` и `attributes`
+выбирают соответственно `eska.toml`, `.gitignore` и `.gitattributes`.
+Поддерживаются файлы UTF-8 до 512 КиБ.
+
+В JSON версии 1 успешный ответ содержит `kind: "project-settings"`,
+`status: "ready"`, `revision` и `value`. Для манифеста `value` содержит
+объект со значениями TOML. Команда `show` для манифеста также возвращает
+`format_schema` и `format_presets` для встроенных профилей. При чтении
+манифеста участника `format_inherited` содержит таблицу `[format]` из
+корневого манифеста workspace, если она задана. Для файлов Git `value`
+содержит текущий текст, а `git_template` содержит встроенный шаблон ESKA.
+Отсутствующий файл Git возвращает пустую строку и `revision: null`.
+
+`preview` и `save` читают JSON из stdin. Укажите ревизию из `show`. Для
+манифеста передайте список `edits`, где `path` содержит имена полей и
+нулевые индексы массивов. Запись без `value` удаляет элемент.
+
+```json
+{
+  "revision": "РЕВИЗИЯ",
+  "edits": [{"path": ["format", "common", "column_limit"], "value": 120}]
+}
+```
+
+Для файла Git передайте полное новое содержимое в `value`.
+
+```json
+{"revision": null, "value": "*.xml text eol=lf\n"}
+```
+
+`preview` возвращает исходную ревизию, предложенные значения, тексты
+`before` и `after` и признак `changed`. `save` возвращает сохранённую
+ревизию. При конфликте ревизий ответ содержит `status: "error"` и
+`error.code: "settings_changed"`. Прочитайте файл заново перед повтором.
+
+Правки раздела `[tools.bsl-analyzer]` проходят проверку `check-config`.
+Для выбора исполняемого файла используется `--analyzer ФАЙЛ`, переменная
+`ESKA_BSL_ANALYZER` или команда `bsl-analyzer-app` на `PATH`. Если передан
+`--analyzer`, после записи изменённого манифеста ESKA пытается обновить
+производный `bsl-analyzer.toml`. Поле `analyzer` сообщает отдельный итог
+обновления. `--application ИМЯ` выбирает приложение workspace для проверки
+или обновления.
 
 ### Локальные профили запуска
 
@@ -1666,6 +1721,7 @@ eska-project 0.32.0
   analyzer-config  Производная конфигурация bsl-analyzer
   validate         Проверить манифесты и корневые дескрипторы Designer XML
   context          Определить контекст выбранного приложения
+  settings-project Просмотр и изменение файлов настроек проекта
   settings-local   Просмотр и редактирование локальных настроек запуска проекта
   new              Создать проект Designer XML без инициализации Git
   init             Подключить существующую выгрузку Designer XML без инициализации Git

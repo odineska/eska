@@ -228,6 +228,28 @@ pub fn resolve(start: &Path, requested: Option<&str>) -> Result<AnalysisContext,
     resolve_with_activity(start, requested, None)?.ok_or(ContextError::EmptyWorkspace)
 }
 
+/// Resolve a replacement root manifest in memory while reading real Designer sources.
+///
+/// # Errors
+/// Rejects the same rules as `resolve`, including invalid source roots and selection.
+pub fn resolve_candidate(
+    root: &Path,
+    requested: Option<&str>,
+    input: &str,
+) -> Result<AnalysisContext, ContextError> {
+    let path = root.join(crate::config::FILE_NAME);
+    let input = input.strip_prefix('\u{feff}').unwrap_or(input);
+    let config = crate::config::ManifestConfig::from_toml(input).map_err(|error| {
+        ContextError::Discovery(Box::new(ContextDiscoveryError::Manifest {
+            path: path.clone(),
+            source: Box::new(error),
+        }))
+    })?;
+    let context = discovery::resolve_manifest(root, &path, config)
+        .map_err(|error| ContextError::Discovery(Box::new(error)))?;
+    resolve_discovered(context, requested, None)?.ok_or(ContextError::EmptyWorkspace)
+}
+
 /// Resolve the IDE source projection; no active consumer returns no analysis context.
 ///
 /// # Errors
@@ -245,9 +267,17 @@ fn resolve_with_activity(
     requested: Option<&str>,
     activity: Option<&crate::project::activity::State>,
 ) -> Result<Option<AnalysisContext>, ContextError> {
-    match discovery::discover_context(start)
-        .map_err(|error| ContextError::Discovery(Box::new(error)))?
-    {
+    let context = discovery::discover_context(start)
+        .map_err(|error| ContextError::Discovery(Box::new(error)))?;
+    resolve_discovered(context, requested, activity)
+}
+
+fn resolve_discovered(
+    context: DiscoveryContext,
+    requested: Option<&str>,
+    activity: Option<&crate::project::activity::State>,
+) -> Result<Option<AnalysisContext>, ContextError> {
+    match context {
         DiscoveryContext::Standalone(project) => {
             if let Some(requested) = requested {
                 return Err(ContextError::UnknownApplication {

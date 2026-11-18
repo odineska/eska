@@ -82,11 +82,7 @@ impl ConfigArgs {
             );
         }
         let analyzer = Analyzer {
-            binary: self
-                .analyzer
-                .clone()
-                .or_else(|| std::env::var_os("ESKA_BSL_ANALYZER").map(PathBuf::from))
-                .unwrap_or_else(|| PathBuf::from("bsl-analyzer-app")),
+            binary: binary(self.analyzer.clone()),
             timeout: Duration::from_secs(self.timeout),
             cancelled: &cancelled,
             connection_closed: None,
@@ -176,6 +172,12 @@ impl ConfigArgs {
     }
 }
 
+pub fn binary(explicit: Option<PathBuf>) -> PathBuf {
+    explicit
+        .or_else(|| std::env::var_os("ESKA_BSL_ANALYZER").map(PathBuf::from))
+        .unwrap_or_else(|| PathBuf::from("bsl-analyzer-app"))
+}
+
 /// Use the same generated fingerprint and path envelope in CLI and the project server.
 pub fn document(plan: &Plan, changed: bool) -> Value {
     json!({"schema_version":1,"kind":"analyzer-configuration","status":plan.status,"changed":changed,"path":response::path(&plan.path()),"ownership":plan.ownership,"preview_token":plan.token,"limited_context":plan.context.limited_context()})
@@ -250,24 +252,28 @@ fn failure(error: &Error, format: OutputFormat, localizer: &Localizer) -> ExitCo
             json!({"schema_version":1,"kind":"analyzer-configuration","status":"error","error":error_document(error)})
         );
     }
-    if let Error::Context(error) = error {
-        eprintln!(
-            "{}",
-            crate::context::failure(error, Path::new("."), localizer).message()
-        );
-    } else {
-        eprintln!(
-            "{}",
-            localizer.text(&format!("analyzer-error-{}", error.code()))
-        );
-    }
-    if let Error::CheckConfig { stdout, stderr, .. } = error {
-        eprintln!("{stdout}{stderr}");
-    }
+    eprintln!("{}", error_message(error, localizer));
+    emit_check_output(error);
     if matches!(error, Error::Cancelled) {
         ExitCode::from(130)
     } else {
         ExitCode::FAILURE
+    }
+}
+
+pub fn error_message(error: &Error, localizer: &Localizer) -> String {
+    if let Error::Context(error) = error {
+        crate::context::failure(error, Path::new("."), localizer)
+            .message()
+            .to_owned()
+    } else {
+        localizer.text(&format!("analyzer-error-{}", error.code()))
+    }
+}
+
+pub fn emit_check_output(error: &Error) {
+    if let Error::CheckConfig { stdout, stderr, .. } = error {
+        eprintln!("{stdout}{stderr}");
     }
 }
 

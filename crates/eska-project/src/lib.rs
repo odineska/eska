@@ -13,6 +13,7 @@ mod context;
 mod local_settings;
 mod operations;
 mod response;
+mod settings;
 
 pub use cli::run;
 

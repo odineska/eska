@@ -1360,3 +1360,19 @@ metadata-authoring-role-help = Module role from object-schema (for example objec
 metadata-module-role-prompt = Choose a missing module
 
 metadata-authoring-operation-create-module = module creation
+
+project-document-about = View and edit project settings files
+project-document-show = Read the selected settings file
+project-document-preview = Validate proposed edits and show the resulting text
+project-document-save = Save validated edits to the selected settings file
+project-document-file = Select the manifest, Git ignore rules, or Git attributes
+project-document-file-value = FILE
+project-document-ready = Project settings are ready.
+project-document-missing = The specified directory must contain eska.toml.
+project-document-unsafe = The project settings path contains a symbolic link or an unexpected file type.
+project-document-input = The project settings request or file encoding is invalid.
+project-document-invalid = The project manifest is invalid.
+project-document-field = Invalid project settings field: { $field }.
+project-document-io = The project settings file could not be read or written.
+project-document-too-large = The project settings document exceeds the supported size.
+project-document-changed = The project settings have changed. Reload them before saving your changes.
