@@ -13,7 +13,7 @@ use eska_project_core::{
         protection::Access,
         protocol::{Edit, Range, Request, source_sha256},
     },
-    project::{metadata_edit, query},
+    project::query::{self, QueryIdentity},
 };
 use std::{
     fs,
@@ -125,10 +125,19 @@ fn prepare_sources(
                 &path,
                 cli.arguments.query_at.is_some() || cli.arguments.query_index.is_some(),
             )?;
-            file.source_sha256 = Some(source_sha256(&before));
-            let range = query_range(cli, &before)?;
-            let result = files::preflight(context, &path, &before, range)
-                .and_then(|()| format(cli, &path, &before, &file));
+            let selection = select_query(cli, &before)?;
+            let range = selection.as_ref().map(|(range, _)| *range);
+            let snapshot = source_sha256(&before);
+            let result = files::preflight(context, &path, &before, range).and_then(|()| {
+                format(
+                    &path,
+                    &before,
+                    &snapshot,
+                    selection.as_ref().map(|(_, id)| id),
+                    &file,
+                )
+            });
+            file.source_sha256 = Some(snapshot);
             let (after, edits) = match result {
                 Ok(value) => value,
                 Err(error) => {
@@ -198,7 +207,7 @@ fn eligible(cli: &Cli, context: &mut Context, path: &Path, file: &mut File) -> R
 }
 
 /// An explicit query selector authorizes its scalar source span, never the whole supplier module.
-fn query_range(cli: &Cli, input: &str) -> Result<Option<Range>, Error> {
+fn select_query(cli: &Cli, input: &str) -> Result<Option<(Range, QueryIdentity)>, Error> {
     let selected = if let Some(offset) = cli.arguments.query_at {
         Some(
             query::read_bsl(input, offset)
@@ -215,37 +224,30 @@ fn query_range(cli: &Cli, input: &str) -> Result<Option<Range>, Error> {
     } else {
         None
     };
-    Ok(selected.map(|query| Range {
-        start: query.source.start,
-        end: query.source.end,
+    Ok(selected.map(|query| {
+        (
+            Range {
+                start: query.source.start,
+                end: query.source.end,
+            },
+            query.identity,
+        )
     }))
 }
 
 /// Query encoding reuses source maps; ordinary BSL never traverses or regenerates its string values.
-fn format(cli: &Cli, path: &Path, before: &str, file: &File) -> Result<(String, Vec<Edit>), Error> {
-    let identity = if let Some(offset) = cli.arguments.query_at {
-        Some(
-            query::read_bsl(before, offset)
-                .map_err(|_| Error::new("unsupported_source", "query_at"))?
-                .identity,
-        )
-    } else if let Some(index) = cli.arguments.query_index {
-        Some(
-            query::read_xml(before)
-                .map_err(|_| Error::new("unsupported_source", "query_index"))?
-                .get(index)
-                .ok_or_else(|| Error::new("invalid_scope", "query_index"))?
-                .identity
-                .clone(),
-        )
-    } else {
-        None
-    };
+fn format(
+    path: &Path,
+    before: &str,
+    snapshot: &str,
+    identity: Option<&QueryIdentity>,
+    file: &File,
+) -> Result<(String, Vec<Edit>), Error> {
     if let Some(identity) = identity {
         let plan = eska_fmt::format_query(
             before,
-            &metadata_edit::snapshot(before),
-            &identity,
+            snapshot,
+            identity,
             file.effective.options.clone(),
             None,
         )?;
