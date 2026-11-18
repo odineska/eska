@@ -7,95 +7,75 @@
 
 **Инструменты для разработки на 1С в формате Designer XML.**
 
-ESKA объединяет работу с выгрузкой Конфигуратора, Git, проверками и сборкой
-`.cf`, `.cfe`, `.epf`, `.erf`. Расширение **ESKA: 1C Explorer** добавляет дерево
-метаданных, свойства, редактор и конструктор запросов, BSL-сервисы и форматирование
-в VS Code / VSCodium. Исходниками остаются обычные XML, BSL и ресурсы проекта.
+ESKA подключает выгрузку Конфигуратора, проверяет XML и BSL, ведёт изменения в Git и собирает файлы `.cf`, `.cfe`, `.epf` и `.erf`. **ESKA: 1C Explorer** предоставляет инструменты для VS Code и VSCodium.
 
-> **ESKA — экспериментальный проект в активной разработке.**
-> Возможности и интерфейсы могут меняться.
+**Проект в активной разработке.** Доступные команды установленного выпуска перечислены в `--help`.
 
-Принять участие может любой желающий: протестировать ESKA на своих проектах,
-[сообщить об ошибке или предложить улучшение](https://github.com/odineska/eska/issues),
-помочь с документацией или прислать pull request.
-[Правила участия и работа с задачами](docs/task-tracker.md).
+[Руководство на сайте](https://odineska.github.io/eska/docs/) · [Справочник CLI](docs/cli-reference.md) · [Руководство в репозитории](docs/user-guide.md)
 
-[Подробное руководство на сайте](https://odineska.github.io/eska/docs/) ·
-[Руководство в репозитории](docs/user-guide.md) ·
-[Практический пример с БСП](docs/user-guide.md#practice) ·
-[Справочник документации](docs/README.md)
-
-Просмотр управляемых форм 1С 8.3.27 в Explorer доступен как **beta**:
-дерево и свойства, живое обновление Designer XML и отдельное окно изображения.
-Функциональные сценарии проверены на Linux и
-[Windows](docs/windows-forms-acceptance-2026-11-07.md); полная визуальная приёмка
-ещё продолжается. Metadata API 1.53 подключает редактирование в панели свойств,
-операции в дереве и несохранённый предпросмотр в основной вкладке или отдельном
-окне. Поддерживаются составные типы и условное оформление динамических списков.
-[Описание и ограничения](https://github.com/odineska/eska-vscode-explorer/blob/main/docs/form-preview.md).
-
-[CLI создания и редактирования](docs/metadata-authoring.md) доступен человеку
-и ИИ: конфигурации, объекты, реквизиты, полные копии с новыми UUID, безопасное
-удаление и операции над структурой форм. Explorer использует тот же Rust backend
-для команд создания, копирования и удаления. Есть discovery, JSON Schema и
-проверяемые планы; обновление информационной базы выполняется отдельно.
+- **Метаданные.** Поиск объектов, свойств и исходников. Создание объектов, форм и модулей, копирование с новыми UUID и проверка ссылок перед удалением. Для автоматизации доступны JSON Schema и планы изменений. [Работа с метаданными](docs/metadata-authoring.md)
+- **Управляемые формы.** Изменение свойств, типов и условного оформления в редакторе, перетаскивание элементов, создание обработчиков BSL, автосохранение и отмена. Предпросмотр формы 8.3.27 имеет статус beta. [Редактор форм](docs/user-guide.md#forms)
+- **BSL и запросы.** Подсказки, переходы и диагностика через BSL Analyzer, форматирование BSL и SDBL, отдельные черновики запросов и визуальный конструктор. [Запросы](docs/user-guide.md#queries) · [Форматирование](docs/formatting.md)
+- **Git.** В терминале доступны задачи, история, полки и семантический diff. В панели Explorer можно сравнить и индексировать файлы по именам объектов 1С и создать коммит. [Git в Explorer](docs/user-guide.md#scm) · [Команды VCS](docs/vcs-tool.md)
 
 ## Запуск и отладка 1С
 
-`eska-debug` — собственный адаптер на Rust: DAP для редактора и HTTP для сервера
-отладки 1С (`dbgs`). Доступны:
+В профиле `test` можно обновить базу или приложение, установить или удалить расширение и запустить клиент. Для `test` и `prod` доступны запуск с отладкой и подключение к HTTP-серверу `dbgs`. Отладчик поддерживает точки останова, условия, шаги, стек, переменные, Watch и вычисление выражений BSL. Адреса базы и сервера задаются в `.eska/settings_local.toml`.
 
-- запуск клиента с отладкой и подключение к работающим предметам;
-- точки останова, условия, счётчики срабатываний, логпоинты и остановка по ошибке;
-- шаги, стек вызовов, переменные, Watch, hover и свои выражения в Debug Console;
-- раскрытие вложенных значений и изменение доступных переменных через **Set Value**;
-- отладка конфигурации, подключённых расширений и внешних обработок EPF;
-- отдельные профили `test` и `prod`, локальные базы, Distrobox и доступный по сети/VPN `dbgs`.
-
-Настройки конкретного проекта хранятся в `.eska/settings_local.toml` вне Git.
-Обновление базы средствами ESKA доступно только для `test`, включая поддержанные
-частичные изменения и сценарий «обновить и запустить с отладкой».
-Для `prod` доступны запуск с отладкой и подключение с проверкой исходников Git.
-Нативный TCP-режим отладки 1С не поддерживается.
-
-[Настройка и первый запуск](https://github.com/odineska/eska/blob/main/docs/run-debug.md) ·
-[Возможности и ограничения HTTP-отладки](https://github.com/odineska/eska/blob/main/docs/1c-http-debug.md) ·
-[Отдельный бинарник и DAP без ESKA](https://github.com/odineska/eska/blob/main/docs/eska-debug-standalone.md)
+[Настройка и первый запуск](docs/run-debug.md) · [Самостоятельная работа с DAP](docs/eska-debug-standalone.md)
 
 ## Explorer в работе
 
-Четыре коротких скринкаста без звука — от настройки проводника до просмотра формы.
-Записано на Linux: VS Code 1.144, Explorer 0.1.19 и ESKA 0.30.0.
-Нажмите на GIF, чтобы открыть видео с управлением воспроизведением.
+Скринкасты записаны в VS Code с Explorer 0.1.23 и ESKA 0.32.0. Нажмите на изображение, чтобы открыть видео с элементами управления.
 
-### 1. Настроить проводник
+<details>
+<summary>Настроить проводник</summary>
 
-Перенесите ESKA: 1C Explorer наверх, сверните остальные группы и раскройте дерево проекта.
+[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.github.io/eska/docs/#demo-setup)
 
-[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-setup.gif)](https://odineska.github.io/eska/docs/#demo-setup)
+</details>
 
-### 2. Найти объект и открыть модуль
+<details>
+<summary>Найти объект и открыть модуль</summary>
 
-Документ → реквизиты → табличная часть → модуль объекта BSL.
+[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.github.io/eska/docs/#demo-tree)
 
-[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-tree.gif)](https://odineska.github.io/eska/docs/#demo-tree)
+</details>
 
-### 3. Посмотреть свойства
+<details>
+<summary>Перейти из свойств к XML</summary>
 
-Откройте свойства документа, найдите настройки номера и перейдите к исходному XML.
+[![Перейти из свойств к XML — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.github.io/eska/docs/#demo-properties)
 
-[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-properties.gif)](https://odineska.github.io/eska/docs/#demo-properties)
+</details>
 
-### 4. Открыть форму
+<details>
+<summary>Открыть управляемую форму</summary>
 
-Выберите поле на форме, раскройте данные и переключите страницы «Товары» и «Дополнительно».
+[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.github.io/eska/docs/#demo-forms)
 
-[![Открыть форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11/explorer-forms.gif)](https://odineska.github.io/eska/docs/#demo-forms)
+</details>
 
-Для дерева, свойств и статического просмотра форм платформа 1С не нужна.
-**В Explorer доступны операции над элементами, реквизитами, свойствами, событиями
-и условным оформлением.** Изменения проверяются перед записью в Designer XML.
-Те же операции доступны через [CLI](docs/metadata-authoring.md).
+<details>
+<summary>Изменить заголовок поля формы</summary>
+
+[![Изменить заголовок поля формы — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.github.io/eska/docs/#demo-form-edit)
+
+</details>
+
+<details>
+<summary>Сравнить изменения модулей по именам объектов</summary>
+
+[![Сравнить изменения модулей по именам объектов — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.github.io/eska/docs/#demo-scm)
+
+</details>
+
+<details>
+<summary>Добавить поле в запрос и применить его к BSL</summary>
+
+[![Добавить поле в запрос и применить его к BSL — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-query.gif)](https://odineska.github.io/eska/docs/#demo-query)
+
+</details>
 
 ## Компоненты
 
