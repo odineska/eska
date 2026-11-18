@@ -132,7 +132,14 @@ mod unix {
     /// Claim a disposable install prefix and official-shaped receipt pointing only into this fixture.
     fn installation(root: &Path) {
         fs::create_dir_all(root.join("bin")).unwrap();
-        fs::copy(env!("CARGO_BIN_EXE_eska"), root.join("bin/eska")).unwrap();
+        // Keep the writable descriptor out of the test runner: another test can fork
+        // while a copy is in progress and keep that descriptor alive until its exec.
+        let copy = Command::new("cp")
+            .args(["-p", env!("CARGO_BIN_EXE_eska")])
+            .arg(root.join("bin/eska"))
+            .output()
+            .expect("copy the fixture executable");
+        assert!(copy.status.success(), "{copy:?}");
         fs::write(root.join("eska-receipt.json"),json!({"binaries":["eska"],"install_prefix":root,"modify_path":false,
             "source":{"app_name":"eska","owner":"1c-tooling","name":"eska","release_type":"github"},
             "version":env!("CARGO_PKG_VERSION"),"provider":{"source":"cargo-dist","version":"0.32.0"}}).to_string()).unwrap();
