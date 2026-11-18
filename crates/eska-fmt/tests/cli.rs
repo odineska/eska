@@ -242,6 +242,38 @@ fn excessive_output_keeps_the_complete_batch_unchanged() {
     assert!(!directory.0.join(".eska").exists());
 }
 
+#[test]
+fn early_planning_failures_identify_the_file_in_both_locales() {
+    let directory = TestDir::new();
+    let first = directory.0.join("A.bsl");
+    let last = directory.0.join("Z.bsl");
+    fs::write(&first, "A=1;").unwrap();
+    fs::write(&last, [0xff]).unwrap();
+    let args = ["--format", "json"];
+    let invalid_utf8 = checked(&run(&directory.0, "ru", &args), 2);
+    assert_eq!(invalid_utf8, checked(&run(&directory.0, "en", &args), 2));
+    assert_eq!(invalid_utf8["error"]["code"], "invalid_utf8");
+    assert_eq!(invalid_utf8["files"][0]["status"], "not_applied");
+    let failed = &invalid_utf8["files"][1];
+    assert_eq!(
+        failed["path"],
+        last.canonicalize().unwrap().to_str().unwrap()
+    );
+    assert_eq!(failed["status"], "failed");
+    assert!(failed["source_sha256"].is_null());
+    assert_eq!(fs::read(&first).unwrap(), b"A=1;");
+
+    let args = ["A.bsl", "--query-at", "0", "--format", "json"];
+    let query = checked(&run(&directory.0, "ru", &args), 2);
+    assert_eq!(query, checked(&run(&directory.0, "en", &args), 2));
+    assert_eq!(query["error"]["code"], "unsupported_source");
+    assert_eq!(query["files"][0]["status"], "failed");
+    assert_eq!(
+        query["files"][0]["source_sha256"],
+        eska_project_core::formatting::protocol::source_sha256("A=1;")
+    );
+}
+
 /// A native query lease in another process is visible to the standalone formatter and released by drop.
 #[test]
 fn shared_source_lease_blocks_the_cli() {
@@ -258,6 +290,7 @@ fn shared_source_lease_blocks_the_cli() {
         2,
     );
     assert_eq!(blocked["error"]["code"], "source_busy");
+    assert_eq!(blocked["files"][0]["status"], "failed");
     assert_eq!(fs::read_to_string(&path).unwrap(), "А=1;");
     drop(lease);
     checked(

@@ -102,7 +102,7 @@ fn blank_form_has_native_autobar_and_independent_definition_identity_spaces() {
 #[test]
 fn subtree_copy_rekeys_nested_ids_but_preserves_data_binding_events_and_unknown_xml() {
     let input = source(
-        "<ChildItems><UsualGroup name='Group' id='10'><ChildItems><InputField name='Amount' id='11'><DataPath>Amount</DataPath><Events><Event name='OnChange'>AmountOnChange</Event></Events><c:Opaque x='1'/><ContextMenu name='Menu' id='12'/></InputField><Button name='Action' id='13'><AssociatedTableElementId>11</AssociatedTableElementId></Button></ChildItems></UsualGroup></ChildItems>",
+        "<ChildItems><UsualGroup name='Group' id='10'><ChildItems><InputField name='Amount' id='011'><DataPath>Amount</DataPath><Events><Event name='OnChange'>AmountOnChange</Event></Events><c:Opaque x='1'/><ContextMenu name='Menu' id='12'/></InputField><Button name='Action' id='13'><AssociatedTableElementId> +11 </AssociatedTableElementId></Button></ChildItems></UsualGroup></ChildItems>",
     );
     let operation = FormOperation::CopyElement {
         target: FormTarget::Element { id: 10 },
@@ -125,6 +125,10 @@ fn subtree_copy_rekeys_nested_ids_but_preserves_data_binding_events_and_unknown_
     );
     assert_eq!(edit.output().matches("<c:Opaque x='1'/>").count(), 2);
     assert_eq!(edit.output().matches(">AmountOnChange</Event>").count(), 2);
+    assert!(
+        edit.output()
+            .contains("<AssociatedTableElementId> +11 </AssociatedTableElementId>")
+    );
     assert!(
         edit.output()
             .contains("<AssociatedTableElementId>15</AssociatedTableElementId>")
@@ -315,6 +319,35 @@ fn scalar_property_and_events_keep_other_bytes_and_validate_known_domains() {
     )
     .unwrap();
     assert!(same.is_empty());
+}
+
+#[test]
+fn removal_checks_numeric_element_references() {
+    let input = source(
+        "<ChildItems><Table name='Rows' id='001'/><Button name='Action' id='2'><AssociatedTableElementId> +1 </AssociatedTableElementId><c:ItemId>1</c:ItemId></Button></ChildItems>",
+    );
+    let target = FormTarget::Element { id: 1 };
+    let error = plan(
+        &input,
+        &request(
+            &input,
+            vec![FormOperation::Remove {
+                target: target.clone(),
+                force: false,
+            }],
+        ),
+    )
+    .unwrap_err();
+    let FormEditError::References {
+        target: referenced,
+        paths,
+    } = error
+    else {
+        panic!("expected element references, got {error:?}");
+    };
+    assert_eq!(referenced, target);
+    assert_eq!(paths.len(), 1);
+    assert!(paths[0].starts_with("AssociatedTableElementId@"));
 }
 
 #[test]

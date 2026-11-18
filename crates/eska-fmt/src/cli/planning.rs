@@ -6,14 +6,14 @@ use super::{
 };
 use eska_project_core::{
     formatting::{
-        Error, Language, Patch,
+        Error, Language, Options, Patch,
         context::Context,
         files::{self, WritePlan},
         migration,
         protection::Access,
         protocol::{Edit, Range, Request, source_sha256},
     },
-    project::{metadata_edit, query},
+    project::query::{self, QueryIdentity},
 };
 use std::{
     fs,
@@ -48,8 +48,7 @@ pub fn run(cli: &Cli, cancelled: &AtomicBool, report: &mut Report) -> Result<(),
         cli.arguments.scope.as_deref(),
         cli.arguments.query_index.is_some(),
     )?;
-    if (cli.arguments.query_at.is_some() || cli.arguments.query_index.is_some()) && paths.len() != 1
-    {
+    if cli.has_query_selector() && paths.len() != 1 {
         return Err(Error::new("invalid_scope", "query"));
     }
     if paths.is_empty() && discovery.is_file() {
@@ -93,8 +92,7 @@ fn prepare_sources(
         let language = if path
             .extension()
             .is_some_and(|extension| extension == "sdbl")
-            || cli.arguments.query_at.is_some()
-            || cli.arguments.query_index.is_some()
+            || cli.has_query_selector()
         {
             Language::Sdbl
         } else {
@@ -116,57 +114,71 @@ fn prepare_sources(
             diff: None,
             skip_reason: None,
         };
-        if !file.effective.excluded && !cli.arguments.dump_config() {
-            if !eligible(cli, context, &path, &mut file)? {
-                report.files.push(file);
-                continue;
-            }
-            let before = read(
-                &path,
-                cli.arguments.query_at.is_some() || cli.arguments.query_index.is_some(),
-            )?;
-            file.source_sha256 = Some(source_sha256(&before));
-            let range = query_range(cli, &before)?;
-            let result = files::preflight(context, &path, &before, range)
-                .and_then(|()| format(cli, &path, &before, &file));
-            let (after, edits) = match result {
-                Ok(value) => value,
-                Err(error) => {
-                    file.status = "failed";
-                    report.files.push(file);
-                    return Err(error);
-                }
-            };
-            file.changed = before != after;
-            file.edits = edits;
-            if file.changed {
-                bytes = bytes
-                    .saturating_add(before.len())
-                    .saturating_add(after.len());
-                if bytes > 128 * 1024 * 1024 {
-                    return Err(Error::new("plan_too_large", "scope"));
-                }
-                file.status = "planned";
-                if cli.arguments.diff() {
-                    file.diff = Some(report::diff(&file.path, &before, &after));
-                }
-                indices.push(report.files.len());
-                plans.push(WritePlan {
-                    path,
-                    before,
-                    after,
-                    range,
-                });
-            }
+        let plan = prepare_file(cli, context, path, &mut file, &mut bytes);
+        if plan.is_err() {
+            file.status = "failed";
         }
+        let index = report.files.len();
         report.files.push(file);
+        if let Some(plan) = plan? {
+            indices.push(index);
+            plans.push(plan);
+        }
     }
     Ok((plans, indices))
 }
 
+fn prepare_file(
+    cli: &Cli,
+    context: &mut Context,
+    path: PathBuf,
+    file: &mut File,
+    planned_bytes: &mut usize,
+) -> Result<Option<WritePlan>, Error> {
+    if file.effective.excluded
+        || cli.arguments.dump_config()
+        || !eligible(cli, context, &path, file)?
+    {
+        return Ok(None);
+    }
+    let before = read(&path, cli.has_query_selector())?;
+    let snapshot = file.source_sha256.insert(source_sha256(&before));
+    let selection = select_query(cli, &before)?;
+    let range = selection.as_ref().map(|(range, _)| *range);
+    files::preflight(context, &path, &before, range)?;
+    let (after, edits) = format(
+        &path,
+        &before,
+        selection.as_ref().map(|(_, id)| (id, snapshot.as_str())),
+        file.language,
+        file.effective.options.clone(),
+    )?;
+    file.changed = before != after;
+    file.edits = edits;
+    if !file.changed {
+        return Ok(None);
+    }
+    *planned_bytes = planned_bytes
+        .saturating_add(before.len())
+        .saturating_add(after.len());
+    if *planned_bytes > 128 * 1024 * 1024 {
+        return Err(Error::new("plan_too_large", "scope"));
+    }
+    file.status = "planned";
+    if cli.arguments.diff() {
+        file.diff = Some(report::diff(&file.path, &before, &after));
+    }
+    Ok(Some(WritePlan {
+        path,
+        before,
+        after,
+        range,
+    }))
+}
+
 /// Bulk CI formatting skips supplier restrictions before reading or parsing their module text.
 fn eligible(cli: &Cli, context: &mut Context, path: &Path, file: &mut File) -> Result<bool, Error> {
-    let query = cli.arguments.query_at.is_some() || cli.arguments.query_index.is_some();
+    let query = cli.has_query_selector();
     let access = context.check_file(path).and_then(|access| {
         if access == Access::SelectionOnly && !query {
             Err(Error::new("selection_required", "range"))
@@ -198,7 +210,7 @@ fn eligible(cli: &Cli, context: &mut Context, path: &Path, file: &mut File) -> R
 }
 
 /// An explicit query selector authorizes its scalar source span, never the whole supplier module.
-fn query_range(cli: &Cli, input: &str) -> Result<Option<Range>, Error> {
+fn select_query(cli: &Cli, input: &str) -> Result<Option<(Range, QueryIdentity)>, Error> {
     let selected = if let Some(offset) = cli.arguments.query_at {
         Some(
             query::read_bsl(input, offset)
@@ -215,40 +227,27 @@ fn query_range(cli: &Cli, input: &str) -> Result<Option<Range>, Error> {
     } else {
         None
     };
-    Ok(selected.map(|query| Range {
-        start: query.source.start,
-        end: query.source.end,
+    Ok(selected.map(|query| {
+        (
+            Range {
+                start: query.source.start,
+                end: query.source.end,
+            },
+            query.identity,
+        )
     }))
 }
 
 /// Query encoding reuses source maps; ordinary BSL never traverses or regenerates its string values.
-fn format(cli: &Cli, path: &Path, before: &str, file: &File) -> Result<(String, Vec<Edit>), Error> {
-    let identity = if let Some(offset) = cli.arguments.query_at {
-        Some(
-            query::read_bsl(before, offset)
-                .map_err(|_| Error::new("unsupported_source", "query_at"))?
-                .identity,
-        )
-    } else if let Some(index) = cli.arguments.query_index {
-        Some(
-            query::read_xml(before)
-                .map_err(|_| Error::new("unsupported_source", "query_index"))?
-                .get(index)
-                .ok_or_else(|| Error::new("invalid_scope", "query_index"))?
-                .identity
-                .clone(),
-        )
-    } else {
-        None
-    };
-    if let Some(identity) = identity {
-        let plan = eska_fmt::format_query(
-            before,
-            &metadata_edit::snapshot(before),
-            &identity,
-            file.effective.options.clone(),
-            None,
-        )?;
+fn format(
+    path: &Path,
+    before: &str,
+    query: Option<(&QueryIdentity, &str)>,
+    language: Language,
+    options: Options,
+) -> Result<(String, Vec<Edit>), Error> {
+    if let Some((identity, snapshot)) = query {
+        let plan = eska_fmt::format_query(before, snapshot, identity, options, None)?;
         let edits = plan
             .replacements()
             .iter()
@@ -264,9 +263,9 @@ fn format(cli: &Cli, path: &Path, before: &str, file: &File) -> Result<(String, 
     }
     let request = Request {
         schema_version: 1,
-        language: file.language,
+        language,
         text: before.into(),
-        options: file.effective.options.clone(),
+        options,
         range: None,
     };
     let response = eska_fmt::format(&request).map_err(|mut error| {

@@ -210,16 +210,19 @@ pub(super) fn fail(format: OutputFormat, code: &str, detail: &str) -> ExitCode {
 
 /// Localize a structured shelf failure without exposing backend command terminology.
 pub(super) fn write_error(format: OutputFormat, error: &Error, localizer: &Localizer) -> ExitCode {
+    fail(format, error_code(error), &present_error(error, localizer))
+}
+
+pub(super) fn present_error(error: &Error, localizer: &Localizer) -> String {
     let code = error_code(error);
     let path = match error {
         Error::Collision(path) => path.display().to_string(),
         _ => String::new(),
     };
-    let detail = localizer.format(
+    localizer.format(
         &format!("shelf-error-{code}"),
         &[("path", LocalizationValue::Text(&path))],
-    );
-    fail(format, code, &detail)
+    )
 }
 
 /// Keep error identifiers stable and independent of locale.

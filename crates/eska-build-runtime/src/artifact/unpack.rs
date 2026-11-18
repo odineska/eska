@@ -3,7 +3,12 @@
 use crate::native_path;
 use std::{ffi::OsString, fs, path::Path};
 
-use super::{ArtifactError, Identity, PublicationError, identity::inspect_identity, io_error};
+use super::{
+    ArtifactError, Identity, PublicationError,
+    identity::inspect_identity,
+    io_error,
+    snapshot::{self, Snapshot},
+};
 use crate::build::{Ibcmd, ProcessStream};
 use eska_project_core::artifact::Staging;
 
@@ -11,6 +16,7 @@ use eska_project_core::artifact::Staging;
 pub struct PreparedArtifact {
     staging: Staging,
     identity: Identity,
+    snapshot: Snapshot,
 }
 
 impl PreparedArtifact {
@@ -69,8 +75,12 @@ impl PreparedArtifact {
             (&export, identity)
         };
         fs::rename(exported, &sources).map_err(|error| io_error(exported, error))?;
-        super::snapshot::capture(&sources)?;
-        Ok(Self { staging, identity })
+        let snapshot = snapshot::capture(&sources)?;
+        Ok(Self {
+            staging,
+            identity,
+            snapshot,
+        })
     }
 
     /// Return the identity read from exported XML rather than the artifact filename.
@@ -85,13 +95,24 @@ impl PreparedArtifact {
         self.staging.path().join("sources")
     }
 
+    /// Both import and unpack publish the same export that the platform prepared.
+    pub(super) fn verified_sources(&self) -> Result<std::path::PathBuf, ArtifactError> {
+        let sources = self.sources();
+        if snapshot::capture(&sources)? != self.snapshot
+            || inspect_identity(&sources)?.as_ref() != Some(&self.identity)
+        {
+            return Err(ArtifactError::SourceChanged(sources));
+        }
+        Ok(sources)
+    }
+
     /// Publish only into an exclusively claimed new directory; an existing destination is preserved.
     ///
     /// No manifest, Git metadata or existing project source is replaced. The core transaction
     /// removes only the directory it claimed if moving one of the exported entries fails.
     ///
     /// # Errors
-    /// Returns unsafe destinations, changed exported identity, I/O or retained rollback failures.
+    /// Returns unsafe destinations, changed exported sources, I/O or retained rollback failures.
     pub fn publish_new(
         self,
         destination: &Path,
@@ -101,11 +122,7 @@ impl PreparedArtifact {
             return Err(ArtifactError::Run(crate::build::RunError::Interrupted));
         }
         let destination = new_destination(destination)?;
-        let sources = self.sources();
-        super::snapshot::capture(&sources)?;
-        if inspect_identity(&sources)?.as_ref() != Some(&self.identity) {
-            return Err(ArtifactError::SourceChanged(sources));
-        }
+        let sources = self.verified_sources()?;
         eska_project_core::project::create::in_new_directory(&destination, |owned| {
             let check_cancelled = || {
                 if cancelled() {
@@ -257,8 +274,44 @@ mod tests {
         let sources = staging.path().join("sources");
         fs::create_dir(&sources).unwrap();
         fs::write(sources.join("Configuration.xml"),"<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><Configuration uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>Example</Name></Properties></Configuration></MetaDataObject>\r\n").unwrap();
+        fs::create_dir(sources.join("Ext")).unwrap();
+        fs::write(sources.join("Ext/ManagedApplicationModule.bsl"), "A = 1;").unwrap();
         let identity = inspect_identity(&sources).unwrap().unwrap();
-        PreparedArtifact { staging, identity }
+        let snapshot = snapshot::capture(&sources).unwrap();
+        PreparedArtifact {
+            staging,
+            identity,
+            snapshot,
+        }
+    }
+
+    #[test]
+    fn modified_export_is_rejected_before_unpack_or_import_publication() {
+        use crate::artifact::ImportPlan;
+        use eska_project_core::{config::ProjectConfig, project::ProjectType};
+
+        let directory = TestDir::new();
+        let config = ProjectConfig::new(ProjectType::Configuration);
+        fs::write(directory.0.join("eska.toml"), config.to_toml().unwrap()).unwrap();
+        let src = directory.0.join("src");
+        fs::create_dir(&src).unwrap();
+        fs::write(src.join(".gitkeep"), "").unwrap();
+        let project = config.into_project(directory.0.clone()).unwrap();
+        let import = ImportPlan::inspect(&project, &|_, _, _| Ok(0)).unwrap();
+        let destination = directory.0.join("export");
+        let artifact = prepared(&destination);
+        let sources = artifact.sources();
+        fs::write(sources.join("Ext/ManagedApplicationModule.bsl"), "A = 2;").unwrap();
+
+        assert!(
+            matches!(import.apply(&artifact, true), Err(ArtifactError::SourceChanged(path)) if path == sources)
+        );
+        assert!(src.join(".gitkeep").is_file());
+        assert_eq!(fs::read_dir(src).unwrap().count(), 1);
+        assert!(
+            matches!(artifact.publish_new(&destination, &|| false), Err(ArtifactError::SourceChanged(path)) if path == sources)
+        );
+        assert!(!destination.exists());
     }
 
     /// Existing directories are never replaced, including an otherwise empty destination.

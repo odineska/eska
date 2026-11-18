@@ -55,8 +55,12 @@ pub(super) fn copy(
         let id = item
             .attribute_node("id")
             .ok_or(invalid("element", "missing_id"))?;
+        let previous = id
+            .value()
+            .parse::<i64>()
+            .map_err(|_| invalid("id", "invalid_integer"))?;
         let next = allocation.id()?;
-        ids.insert(id.value().to_owned(), next.to_string());
+        ids.insert(previous, next);
         changes.push(Replacement {
             range: id.range_value(),
             text: next.to_string(),
@@ -85,11 +89,10 @@ pub(super) fn copy(
             continue;
         };
         let property = item.tag_name().name();
-        let replacement = if super::id_reference(property) {
-            ids.get(value).cloned()
-        } else {
-            remap_name(property, value, &names)
-        };
+        let replacement = super::referenced_element_id(property, value)
+            .and_then(|id| ids.get(&id))
+            .map(i64::to_string)
+            .or_else(|| remap_name(property, value, &names));
         if let Some(value) = replacement {
             changes.extend(
                 text_plan(input, item.range(), &value)?

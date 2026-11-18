@@ -361,6 +361,7 @@ finish-dirty-workspace = The worktree contains unsaved changes ({ $files } files
 finish-detached-head = The task cannot be finished with a detached HEAD. Switch to a local task branch.
 finish-unborn-head = The task cannot be finished on a branch without its first commit.
 finish-not-task-branch = The current branch is not a task branch under the configured workflow policy.
+finish-shelf-exists = The task branch has a shelf. Restore it with eska unshelve and save the changes before finishing.
 finish-base-missing = Local base branch { $branch } was not found.
 finish-remote-base-missing = Repository { $remote } ({ $url }) is reachable, but base reference { $reference } was not found after fetch.
 finish-remote-required = Remote repository { $remote } is not configured, so task publication cannot be confirmed.

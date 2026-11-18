@@ -1,10 +1,6 @@
 //! Source fingerprints prevent a slow platform export from overwriting intervening edits.
 
-use std::{
-    fs,
-    io::Read,
-    path::{Path, PathBuf},
-};
+use std::{fs, io::Read, path::Path};
 
 use sha2::{Digest, Sha256};
 
@@ -17,21 +13,21 @@ pub(super) struct Snapshot {
     pub empty_scaffold: bool,
 }
 
+#[derive(Default)]
+struct Inventory {
+    files: usize,
+    populated: bool,
+}
+
 /// Hash byte-exact files and directory names without following symlinks or special files.
 pub(super) fn capture(root: &Path) -> Result<Snapshot, ArtifactError> {
     let mut hasher = Sha256::new();
-    let mut files = Vec::new();
-    walk(root, root, &mut hasher, &mut files)?;
+    let mut inventory = Inventory::default();
+    walk(root, root, &mut hasher, &mut inventory)?;
     Ok(Snapshot {
         digest: hasher.finalize().into(),
-        files: files.len(),
-        empty_scaffold: files.is_empty()
-            || (files.len() == 1
-                && files[0] == Path::new(".gitkeep")
-                && fs::metadata(root.join(".gitkeep"))
-                    .map_err(|error| io_error(root, error))?
-                    .len()
-                    == 0),
+        files: inventory.files,
+        empty_scaffold: !inventory.populated,
     })
 }
 
@@ -40,7 +36,7 @@ fn walk(
     root: &Path,
     directory: &Path,
     hasher: &mut Sha256,
-    files: &mut Vec<PathBuf>,
+    inventory: &mut Inventory,
 ) -> Result<(), ArtifactError> {
     let mut paths = fs::read_dir(directory)
         .map_err(|error| io_error(directory, error))?
@@ -66,7 +62,7 @@ fn walk(
         hasher.update(encoded.as_ref());
         hasher.update([u8::from(metadata.is_dir())]);
         if metadata.is_dir() {
-            walk(root, &path, hasher, files)?;
+            walk(root, &path, hasher, inventory)?;
         } else {
             hasher.update(metadata.len().to_le_bytes());
             let mut file = fs::File::open(&path).map_err(|error| io_error(&path, error))?;
@@ -80,7 +76,8 @@ fn walk(
                 }
                 hasher.update(&buffer[..length]);
             }
-            files.push(relative.to_owned());
+            inventory.files += 1;
+            inventory.populated |= relative != Path::new(".gitkeep") || metadata.len() != 0;
         }
     }
     Ok(())

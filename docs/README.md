@@ -42,6 +42,7 @@
   версии, защита, query-сессии, форматирование и активность workspace.
 - [Композиция компонентов](component-delegation.md), [архитектура](architecture.md),
   [модульность](tooling-modularity.md), [проверка установки](component-installation.md).
+- [Ревью ESKA и Explorer от 18 ноября 2026](reviews/2026-11-18.md).
 - [Источники](metadata-sources.md), [парсер](metadata-parser.md),
   [модель](metadata-model.md), [workspace](metadata-workspace.md), [кеш](metadata-cache.md).
 - [Измерения](measurements/) и [проверка Windows 2026-10-30](measurements/windows-2026-10-30.md)
