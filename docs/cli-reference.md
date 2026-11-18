@@ -1349,6 +1349,9 @@ Options:
 <details>
 <summary>eska platform list: синтаксис и все параметры</summary>
 
+`--include-distrobox` включает независимый список хоста и настроенного контейнера
+с машинно-читаемыми источниками и частичными результатами. [Контракт JSON](user-guide.md#найти-и-выбрать-платформу).
+
 ```text
 Показать платформы в текущем раннере
 
@@ -2969,6 +2972,8 @@ eska-build 0.32.0
 
 <details>
 <summary>eska-build platform list: синтаксис и все параметры</summary>
+
+`--include-distrobox` включает тот же расширенный контракт, что у `eska platform list`.
 
 ```text
 Показать платформы в текущем раннере

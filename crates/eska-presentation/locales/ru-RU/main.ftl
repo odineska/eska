@@ -753,6 +753,7 @@ platform-usage = eska platform <КОМАНДА>
 platform-list-about = Показать платформы в текущем раннере
 platform-list-usage = eska platform list [ПАРАМЕТРЫ]
 platform-none = Установленные платформы 1С не найдены.
+platform-inventory-host = Хост
 platform-json-error = Не удалось сериализовать список платформ.
 platform-scan-error = Не удалось просканировать { $path }: { $reason }
 platform-scan-command-error = Не удалось просканировать платформы в Distrobox { $container }: { $reason }
@@ -1378,3 +1379,5 @@ project-document-field = Недопустимое поле настроек пр
 project-document-io = Не удалось прочитать или записать файл настроек проекта.
 project-document-too-large = Документ настроек проекта превышает допустимый размер.
 project-document-changed = Настройки проекта изменились. Перечитайте их перед сохранением правок.
+
+platform-include-distrobox-help = Показать подтверждённые платформы на хосте и в настроенном Distrobox с источниками и частичными результатами

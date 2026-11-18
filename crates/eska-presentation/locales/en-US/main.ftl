@@ -753,6 +753,7 @@ platform-usage = eska platform <COMMAND>
 platform-list-about = List platforms in the current runner
 platform-list-usage = eska platform list [OPTIONS]
 platform-none = No installed 1C platforms were found.
+platform-inventory-host = Host
 platform-json-error = Failed to serialize the platform list.
 platform-scan-error = Could not scan { $path }: { $reason }
 platform-scan-command-error = Could not scan platforms in Distrobox { $container }: { $reason }
@@ -1378,3 +1379,5 @@ project-document-field = Invalid project settings field: { $field }.
 project-document-io = The project settings file could not be read or written.
 project-document-too-large = The project settings document exceeds the supported size.
 project-document-changed = The project settings have changed. Reload them before saving your changes.
+
+platform-include-distrobox-help = List verified host and configured Distrobox platforms with sources and partial results

@@ -22,6 +22,9 @@ pub enum PlatformCommand {
 #[derive(Debug, Args)]
 pub struct PlatformListArgs {
     #[arg(long)]
+    pub include_distrobox: bool,
+
+    #[arg(long)]
     pub ibcmd: Option<PathBuf>,
 
     #[arg(long)]
@@ -54,6 +57,9 @@ pub fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command 
             command
                 .about(localizer.text("platform-list-about"))
                 .override_usage(localizer.text("platform-list-usage"))
+                .mut_arg("include_distrobox", |arg| {
+                    arg.help(localizer.text("platform-include-distrobox-help"))
+                })
                 .mut_arg("ibcmd", |arg| {
                     arg.help(localizer.text("build-ibcmd-help"))
                         .value_name(localizer.text("build-ibcmd-value"))

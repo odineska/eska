@@ -123,6 +123,7 @@ static SIGNAL_HANDLER: OnceLock<Result<(), String>> = OnceLock::new();
 
 #[derive(Clone, Debug, Default)]
 pub struct ToolOptions {
+    inventory_deadline: Option<std::time::Instant>,
     #[cfg(unix)]
     cancellation: Option<eska_tool_runtime::Operation>,
     ibcmd: Option<PathBuf>,
@@ -149,6 +150,7 @@ impl ToolOptions {
         distrobox: Option<String>,
     ) -> Self {
         Self {
+            inventory_deadline: None,
             #[cfg(unix)]
             cancellation: None,
             ibcmd,
@@ -156,6 +158,23 @@ impl ToolOptions {
             distrobox,
             runner: RunnerPreference::Auto,
             project_local: false,
+        }
+    }
+
+    /// Inspect one inventory source without process or machine runner overrides.
+    #[must_use]
+    pub fn inventory_source(&self, container: Option<String>) -> Self {
+        Self {
+            inventory_deadline: Some(std::time::Instant::now() + std::time::Duration::from_secs(5)),
+            ibcmd: None,
+            runner: if container.is_some() {
+                RunnerPreference::Distrobox
+            } else {
+                RunnerPreference::Host
+            },
+            distrobox: container,
+            project_local: true,
+            ..self.clone()
         }
     }
 
@@ -872,7 +891,12 @@ fn probe_runner(
 ) -> Result<Output, io::Error> {
     #[cfg(unix)]
     {
-        probe::output(runner, arguments, options.cancellation.as_ref())
+        probe::output(
+            runner,
+            arguments,
+            options.cancellation.as_ref(),
+            options.inventory_deadline,
+        )
     }
     #[cfg(not(unix))]
     {

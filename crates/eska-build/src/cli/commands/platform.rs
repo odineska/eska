@@ -26,6 +26,20 @@ struct PlatformEntry<'a> {
     source: String,
 }
 
+#[derive(Clone, Serialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+enum InventorySource {
+    Host,
+    Distrobox { container: String },
+}
+
+#[derive(Serialize)]
+struct InventoryEntry {
+    version: String,
+    ibcmd: String,
+    source: InventorySource,
+}
+
 struct PlatformHandler<'a> {
     options: &'a PlatformArgs,
 }
@@ -68,6 +82,9 @@ impl PlatformListHandler<'_> {
             }
         };
         let options = super::artifact::scoped_options(options, scope.as_ref());
+        if self.options.include_distrobox {
+            return print_inventory(&options, self.options.format, localizer, scope.as_ref());
+        }
         let platforms = match Ibcmd::installed(&options) {
             Ok(platforms) => platforms,
             Err(error) => {
@@ -132,4 +149,67 @@ fn source_label(source: &ToolSource) -> String {
 /// Execute parsed platform inventory options in the native owner.
 pub fn run(args: &PlatformArgs, localizer: &Localizer) -> ExitCode {
     PlatformHandler { options: args }.run(localizer)
+}
+
+/// Source failures remain independent so callers can still select a verified installation.
+fn print_inventory(
+    options: &crate::project::build::ToolOptions,
+    format: PlatformOutputFormat,
+    localizer: &Localizer,
+    scope: Option<&eska_tool_runtime::Operation>,
+) -> ExitCode {
+    let mut entries = Vec::new();
+    let mut collect = |container: Option<String>| {
+        let Ok(platforms) = Ibcmd::installed(&options.inventory_source(container.clone())) else {
+            return "unavailable";
+        };
+        let source = container.map_or(InventorySource::Host, |container| {
+            InventorySource::Distrobox { container }
+        });
+        for platform in platforms {
+            let path = match platform.source() {
+                ToolSource::Explicit(path)
+                | ToolSource::Path(path)
+                | ToolSource::Standard(path) => std::path::absolute(path).ok(),
+                ToolSource::Distrobox { path, .. } => path.is_absolute().then(|| path.clone()),
+            };
+            let Some(path) = path.as_deref().and_then(std::path::Path::to_str) else {
+                continue;
+            };
+            entries.push(InventoryEntry {
+                version: platform.version().as_str().to_owned(),
+                ibcmd: path.to_owned(),
+                source: source.clone(),
+            });
+        }
+        "ready"
+    };
+    let host = collect(None);
+    let distrobox = options.distrobox_name().map(|container| {
+        let status = collect(Some(container.clone()));
+        serde_json::json!({"container":container,"status":status})
+    });
+    if scope.is_some_and(eska_tool_runtime::Operation::is_cancelled) {
+        eprintln!("{}", localizer.text("component-cancelled"));
+        return ExitCode::FAILURE;
+    }
+    match format {
+        PlatformOutputFormat::Json => println!(
+            "{}",
+            serde_json::json!({"schema_version":1,"kind":"installed-platforms", "platforms":entries,"sources":{"host":host,"distrobox":distrobox}})
+        ),
+        PlatformOutputFormat::Human => {
+            if entries.is_empty() {
+                println!("{}", localizer.text("platform-none"));
+            }
+            for entry in entries {
+                let label = match entry.source {
+                    InventorySource::Host => localizer.text("platform-inventory-host"),
+                    InventorySource::Distrobox { container } => format!("Distrobox ({container})"),
+                };
+                println!("{}\t{label}\t{}", entry.version, entry.ibcmd);
+            }
+        }
+    }
+    ExitCode::SUCCESS
 }
