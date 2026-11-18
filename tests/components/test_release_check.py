@@ -130,7 +130,7 @@ class ReleaseCheckTests(unittest.TestCase):
                 self.run_data[key] = value
                 self.assertFalse(self.proved())
         self.witness()
-        self.jobs.append(dict(self.job, name="other / check"))
+        self.jobs.append(dict(self.job))
         self.assertFalse(self.proved())
 
     def test_bot_dispatch_and_squash_can_share_tree(self):
@@ -176,6 +176,39 @@ class ReleaseCheckTests(unittest.TestCase):
 
         self.assertEqual(check.find_proof(get, MAIN, TREE, CURRENT), (RUN, ATTEMPT))
 
+    def test_version_gate_prioritizes_baseline_without_resolving_old_prs(self):
+        self.witness()
+        self.commit["tree"]["sha"] = OTHER_TREE
+        old_runs = [
+            dict(self.run_data, id=100 + index, head_commit={"tree_id": MAIN})
+            for index in range(24)
+        ]
+        release_path = f"actions/workflows/{RELEASE}"
+        ci_path = f"actions/workflows/{CI}"
+        responses = {
+            release_path: {"id": WORKFLOW_ID, "path": f".github/workflows/{RELEASE}"},
+            ci_path: {"id": WORKFLOW_ID, "path": f".github/workflows/{CI}"},
+            f"{release_path}/runs?head_sha={MAIN}&per_page=25": {"workflow_runs": []},
+            f"{release_path}/runs?head_sha={HEAD}&per_page=25": {"workflow_runs": []},
+            f"{release_path}/runs?branch=main&per_page=25": {"workflow_runs": []},
+            f"{ci_path}/runs?status=success&per_page=25": {
+                "workflow_runs": [*old_runs, self.run_data]
+            },
+        }
+
+        def get(endpoint):
+            return responses[endpoint] if endpoint in responses else self.api(endpoint)
+
+        with (
+            patch.object(check, "git", side_effect=[HEAD, OTHER_TREE]),
+            patch.object(check, "release_version", return_value="0.35.1"),
+        ):
+            self.assertEqual(
+                check.check_mode(get, MAIN, TREE, CURRENT, True, "refs/heads/main", "push"),
+                ("package", (RUN, ATTEMPT)),
+            )
+        self.assertEqual(self.calls.count(f"git/commits/{MERGE}"), 1)
+
     def test_expired_search_and_unavailable_api_request_full_ci(self):
         with self.assertRaises(TimeoutError):
             check.api("unused", 0)
@@ -186,15 +219,78 @@ class ReleaseCheckTests(unittest.TestCase):
                 "GITHUB_REPOSITORY_ID": str(check.REPOSITORY_ID),
                 "GITHUB_SHA": MAIN,
                 "GITHUB_RUN_ID": str(CURRENT),
+                "GITHUB_REF": "refs/heads/main",
+                "GITHUB_EVENT_NAME": "push",
                 "GITHUB_OUTPUT": str(output),
             }
             with (
                 patch.dict(os.environ, variables),
-                patch.object(check.subprocess, "check_output", side_effect=[MAIN, TREE]),
+                patch.object(check, "git", side_effect=[MAIN, TREE]),
                 patch.object(check, "api", side_effect=subprocess.TimeoutExpired("gh", 5)),
             ):
                 check.main()
-            self.assertEqual(output.read_text(encoding="utf-8"), "reused=false\n")
+            self.assertEqual(output.read_text(encoding="utf-8"), "mode=full\n")
+
+
+    def test_verified_package_is_reusable_only_for_the_exact_release_tree(self):
+        self.witness(event="workflow_dispatch")
+        reference = self.run_data["referenced_workflows"][0]
+        self.run_data["referenced_workflows"] = [
+            dict(reference, path=reference["path"].replace("ci-full.yml", "release-package.yml")),
+            dict(reference, path=reference["path"].replace("ci-full.yml", "release-check.yml")),
+        ]
+        self.job["name"] = "release-check / package / package"
+        verify = lambda target: check.proved_run(
+            self.api, self.run_data, CI, WORKFLOW_ID, target, CURRENT, check.PACKAGE_WORKFLOW
+        )
+        self.assertTrue(verify(TREE))
+        self.assertFalse(verify(OTHER_TREE))
+        self.assertFalse(self.proved())
+        self.run_data["referenced_workflows"].pop()
+        self.assertFalse(verify(TREE))
+
+    def test_release_pr_dispatch_requires_same_repo_bot_pr(self):
+        branch = "release-plz-test"
+        self.request.update(user={"id": check.BOT_ID})
+        self.request["head"]["ref"] = branch
+
+        def api(endpoint):
+            self.assertEqual(endpoint, f"pulls?head=odineska%3A{branch}&base=main&state=all")
+            return [self.request]
+
+        ref = "refs/heads/" + branch
+        self.assertTrue(check.source_allows_version_check(api, HEAD, ref, "workflow_dispatch"))
+        self.assertFalse(check.source_allows_version_check(api, MERGE, ref, "workflow_dispatch"))
+        self.request["user"]["id"] = 1
+        self.assertFalse(check.source_allows_version_check(api, HEAD, ref, "workflow_dispatch"))
+
+    def test_narrow_path_needs_full_baseline_and_exact_tag(self):
+        with (
+            patch.object(check, "git", side_effect=[HEAD, OTHER_TREE]) as git,
+            patch.object(check, "release_version", return_value="0.35.1"),
+            patch.object(check, "find_proof", side_effect=[None, (RUN, ATTEMPT)]) as find,
+        ):
+            self.assertEqual(
+                check.check_mode(None, MAIN, TREE, CURRENT, True, "refs/tags/v0.35.1", "workflow_dispatch"),
+                ("package", (RUN, ATTEMPT)),
+            )
+            self.assertEqual(find.call_args.args[1:], (HEAD, OTHER_TREE, CURRENT))
+            self.assertEqual(find.call_args.kwargs, {})
+            self.assertEqual(git.call_count, 2)
+        with (
+            patch.object(check, "git", return_value=HEAD),
+            patch.object(check, "release_version", return_value="0.35.1"),
+            patch.object(check, "find_proof", return_value=None) as find,
+        ):
+            self.assertEqual(
+                check.check_mode(None, MAIN, TREE, CURRENT, True, "refs/tags/v0.35.2", "workflow_dispatch"),
+                ("full", None),
+            )
+            self.assertEqual(find.call_count, 2)
+            self.assertEqual(
+                check.check_mode(None, MAIN, TREE, CURRENT, True, "refs/heads/main", "push"),
+                ("full", None),
+            )
 
 
 if __name__ == "__main__":

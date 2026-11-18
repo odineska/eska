@@ -6,12 +6,17 @@ import os
 import re
 import subprocess
 from time import monotonic
+from urllib.parse import quote
+
+from release_version_only import git, release_version
 
 
 REPOSITORY = "odineska/eska"
 REPOSITORY_ID = 1086457908
 WORKFLOWS = ".github/workflows/"
 FULL_WORKFLOW = "ci-full.yml"
+PACKAGE_WORKFLOW = "release-package.yml"
+BOT_ID = 41898282
 
 
 def git_hash(value):
@@ -38,12 +43,12 @@ def pull_number(reference):
     return match[1] if match else None
 
 
-def full_revision(run, workflow):
+def checked_revision(run, workflow, reusable):
     """Extract the immutable local reusable-workflow revision from Actions provenance."""
     head = run["head_sha"]
     references = [
         item for item in run.get("referenced_workflows", [])
-        if item["path"] == f"{REPOSITORY}/{WORKFLOWS}{FULL_WORKFLOW}@{item['sha']}"
+        if item["path"] == f"{REPOSITORY}/{WORKFLOWS}{reusable}@{item['sha']}"
     ]
     if len(references) != 1 or not git_hash(references[0]["sha"]):
         return None
@@ -58,7 +63,7 @@ def full_revision(run, workflow):
     return None
 
 
-def proved_run(get, run, workflow, workflow_id, tree, current_run):
+def proved_run(get, run, workflow, workflow_id, tree, current_run, reusable=FULL_WORKFLOW):
     """Tie the successful leaf job and its latest attempt to the checked commit and tree."""
     if (
         run["id"] == current_run
@@ -73,8 +78,10 @@ def proved_run(get, run, workflow, workflow_id, tree, current_run):
         return False
     if workflow == "ci.yml" and (run["status"], run["conclusion"]) != ("completed", "success"):
         return False
-    reference = full_revision(run, workflow)
+    reference = checked_revision(run, workflow, reusable)
     if reference is None:
+        return False
+    if reusable == PACKAGE_WORKFLOW and checked_revision(run, workflow, "release-check.yml") != reference:
         return False
     revision, pull = reference
     if pull is None and (run["head_commit"]["id"], run["head_commit"]["tree_id"]) != (revision, tree):
@@ -104,24 +111,38 @@ def proved_run(get, run, workflow, workflow_id, tree, current_run):
     run_id, attempt = run["id"], run["run_attempt"]
     path = f"actions/runs/{run_id}"
     jobs = get(f"{path}/attempts/{attempt}/jobs?per_page=100")["jobs"]
-    name = "check / check" if workflow == "ci.yml" else "check / full / check"
-    if workflow == "ci.yml" and len(jobs) != 1:
-        return False
-    if not any(
-        job["name"] == name
+    prefix = "release-check" if workflow == "ci.yml" else "check"
+    names = {f"{prefix} / package / package"} if reusable == PACKAGE_WORKFLOW else {f"{prefix} / full / check"}
+    if workflow == "ci.yml" and reusable == FULL_WORKFLOW:
+        names.add("check / check")
+    matches = [
+        job for job in jobs if job["name"] in names
         and job["run_id"] == run_id
         and job["run_attempt"] == attempt
         and job["head_sha"] == run["head_sha"]
         and (job["status"], job["conclusion"]) == ("completed", "success")
-        for job in jobs
-    ):
+    ]
+    if len(matches) != 1:
         return False
     latest = get(path)
     return latest["id"] == run_id and latest["run_attempt"] == attempt
 
 
-def find_proof(get, revision, tree, current_run):
-    """Search recent standalone CI and main release-plz runs. A miss requests full CI."""
+def find_proof(get, revision, tree, current_run, include_package=False, matching_head_only=False):
+    """Try matching head trees first, then resolve any remaining synthetic PR commits."""
+    kinds = (FULL_WORKFLOW, PACKAGE_WORKFLOW) if include_package else (FULL_WORKFLOW,)
+
+    def proof(run, workflow, workflow_id):
+        try:
+            for kind in kinds:
+                if proved_run(get, run, workflow, workflow_id, tree, current_run, kind):
+                    return run["id"], run["run_attempt"]
+        except (subprocess.CalledProcessError, AttributeError, KeyError, TypeError, ValueError):
+            # A historical run may lack metadata or have an unavailable synthetic commit.
+            pass
+        return None
+
+    synthetic = []
     for workflow, searches in (
         ("release-plz.yml", (f"head_sha={revision}", "branch=main")),
         ("ci.yml", ("status=success",)),
@@ -133,41 +154,99 @@ def find_proof(get, revision, tree, current_run):
         seen = set()
         for query in searches:
             for run in get(f"{path}/runs?{query}&per_page=25")["workflow_runs"]:
-                if run["id"] in seen:
+                if run.get("id") == current_run or run.get("id") in seen:
                     continue
-                seen.add(run["id"])
-                try:
-                    if proved_run(get, run, workflow, definition["id"], tree, current_run):
-                        return run["id"], run["run_attempt"]
-                except (subprocess.CalledProcessError, AttributeError, KeyError, TypeError, ValueError):
-                    # A historical run may lack metadata or have an unavailable synthetic commit.
+                seen.add(run.get("id"))
+                if (run.get("head_commit") or {}).get("tree_id") != tree:
+                    if not matching_head_only and workflow == "ci.yml" and run.get("event") == "pull_request":
+                        synthetic.append((run, workflow, definition["id"]))
                     continue
+                result = proof(run, workflow, definition["id"])
+                if result:
+                    return result
+    for candidate in synthetic:
+        result = proof(*candidate)
+        if result:
+            return result
     return None
 
 
+def source_allows_version_check(get, revision, ref, event):
+    """Require a bot-created PR for explicit runs on the release branch."""
+    prefix = "refs/heads/release-plz-"
+    if event != "workflow_dispatch" or not ref.startswith(prefix):
+        return True
+    branch = ref.removeprefix("refs/heads/")
+    requests = get(f"pulls?head={quote(f'odineska:{branch}', safe='')}&base=main&state=all")
+    return any(
+        request["user"]["id"] == BOT_ID
+        and request["head"]["repo"]["id"] == REPOSITORY_ID
+        and request["head"]["ref"] == branch
+        and request["head"]["sha"] == revision
+        and request["base"]["repo"]["id"] == REPOSITORY_ID
+        and request["base"]["ref"] == "main"
+        for request in requests
+    )
+
+
+def check_mode(get, revision, tree, current_run, allow_version, ref, event):
+    proof = find_proof(get, revision, tree, current_run, include_package=True, matching_head_only=allow_version)
+    if proof:
+        return "reuse", proof
+    if allow_version and source_allows_version_check(get, revision, ref, event):
+        parent = git("rev-parse", "HEAD^1").strip()
+        if git_hash(parent):
+            version = release_version(parent, revision)
+            if version and (not ref.startswith("refs/tags/") or ref == f"refs/tags/v{version}"):
+                parent_tree = git("rev-parse", f"{parent}^{{tree}}").strip()
+                proof = find_proof(get, parent, parent_tree, current_run)
+                if proof:
+                    return "package", proof
+    if allow_version:
+        proof = find_proof(get, revision, tree, current_run, include_package=True)
+        if proof:
+            return "reuse", proof
+    return "full", None
+
+
 def main():
-    result = None
+    mode, proof = "full", None
     try:
         if (
             os.environ["GITHUB_REPOSITORY"] == REPOSITORY
             and os.environ["GITHUB_REPOSITORY_ID"] == str(REPOSITORY_ID)
         ):
-            revision = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True, timeout=5).strip()
-            tree = subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], text=True, timeout=5).strip()
+            revision = git("rev-parse", "HEAD").strip()
+            tree = git("rev-parse", "HEAD^{tree}").strip()
             if revision == os.environ["GITHUB_SHA"] and git_hash(revision) and git_hash(tree):
                 deadline = monotonic() + 20
-                result = find_proof(lambda endpoint: api(endpoint, deadline), revision, tree,
-                                    int(os.environ["GITHUB_RUN_ID"]))
+                workflows = {}
+
+                def get(endpoint):
+                    if not endpoint.startswith("actions/workflows/"):
+                        return api(endpoint, deadline)
+                    if endpoint not in workflows:
+                        workflows[endpoint] = api(endpoint, deadline)
+                    return workflows[endpoint]
+
+                mode, proof = check_mode(
+                    get, revision, tree, int(os.environ["GITHUB_RUN_ID"]),
+                    os.environ.get("ALLOW_VERSION_CHECK") == "true",
+                    os.environ["GITHUB_REF"], os.environ["GITHUB_EVENT_NAME"],
+                )
     except (OSError, subprocess.SubprocessError, AttributeError, KeyError, TypeError, ValueError) as error:
         print(f"Подтверждение CI недоступно ({type(error).__name__}).")
 
-    if result:
-        run_id, attempt = result
-        print(f"Проверки дерева подтверждены GitHub Actions: {run_id}, попытка {attempt}.")
+    if proof:
+        run_id, attempt = proof
+        stage = "текущего дерева" if mode == "reuse" else "базового дерева"
+        print(f"Проверки {stage} подтверждены GitHub Actions: {run_id}, попытка {attempt}.")
+        if mode == "package":
+            print("Изменились версия и описание релиза. Будет проверена упаковка Cargo.")
     else:
         print("Для этого дерева будет выполнена полная проверка.")
     with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
-        output.write(f"reused={'true' if result else 'false'}\n")
+        output.write(f"mode={mode}\n")
 
 
 if __name__ == "__main__":

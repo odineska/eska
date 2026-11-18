@@ -2,6 +2,10 @@ name: Release check
 
 on:
   workflow_call:
+    inputs:
+      allow-version-check:
+        type: boolean
+        default: false
 
 permissions:
   actions: read
@@ -14,18 +18,25 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
-      reused: ${{ steps.proof.outputs.reused }}
+      mode: ${{ steps.proof.outputs.mode }}
     steps:
       - uses: actions/checkout@v6
         with:
+          fetch-depth: 2
           persist-credentials: false
       - name: Поиск завершённой проверки этого дерева
         id: proof
         env:
           GH_TOKEN: ${{ github.token }}
+          ALLOW_VERSION_CHECK: ${{ inputs.allow-version-check }}
         run: python3 -B tools/release_check.py
 
   full:
     needs: proof
-    if: ${{ !cancelled() && needs.proof.outputs.reused != 'true' }}
+    if: ${{ !cancelled() && needs.proof.outputs.mode != 'reuse' && needs.proof.outputs.mode != 'package' }}
     uses: ./.github/workflows/ci-full.yml
+
+  package:
+    needs: proof
+    if: needs.proof.outputs.mode == 'package'
+    uses: ./.github/workflows/release-package.yml

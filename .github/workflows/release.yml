@@ -22,6 +22,8 @@ jobs:
       contents: read
       pull-requests: read
     uses: ./.github/workflows/release-check.yml
+    with:
+      allow-version-check: ${{ github.ref == format('refs/tags/{0}', inputs.tag) }}
 
   build:
     strategy:

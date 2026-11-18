@@ -10,4 +10,32 @@ permissions:
 
 jobs:
   check:
+    if: >-
+      github.repository != 'odineska/eska' ||
+      !(
+        (github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/heads/release-plz-')) ||
+        (github.event_name == 'pull_request' && github.event.pull_request.user.id == 41898282 &&
+         github.event.pull_request.head.repo.id == 1086457908 &&
+         startsWith(github.head_ref, 'release-plz-'))
+      )
     uses: ./.github/workflows/ci-full.yml
+
+  release-check:
+    if: >-
+      github.repository == 'odineska/eska' &&
+      (
+        (github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/heads/release-plz-')) ||
+        (github.event_name == 'pull_request' && github.event.pull_request.user.id == 41898282 &&
+         github.event.pull_request.head.repo.id == 1086457908 &&
+         startsWith(github.head_ref, 'release-plz-'))
+      )
+    concurrency:
+      group: release-pr-check-${{ github.event.pull_request.head.sha || github.sha }}
+      cancel-in-progress: false
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+    uses: ./.github/workflows/release-check.yml
+    with:
+      allow-version-check: true
