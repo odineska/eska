@@ -475,10 +475,23 @@ impl QuerySession {
         }
         self.check_project(project)?;
         self.check_context(project, self.application.as_deref())?;
+        let refreshed;
+        let document = if self.document.generation == project.generation() {
+            &self.document
+        } else {
+            reveal_owner(project, &self.document.node)?;
+            // Rebind only the generation. Keep the original source fingerprints and
+            // permissions as the baseline for the full check below.
+            refreshed = QueryDocument {
+                generation: project.generation(),
+                ..self.document.clone()
+            };
+            &refreshed
+        };
         project
             .check_query_source(
-                &self.document,
-                revision(&self.document),
+                document,
+                revision(document),
                 self.source_restriction.as_ref(),
             )
             .map_err(Into::into)

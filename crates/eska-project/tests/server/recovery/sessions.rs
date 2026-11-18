@@ -744,3 +744,49 @@ fn standalone_query_session_checks_current_application_and_the_context_that_open
 
 #[path = "sessions/constructors.rs"]
 mod constructors;
+
+#[test]
+fn private_draft_formatting_revalidates_the_owner_after_refresh() {
+    let (_directory, root, private) = source_fixture();
+    let manifest = root.join("eska.toml");
+    fs::write(
+        &manifest,
+        format!(
+            "{}\n[format]\nexclude = [\"**/Form.xml\"]\n",
+            fs::read_to_string(&manifest).unwrap()
+        ),
+    )
+    .unwrap();
+    let mut client = Client::new(&root, "en-US");
+    let mut binding = source_connect_version(&mut client, &root, &private, "en-US", 55);
+    let opened = open_source(&mut client, &binding, XML, false);
+    let request = json!({
+        "querySessionId": opened["querySessionId"], "revision": opened["revision"],
+        "version": "1", "text": "SELECT 1", "userReadOnly": false,
+    });
+    let original = client.request("format/query", &source_args(&binding, request.clone()));
+    assert_eq!(original["effective"]["excluded"], true);
+
+    let owner = binding["node"].clone();
+    let refreshed = client.request(
+        "metadata/refresh",
+        &source_args(&binding, json!({"node":owner})),
+    );
+    assert_ne!(refreshed["generation"], binding["generation"]);
+    binding["generation"] = refreshed["generation"].clone();
+    let formatted = client.request("format/query", &source_args(&binding, request.clone()));
+    assert_eq!(formatted, original);
+
+    let path = root.join("src").join(SOURCE);
+    let external = XML.replace("<other>keep</other>", "<other>external</other>");
+    fs::write(&path, &external).unwrap();
+    let refreshed = client.request(
+        "metadata/refresh",
+        &source_args(&binding, json!({"node":owner})),
+    );
+    assert_ne!(refreshed["generation"], binding["generation"]);
+    binding["generation"] = refreshed["generation"].clone();
+    let rejected = client.response("format/query", &source_args(&binding, request));
+    assert_eq!(rejected["error"]["data"]["details"]["reason"], "conflict");
+    assert_eq!(fs::read_to_string(path).unwrap(), external);
+}
