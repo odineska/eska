@@ -148,11 +148,12 @@ fn ordinary_table_menu_obeys_row_permissions_search_placement_and_autofill() {
     assert_eq!(keys(&manual.last().unwrap().table_command_menu).len(), 3);
     let manual_with_commands = ordinary_menu(
         r#"<AutoCommandBar name="RowsBar" id="14"><Autofill>false</Autofill><ChildItems>
-            <Button name="Search" id="15"><CommandName>Form.Item.Rows.StandardCommand.Find</CommandName>
+            <Button name="Search" id="15"><CommandName>Form.Item.ROWS.StandardCommand.Find</CommandName>
                 <LocationInCommandBar>InAdditionalSubmenu</LocationInCommandBar></Button>
             <ButtonGroup name="Group" id="16"><ChildItems>
-                <Button name="Finish" id="17"><CommandName>Form.Item.Rows.StandardCommand.EndEdit</CommandName></Button>
+                <Button name="Finish" id="17"><CommandName>Form.Item.rows.StandardCommand.EndEdit</CommandName></Button>
             </ChildItems></ButtonGroup>
+            <Button name="Other" id="18"><CommandName>Form.Item.OtherRows.StandardCommand.Copy</CommandName></Button>
         </ChildItems></AutoCommandBar>"#,
         true,
     );

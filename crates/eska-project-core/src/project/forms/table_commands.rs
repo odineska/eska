@@ -1,10 +1,14 @@
 //! Design-time additional menus for tables. Commands carry no executable behavior.
 
+use std::collections::HashSet;
+
 use super::{
     AutoCommandItem, EffectiveElement, ElementKind, FormPicture, FormResource, PresentationText,
     PropertySource,
     appearance::text,
-    commands::{effective_metadata, excludes, metadata_caption, metadata_text},
+    commands::{
+        effective_metadata, excludes, metadata_caption, metadata_text, table_command_reference,
+    },
     presentation::metadata_property,
 };
 use crate::project::{
@@ -36,12 +40,19 @@ pub(super) fn ordinary_sections(table: &EffectiveElement) -> Vec<Vec<AutoCommand
 
 /// A manual bar keeps the picture and shortcut of its explicitly authored standard commands.
 pub(super) fn ordinary_authored_commands(table: &EffectiveElement) -> Vec<Vec<AutoCommandItem>> {
-    fn declares(elements: &[EffectiveElement], reference: &str) -> bool {
-        elements.iter().any(|element| {
-            element.scalar("CommandName") == Some(reference)
-                || element.kind == Some(ElementKind::ButtonGroup)
-                    && declares(&element.children, reference)
-        })
+    fn collect<'a>(elements: &'a [EffectiveElement], table: &str, commands: &mut HashSet<&'a str>) {
+        for element in elements {
+            if let Some((owner, name)) = element
+                .scalar("CommandName")
+                .and_then(table_command_reference)
+                && owner.to_lowercase() == table
+            {
+                commands.insert(name);
+            }
+            if element.kind == Some(ElementKind::ButtonGroup) {
+                collect(&element.children, table, commands);
+            }
+        }
     }
     let Some(name) = table.name.as_deref() else {
         return Vec::new();
@@ -53,12 +64,14 @@ pub(super) fn ordinary_authored_commands(table: &EffectiveElement) -> Vec<Vec<Au
     else {
         return Vec::new();
     };
+    let mut authored = HashSet::new();
+    collect(&bar.children, &name.to_lowercase(), &mut authored);
     let mut sections = ordinary_sections(table);
     for group in &mut sections {
         group.retain(|item| {
             item.key
-                .strip_prefix("Table.")
-                .is_some_and(|key| declares(&bar.children, &format!("Form.Item.{name}.{key}")))
+                .strip_prefix("Table.StandardCommand.")
+                .is_some_and(|key| authored.contains(key))
         });
     }
     sections.retain(|group| !group.is_empty());
@@ -74,17 +87,14 @@ pub(super) fn allows_row_order_change(table: &EffectiveElement) -> bool {
 }
 
 fn ordinary_item(name: &str) -> AutoCommandItem {
-    let mut command = AutoCommandItem::standard("Table", name, false);
+    let mut command = item(name);
     command.shortcut = match name {
         "Add" => Some("Ins"),
-        "Copy" => Some("F9"),
-        "Change" => Some("F2"),
         "Delete" => Some("Del"),
         "EndEdit" => Some("Shift+F2"),
-        "CancelSearch" => Some("Ctrl+Q"),
         "MoveUp" => Some("Ctrl+Shift+Up"),
         "MoveDown" => Some("Ctrl+Shift+Down"),
-        _ => None,
+        _ => command.shortcut,
     };
     command.picture = Some(picture(name));
     if name == "EndEdit" {

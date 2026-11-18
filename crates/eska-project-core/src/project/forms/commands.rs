@@ -164,6 +164,12 @@ pub(super) fn local_command<'a>(
         .find(|command| command.name.as_deref() == Some(name))
 }
 
+pub(super) fn table_command_reference(value: &str) -> Option<(&str, &str)> {
+    value
+        .strip_prefix("Form.Item.")?
+        .split_once(".StandardCommand.")
+}
+
 pub(super) fn visible(items: &SourceItems<'_>, command: Option<&str>) -> bool {
     // These commands require a distributed/standalone server context. The ordinary desktop
     // Configurator profile retains their XML nodes but excludes them from the visual bar.
@@ -176,10 +182,7 @@ pub(super) fn visible(items: &SourceItems<'_>, command: Option<&str>) -> bool {
     ) {
         return false;
     }
-    let Some((table, name)) = command
-        .and_then(|value| value.strip_prefix("Form.Item."))
-        .and_then(|value| value.split_once(".StandardCommand."))
-    else {
+    let Some((table, name)) = command.and_then(table_command_reference) else {
         return true;
     };
     !items
