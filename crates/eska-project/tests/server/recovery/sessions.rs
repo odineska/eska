@@ -39,6 +39,31 @@ fn source_fixture() -> (support::TestDir, std::path::PathBuf, std::path::PathBuf
     (directory, root, private)
 }
 
+fn order_descriptor(source: &Path, child_objects: &str) {
+    let configuration = source.join("Configuration.xml");
+    fs::write(
+        &configuration,
+        fs::read_to_string(&configuration).unwrap().replace(
+            "<CommonForm>Queries</CommonForm>",
+            "<CommonForm>Queries</CommonForm><Document>Order</Document>",
+        ),
+    )
+    .unwrap();
+    fs::create_dir_all(source.join("Documents")).unwrap();
+    fs::write(source.join("Documents/Order.xml"), format!("<MetaDataObject xmlns='http://v8.1c.ru/8.3/MDClasses'><Document uuid='33333333-3333-3333-3333-333333333333'><Properties><Name>Order</Name></Properties><ChildObjects>{child_objects}</ChildObjects></Document></MetaDataObject>")).unwrap();
+}
+
+const ORDER_FORM: &str = "Documents/Order/Forms/QueryForm/Ext/Form.xml";
+
+fn order_form(source: &Path) -> std::path::PathBuf {
+    order_descriptor(source, "<Form>QueryForm</Form>");
+    let file = source.join(ORDER_FORM);
+    fs::create_dir_all(file.parent().unwrap()).unwrap();
+    fs::write(source.join("Documents/Order/Forms/QueryForm.xml"), "<MetaDataObject xmlns='http://v8.1c.ru/8.3/MDClasses'><Form uuid='44444444-4444-4444-4444-444444444444'><Properties><Name>QueryForm</Name></Properties></Form></MetaDataObject>").unwrap();
+    fs::write(&file, XML).unwrap();
+    file
+}
+
 /// Context tokens are copied from replies, independently of production parameter types.
 fn source_args(binding: &Value, extra: Value) -> Value {
     let mut value = json!({"sessionId":binding["sessionId"],"projectId":binding["projectId"],
@@ -117,6 +142,12 @@ fn source_connect_options(
         hello["capabilities"]["querySessions"]["preparedStateDurable"],
         minor >= 16
     );
+    assert_eq!(
+        hello["capabilities"]["querySessions"]
+            .get("saveCleanOwner")
+            .and_then(Value::as_bool),
+        (minor >= 55).then_some(true)
+    );
     let workspace = client.request("workspace/open",&json!({"start":{"value":root,"encoding":"utf-8"},"selection":{"kind":"current"},"diskCache":false}));
     let opened = client.request(
         "query/recoveryOpen",
@@ -130,7 +161,17 @@ fn source_connect_options(
 
 /// Opening publishes the complete original snapshot before any adapter displays an editable query.
 fn open_source(client: &mut Client, binding: &Value, text: &str, read_only: bool) -> Value {
-    let document = client.request("query/open",&source_args(binding,json!({"node":binding["node"],"source":{"value":SOURCE,"encoding":"utf-8"},"version":"7","text":text})));
+    open_xml(client, binding, SOURCE, text, read_only)
+}
+
+fn open_xml(
+    client: &mut Client,
+    binding: &Value,
+    path: &str,
+    text: &str,
+    read_only: bool,
+) -> Value {
+    let document = client.request("query/open",&source_args(binding,json!({"node":binding["node"],"source":{"value":path,"encoding":"utf-8"},"version":"7","text":text})));
     client.request("query/sessionOpen",&source_args(binding,json!({"documentId":document["documentId"],"id":ID,
         "query":{"kind":"dynamicList","name":"List","id":"1"},"format":"editor","userReadOnly":read_only})))
 }
@@ -262,18 +303,26 @@ fn standalone_query_session_checkpoints_and_acknowledges_dirty_owner_without_sou
 #[test]
 fn standalone_query_session_restores_with_explicit_resume_and_clean_independent_owner_save() {
     let (_directory, root, private) = source_fixture();
+    let owner_file = order_form(&root.join("src"));
+    let owner = json!({"kind":"object","objectId":"document:Order"});
+    let form = json!({"kind":"object","objectId":"document:Order/form:QueryForm"});
     let input = XML
         .strip_prefix('\u{feff}')
         .unwrap()
         .replace("<other>keep</other>", "<other>dirty</other>");
     let mut first = Client::new(&root, "en");
-    let binding = source_connect(&mut first, &root, &private, "en-US");
-    let state = open_source(&mut first, &binding, &input, false);
+    let mut binding = source_connect(&mut first, &root, &private, "en-US");
+    first.request(
+        "metadata/children",
+        &source_args(&binding, json!({"node":owner})),
+    );
+    binding["node"] = form;
+    let state = open_xml(&mut first, &binding, ORDER_FORM, &input, false);
     source_draft(&mut first, &binding, &state, "SELECT recovered");
     first.child.kill().unwrap();
     first.child.wait().unwrap();
     let mut client = Client::new(&root, "ru");
-    let binding = source_connect(&mut client, &root, &private, "ru-RU");
+    let mut binding = source_connect(&mut client, &root, &private, "ru-RU");
     let recovered = client.request(
         "query/sessionRestore",
         &source_args(
@@ -292,7 +341,7 @@ fn standalone_query_session_restores_with_explicit_resume_and_clean_independent_
         client.response("query/sessionPrepare", &request)["error"]["data"]["details"]["reason"],
         "resume_required"
     );
-    fs::write(root.join("src").join(SOURCE), format!("\u{feff}{input}")).unwrap();
+    fs::write(&owner_file, format!("\u{feff}{input}")).unwrap();
     assert!(
         client
             .response("query/sessionResume", &request)
@@ -308,29 +357,48 @@ fn standalone_query_session_restores_with_explicit_resume_and_clean_independent_
         ),
     );
     assert_eq!(resumed["resumed"], true);
-    let prepared = client.request(
-        "query/sessionPrepare",
-        &source_args(
-            &binding,
-            json!({"querySessionId":resumed["querySessionId"],
-        "revision":resumed["revision"],"owner":native(1,&input,false,false),"comments":[]}),
-        ),
-    );
-    assert_eq!(prepared["plan"]["saveOwner"], true);
-    let output = applied_text(&input, &prepared["plan"]);
-    fs::write(root.join("src").join(SOURCE), format!("\u{feff}{output}")).unwrap();
-    let state = client.request(
-        "query/sessionApplied",
-        &source_args(
-            &binding,
-            json!({"querySessionId":resumed["querySessionId"],
-        "applyToken":prepared["plan"]["applyToken"],"owner":native(2,&output,false,false)}),
-        ),
-    );
-    assert_eq!(
-        source_parts(&mut client, &binding, &state)[2],
-        "SELECT recovered"
-    );
+    let mut state = resumed;
+    let mut input = input;
+    for (version, draft) in [(1, "SELECT recovered"), (2, "SELECT next")] {
+        if version == 2 {
+            let refreshed = client.request(
+                "metadata/refresh",
+                &source_args(&binding, json!({"node":owner})),
+            );
+            assert_ne!(refreshed["generation"], binding["generation"]);
+            binding["generation"] = refreshed["generation"].clone();
+            state = source_draft(&mut client, &binding, &state, draft);
+        }
+        let prepared = client.request(
+            "query/sessionPrepare",
+            &source_args(
+                &binding,
+                json!({"querySessionId":state["querySessionId"],"revision":state["revision"],
+                    "owner":native(version,&input,false,false),"comments":[]}),
+            ),
+        );
+        assert_eq!(prepared["plan"]["saveOwner"], true);
+        let output = applied_text(&input, &prepared["plan"]);
+        fs::write(&owner_file, format!("\u{feff}{output}")).unwrap();
+        let acknowledged = client.request(
+            "query/sessionApplied",
+            &source_args(
+                &binding,
+                json!({"querySessionId":state["querySessionId"],"applyToken":prepared["plan"]["applyToken"],
+                    "owner":native(version+1,&output,false,false)}),
+            ),
+        );
+        assert_eq!(acknowledged["querySessionId"], state["querySessionId"]);
+        assert_eq!(acknowledged["protection"], state["protection"]);
+        assert_eq!(acknowledged["resumed"], true);
+        assert_eq!(acknowledged["applyPending"], false);
+        let parts = source_parts(&mut client, &binding, &acknowledged);
+        assert_eq!(parts[1], output);
+        assert_eq!(parts[2], draft);
+        assert_eq!(parts[3], parts[2]);
+        state = acknowledged;
+        input = output;
+    }
     client.finish();
 }
 

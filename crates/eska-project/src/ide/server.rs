@@ -125,9 +125,16 @@ impl Server {
             "metadata/search" => &["limit", "synonymLanguage"],
             "metadata/refresh" => &["resetFileSequence"],
             "metadata/indexErrors" => &["offset", "limit"],
+            "query/sessionPrepare" => &["saveCleanOwner"],
             _ => &[],
         };
         params::optional_fields(args, optional)?;
+        if method == "query/sessionPrepare"
+            && self.client_minor < 55
+            && args.get("saveCleanOwner").is_some()
+        {
+            return Err(error(-32602));
+        }
         if super::metadata::writes(method) && !self.property_editing {
             return Err(domain(
                 "property_read_only",
@@ -306,7 +313,7 @@ impl Server {
         }
         if self.client_minor >= 15 {
             result["capabilities"]["querySessions"] =
-                super::query::session_capability(self.client_minor >= 16, self.client_minor >= 19);
+                super::query::session_capability(self.client_minor);
         }
         if self.client_minor >= 17 {
             result["capabilities"]["sourceProtection"] =
