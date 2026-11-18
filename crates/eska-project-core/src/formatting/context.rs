@@ -15,7 +15,7 @@ use crate::{
 use std::{
     collections::BTreeMap,
     fs, io,
-    path::{Path, PathBuf},
+    path::{Component, Path, PathBuf},
 };
 
 struct PolicyLayer {
@@ -159,6 +159,10 @@ impl Context {
         scope: Option<&Path>,
         xml: bool,
     ) -> Result<Vec<PathBuf>, Error> {
+        let base = scope
+            .filter(|scope| !scope.is_absolute())
+            .map(|_| canonical_target(start, None))
+            .transpose()?;
         let targets = scope.map_or_else(
             || {
                 if self.projects.is_empty() {
@@ -170,11 +174,12 @@ impl Context {
                         .collect()
                 }
             },
-            |scope| vec![start.join(scope)],
+            |scope| vec![scope.to_owned()],
         );
         let mut files = Vec::new();
         let mut visited = 0;
         for target in targets {
+            let target = canonical_target(&target, base.as_deref())?;
             if !self.projects.is_empty()
                 && !self
                     .projects
@@ -295,6 +300,26 @@ impl Context {
                 Project::root,
             )
     }
+}
+
+/// Check prefixes of the original path before a Windows verbatim join can normalize parent
+/// components. Visit the shortest prefixes first so metadata never traverses a known link.
+fn canonical_target(path: &Path, base: Option<&Path>) -> Result<PathBuf, Error> {
+    let join = |path: &Path| base.map_or_else(|| path.to_owned(), |base| base.join(path));
+    let prefixes: Vec<_> = path
+        .ancestors()
+        .filter(|prefix| matches!(prefix.components().next_back(), Some(Component::Normal(_))))
+        .collect();
+    for prefix in prefixes.into_iter().rev().map(join) {
+        if fs::symlink_metadata(&prefix)
+            .map_err(|_| Error::new("source_io", prefix.to_string_lossy()))?
+            .is_symlink()
+        {
+            return Err(Error::new("unsafe_path", prefix.to_string_lossy()));
+        }
+    }
+    let target = join(path);
+    fs::canonicalize(&target).map_err(|_| Error::new("source_io", target.to_string_lossy()))
 }
 
 /// Broken links and permission failures count as existing invalid configuration, never as absent defaults.

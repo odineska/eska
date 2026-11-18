@@ -5,6 +5,112 @@ use super::{
 };
 use std::path::Path;
 
+#[test]
+fn formatting_scope_resolves_relative_paths_in_the_selected_project() {
+    use crate::test_support::TestDir;
+    use std::fs;
+
+    let fixture = TestDir::new();
+    let root = fixture.0.canonicalize().unwrap();
+    let project = root.join("project");
+    let source = project.join("src");
+    fs::create_dir_all(&source).unwrap();
+    fs::write(
+        project.join("eska.toml"),
+        "[project]\ntype='configuration'\n",
+    )
+    .unwrap();
+    let module = source.join("module.bsl");
+    fs::write(&module, "").unwrap();
+    let context = super::context::Context::open(&source, &[], false).unwrap();
+    for scope in [Path::new("../src/module.bsl"), module.as_path()] {
+        assert_eq!(
+            context.files(&source, Some(scope), false).unwrap(),
+            [module.canonicalize().unwrap()]
+        );
+    }
+    let standalone = root.join("standalone.sdbl");
+    fs::write(&standalone, "").unwrap();
+    assert_eq!(
+        context
+            .files(&source, Some(&standalone), false)
+            .unwrap_err()
+            .code,
+        "invalid_scope"
+    );
+    let context = super::context::Context::open(&standalone, &[], false).unwrap();
+    assert_eq!(
+        context
+            .files(&root, Some(Path::new("standalone.sdbl")), false)
+            .unwrap(),
+        [standalone.canonicalize().unwrap()]
+    );
+}
+
+#[cfg(unix)]
+#[test]
+fn formatting_scope_rejects_symlinks_to_local_source_paths() {
+    use crate::test_support::TestDir;
+    use std::{fs, os::unix::fs::symlink};
+
+    let fixture = TestDir::new();
+    let root = fixture.0.canonicalize().unwrap();
+    let source = root.join("src");
+    fs::create_dir(&source).unwrap();
+    fs::write(source.join("module.bsl"), "").unwrap();
+    symlink("src", root.join("linked")).unwrap();
+    let context = super::context::Context::open(&root, &[], false).unwrap();
+    for scope in ["linked", "linked/module.bsl"] {
+        assert_eq!(
+            context
+                .files(&root, Some(Path::new(scope)), false)
+                .unwrap_err()
+                .code,
+            "unsafe_path"
+        );
+    }
+}
+
+#[test]
+fn formatting_scope_honors_workspace_member_selection() {
+    use crate::test_support::TestDir;
+    use std::fs;
+
+    let fixture = TestDir::new();
+    let root = fixture.0.canonicalize().unwrap();
+    fs::write(
+        root.join("eska.toml"),
+        "[workspace.members.app]\nexternal_objects=['report', 'processing']\n",
+    )
+    .unwrap();
+    for member in ["report", "processing"] {
+        let directory = root.join(member);
+        fs::create_dir(&directory).unwrap();
+        fs::write(
+            directory.join("eska.toml"),
+            format!("[project]\nname='{member}'\ntype='{member}'\nsource='.'\n"),
+        )
+        .unwrap();
+        fs::write(directory.join("module.bsl"), "").unwrap();
+    }
+    let chosen = Path::new("report/module.bsl");
+    let sibling = Path::new("processing/module.bsl");
+    let context = super::context::Context::open(&root.join(chosen), &[], false).unwrap();
+    assert_eq!(
+        context.files(&root, Some(chosen), false).unwrap(),
+        [root.join(chosen).canonicalize().unwrap()]
+    );
+    assert_eq!(
+        context.files(&root, Some(sibling), false).unwrap_err().code,
+        "invalid_scope"
+    );
+    let workspace = super::context::Context::open(&root, &[], true).unwrap();
+    assert_eq!(
+        workspace.files(&root, Some(sibling), false).unwrap(),
+        [root.join(sibling).canonicalize().unwrap()]
+    );
+}
+
 /// Additive layout options retain pinned v1 defaults for older pure-text clients.
 #[test]
 fn old_protocol_options_receive_only_pinned_additive_defaults() {
