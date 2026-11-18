@@ -56,6 +56,10 @@ enum Operation {
 struct InfobasesArgs {
     #[arg(long)]
     list: Option<PathBuf>,
+    #[arg(long)]
+    include_distrobox: bool,
+    #[arg(long, requires = "include_distrobox")]
+    distrobox: Option<String>,
     #[arg(short, long, action = ArgAction::Help)]
     help: Option<bool>,
 }
@@ -132,6 +136,13 @@ fn main() -> ExitCode {
         return code;
     }
     if let Operation::Infobases(args) = cli.command {
+        if args.include_distrobox {
+            println!(
+                "{}",
+                infobases::list_with_distrobox(args.list, args.distrobox)
+            );
+            return ExitCode::SUCCESS;
+        }
         let Some(entries) = infobases::list(args.list) else {
             eprintln!("{}", localizer.text("debug-infobases-unavailable"));
             return ExitCode::FAILURE;
@@ -392,6 +403,12 @@ fn localized(localizer: &Localizer) -> clap::Command {
                 .about(localizer.text("debug-infobases-about"))
                 .mut_arg("list", |arg| {
                     arg.help(localizer.text("debug-infobases-list-help"))
+                })
+                .mut_arg("include_distrobox", |arg| {
+                    arg.help(localizer.text("debug-infobases-include-distrobox-help"))
+                })
+                .mut_arg("distrobox", |arg| {
+                    arg.help(localizer.text("debug-infobases-distrobox-help"))
                 })
                 .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
         })

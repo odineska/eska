@@ -183,7 +183,9 @@ impl ToolOptions {
         })
     }
 
-    fn distrobox_name(&self) -> Option<String> {
+    /// Resolve the configured container using the runner override precedence.
+    #[must_use]
+    pub fn distrobox_name(&self) -> Option<String> {
         self.distrobox.clone().or_else(|| {
             if self.project_local {
                 None
@@ -191,6 +193,35 @@ impl ToolOptions {
                 env::var(DISTROBOX_ENV).ok()
             }
         })
+    }
+
+    /// Construct a terminal-free query from the home directory of an existing container.
+    ///
+    /// # Errors
+    /// Rejects container names using the same rules as platform execution.
+    pub fn distrobox_query(
+        container: &str,
+        program: &str,
+        arguments: &[OsString],
+    ) -> Result<Command, ToolError> {
+        validate_component(container)
+            .map_err(|()| ToolError::InvalidContainer(container.to_owned()))?;
+        let mut command = Command::new("distrobox");
+        // EOF at the creation prompt prevents Distrobox from creating a missing container.
+        command
+            .env("DBX_NON_INTERACTIVE", "0")
+            .stdin(Stdio::null())
+            .args([
+                "enter",
+                "--name",
+                container,
+                "--no-tty",
+                "--no-workdir",
+                "--",
+            ])
+            .arg(program)
+            .args(arguments);
+        Ok(command)
     }
 
     fn explicit_runner(&self, path: PathBuf) -> Result<(Runner, ToolSource), ToolError> {

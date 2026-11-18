@@ -1,9 +1,12 @@
-//! Read only the connection selected from a local 1C launcher list.
+//! Read registered infobase connections from 1C launcher lists.
 
-use std::{collections::BTreeMap, env, fs::File, io::Read, path::PathBuf};
+use std::{collections::BTreeMap, env, fs::File, io::Read, path::PathBuf, time::Duration};
 
-use eska_project_core::project::local_settings::Infobase;
+use eska_build_runtime::build::{RunnerPreference, ToolOptions};
+use eska_project_core::{config::global, project::local_settings::Infobase};
+use eska_tool_runtime::{Component, Operation, QueryPolicy, capture};
 use serde::{Deserialize, Serialize};
+use serde_json::{Value, json};
 
 const MAX_LIST_BYTES: usize = 1024 * 1024;
 
@@ -29,17 +32,102 @@ pub struct Entry {
 
 pub fn list(path: Option<PathBuf>) -> Option<Vec<Entry>> {
     let contents = read(path)?;
-    Some(
-        entries(&contents)
-            .into_iter()
-            .filter_map(|(name, value)| {
-                Some(Entry {
-                    name: name.to_owned(),
-                    infobase: connection(value?)?,
-                })
+    Some(parse_list(&contents))
+}
+
+fn parse_list(contents: &str) -> Vec<Entry> {
+    entries(contents)
+        .into_iter()
+        .filter_map(|(name, value)| {
+            Some(Entry {
+                name: name.to_owned(),
+                infobase: connection(value?)?,
             })
-            .collect(),
+        })
+        .collect()
+}
+
+#[derive(Clone, Copy, Serialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+enum Source<'a> {
+    Host,
+    Distrobox { container: &'a str },
+}
+
+#[derive(Serialize)]
+struct SourcedEntry<'a> {
+    #[serde(flatten)]
+    entry: Entry,
+    source: Source<'a>,
+}
+
+/// Extended discovery preserves each source independently, including unavailable lists.
+pub fn list_with_distrobox(path: Option<PathBuf>, explicit: Option<String>) -> Value {
+    let container = explicit.or_else(|| {
+        let configured = global::load()
+            .ok()
+            .and_then(|(_, config)| config.build.container);
+        ToolOptions::default()
+            .with_machine_defaults(RunnerPreference::Auto, None, configured)
+            .distrobox_name()
+    });
+    let mut entries = Vec::new();
+    let host = append_list(&mut entries, list(path), Source::Host);
+    let distrobox = container.as_deref().map(|container| {
+        let status = append_list(
+            &mut entries,
+            read_distrobox(container),
+            Source::Distrobox { container },
+        );
+        json!({"container": container, "status": status})
+    });
+    json!({
+        "schema_version": 1,
+        "kind": "registered-infobases",
+        "entries": entries,
+        "sources": { "host": host, "distrobox": distrobox },
+    })
+}
+
+fn append_list<'a>(
+    target: &mut Vec<SourcedEntry<'a>>,
+    list: Option<Vec<Entry>>,
+    source: Source<'a>,
+) -> &'static str {
+    let Some(list) = list else {
+        return "unavailable";
+    };
+    target.extend(list.into_iter().map(|entry| SourcedEntry { entry, source }));
+    "ready"
+}
+
+fn read_distrobox(container: &str) -> Option<Vec<Entry>> {
+    // Only this fixed script is interpreted; container names remain separate validated arguments.
+    // Read one byte beyond the limit to reject oversized lists without sending unbounded data.
+    let script = format!(
+        "test -n \"${{HOME:-}}\" && test -f \"$HOME/.1C/1cestart/ibases.v8i\" && exec head -c {} -- \"$HOME/.1C/1cestart/ibases.v8i\"",
+        MAX_LIST_BYTES + 1
+    );
+    let mut command =
+        ToolOptions::distrobox_query(container, "sh", &["-c".into(), script.into()]).ok()?;
+    let operation = Operation::new().ok()?;
+    let output = capture(
+        Component::Build,
+        &mut command,
+        &operation,
+        QueryPolicy {
+            timeout: Duration::from_secs(5),
+            output_limit: MAX_LIST_BYTES as u64,
+            ..QueryPolicy::default()
+        },
+        || {},
     )
+    .ok()?;
+    if !output.status.success() {
+        return None;
+    }
+    let contents = String::from_utf8(output.stdout).ok()?;
+    Some(parse_list(&contents))
 }
 
 fn read(path: Option<PathBuf>) -> Option<String> {
