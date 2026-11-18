@@ -317,3 +317,30 @@ fn component_replies_cannot_touch_change_and_validate_methods() {
         "A=1;"
     );
 }
+
+#[test]
+fn settings_preview_uses_draft_without_publishing_manifest_or_source() {
+    let mut fixture = Fixture::new("replace");
+    let manifest = "[project]\nname='example'\ntype='configuration'\nsource='.'\n[format.bsl]\nspace_around_operators=false\n";
+    fs::write(fixture.directory.0.join("eska.toml"), manifest).unwrap();
+    let result = fixture.call("format/settingsPreview", &json!({
+        "source":{"encoding":"utf-8","value":fixture.directory.0.join("Module.bsl")},
+        "settingsRoot":{"encoding":"utf-8","value":fixture.directory.0},
+        "revision": source_sha256(manifest), "edits":[{"path":["format","bsl","space_around_operators"]}],
+        "version":"7", "text":"A=1;", "userReadOnly":false,
+        "formatter":{"encoding":"utf-8","value":fixture.binary}
+    })).unwrap();
+    assert_eq!(
+        result["effective"]["options"]["space_around_operators"],
+        true
+    );
+    assert_eq!(result["plan"]["edits"][0]["text"], "A = 1;\n");
+    assert_eq!(
+        fs::read_to_string(fixture.directory.0.join("eska.toml")).unwrap(),
+        manifest
+    );
+    assert_eq!(
+        fs::read_to_string(fixture.directory.0.join("Module.bsl")).unwrap(),
+        "A=1;"
+    );
+}

@@ -570,3 +570,43 @@ fn published_schema_tracks_options_and_language_defaults() {
         "canonical"
     );
 }
+
+#[test]
+fn settings_example_replaces_member_policy_and_preserves_workspace_inheritance() {
+    use crate::test_support::TestDir;
+    use std::fs;
+    let fixture = TestDir::new();
+    let root = fixture.0.canonicalize().unwrap();
+    let member = root.join("report");
+    fs::create_dir(&member).unwrap();
+    fs::write(root.join("eska.toml"), "[workspace.members.app]\nexternal_objects=['report']\n[format.bsl]\nspace_after_comma=false\n").unwrap();
+    let original = "[project]\nname='report'\ntype='report'\nsource='.'\n[format.bsl]\nspace_after_comma=true\nspace_around_operators=false\n";
+    fs::write(member.join("eska.toml"), original).unwrap();
+    let path = member.join("Module.bsl");
+    fs::write(&path, "A=1;").unwrap();
+    let mut context = super::context::Context::open(&path, &[], false).unwrap();
+    context
+        .preview_manifest(
+            &member,
+            "[project]\nname='report'\ntype='report'\nsource='.'\n[format]\nprofile='1c'\n",
+        )
+        .unwrap();
+    let effective = context
+        .policy(&path, Language::Bsl, &Patch::default())
+        .unwrap();
+    assert_eq!(effective.profile, "1c");
+    assert!(!effective.options.space_after_comma);
+    assert!(effective.options.space_around_operators);
+    context.check_current().unwrap();
+    assert_eq!(
+        fs::read_to_string(member.join("eska.toml")).unwrap(),
+        original
+    );
+    assert_eq!(
+        context
+            .preview_manifest(&root.join("unrelated"), original)
+            .unwrap_err()
+            .code,
+        "invalid_scope"
+    );
+}

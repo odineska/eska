@@ -22,7 +22,7 @@ struct Failure {
 
 /// Additive capability does not imply an installed formatter or an analyzer requirement.
 pub(super) fn capability() -> Value {
-    json!({"schemaVersion":1,"component":"eska-fmt","protocolVersion":1,"planOnly":true,"writesOwner":false,"languages":["bsl","sdbl"],"document":true,"range":true,"queryDraft":true,"formatOnSave":"opt_in","maxTextBytes":4*1024*1024,"maxInlineBytes":128*1024})
+    json!({"schemaVersion":1,"component":"eska-fmt","protocolVersion":1,"planOnly":true,"writesOwner":false,"languages":["bsl","sdbl"],"settingsPreview":true,"document":true,"range":true,"queryDraft":true,"formatOnSave":"opt_in","maxTextBytes":4*1024*1024,"maxInlineBytes":128*1024})
 }
 
 /// Explicit machine entries are independent of metadata membership and analyzer availability.
@@ -30,6 +30,7 @@ pub(super) fn is_method(method: &str) -> bool {
     matches!(
         method,
         "format/document"
+            | "format/settingsPreview"
             | "format/query"
             | "format/bufferBegin"
             | "format/bufferAppend"
