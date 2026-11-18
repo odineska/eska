@@ -1,9 +1,14 @@
-//! Design-time additional menus for dynamic lists. Commands carry no executable behavior.
+//! Design-time additional menus for tables. Commands carry no executable behavior.
+
+use std::collections::HashSet;
 
 use super::{
-    AutoCommandItem, EffectiveElement, FormPicture, FormResource, PresentationText, PropertySource,
+    AutoCommandItem, EffectiveElement, ElementKind, FormPicture, FormResource, PresentationText,
+    PropertySource,
     appearance::text,
-    commands::{effective_metadata, excludes, metadata_caption, metadata_text},
+    commands::{
+        effective_metadata, excludes, metadata_caption, metadata_text, table_command_reference,
+    },
     presentation::metadata_property,
 };
 use crate::project::{
@@ -11,7 +16,94 @@ use crate::project::{
     metadata_parser::ParsedObject,
 };
 
-pub(super) fn sections(
+pub(super) fn ordinary_sections(table: &EffectiveElement) -> Vec<Vec<AutoCommandItem>> {
+    let mut primary = Vec::new();
+    if allows_row_set_change(table) {
+        primary.extend(["Add", "Copy", "Change", "Delete"].map(ordinary_item));
+    } else {
+        primary.push(ordinary_item("Change"));
+    }
+    primary.push(ordinary_item("EndEdit"));
+    primary.push(item("FindByCurrentValue"));
+    primary.extend([find_item(table), ordinary_item("CancelSearch")]);
+
+    let mut result = vec![primary];
+    let mut output = Vec::new();
+    if allows_row_order_change(table) {
+        result.push(["MoveUp", "MoveDown"].map(ordinary_item).into());
+        output.extend(["SortListAsc", "SortListDesc"].map(ordinary_item));
+    }
+    output.push(ordinary_item("OutputList"));
+    result.push(output);
+    retain_available(table, result)
+}
+
+/// A manual bar keeps the picture and shortcut of its explicitly authored standard commands.
+pub(super) fn ordinary_authored_commands(table: &EffectiveElement) -> Vec<Vec<AutoCommandItem>> {
+    fn collect<'a>(elements: &'a [EffectiveElement], table: &str, commands: &mut HashSet<&'a str>) {
+        for element in elements {
+            if let Some((owner, name)) = element
+                .scalar("CommandName")
+                .and_then(table_command_reference)
+                && owner.to_lowercase() == table
+            {
+                commands.insert(name);
+            }
+            if element.kind == Some(ElementKind::ButtonGroup) {
+                collect(&element.children, table, commands);
+            }
+        }
+    }
+    let Some(name) = table.name.as_deref() else {
+        return Vec::new();
+    };
+    let Some(bar) = table
+        .auxiliary
+        .iter()
+        .find(|item| item.kind == Some(ElementKind::AutoCommandBar))
+    else {
+        return Vec::new();
+    };
+    let mut authored = HashSet::new();
+    collect(&bar.children, &name.to_lowercase(), &mut authored);
+    let mut sections = ordinary_sections(table);
+    for group in &mut sections {
+        group.retain(|item| {
+            item.key
+                .strip_prefix("Table.StandardCommand.")
+                .is_some_and(|key| authored.contains(key))
+        });
+    }
+    sections.retain(|group| !group.is_empty());
+    sections
+}
+
+pub(super) fn allows_row_set_change(table: &EffectiveElement) -> bool {
+    !matches!(table.scalar("ChangeRowSet"), Some("false" | "0"))
+}
+
+pub(super) fn allows_row_order_change(table: &EffectiveElement) -> bool {
+    !matches!(table.scalar("ChangeRowOrder"), Some("false" | "0"))
+}
+
+fn ordinary_item(name: &str) -> AutoCommandItem {
+    let mut command = item(name);
+    command.shortcut = match name {
+        "Add" => Some("Ins"),
+        "Delete" => Some("Del"),
+        "EndEdit" => Some("Shift+F2"),
+        "MoveUp" => Some("Ctrl+Shift+Up"),
+        "MoveDown" => Some("Ctrl+Shift+Down"),
+        _ => command.shortcut,
+    };
+    command.picture = Some(picture(name));
+    if name == "EndEdit" {
+        command.caption = caption("TableEndEdit");
+    }
+    command
+}
+
+pub(super) fn dynamic_sections(
     table: &EffectiveElement,
     owner: Option<&ParsedObject>,
     resources: &[FormResource],
@@ -97,6 +189,13 @@ pub(super) fn sections(
         output.push(search_control(table));
     }
     result.push(output);
+    retain_available(table, result)
+}
+
+fn retain_available(
+    table: &EffectiveElement,
+    mut result: Vec<Vec<AutoCommandItem>>,
+) -> Vec<Vec<AutoCommandItem>> {
     for group in &mut result {
         group.retain_mut(|item| {
             if excluded(table, item) {

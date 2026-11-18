@@ -183,10 +183,7 @@ fn call(index: usize, unit: &Unit, tokens: &[Token<'_>], options: &Options) -> O
     } else {
         part
     };
-    if unit.kind != UnitKind::Statement
-        || !part.last()?.is(";")
-        || part.iter().any(|token| token.kind == Kind::Comment)
-    {
+    if unit.kind != UnitKind::Statement || part.iter().any(|token| token.kind == Kind::Comment) {
         return None;
     }
     let indent = unit.level * usize::from(options.indent_width);
@@ -196,6 +193,8 @@ fn call(index: usize, unit: &Unit, tokens: &[Token<'_>], options: &Options) -> O
     {
         return None;
     }
+    // The final statement of a block or module may omit its semicolon.
+    let call_end = part.len() - usize::from(part.last()?.is(";"));
     let open = part.iter().position(|token| token.is("("))?;
     if open == 0
         || open.is_multiple_of(2)
@@ -206,14 +205,14 @@ fn call(index: usize, unit: &Unit, tokens: &[Token<'_>], options: &Options) -> O
                 token.is(".")
             }
         })
-        || group_end(part, open).ok()? != part.len() - 1
+        || group_end(part, open).ok()? != call_end
     {
         return None;
     }
     let mut arguments = Vec::new();
     let mut first = open + 1;
     let mut at = first;
-    while at < part.len() - 2 {
+    while at + 1 < call_end {
         if part[at].is("(") || part[at].is("[") {
             at = group_end(part, at).ok()?;
         } else {
@@ -235,7 +234,7 @@ fn call(index: usize, unit: &Unit, tokens: &[Token<'_>], options: &Options) -> O
         unit: index,
         start: layout::width(&callee, indent, options.tab_width)
             + usize::from(options.space_inside_parentheses),
-        callee,
+        callee: callee.to_lowercase(),
         arguments,
         tail: layout::flat(&part[first..], options),
     })

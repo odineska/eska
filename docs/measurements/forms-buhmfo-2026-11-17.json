@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-17",
+  "issue": "https://github.com/odineska/eska/issues/239",
+  "environment": {
+    "platform": "1С 8.3.27.2342, Такси, Linux, 96 DPI",
+    "explorer_host": "VS Code 1.109.0, Linux ARM64",
+    "source": "Designer XML BuhMFO и оригинальная конфигурация CF в отдельной базе Конфигуратора",
+    "locales": ["ru", "en"],
+    "scales_percent": [75, 100, 125],
+    "chromium_device_pixel_ratios": [1, 2]
+  },
+  "implementation": {
+    "eska": "b921b0ffbd0696d8fac1b6d27e123bae16ff263a",
+    "explorer": "875c3c637c11b60f3ace47b3e9f602a89802cc7d",
+    "explorer_baseline": "53d4830",
+    "explorer_commits": [
+      "fd06d15 fix(forms): Уточнено масштабирование стандартных картинок",
+      "a33299e fix(forms): Сохранены настольные отметки при масштабировании",
+      "feb57e4 feat(forms): Добавлена автопрокрутка при перетаскивании",
+      "205e94f fix(forms): Свёрнуты команды узкой таблицы",
+      "f5e042d fix(forms): Показаны картинки и подписи в меню таблицы",
+      "999173b fix(forms): Убрана подсветка недоступных команд меню",
+      "6550de3 fix(forms): Восстановлены углы поля поиска таблицы",
+      "fcf81ef test(forms): Стабилизирована проверка перетаскивания в VS Code",
+      "875c3c6 fix(forms): Восстановлен значок добавления в меню таблицы"
+    ],
+    "vsix_sha256": "affb58e1ad78fc23846171ad4648a2b901b5c0a4a84a419ee6df64094ae40035",
+    "installed_runtime_manifest_sha256": "453596807081c119fe5df09c9b0789353dc3b5e86261949ee7c03c37b9a73afc",
+    "public_api_changes": false,
+    "new_dependencies": false
+  },
+  "corpus": {
+    "designer_xml_scanned": 10231,
+    "managed_forms_parsed": 10231,
+    "parse_errors": 0,
+    "selected_forms_per_locale": 15,
+    "main_window_observations": 210,
+    "detached_window_observations": 20,
+    "baseline_ru_observations": 105,
+    "chromium_forms": 8,
+    "chromium_observations": 64,
+    "coverage": ["Широкая и узкая область", "Возврат к 100%", "Переключение страниц", "Прокрутка", "Меню", "Открепление и возврат окна"],
+    "source_sha256_unchanged": true
+  },
+  "command_presentation": {
+    "form": "Выдача по займам",
+    "native_menu_checks": 6,
+    "chromium_menu_checks": 6,
+    "movement": {"toolbar": "Картинка", "more": "Картинка и подпись"},
+    "add": {"toolbar": "Подпись", "more": "Зелёный плюс и подпись"},
+    "authored_text_picture": {"commands": ["Заполнить", "Обновить"], "toolbar": "Картинка и подпись", "more": "Картинка и подпись"},
+    "atlas": {"source": "e1csys/core/tbglacti.zip", "cells_in_first_row": [0, 4, 5], "density_variants": 8, "png_tiles": 24, "desktop_100_max_rgb_channel_error": 1}
+  },
+  "layout": {
+    "loan_issue": {
+      "desktop_frame_px": 802,
+      "table_px": 768,
+      "toolbar_scroll_width_px": {"before": 782, "after": 768},
+      "search_width_px": {"before": 80, "after": 170, "desktop": 178},
+      "overflow_actions": ["Оплачено", "Платежные документы"],
+      "restores_actions_when_widened": true
+    },
+    "remaining_minimum_width_differences_px": [
+      {"form": "Закрытие займа", "desktop": 665, "preview": 955, "driver": "Горизонтальная шапка"},
+      {"form": "Акт сверки взаиморасчётов по займам", "desktop": 802, "preview": 1004, "driver": "Отдельная командная панель"},
+      {"form": "Расчёты с покупателями и поставщиками", "desktop": 1075, "preview": 1632, "driver": "Горизонтальная группа команд страницы отчёта"}
+    ]
+  },
+  "controls": {
+    "choice_marks": {"fractional_scale_comparisons": 32, "mean_absolute_rgb_error_before": 7.58, "mean_absolute_rgb_error_after": 2.02, "matching_original_100_percent_dpr1": 8},
+    "reference_buttons": {"result": "PASS", "forms": 10, "fields": 110, "compared_pixels_per_locale": 631421, "inactive_open_75_ink_pixels": 33, "inactive_open_125_ink_pixels": 45},
+    "table_search": {"exact_x11_rgb": true, "corner_pixels_corrected_in_dynamic_list": 46},
+    "strict_table_pixels": {"result": "FAIL", "remaining_regions_per_locale": 9, "inline_movement_groups_byte_identical_to_baseline": 8, "remaining_dynamic_toolbar_pixels": 24, "remaining_max_rgb_channel_error": 1}
+  },
+  "editing": {
+    "form": "Финансовые нормативы КПК",
+    "source": "Изолированная редактируемая копия оригинальной формы",
+    "attached_zoom_percent": 75,
+    "detached_zoom_percent": 125,
+    "checks": ["Автопрокрутка", "Смена цели вставки у границы группы", "Одиночная запись XML", "Undo и Redo", "Побайтное совпадение с исходником после итогового Undo", "Запрет редактирования защищённой конфигурации"]
+  },
+  "checks": {
+    "explorer": {"typecheck": "PASS", "compile": "PASS", "node_passed": 947, "node_skipped": 14, "node_failed": 0},
+    "rust": {"fmt": "PASS", "check": "PASS", "strict_clippy": "PASS", "passed": 1827, "ignored": 59, "failed": 0},
+    "native_suites_ru_en": ["pictures", "standard-pictures", "tables", "radio-layout", "states", "editor", "reference-buttons"],
+    "test_root": "<absolute sibling eska-playground>"
+  },
+  "artifacts": {
+    "archive": "../eska-form-reference/1c-8.3.27.2342/analysis/buhmfo-forms-2026-11-17",
+    "lab": "../eska-playground/forms-buhmfo-1MsONQ",
+    "desktop_layout": "../eska-playground/buhmfo-layout-lyyN40PL",
+    "editing": "../eska-playground/form-drag-repro-D8wmZWvM"
+  },
+  "limits": [
+    "Платформенная сверка охватывает Linux. Windows и физические дисплеи с другими плотностями требуют отдельного прогона",
+    "Полные снимки входят в проверку 15 выбранных форм. Инвентаризация остальных форм проверяет разбор XML",
+    "Сверено оформление уже отображаемых действий. У обычной таблицы список стандартных команд в «Ещё» короче настольного",
+    "Нативные сравнения отдельных контролов проводились также на сборке непосредственно перед добавлением значка «Добавить»"
+  ]
+}

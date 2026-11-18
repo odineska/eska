@@ -59,6 +59,48 @@ fn split_callee_uses_its_rendered_single_line_layout() {
     );
 }
 
+#[test]
+fn query_parameter_calls_align_across_identifier_case() {
+    let source = concat!(
+        "запрос.установитьпараметр(\"Вид\", Вид);\n",
+        "Запрос.УстановитьПараметр(\"ДатаОкончания\", ДатаОкончания);\n",
+    );
+    assert_eq!(
+        formatted(source, options()),
+        concat!(
+            "запрос.установитьпараметр(\"Вид\"          , Вид);\n",
+            "Запрос.УстановитьПараметр(\"ДатаОкончания\", ДатаОкончания);\n",
+        )
+    );
+}
+
+#[test]
+fn query_parameter_calls_align_without_a_final_semicolon() {
+    let source = concat!(
+        "Запрос.УстановитьПараметр(\"Вид\", Вид);\n",
+        "Запрос.УстановитьПараметр(\"ДатаОкончания\", ДатаОкончания) // Последний вызов\n",
+    );
+    assert_eq!(
+        formatted(source, options()),
+        concat!(
+            "Запрос.УстановитьПараметр(\"Вид\"          , Вид);\n",
+            "Запрос.УстановитьПараметр(\"ДатаОкончания\", ДатаОкончания) // Последний вызов\n",
+        )
+    );
+    assert_eq!(
+        formatted(
+            &format!("Процедура Тест(Запрос)\n{source}КонецПроцедуры\n"),
+            options()
+        ),
+        concat!(
+            "Процедура Тест(Запрос)\n\n",
+            "\tЗапрос.УстановитьПараметр(\"Вид\"          , Вид);\n",
+            "\tЗапрос.УстановитьПараметр(\"ДатаОкончания\", ДатаОкончания) // Последний вызов\n\n",
+            "КонецПроцедуры\n",
+        )
+    );
+}
+
 /// Retained expression breaks and opaque multiline literals must never receive table padding.
 #[test]
 fn retained_multiline_calls_remain_table_boundaries() {

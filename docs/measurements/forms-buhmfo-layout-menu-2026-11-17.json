@@ -1,0 +1,380 @@
+{
+  "date": "2026-11-17–18",
+  "environment": {
+    "configurator": "1С 8.3.27.2342, Такси, Linux, 96 DPI",
+    "host": "VS Code 1.109.0, Linux ARM64, X11",
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "zoom_percent": [
+      75,
+      100,
+      125
+    ]
+  },
+  "issues": [
+    265,
+    267,
+    239
+  ],
+  "implementation": {
+    "eska": "b30f974b60dff1a2066338ee9768ed58ac6039ba",
+    "explorer": "c6fde85d7b3989bad384615bfb96834fe14f9080",
+    "eska_baseline": "fecc7557",
+    "explorer_baseline": "875c3c6",
+    "vsix_sha256": "8c5d4804e240ad6fb8c81de57c1860b65d78c91799aeabdc01b1580929a25ec8",
+    "installed_runtime_manifest_sha256": "d9c4a2d880b8946c9194407c57204846980403b6d7d4fc242747f9f76b471dc6",
+    "backend_sha256": "2fa122183eab38b4bdd16aecfc71ecff1a9e53b1c7ea647771d9f59eec67b069",
+    "new_dependencies": false,
+    "new_protocol_fields": false
+  },
+  "layout": {
+    "widths_css_px_at_100_percent": {
+      "ru": {
+        "close-loan": {
+          "client_680_px": {
+            "before": 955,
+            "after": 656
+          },
+          "desktop_equivalent_client_px": 689,
+          "at_desktop_equivalent_client_px": {
+            "before": 955,
+            "after": 665,
+            "configurator_ru": 665
+          }
+        },
+        "reconcile-loans": {
+          "client_680_px": {
+            "before": 1004,
+            "after": 741
+          },
+          "desktop_equivalent_client_px": 826,
+          "at_desktop_equivalent_client_px": {
+            "before": 1004,
+            "after": 802,
+            "configurator_ru": 802
+          }
+        },
+        "settlement-report": {
+          "client_680_px": {
+            "before": 1632,
+            "after": 1079
+          },
+          "desktop_equivalent_client_px": 1099,
+          "at_desktop_equivalent_client_px": {
+            "before": 1632,
+            "after": 1079,
+            "configurator_ru": 1075
+          }
+        }
+      },
+      "en": {
+        "close-loan": {
+          "client_680_px": {
+            "before": 960,
+            "after": 656
+          },
+          "desktop_equivalent_client_px": 689,
+          "at_desktop_equivalent_client_px": {
+            "before": 960,
+            "after": 665
+          }
+        },
+        "reconcile-loans": {
+          "client_680_px": {
+            "before": 958,
+            "after": 741
+          },
+          "desktop_equivalent_client_px": 826,
+          "at_desktop_equivalent_client_px": {
+            "before": 958,
+            "after": 802
+          }
+        },
+        "settlement-report": {
+          "client_680_px": {
+            "before": 1680,
+            "after": 1127
+          },
+          "desktop_equivalent_client_px": 1099,
+          "at_desktop_equivalent_client_px": {
+            "before": 1680,
+            "after": 1127
+          }
+        }
+      }
+    },
+    "close_loan_renderer_minimum_px": 650,
+    "close_loan_fixed_picture_track_px": 20
+  },
+  "corpus": {
+    "native_main_observations": 90,
+    "native_detached_observations": 90,
+    "native_resize": [
+      [
+        1600,
+        900
+      ],
+      [
+        760,
+        650
+      ],
+      [
+        1600,
+        900
+      ]
+    ],
+    "cases": {
+      "ru": [
+        {
+          "id": "issue-loan",
+          "source_sha256": "54e89ef098c27ea9d6065a3fd743d3c17e21fa5a25d19fcda1c12587a57a1495",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "close-loan",
+          "source_sha256": "ecdbecf3ea9bbe2b3b8b42a5a9682aed1cd0c9308cec7cc42d90b5af100754fe",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "reconcile-loans",
+          "source_sha256": "c2b5140f29b0b3ff31efe5d4c2d5e400a74274a4c49e7213a34ed004b81b3eee",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "settlement-report",
+          "source_sha256": "d96357a0d6762ad1bfae76d96fd55692e8ed0488adf79542d131d83f3ea3d9c5",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "loan-list",
+          "source_sha256": "894e40e29a127fbc1f0bf73fb0601bafe409750d70fb636f4435418456d2ec57",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        }
+      ],
+      "en": [
+        {
+          "id": "issue-loan",
+          "source_sha256": "54e89ef098c27ea9d6065a3fd743d3c17e21fa5a25d19fcda1c12587a57a1495",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "close-loan",
+          "source_sha256": "ecdbecf3ea9bbe2b3b8b42a5a9682aed1cd0c9308cec7cc42d90b5af100754fe",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "reconcile-loans",
+          "source_sha256": "c2b5140f29b0b3ff31efe5d4c2d5e400a74274a4c49e7213a34ed004b81b3eee",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "settlement-report",
+          "source_sha256": "d96357a0d6762ad1bfae76d96fd55692e8ed0488adf79542d131d83f3ea3d9c5",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        },
+        {
+          "id": "loan-list",
+          "source_sha256": "894e40e29a127fbc1f0bf73fb0601bafe409750d70fb636f4435418456d2ec57",
+          "source_unchanged": true,
+          "native_main": 9,
+          "native_detached": 9
+        }
+      ]
+    },
+    "preserves_selection_page_geometry_on_return": true
+  },
+  "ordinary_menu": {
+    "standard_items": 13,
+    "total_rows_with_authored_items_and_separators": 23,
+    "installed_window_locale_zoom_cases": 12,
+    "add_icon_widths": [
+      14,
+      16,
+      20
+    ],
+    "new_icon_series": 11,
+    "density_variants_per_series": 8,
+    "icon_calibration_max_channel_error_at_96_dpi": 1,
+    "chromium_native_property_comparisons": [
+      "ReadOnly",
+      "ChangeRowSet",
+      "ChangeRowOrder",
+      "CommandSet",
+      "SearchStringLocation",
+      "Enabled",
+      "Autofill",
+      "LocationInCommandBar"
+    ]
+  },
+  "tree": {
+    "ru": {
+      "passed": true,
+      "locale": "ru",
+      "attachField": true,
+      "detachedField": true,
+      "detachedGroup": true,
+      "virtualTreeExpand": true,
+      "mounted": [
+        23,
+        24
+      ]
+    },
+    "en": {
+      "passed": true,
+      "locale": "en",
+      "attachField": true,
+      "detachedField": true,
+      "detachedGroup": true,
+      "virtualTreeExpand": true,
+      "mounted": [
+        23,
+        24
+      ]
+    }
+  },
+  "drag": {
+    "form": "Финансовые нормативы КПК",
+    "isolated_copy": true,
+    "installed_host_events": "DOM drag and keyboard",
+    "trusted_mouse_chromium_fixture": true,
+    "outcomes": {
+      "ru": {
+        "attached": {
+          "zoom": 75,
+          "scrolled": 130.6666717529297,
+          "beforeLocation": {
+            "name": "Номер",
+            "parent": "13",
+            "previous": null,
+            "next": "4"
+          },
+          "afterLocation": {
+            "name": "Номер",
+            "parent": "49",
+            "previous": "531",
+            "next": "618"
+          },
+          "initial": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e",
+          "moved": "b8d97c5071bde2f56458b8af5e47d0a2a8ea0f2c194b3d67dfd9117625c92f9c",
+          "restored": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e"
+        },
+        "detached": {
+          "zoom": 125,
+          "scrolled": 145.60000610351562,
+          "beforeLocation": {
+            "name": "Номер",
+            "parent": "13",
+            "previous": null,
+            "next": "4"
+          },
+          "afterLocation": {
+            "name": "Номер",
+            "parent": "49",
+            "previous": "531",
+            "next": "618"
+          },
+          "initial": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e",
+          "moved": "b8d97c5071bde2f56458b8af5e47d0a2a8ea0f2c194b3d67dfd9117625c92f9c",
+          "restored": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e"
+        }
+      },
+      "en": {
+        "attached": {
+          "zoom": 75,
+          "scrolled": 168,
+          "beforeLocation": {
+            "name": "Номер",
+            "parent": "13",
+            "previous": null,
+            "next": "4"
+          },
+          "afterLocation": {
+            "name": "Номер",
+            "parent": "49",
+            "previous": "531",
+            "next": "618"
+          },
+          "initial": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e",
+          "moved": "b8d97c5071bde2f56458b8af5e47d0a2a8ea0f2c194b3d67dfd9117625c92f9c",
+          "restored": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e"
+        },
+        "detached": {
+          "zoom": 125,
+          "scrolled": 134.39999389648438,
+          "beforeLocation": {
+            "name": "Номер",
+            "parent": "13",
+            "previous": null,
+            "next": "4"
+          },
+          "afterLocation": {
+            "name": "Номер",
+            "parent": "49",
+            "previous": "531",
+            "next": "618"
+          },
+          "initial": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e",
+          "moved": "b8d97c5071bde2f56458b8af5e47d0a2a8ea0f2c194b3d67dfd9117625c92f9c",
+          "restored": "bb94561d4fe3c5de077c69ebe08f042e108b0c888b482787dcb636d5cefaf17e"
+        }
+      }
+    }
+  },
+  "checks": {
+    "rust": {
+      "fmt": "PASS",
+      "check": "PASS",
+      "clippy_all_targets_all_features": "PASS",
+      "passed": 1831,
+      "failed": 0,
+      "ignored": 59
+    },
+    "explorer": {
+      "typecheck": "PASS",
+      "compile": "PASS",
+      "node": {
+        "pass": 954,
+        "fail": 0,
+        "skipped": 14
+      }
+    },
+    "installed_target_suites_both_locales": [
+      "header-layout",
+      "command-overflow",
+      "inspector-tree-focused",
+      "inspector-navigation"
+    ],
+    "test_root": "<absolute sibling eska-playground>",
+    "strict_suite_comparison": {
+      "command-bars": "Исходное расхождение RightParentFixed повторилось в обеих локалях",
+      "button-links": "Исходная отметка uncalibrated link font reported повторилась в обеих локалях"
+    }
+  },
+  "limits": [
+    "На промежуточной ширине около 994 px у «Закрытия займа» порог переноса автоматических подписей отличается от Конфигуратора.",
+    "Русский отчёт при сопоставимой ширине имеет рамку 1079 px против 1075 px в Конфигураторе.",
+    "Строгие проверки command-bars и button-links в ru/en повторили исходные расхождения геометрии RightParentFixed и статуса калибровки шрифта соответственно.",
+    "Сопоставление с Конфигуратором выполнено для Linux при 96 DPI. Windows и полное совпадение всех пикселей вне проверенной матрицы остаются отдельной приёмкой."
+  ],
+  "artifacts": "../eska-form-reference/1c-8.3.27.2342/analysis/buhmfo-layout-menu-2026-11-17"
+}

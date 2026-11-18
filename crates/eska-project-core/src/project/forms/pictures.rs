@@ -57,7 +57,7 @@ impl ButtonRepresentation {
             .find_map(|value| match value {
                 "Text" => Some(Self::Text),
                 "Picture" => Some(Self::Picture),
-                "PictureAndText" => Some(Self::PictureAndText),
+                "TextPicture" | "PictureAndText" => Some(Self::PictureAndText),
                 _ => None,
             })
             .unwrap_or(automatic)
