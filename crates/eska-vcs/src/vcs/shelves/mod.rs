@@ -230,13 +230,14 @@ impl<'a> Session<'a> {
         let directory = shelf_directory(self.repository, &saved.id)?;
         fs::create_dir_all(shelf_root(self.repository))?;
         fs::create_dir(&directory)?;
-        let index = files::capture(&self.repository.index_path(), &directory.join("index"))?;
+        let index_path = directory.join("index");
+        let index = files::capture(&self.repository.index_path(), &index_path)?;
         let mut images = Vec::with_capacity(saved.files.len());
         for (number, entry) in saved.files.iter().enumerate() {
             let path = files::work_path(self.repository.work_dir(), &entry.path)?;
             images.push(files::capture(&path, &directory.join(number.to_string()))?);
         }
-        self.protect_index(&saved.id)?;
+        self.protect_index(&saved.id, &index_path)?;
         let stored = Stored {
             version: 1,
             shelf: saved.clone(),
@@ -294,9 +295,8 @@ impl<'a> Session<'a> {
     }
 
     /// Pin the serialized index tree with gix so garbage collection cannot remove staged blobs.
-    fn protect_index(&self, id: &str) -> Result<(), Error> {
-        let tree = Executor::new(self.repository.work_dir()).shelf_index_tree()?;
-        let tree = ObjectId::from_hex(&tree).map_err(|_| Error::InvalidShelf)?;
+    fn protect_index(&self, id: &str, snapshot: &Path) -> Result<(), Error> {
+        let tree = index_tree(self.repository, snapshot)?;
         let mut repository = self.repository.inner.clone();
         repository
             .committer_or_set_generic_fallback()
@@ -407,10 +407,15 @@ pub(crate) fn preflight(repository: &Repository) -> Result<(Vec<u8>, String), Er
     if !repository.index_path().is_file() {
         return Err(Error::UnsupportedIndex);
     }
+    shelf_index(repository, &repository.index_path())?;
+    Ok((reference.to_vec(), id.to_string()))
+}
+
+fn shelf_index(repository: &Repository, path: &Path) -> Result<gix::index::State, Error> {
     // Decode without resolving the link extension: gix's repository index accessor
     // dissolves split indexes and hides the dependency on sharedindex files.
     let (index, _) = gix::index::State::from_bytes(
-        &fs::read(repository.index_path())?,
+        &fs::read(path)?,
         SystemTime::now().into(),
         repository.inner.object_hash(),
         gix::index::decode::Options::default(),
@@ -429,7 +434,44 @@ pub(crate) fn preflight(repository: &Repository) -> Result<(Vec<u8>, String), Er
     {
         return Err(Error::UnsupportedIndex);
     }
-    Ok((reference.to_vec(), id.to_string()))
+    index
+        .verify_entries()
+        .map_err(|_| Error::UnsupportedIndex)?;
+    Ok(index)
+}
+
+/// Materialize the captured index in the object database without updating the live index.
+fn index_tree(repository: &Repository, snapshot: &Path) -> Result<ObjectId, Error> {
+    let index = shelf_index(repository, snapshot)?;
+    let mut editor = repository
+        .inner
+        .edit_tree(ObjectId::empty_tree(repository.inner.object_hash()))
+        .map_err(|_| Error::InvalidShelf)?;
+    for entry in index.entries() {
+        let path = entry.path(&index);
+        let mode = entry
+            .mode
+            .to_tree_entry_mode()
+            .ok_or(Error::UnsupportedIndex)?;
+        // Tree editors allow placeholders and file-to-directory conversions. An index tree must
+        // account for every staged object, so reject either condition before passing it to gix.
+        if entry.id.is_null()
+            || path
+                .iter()
+                .enumerate()
+                .filter(|(_, byte)| **byte == b'/')
+                .any(|(end, _)| index.entry_by_path(path[..end].as_bstr()).is_some())
+        {
+            return Err(Error::UnsupportedIndex);
+        }
+        editor
+            .upsert(path, mode.kind(), entry.id)
+            .map_err(|_| Error::InvalidShelf)?;
+    }
+    editor
+        .write()
+        .map(gix::Id::detach)
+        .map_err(|_| Error::InvalidShelf)
 }
 
 /// Read and validate immutable metadata before trusting any persisted path or payload count.
