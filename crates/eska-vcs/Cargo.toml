@@ -16,7 +16,7 @@ workspace = true
 
 [dependencies]
 eska-presentation = { workspace = true }
-clap = { version = "4.6.7", features = ["derive", "string"] }
+clap = { version = "4.6.8", features = ["derive", "string"] }
 eska-project-core = { workspace = true }
 gix = { version = "0.90.0", default-features = false, features = ["max-performance", "revision", "sha1", "status", "worktree-mutation"] }
 roxmltree = { version = "0.21.2", default-features = false, features = ["std", "positions"] }

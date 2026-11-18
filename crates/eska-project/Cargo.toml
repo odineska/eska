@@ -20,8 +20,8 @@ eska-terminal = { workspace = true }
 eska-project-core = { workspace = true }
 eska-presentation = { workspace = true }
 eska-analyzer = { workspace = true }
-ctrlc = { version = "3.5.2", features = ["termination"] }
+ctrlc = { version = "3.5.3", features = ["termination"] }
 base64 = { version = "0.23.1", default-features = false, features = ["std"] }
-clap = { version = "4.6.7", features = ["derive", "string"] }
+clap = { version = "4.6.8", features = ["derive", "string"] }
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = { version = "1.0.154", features = ["raw_value"] }
