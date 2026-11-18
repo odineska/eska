@@ -5,6 +5,8 @@ mod elements;
 mod properties;
 pub(super) use elements::layout_kind;
 
+use std::collections::HashSet;
+
 use roxmltree::Document;
 
 use super::{
@@ -125,10 +127,10 @@ pub(super) fn apply(
 }
 
 fn references(xml: &Document<'_>, removed: roxmltree::Node<'_, '_>) -> Vec<String> {
-    let ids: Vec<_> = removed
+    let ids: HashSet<i64> = removed
         .descendants()
         .filter(|node| document::element(*node).is_some())
-        .filter_map(|node| node.attribute("id"))
+        .filter_map(|node| node.attribute("id")?.parse().ok())
         .collect();
     let targets: Vec<_> = removed
         .descendants()
@@ -158,7 +160,7 @@ fn references(xml: &Document<'_>, removed: roxmltree::Node<'_, '_>) -> Vec<Strin
         };
         let text = text.trim();
         let local = node.tag_name().name();
-        let by_id = id_reference(local) && ids.contains(&text);
+        let by_id = referenced_element_id(local, text).is_some_and(|id| ids.contains(&id));
         let by_name = targets
             .iter()
             .any(|(target, name)| named_reference(local, text, target, name));
@@ -169,11 +171,16 @@ fn references(xml: &Document<'_>, removed: roxmltree::Node<'_, '_>) -> Vec<Strin
     paths
 }
 
-pub(super) fn id_reference(name: &str) -> bool {
-    matches!(
+fn referenced_element_id(name: &str, value: &str) -> Option<i64> {
+    let is_reference = matches!(
         name,
         "AssociatedTableElementId" | "CommandBar" | "ContextMenu" | "ElementId" | "ItemId"
-    ) || name.ends_with("ElementId")
+    ) || name.ends_with("ElementId");
+    if is_reference {
+        value.trim().parse().ok()
+    } else {
+        None
+    }
 }
 
 /// Named element links include an optional command/source prefix and a command suffix.
