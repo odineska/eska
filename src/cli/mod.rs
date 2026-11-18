@@ -11,7 +11,6 @@ pub use eska_presentation::localization;
 use localization::{Localizer, resolve_locale_from_environment};
 
 /// Starts the CLI with the process arguments and selected UI locale.
-#[must_use]
 pub fn run() -> ExitCode {
     let args: Vec<_> = env::args_os().collect();
     if let Some(code) =

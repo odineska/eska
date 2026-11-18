@@ -228,8 +228,7 @@ fn declared_library_errors_are_localized_structured_and_never_fall_back_to_empty
             &config,
             &source
                 .as_ref()
-                .map(|path| vec![("ssl_3_1", path.as_path())])
-                .unwrap_or_default(),
+                .map_or_default(|path| vec![("ssl_3_1", path.as_path())]),
         );
         if source.as_deref() == Some(library.source()) {
             fs::write(library.source().join("Configuration.xml"), "<broken>").unwrap();

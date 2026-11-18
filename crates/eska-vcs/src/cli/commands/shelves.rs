@@ -17,7 +17,6 @@ struct ShelveHandler<'a> {
 
 impl ShelveHandler<'_> {
     /// Save the current branch's repository-wide state or display its exact preview.
-    #[must_use]
     pub fn run(&self, start: &Path, localizer: &Localizer) -> ExitCode {
         MutationOptionsHandler {
             args: &self.args.options,
@@ -31,7 +30,6 @@ struct UnshelveHandler<'a> {
 
 impl UnshelveHandler<'_> {
     /// Restore the current branch's matching shelf without overwriting conflicts.
-    #[must_use]
     pub fn run(&self, start: &Path, localizer: &Localizer) -> ExitCode {
         MutationOptionsHandler {
             args: &self.args.options,
@@ -89,7 +87,6 @@ struct ShelvesHandler<'a> {
 
 impl ShelvesHandler<'_> {
     /// List retained shelves without modifying the repository or filesystem.
-    #[must_use]
     pub fn run(&self, start: &Path, localizer: &Localizer) -> ExitCode {
         let repository = match presentation::repository(start, self.args.format, localizer) {
             Ok(repo) => repo,
@@ -103,19 +100,16 @@ impl ShelvesHandler<'_> {
 }
 
 /// Execute parsed shelf options in the repository owner.
-#[must_use]
 pub fn shelve(args: &ShelveArgs, start: &Path, localizer: &Localizer) -> ExitCode {
     ShelveHandler { args }.run(start, localizer)
 }
 
 /// Execute parsed shelf options in the repository owner.
-#[must_use]
 pub fn unshelve(args: &UnshelveArgs, start: &Path, localizer: &Localizer) -> ExitCode {
     UnshelveHandler { args }.run(start, localizer)
 }
 
 /// Execute parsed shelf options in the repository owner.
-#[must_use]
 pub fn list(args: &ShelvesArgs, start: &Path, localizer: &Localizer) -> ExitCode {
     ShelvesHandler { args }.run(start, localizer)
 }

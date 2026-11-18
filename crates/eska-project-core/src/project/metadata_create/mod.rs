@@ -49,31 +49,42 @@ pub enum DateFractions {
     DateTime,
 }
 
-/// A type description contains values, never namespace prefixes or XML fragments.
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "camelCase", deny_unknown_fields)]
-pub enum CreateType {
-    String {
-        #[serde(default)]
-        length: u32,
-        #[serde(default)]
-        fixed: bool,
-    },
-    Number {
-        digits: u8,
-        #[serde(rename = "fractionDigits")]
-        fraction_digits: u8,
-        #[serde(default, rename = "nonNegative")]
-        non_negative: bool,
-    },
-    Boolean {},
-    Date {
-        #[serde(default)]
-        fractions: DateFractions,
-    },
-    Reference {
-        object: ObjectId,
-    },
+pub use wire_type::CreateType;
+
+mod wire_type {
+    #![expect(
+        clippy::empty_enums,
+        reason = "Serde generates an empty field enum to reject unknown fields on Boolean {}"
+    )]
+
+    use super::{DateFractions, Deserialize, ObjectId, Serialize};
+
+    /// A type description contains values, never namespace prefixes or XML fragments.
+    #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+    #[serde(tag = "kind", rename_all = "camelCase", deny_unknown_fields)]
+    pub enum CreateType {
+        String {
+            #[serde(default)]
+            length: u32,
+            #[serde(default)]
+            fixed: bool,
+        },
+        Number {
+            digits: u8,
+            #[serde(rename = "fractionDigits")]
+            fraction_digits: u8,
+            #[serde(default, rename = "nonNegative")]
+            non_negative: bool,
+        },
+        Boolean {},
+        Date {
+            #[serde(default)]
+            fractions: DateFractions,
+        },
+        Reference {
+            object: ObjectId,
+        },
+    }
 }
 
 /// A request is bound to the descriptor read by discovery; source paths are resolved by ESKA.

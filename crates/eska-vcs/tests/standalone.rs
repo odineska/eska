@@ -351,6 +351,8 @@ fn initialization_bridge_preserves_existing_repository_metadata() {
 #[cfg(unix)]
 #[test]
 fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
+    use std::os::unix::ffi::OsStrExt;
+
     let fixture = TestDir::new();
     let bin = fixture.0.join("bin");
     fs::create_dir(&bin).unwrap();
@@ -369,6 +371,7 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
         )
         .unwrap();
         fs::write(root.join("src/module.bsl"), b"base\r\n").unwrap();
+        fs::write(root.join("src/removed.bsl"), b"base\r\n").unwrap();
         git(&root, &["init", "--initial-branch=main", "--template="]);
         git(&root, &["add", "."]);
         git(&root, &["commit", "-m", "base"]);
@@ -376,16 +379,25 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
         let start = tool(&root, bin.as_os_str(), locale, &["start", &id]);
         assert!(start.status.success(), "{start:?}");
         fs::write(root.join("src/module.bsl"), b"staged\r\n").unwrap();
-        git(&root, &["add", "src/module.bsl"]);
+        let native_name = root.join("src").join(OsStr::from_bytes(b"native-\xff.bsl"));
+        fs::write(&native_name, b"native path bytes\n").unwrap();
+        git(&root, &["add", "src"]);
+        git(&root, &["add", "--chmod=+x", "src/module.bsl"]);
+        git(&root, &["rm", "src/removed.bsl"]);
+        std::os::unix::fs::symlink("module.bsl", root.join("src/ссылка")).unwrap();
+        git(&root, &["add", "src/ссылка"]);
+        git(&root, &["update-index", "--index-version=4"]);
         fs::write(root.join("src/module.bsl"), b"unstaged\r\n").unwrap();
         fs::write(root.join("untracked кириллица"), b"untracked\r\n").unwrap();
         let index = fs::read(root.join(".git/index")).unwrap();
-        json(&tool(
+        let switched = json(&tool(
             &root,
             bin.as_os_str(),
             locale,
             &["switch", "--base", "--format", "json"],
         ));
+        let shelf = switched["saved"]["id"].as_str().unwrap();
+        let protected_tree = git(&root, &["rev-parse", &format!("refs/eska/shelves/{shelf}")]);
         assert_eq!(fs::read(root.join("src/module.bsl")).unwrap(), b"base\r\n");
         assert!(!root.join("untracked кириллица").exists());
         json(&tool(
@@ -403,6 +415,8 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
             fs::read(root.join("untracked кириллица")).unwrap(),
             b"untracked\r\n"
         );
+        assert_eq!(fs::read(&native_name).unwrap(), b"native path bytes\n");
+        assert_eq!(git(&root, &["write-tree"]), protected_tree);
         let saved = tool(&root, bin.as_os_str(), locale, &["save", "-m", "own task"]);
         assert!(saved.status.success(), "{saved:?}");
         let refused = tool(&root, bin.as_os_str(), locale, &["finish"]);
@@ -425,6 +439,61 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
             [] as [u8; 0]
         );
     }
+}
+
+#[test]
+fn untracked_shelf_in_linked_worktree_needs_no_system_git() {
+    let fixture = TestDir::new();
+    let main = fixture.0.join("main");
+    let linked = fixture.0.join("linked");
+    fs::create_dir_all(main.join("src")).unwrap();
+    fs::write(
+        main.join("eska.toml"),
+        "[project]\ntype='configuration'\n[vcs.workflow]\npreset='trunk'\n",
+    )
+    .unwrap();
+    fs::write(main.join("src/module.bsl"), b"base\n").unwrap();
+    git(&main, &["init", "--initial-branch=main", "--template="]);
+    git(&main, &["add", "."]);
+    git(&main, &["commit", "-m", "base"]);
+    git(
+        &main,
+        &[
+            "worktree",
+            "add",
+            "-b",
+            "task/linked",
+            linked.to_str().unwrap(),
+        ],
+    );
+    let empty_path = fixture.0.join("empty-path");
+    fs::create_dir(&empty_path).unwrap();
+    let pending = linked.join("pending.bsl");
+    fs::write(&pending, b"pending\r\n").unwrap();
+    let index = main.join(".git/worktrees/linked/index");
+    let before = fs::read(&index).unwrap();
+
+    let saved = json(&tool(
+        &linked,
+        empty_path.as_os_str(),
+        "en",
+        &["shelve", "--format", "json"],
+    ));
+    assert!(!pending.exists());
+    assert_eq!(fs::read(&index).unwrap(), before);
+    let id = saved["shelf"]["id"].as_str().unwrap();
+    assert_eq!(
+        git(&linked, &["rev-parse", &format!("refs/eska/shelves/{id}")]),
+        git(&linked, &["rev-parse", "HEAD^{tree}"])
+    );
+    json(&tool(
+        &linked,
+        empty_path.as_os_str(),
+        "en",
+        &["unshelve", "--format", "json"],
+    ));
+    assert_eq!(fs::read(&pending).unwrap(), b"pending\r\n");
+    assert_eq!(fs::read(&index).unwrap(), before);
 }
 
 #[test]

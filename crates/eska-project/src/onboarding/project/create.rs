@@ -210,9 +210,9 @@ mod tests {
         let result = in_new_directory(&destination, |root| {
             fs::create_dir(root.path().join("src")).expect("partial source");
             fs::write(root.path().join("eska.toml"), "partial config").expect("partial config");
-            let binary = crate::test_component(eska_tool_runtime::Component::Vcs);
-            eska_tool_runtime::vcs::initialize_new(&binary, root.path())
-                .expect("partial Git repository");
+            let git = root.path().join(".git");
+            fs::create_dir(&git).expect("partial Git directory");
+            fs::write(git.join("HEAD"), "ref: refs/heads/main\n").expect("partial Git HEAD");
             Err(CreationError::Io {
                 path: root.path().join("injected-error"),
                 source: std::io::Error::other("injected failure"),

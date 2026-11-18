@@ -63,7 +63,6 @@ enum Commands {
 }
 
 /// Start one VCS command without locating a platform, project server or analyzer.
-#[must_use]
 pub fn run() -> ExitCode {
     let args: Vec<OsString> = std::env::args_os().collect();
     if let Some(code) = eska_presentation::components::tool_contract(

@@ -147,22 +147,6 @@ impl<'a> Executor<'a> {
         )
     }
 
-    /// Materialize the index tree so a private reference can protect staged blobs from GC.
-    ///
-    /// # Errors
-    /// Returns a structured error if Git cannot serialize the current index.
-    pub(crate) fn shelf_index_tree(&self) -> Result<BString, Error> {
-        let output = self.output(Operation::Shelf, ["write-tree"])?;
-        if !output.status.success() {
-            return Err(Error::Failed {
-                operation: Operation::Shelf,
-                status: output.status,
-                stderr: output.stderr.into(),
-            });
-        }
-        Ok(output.stdout.trim_ascii().into())
-    }
-
     /// Clean only captured tracked paths using a NUL-delimited literal pathspec file.
     ///
     /// # Errors

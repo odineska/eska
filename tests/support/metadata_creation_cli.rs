@@ -359,8 +359,7 @@ fn verify_created(root: &Path, created: &[Created], external_file: Option<&str>)
                 .unwrap()
                 .children()
                 .find(|child| child.has_tag_name((MD, "Synonym")))
-                .map(leaves)
-                .unwrap_or_default()
+                .map_or_default(leaves)
         };
         assert_eq!(synonyms(before), synonyms(after));
         if case.table {

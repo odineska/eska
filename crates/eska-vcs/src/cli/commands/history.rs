@@ -31,7 +31,6 @@ struct HistoryHandler<'a> {
 impl HistoryHandler<'_> {
     /// Discover the project, read local history and select one presentation.
     /// Execute the selected VCS operation with localized presentation.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let project = match discovery::discover(project_dir) {
             Ok(project) => project,
@@ -287,7 +286,6 @@ impl From<&HistoryEntry> for CommitDocument {
 }
 
 /// Execute parsed VCS options in the repository owner.
-#[must_use]
 pub fn run(args: &HistoryArgs, directory: &Path, localizer: &Localizer) -> ExitCode {
     HistoryHandler { args }.run(directory, localizer)
 }

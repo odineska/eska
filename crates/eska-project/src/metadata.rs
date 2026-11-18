@@ -25,7 +25,6 @@ struct MetadataHandler<'a> {
 
 impl MetadataHandler<'_> {
     /// Emit exactly one stable JSON envelope; source inspection never starts disk caching.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         if authoring::handles(&self.args.command) {
             return authoring::run(self.args, project_dir, localizer);

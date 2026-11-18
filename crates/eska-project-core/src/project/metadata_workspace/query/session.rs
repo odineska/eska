@@ -117,6 +117,13 @@ enum Phase {
     Closed,
 }
 
+#[derive(Clone, Copy, Eq, PartialEq)]
+enum OwnerCheck {
+    Exact,
+    AdoptCleanSave,
+    Resume,
+}
+
 /// Immutable text sharing permits a proposed state to be published only after its checkpoint CAS succeeds.
 #[derive(Clone, Debug)]
 pub struct QuerySession {
@@ -220,6 +227,20 @@ impl QuerySession {
             .prepared
             .map(|prepared| restore_pending(&document, &saved.identity, format, prepared))
             .transpose()?;
+        if pending.as_ref().is_some_and(|pending| pending.save_owner)
+            && format == QueryOwnerFormat::Editor
+        {
+            // The original model was clean, so its remembered hash identifies its BOM even
+            // when the current file is already the output of the interrupted editor save.
+            document.disk_bom =
+                if disk_snapshot(&document.input, false, format) == document.disk_snapshot {
+                    false
+                } else if disk_snapshot(&document.input, true, format) == document.disk_snapshot {
+                    true
+                } else {
+                    return Err(QueryError::Conflict.into());
+                };
+        }
         let plan_serial = pending.as_ref().map_or(0, |pending| pending.token);
         let root = project.project().root().to_owned();
         let source = project.project().source().to_owned();
@@ -454,10 +475,23 @@ impl QuerySession {
         }
         self.check_project(project)?;
         self.check_context(project, self.application.as_deref())?;
+        let refreshed;
+        let document = if self.document.generation == project.generation() {
+            &self.document
+        } else {
+            reveal_owner(project, &self.document.node)?;
+            // Rebind only the generation. Keep the original source fingerprints and
+            // permissions as the baseline for the full check below.
+            refreshed = QueryDocument {
+                generation: project.generation(),
+                ..self.document.clone()
+            };
+            &refreshed
+        };
         project
             .check_query_source(
-                &self.document,
-                revision(&self.document),
+                document,
+                revision(document),
                 self.source_restriction.as_ref(),
             )
             .map_err(Into::into)
@@ -483,7 +517,7 @@ impl QuerySession {
             Phase::Applying(_) | Phase::Recovering(_) => return Err(QuerySessionError::ApplyBusy),
             _ => return Err(QuerySessionError::ResumeRequired),
         }
-        let document = self.checked_read_document(project, current, false)?;
+        let document = self.checked_read_document(project, current, OwnerCheck::Exact)?;
         project.check_query_read(&document, revision(&document))?;
         let plan = document.plan(&self.identity, &self.draft, &[], None)?;
         let QueryIdentity::BslLiteral(range) = &self.identity else {
@@ -537,7 +571,7 @@ impl QuerySession {
             }
             return result;
         }
-        let document = self.checked_document(project, current, true)?;
+        let document = self.checked_document(project, current, OwnerCheck::Resume)?;
         self.advance()?;
         self.document = document;
         self.restrictions = restrictions;
@@ -557,6 +591,23 @@ impl QuerySession {
         decisions: &[CommentPlacement],
         line_ending: Option<query::LineEnding>,
     ) -> Result<QueryApplyPlan, QuerySessionError> {
+        self.prepare_with_owner_save(project, expected, current, decisions, line_ending, false)
+    }
+
+    /// Plan a native edit with optional saving of a clean BSL owner. An exact independent
+    /// save of the unchanged owner may advance its disk baseline in the same transaction.
+    ///
+    /// # Errors
+    /// Rejects unresumed, changed or forbidden owners and competing application attempts.
+    pub fn prepare_with_owner_save(
+        &mut self,
+        project: &mut ProjectSession,
+        expected: u64,
+        current: QueryEditorState<'_>,
+        decisions: &[CommentPlacement],
+        line_ending: Option<query::LineEnding>,
+        save_clean_owner: bool,
+    ) -> Result<QueryApplyPlan, QuerySessionError> {
         self.check_revision(expected)?;
         self.check_constructor_idle()?;
         match self.phase {
@@ -568,7 +619,12 @@ impl QuerySession {
         if current.user_read_only {
             self.restrictions.user_read_only = true;
         }
-        let checked = self.checked_plan(project, current, decisions, line_ending);
+        let owner_check = if save_clean_owner {
+            OwnerCheck::AdoptCleanSave
+        } else {
+            OwnerCheck::Exact
+        };
+        let checked = self.checked_plan(project, current, decisions, line_ending, owner_check);
         let (document, plan, projected) = match checked {
             Ok(checked) => checked,
             Err(error) => {
@@ -580,8 +636,9 @@ impl QuerySession {
             .plan_serial
             .checked_add(1)
             .ok_or(QuerySessionError::RevisionExhausted)?;
-        let save_owner =
-            document.kind != QueryDocumentKind::Bsl && !current.is_dirty && !plan.is_empty();
+        let save_owner = (save_clean_owner || document.kind != QueryDocumentKind::Bsl)
+            && !current.is_dirty
+            && !plan.is_empty();
         self.phase = Phase::Applying(Pending {
             token,
             output: if plan.is_empty() {
@@ -600,6 +657,7 @@ impl QuerySession {
             save_owner,
             no_op: plan.is_empty(),
         });
+        self.document = document;
         self.plan_serial = token;
         Ok(QueryApplyPlan {
             token,
@@ -648,6 +706,7 @@ impl QuerySession {
         }
         self.check_project(project)?;
         self.check_context(project, current.application)?;
+        reveal_owner(project, &self.document.node)?;
         let document = project.query_document_shared(
             &self.document.node,
             &self.document.path,
@@ -714,9 +773,10 @@ impl QuerySession {
         current: QueryEditorState<'_>,
         decisions: &[CommentPlacement],
         line_ending: Option<query::LineEnding>,
+        owner_check: OwnerCheck,
     ) -> Result<(QueryDocument, EditPlan, Query), QuerySessionError> {
         self.check_restrictions(current)?;
-        let document = self.checked_document(project, current, false)?;
+        let document = self.checked_document(project, current, owner_check)?;
         project.check_query_source(
             &document,
             revision(&document),
@@ -738,9 +798,9 @@ impl QuerySession {
         &self,
         project: &mut ProjectSession,
         current: QueryEditorState<'_>,
-        resuming: bool,
+        owner_check: OwnerCheck,
     ) -> Result<QueryDocument, QuerySessionError> {
-        let document = self.checked_read_document(project, current, resuming)?;
+        let document = self.checked_read_document(project, current, owner_check)?;
         if !self.document.writable || !document.writable {
             return Err(QueryDocumentError::ReadOnly.into());
         }
@@ -752,15 +812,16 @@ impl QuerySession {
         &self,
         project: &mut ProjectSession,
         current: QueryEditorState<'_>,
-        resuming: bool,
+        owner_check: OwnerCheck,
     ) -> Result<QueryDocument, QuerySessionError> {
         if current.snapshot != self.document.snapshot
-            || (!resuming && current.version != self.document.version)
+            || (owner_check != OwnerCheck::Resume && current.version != self.document.version)
         {
             return Err(QueryDocumentError::StaleVersion.into());
         }
         self.check_project(project)?;
         self.check_context(project, current.application)?;
+        reveal_owner(project, &self.document.node)?;
         let document = project.query_document_shared(
             &self.document.node,
             &self.document.path,
@@ -770,9 +831,15 @@ impl QuerySession {
         self.check_descriptor(&document)?;
         let matching_disk = document.disk_snapshot
             == disk_snapshot(&document.input, document.disk_bom, self.format);
+        let adopt_disk = !current.is_dirty
+            && matching_disk
+            && match owner_check {
+                OwnerCheck::Exact => false,
+                OwnerCheck::AdoptCleanSave => document.disk_bom == self.document.disk_bom,
+                OwnerCheck::Resume => true,
+            };
         if (!current.is_dirty && !matching_disk)
-            || (document.disk_snapshot != self.document.disk_snapshot
-                && (!resuming || current.is_dirty || !matching_disk))
+            || (document.disk_snapshot != self.document.disk_snapshot && !adopt_disk)
         {
             return Err(QueryError::Conflict.into());
         }
@@ -859,7 +926,7 @@ impl QuerySession {
     }
 }
 
-/// A private checkpoint is untrusted: rediscover only its declared ancestry and verify the actual module role.
+/// Restore a collapsed or recovered owner through its declared ancestry and actual module role.
 fn reveal_owner(project: &mut ProjectSession, node: &NodeId) -> Result<(), QuerySessionError> {
     if project.node(node).is_ok() {
         return Ok(());
@@ -949,10 +1016,7 @@ fn restore_pending(
     prepared: query::recovery::Prepared,
 ) -> Result<Pending, QuerySessionError> {
     prepared.validate().map_err(|_| QueryError::Conflict)?;
-    if prepared.format != format
-        || prepared.no_op != (prepared.output == document.input)
-        || (prepared.save_owner && document.kind == QueryDocumentKind::Bsl)
-    {
+    if prepared.format != format || prepared.no_op != (prepared.output == document.input) {
         return Err(QueryError::Conflict.into());
     }
     let projected = projected_text(&prepared.output, identity)?;

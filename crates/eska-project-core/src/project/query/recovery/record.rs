@@ -79,14 +79,12 @@ impl Record {
     /// Attach or clear a checked intent while retaining the complete original checkpoint.
     ///
     /// # Errors
-    /// Rejects inconsistent no-op output, a BSL disk-save request or invalid intent bounds.
+    /// Rejects inconsistent no-op output or invalid intent bounds.
     pub fn with_prepared(mut self, prepared: Option<Prepared>) -> Result<Self, Error> {
         self.prepared = prepared
             .map(|mut intent| {
                 intent.validate()?;
-                if intent.no_op != (intent.output == self.texts[0])
-                    || (intent.save_owner && self.metadata["identity"]["kind"] == "bslLiteral")
-                {
+                if intent.no_op != (intent.output == self.texts[0]) {
                     return Err(Error::InvalidRecord);
                 }
                 if intent.no_op {

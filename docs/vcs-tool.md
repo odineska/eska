@@ -35,10 +35,11 @@ LSP или движок BSL-анализа. Существующий консе�
 Repository discovery, refs, history, ancestry, status и committed snapshots
 используют закреплённый `gix`. System Git остаётся capability fallback в одном
 infrastructure layer: orchestration index/worktree/switch, hooks/editor/signing,
-служебные операции полок и явно неподдержанный transport. Это не безусловный
-повтор после ошибки встроенной библиотеки; локализованный Git output не
-используется как machine protocol. Clone/fetch могут требовать транспортные
-helpers Git. Для read-only status/diff/history/shelves Git в PATH не нужен.
+очистка отслеживаемых путей при сохранении полки и явно неподдержанный
+transport. При остальных ошибках `gix` возвращает диагностику. Для разбора
+результатов команд используются коды завершения и машинный вывод Git.
+Clone/fetch могут требовать транспортные helpers Git. Для read-only
+status/diff/history/shelves Git в PATH не нужен.
 
 ## Сохранность и контракты
 
@@ -49,7 +50,10 @@ repository; finish проверяет интеграцию/публикацию 
 соседние workspace members и файлы вне вложенного проекта.
 
 Полка сохраняет raw index, отдельные staged/unstaged байты, non-ignored
-untracked, удаления и mode. Dry-run не создаёт полку и не меняет worktree.
+untracked, удаления и mode. Дерево для защиты staged-объектов строится через
+`gix` из сохранённого индекса. Если полка содержит только untracked-файлы,
+для сохранения и восстановления Git в PATH не нужен. Dry-run не создаёт полку
+и не меняет worktree.
 Restore требует совпадения branch/base и отсутствия конфликтов; ошибка
 сохраняет единственную копию состояния. BOM/CRLF и произвольные Git path bytes
 проходят через прежний контракт. [Подробности workflow и полок](roadmap/05-safe-vcs.md).

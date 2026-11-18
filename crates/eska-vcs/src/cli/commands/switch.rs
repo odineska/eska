@@ -20,7 +20,6 @@ struct SwitchHandler<'a> {
 
 impl SwitchHandler<'_> {
     /// Present a repository-wide switch or its read-only preview.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let project = match discovery::discover_context(project_dir) {
             Ok(project) => project,
@@ -139,7 +138,6 @@ const fn error_code(error: &switch::SwitchError) -> &'static str {
 }
 
 /// Execute parsed VCS options in the repository owner.
-#[must_use]
 pub fn run(args: &SwitchArgs, directory: &Path, localizer: &Localizer) -> ExitCode {
     SwitchHandler { args }.run(directory, localizer)
 }

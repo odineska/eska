@@ -15,7 +15,6 @@ use crate::{
 };
 
 /// Execute the selected VCS operation with localized presentation.
-#[must_use]
 pub fn run(project_dir: &Path, localizer: &Localizer) -> ExitCode {
     let project = match discovery::discover(project_dir) {
         Ok(project) => project,

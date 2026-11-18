@@ -138,7 +138,7 @@ impl State {
         let entry = self
             .sessions
             .get(&input.query_session_id)
-            .filter(|entry| entry.key == *key)
+            .filter(|entry| entry.key.same_owner(key))
             .ok_or_else(|| failure("unknown_query_session"))?;
         let constructor = entry
             .core

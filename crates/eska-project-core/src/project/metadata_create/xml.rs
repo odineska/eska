@@ -236,14 +236,12 @@ fn insert(
         } else {
             anchor.range().start
         };
-        let separator = indentation(input, anchor.range().start)
-            .map(|indent| {
-                format!(
-                    "{}{indent}",
-                    crate::project::metadata_edit::types::newline(input)
-                )
-            })
-            .unwrap_or_default();
+        let separator = indentation(input, anchor.range().start).map_or_default(|indent| {
+            format!(
+                "{}{indent}",
+                crate::project::metadata_edit::types::newline(input)
+            )
+        });
         return Ok(Replacement {
             range: at..at,
             text: if after {

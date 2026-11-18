@@ -70,7 +70,6 @@ enum Commands {
 }
 
 /// Parse standalone help before touching the project or locating a 1C installation.
-#[must_use]
 pub fn run() -> ExitCode {
     let args: Vec<OsString> = std::env::args_os().collect();
     if let Some(code) = eska_presentation::components::tool_contract(

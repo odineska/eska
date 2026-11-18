@@ -207,8 +207,8 @@ pub(super) fn is_source_preview_method(method: &str) -> bool {
 }
 
 /// Existing query extraction remains independent from optional lifecycle/checkpoint ownership.
-pub(super) fn session_capability(durable: bool, bsl: bool) -> Value {
-    sessions::capability(durable, bsl)
+pub(super) fn session_capability(minor: u32) -> Value {
+    sessions::capability(minor)
 }
 
 /// Recovery is independent of source generations and never writes a project owner.

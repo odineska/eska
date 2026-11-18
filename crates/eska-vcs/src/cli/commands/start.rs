@@ -18,7 +18,6 @@ struct StartHandler<'a> {
 
 impl StartHandler<'_> {
     /// Execute the selected VCS operation with localized presentation.
-    #[must_use]
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let project = match discovery::discover(project_dir) {
             Ok(project) => project,
@@ -142,7 +141,6 @@ const fn command_error_key(error: &command::Error) -> &'static str {
 }
 
 /// Execute parsed VCS options in the repository owner.
-#[must_use]
 pub fn run(args: &StartArgs, directory: &Path, localizer: &Localizer) -> ExitCode {
     StartHandler { args }.run(directory, localizer)
 }

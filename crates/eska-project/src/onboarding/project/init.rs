@@ -1,7 +1,5 @@
 //! Existing Git-aware initialization delegates source and file transactions to project core.
 
-#[cfg(test)]
-use super::templates::TemplateFile;
 use super::{Project, ProjectName, Workspace, build::BuildSettings};
 use crate::onboarding::{config::ProjectConfig, vcs::workflow::WorkflowPreset};
 use eska_project_core::project::init as core;
@@ -130,44 +128,32 @@ fn initialize_reserved_with(binary: Option<&Path>, path: &Path) -> Result<(), In
         .map_err(|error| InitError::Operation(InitFailure::Vcs(error)))
 }
 
-/// Test entry keeps the same real process initializer within rollback fault injection.
-#[cfg(test)]
-fn initialize_reserved(path: &Path) -> Result<(), InitError> {
-    let binary = crate::test_component(eska_tool_runtime::Component::Vcs);
-    initialize_reserved_with(Some(&binary), path)
-}
-
-/// Keep the existing native rollback scenarios on the same filesystem writer used by project core.
-#[cfg(test)]
-fn write_project<T>(
-    root: &Path,
-    contents: &str,
-    files: &[TemplateFile],
-    create_git: bool,
-    validate: impl FnOnce() -> Result<T, InitError>,
-) -> Result<T, InitError> {
-    core::write_project(
-        root,
-        contents,
-        files,
-        create_git,
-        initialize_reserved,
-        validate,
-    )
-}
-
 #[cfg(test)]
 mod tests {
-    use super::{
-        InitError, apply_workspace_member, inspect, prepare_workspace_member, write_project,
-    };
+    use super::{InitError, apply_workspace_member, core, inspect, prepare_workspace_member};
     use crate::onboarding::project::{
         ProjectName,
         discovery::{DiscoveryContext, discover_context},
-        templates,
+        templates::{self, TemplateFile},
     };
     use crate::test_support::TestDir;
-    use std::fs;
+    use std::{fs, path::Path};
+
+    fn write_project<T>(
+        root: &Path,
+        contents: &str,
+        files: &[TemplateFile],
+        create_git: bool,
+        validate: impl FnOnce() -> Result<T, InitError>,
+    ) -> Result<T, InitError> {
+        // The production CLI tests cover the VCS subprocess. Rollback only needs its files.
+        let initialize = |git: &Path| {
+            let path = git.join("HEAD");
+            fs::write(&path, "ref: refs/heads/main\n")
+                .map_err(|source| InitError::Io { path, source })
+        };
+        core::write_project(root, contents, files, create_git, initialize, validate)
+    }
 
     #[test]
     fn validation_failure_rolls_back_only_owned_config_and_git() {

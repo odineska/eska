@@ -43,14 +43,12 @@ impl<'a> Layout<'a> {
 
     pub fn child_separator(&self) -> String {
         self.indent
-            .map(|indent| format!("{}{indent}{}", self.newline, self.unit))
-            .unwrap_or_default()
+            .map_or_default(|indent| format!("{}{indent}{}", self.newline, self.unit))
     }
 
     pub fn parent_separator(&self) -> String {
         self.indent
-            .map(|indent| format!("{}{indent}", self.newline))
-            .unwrap_or_default()
+            .map_or_default(|indent| format!("{}{indent}", self.newline))
     }
 }
 

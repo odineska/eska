@@ -50,18 +50,22 @@ pub(super) fn is_method(method: &str) -> bool {
 }
 
 /// BSL explicitly negotiates protected snapshots with exact native conflict checks, never native lock overrides.
-pub(super) fn capability(durable: bool, bsl: bool) -> Value {
+pub(super) fn capability(minor: u32) -> Value {
+    let durable = minor >= 16;
     let mut capability = json!({"schemaVersion":1,"writesOwner":false,"checkpointStorageVersion":1,"maxSessions":16,
         "maxRetainedBytes":super::RETAINED_BYTES,"nativeApplicationReceipt":true,
         "explicitResume":true,"preparedStateDurable":durable,"bslEditing":false,"sourceKinds":["dataCompositionSchema","form"]});
     if durable {
         capability["preparedStorageVersion"] = json!(2);
     }
-    if bsl {
+    if minor >= 19 {
         capability["bslEditing"] = json!(true);
         capability["sourceKinds"] = json!(["dataCompositionSchema", "form", "bsl"]);
         capability["ownerProtection"] = json!("protectedViewWithConflicts");
         capability["bslSave"] = json!("checkpointOnly");
+    }
+    if minor >= 55 {
+        capability["saveCleanOwner"] = json!(true);
     }
     capability
 }
@@ -404,12 +408,13 @@ fn operation(
                 .map(query_params::Placement::core)
                 .collect::<Result<Vec<_>, _>>()?;
             let prepared = core
-                .prepare(
+                .prepare_with_owner_save(
                     project,
                     params::counter(&input.revision)?,
                     input.owner.core()?,
                     &comments,
                     input.line_ending.map(query_params::LineEnding::core),
+                    input.save_clean_owner,
                 )
                 .map_err(session_error)?;
             let plan = &prepared.plan;
@@ -603,6 +608,8 @@ struct Prepare {
     owner: Owner,
     comments: Vec<query_params::Placement>,
     line_ending: Option<query_params::LineEnding>,
+    #[serde(default)]
+    save_clean_owner: bool,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]

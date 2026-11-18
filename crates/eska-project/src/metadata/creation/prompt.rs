@@ -450,14 +450,12 @@ pub(in crate::metadata) fn line(
     label: &str,
     default: Option<&str>,
 ) -> Result<String, Value> {
-    let default_label = default
-        .map(|value| {
-            locale.format(
-                "metadata-create-default",
-                &[("value", LocalizationValue::Text(value))],
-            )
-        })
-        .unwrap_or_default();
+    let default_label = default.map_or_default(|value| {
+        locale.format(
+            "metadata-create-default",
+            &[("value", LocalizationValue::Text(value))],
+        )
+    });
     let prompt = locale.format(
         "metadata-create-input-prompt",
         &[
