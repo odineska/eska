@@ -457,6 +457,16 @@ fn commits_state(method: &str) -> bool {
                 | "format/bufferBegin"
                 | "format/bufferAppend"
                 | "format/bufferClose"
+                | "form/open"
+                | "form/update"
+                | "form/close"
+                | "source/snapshotOpen"
+                | "source/snapshotClose"
+                | "source/previewOpen"
+                | "source/previewClose"
+                | "source/bufferBegin"
+                | "source/bufferAppend"
+                | "source/bufferClose"
                 | "query/bufferBegin"
                 | "query/bufferAppend"
                 | "query/bufferClose"
@@ -476,6 +486,12 @@ fn commits_state(method: &str) -> bool {
                 | "query/sessionApplied"
                 | "query/sessionAbort"
                 | "query/sessionClose"
+                | "query/projectionOpen"
+                | "query/projectionClose"
+                | "query/constructorOpen"
+                | "query/constructorAction"
+                | "query/constructorFinish"
+                | "query/constructorCancel"
         )
 }
 
@@ -632,5 +648,40 @@ mod tests {
         };
         let (writer, _output) = mpsc::sync_channel(0);
         send(&shared, &writer, &json!({}), vec![]);
+    }
+
+    #[test]
+    fn late_cancellation_preserves_acknowledgement_of_retained_state_changes() {
+        for method in [
+            "form/open",
+            "form/update",
+            "form/close",
+            "source/snapshotOpen",
+            "source/snapshotClose",
+            "source/previewOpen",
+            "source/previewClose",
+            "source/bufferBegin",
+            "source/bufferAppend",
+            "source/bufferClose",
+            "query/projectionOpen",
+            "query/projectionClose",
+            "query/constructorOpen",
+            "query/constructorAction",
+            "query/constructorFinish",
+            "query/constructorCancel",
+        ] {
+            assert!(commits_state(method), "{method}");
+        }
+
+        for method in [
+            "form/prepare",
+            "form/get",
+            "source/snapshotRead",
+            "source/previewRead",
+            "query/projectionRead",
+            "query/constructorPreview",
+        ] {
+            assert!(!commits_state(method), "{method}");
+        }
     }
 }
