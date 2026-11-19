@@ -947,16 +947,26 @@ fn interruptible_runner_command(
         Runner::Host(_) => runner_command(runner, arguments),
         Runner::Distrobox { container, path } => {
             let mut command = Command::new("distrobox");
-            command
-                .args(["enter", "--name", container, "--no-tty", "--", "sh", "-c"])
-                .arg("printf '%s\\n' \"$$\" > \"$1\" || exit 1; shift; exec \"$@\"")
-                .arg("sh")
-                .arg(pid_file)
-                .arg(path)
-                .args(arguments);
+            command.args(["enter", "--name", container, "--no-tty", "--"]);
+            command.args(recorded_arguments(path, arguments, pid_file));
             command
         }
     }
+}
+
+/// Record the container-side process before replacing the wrapper with the requested tool.
+fn recorded_arguments(path: &Path, arguments: &[OsString], pid_file: &Path) -> Vec<OsString> {
+    [
+        OsString::from("sh"),
+        OsString::from("-c"),
+        OsString::from("printf '%s\\n' \"$$\" > \"$1\" || exit 1; shift; exec \"$@\""),
+        OsString::from("sh"),
+        pid_file.as_os_str().to_owned(),
+        path.as_os_str().to_owned(),
+    ]
+    .into_iter()
+    .chain(arguments.iter().cloned())
+    .collect()
 }
 
 /// Signal only the recorded container-side ibcmd process before stopping the adapter.

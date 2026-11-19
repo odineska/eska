@@ -1,6 +1,6 @@
 //! Unix discovery owns both the adapter and its recorded container-side version probe.
 
-use super::{Runner, ToolOptions, interruptible_runner_command};
+use super::{Runner, ToolOptions, interruptible_runner_command, recorded_arguments};
 use eska_tool_runtime::{Component, Error, Operation, QueryPolicy};
 use std::{
     fs, io,
@@ -38,7 +38,14 @@ pub(super) fn output(
     let pid = directory
         .as_ref()
         .map_or_else(PathBuf::new, |directory| directory.0.join("process.pid"));
-    let mut command = interruptible_runner_command(runner, arguments, &pid);
+    let mut command = match runner {
+        Runner::Host(_) => interruptible_runner_command(runner, arguments, &pid),
+        Runner::Distrobox { container, path } => {
+            let arguments = recorded_arguments(path, arguments, &pid);
+            ToolOptions::distrobox_query(container, "sh", &arguments[1..])
+                .map_err(|_| io::Error::from(io::ErrorKind::InvalidInput))?
+        }
+    };
     // Discovery must never answer a missing-container creation prompt.
     command
         .env("DBX_NON_INTERACTIVE", "0")

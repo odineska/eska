@@ -427,7 +427,7 @@ fn platform_inventory_sources_are_partial_and_locale_independent() {
         }
         previous = Some(value);
     }
-    fs::write(&distrobox, "#!/bin/sh\ncase \"$*\" in *find*) echo /opt/1cv8/x86_64/8.3.27.2342/ibcmd;; *) echo 8.3.27.2342;; esac\n").unwrap();
+    fs::write(&distrobox, "#!/bin/sh\n[ \"$4\" = --no-tty ] && [ \"$5\" = --no-workdir ] && [ \"$6\" = -- ] || exit 2\ncase \"$*\" in *find*) echo /opt/1cv8/x86_64/8.3.27.2342/ibcmd;; *) echo 8.3.27.2342;; esac\n").unwrap();
     let output = command(&fixture.0, &fixture.0.join("config"), "en-US")
         .env("PATH", &bin)
         .args([
