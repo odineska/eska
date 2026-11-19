@@ -162,10 +162,9 @@ fn execute(root: &Path, args: &SettingsArgs, localizer: &Localizer) -> Result<Va
             if matches!(args.format, OutputFormat::Json) {
                 match file.file {
                     File::Manifest => {
-                        result["format_schema"] = serde_json::from_str(include_str!(
-                            "../../../schemas/format-v1.schema.json"
-                        ))
-                        .map_err(|_| Error::InvalidManifest)?;
+                        result["format_schema"] =
+                            serde_json::from_str(include_str!("../schemas/format-v1.schema.json"))
+                                .map_err(|_| Error::InvalidManifest)?;
                         result["format_presets"] = format_presets(root)?;
                         if let Some(inherited) = settings::inherited_formatting(root) {
                             result["format_inherited"] = inherited;

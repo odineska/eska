@@ -102,7 +102,9 @@ column_limit = 100 # Keep override
         150
     );
     assert_eq!(snapshot["format_presets"]["1c"]["bsl"]["column_limit"], 120);
-    assert!(snapshot["format_schema"].is_object());
+    let schema: Value =
+        serde_json::from_str(include_str!("../../../schemas/format-v1.schema.json")).unwrap();
+    assert_eq!(snapshot["format_schema"], schema);
     assert!(snapshot.get("format_inherited").is_none());
     let input = json!({
         "revision": snapshot["revision"],
