@@ -5,7 +5,7 @@ pub use eska_presentation::arguments::vcs::start::{StartArgs, localize};
 use std::{path::Path, process::ExitCode};
 
 use crate::{
-    cli::{diagnostics, localization::Localizer},
+    cli::{diagnostics, localization::Localizer, progress},
     project::{discovery, start},
     vcs::command,
 };
@@ -26,7 +26,10 @@ impl StartHandler<'_> {
                 return ExitCode::FAILURE;
             }
         };
-        let result = match start::execute(&project, &self.args.task) {
+        let result = progress::run(localizer, "git-progress-fetch", |progress| {
+            start::execute_with_progress(&project, &self.args.task, progress)
+        });
+        let result = match result {
             Ok(result) => result,
             Err(error) => {
                 eprintln!("{}", present_error(&error, localizer));

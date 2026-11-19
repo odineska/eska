@@ -8,6 +8,7 @@ use crate::{
     cli::{
         diagnostics,
         localization::{LocalizationValue, Localizer},
+        progress,
     },
     project::clone::{self, CloneError},
 };
@@ -31,7 +32,10 @@ impl CloneHandler<'_> {
                 return ExitCode::FAILURE;
             }
         };
-        match clone::execute(plan) {
+        let result = progress::run(localizer, "git-progress-clone", |progress| {
+            clone::execute_with_progress(plan, progress)
+        });
+        match result {
             Ok(project) => {
                 println!(
                     "{}",

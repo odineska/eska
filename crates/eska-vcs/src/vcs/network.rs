@@ -6,6 +6,8 @@ use gix::bstr::ByteSlice;
 
 use super::{command, repository::Repository};
 
+pub(crate) type Progress = gix::progress::DoOrDiscard<gix::progress::tree::Item>;
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum CapabilityGap {
     RemoteHelper { scheme: String },
@@ -64,7 +66,15 @@ impl std::error::Error for FetchError {}
 /// # Errors
 /// Returns the exact open, remote, transport, fetch or system Git failure.
 pub fn fetch(repository: &Repository, remote_name: &str) -> Result<FetchOutcome, FetchError> {
-    fetch_operation(repository, remote_name, None).map(|(outcome, _)| outcome)
+    fetch_with_progress(repository, remote_name, Progress::from(None))
+}
+
+pub(crate) fn fetch_with_progress(
+    repository: &Repository,
+    remote_name: &str,
+    progress: Progress,
+) -> Result<FetchOutcome, FetchError> {
+    fetch_operation(repository, remote_name, None, progress).map(|(outcome, _)| outcome)
 }
 
 /// Fetch and return the commit advertised by this fetch for one full branch name.
@@ -75,16 +85,20 @@ pub fn fetch_branch(
     remote_name: &str,
     branch: &str,
 ) -> Result<Option<gix::ObjectId>, FetchError> {
-    fetch_operation(repository, remote_name, Some(branch)).map(|(_, id)| id)
+    fetch_operation(repository, remote_name, Some(branch), Progress::from(None)).map(|(_, id)| id)
 }
 
 fn fetch_operation(
     repository: &Repository,
     remote_name: &str,
     branch: Option<&str>,
+    mut progress: Progress,
 ) -> Result<(FetchOutcome, Option<gix::ObjectId>), FetchError> {
-    let mut network_repository =
-        gix::open(repository.git_dir()).map_err(|source| FetchError::Open(Box::new(source)))?;
+    // Fetch, like gix clone, honors configuration from the Git installation as well.
+    let mut options = gix::open::Options::default();
+    options.permissions.config.git_binary = true;
+    let mut network_repository = gix::open_opts(repository.git_dir(), options)
+        .map_err(|source| FetchError::Open(Box::new(source)))?;
     // Fetch writes reflogs but must also work before the developer configures a commit identity.
     // The fallback belongs to this repository handle and never changes the on-disk configuration.
     network_repository
@@ -114,10 +128,7 @@ fn fetch_operation(
         .connect(gix::remote::Direction::Fetch)
         .map_err(|source| FetchError::Connect(Box::new(source)))?;
     let prepare = connection
-        .prepare_fetch(
-            gix::progress::Discard,
-            gix::remote::ref_map::Options::default(),
-        )
+        .prepare_fetch(&mut progress, gix::remote::ref_map::Options::default())
         .map_err(|source| FetchError::Prepare(Box::new(source)))?;
     let interrupt = AtomicBool::new(false);
     let advertised = branch.and_then(|name| {
@@ -134,7 +145,7 @@ fn fetch_operation(
             })
     });
     prepare
-        .receive(gix::progress::Discard, &interrupt)
+        .receive(progress, &interrupt)
         .map_err(|source| FetchError::Receive(Box::new(source)))?;
     Ok((FetchOutcome { backend }, advertised))
 }
@@ -180,8 +191,17 @@ pub fn clone_checkout(
     destination: &Path,
     remote_name: &str,
 ) -> Result<CloneOutcome, CloneError> {
+    clone_checkout_with_progress(repository, destination, remote_name, Progress::from(None))
+}
+
+pub(crate) fn clone_checkout_with_progress(
+    repository: gix::Url,
+    destination: &Path,
+    remote_name: &str,
+    progress: Progress,
+) -> Result<CloneOutcome, CloneError> {
     let prepare = prepare_clone(repository, destination, remote_name)?;
-    finish_checkout(prepare)
+    finish_checkout(prepare, progress)
 }
 
 /// Retrieve the current master branch without downloading unrelated history or tags.
@@ -202,7 +222,7 @@ pub fn clone_master(repository: gix::Url, destination: &Path) -> Result<CloneOut
             )?;
             Ok(remote.with_fetch_tags(gix::remote::fetch::Tags::None))
         });
-    finish_checkout(prepare)
+    finish_checkout(prepare, Progress::from(None))
 }
 
 fn prepare_clone(
@@ -216,13 +236,16 @@ fn prepare_clone(
         .map_err(CloneError::RemoteName)
 }
 
-fn finish_checkout(mut prepare: gix::clone::PrepareFetch) -> Result<CloneOutcome, CloneError> {
+fn finish_checkout(
+    mut prepare: gix::clone::PrepareFetch,
+    mut progress: Progress,
+) -> Result<CloneOutcome, CloneError> {
     let interrupt = AtomicBool::new(false);
     let (mut checkout, _) = prepare
-        .fetch_then_checkout(gix::progress::Discard, &interrupt)
+        .fetch_then_checkout(&mut progress, &interrupt)
         .map_err(clone_fetch_error)?;
     let (repository, outcome) = checkout
-        .main_worktree(gix::progress::Discard, &interrupt)
+        .main_worktree(progress, &interrupt)
         .map_err(|source| CloneError::Checkout(Box::new(source)))?;
     Ok(CloneOutcome {
         collisions: outcome.collisions.len(),

@@ -84,6 +84,13 @@ pub enum FinishError {
 /// Returns a structured error before cleanup when repository state or policy requirements do not
 /// permit completion. A branch deletion error can occur after the worktree has switched to base.
 pub fn execute(project: &Project) -> Result<FinishResult, FinishError> {
+    execute_with_progress(project, network::Progress::from(None))
+}
+
+pub(crate) fn execute_with_progress(
+    project: &Project,
+    progress: network::Progress,
+) -> Result<FinishResult, FinishError> {
     let settings = project
         .configuration()
         .workflow_settings()
@@ -125,7 +132,9 @@ pub fn execute(project: &Project) -> Result<FinishResult, FinishError> {
         .map_err(FinishError::Repository)?;
     let refreshed = remote
         .as_ref()
-        .map(|remote| update_base_from_remote(project, &repository, remote, &plan, base_id))
+        .map(|remote| {
+            update_base_from_remote(project, &repository, remote, &plan, base_id, progress)
+        })
         .transpose()?;
     let (repository, base_updated) = refreshed
         .as_ref()
@@ -169,8 +178,9 @@ fn update_base_from_remote(
     remote: &Remote,
     plan: &crate::vcs::workflow::TaskPlan,
     base_id: ObjectId,
+    progress: network::Progress,
 ) -> Result<(Repository, bool), FinishError> {
-    if let Err(error) = network::fetch(repository, remote.name()) {
+    if let Err(error) = network::fetch_with_progress(repository, remote.name(), progress) {
         return Err(fetch_error(remote, &error));
     }
     let repository = Repository::discover(project.root()).map_err(FinishError::Repository)?;
