@@ -158,6 +158,8 @@ pub enum CloneError {
     Prepare(Box<gix::Error>),
     RemoteName(gix::Error),
     Fetch(Box<gix::Error>),
+    Authentication(Box<gix::Error>),
+    CleartextCredentials(Box<gix::Error>),
     Checkout(Box<gix::Error>),
     MissingHead,
 }
@@ -218,7 +220,7 @@ fn finish_checkout(mut prepare: gix::clone::PrepareFetch) -> Result<CloneOutcome
     let interrupt = AtomicBool::new(false);
     let (mut checkout, _) = prepare
         .fetch_then_checkout(gix::progress::Discard, &interrupt)
-        .map_err(|source| CloneError::Fetch(Box::new(source)))?;
+        .map_err(clone_fetch_error)?;
     let (repository, outcome) = checkout
         .main_worktree(gix::progress::Discard, &interrupt)
         .map_err(|source| CloneError::Checkout(Box::new(source)))?;
@@ -227,6 +229,20 @@ fn finish_checkout(mut prepare: gix::clone::PrepareFetch) -> Result<CloneOutcome
         errors: outcome.errors.len(),
         commit: repository.head_id().ok().map(gix::Id::detach),
     })
+}
+
+/// Keep credential failures distinct without presenting raw transport messages or remote URLs.
+fn clone_fetch_error(source: gix::Error) -> CloneError {
+    if matches!(
+        source.downcast_any_ref::<gix::protocol::transport::client::Error>(),
+        Some(gix::protocol::transport::client::Error::AuthenticationRefused(_))
+    ) {
+        CloneError::CleartextCredentials(Box::new(source))
+    } else if source.is_unauthenticated() {
+        CloneError::Authentication(Box::new(source))
+    } else {
+        CloneError::Fetch(Box::new(source))
+    }
 }
 
 #[cfg(test)]

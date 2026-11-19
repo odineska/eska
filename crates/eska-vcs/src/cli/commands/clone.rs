@@ -73,6 +73,12 @@ fn present(error: &CloneError, localizer: &Localizer) -> String {
             crate::vcs::network::CloneError::Prepare(_)
             | crate::vcs::network::CloneError::RemoteName(_)
             | crate::vcs::network::CloneError::Fetch(_) => localizer.text("clone-fetch-error"),
+            crate::vcs::network::CloneError::Authentication(_) => {
+                localizer.text("clone-authentication-error")
+            }
+            crate::vcs::network::CloneError::CleartextCredentials(_) => {
+                localizer.text("clone-cleartext-credentials")
+            }
             crate::vcs::network::CloneError::Checkout(_)
             | crate::vcs::network::CloneError::MissingHead => {
                 localizer.text("clone-checkout-error")
