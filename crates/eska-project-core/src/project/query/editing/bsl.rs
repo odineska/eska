@@ -28,17 +28,11 @@ pub(super) fn plan(
     let end = if old.is_empty() {
         start
     } else {
+        // Encoding a replaced newline emits its continuation prefix, so consume the
+        // original prefix as well. Source comments in this gap use the rebuild below.
         query
             .map
-            .query_to_source(
-                &query.text,
-                old.end,
-                if old.end == query.text.len() {
-                    Affinity::After
-                } else {
-                    Affinity::Before
-                },
-            )
+            .query_to_source(&query.text, old.end, Affinity::After)
             .ok_or(QueryError::InvalidPosition)?
     };
     let touches_comment = query

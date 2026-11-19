@@ -83,8 +83,15 @@ pub fn inspect(
 /// # Errors
 /// Returns structured clone, checkout, project-validation or rollback errors.
 pub fn execute(plan: ClonePlan) -> Result<Project, CloneError> {
+    execute_with_progress(plan, network::Progress::from(None))
+}
+
+pub(crate) fn execute_with_progress(
+    plan: ClonePlan,
+    progress: network::Progress,
+) -> Result<Project, CloneError> {
     claim_destination(&plan.destination)?;
-    match clone_and_validate(&plan) {
+    match clone_and_validate(&plan, progress) {
         Ok(project) => Ok(project),
         Err(original) => Err(rollback(plan.destination, original)),
     }
@@ -121,11 +128,15 @@ fn rollback(destination: PathBuf, original: CloneError) -> CloneError {
 }
 
 /// Perform the gix fetch and checkout, then apply normal eska discovery.
-fn clone_and_validate(plan: &ClonePlan) -> Result<Project, CloneError> {
-    let outcome = network::clone_checkout(
+fn clone_and_validate(
+    plan: &ClonePlan,
+    progress: network::Progress,
+) -> Result<Project, CloneError> {
+    let outcome = network::clone_checkout_with_progress(
         plan.repository.clone(),
         &plan.destination,
         &plan.remote_name,
+        progress,
     )
     .map_err(CloneError::Network)?;
     validate_checkout(&outcome)?;

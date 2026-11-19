@@ -3,6 +3,7 @@
 mod changes;
 pub mod commands;
 mod diagnostics;
+mod progress;
 mod shelves;
 
 pub use eska_presentation::{encoding, localization};

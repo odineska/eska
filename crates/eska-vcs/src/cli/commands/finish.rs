@@ -8,7 +8,7 @@ use crate::{
     cli::{
         diagnostics,
         localization::{LocalizationValue, Localizer},
-        shelves,
+        progress, shelves,
     },
     project::{discovery, finish},
     vcs::shelves::Error as ShelfError,
@@ -23,7 +23,10 @@ pub fn run(project_dir: &Path, localizer: &Localizer) -> ExitCode {
             return ExitCode::FAILURE;
         }
     };
-    let result = match finish::execute(&project) {
+    let result = progress::run(localizer, "git-progress-fetch", |progress| {
+        finish::execute_with_progress(&project, progress)
+    });
+    let result = match result {
         Ok(result) => result,
         Err(error) => {
             eprintln!("{}", present_error(&error, localizer));

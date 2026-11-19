@@ -69,6 +69,14 @@ pub enum StartError {
 /// # Errors
 /// Returns a structured error before worktree mutation when policy or repository preflight fails.
 pub fn execute(project: &Project, task: &str) -> Result<StartResult, StartError> {
+    execute_with_progress(project, task, network::Progress::from(None))
+}
+
+pub(crate) fn execute_with_progress(
+    project: &Project,
+    task: &str,
+    progress: network::Progress,
+) -> Result<StartResult, StartError> {
     let settings = project
         .configuration()
         .workflow_settings()
@@ -116,7 +124,7 @@ pub fn execute(project: &Project, task: &str) -> Result<StartResult, StartError>
         });
     };
 
-    if let Err(error) = network::fetch(&repository, policy.remote()) {
+    if let Err(error) = network::fetch_with_progress(&repository, policy.remote(), progress) {
         return Err(fetch_error(&remote, &error));
     }
 
