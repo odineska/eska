@@ -214,11 +214,100 @@ fn bsl_changes_only_differing_bytes_and_preserves_comment_lines_and_undo() {
 }
 
 #[test]
+fn bsl_replacement_ending_at_a_line_start_consumes_the_original_continuation() {
+    for newline in ["\n", "\r\n"] {
+        for bom in ["", "\u{feff}"] {
+            let input = format!(
+                "{bom}Функция ТекстЗапроса()\n    Запрос.Текст = \"ВЫБРАТЬ\n    |    1 КАК Количество,\n    |    \"\"Пример\"\" КАК Имя\n    |ИЗ Справочник.Товары КАК Товары\";\n    ЕщеТекст = \"ВЫБРАТЬ 2\";\nКонецФункции\n"
+            )
+            .replace('\n', newline);
+            let value = "ВЫБРАТЬ\n    7 КАК Количество,\n        \"Пример\" КАК Имя\n        ИЗ Справочник.Товары КАК Товары";
+            let result = edit(&input, value, &[]).expect("changed multiline query");
+            let expected = input
+                .replacen("1 КАК Количество", "7 КАК Количество", 1)
+                .replacen("|    \"\"Пример", "|        \"\"Пример", 1)
+                .replacen("|ИЗ", "|        ИЗ", 1);
+            assert_eq!(result.output(), expected);
+            assert_eq!(query(result.output()).text, value);
+            assert_eq!(
+                result
+                    .history()
+                    .replay(result.output(), true)
+                    .expect("undo")
+                    .output(),
+                input
+            );
+        }
+    }
+}
+
+#[test]
+fn bsl_line_start_indentation_requires_an_explicit_source_comment_anchor() {
+    let input = "Текст = \"а\n\t// сохранить\n\t|б\";";
+    let value = "А\n  б";
+    assert!(matches!(
+        edit(input, value, &[]),
+        Err(QueryError::CommentsRequireDecision)
+    ));
+    let result = edit(
+        input,
+        value,
+        &[CommentPlacement {
+            comment: 0,
+            query_offset: Some("А\n".len()),
+        }],
+    )
+    .expect("explicit line-start comment anchor");
+    assert_eq!(result.output(), "Текст = \"А\n\t// сохранить\n\t|  б\";");
+    assert_eq!(query(result.output()).text, value);
+}
+
+#[test]
+fn bsl_edits_round_trip_scalar_ranges_across_line_and_quote_boundaries() {
+    let base = "А\nБ \"В\"\nГ";
+    let boundaries: Vec<_> = base
+        .char_indices()
+        .map(|(offset, _)| offset)
+        .chain(std::iter::once(base.len()))
+        .collect();
+    for newline in ["\n", "\r\n"] {
+        for bom in ["", "\u{feff}"] {
+            let input = format!("{bom}Текст = \"А\n\t|Б \"\"В\"\"\n\t|Г\"; // outside\n")
+                .replace('\n', newline);
+            for (index, &start) in boundaries.iter().enumerate() {
+                for &end in &boundaries[index..] {
+                    for inserted in ["", "Я", "Я\n", "\n  \"Ю\""] {
+                        let value = format!("{}{inserted}{}", &base[..start], &base[end..]);
+                        let result = edit(&input, &value, &[]).unwrap_or_else(|error| {
+                            panic!("{start}..{end} -> {inserted:?}: {error:?}")
+                        });
+                        assert_eq!(query(result.output()).text, value);
+                        let original = query(&input);
+                        let updated = query(result.output());
+                        assert_eq!(
+                            &result.output()[..updated.source.start],
+                            &input[..original.source.start]
+                        );
+                        assert_eq!(
+                            &result.output()[updated.source.end..],
+                            &input[original.source.end..]
+                        );
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[test]
 fn bsl_handles_inserted_removed_and_empty_final_lines_without_leaking_service_bars() {
     for (input, value) in [
         ("x = \"old\";", "\"😀\"\n\n| // query comment\n"),
         ("x = \"old\r\n\t|\";", ""),
         ("x = \"a\n\t|b\";", "a\nnew\nb"),
+        ("x = \"a\n\t|old\n\t|b\";", "a\nb"),
+        ("x = \"a\n\t|b\";", "ab"),
+        ("x = \"a\n\t|old\n\t// keep\n\t|b\";", "a\nb"),
         ("x = \"a\n\t|\";", "a\nend"),
         ("x = \"\";", "a\n\n"),
     ] {
