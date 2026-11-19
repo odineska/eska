@@ -27,6 +27,8 @@ enum Operation {
         inherited: Option<String>,
         #[arg(long)]
         init: bool,
+        #[arg(long, conflicts_with = "init")]
+        create: bool,
     },
     Unpack {
         input: PathBuf,
@@ -47,10 +49,11 @@ impl BridgeArgs {
                 platform,
                 inherited,
                 init,
+                create,
             } => (
                 "select_platform",
                 *init,
-                select(platform, inherited.as_deref(), *init, localizer),
+                select(platform, inherited.as_deref(), *init, *create, localizer),
             ),
             Operation::Unpack {
                 input,
@@ -90,6 +93,7 @@ fn select(
     platform: &PlatformArgs,
     inherited: Option<&str>,
     init: bool,
+    create: bool,
     localizer: &Localizer,
 ) -> Result<Value, Failure> {
     let inherited = inherited
@@ -101,6 +105,11 @@ fn select(
                 localizer.text("artifact-version-invalid"),
             )
         })?;
+    if create {
+        let (tool, deferred) =
+            artifact::resolve_for_creation(platform, inherited.as_ref(), localizer)?;
+        return Ok(json!({"platform_version":tool.version().as_str(),"deferred":deferred}));
+    }
     let tool = if init {
         artifact::resolve_for_init(platform, localizer)
     } else {

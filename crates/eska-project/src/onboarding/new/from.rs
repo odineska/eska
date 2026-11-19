@@ -135,7 +135,7 @@ fn execute(
         || inherited.is_none()
     {
         Some(
-            BuildSettings::new(tool.version().as_str(), "build".into()).map_err(|_| {
+            BuildSettings::new(tool.configured_version(), "build".into()).map_err(|_| {
                 Failure::new(
                     "platform-version-invalid",
                     localizer.text("artifact-version-invalid"),

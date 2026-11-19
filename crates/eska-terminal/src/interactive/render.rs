@@ -83,7 +83,12 @@ pub(super) fn render_values(
             )?;
         }
         let marker = if index == selected { "›" } else { " " };
-        let text = format!("{marker} {}  {} ({value})", index + 1, label);
+        let choice = if value.is_empty() || value == label {
+            label.clone()
+        } else {
+            format!("{label} ({value})")
+        };
+        let text = format!("{marker} {}. {choice}", index + 1);
         let row = u16::try_from(index).map_err(io::Error::other)? + 5;
         line(output, row, &text, width, height)?;
         queue!(output, ResetColor, SetAttribute(Attribute::Reset))?;
@@ -137,7 +142,7 @@ mod tests {
                     assert!(text.contains(&localizer.text(label)), "{text}");
                 }
                 assert!(text.contains(&format!(
-                    "› 2  {} (extension)",
+                    "› 2. {} (extension)",
                     localizer.text("new-type-extension")
                 )));
                 assert_eq!(text.matches('›').count(), 1);
@@ -145,6 +150,33 @@ mod tests {
                 assert!(text.contains(&localizer.text("select-digit-hint")));
                 assert_eq!(text.contains("\x1b[1m"), styled);
             }
+        }
+    }
+
+    #[test]
+    fn platform_menu_displays_versions_and_a_plain_deferred_choice() {
+        for locale in [Locale::RuRu, Locale::EnUs] {
+            let localizer = Localizer::try_new(locale).unwrap();
+            let later = localizer.text("artifact-platform-later");
+            let mut output = Vec::new();
+            render_values(
+                &mut output,
+                &localizer,
+                ("build-platform-tui-title", "artifact-platform-menu"),
+                &[
+                    ("8.3.27.2325".into(), "8.3.27.2325".into()),
+                    (String::new(), later.clone()),
+                ],
+                0,
+                (80, 24),
+                false,
+            )
+            .unwrap();
+            let text = String::from_utf8(output).unwrap();
+            assert!(text.contains("1. 8.3.27.2325"), "{text}");
+            assert!(text.contains(&format!("2. {later}")), "{text}");
+            assert!(!text.contains("8.3.27.2325 (8.3.27.2325)"), "{text}");
+            assert!(!text.contains("()"), "{text}");
         }
     }
 
