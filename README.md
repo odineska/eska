@@ -11,7 +11,7 @@ ESKA подключает выгрузку Конфигуратора, пров�
 
 **Проект в активной разработке.** Доступные команды установленного выпуска перечислены в `--help`.
 
-[Руководство на сайте](https://odineska.github.io/eska/docs/) · [Справочник CLI](docs/cli-reference.md) · [Руководство в репозитории](docs/user-guide.md)
+[Руководство на сайте](https://odineska.tech/eska/docs/) · [Справочник CLI](docs/cli-reference.md) · [Руководство в репозитории](docs/user-guide.md)
 
 - **Метаданные.** Поиск объектов, свойств и исходников. Создание объектов, форм и модулей, копирование с новыми UUID и проверка ссылок перед удалением. Для автоматизации доступны JSON Schema и планы изменений. [Работа с метаданными](docs/metadata-authoring.md)
 - **Управляемые формы.** Изменение свойств, типов и условного оформления в редакторе, перетаскивание элементов, создание обработчиков BSL, автосохранение и отмена. Предпросмотр формы 8.3.27 имеет статус beta. [Редактор форм](docs/user-guide.md#forms)
@@ -29,49 +29,49 @@ ESKA подключает выгрузку Конфигуратора, пров�
 <details open>
 <summary>Настроить проводник</summary>
 
-[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.github.io/eska/docs/#demo-setup)
+[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.tech/eska/docs/#demo-setup)
 
 </details>
 
 <details open>
 <summary>Найти объект и открыть модуль</summary>
 
-[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.github.io/eska/docs/#demo-tree)
+[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.tech/eska/docs/#demo-tree)
 
 </details>
 
 <details open>
 <summary>Перейти из свойств к XML</summary>
 
-[![Перейти из свойств к XML — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.github.io/eska/docs/#demo-properties)
+[![Перейти из свойств к XML — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.tech/eska/docs/#demo-properties)
 
 </details>
 
 <details open>
 <summary>Открыть управляемую форму</summary>
 
-[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.github.io/eska/docs/#demo-forms)
+[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.tech/eska/docs/#demo-forms)
 
 </details>
 
 <details open>
 <summary>Изменить заголовок поля формы</summary>
 
-[![Изменить заголовок поля формы — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.github.io/eska/docs/#demo-form-edit)
+[![Изменить заголовок поля формы — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.tech/eska/docs/#demo-form-edit)
 
 </details>
 
 <details open>
 <summary>Сравнить изменения модулей по именам объектов</summary>
 
-[![Сравнить изменения модулей по именам объектов — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.github.io/eska/docs/#demo-scm)
+[![Сравнить изменения модулей по именам объектов — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.tech/eska/docs/#demo-scm)
 
 </details>
 
 <details open>
 <summary>Изменить запрос и сохранить через Ctrl+S</summary>
 
-[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.github.io/eska/docs/#demo-query)
+[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.tech/eska/docs/#demo-query)
 
 </details>
 
@@ -98,13 +98,13 @@ ESKA подключает выгрузку Конфигуратора, пров�
 Установка опубликованного комплекта:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -LsSf https://odineska.github.io/eska/install | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://odineska.tech/eska/install | sh
 ```
 
 Windows PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -c "irm https://odineska.github.io/eska/install.ps1 | iex"
+powershell -ExecutionPolicy Bypass -c "irm https://odineska.tech/eska/install.ps1 | iex"
 ```
 
 Повторный запуск установщика обновляет все семь утилит до одного выбранного

@@ -44,11 +44,22 @@ pub fn discover_context(start: &Path) -> Result<DiscoveryContext, ContextDiscove
     }
 
     let (nearest_root, nearest_path, nearest) = find_nearest_manifest(&start)?;
+    resolve_manifest(&nearest_root, &nearest_path, nearest)
+}
+
+/// Validate a candidate at its existing project root without first writing it to disk.
+pub(crate) fn resolve_manifest(
+    nearest_root: &Path,
+    nearest_path: &Path,
+    nearest: ManifestConfig,
+) -> Result<DiscoveryContext, ContextDiscoveryError> {
     match nearest {
         ManifestConfig::Workspace(config) => {
-            load_workspace(&nearest_root, &config).map(|workspace| DiscoveryContext::Workspace {
-                workspace,
-                current_member: None,
+            load_workspace(nearest_root, &config, None).map(|workspace| {
+                DiscoveryContext::Workspace {
+                    workspace,
+                    current_member: None,
+                }
             })
         }
         ManifestConfig::Project(config) => {
@@ -59,19 +70,23 @@ pub fn discover_context(start: &Path) -> Result<DiscoveryContext, ContextDiscove
                         let manifest = load_manifest(&path)?;
                         return match manifest {
                             ManifestConfig::Project(_) => {
-                                load_project_config(&nearest_root, &nearest_path, config)
+                                load_project_config(nearest_root, nearest_path, config)
                                     .map(DiscoveryContext::Standalone)
                                     .map_err(ContextDiscoveryError::Project)
                             }
                             ManifestConfig::Workspace(workspace_config) => {
-                                let workspace = load_workspace(ancestor, &workspace_config)?;
+                                let workspace = load_workspace(
+                                    ancestor,
+                                    &workspace_config,
+                                    Some((nearest_root, &config)),
+                                )?;
                                 let current_member = workspace
                                     .members()
                                     .iter()
                                     .find(|member| member.root() == nearest_root)
                                     .map(|member| member.name().clone())
                                     .ok_or_else(|| ContextDiscoveryError::UnlistedProject {
-                                        project: nearest_root.clone(),
+                                        project: nearest_root.to_path_buf(),
                                         workspace: ancestor.to_path_buf(),
                                     })?;
                                 Ok(DiscoveryContext::Workspace {
@@ -90,7 +105,7 @@ pub fn discover_context(start: &Path) -> Result<DiscoveryContext, ContextDiscove
                     }
                 }
             }
-            load_project_config(&nearest_root, &nearest_path, config)
+            load_project_config(nearest_root, nearest_path, config)
                 .map(DiscoveryContext::Standalone)
                 .map_err(ContextDiscoveryError::Project)
         }
@@ -141,11 +156,15 @@ fn load_manifest(path: &Path) -> Result<ManifestConfig, ContextDiscoveryError> {
 fn load_workspace(
     root: &Path,
     config: &WorkspaceConfig,
+    candidate: Option<(&Path, &ProjectConfig)>,
 ) -> Result<Workspace, ContextDiscoveryError> {
     let mut members: Vec<WorkspaceMember> = Vec::with_capacity(config.members().len());
     for configured_path in config.members() {
         let member_root = validate_member_root(root, configured_path, &members)?;
-        let member = load_workspace_member(config, member_root)?;
+        let override_config = candidate
+            .filter(|(path, _)| *path == member_root)
+            .map(|(_, config)| config);
+        let member = load_workspace_member(config, member_root, override_config)?;
         if members
             .iter()
             .any(|existing| existing.name() == member.name())
@@ -211,15 +230,22 @@ fn validate_member_root(
 fn load_workspace_member(
     workspace_config: &WorkspaceConfig,
     member_root: PathBuf,
+    candidate: Option<&ProjectConfig>,
 ) -> Result<WorkspaceMember, ContextDiscoveryError> {
     let manifest_path = member_root.join(FILE_NAME);
-    let member_config = match load_manifest(&manifest_path)? {
-        ManifestConfig::Project(config) => config,
-        ManifestConfig::Workspace(_) => {
-            return Err(ContextDiscoveryError::MemberManifestNotProject {
-                path: manifest_path,
-            });
-        }
+    let loaded;
+    let member_config = if let Some(config) = candidate {
+        config
+    } else {
+        loaded = match load_manifest(&manifest_path)? {
+            ManifestConfig::Project(config) => config,
+            ManifestConfig::Workspace(_) => {
+                return Err(ContextDiscoveryError::MemberManifestNotProject {
+                    path: manifest_path,
+                });
+            }
+        };
+        &loaded
     };
     let name =
         member_config
@@ -239,7 +265,7 @@ fn load_workspace_member(
         });
     }
 
-    let configuration = resolve_member_configuration(workspace_config, &member_config)?;
+    let configuration = resolve_member_configuration(workspace_config, member_config)?;
     let source = member_root.join(member_config.source());
     let project = Project::new(member_root.clone(), source, configuration)
         .map_err(ProjectConfigError::ProjectPath)

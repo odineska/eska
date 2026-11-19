@@ -97,13 +97,13 @@ eska-build --project-dir ./accounting build --dry-run --format json
 Linux и macOS:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -LsSf https://odineska.github.io/eska/install | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://odineska.tech/eska/install | sh
 ```
 
 Windows PowerShell:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -c "irm https://odineska.github.io/eska/install.ps1 | iex"
+powershell -ExecutionPolicy Bypass -c "irm https://odineska.tech/eska/install.ps1 | iex"
 ```
 
 Скрипт устанавливает **опубликованный** комплект, а не произвольную feature-ветку.
@@ -280,12 +280,30 @@ Project name — техническое имя ESKA, имя объекта 1С �
 | --- | --- | --- |
 | Корневой `eska.toml` | Состав workspace, workflow, build, анализ и форматирование | Да |
 | `eska.toml` участника | Имя, тип, source, разрешённые локальные build/format-настройки | Да |
+| `.eska/settings_local.toml` | Профили запуска и отладки `test` и `prod` | Нет |
+| `.gitignore`, `.gitattributes` | Исключения Git и шаблоны файлов Git LFS | Да |
 | Пользовательский `config.toml` ESKA | Runner, контейнер, архитектура, глобальный каталог библиотек | Обычно нет |
 | `bsl-analyzer.toml` | Производный файл выбранного контекста анализа | Редактировать первичный `eska.toml` |
 | Настройки VS Code | Выбор executable, языка дерева, форматирования на save и обновлений | По политике команды |
 | Состояние активности | Локальные включения/отключения и фильтр workspace | Нет |
 | `~/.eska/lib` | Общие пользовательские копии библиотек | Не копировать в каждый проект |
 | Производные кеши и служебные ИБ | Ускорение работы, не исходники | Нет |
+
+В Explorer откройте **Настройки проекта → Настроить проект**. Выберите
+раздел, измените значения и нажмите **Предпросмотр**, чтобы сравнить содержимое
+файла до и после правки. **Сохранить** проверяет черновик и ревизию файла.
+Общие разделы, которые редактируют `eska.toml`, используют один черновик.
+Исключения Git, правила Git LFS и каждый локальный профиль сохраняются отдельно.
+Для общей политики рабочего пространства откройте настройки его корня.
+
+В **Форматировании** можно выбрать `ESKA`, `1С` или командный профиль.
+Флажки и списки меняют отдельные параметры. **Наследовать** удаляет явное
+переопределение, а пустой список исключений можно задать явно. Для
+**Анализа BSL** состояние и параметры каждого правила доступны в каталоге.
+Изменения политики проверяет установленный анализатор. После сохранения
+ESKA обновляет производный конфиг, когда доступны проверенный контекст,
+анализатор и запись в управляемый файл.
+[Настройки форматирования](formatting.md) · [Политика анализатора](analyzer-configuration.md).
 
 Пользовательский config находится в стандартном config-каталоге ОС в подкаталоге
 `eska`, либо в `${ESKA_CONFIG_DIR}/config.toml`. Это **не** каталог установки
@@ -510,11 +528,11 @@ cache `eska/libraries`; при нестандартном config — в сосе
 В первом скринкасте проект уже подключён; показана именно настройка проводника.
 Скринкасты записаны в русскоязычном интерфейсе Explorer, без звука.
 
-[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.github.io/eska/docs/#demo-setup)
+[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.tech/eska/docs/#demo-setup)
 
 ### Дерево метаданных
 
-[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.github.io/eska/docs/#demo-tree)
+[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.tech/eska/docs/#demo-tree)
 
 В корне показаны конфигурации и подпроекты; разделы метаданных находятся прямо
 внутри проекта. «Общие», коллекции объектов, вложенные реквизиты и табличные части,
@@ -577,9 +595,9 @@ JSON-запросы, `--no-input`, предварительная проверк
 
 Редактирование требует Metadata API 1.53, создание обработчиков — 1.54. Предпросмотр Designer XML 8.3.27 имеет статус beta. Команды и BSL формы выполняются в клиенте 1С. [Свойства, события и ограничения](https://github.com/odineska/eska-vscode-explorer/blob/main/docs/form-preview.md).
 
-[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.github.io/eska/docs/#demo-forms)
+[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.tech/eska/docs/#demo-forms)
 
-[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.github.io/eska/docs/#demo-form-edit)
+[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.tech/eska/docs/#demo-form-edit)
 
 ### Открытие и переход от файла
 
@@ -674,13 +692,13 @@ Unsaved BSL сам по себе не меняет Git-статус. Без вс
 
 Панель использует встроенное расширение Git редактора. Изменённые файлы также отмечаются в дереве метаданных. Команды для терминала описаны в [разделе Git](#daily-work).
 
-[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.github.io/eska/docs/#demo-scm)
+[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.tech/eska/docs/#demo-scm)
 
 <a id="debug"></a>
 
 ### Запуск и HTTP-отладка
 
-Откройте **Настройки проекта → Настроить проект** и заполните нужный профиль в `.eska/settings_local.toml`. В разделе **Запуск и отладка → ESKA: запуск 1С** доступны запуск клиента, обновление тестовой базы и подключение к `dbgs`. Команда **Запустить 1С с отладкой** запускает клиент, **Подключиться к серверу отладки 1С** подключается к работающей сессии. Во время отладки можно выбрать предмет и типы автоподключения.
+Откройте **Настройки проекта → Настроить проект → Запуск и отладка** и заполните нужный профиль. Флажки задают типы предметов автоподключения, параметры профиля сохраняются в `.eska/settings_local.toml`. В панели **Запуск и отладка → ESKA: запуск 1С** доступны запуск клиента, обновление тестовой базы и подключение к `dbgs`. Команда **Запустить 1С с отладкой** запускает клиент, **Подключиться к серверу отладки 1С** подключается к работающей сессии. Во время отладки можно выбрать предмет и типы автоподключения.
 
 | Операция | Условия и результат |
 | --- | --- |
@@ -739,7 +757,7 @@ Standalone-проект этой функцией не отключается. �
 
 ## 10. Свойства и переименование метаданных
 
-[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.github.io/eska/docs/#demo-properties)
+[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.tech/eska/docs/#demo-properties)
 
 Панель **Свойства** читает объект и схему редактирования из ESKA. Редактор не
 угадывает допустимые поля по внешнему виду XML. Read-only поле показывает
@@ -967,7 +985,7 @@ dirty-текст сохраняется с ограничением записи
 поддерживаемых источников предоставляет ESKA. Наличие имени в каталоге не означает
 полного вывода типа выражения или проверки выполнения запроса.
 
-[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.github.io/eska/docs/#demo-query)
+[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.tech/eska/docs/#demo-query)
 
 ### Таблицы, поля и соединения
 
@@ -1444,6 +1462,28 @@ finish выполнены. Squash/rebase может не подтверждат�
 есть отдельная target version; это не обещание найти native binary автоматически.
 
 ### Найти и выбрать платформу
+
+В настройках «Запуск и отладка → Платформа → Из установленных…» можно
+выбрать подтверждённую установку на хосте или в контейнере Distrobox из
+черновика профиля (при пустом имени — из машинных defaults). В списке видны
+версия, источник и путь `ibcmd`. Выбор подставляет в черновик среду запуска,
+контейнер, версию и путь; изменения сохраняются обычной кнопкой «Сохранить».
+При недоступном источнике остаются результаты другого источника.
+
+Для IDE доступен opt-in режим `eska platform list --include-distrobox --format json`
+(также у `eska-build`). Он независимо сканирует хост и настроенный контейнер,
+игнорируя `--ibcmd` / `ESKA_IBCMD` как ограничение списка. Архитектура остаётся
+из `--platform-arch`, окружения или машинных defaults. Без нового флага контракт
+прежний. JSON содержит `schema_version: 1`, `kind: "installed-platforms"`,
+`platforms: [{version, ibcmd, source}]`, где `source` — `{kind: "host"}` или
+`{kind: "distrobox", container}`. Статусы источников находятся в
+`sources: {host: "ready"|"unavailable", distrobox: null|{container, status}}`;
+пустой успешно проверенный источник имеет статус `ready`. Частичная
+недоступность не меняет успешный exit code; отмена завершает команду с ошибкой.
+На Unix каждый источник имеет общий бюджет 5 секунд и ограничение вывода
+процессов 1 MiB (до 1 секунды дополнительно на завершение контейнерного процесса);
+проверка не отвечает на предложение создать отсутствующий
+контейнер. Если контейнер не настроен, `sources.distrobox` равен `null`.
 
 ```sh
 eska platform list --format json

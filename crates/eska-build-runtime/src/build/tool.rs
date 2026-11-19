@@ -123,6 +123,7 @@ static SIGNAL_HANDLER: OnceLock<Result<(), String>> = OnceLock::new();
 
 #[derive(Clone, Debug, Default)]
 pub struct ToolOptions {
+    inventory_deadline: Option<std::time::Instant>,
     #[cfg(unix)]
     cancellation: Option<eska_tool_runtime::Operation>,
     ibcmd: Option<PathBuf>,
@@ -149,6 +150,7 @@ impl ToolOptions {
         distrobox: Option<String>,
     ) -> Self {
         Self {
+            inventory_deadline: None,
             #[cfg(unix)]
             cancellation: None,
             ibcmd,
@@ -156,6 +158,23 @@ impl ToolOptions {
             distrobox,
             runner: RunnerPreference::Auto,
             project_local: false,
+        }
+    }
+
+    /// Inspect one inventory source without process or machine runner overrides.
+    #[must_use]
+    pub fn inventory_source(&self, container: Option<String>) -> Self {
+        Self {
+            inventory_deadline: Some(std::time::Instant::now() + std::time::Duration::from_secs(5)),
+            ibcmd: None,
+            runner: if container.is_some() {
+                RunnerPreference::Distrobox
+            } else {
+                RunnerPreference::Host
+            },
+            distrobox: container,
+            project_local: true,
+            ..self.clone()
         }
     }
 
@@ -183,7 +202,9 @@ impl ToolOptions {
         })
     }
 
-    fn distrobox_name(&self) -> Option<String> {
+    /// Resolve the configured container using the runner override precedence.
+    #[must_use]
+    pub fn distrobox_name(&self) -> Option<String> {
         self.distrobox.clone().or_else(|| {
             if self.project_local {
                 None
@@ -191,6 +212,35 @@ impl ToolOptions {
                 env::var(DISTROBOX_ENV).ok()
             }
         })
+    }
+
+    /// Construct a terminal-free query from the home directory of an existing container.
+    ///
+    /// # Errors
+    /// Rejects container names using the same rules as platform execution.
+    pub fn distrobox_query(
+        container: &str,
+        program: &str,
+        arguments: &[OsString],
+    ) -> Result<Command, ToolError> {
+        validate_component(container)
+            .map_err(|()| ToolError::InvalidContainer(container.to_owned()))?;
+        let mut command = Command::new("distrobox");
+        // EOF at the creation prompt prevents Distrobox from creating a missing container.
+        command
+            .env("DBX_NON_INTERACTIVE", "0")
+            .stdin(Stdio::null())
+            .args([
+                "enter",
+                "--name",
+                container,
+                "--no-tty",
+                "--no-workdir",
+                "--",
+            ])
+            .arg(program)
+            .args(arguments);
+        Ok(command)
     }
 
     fn explicit_runner(&self, path: PathBuf) -> Result<(Runner, ToolSource), ToolError> {
@@ -841,7 +891,12 @@ fn probe_runner(
 ) -> Result<Output, io::Error> {
     #[cfg(unix)]
     {
-        probe::output(runner, arguments, options.cancellation.as_ref())
+        probe::output(
+            runner,
+            arguments,
+            options.cancellation.as_ref(),
+            options.inventory_deadline,
+        )
     }
     #[cfg(not(unix))]
     {
@@ -892,16 +947,26 @@ fn interruptible_runner_command(
         Runner::Host(_) => runner_command(runner, arguments),
         Runner::Distrobox { container, path } => {
             let mut command = Command::new("distrobox");
-            command
-                .args(["enter", "--name", container, "--no-tty", "--", "sh", "-c"])
-                .arg("printf '%s\\n' \"$$\" > \"$1\" || exit 1; shift; exec \"$@\"")
-                .arg("sh")
-                .arg(pid_file)
-                .arg(path)
-                .args(arguments);
+            command.args(["enter", "--name", container, "--no-tty", "--"]);
+            command.args(recorded_arguments(path, arguments, pid_file));
             command
         }
     }
+}
+
+/// Record the container-side process before replacing the wrapper with the requested tool.
+fn recorded_arguments(path: &Path, arguments: &[OsString], pid_file: &Path) -> Vec<OsString> {
+    [
+        OsString::from("sh"),
+        OsString::from("-c"),
+        OsString::from("printf '%s\\n' \"$$\" > \"$1\" || exit 1; shift; exec \"$@\""),
+        OsString::from("sh"),
+        pid_file.as_os_str().to_owned(),
+        path.as_os_str().to_owned(),
+    ]
+    .into_iter()
+    .chain(arguments.iter().cloned())
+    .collect()
 }
 
 /// Signal only the recorded container-side ibcmd process before stopping the adapter.

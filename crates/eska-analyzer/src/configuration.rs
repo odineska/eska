@@ -87,6 +87,37 @@ pub fn inspect(start: &Path, application: Option<&str>) -> Result<Plan, Error> {
     build(context, manifest, None)
 }
 
+/// Check upstream policy generated from an unpublished manifest at its final project root.
+///
+/// # Errors
+/// Rejects invalid source/policy inputs, member-local analyzer policy and upstream validation errors.
+pub fn validate_manifest_candidate(
+    root: &Path,
+    application: Option<&str>,
+    manifest: &str,
+    analyzer: &Analyzer<'_>,
+) -> Result<(), Error> {
+    let generate_candidate = || {
+        let context = application::resolve_candidate(root, application, manifest)
+            .map_err(|error| Error::Context(Box::new(error)))?;
+        if context.root() != root {
+            return Err(Error::InvalidPolicy {
+                field: "tools.bsl-analyzer".into(),
+            });
+        }
+        // Use the same source and effective formatting derivation as ordinary publication.
+        generate(&context, context.analyzer_policy(), manifest.as_bytes())
+    };
+    let body = generate_candidate()?;
+    analyzer.validate(root)?;
+    let candidate = Temporary::new(root, body.as_bytes())?;
+    analyzer.check_config(root, candidate.path())?;
+    if generate_candidate()? != body {
+        return Err(Error::StalePreview);
+    }
+    Ok(())
+}
+
 /// Inspect the IDE's effective sources; an entirely inactive application has no analyzer context.
 ///
 /// # Errors

@@ -27,6 +27,7 @@ pub mod object_model;
 pub mod onboarding;
 pub mod query;
 pub mod selection;
+pub mod settings;
 pub mod source_lock;
 pub mod support;
 pub mod templates;

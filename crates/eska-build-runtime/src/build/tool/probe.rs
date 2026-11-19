@@ -1,6 +1,6 @@
 //! Unix discovery owns both the adapter and its recorded container-side version probe.
 
-use super::{Runner, interruptible_runner_command, terminate_distrobox_process};
+use super::{Runner, ToolOptions, interruptible_runner_command, recorded_arguments};
 use eska_tool_runtime::{Component, Error, Operation, QueryPolicy};
 use std::{
     fs, io,
@@ -24,6 +24,7 @@ pub(super) fn output(
     runner: &Runner,
     arguments: &[std::ffi::OsString],
     outer: Option<&Operation>,
+    deadline: Option<std::time::Instant>,
 ) -> io::Result<Output> {
     let scope = outer.map_or_else(
         || Operation::new().map_err(io_error),
@@ -37,17 +38,71 @@ pub(super) fn output(
     let pid = directory
         .as_ref()
         .map_or_else(PathBuf::new, |directory| directory.0.join("process.pid"));
-    let mut command = interruptible_runner_command(runner, arguments, &pid);
-    eska_tool_runtime::capture(
+    let mut command = match runner {
+        Runner::Host(_) => interruptible_runner_command(runner, arguments, &pid),
+        Runner::Distrobox { container, path } => {
+            let arguments = recorded_arguments(path, arguments, &pid);
+            ToolOptions::distrobox_query(container, "sh", &arguments[1..])
+                .map_err(|_| io::Error::from(io::ErrorKind::InvalidInput))?
+        }
+    };
+    // Discovery must never answer a missing-container creation prompt.
+    command
+        .env("DBX_NON_INTERACTIVE", "0")
+        .stdin(std::process::Stdio::null());
+    let policy = QueryPolicy {
+        timeout: deadline.map_or_else(
+            || QueryPolicy::default().timeout,
+            |deadline| deadline.saturating_duration_since(std::time::Instant::now()),
+        ),
+        ..QueryPolicy::default()
+    };
+    if policy.timeout.is_zero() {
+        return Err(io::ErrorKind::TimedOut.into());
+    }
+    eska_tool_runtime::capture(Component::Build, &mut command, &scope, policy, || {
+        terminate_probe(runner, &pid);
+    })
+    .map_err(io_error)
+}
+
+/// Cleanup must remain bounded even when the container adapter itself stops responding.
+fn terminate_probe(runner: &Runner, pid_file: &std::path::Path) {
+    let Runner::Distrobox { container, .. } = runner else {
+        return;
+    };
+    let Ok(pid) = fs::read_to_string(pid_file) else {
+        return;
+    };
+    let pid = pid.trim();
+    if pid.is_empty() || !pid.bytes().all(|byte| byte.is_ascii_digit()) {
+        return;
+    }
+    let Ok(mut command) = ToolOptions::distrobox_query(
+        container,
+        "sh",
+        &[
+            "-c".into(),
+            "kill -TERM \"$1\"".into(),
+            "sh".into(),
+            pid.into(),
+        ],
+    ) else {
+        return;
+    };
+    let Ok(scope) = Operation::new() else {
+        return;
+    };
+    let _ = eska_tool_runtime::capture(
         Component::Build,
         &mut command,
         &scope,
-        QueryPolicy::default(),
-        || {
-            terminate_distrobox_process(runner, &pid);
+        QueryPolicy {
+            timeout: std::time::Duration::from_secs(1),
+            ..QueryPolicy::default()
         },
-    )
-    .map_err(io_error)
+        || {},
+    );
 }
 
 /// Keep Distrobox control files in shared user storage; private container /tmp is not shared.

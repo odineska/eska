@@ -22,6 +22,7 @@ struct PolicyLayer {
     root: PathBuf,
     config: Config,
     manifest: String,
+    draft: Option<String>,
 }
 
 /// A context retains checked manifests, without starting an analyzer or a complete metadata index.
@@ -142,11 +143,37 @@ impl Context {
                         "member"
                     },
                     &layer.config,
-                    &layer.manifest,
+                    layer.draft.as_deref().unwrap_or(&layer.manifest),
                 )
             })
             .collect::<Result<Vec<_>, _>>()?;
         super::resolve(&selected, path, language, operation)
+    }
+
+    /// Replace exactly one authored policy layer for a read-only settings example.
+    ///
+    /// # Errors
+    /// Rejects drafts outside this source's workspace/member chain or invalid policies.
+    pub fn preview_manifest(&mut self, root: &Path, manifest: &str) -> Result<(), Error> {
+        let root =
+            fs::canonicalize(root).map_err(|_| Error::new("invalid_scope", "settingsRoot"))?;
+        let layer = self
+            .layers
+            .iter_mut()
+            .find(|layer| layer.root == root)
+            .ok_or_else(|| Error::new("invalid_scope", "settingsRoot"))?;
+        let config = match ManifestConfig::from_toml(manifest.trim_start_matches('\u{feff}'))
+            .map_err(|_| Error::new("invalid_config", "eska.toml"))?
+        {
+            ManifestConfig::Project(project) => {
+                project.configuration().formatting_settings().clone()
+            }
+            ManifestConfig::Workspace(workspace) => workspace.formatting_settings().clone(),
+        };
+        // Keep the disk snapshot for check_current; only policy resolution sees the draft.
+        layer.config = config;
+        layer.draft = Some(manifest.to_owned());
+        Ok(())
     }
 
     /// Select only owned source roots by default; an explicit object is its ordinary source directory.
@@ -345,6 +372,7 @@ fn layer(root: &Path, config: &Config) -> Result<PolicyLayer, Error> {
         root: root.to_owned(),
         config: config.clone(),
         manifest,
+        draft: None,
     })
 }
 

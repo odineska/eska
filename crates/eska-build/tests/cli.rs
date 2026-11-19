@@ -369,3 +369,172 @@ fn help_uses_the_standalone_name_and_both_locales() {
         }
     }
 }
+
+/// Extended inventory keeps verified host entries when a container cannot be queried.
+#[cfg(unix)]
+#[test]
+fn platform_inventory_sources_are_partial_and_locale_independent() {
+    use std::os::unix::fs::PermissionsExt;
+    let fixture = support::TestDir::new();
+    let bin = fixture.0.join("bin");
+    fs::create_dir(&bin).unwrap();
+    let ibcmd = bin.join("ibcmd");
+    fs::write(&ibcmd, "#!/bin/sh\necho 8.3.27.2342\n").unwrap();
+    fs::set_permissions(&ibcmd, fs::Permissions::from_mode(0o700)).unwrap();
+    let marker = fixture.0.join("called");
+    let distrobox = bin.join("distrobox");
+    fs::write(
+        &distrobox,
+        "#!/bin/sh\nprintf called > \"$MARKER\"\nexit 1\n",
+    )
+    .unwrap();
+    fs::set_permissions(&distrobox, fs::Permissions::from_mode(0o700)).unwrap();
+    let mut previous = None;
+    for (locale, tools) in [("ru-RU", Path::new("bin")), ("en-US", bin.as_path())] {
+        let output = command(&fixture.0, &fixture.0.join("config"), locale)
+            .current_dir(&fixture.0)
+            .env("PATH", tools)
+            .env("MARKER", &marker)
+            .args([
+                "platform",
+                "list",
+                "--include-distrobox",
+                "--format",
+                "json",
+                "--distrobox=bad/name",
+            ])
+            .output()
+            .unwrap();
+        assert!(
+            output.status.success(),
+            "{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        let value: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(value["kind"], "installed-platforms");
+        assert_eq!(value["sources"]["distrobox"]["status"], "unavailable");
+        assert!(
+            value["platforms"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|entry| entry["source"]["kind"] == "host"
+                    && entry["ibcmd"] == ibcmd.to_string_lossy().as_ref())
+        );
+        assert!(!marker.exists(), "invalid names must not spawn Distrobox");
+        if let Some(previous) = previous {
+            assert_eq!(value, previous);
+        }
+        previous = Some(value);
+    }
+    fs::write(&distrobox, "#!/bin/sh\n[ \"$4\" = --no-tty ] && [ \"$5\" = --no-workdir ] && [ \"$6\" = -- ] || exit 2\ncase \"$*\" in *find*) echo /opt/1cv8/x86_64/8.3.27.2342/ibcmd;; *) echo 8.3.27.2342;; esac\n").unwrap();
+    let output = command(&fixture.0, &fixture.0.join("config"), "en-US")
+        .env("PATH", &bin)
+        .args([
+            "platform",
+            "list",
+            "--include-distrobox",
+            "--format",
+            "json",
+            "--distrobox=existing-box",
+        ])
+        .output()
+        .unwrap();
+    assert!(output.status.success());
+    let value: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(value["sources"]["distrobox"]["status"], "ready");
+    assert!(value["platforms"].as_array().unwrap().iter().any(
+        |entry| entry["source"]["container"] == "existing-box"
+            && entry["version"] == "8.3.27.2342"
+            && entry["ibcmd"] == "/opt/1cv8/x86_64/8.3.27.2342/ibcmd"
+    ));
+    assert_legacy_platform_contract(&fixture.0, &ibcmd);
+    let start = std::time::Instant::now();
+    fs::write(&distrobox, "#!/bin/sh\n[ \"$DBX_NON_INTERACTIVE\" = 0 ] || exit 99\nread answer && exit 98\nfor value; do case \"$value\" in */process.pid) printf 1234 > \"$value\";; esac; done\nexec /bin/sleep 30\n").unwrap();
+    let output = command(&fixture.0, &fixture.0.join("config"), "en-US")
+        .env("PATH", &bin)
+        .args([
+            "platform",
+            "list",
+            "--include-distrobox",
+            "--format",
+            "json",
+            "--distrobox=missing-box",
+        ])
+        .output()
+        .unwrap();
+    assert!(output.status.success());
+    assert!(start.elapsed() < std::time::Duration::from_secs(10));
+    let value: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(value["sources"]["distrobox"]["status"], "unavailable");
+    assert!(
+        value["platforms"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|entry| entry["source"]["kind"] == "host")
+    );
+}
+
+#[cfg(unix)]
+#[test]
+fn platform_inventory_cancellation_does_not_publish_partial_success() {
+    use std::os::unix::fs::PermissionsExt;
+    let fixture = support::TestDir::new();
+    let bin = fixture.0.join("bin");
+    fs::create_dir(&bin).unwrap();
+    let marker = fixture.0.join("started");
+    let distrobox = bin.join("distrobox");
+    fs::write(
+        &distrobox,
+        "#!/bin/sh\nprintf started > \"$MARKER\"\nexec /bin/sleep 30\n",
+    )
+    .unwrap();
+    fs::set_permissions(&distrobox, fs::Permissions::from_mode(0o700)).unwrap();
+    let child = command(&fixture.0, &fixture.0.join("config"), "en-US")
+        .env("PATH", &bin)
+        .env("MARKER", &marker)
+        .args([
+            "platform",
+            "list",
+            "--include-distrobox",
+            "--format",
+            "json",
+            "--distrobox=existing-box",
+        ])
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped())
+        .spawn()
+        .unwrap();
+    let started = std::time::Instant::now();
+    while !marker.exists() && started.elapsed() < std::time::Duration::from_secs(3) {
+        std::thread::sleep(std::time::Duration::from_millis(10));
+    }
+    assert!(marker.exists());
+    assert!(
+        Command::new("/bin/kill")
+            .args(["-INT", &child.id().to_string()])
+            .status()
+            .unwrap()
+            .success()
+    );
+    let output = child.wait_with_output().unwrap();
+    assert!(!output.status.success());
+    assert_eq!(output.stdout, [] as [u8; 0]);
+    assert!(String::from_utf8_lossy(&output.stderr).contains("cancel"));
+    assert!(started.elapsed() < std::time::Duration::from_secs(5));
+}
+
+#[cfg(unix)]
+fn assert_legacy_platform_contract(root: &Path, ibcmd: &Path) {
+    let legacy = command(root, &root.join("config"), "en-US")
+        .args(["platform", "list", "--format", "json", "--ibcmd"])
+        .arg(ibcmd)
+        .output()
+        .unwrap();
+    assert!(legacy.status.success());
+    let legacy: Value = serde_json::from_slice(&legacy.stdout).unwrap();
+    assert_eq!(legacy["schema_version"], 1);
+    assert!(legacy["platforms"][0]["source"].is_string());
+    assert!(legacy.get("sources").is_none());
+}

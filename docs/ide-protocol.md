@@ -2059,7 +2059,7 @@ Request-only `language/multilineStrings` принимает
 Capability `formatting` доступна при handshake 1.33:
 `{schemaVersion:1,component:"eska-fmt",protocolVersion:1,planOnly:true,
 writesOwner:false,languages:["bsl","sdbl"],document:true,range:true,
-queryDraft:true,formatOnSave:"opt_in",maxTextBytes:4194304,maxInlineBytes:131072}`.
+queryDraft:true,settingsPreview:true,formatOnSave:"opt_in",maxTextBytes:4194304,maxInlineBytes:131072}`.
 Capability не обещает установленный компонент. Сервер проверяет его tool-contract,
 вызывает `eska-fmt __format-text` и проверяет snapshot/координаты ответа.
 Копия алгоритма и запуск анализатора для этого не используются.
@@ -2072,6 +2072,19 @@ text?:string,bufferId?:string,range?:{start:number,end:number},formatter?:Path}`
 Version — положительный native u64 counter, range — UTF-8 bytes в переданном тексте.
 `formatter` явно выбирает executable; иначе действует обычный resolver компонентов.
 Нативные tab/indent options не заменяют стиль из `eska.toml`.
+
+`format/settingsPreview` доступен при `formatting.settingsPreview:true` и принимает
+параметры документа плюс `{settingsRoot:Path,revision:string|null,edits:Edit[]}`.
+`settingsRoot` — точный каталог workspace или проекта в цепочке выбранного BSL-файла;
+`revision` и `edits` используют контракт `settings-project preview` для manifest.
+Проверенный черновик заменяет соответствующий слой политики целиком в памяти:
+удаление override восстанавливает наследование. Остальные слои и правила по путям
+разрешаются тем же Rust resolver, что при обычном форматировании. Ответ имеет
+обычную форму `{schemaVersion,version,plan,effective,formatterVersion}`.
+Это исключительно пример для показа: source и manifest не записываются, права
+на изменение исходника и leases не запрашиваются. Адаптер не применяет этот план
+к исходнику, а показывает до/после отдельно. Изменение manifest на диске
+инвалидирует результат. `range` для примера не используется.
 
 Для `editableWithSupport` обязательна непустая часть файла в `range`; весь файл
 и cursor-only дают `selection_required`. Любая правка снаружи выбранных байтов

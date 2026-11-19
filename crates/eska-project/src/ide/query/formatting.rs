@@ -39,6 +39,14 @@ struct Draft {
     revision: String,
 }
 
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct SettingsPreview {
+    settings_root: params::Path,
+    revision: Option<String>,
+    edits: Vec<eska_project_core::project::settings::Edit>,
+}
+
 struct Formatted {
     request: Request,
     response: Response,
@@ -113,6 +121,43 @@ impl Server {
                 "unsupported_source",
                 "source",
             )));
+        }
+        if method == "format/settingsPreview" {
+            let draft: SettingsPreview = params::decode(args)?;
+            let root = draft.settings_root.native()?;
+            if !root.is_absolute()
+                || path.extension().and_then(|value| value.to_str()) != Some("bsl")
+            {
+                return Err(error(-32602));
+            }
+            let plan = eska_project_core::project::settings::preview(
+                &root,
+                eska_project_core::project::settings::SettingsFile::Manifest,
+                draft.revision.as_deref(),
+                eska_project_core::project::settings::Update::Manifest(draft.edits),
+            )
+            .map_err(|_| formatting::failure(Error::new("invalid_config", "draft")))?;
+            let mut context = Context::open(&path, &[], false).map_err(formatting::failure)?;
+            context
+                .preview_manifest(plan.root(), plan.after())
+                .map_err(formatting::failure)?;
+            let pair = request(&context, &path, Language::Bsl, text, None)?;
+            let result = execute(&context, pair, &input, cancelled, closed)?;
+            context.check_current().map_err(formatting::failure)?;
+            let current = eska_project_core::project::settings::show(
+                plan.root(),
+                eska_project_core::project::settings::SettingsFile::Manifest,
+            )
+            .map_err(|_| formatting::failure(Error::new("config_conflict", "draft")))?;
+            if current.revision != draft.revision {
+                return Err(formatting::failure(Error::new("config_conflict", "draft")));
+            }
+            return Ok(reply(
+                &input,
+                &result.response,
+                &result.effective,
+                result.version.as_deref(),
+            ));
         }
         format_document(&path, &input, text, cancelled, closed)
     }
