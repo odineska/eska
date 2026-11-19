@@ -6,6 +6,20 @@
 версии соответствуют [семантическому версионированию](https://semver.org/lang/ru/).
 
 
+## [0.37.0](https://github.com/odineska/eska/compare/v0.36.0...v0.37.0) - 2026-11-19
+
+### Исправлено
+
+- *(vcs)* Восстановлено HTTPS-клонирование закрытых репозиториев на Linux
+- *(project)* Добавлен поздний выбор платформы при создании проекта
+
+### Прочее
+
+- Merge pull request #350 from odineska/codex/form-editor
+- *(explorer)* Описано сохранение отдельного запроса из BSL
+
+
+
 ## [0.36.0](https://github.com/odineska/eska/compare/v0.35.1...v0.36.0) - 2026-11-19
 
 ### Добавлено
