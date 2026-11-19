@@ -6,6 +6,26 @@
 версии соответствуют [семантическому версионированию](https://semver.org/lang/ru/).
 
 
+## [0.37.1](https://github.com/odineska/eska/compare/v0.37.0...v0.37.1) - 2026-11-19
+
+### Добавлено
+
+- *(vcs)* Добавлен терминальный прогресс клонирования и fetch как в Gitoxide
+
+### Исправлено
+
+- *(project)* Исправлено сохранение многострочного запроса в BSL
+
+### Производительность
+
+- *(vcs)* Подключён быстрый декодер pack из сборки Gitoxide
+
+### Прочее
+
+- Merge pull request #352 from odineska/codex/form-editor
+
+
+
 ## [0.37.0](https://github.com/odineska/eska/compare/v0.36.0...v0.37.0) - 2026-11-19
 
 ### Исправлено
