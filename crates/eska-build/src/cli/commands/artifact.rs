@@ -20,7 +20,7 @@ use crate::{
     },
     project::{
         artifact::{ArtifactError, PreparedArtifact},
-        build::{Ibcmd, PlatformVersion},
+        build::{Ibcmd, PlatformVersion, ToolError},
     },
 };
 
@@ -195,6 +195,13 @@ struct PlatformHandler<'a> {
     options: &'a PlatformArgs,
 }
 
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum PlatformPurpose {
+    Import,
+    Initialize,
+    Create,
+}
+
 impl PlatformHandler<'_> {
     /// Resolve an explicit, inherited or interactively selected platform without hidden defaults.
     ///
@@ -207,15 +214,21 @@ impl PlatformHandler<'_> {
         localizer: &Localizer,
     ) -> Result<Ibcmd, Failure> {
         let scope = cancellation_scope(localizer)?;
-        self.resolve_with_cancellation(inherited, interactive, localizer, false, scope.as_ref())
-            .and_then(|tool| {
-                tool.ok_or_else(|| {
-                    Failure::new(
-                        "platform-required",
-                        localizer.text("artifact-platform-required"),
-                    )
-                })
+        self.resolve_with_cancellation(
+            inherited,
+            interactive,
+            localizer,
+            PlatformPurpose::Import,
+            scope.as_ref(),
+        )
+        .and_then(|(tool, _)| {
+            tool.ok_or_else(|| {
+                Failure::new(
+                    "platform-required",
+                    localizer.text("artifact-platform-required"),
+                )
             })
+        })
     }
 
     /// Allow configuration-only onboarding to select a platform or leave its version empty.
@@ -224,7 +237,38 @@ impl PlatformHandler<'_> {
     /// Returns the same machine selection and validation failures as `resolve`.
     pub fn resolve_for_init(&self, localizer: &Localizer) -> Result<Option<Ibcmd>, Failure> {
         let scope = cancellation_scope(localizer)?;
-        self.resolve_with_cancellation(None, true, localizer, true, scope.as_ref())
+        self.resolve_with_cancellation(
+            None,
+            true,
+            localizer,
+            PlatformPurpose::Initialize,
+            scope.as_ref(),
+        )
+        .map(|(tool, _)| tool)
+    }
+
+    /// An artifact still needs a native tool when its project version will be chosen later.
+    pub fn resolve_for_creation(
+        &self,
+        inherited: Option<&PlatformVersion>,
+        localizer: &Localizer,
+    ) -> Result<(Ibcmd, bool), Failure> {
+        let scope = cancellation_scope(localizer)?;
+        self.resolve_with_cancellation(
+            inherited,
+            true,
+            localizer,
+            PlatformPurpose::Create,
+            scope.as_ref(),
+        )
+        .and_then(|(tool, deferred)| {
+            tool.map(|tool| (tool, deferred)).ok_or_else(|| {
+                Failure::new(
+                    "platform-required",
+                    localizer.text("artifact-platform-required"),
+                )
+            })
+        })
     }
 
     /// Keep selection and installed-version verification identical across onboarding commands.
@@ -233,9 +277,10 @@ impl PlatformHandler<'_> {
         inherited: Option<&PlatformVersion>,
         interactive: bool,
         localizer: &Localizer,
-        initializing: bool,
+        purpose: PlatformPurpose,
         scope: Option<&eska_tool_runtime::Operation>,
-    ) -> Result<Option<Ibcmd>, Failure> {
+    ) -> Result<(Option<Ibcmd>, bool), Failure> {
+        let initializing = purpose == PlatformPurpose::Initialize;
         let cancellation_key = if initializing {
             "init-cancelled"
         } else {
@@ -257,6 +302,7 @@ impl PlatformHandler<'_> {
             )
         })?;
         let options = scoped_options(options, scope);
+        let mut automatic_version = None;
         let version = if let Some(value) = &self.options.platform_version {
             value.clone()
         } else if !self.options.select_platform
@@ -266,24 +312,16 @@ impl PlatformHandler<'_> {
         } else {
             if !interactive || !terminal() {
                 if initializing && !self.options.select_platform {
-                    return Ok(None);
+                    return Ok((None, true));
                 }
                 return Err(Failure::new(
                     "platform-required",
                     localizer.text("artifact-platform-required"),
                 ));
             }
-            let installed = Ibcmd::installed(&options).map_err(|error| {
-                Failure::new(
-                    "platform-discovery",
-                    diagnostics::present_tool_error_with_links(
-                        &error,
-                        localizer,
-                        io::stderr().is_terminal(),
-                    ),
-                )
-            })?;
-            if installed.is_empty() && !initializing {
+            let installed = Ibcmd::installed(&options)
+                .map_err(|error| platform_discovery_failure(&error, localizer))?;
+            if installed.is_empty() && purpose == PlatformPurpose::Import {
                 return Err(Failure::new(
                     "platform-not-found",
                     localizer.text("platform-none"),
@@ -296,9 +334,12 @@ impl PlatformHandler<'_> {
                     (version.clone(), version)
                 })
                 .collect::<Vec<_>>();
-            if initializing {
+            if purpose != PlatformPurpose::Import {
                 choices.push((String::new(), localizer.text("artifact-platform-later")));
             }
+            automatic_version = installed
+                .first()
+                .map(|value| value.version().as_str().to_owned());
             let mut selector = Selector::start("build-platform-tui-title")
                 .map_err(|error| platform_prompt_error(error, localizer, cancellation_key))?;
             let selected = selector
@@ -310,8 +351,23 @@ impl PlatformHandler<'_> {
             selected
         };
         if initializing && version.is_empty() {
-            return Ok(None);
+            return Ok((None, true));
         }
+        let deferred = purpose == PlatformPurpose::Create && version.is_empty();
+        let version = if deferred {
+            match automatic_version {
+                Some(version) => version,
+                None => Ibcmd::installed(&options)
+                    .map_err(|error| platform_discovery_failure(&error, localizer))?
+                    .first()
+                    .map(|value| value.version().as_str().to_owned())
+                    .ok_or_else(|| {
+                        Failure::new("platform-not-found", localizer.text("platform-none"))
+                    })?,
+            }
+        } else {
+            version
+        };
         let version = PlatformVersion::parse(&version).map_err(|_| {
             Failure::new(
                 "platform-version-invalid",
@@ -319,18 +375,17 @@ impl PlatformHandler<'_> {
             )
         })?;
         Ibcmd::discover(&version, &options)
-            .map(Some)
-            .map_err(|error| {
-                Failure::new(
-                    "platform-discovery",
-                    diagnostics::present_tool_error_with_links(
-                        &error,
-                        localizer,
-                        io::stderr().is_terminal(),
-                    ),
-                )
-            })
+            .map(|tool| (Some(tool), deferred))
+            .map_err(|error| platform_discovery_failure(&error, localizer))
     }
+}
+
+/// Inventory and exact-version discovery report the same structured native failure.
+fn platform_discovery_failure(error: &ToolError, localizer: &Localizer) -> Failure {
+    Failure::new(
+        "platform-discovery",
+        diagnostics::present_tool_error_with_links(error, localizer, io::stderr().is_terminal()),
+    )
 }
 
 /// Localize selector cancellation for the command that owns the interaction.
@@ -488,4 +543,16 @@ pub fn resolve_for_init(
     localizer: &Localizer,
 ) -> Result<Option<Ibcmd>, Failure> {
     PlatformHandler { options: args }.resolve_for_init(localizer)
+}
+
+/// Select the unpacking tool independently of whether the new project pins its version.
+///
+/// # Errors
+/// Returns discovery, selection, probe or cancellation failures before native work.
+pub fn resolve_for_creation(
+    args: &PlatformArgs,
+    inherited: Option<&PlatformVersion>,
+    localizer: &Localizer,
+) -> Result<(Ibcmd, bool), Failure> {
+    PlatformHandler { options: args }.resolve_for_creation(inherited, localizer)
 }

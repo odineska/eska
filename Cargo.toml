@@ -50,7 +50,7 @@ all = { level = "warn", priority = -1 }
 pedantic = { level = "warn", priority = -1 }
 nursery = { level = "warn", priority = -1 }
 cargo = { level = "warn", priority = -1 }
-# Curl/Rustls and existing cross-platform crates pin incompatible windows-sys lines.
+# The HTTP transports and existing cross-platform crates pin incompatible windows-sys lines.
 multiple_crate_versions = { level = "allow", priority = 1 }
 
 [dependencies]
@@ -85,5 +85,8 @@ self-replace = "1.5.1"
 # curl's ssl feature uses Schannel and the Windows certificate store on this target.
 gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
 
-[target.'cfg(not(windows))'.dev-dependencies]
+[target.'cfg(target_os = "linux")'.dev-dependencies]
+gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
+
+[target.'cfg(all(not(windows), not(target_os = "linux")))'.dev-dependencies]
 gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-rustls"] }

@@ -55,12 +55,22 @@ pub struct ToolSelection {
     options: Vec<OsString>,
     language: &'static str,
     scope: Operation,
+    deferred: bool,
 }
 
 impl ToolSelection {
     /// Retain the verified exact version across the following native preparation.
     pub const fn version(&self) -> &PlatformVersion {
         &self.version
+    }
+
+    /// Keep a temporary unpacking platform separate from the new project's stored version.
+    pub fn configured_version(&self) -> &str {
+        if self.deferred {
+            ""
+        } else {
+            self.version.as_str()
+        }
     }
 }
 
@@ -94,7 +104,7 @@ struct PlatformHandler<'a> {
 }
 
 impl PlatformHandler<'_> {
-    /// Ask the build owner to select and verify a platform before claiming a project.
+    /// Ask the build owner to select an unpacking tool and optionally defer its stored version.
     pub fn resolve(
         &self,
         inherited: Option<&PlatformVersion>,
@@ -106,6 +116,7 @@ impl PlatformHandler<'_> {
                 component_failure(Error::InvalidResponse, localizer, "artifact-cancelled")
             })
     }
+
     /// Keep initialization-specific selection and cancellation in the native owner.
     pub fn resolve_for_init(
         &self,
@@ -150,15 +161,28 @@ impl PlatformHandler<'_> {
         if init {
             args.push("--init".into());
         }
+        if !init {
+            args.push("--create".into());
+        }
         if let Some(version) = inherited {
             args.extend(["--inherited".into(), version.as_str().into()]);
         }
         let data = exchange(Component::Build, &binary, &args, "select_platform", scope)
             .map_err(failure)?;
-        let version = data
+        let fields = data
             .as_object()
-            .filter(|object| object.len() == 1)
-            .and_then(|object| object.get("platform_version"))
+            .filter(|object| object.len() == if init { 1 } else { 2 })
+            .ok_or_else(|| failure(Error::InvalidResponse))?;
+        let deferred = if init {
+            false
+        } else {
+            fields
+                .get("deferred")
+                .and_then(serde_json::Value::as_bool)
+                .ok_or_else(|| failure(Error::InvalidResponse))?
+        };
+        let version = fields
+            .get("platform_version")
             .ok_or_else(|| failure(Error::InvalidResponse))?;
         if init && version.is_null() {
             return Ok(None);
@@ -173,6 +197,7 @@ impl PlatformHandler<'_> {
             options,
             language,
             scope: scope.clone(),
+            deferred,
         }))
     }
     /// Preserve OS-native option values; command lines never pass through a shell.

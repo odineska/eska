@@ -255,7 +255,8 @@ eska clone <repository> [directory]
 - production-путь повторяет upstream `gitoxide-core`: подготовка clone, fetch,
   checkout и проверка outcome выполняются API `gix 0.87.1`;
 - `gix/max-performance` включает параллельные pack/index/checkout операции;
-  HTTP(S) использует Curl/Rustls без системного OpenSSL;
+  HTTP(S) использует транспорт Curl из `gix`. На Linux он работает с OpenSSL,
+  как стандартная сборка `gix clone`. В Linux-релизах OpenSSL линкуется статически;
 - destination сначала захватывается эксклюзивным созданием каталога; при любой
   обычной ошибке fetch, checkout или project validation удаляется только он;
 - непустые checkout collisions/errors считаются незавершённым checkout, даже
@@ -263,7 +264,7 @@ eska clone <repository> [directory]
 - local/file и SSH сохраняют transport-семантику upstream и требуют доступный
   `git-upload-pack`/`ssh`; отсутствие helper диагностируется без утечки URL и с
   полным rollback;
-- `multiple_crate_versions` разрешён точечно: Curl/Rustls и существующие
+- `multiple_crate_versions` разрешён точечно: HTTP-транспорты и существующие
   cross-platform dependencies требуют несовместимые Windows-only линии
   `windows-sys`, которые нельзя унифицировать из приложения.
 

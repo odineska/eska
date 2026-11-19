@@ -28,5 +28,11 @@ sha2 = "0.11.1"
 # curl's ssl feature uses Schannel and the Windows certificate store on this target.
 gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
 
-[target.'cfg(not(windows))'.dependencies]
+[target.'cfg(target_os = "linux")'.dependencies]
+# Match gitoxide's default curl TLS backend, including servers that close after an HTTP challenge.
+gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
+# Keep Linux release binaries independent of the system OpenSSL version.
+openssl-sys = { version = "0.9.118", features = ["vendored"] }
+
+[target.'cfg(all(not(windows), not(target_os = "linux")))'.dependencies]
 gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-rustls"] }

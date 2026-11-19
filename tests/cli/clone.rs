@@ -1,7 +1,11 @@
 use std::{
     fs,
+    io::{BufRead, BufReader, Write},
+    net::TcpListener,
     path::Path,
     process::{Command, Output},
+    thread,
+    time::{Duration, Instant},
 };
 
 use crate::support::TestDir;
@@ -121,6 +125,76 @@ fn clones_local_path_and_file_url_in_both_locales() {
             Some(b"refs/heads/main".as_bstr())
         );
         assert!(repository.find_remote("origin").is_ok());
+    }
+}
+
+#[test]
+fn authentication_required_is_localized_and_rolls_back_without_a_prompt() {
+    let fixture = TestDir::new();
+    let config = fixture.0.join("git-config");
+    fs::write(&config, "[credential]\nhelper =\n").expect("isolated credential config");
+    for (locale, expected) in [
+        ("ru", "Не удалось войти в репозиторий"),
+        ("en", "Could not authenticate to the repository"),
+    ] {
+        let listener = TcpListener::bind("127.0.0.1:0").expect("local Git HTTP fixture");
+        let address = listener.local_addr().expect("fixture address");
+        listener.set_nonblocking(true).expect("bounded accept");
+        let challenge = thread::spawn(move || {
+            let deadline = Instant::now() + Duration::from_secs(10);
+            let mut stream = loop {
+                match listener.accept() {
+                    Ok((stream, _)) => break stream,
+                    Err(error)
+                        if error.kind() == std::io::ErrorKind::WouldBlock
+                            && Instant::now() < deadline =>
+                    {
+                        thread::sleep(Duration::from_millis(10));
+                    }
+                    Err(error) => {
+                        panic!("Git client must reach the authentication fixture: {error}")
+                    }
+                }
+            };
+            stream
+                .set_read_timeout(Some(Duration::from_secs(5)))
+                .expect("bounded request");
+            let mut request = BufReader::new(&mut stream);
+            let mut line = String::new();
+            loop {
+                assert_ne!(request.read_line(&mut line).expect("request header"), 0);
+                if line == "\r\n" {
+                    break;
+                }
+                assert!(!line.to_ascii_lowercase().starts_with("authorization:"));
+                line.clear();
+            }
+            stream
+                .write_all(b"HTTP/1.1 401 Unauthorized\r\nWWW-Authenticate: Basic realm=\"fixture\"\r\nContent-Length: 0\r\nConnection: close\r\n\r\n")
+                .expect("authentication challenge");
+        });
+        let url = format!("http://{address}/private.git");
+        let output = Command::new(crate::vcs_cli())
+            .current_dir(&fixture.0)
+            .env("GIT_CONFIG_NOSYSTEM", "1")
+            .env("GIT_CONFIG_GLOBAL", &config)
+            .env("GIT_TERMINAL_PROMPT", "0")
+            .env("NO_PROXY", "127.0.0.1")
+            .env("no_proxy", "127.0.0.1")
+            .env_remove("GIT_CONFIG_COUNT")
+            .env_remove("GIT_CONFIG_PARAMETERS")
+            .env_remove("GIT_ASKPASS")
+            .env_remove("SSH_ASKPASS")
+            .args(["--lang", locale, "clone", &url])
+            .output()
+            .expect("clone with noninteractive credentials");
+        challenge.join().expect("authentication fixture");
+        assert_eq!(output.status.code(), Some(1));
+        assert_eq!(output.stdout, [] as [u8; 0]);
+        let diagnostic = text(&output.stderr);
+        assert!(diagnostic.contains(expected), "{diagnostic}");
+        assert!(!diagnostic.contains(&url));
+        assert!(!fixture.0.join("private").exists());
     }
 }
 

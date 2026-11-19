@@ -558,6 +558,59 @@ fn creates_all_types_in_both_locales() {
     }
 }
 
+/// A temporary unpacking platform never pins the new project or inherits a workspace pin.
+#[test]
+fn creation_can_defer_its_platform_after_unpacking_in_both_locales() {
+    for locale in ["ru", "en"] {
+        for workspace in [false, true] {
+            let fixture = TestDir::new();
+            let manifest = "# preserve\n[workspace]\nmembers = {}\n[build]\nplatform_version = '8.3.27.2325'\n";
+            if workspace {
+                fs::write(fixture.0.join("eska.toml"), manifest).unwrap();
+            }
+            let input = artifact(
+                &fixture.0,
+                "epf",
+                "ExternalDataProcessor",
+                "ВнутреннееИмя",
+                UUID,
+            );
+            let before = fs::read(&input).unwrap();
+            let mut args = vec![
+                "new",
+                "deferred",
+                "--from",
+                "incoming.epf",
+                "--platform-version",
+                "",
+            ];
+            if !workspace {
+                args.extend(["--workflow", "trunk"]);
+            }
+            let output = run(&fixture.0, &fixture, locale, &args);
+            assert!(output.status.success(), "{output:?}");
+            let progress = String::from_utf8_lossy(&output.stderr);
+            assert!(progress.contains("8.3.27.2325"), "{progress}");
+            let root = fixture.0.join(if workspace {
+                "src/deferred"
+            } else {
+                "deferred"
+            });
+            let config = fs::read_to_string(root.join("eska.toml")).unwrap();
+            assert!(config.contains("platform_version = \"\""), "{config}");
+            assert!(root.join("src/incoming.xml").is_file());
+            assert_eq!(fs::read(input).unwrap(), before);
+            if workspace {
+                let updated = fs::read_to_string(fixture.0.join("eska.toml")).unwrap();
+                assert!(
+                    updated.contains("platform_version = '8.3.27.2325'"),
+                    "{updated}"
+                );
+            }
+        }
+    }
+}
+
 /// Workspace onboarding inherits the version and preserves the root manifest's comments.
 #[test]
 fn creates_workspace_member_with_inherited_platform() {
