@@ -33,18 +33,38 @@ pub enum DiscoveryContext {
 /// # Errors
 /// Returns a structured project, manifest, member layout, or inheritance error.
 pub fn discover_context(start: &Path) -> Result<DiscoveryContext, ContextDiscoveryError> {
-    let start = canonicalize(start).map_err(ContextDiscoveryError::Project)?;
-    if !metadata(&start)
-        .map_err(ContextDiscoveryError::Project)?
-        .is_dir()
-    {
-        return Err(ContextDiscoveryError::Project(
-            DiscoveryError::StartNotDirectory { path: start },
-        ));
-    }
+    let start = canonicalize_directory(start).map_err(ContextDiscoveryError::Project)?;
+    find_context(&start, None)?.ok_or(ContextDiscoveryError::Project(DiscoveryError::NotFound {
+        start,
+    }))
+}
 
-    let (nearest_root, nearest_path, nearest) = find_nearest_manifest(&start)?;
-    resolve_manifest(&nearest_root, &nearest_path, nearest)
+/// Find a project or workspace without searching above an inclusive directory boundary.
+///
+/// Both paths are canonicalized. A missing manifest inside the boundary returns `None`.
+/// An existing invalid manifest remains authoritative.
+///
+/// # Errors
+/// Returns discovery errors, including invalid input when `start` is outside `boundary`.
+pub fn discover_context_within(
+    start: &Path,
+    boundary: &Path,
+) -> Result<Option<DiscoveryContext>, ContextDiscoveryError> {
+    let (start, boundary) =
+        bounded_directories(start, boundary).map_err(ContextDiscoveryError::Project)?;
+    find_context(&start, Some(&boundary))
+}
+
+fn find_context(
+    start: &Path,
+    boundary: Option<&Path>,
+) -> Result<Option<DiscoveryContext>, ContextDiscoveryError> {
+    let Some((root, path)) =
+        nearest_manifest(start.ancestors(), boundary).map_err(ContextDiscoveryError::Project)?
+    else {
+        return Ok(None);
+    };
+    resolve_manifest_within(root, &path, load_manifest(&path)?, boundary).map(Some)
 }
 
 /// Validate a candidate at its existing project root without first writing it to disk.
@@ -52,6 +72,15 @@ pub(crate) fn resolve_manifest(
     nearest_root: &Path,
     nearest_path: &Path,
     nearest: ManifestConfig,
+) -> Result<DiscoveryContext, ContextDiscoveryError> {
+    resolve_manifest_within(nearest_root, nearest_path, nearest, None)
+}
+
+fn resolve_manifest_within(
+    nearest_root: &Path,
+    nearest_path: &Path,
+    nearest: ManifestConfig,
+    boundary: Option<&Path>,
 ) -> Result<DiscoveryContext, ContextDiscoveryError> {
     match nearest {
         ManifestConfig::Workspace(config) => {
@@ -63,47 +92,26 @@ pub(crate) fn resolve_manifest(
             })
         }
         ManifestConfig::Project(config) => {
-            for ancestor in nearest_root.parent().into_iter().flat_map(Path::ancestors) {
-                let path = ancestor.join(FILE_NAME);
-                match fs::symlink_metadata(&path) {
-                    Ok(_) => {
-                        let manifest = load_manifest(&path)?;
-                        return match manifest {
-                            ManifestConfig::Project(_) => {
-                                load_project_config(nearest_root, nearest_path, config)
-                                    .map(DiscoveryContext::Standalone)
-                                    .map_err(ContextDiscoveryError::Project)
-                            }
-                            ManifestConfig::Workspace(workspace_config) => {
-                                let workspace = load_workspace(
-                                    ancestor,
-                                    &workspace_config,
-                                    Some((nearest_root, &config)),
-                                )?;
-                                let current_member = workspace
-                                    .members()
-                                    .iter()
-                                    .find(|member| member.root() == nearest_root)
-                                    .map(|member| member.name().clone())
-                                    .ok_or_else(|| ContextDiscoveryError::UnlistedProject {
-                                        project: nearest_root.to_path_buf(),
-                                        workspace: ancestor.to_path_buf(),
-                                    })?;
-                                Ok(DiscoveryContext::Workspace {
-                                    workspace,
-                                    current_member: Some(current_member),
-                                })
-                            }
-                        };
-                    }
-                    Err(error) if error.kind() == io::ErrorKind::NotFound => {}
-                    Err(source) => {
-                        return Err(ContextDiscoveryError::Project(DiscoveryError::Io {
-                            path,
-                            source,
-                        }));
-                    }
-                }
+            if let Some((ancestor, path)) =
+                nearest_manifest(nearest_root.ancestors().skip(1), boundary)
+                    .map_err(ContextDiscoveryError::Project)?
+                && let ManifestConfig::Workspace(workspace_config) = load_manifest(&path)?
+            {
+                let workspace =
+                    load_workspace(ancestor, &workspace_config, Some((nearest_root, &config)))?;
+                let current_member = workspace
+                    .members()
+                    .iter()
+                    .find(|member| member.root() == nearest_root)
+                    .map(|member| member.name().clone())
+                    .ok_or_else(|| ContextDiscoveryError::UnlistedProject {
+                        project: nearest_root.to_path_buf(),
+                        workspace: ancestor.to_path_buf(),
+                    })?;
+                return Ok(DiscoveryContext::Workspace {
+                    workspace,
+                    current_member: Some(current_member),
+                });
             }
             load_project_config(nearest_root, nearest_path, config)
                 .map(DiscoveryContext::Standalone)
@@ -112,28 +120,20 @@ pub(crate) fn resolve_manifest(
     }
 }
 
-fn find_nearest_manifest(
-    start: &Path,
-) -> Result<(PathBuf, PathBuf, ManifestConfig), ContextDiscoveryError> {
-    for root in start.ancestors() {
+fn nearest_manifest<'a>(
+    ancestors: impl Iterator<Item = &'a Path>,
+    boundary: Option<&Path>,
+) -> Result<Option<(&'a Path, PathBuf)>, DiscoveryError> {
+    for root in ancestors.take_while(|root| boundary.is_none_or(|bound| root.starts_with(bound))) {
         let path = root.join(FILE_NAME);
+        // A dangling link is a broken manifest, so its error must stop discovery.
         match fs::symlink_metadata(&path) {
-            Ok(_) => {
-                let manifest = load_manifest(&path)?;
-                return Ok((root.to_path_buf(), path, manifest));
-            }
+            Ok(_) => return Ok(Some((root, path))),
             Err(error) if error.kind() == io::ErrorKind::NotFound => {}
-            Err(source) => {
-                return Err(ContextDiscoveryError::Project(DiscoveryError::Io {
-                    path,
-                    source,
-                }));
-            }
+            Err(source) => return Err(DiscoveryError::Io { path, source }),
         }
     }
-    Err(ContextDiscoveryError::Project(DiscoveryError::NotFound {
-        start: start.to_path_buf(),
-    }))
+    Ok(None)
 }
 
 fn load_manifest(path: &Path) -> Result<ManifestConfig, ContextDiscoveryError> {
@@ -343,22 +343,41 @@ fn resolve_member_configuration(
 /// project, invalid configuration, or sources outside the project root.
 pub fn discover(start: &Path) -> Result<Project, DiscoveryError> {
     let start = canonicalize_directory(start)?;
-    for root in start.ancestors() {
-        if let Some(project) = find_project_at(root)? {
-            return Ok(project);
-        }
-    }
-    Err(DiscoveryError::NotFound { start })
+    find_project(&start, None)?.ok_or(DiscoveryError::NotFound { start })
 }
 
-/// Loads a project at the given directory without searching its ancestors.
-///
-/// Returns `None` when there is no manifest at that root.
+/// Find the nearest standalone project manifest inside the inclusive boundary.
 ///
 /// # Errors
-/// Returns a structured error for an invalid directory or project.
-pub fn discover_at_root(root: &Path) -> Result<Option<Project>, DiscoveryError> {
-    find_project_at(&canonicalize_directory(root)?)
+/// Returns the same project validation errors as [`discover`], or an error when
+/// `start` is outside the boundary.
+pub fn discover_within(start: &Path, boundary: &Path) -> Result<Option<Project>, DiscoveryError> {
+    let (start, boundary) = bounded_directories(start, boundary)?;
+    find_project(&start, Some(&boundary))
+}
+
+fn find_project(start: &Path, boundary: Option<&Path>) -> Result<Option<Project>, DiscoveryError> {
+    nearest_manifest(start.ancestors(), boundary)?
+        .map(|(root, path)| load_project(root, &path))
+        .transpose()
+}
+
+fn bounded_directories(
+    start: &Path,
+    boundary: &Path,
+) -> Result<(PathBuf, PathBuf), DiscoveryError> {
+    let start = canonicalize_directory(start)?;
+    let boundary = canonicalize_directory(boundary)?;
+    if !start.starts_with(&boundary) {
+        return Err(DiscoveryError::Io {
+            path: start,
+            source: io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "start is outside discovery boundary",
+            ),
+        });
+    }
+    Ok((start, boundary))
 }
 
 fn canonicalize_directory(path: &Path) -> Result<PathBuf, DiscoveryError> {
@@ -367,16 +386,6 @@ fn canonicalize_directory(path: &Path) -> Result<PathBuf, DiscoveryError> {
         return Err(DiscoveryError::StartNotDirectory { path });
     }
     Ok(path)
-}
-
-fn find_project_at(root: &Path) -> Result<Option<Project>, DiscoveryError> {
-    let path = root.join(FILE_NAME);
-    // A dangling link is a broken manifest, so its error must stop discovery.
-    match fs::symlink_metadata(&path) {
-        Ok(_) => load_project(root, &path).map(Some),
-        Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(None),
-        Err(source) => Err(DiscoveryError::Io { path, source }),
-    }
 }
 
 fn load_project(root: &Path, path: &Path) -> Result<Project, DiscoveryError> {
@@ -507,19 +516,107 @@ mod tests {
     use super::*;
     use crate::test_support::TestDir;
 
+    const PROJECT: &str = "[project]\nname = 'member'\ntype = 'report'\nsource = '.'\n";
+    const WORKSPACE: &str = "[workspace]\n[workspace.members.app]\nexternal_objects = ['member']\n";
+
     #[test]
-    fn root_discovery_ignores_parent_manifest_and_rejects_a_manifest_directory() {
+    fn bounded_discovery_stops_both_searches_at_the_repository_root() {
+        let fixture = TestDir::new();
+        fs::write(fixture.0.join(FILE_NAME), "invalid parent manifest").expect("parent");
+        let repository = fixture.0.join("nested-git");
+        let nested = repository.join("nested");
+        fs::create_dir_all(repository.join(".git")).expect("Git boundary");
+        fs::create_dir(&nested).expect("nested directory");
+        assert!(
+            discover_context_within(&nested, &repository)
+                .expect("missing")
+                .is_none()
+        );
+        fs::write(repository.join(FILE_NAME), PROJECT).expect("project");
+        assert!(matches!(
+            discover_context_within(&nested, &repository).expect("bounded project"),
+            Some(DiscoveryContext::Standalone(project)) if project.root() == repository
+        ));
+        assert!(
+            discover_context(&nested).is_err(),
+            "unbounded parent validation stays intact"
+        );
+    }
+
+    #[test]
+    fn bounded_workspace_discovery_includes_boundary_and_validates_members() {
+        let fixture = TestDir::new();
+        let root = &fixture.0;
+        let member = root.join("member");
+        fs::create_dir(&member).expect("member");
+        fs::write(root.join(FILE_NAME), WORKSPACE).expect("workspace");
+        fs::write(member.join(FILE_NAME), PROJECT).expect("project");
+        assert!(matches!(
+            discover_context_within(root, root).expect("workspace"),
+            Some(DiscoveryContext::Workspace { workspace, current_member: None })
+                if workspace.members().len() == 1
+        ));
+        assert!(matches!(
+            discover_context_within(&member, root).expect("member workspace"),
+            Some(DiscoveryContext::Workspace {
+                current_member: Some(_),
+                ..
+            })
+        ));
+        assert!(matches!(
+            discover_context_within(&member, &member).expect("nested Git boundary"),
+            Some(DiscoveryContext::Standalone(_))
+        ));
+        fs::write(member.join(FILE_NAME), "broken = [").expect("invalid member");
+        assert!(discover_context_within(root, root).is_err());
+    }
+
+    #[test]
+    fn bounded_discovery_rejects_invalid_nearest_manifests_and_outside_start() {
+        let fixture = TestDir::new();
+        let root = fixture.0.join("repository");
+        fs::create_dir(&root).expect("repository");
+        assert!(discover_context_within(&fixture.0, &root).is_err());
+        fs::create_dir(root.join(FILE_NAME)).expect("manifest directory");
+        assert!(matches!(
+            discover_context_within(&root, &root),
+            Err(ContextDiscoveryError::Project(
+                DiscoveryError::ConfigNotFile { .. }
+            ))
+        ));
+        fs::remove_dir(root.join(FILE_NAME)).expect("remove manifest directory");
+        fs::write(root.join(FILE_NAME), "broken = [").expect("invalid manifest");
+        assert!(matches!(
+            discover_context_within(&root, &root),
+            Err(ContextDiscoveryError::Manifest { .. })
+        ));
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn bounded_discovery_does_not_skip_a_dangling_manifest() {
+        let fixture = TestDir::new();
+        std::os::unix::fs::symlink("missing", fixture.0.join(FILE_NAME))
+            .expect("dangling manifest");
+        assert!(matches!(
+            discover_context_within(&fixture.0, &fixture.0),
+            Err(ContextDiscoveryError::Project(DiscoveryError::Io { .. }))
+        ));
+    }
+
+    #[test]
+    fn bounded_single_project_ignores_parent_manifest_and_rejects_a_manifest_directory() {
         let fixture = TestDir::new();
         fs::write(fixture.0.join(FILE_NAME), "invalid parent TOML").expect("parent manifest");
         let root = fixture.0.join("clone");
         fs::create_dir(&root).expect("clone root");
 
-        assert!(discover_at_root(&root).expect("root check").is_none());
+        assert!(discover_within(&root, &root).expect("root check").is_none());
 
         let manifest = root.join(FILE_NAME);
         fs::create_dir(&manifest).expect("manifest directory");
         assert!(matches!(
-            discover_at_root(&root),
+            discover_within(&root, &root),
             Err(DiscoveryError::ConfigNotFile { path }) if path == manifest
         ));
     }

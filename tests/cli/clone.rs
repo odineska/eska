@@ -96,6 +96,74 @@ fn eska_without_helpers(base: &Path, locale: &str, args: &[&str]) -> Output {
 }
 
 #[test]
+fn workspace_clone_validates_members_without_reading_the_parent_workspace() {
+    for (locale, expected) in [("ru", "Проект клонирован"), ("en", "Project cloned")]
+    {
+        let (_source_fixture, source) = source_repository(Some(
+            "[workspace]\n[workspace.members.app]\nconfiguration = 'member'\n",
+        ));
+        fs::create_dir_all(source.join("member/src")).expect("member sources");
+        fs::write(source.join("member/src/object.xml"), "<object/>\n").expect("member source");
+        fs::write(
+            source.join("member/eska.toml"),
+            "[project]\nname = 'member'\ntype = 'configuration'\n",
+        )
+        .expect("member manifest");
+        git_ok(&source, &["add", "."]);
+        git_ok(&source, &["commit", "-m", "workspace member"]);
+        let destination_fixture = TestDir::new();
+        git_ok(
+            &destination_fixture.0,
+            &["init", "--initial-branch=main", "--template="],
+        );
+        fs::write(
+            destination_fixture.0.join("eska.toml"),
+            "invalid parent workspace = [",
+        )
+        .expect("parent workspace");
+        let output = eska(
+            &destination_fixture.0,
+            locale,
+            &["clone", source.to_str().expect("source path"), "nested"],
+        );
+        assert!(output.status.success(), "{}", text(&output.stderr));
+        assert_eq!(output.stderr, [] as [u8; 0]);
+        assert!(text(&output.stdout).contains(expected));
+        assert!(
+            destination_fixture
+                .0
+                .join("nested/member/src/object.xml")
+                .is_file()
+        );
+        assert!(gix::open(destination_fixture.0.join("nested")).is_ok());
+    }
+}
+
+#[test]
+fn invalid_workspace_member_warns_and_preserves_clone() {
+    for locale in ["ru", "en"] {
+        let (_source_fixture, source) = source_repository(Some(
+            "[workspace]\n[workspace.members.app]\nconfiguration = 'missing-member'\n",
+        ));
+        let destination_fixture = TestDir::new();
+        let output = eska(
+            &destination_fixture.0,
+            locale,
+            &[
+                "clone",
+                source.to_str().expect("source path"),
+                "invalid-workspace",
+            ],
+        );
+        assert!(output.status.success(), "{}", text(&output.stderr));
+        assert!(text(&output.stderr).starts_with("WARN "));
+        let destination = destination_fixture.0.join("invalid-workspace");
+        assert!(destination.join("eska.toml").is_file());
+        assert!(gix::open(destination).is_ok());
+    }
+}
+
+#[test]
 fn clones_local_path_and_file_url_in_both_locales() {
     for (locale, expected, as_url) in [
         ("ru", "Проект клонирован", false),

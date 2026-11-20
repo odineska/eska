@@ -8,10 +8,7 @@ use std::{
 
 use gix::bstr::ByteSlice;
 
-use super::{
-    Project,
-    discovery::{self, DiscoveryError},
-};
+use super::discovery::{self, ContextDiscoveryError, DiscoveryContext};
 use crate::vcs::network;
 
 /// A validated clone request which has not changed the filesystem yet.
@@ -79,7 +76,7 @@ pub fn inspect(
 #[derive(Debug)]
 pub struct CloneOutcome {
     pub destination: PathBuf,
-    pub project: Result<Option<Project>, DiscoveryError>,
+    pub context: Result<Option<DiscoveryContext>, ContextDiscoveryError>,
 }
 
 /// Clone, fetch and check out a planned repository through `gix`.
@@ -110,10 +107,10 @@ pub(crate) fn execute_with_progress(
     if let Err(original) = checkout {
         return Err(rollback(destination, original));
     }
-    let project = discovery::discover_at_root(&destination);
+    let context = discovery::discover_context_within(&destination, &destination);
     Ok(CloneOutcome {
         destination,
-        project,
+        context,
     })
 }
 

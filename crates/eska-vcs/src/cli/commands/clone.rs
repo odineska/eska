@@ -37,7 +37,7 @@ impl CloneHandler<'_> {
         });
         match result {
             Ok(outcome) => {
-                let (message, warning) = match outcome.project {
+                let (message, warning) = match outcome.context {
                     Ok(Some(_)) => ("clone-created", None),
                     Ok(None) => (
                         "clone-repository-created",
@@ -49,7 +49,7 @@ impl CloneHandler<'_> {
                     ),
                     Err(error) => (
                         "clone-repository-created",
-                        Some(diagnostics::present_project_error(&error, localizer)),
+                        Some(diagnostics::present_context_error(&error, localizer)),
                     ),
                 };
                 println!("{}", path_message(localizer, message, &outcome.destination));
