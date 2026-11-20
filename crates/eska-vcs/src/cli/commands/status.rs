@@ -19,9 +19,14 @@ use crate::{
         localization::Localizer,
     },
     project::{
-        discovery::{self, DiscoveryContext},
+        RepositoryContextError,
+        discovery::DiscoveryContext,
+        repository_context, selected_repository,
         selection::{SelectionIntent, select_projects},
-        status::{self, ChangeSummary, HeadState, ProjectStatus, StatusError, WorkspaceStatus},
+        status::{
+            self, ChangeSummary, HeadState, ProjectStatus, RepositoryStatus, StatusError,
+            WorkspaceStatus,
+        },
     },
 };
 
@@ -32,12 +37,32 @@ struct StatusHandler<'a> {
 impl StatusHandler<'_> {
     /// Execute the selected VCS operation with localized presentation.
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
-        let context = match discovery::discover_context(project_dir) {
+        let (repository, context) = match repository_context(project_dir) {
             Ok(context) => context,
-            Err(error) => {
+            Err(RepositoryContextError::Project(error)) => {
                 eprintln!("{}", diagnostics::present_context_error(&error, localizer));
                 return ExitCode::FAILURE;
             }
+            Err(RepositoryContextError::Repository(error)) => {
+                eprintln!(
+                    "{}",
+                    present_error(&StatusError::Repository(error), localizer)
+                );
+                return ExitCode::FAILURE;
+            }
+        };
+        let Some(context) = context else {
+            if !self.args.project.is_empty() || self.args.workspace {
+                eprintln!("{}", localizer.text("vcs-project-required"));
+                return ExitCode::FAILURE;
+            }
+            return match status::inspect_repository(&repository) {
+                Ok(status) => self.render_repository(&status, localizer),
+                Err(error) => {
+                    eprintln!("{}", present_error(&error, localizer));
+                    ExitCode::FAILURE
+                }
+            };
         };
         let selection = match select_projects(
             &context,
@@ -59,7 +84,12 @@ impl StatusHandler<'_> {
                 eprintln!("{}", localizer.text("project-selector-single-required"));
                 return ExitCode::FAILURE;
             };
-            let status = match status::inspect(selected.project()) {
+            let result = selected_repository(repository, &context, *selected)
+                .map_err(StatusError::Repository)
+                .and_then(|repository| {
+                    status::inspect_with_repository(selected.project(), &repository)
+                });
+            let status = match result {
                 Ok(status) => status,
                 Err(error) => {
                     eprintln!("{}", present_error(&error, localizer));
@@ -88,8 +118,12 @@ impl StatusHandler<'_> {
         }
         let include_workspace_files =
             self.args.workspace || (self.args.project.is_empty() && current_member.is_none());
-        let status = match status::inspect_workspace(workspace, &selected, include_workspace_files)
-        {
+        let status = match status::inspect_workspace_with_repository(
+            workspace,
+            &selected,
+            include_workspace_files,
+            &repository,
+        ) {
             Ok(status) => status,
             Err(error) => {
                 eprintln!("{}", present_error(&error, localizer));
@@ -97,6 +131,25 @@ impl StatusHandler<'_> {
             }
         };
         self.render_workspace(&status, localizer)
+    }
+
+    fn render_repository(&self, status: &RepositoryStatus, localizer: &Localizer) -> ExitCode {
+        match self.args.format {
+            OutputFormat::Human => println!(
+                "{}",
+                render_repository_human(status, localizer, styling_enabled())
+            ),
+            OutputFormat::Json => {
+                let Ok(json) =
+                    serde_json::to_string_pretty(&RepositoryStatusDocument::from(status))
+                else {
+                    eprintln!("{}", localizer.text("status-json-error"));
+                    return ExitCode::FAILURE;
+                };
+                println!("{json}");
+            }
+        }
+        ExitCode::SUCCESS
     }
 
     fn render_project(&self, status: &ProjectStatus, localizer: &Localizer) -> ExitCode {
@@ -141,6 +194,37 @@ fn present_error(error: &StatusError, localizer: &Localizer) -> String {
         StatusError::Repository(_) => "status-repository-error",
         StatusError::ProjectOutsideRepository { .. } => "status-project-outside-repository",
     })
+}
+
+fn render_repository_human(
+    status: &RepositoryStatus,
+    localizer: &Localizer,
+    styled: bool,
+) -> String {
+    let head = localizer.text(match status.head {
+        HeadState::Attached => "status-head-attached",
+        HeadState::Detached => "status-head-detached",
+        HeadState::Unborn => "status-head-unborn",
+    });
+    let branch = status
+        .branch
+        .as_ref()
+        .map_or_else(|| "—".to_owned(), ToString::to_string);
+    let mut lines = render_fields(
+        &[
+            (
+                localizer.text("status-repository"),
+                status.root.display().to_string(),
+            ),
+            (localizer.text("status-head"), head),
+            (localizer.text("status-branch"), branch),
+        ],
+        "",
+        styled,
+    );
+    lines.extend([String::new(), section(localizer, "status-changes", styled)]);
+    append_changes(&mut lines, status.changes, localizer, styled);
+    lines.join("\n")
 }
 
 fn render_human(status: &ProjectStatus, localizer: &Localizer, styled: bool) -> String {
@@ -432,6 +516,40 @@ fn workflow_key(workflow: &str) -> &'static str {
         "github-flow" => "new-workflow-github-flow",
         "custom" => "new-workflow-custom",
         _ => unreachable!("all workflow presets have a localization key"),
+    }
+}
+
+#[derive(Serialize)]
+struct RepositoryStatusDocument {
+    schema_version: u8,
+    repository: RepositoryDocument,
+    changes: ChangeDocument,
+}
+
+#[derive(Serialize)]
+struct RepositoryDocument {
+    root: String,
+    root_encoding: &'static str,
+    head: &'static str,
+    branch: Option<String>,
+    branch_encoding: Option<&'static str>,
+}
+
+impl From<&RepositoryStatus> for RepositoryStatusDocument {
+    fn from(status: &RepositoryStatus) -> Self {
+        let (root, root_encoding) = json_path(status.root.as_os_str());
+        let (branch, branch_encoding) = json_branch(status.branch.as_ref());
+        Self {
+            schema_version: 4,
+            repository: RepositoryDocument {
+                root,
+                root_encoding,
+                head: head_name(status.head),
+                branch,
+                branch_encoding,
+            },
+            changes: ChangeDocument::from(status.changes),
+        }
     }
 }
 

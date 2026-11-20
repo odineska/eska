@@ -76,11 +76,15 @@ Restore требует совпадения branch/base и отсутствия 
 сохраняет единственную копию состояния. BOM/CRLF и произвольные Git path bytes
 проходят через прежний контракт. [Подробности workflow и полок](roadmap/05-safe-vcs.md).
 
-JSON полностью сохраняет текущие схемы: status 3; текущий file diff 1;
-revision file diff 2; semantic diff 4; history и полки 1. Одиночные и workspace
-варианты используют эти же версии. Выделение executable не меняет schema.
-JSON независим от locale,
-обратимые кодировки путей и Git-строк сохранены. Human-вывод и ошибки доступны
+В обычном Git-репозитории без манифеста `status --format json` возвращает схему 4
+с полями `schema_version`, `repository` и `changes`. Объект `repository` содержит
+`root`, `root_encoding`, состояние `head` (`attached`, `detached` или `unborn`),
+`branch` и `branch_encoding`. При detached HEAD оба поля ветки равны `null`.
+`changes` содержит счётчики для всего рабочего дерева.
+
+Для проекта и workspace `status` использует схему 3. У текущего файлового diff
+схема 1, у сравнения ревизий 2, у semantic diff 4, у истории и полок 1.
+JSON независим от локали и сохраняет обратимые кодировки путей и Git-строк. Human-вывод и ошибки доступны
 на русском и английском; redirect/NO_COLOR подавляет оформление.
 Exit 0 — успех, 1 — отказ операции, 2 — ошибка аргументов.
 
