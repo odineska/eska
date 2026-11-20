@@ -20,6 +20,10 @@ enum Event {
     Start {
         total_files: usize,
         version: String,
+        #[serde(default)]
+        line_base: u8,
+        #[serde(default)]
+        column_base: u8,
     },
     File {
         path: PathBuf,
@@ -39,6 +43,13 @@ enum Event {
 struct Baseline {
     state: String,
     complete: bool,
+}
+
+fn valid_diagnostic(diagnostic: &Diagnostic) -> bool {
+    !diagnostic.code.is_empty()
+        && !diagnostic.message.is_empty()
+        && (diagnostic.start_line, diagnostic.start_column)
+            <= (diagnostic.end_line, diagnostic.end_column)
 }
 
 /// Drain rejected stdout until the child exits; the process owner still enforces its deadline.
@@ -92,12 +103,17 @@ fn parse(
             Event::Start {
                 total_files,
                 version,
+                line_base,
+                column_base,
             } if !started => {
                 if total_files != expected.len() || total_files == 0 {
                     return Err(invalid("source_count"));
                 }
                 if version != expected_version {
                     return Err(invalid("stream_version"));
+                }
+                if line_base != 0 || column_base != 0 {
+                    return Err(invalid("coordinate_base"));
                 }
                 started = true;
             }
@@ -112,15 +128,8 @@ fn parse(
                 if error.is_some() {
                     return Err(invalid("file_error"));
                 }
-                for diagnostic in &diagnostics {
-                    if diagnostic.code.is_empty()
-                        || diagnostic.message.is_empty()
-                        || diagnostic.start_line > diagnostic.end_line
-                        || (diagnostic.start_line == diagnostic.end_line
-                            && diagnostic.start_column > diagnostic.end_column)
-                    {
-                        return Err(invalid("diagnostic"));
-                    }
+                if !diagnostics.iter().all(valid_diagnostic) {
+                    return Err(invalid("diagnostic"));
                 }
                 diagnostics_count += diagnostics.len() as u64;
                 if files.insert(path, diagnostics).is_some() {
@@ -144,7 +153,7 @@ fn parse(
                     return Err(invalid("incomplete_counts"));
                 }
                 if baseline.is_some_and(|baseline| {
-                    baseline.state != "disabled" && (baseline.state != "full" || !baseline.complete)
+                    !baseline.complete || !matches!(baseline.state.as_str(), "disabled" | "full")
                 }) {
                     return Err(invalid("partial_baseline"));
                 }
@@ -199,6 +208,49 @@ mod tests {
                 reason: "stream_version"
             })
         ));
+    }
+
+    #[test]
+    fn accepts_implicit_and_explicit_zero_based_coordinates() {
+        let expected = BTreeSet::from([PathBuf::from("/selected/Module.bsl")]);
+        let mut values = events();
+        let legacy = read(stream(&values).as_slice(), &expected, "0.4.0").unwrap();
+        values[0]["line_base"] = json!(0);
+        values[0]["column_base"] = json!(0);
+        let current = read(stream(&values).as_slice(), &expected, "0.4.0").unwrap();
+        assert_eq!(legacy[0].diagnostics, current[0].diagnostics);
+        for field in ["line_base", "column_base"] {
+            values[0][field] = json!(1);
+            assert!(matches!(
+                read(stream(&values).as_slice(), &expected, "0.4.0"),
+                Err(Failure::Stream {
+                    reason: "coordinate_base"
+                })
+            ));
+            values[0][field] = json!(0);
+        }
+    }
+
+    #[test]
+    fn only_complete_disabled_or_full_baselines_can_finish_a_report() {
+        let expected = BTreeSet::from([PathBuf::from("/selected/Module.bsl")]);
+        for state in ["disabled", "full", "partial", "error", "unknown"] {
+            for complete in [true, false] {
+                let mut values = events();
+                values[2]["baseline"] = json!({"state": state, "complete": complete});
+                let result = read(stream(&values).as_slice(), &expected, "0.4.0");
+                if complete && matches!(state, "disabled" | "full") {
+                    assert!(result.is_ok());
+                } else {
+                    assert!(matches!(
+                        result,
+                        Err(Failure::Stream {
+                            reason: "partial_baseline"
+                        })
+                    ));
+                }
+            }
+        }
     }
 
     /// Current upstream Sonar severities must survive complete stream validation as public errors.
