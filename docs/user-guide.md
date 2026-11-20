@@ -172,12 +172,12 @@ cargo build --workspace --bins --release --locked
 каталогах PATH. Относительные PATH entries пропускаются. Явно заданный путь
 не имеет fallback: его исчезновение или несовместимость требует исправить настройку.
 
-Анализатор должен быть именно совместимым `bsl-analyzer-app` с командами `contract`,
-`check-config`, `analyze --format jsonl` и `lsp --mode stdio`. ESKA проверяет контракт,
-а не только имя файла. Для текущих примеров использована версия 0.4.2; наличие
-готового upstream asset для вашей ОС/CPU проверяется отдельно. Соседняя
-архитектура автоматически не подставляется. Совместимую локальную сборку можно
-указать в `eska.explorer.analyzerExecutable` и CLI `--analyzer`.
+Анализатору нужны команды `contract`, `check-config`, `analyze --format jsonl`
+и `lsp --mode stdio`. CLI проверен с `bsl-analyzer-app` 0.4.2 и 0.4.6.
+Совместимую сборку для вашей ОС и архитектуры можно указать в
+`eska.explorer.analyzerExecutable` и CLI `--analyzer`. Каталог правил и их
+уровни доступны в **Настройки проекта → Анализ BSL**.
+[Настройки анализатора](analyzer-configuration.md).
 
 ### Одна машина, Remote и работа без сети
 
