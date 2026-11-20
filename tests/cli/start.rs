@@ -225,3 +225,72 @@ fn help_and_invalid_task_are_localized() {
         assert!(text(&output.stderr).contains(invalid));
     }
 }
+
+/// Mutating workflow commands must never select an outer project from a nested repository.
+#[test]
+fn workflow_mutations_do_not_escape_a_nested_git_repository() {
+    for locale in ["en", "ru"] {
+        for arguments in [
+            vec!["start", "FI-99"],
+            vec!["switch", "--base"],
+            vec!["save", "-m", "nested invocation"],
+            vec!["finish"],
+        ] {
+            let (_fixture, root) = local_project("trunk");
+            fs::write(root.join(".gitignore"), "nested/\n").unwrap();
+            git_ok(&root, &["add", ".gitignore"]);
+            git_ok(&root, &["commit", "-m", "ignore nested repository"]);
+            if arguments[0] == "switch" || arguments[0] == "finish" {
+                git_ok(&root, &["switch", "-c", "task/FI-34"]);
+            }
+            if arguments[0] == "save" {
+                fs::write(root.join("src/change.bsl"), "// outer change\n").unwrap();
+            }
+            let nested = root.join("nested");
+            fs::create_dir(&nested).unwrap();
+            git_ok(&nested, &["init", "--initial-branch=main"]);
+            fs::write(nested.join("nested.txt"), "base\n").unwrap();
+            git_ok(&nested, &["add", "."]);
+            git_ok(&nested, &["commit", "-m", "nested base"]);
+            fs::write(nested.join("nested.txt"), "staged change\n").unwrap();
+            git_ok(&nested, &["add", "nested.txt"]);
+            let protected = [
+                "HEAD",
+                "index",
+                "refs/heads/main",
+                "refs/heads/task/FI-34",
+                "refs/heads/task/FI-99",
+            ];
+            let snapshot = || {
+                [&root, &nested]
+                    .into_iter()
+                    .flat_map(|repository| {
+                        protected
+                            .iter()
+                            .map(move |path| fs::read(repository.join(".git").join(path)).ok())
+                    })
+                    .collect::<Vec<_>>()
+            };
+            let before = snapshot();
+            let output = eska(&nested, locale, &arguments);
+            assert_eq!(output.status.code(), Some(1), "{arguments:?}: {output:?}");
+            let message = text(&output.stderr);
+            assert!(message.contains("eska.toml"), "{message}");
+            let worktree = if locale == "ru" {
+                "рабочем дереве Git"
+            } else {
+                "Git worktree"
+            };
+            assert!(message.contains(worktree), "{message}");
+            assert_eq!(
+                snapshot(),
+                before,
+                "{arguments:?} changed repository metadata"
+            );
+            assert_eq!(
+                fs::read_to_string(nested.join(".git/HEAD")).unwrap(),
+                "ref: refs/heads/main\n"
+            );
+        }
+    }
+}

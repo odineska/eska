@@ -12,9 +12,9 @@ use crate::{
         localization::{LocalizationValue, Localizer},
     },
     project::{
-        Project, Workspace, diff,
-        discovery::{self, DiscoveryContext},
-        save,
+        Project, RepositoryContextError, Workspace, diff,
+        discovery::DiscoveryContext,
+        required_repository_context, save,
         selection::{SelectionIntent, select_projects},
         semantic::{self, SemanticDiff, SemanticDiffError},
     },
@@ -28,10 +28,20 @@ struct SaveHandler<'a> {
 impl SaveHandler<'_> {
     /// Discover the project and save its complete current `ChangeSet`.
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
-        let context = match discovery::discover_context(project_dir) {
+        let context = match required_repository_context(project_dir) {
             Ok(context) => context,
-            Err(error) => {
-                eprintln!("{}", diagnostics::present_context_error(&error, localizer));
+            Err(RepositoryContextError::Repository(error)) => {
+                eprintln!(
+                    "{}",
+                    present_error(&save::SaveError::Repository(error), localizer)
+                );
+                return ExitCode::FAILURE;
+            }
+            Err(RepositoryContextError::Project(error)) => {
+                eprintln!(
+                    "{}",
+                    diagnostics::present_repository_context_error(&error, localizer)
+                );
                 return ExitCode::FAILURE;
             }
         };

@@ -6,7 +6,7 @@ use std::{path::Path, process::ExitCode};
 
 use crate::{
     cli::{diagnostics, localization::Localizer, progress},
-    project::{discovery, start},
+    project::{RepositoryContextError, repository_project, start},
     vcs::command,
 };
 
@@ -19,10 +19,20 @@ struct StartHandler<'a> {
 impl StartHandler<'_> {
     /// Execute the selected VCS operation with localized presentation.
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
-        let project = match discovery::discover(project_dir) {
+        let project = match repository_project(project_dir) {
             Ok(project) => project,
-            Err(error) => {
-                eprintln!("{}", diagnostics::present_project_error(&error, localizer));
+            Err(RepositoryContextError::Repository(error)) => {
+                eprintln!(
+                    "{}",
+                    present_error(&start::StartError::Repository(error), localizer)
+                );
+                return ExitCode::FAILURE;
+            }
+            Err(RepositoryContextError::Project(error)) => {
+                eprintln!(
+                    "{}",
+                    diagnostics::present_repository_context_error(&error, localizer)
+                );
                 return ExitCode::FAILURE;
             }
         };

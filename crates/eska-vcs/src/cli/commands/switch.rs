@@ -11,7 +11,7 @@ use crate::{
         localization::Localizer,
         shelves::{self, OutputFormat, ShelfDocument},
     },
-    project::{discovery, switch},
+    project::{RepositoryContextError, required_repository_context, switch},
 };
 
 struct SwitchHandler<'a> {
@@ -21,13 +21,20 @@ struct SwitchHandler<'a> {
 impl SwitchHandler<'_> {
     /// Present a repository-wide switch or its read-only preview.
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
-        let project = match discovery::discover_context(project_dir) {
+        let project = match required_repository_context(project_dir) {
             Ok(project) => project,
-            Err(error) => {
+            Err(RepositoryContextError::Repository(error)) => {
+                return shelves::fail(
+                    self.args.format,
+                    "repository",
+                    &present_error(&switch::SwitchError::Repository(error), localizer),
+                );
+            }
+            Err(RepositoryContextError::Project(error)) => {
                 return shelves::fail(
                     self.args.format,
                     "project-discovery",
-                    &diagnostics::present_context_error(&error, localizer),
+                    &diagnostics::present_repository_context_error(&error, localizer),
                 );
             }
         };
