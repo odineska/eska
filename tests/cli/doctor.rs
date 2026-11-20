@@ -559,3 +559,201 @@ fn run_git(root: &Path, arguments: &[&str]) {
         String::from_utf8_lossy(&output.stderr)
     );
 }
+
+/// A plain working repository needs no project manifest for independent Git diagnosis.
+#[cfg(unix)]
+#[test]
+fn plain_git_reports_optional_project_config_in_both_locales() {
+    let fixture = TestDir::new();
+    let root = fixture.0.join("repository");
+    fs::create_dir(&root).unwrap();
+    run_git(&root, &["init", "--initial-branch=main"]);
+    let tools = fixture.0.join("tools");
+    fs::create_dir(&tools).unwrap();
+    executable(&tools.join("git"), "#!/bin/sh\nexit 0\n");
+    for repository_info in [false, true] {
+        let mut command = Command::new(owner_binary("eska-vcs"));
+        command
+            .current_dir(&root)
+            .env("PATH", &tools)
+            .args(["__bridge", "doctor"]);
+        if repository_info {
+            command.arg("--repository-info");
+        }
+        let output = command.output().unwrap();
+        assert!(output.status.success(), "{output:?}");
+        let packet: Value = serde_json::from_slice(&output.stdout).unwrap();
+        if repository_info {
+            assert_eq!(packet["data"]["repository_available"], true);
+        } else {
+            assert_eq!(packet["data"].as_object().unwrap().len(), 2);
+        }
+    }
+    let mut documents = Vec::new();
+    for locale in ["en", "ru"] {
+        let output = doctor(&root, locale, &["--format", "json"], &tools);
+        assert!(output.status.success(), "{output:?}");
+        let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(document["schema_version"], 1);
+        assert_eq!(document["summary"]["failed"], 0);
+        assert!(document["checks"].as_array().unwrap().iter().any(|check| {
+            check["id"] == "project.config"
+                && check["status"] == "warning"
+                && check["code"] == "not-configured"
+                && check["remediation"] == "initialize-project"
+        }));
+        documents.push(document);
+        let human = doctor(&root, locale, &[], &tools);
+        assert!(human.status.success(), "{human:?}");
+        let human = String::from_utf8(human.stdout).unwrap();
+        assert!(
+            human
+                .lines()
+                .any(|line| line.starts_with("WARN ") && line.contains("eska.toml"))
+        );
+        assert!(human.contains("eska init"));
+    }
+    assert_eq!(documents[0], documents[1]);
+
+    let missing_git = doctor(&root, "en", &["--format", "json"], Path::new(""));
+    assert_eq!(missing_git.status.code(), Some(1), "{missing_git:?}");
+    let document: Value = serde_json::from_slice(&missing_git.stdout).unwrap();
+    assert_eq!(document["checks"][1]["status"], "warning");
+    assert!(
+        document["checks"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|check| { check["id"] == "vcs.git" && check["status"] == "fail" })
+    );
+
+    // Worktree-style Git files are boundaries as well as ordinary .git directories.
+    let git_directory = fixture.0.join("repository.git");
+    fs::rename(root.join(".git"), &git_directory).unwrap();
+    fs::write(
+        root.join(".git"),
+        format!("gitdir: {}\n", git_directory.display()),
+    )
+    .unwrap();
+    let output = doctor(&root, "en", &["--format", "json"], &tools);
+    assert!(output.status.success(), "{output:?}");
+
+    // An unrelated outer manifest must not turn a nested repository into its project.
+    fs::write(fixture.0.join("eska.toml"), "broken = [").unwrap();
+    let output = doctor(&root, "en", &["--format", "json"], &tools);
+    assert!(output.status.success(), "{output:?}");
+    for selectors in [vec!["--project", "missing"], vec!["--workspace"]] {
+        let mut arguments = selectors;
+        arguments.extend(["--format", "json"]);
+        let output = doctor(&root, "en", &arguments, &tools);
+        assert_eq!(output.status.code(), Some(1), "{output:?}");
+        let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(document["checks"][1]["id"], "project.config");
+        assert_eq!(document["checks"][1]["status"], "fail");
+    }
+    fs::write(root.join("eska.toml"), "broken = [").unwrap();
+    let output = doctor(&root, "en", &["--format", "json"], &tools);
+    assert_eq!(output.status.code(), Some(1), "{output:?}");
+    let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(document["checks"][1]["code"], "invalid");
+}
+
+/// Neither a missing repository nor a broken Git marker can make project discovery optional.
+#[cfg(unix)]
+#[test]
+fn absent_or_broken_git_keeps_missing_project_config_fatal() {
+    let fixture = TestDir::new();
+    let tools = fixture.0.join("tools");
+    fs::create_dir(&tools).unwrap();
+    executable(&tools.join("git"), "#!/bin/sh\nexit 0\n");
+    for name in ["ordinary", "broken"] {
+        let root = fixture.0.join(name);
+        fs::create_dir(&root).unwrap();
+        if name == "broken" {
+            fs::write(root.join(".git"), "gitdir: missing\n").unwrap();
+        }
+        let output = doctor(&root, "en", &["--format", "json"], &tools);
+        assert_eq!(output.status.code(), Some(1), "{output:?}");
+        let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(document["checks"][1]["id"], "project.config");
+        assert_eq!(document["checks"][1]["status"], "fail");
+    }
+}
+
+/// Native prerequisites use the coordinator's boundary while old bridge inputs stay valid.
+#[cfg(unix)]
+#[test]
+fn native_doctor_boundary_ignores_external_projects_and_preserves_legacy_inputs() {
+    let (fixture, outer) = scaffold();
+    let nested = outer.join("nested-git");
+    fs::create_dir(&nested).unwrap();
+    run_git(&nested, &["init", "--initial-branch=main"]);
+    for locale in ["ru", "en"] {
+        let inspect = |boundary: bool| {
+            let mut command = Command::new(owner_binary("eska-build"));
+            command
+                .current_dir(&nested)
+                .env("PATH", "")
+                .env("ESKA_CONFIG_DIR", fixture.0.join("machine-config"))
+                .args(["--lang", locale, "__bridge", "doctor"]);
+            if boundary {
+                command.arg("--discovery-boundary").arg(&nested);
+            }
+            let output = command.output().unwrap();
+            assert!(output.status.success(), "{output:?}");
+            serde_json::from_slice::<Value>(&output.stdout).unwrap()
+        };
+        let legacy = inspect(false);
+        assert!(
+            legacy["data"]["checks"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|check| { check["id"] == "build.platform-version" })
+        );
+        let bounded = inspect(true);
+        assert_eq!(bounded["data"]["checks"].as_array().unwrap().len(), 1);
+        assert_eq!(bounded["data"]["checks"][0]["id"], "machine.config");
+    }
+}
+
+/// The native and project owners agree on a valid local context below an invalid outer workspace.
+#[cfg(unix)]
+#[test]
+fn local_doctor_keeps_native_project_checks_below_an_invalid_outer_workspace() {
+    let (fixture, root) = scaffold();
+    fs::write(fixture.0.join("eska.toml"), "[workspace]\ninvalid = true\n").unwrap();
+    run_git(&root, &["init", "--initial-branch=main"]);
+    for owner in ["eska", "eska-project"] {
+        for locale in ["ru", "en"] {
+            let output = Command::new(owner_binary(owner))
+                .current_dir(&root)
+                .env("PATH", "")
+                .env("ESKA_CONFIG_DIR", fixture.0.join("machine-config"))
+                .args(["--lang", locale, "doctor", "--format", "json"])
+                .output()
+                .unwrap();
+            assert_eq!(output.status.code(), Some(1), "{output:?}");
+            let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+            let checks = document["checks"].as_array().unwrap();
+            assert!(
+                checks
+                    .iter()
+                    .any(|check| check["id"] == "project.config" && check["status"] == "pass")
+            );
+            assert!(
+                checks
+                    .iter()
+                    .any(|check| check["id"] == "build.platform-version"
+                        && check["code"] == "not-configured")
+            );
+            assert!(
+                checks
+                    .iter()
+                    .any(|check| check["id"] == "build.ibcmd" && check["status"] == "skipped")
+            );
+            assert!(checks.iter().any(|check| check["id"] == "patch.designer"));
+            assert!(!checks.iter().any(|check| check["id"] == "component.build"));
+        }
+    }
+}

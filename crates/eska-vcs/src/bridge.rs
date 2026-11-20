@@ -34,6 +34,8 @@ enum Operation {
     },
     Doctor {
         #[arg(long)]
+        repository_info: bool,
+        #[arg(long)]
         project: Option<PathBuf>,
         #[arg(long = "attribute-root")]
         attribute_roots: Vec<PathBuf>,
@@ -139,9 +141,13 @@ impl BridgeArgs {
                 library_checkout(root, repository, destination),
             ),
             Operation::Doctor {
+                repository_info,
                 project,
                 attribute_roots,
-            } => ("doctor", doctor(root, project.as_deref(), attribute_roots)),
+            } => (
+                "doctor",
+                doctor(root, project.as_deref(), attribute_roots, *repository_info),
+            ),
             Operation::PatchPlan { base } => (
                 "patch_plan",
                 crate::project::patch::plan_reply(root, base.as_deref())
@@ -265,7 +271,12 @@ fn initialize(root: &Path, reserved: bool) -> Result<serde_json::Value, &'static
 }
 
 /// A project failure cannot prevent the caller from requesting independent system Git checks.
-fn doctor(root: &Path, project: Option<&Path>, attributes: &[PathBuf]) -> Result<Value, Value> {
+fn doctor(
+    root: &Path,
+    project: Option<&Path>,
+    attributes: &[PathBuf],
+    repository_info: bool,
+) -> Result<Value, Value> {
     let checks = match project {
         Some(path) => {
             let project = discovery::discover(path).map_err(|_| json!("project"))?;
@@ -274,7 +285,11 @@ fn doctor(root: &Path, project: Option<&Path>, attributes: &[PathBuf]) -> Result
         None => crate::doctor::inspect_system_git(root, attributes),
     };
     let details = vec![None::<String>; checks.len()];
-    Ok(json!({"checks":checks,"details":details}))
+    let mut packet = json!({"checks":checks,"details":details});
+    if repository_info {
+        packet["repository_available"] = json!(Repository::discover(root).is_ok());
+    }
+    Ok(packet)
 }
 
 fn settings_protection(root: &Path) -> &'static str {

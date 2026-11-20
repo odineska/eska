@@ -1529,6 +1529,11 @@ eska-build platform list --format json
 eska-project doctor --format json
 ```
 
+В обычном Git-репозитории без `eska.toml` команда `doctor` выводит строку
+`WARN` для проверки `project.config` и продолжает проверки окружения и Git.
+При отсутствии других ошибок команда завершается с кодом 0. Повреждённый
+манифест и запрос конкретного проекта без манифеста дают код 1.
+
 Machine config выбирает runner `auto`, `host` или `distrobox`, контейнер и
 архитектуру. Явный `--ibcmd` либо `ESKA_IBCMD` задаёт executable; доступны
 `--platform-arch` / `ESKA_PLATFORM_ARCH` и `--distrobox` / `ESKA_DISTROBOX`.
