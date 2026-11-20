@@ -56,8 +56,8 @@ pub(super) fn build(
             object,
             &kinds,
             modules.get(object.metadata.id()),
+            compatibility,
         )?;
-        build_standard_attributes(&mut tree, object, compatibility);
     }
     if !descriptor.diagnostics.is_empty() {
         let parent = tree.root.clone();
@@ -128,10 +128,12 @@ fn build_owner(
     object: &ParsedObject,
     kinds: &BTreeMap<&ObjectId, MetadataKind>,
     modules: Option<&ModuleAvailability>,
+    compatibility: &str,
 ) -> Result<(), TreeError> {
     let owner = object.metadata.id();
     let parent = NodeId::Object(owner.clone());
     build_modules(tree, schema, object, modules);
+    build_standard_attributes(tree, object, compatibility);
     let mut groups = BTreeMap::new();
     if schema.has_root_sections(owner) {
         let common = group(tree, owner, CollectionKind::Common, &parent, true);

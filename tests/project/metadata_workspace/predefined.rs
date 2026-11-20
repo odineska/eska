@@ -39,12 +39,19 @@ fn predefined_items_load_on_group_expansion_and_refresh_with_their_owner() {
     assert_eq!(
         children[0].id,
         NodeId::Collection {
-            owner: catalog,
+            owner: catalog.clone(),
             kind: CollectionKind::Modules
         }
     );
-    assert_eq!(children[1].id, group);
-    assert_eq!(children[1].state, ChildrenState::Unloaded);
+    assert_eq!(
+        children[1].id,
+        NodeId::Collection {
+            owner: catalog,
+            kind: CollectionKind::StandardAttributes
+        }
+    );
+    assert_eq!(children[2].id, group);
+    assert_eq!(children[2].state, ChildrenState::Unloaded);
     assert_eq!(
         session.cache_stats().parses,
         2,

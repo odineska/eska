@@ -139,6 +139,62 @@ fn configurator_golden_trees_cover_four_project_types_and_owner_shapes() {
     assert_eq!(actual, expected);
 }
 
+/// Virtual standard fields precede metadata collections even while module discovery is pending.
+#[test]
+fn standard_attributes_follow_modules_for_every_module_availability() {
+    let (_directory, source) = project("configuration");
+    let schema = ConfiguratorSchema::for_source(&source);
+    let owner = MetadataObject::new(
+        MetadataKind::Catalog,
+        "Контрагенты".into(),
+        "id".into(),
+        None,
+    )
+    .unwrap();
+    let parsed = metadata_parser::load(&source, owner.id(), PropertiesMode::Summary).unwrap();
+    for availability in [
+        ModuleAvailability::Loaded(vec![ModuleRole::Object]),
+        ModuleAvailability::Loaded(vec![]),
+        ModuleAvailability::Unloaded,
+        ModuleAvailability::Failed,
+    ] {
+        let has_modules =
+            !matches!(&availability, ModuleAvailability::Loaded(roles) if roles.is_empty());
+        let projection = ConfiguratorTree::build(
+            &schema,
+            &parsed,
+            &BTreeMap::from([(owner.id().clone(), availability)]),
+            "",
+        )
+        .unwrap();
+        let root = projection.node(projection.root()).unwrap();
+        let mut expected = Vec::new();
+        if has_modules {
+            expected.push(CollectionKind::Modules);
+        }
+        expected.push(CollectionKind::StandardAttributes);
+        expected.extend(
+            [
+                MetadataKind::PredefinedItem,
+                MetadataKind::Attribute,
+                MetadataKind::TabularSection,
+                MetadataKind::Form,
+                MetadataKind::Command,
+                MetadataKind::Template,
+            ]
+            .map(CollectionKind::Metadata),
+        );
+        let collections: Vec<_> = expected
+            .into_iter()
+            .map(|kind| NodeId::Collection {
+                owner: owner.id().clone(),
+                kind,
+            })
+            .collect();
+        assert_eq!(root.children, collections);
+    }
+}
+
 /// External roots expose their object module directly, including deferred and failed probes.
 #[test]
 fn external_object_modules_are_direct_children() {
