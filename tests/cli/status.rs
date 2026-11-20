@@ -152,7 +152,7 @@ fn plain_git_status_has_locale_independent_schema_and_tracks_real_head() {
     for locale in ["ru", "en"] {
         let output = eska(&nested, locale, &["status", "--format", "json"]);
         assert!(output.status.success(), "{output:?}");
-        assert!(output.stderr.is_empty());
+        assert_eq!(output.stderr, [] as [u8; 0]);
         let document: Value = serde_json::from_slice(&output.stdout).expect("Git status JSON");
         assert_eq!(
             document,
@@ -218,15 +218,15 @@ fn plain_git_status_respects_nested_repository_and_manifest_guards() {
         ] {
             let output = eska(&nested, locale, &args);
             assert_eq!(output.status.code(), Some(1));
-            assert!(output.stdout.is_empty());
-            assert!(!output.stderr.is_empty());
+            assert_eq!(output.stdout, [] as [u8; 0]);
+            assert!(String::from_utf8_lossy(&output.stderr).contains("eska.toml"));
         }
     }
     fs::write(nested.join("eska.toml"), "invalid local manifest = [").expect("invalid local");
     let output = eska(&nested, "en", &["status", "--format", "json"]);
     assert_eq!(output.status.code(), Some(1));
-    assert!(output.stdout.is_empty());
-    assert!(!output.stderr.is_empty());
+    assert_eq!(output.stdout, [] as [u8; 0]);
+    assert!(String::from_utf8_lossy(&output.stderr).contains("eska.toml"));
 }
 
 #[test]

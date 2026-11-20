@@ -437,7 +437,12 @@ mod tests {
         let styled = render_human(&report, &details, &localizer, true);
 
         assert!(!plain.contains('\x1b'), "{plain:?}");
-        for sequence in ["\x1b[1;32m✓", "\x1b[1;33m!", "\x1b[1;31m✗", "\x1b[2;90m–"] {
+        for sequence in [
+            "\x1b[1;32m✓",
+            "\x1b[1;33mWARN",
+            "\x1b[1;31m✗",
+            "\x1b[2;90m–",
+        ] {
             assert!(styled.contains(sequence), "{styled:?}");
         }
         assert_eq!(

@@ -168,7 +168,8 @@ fn plain_git_history_stays_inside_the_worktree_and_keeps_invalid_manifests_visib
     fs::write(root.join("eska.toml"), "also_broken = [").unwrap();
     let invalid = eska(&nested, "en", &args);
     assert_eq!(invalid.status.code(), Some(1));
-    assert!(invalid.stdout.is_empty());
+    assert_eq!(invalid.stdout, [] as [u8; 0]);
+    assert!(String::from_utf8_lossy(&invalid.stderr).contains("eska.toml"));
 }
 
 #[test]
