@@ -774,6 +774,7 @@ name = "eska-analyzer"
 version = "0.35.1"
 dependencies = [
  "eska-project-core",
+ "semver",
  "serde",
  "serde_json",
  "sha2",

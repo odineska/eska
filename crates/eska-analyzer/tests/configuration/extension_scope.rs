@@ -88,7 +88,7 @@ fn migration_compares_explicit_extension_scopes() {
 
 /// The published executable must accept both scopes and omit its unknown-deployment warning.
 #[test]
-#[ignore = "requires ESKA_BSL_ANALYZER pointing to published bsl-analyzer-app 0.4.0"]
+#[ignore = "requires ESKA_BSL_ANALYZER pointing to a compatible bsl-analyzer-app release"]
 fn published_analyzer_accepts_explicit_scopes_without_legacy_warning() {
     let fixture = TestDir::new();
     workspace(&fixture.0, None);

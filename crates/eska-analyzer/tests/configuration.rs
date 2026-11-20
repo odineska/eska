@@ -242,7 +242,7 @@ fn reference_context_regenerates_from_policy_and_external_descriptor_changes() {
 
 /// The published analyzer, rather than a fixture process, validates the absolute reference topology.
 #[test]
-#[ignore = "requires ESKA_BSL_ANALYZER pointing to published bsl-analyzer-app 0.4.0"]
+#[ignore = "requires ESKA_BSL_ANALYZER pointing to a compatible bsl-analyzer-app release"]
 fn published_analyzer_accepts_external_configuration_reference() {
     let fixture = TestDir::new();
     let root = fixture.0.join("report");
@@ -629,7 +629,7 @@ fn lease_child() {
 
 /// Explicit integration uses the real published 0.4.0 binary; the ordinary suite does not fake this result.
 #[test]
-#[ignore = "requires ESKA_BSL_ANALYZER pointing to published bsl-analyzer-app 0.4.0"]
+#[ignore = "requires ESKA_BSL_ANALYZER pointing to a compatible bsl-analyzer-app release"]
 fn published_analyzer_accepts_all_project_kinds_and_rejects_unknown_policy() {
     let binary = std::env::var_os("ESKA_BSL_ANALYZER")
         .map(PathBuf::from)

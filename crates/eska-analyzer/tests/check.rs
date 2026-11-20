@@ -22,6 +22,9 @@ use eska_project_core::{config::ProjectConfig, project::ProjectType};
 #[path = "../../../tests/support/mod.rs"]
 mod support;
 
+#[path = "check/query_rules.rs"]
+mod query_rules;
+
 /// Minimal Designer exports retain native Unicode paths and module bytes.
 fn project(root: &Path, kind: ProjectType) -> PathBuf {
     let config = ProjectConfig::new(kind)
@@ -114,6 +117,54 @@ fn complete_stream_and_thresholds_keep_clean_files_and_policy() {
     assert!(report.counts.exceeds(&report.policy));
     assert_eq!(fs::read(module).unwrap(), unchanged);
     assert!(!directory.0.join(".git").exists());
+}
+
+/// Query exports changed upstream in 0.4.4; normal module coverage and byte checks stay exact.
+#[cfg(unix)]
+#[test]
+fn query_extracts_follow_the_selected_release_without_losing_real_modules() {
+    let directory = support::TestDir::new();
+    let root = &directory.0;
+    let module = project(root, ProjectType::Configuration);
+    let ext = module.parent().unwrap();
+    let nested = ext.join("Queries/Module.bsl");
+    let queries_module = ext.join("Queries.bsl");
+    let extract = ext.join("Template.QuErIeS.BSL");
+    fs::create_dir(ext.join("Queries")).unwrap();
+    for path in [&nested, &queries_module, &extract] {
+        fs::write(path, "// fixture\n").unwrap();
+    }
+    let cancelled = AtomicBool::new(false);
+    let analyzer = Analyzer {
+        binary: fake(root),
+        timeout: Duration::from_secs(5),
+        cancelled: &cancelled,
+        connection_closed: None,
+    };
+    let plan = prepare(root, &analyzer);
+    for (release, includes_extracts) in [("0.4.3", true), ("0.4.4", false), ("0.4.10", false)] {
+        fs::write(root.join("stream-release"), release).unwrap();
+        let report = check::analyze(&plan, &analyzer).unwrap();
+        let paths: Vec<_> = report.files.iter().map(|file| &file.path).collect();
+        assert_eq!(paths.len(), if includes_extracts { 4 } else { 3 });
+        for path in [&module, &queries_module, &nested] {
+            assert!(paths.contains(&path), "{release}: {path:?}");
+        }
+        assert_eq!(paths.contains(&&extract), includes_extracts);
+        fs::write(&extract, release).unwrap();
+        let changed = check::analyze(&plan, &analyzer).unwrap();
+        assert_eq!(
+            changed.input_fingerprint != report.input_fingerprint,
+            includes_extracts
+        );
+    }
+    for path in [module, queries_module, nested] {
+        fs::remove_file(path).unwrap();
+    }
+    assert!(matches!(
+        check::analyze(&plan, &analyzer),
+        Err(Failure::EmptyInput)
+    ));
 }
 
 /// Success requires both stream completeness and a successful process, with the exact input set.
@@ -256,7 +307,7 @@ fn timeout_and_cancellation_reap_the_actual_child() {
 
 /// The published application, not a fake stream, supplies the actual diagnostics for all four kinds.
 #[test]
-#[ignore = "requires ESKA_BSL_ANALYZER pointing to published bsl-analyzer-app 0.4.0"]
+#[ignore = "requires ESKA_BSL_ANALYZER pointing to a compatible bsl-analyzer-app release"]
 fn published_analyzer_checks_real_designer_modules_for_all_types() {
     let binary = std::env::var_os("ESKA_BSL_ANALYZER").expect("explicit analyzer");
     for kind in [
@@ -288,7 +339,7 @@ fn published_analyzer_checks_real_designer_modules_for_all_types() {
 
 /// The real CLI must use the selected base plus five extensions and EPF, including literal excludes.
 #[test]
-#[ignore = "requires ESKA_BSL_ANALYZER pointing to published bsl-analyzer-app 0.4.0"]
+#[ignore = "requires ESKA_BSL_ANALYZER pointing to a compatible bsl-analyzer-app release"]
 fn published_application_uses_exact_members_and_exclusions() {
     let directory = support::TestDir::new();
     for (name, kind) in [

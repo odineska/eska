@@ -7,7 +7,10 @@ use std::{
     path::{Component, Path, PathBuf},
 };
 
+use semver::Version;
 use sha2::{Digest, Sha256};
+
+mod forms;
 
 use super::Failure;
 use crate::{configuration::Plan, process::Analyzer};
@@ -20,7 +23,11 @@ pub(super) struct Snapshot {
 
 impl Snapshot {
     /// The generator remains the only owner of composition; policy exclusions prune directories.
-    pub fn capture(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Self, Failure> {
+    pub fn capture(
+        plan: &Plan,
+        analyzer: &Analyzer<'_>,
+        release: &Version,
+    ) -> Result<Self, Failure> {
         let policy: toml::Table = toml::from_str(plan.context.analyzer_policy().as_toml())
             .map_err(|_| Failure::PartialPolicy {
                 field: "invalid_policy",
@@ -96,7 +103,8 @@ impl Snapshot {
                     .extension()
                     .and_then(|extension| extension.to_str())
                     .unwrap_or_default();
-                let module = extension.eq_ignore_ascii_case("bsl");
+                let module = extension.eq_ignore_ascii_case("bsl")
+                    && (*release < Version::new(0, 4, 4) || !is_query_extract(&path));
                 if module || extension.eq_ignore_ascii_case("xml") {
                     if path.to_str().is_none() {
                         return Err(Failure::UnsupportedPath { path });
@@ -114,6 +122,7 @@ impl Snapshot {
         if snapshot.modules.is_empty() {
             return Err(Failure::EmptyInput);
         }
+        forms::capture(&mut snapshot, analyzer)?;
         Ok(snapshot)
     }
 
@@ -132,6 +141,14 @@ impl Snapshot {
         }
         crate::configuration::hex(&hash.finalize())
     }
+}
+
+/// Since 0.4.4 only a dotted filename suffix designates an exported query, regardless of case.
+fn is_query_extract(path: &Path) -> bool {
+    path.file_stem()
+        .and_then(|stem| stem.to_str())
+        .and_then(|stem| stem.rsplit_once('.'))
+        .is_some_and(|(_, suffix)| suffix.eq_ignore_ascii_case("Queries"))
 }
 
 /// Stream source bytes without retaining full configuration text or creating a second index.

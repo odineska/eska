@@ -46,10 +46,9 @@ struct Baseline {
 }
 
 fn valid_diagnostic(diagnostic: &Diagnostic) -> bool {
-    !diagnostic.code.is_empty()
-        && !diagnostic.message.is_empty()
-        && (diagnostic.start_line, diagnostic.start_column)
-            <= (diagnostic.end_line, diagnostic.end_column)
+    let start = (diagnostic.start_line, diagnostic.start_column);
+    let end = (diagnostic.end_line, diagnostic.end_column);
+    !diagnostic.code.is_empty() && !diagnostic.message.is_empty() && start <= end
 }
 
 /// Drain rejected stdout until the child exits; the process owner still enforces its deadline.
