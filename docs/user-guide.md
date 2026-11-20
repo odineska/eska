@@ -1449,7 +1449,8 @@ eska unshelve --dry-run --format json
 eska unshelve
 ```
 
-Полка сохраняет staged и unstaged отдельно, non-ignored untracked, удаления,
+`shelve`, `shelves` и `unshelve` доступны в обычном Git-репозитории до
+создания `eska.toml`. Полка сохраняет staged и unstaged отдельно, non-ignored untracked, удаления,
 mode и raw index. Это repository-wide состояние, включая соседние проекты
 workspace и файлы вне вложенного member. `unshelve ID` позволяет выбрать запись;
 без ID используется полка текущей ветки. Восстановление проверяет branch/base

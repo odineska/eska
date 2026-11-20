@@ -7,7 +7,7 @@ use crate::{
         encoding::json_git_text,
         localization::{LocalizationValue, Localizer},
     },
-    project::discovery::{self, DiscoveryContext},
+    project::{RepositoryContextError, repository_context},
     vcs::{
         repository::Repository,
         shelves::{Error, Shelf},
@@ -63,25 +63,23 @@ impl<'a> From<&'a Shelf> for ShelfDocument<'a> {
     }
 }
 
-/// Discover a standalone or workspace repository without restricting the shelf to a member.
+/// Shelves belong to the entire worktree, including before an ESKA project is configured.
 pub(super) fn repository(
     start: &Path,
     format: OutputFormat,
     localizer: &Localizer,
 ) -> Result<Repository, ExitCode> {
-    let context = discovery::discover_context(start).map_err(|error| {
-        fail(
+    match repository_context(start) {
+        Ok((repository, _)) => Ok(repository),
+        Err(RepositoryContextError::Project(error)) => Err(fail(
             format,
             "project-discovery",
             &diagnostics::present_context_error(&error, localizer),
-        )
-    })?;
-    let root = match &context {
-        DiscoveryContext::Standalone(project) => project.root(),
-        DiscoveryContext::Workspace { workspace, .. } => workspace.root(),
-    };
-    Repository::discover(root)
-        .map_err(|error| write_error(format, &Error::Repository(error), localizer))
+        )),
+        Err(RepositoryContextError::Repository(error)) => {
+            Err(write_error(format, &Error::Repository(error), localizer))
+        }
+    }
 }
 
 /// Emit one successful explicit shelf operation using the selected output contract.
