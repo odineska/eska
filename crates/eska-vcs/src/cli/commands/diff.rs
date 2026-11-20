@@ -8,17 +8,19 @@ mod human;
 mod json;
 mod raw;
 
+use crate::vcs::repository::Repository;
 use crate::{
     cli::{
         diagnostics,
         localization::{LocalizationValue, Localizer},
     },
     project::{
-        Project, WorkspaceMember,
+        Project, RepositoryContextError, WorkspaceMember,
         diff::{
             self, DiffError, ProjectDiff, RevisionProjectDiff, WorkspaceDiff, WorkspaceRevisionDiff,
         },
-        discovery::{self, DiscoveryContext},
+        discovery::DiscoveryContext,
+        repository_context, selected_repository,
         selection::{SelectionIntent, select_projects},
         semantic::{SemanticDiff, SemanticDiffError},
     },
@@ -49,15 +51,52 @@ struct DiffHandler<'a> {
 impl DiffHandler<'_> {
     /// Discover the project, inspect its file changes and select one presentation.
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
-        let context = match discovery::discover_context(project_dir) {
+        let (repository, context) = match repository_context(project_dir) {
             Ok(context) => context,
-            Err(error) => {
+            Err(RepositoryContextError::Project(error)) => {
                 eprintln!("{}", diagnostics::present_context_error(&error, localizer));
                 return ExitCode::FAILURE;
             }
+            Err(RepositoryContextError::Repository(error)) => {
+                return report_error(&DiffError::Repository(error), localizer);
+            }
         };
+        match context {
+            Some(context) => self.run_context(&context, repository, localizer),
+            None => self.run_repository(&repository, localizer),
+        }
+    }
+
+    fn run_repository(&self, repository: &Repository, localizer: &Localizer) -> ExitCode {
+        if self.args.semantic
+            || !self.args.selectors.project.is_empty()
+            || self.args.selectors.workspace
+        {
+            eprintln!("{}", localizer.text("vcs-project-required"));
+            return ExitCode::FAILURE;
+        }
+        if self.args.revisions.is_empty() {
+            return match diff::inspect_repository(repository) {
+                Ok(changes) => self.render_workspace(&changes, localizer),
+                Err(error) => report_error(&error, localizer),
+            };
+        }
+        let from = &self.args.revisions[0];
+        let to = self.args.revisions.get(1).map_or("HEAD", String::as_str);
+        match diff::compare_repository(repository, from, to, self.args.since_branch_point) {
+            Ok(changes) => self.render_revisions(&changes, localizer),
+            Err(error) => report_error(&error, localizer),
+        }
+    }
+
+    fn run_context(
+        &self,
+        context: &DiscoveryContext,
+        repository: Repository,
+        localizer: &Localizer,
+    ) -> ExitCode {
         let selection = match select_projects(
-            &context,
+            context,
             &self.args.selectors.project,
             self.args.selectors.workspace,
             SelectionIntent::ReadOnly,
@@ -76,12 +115,15 @@ impl DiffHandler<'_> {
                 eprintln!("{}", localizer.text("project-selector-single-required"));
                 return ExitCode::FAILURE;
             };
-            return self.run_project(selected.project(), localizer);
+            return match selected_repository(repository, context, *selected) {
+                Ok(repository) => self.run_project(selected.project(), &repository, localizer),
+                Err(error) => report_error(&DiffError::Repository(error), localizer),
+            };
         }
         let DiscoveryContext::Workspace {
             workspace,
             current_member,
-        } = &context
+        } = context
         else {
             eprintln!("{}", localizer.text("project-selector-single-required"));
             return ExitCode::FAILURE;
@@ -98,19 +140,24 @@ impl DiffHandler<'_> {
         let include_workspace_files = self.args.selectors.workspace
             || (self.args.selectors.project.is_empty() && current_member.is_none());
         if self.args.revisions.is_empty() {
-            let changes =
-                match diff::inspect_workspace(workspace, &selected, include_workspace_files) {
-                    Ok(changes) => changes,
-                    Err(error) => return report_error(&error, localizer),
-                };
+            let changes = match diff::inspect_workspace_in_repository(
+                workspace,
+                &selected,
+                include_workspace_files,
+                &repository,
+            ) {
+                Ok(changes) => changes,
+                Err(error) => return report_error(&error, localizer),
+            };
             self.render_workspace_group(&changes, &selected, localizer)
         } else {
             let from = &self.args.revisions[0];
             let to = self.args.revisions.get(1).map_or("HEAD", String::as_str);
-            let changes = match diff::compare_workspace(
+            let changes = match diff::compare_workspace_in_repository(
                 workspace,
                 &selected,
                 include_workspace_files,
+                &repository,
                 from,
                 to,
                 self.args.since_branch_point,
@@ -123,9 +170,14 @@ impl DiffHandler<'_> {
     }
 
     /// Keep single-project comparison and output selection together.
-    fn run_project(&self, project: &Project, localizer: &Localizer) -> ExitCode {
+    fn run_project(
+        &self,
+        project: &Project,
+        repository: &Repository,
+        localizer: &Localizer,
+    ) -> ExitCode {
         if self.args.revisions.is_empty() {
-            let changes = match diff::inspect(project) {
+            let changes = match diff::inspect_in_repository(project, repository) {
                 Ok(changes) => changes,
                 Err(error) => return report_error(&error, localizer),
             };
@@ -140,7 +192,13 @@ impl DiffHandler<'_> {
         } else {
             let from = &self.args.revisions[0];
             let to = self.args.revisions.get(1).map_or("HEAD", String::as_str);
-            let changes = match diff::compare(project, from, to, self.args.since_branch_point) {
+            let changes = match diff::compare_in_repository(
+                project,
+                repository,
+                from,
+                to,
+                self.args.since_branch_point,
+            ) {
                 Ok(changes) => changes,
                 Err(error) => return report_error(&error, localizer),
             };

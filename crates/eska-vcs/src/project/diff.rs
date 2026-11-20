@@ -135,18 +135,58 @@ pub enum DiffError {
 /// Returns a structured error when the repository cannot be read or does not contain the project.
 pub fn inspect(project: &Project) -> Result<ProjectDiff, DiffError> {
     let repository = Repository::discover(project.root()).map_err(DiffError::Repository)?;
-    if !project.root().starts_with(repository.work_dir()) {
-        return Err(DiffError::ProjectOutsideRepository {
-            project: project.root().to_owned(),
-            repository: repository.work_dir().to_owned(),
-        });
-    }
+    inspect_in_repository(project, &repository)
+}
 
+pub(crate) fn inspect_in_repository(
+    project: &Project,
+    repository: &Repository,
+) -> Result<ProjectDiff, DiffError> {
+    ensure_root_in_repository(project.root(), repository)?;
     let status = repository.status().map_err(DiffError::Repository)?;
-    Ok(inspect_status_entries(
-        project,
-        &repository,
-        &status.entries,
+    Ok(inspect_status_entries(project, repository, &status.entries))
+}
+
+/// Inspect every changed file in an ordinary Git worktree without metadata analysis.
+///
+/// # Errors
+/// Returns an error when the repository status cannot be read.
+pub fn inspect_repository(repository: &Repository) -> Result<ProjectDiff, DiffError> {
+    let status = repository.status().map_err(DiffError::Repository)?;
+    Ok(file_diff(
+        status
+            .entries
+            .into_iter()
+            .map(|entry| FileChange {
+                path: entry.path,
+                index: entry.index,
+                worktree: entry.worktree,
+            })
+            .collect(),
+    ))
+}
+
+/// Compare revisions across the whole Git worktree without reading metadata descriptors.
+///
+/// # Errors
+/// Returns an error when revisions, history or trees cannot be read.
+pub fn compare_repository(
+    repository: &Repository,
+    from_revision: &str,
+    to_revision: &str,
+    since_branch_point: bool,
+) -> Result<RevisionProjectDiff, DiffError> {
+    let (comparison, changes) =
+        compare_entries(repository, from_revision, to_revision, since_branch_point)?;
+    Ok(revision_file_diff(
+        comparison,
+        changes
+            .into_iter()
+            .map(|entry| RevisionFileChange {
+                path: entry.path,
+                change: entry.change,
+            })
+            .collect(),
     ))
 }
 
@@ -160,17 +200,26 @@ pub fn inspect_workspace(
     include_workspace_files: bool,
 ) -> Result<WorkspaceDiff, DiffError> {
     let repository = Repository::discover(workspace.root()).map_err(DiffError::Repository)?;
-    ensure_root_in_repository(workspace.root(), &repository)?;
+    inspect_workspace_in_repository(workspace, selected, include_workspace_files, &repository)
+}
+
+pub(crate) fn inspect_workspace_in_repository(
+    workspace: &Workspace,
+    selected: &[&WorkspaceMember],
+    include_workspace_files: bool,
+    repository: &Repository,
+) -> Result<WorkspaceDiff, DiffError> {
+    ensure_root_in_repository(workspace.root(), repository)?;
     let status = repository.status().map_err(DiffError::Repository)?;
     let projects = selected
         .iter()
         .map(|member| WorkspaceProjectDiff {
             name: member.name().clone(),
-            diff: inspect_status_entries(member.project(), &repository, &status.entries),
+            diff: inspect_status_entries(member.project(), repository, &status.entries),
         })
         .collect();
     let workspace_files = include_workspace_files
-        .then(|| workspace_status_files(workspace, &repository, &status.entries));
+        .then(|| workspace_status_files(workspace, repository, &status.entries));
     Ok(WorkspaceDiff {
         projects,
         workspace_files,
@@ -280,6 +329,10 @@ fn workspace_status_files(
             })
         })
         .collect::<Vec<_>>();
+    file_diff(files)
+}
+
+fn file_diff(files: Vec<FileChange>) -> ProjectDiff {
     let display = files
         .iter()
         .map(|file| DisplayChange {
@@ -302,14 +355,27 @@ pub fn compare(
     since_branch_point: bool,
 ) -> Result<RevisionProjectDiff, DiffError> {
     let repository = Repository::discover(project.root()).map_err(DiffError::Repository)?;
-    ensure_root_in_repository(project.root(), &repository)?;
-    let (comparison, changes) =
-        compare_entries(&repository, from_revision, to_revision, since_branch_point)?;
-    Ok(revision_diff_from_entries(
+    compare_in_repository(
         project,
         &repository,
-        &changes,
-        comparison,
+        from_revision,
+        to_revision,
+        since_branch_point,
+    )
+}
+
+pub(crate) fn compare_in_repository(
+    project: &Project,
+    repository: &Repository,
+    from_revision: &str,
+    to_revision: &str,
+    since_branch_point: bool,
+) -> Result<RevisionProjectDiff, DiffError> {
+    ensure_root_in_repository(project.root(), repository)?;
+    let (comparison, changes) =
+        compare_entries(repository, from_revision, to_revision, since_branch_point)?;
+    Ok(revision_diff_from_entries(
+        project, repository, &changes, comparison,
     ))
 }
 
@@ -326,23 +392,43 @@ pub fn compare_workspace(
     since_branch_point: bool,
 ) -> Result<WorkspaceRevisionDiff, DiffError> {
     let repository = Repository::discover(workspace.root()).map_err(DiffError::Repository)?;
-    ensure_root_in_repository(workspace.root(), &repository)?;
+    compare_workspace_in_repository(
+        workspace,
+        selected,
+        include_workspace_files,
+        &repository,
+        from_revision,
+        to_revision,
+        since_branch_point,
+    )
+}
+
+pub(crate) fn compare_workspace_in_repository(
+    workspace: &Workspace,
+    selected: &[&WorkspaceMember],
+    include_workspace_files: bool,
+    repository: &Repository,
+    from_revision: &str,
+    to_revision: &str,
+    since_branch_point: bool,
+) -> Result<WorkspaceRevisionDiff, DiffError> {
+    ensure_root_in_repository(workspace.root(), repository)?;
     let (comparison, changes) =
-        compare_entries(&repository, from_revision, to_revision, since_branch_point)?;
+        compare_entries(repository, from_revision, to_revision, since_branch_point)?;
     let projects = selected
         .iter()
         .map(|member| WorkspaceRevisionProjectDiff {
             name: member.name().clone(),
             diff: revision_diff_from_entries(
                 member.project(),
-                &repository,
+                repository,
                 &changes,
                 comparison.clone(),
             ),
         })
         .collect();
     let workspace_files = include_workspace_files
-        .then(|| workspace_revision_files(workspace, &repository, &changes, comparison.clone()));
+        .then(|| workspace_revision_files(workspace, repository, &changes, comparison.clone()));
     Ok(WorkspaceRevisionDiff {
         comparison,
         projects,
@@ -483,6 +569,13 @@ fn workspace_revision_files(
             })
         })
         .collect::<Vec<_>>();
+    revision_file_diff(comparison, files)
+}
+
+fn revision_file_diff(
+    comparison: RevisionComparison,
+    files: Vec<RevisionFileChange>,
+) -> RevisionProjectDiff {
     let display = files
         .iter()
         .map(|file| RevisionDisplayChange {

@@ -6,6 +6,7 @@ use std::path::Path;
 
 use crate::vcs::repository::{self, Repository};
 use discovery::{ContextDiscoveryError, DiscoveryContext};
+use selection::SelectedProject;
 
 pub mod clone;
 pub mod debug_sources;
@@ -32,4 +33,18 @@ pub(crate) fn repository_context(
     let context = discovery::discover_context_within(start, repository.work_dir())
         .map_err(RepositoryContextError::Project)?;
     Ok((repository, context))
+}
+
+/// A selection from another workspace member may have its own nested worktree.
+pub(crate) fn selected_repository(
+    repository: Repository,
+    context: &DiscoveryContext,
+    selected: SelectedProject<'_>,
+) -> Result<Repository, repository::Error> {
+    if let DiscoveryContext::Workspace { current_member, .. } = context
+        && selected.name() != current_member.as_ref()
+    {
+        return Repository::discover(selected.project().root());
+    }
+    Ok(repository)
 }

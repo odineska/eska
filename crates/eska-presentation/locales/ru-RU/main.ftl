@@ -153,6 +153,7 @@ version-member-error = Не удалось прочитать версию пр�
 cli-project-dir-help = Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
 cli-project-dir-value = КАТАЛОГ
 project-not-found = Файл eska.toml не найден в каталоге { $path } и его родительских каталогах.
+vcs-project-required = Для этой операции нужен файл eska.toml в текущем рабочем дереве Git.
 project-start-not-directory = Начальный путь не является каталогом: { $path }.
 project-config-not-file = Файл конфигурации должен быть обычным файлом: { $path }.
 project-source-not-directory = Путь исходников не является каталогом: { $path }.

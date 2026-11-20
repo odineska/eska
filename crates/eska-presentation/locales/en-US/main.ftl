@@ -153,6 +153,7 @@ version-member-error = Could not read the version of workspace project "{ $name 
 cli-project-dir-help = Search for a project from this directory; base directory for clone/new/init (defaults to the current directory)
 cli-project-dir-value = DIRECTORY
 project-not-found = No eska.toml found in { $path } or its parent directories.
+vcs-project-required = This operation requires an eska.toml in the current Git worktree.
 project-start-not-directory = The starting path is not a directory: { $path }.
 project-config-not-file = The configuration must be a regular file: { $path }.
 project-source-not-directory = The source path is not a directory: { $path }.
