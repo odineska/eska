@@ -17,6 +17,25 @@ use crate::Error;
 
 const MAX_OUTPUT: u64 = 4 * 1024 * 1024;
 
+/// Bind explicit relative paths to the caller before applying the child's project directory.
+fn executable_path(binary: &Path) -> Result<std::borrow::Cow<'_, Path>, Error> {
+    let bare_name = binary.components().count() == 1
+        && matches!(
+            binary.components().next(),
+            Some(std::path::Component::Normal(_))
+        );
+    if binary.is_absolute() || bare_name {
+        Ok(std::borrow::Cow::Borrowed(binary))
+    } else {
+        std::path::absolute(binary)
+            .map(std::borrow::Cow::Owned)
+            .map_err(|source| Error::ProcessStart {
+                binary: binary.to_path_buf(),
+                source,
+            })
+    }
+}
+
 /// The selected executable and operation limits do not locate a wrapper or a platform.
 pub struct Analyzer<'a> {
     pub binary: PathBuf,
@@ -143,7 +162,8 @@ impl Analyzer<'_> {
         if self.is_cancelled() {
             return Err(Error::Cancelled);
         }
-        let mut child = Command::new(&self.binary)
+        let binary = executable_path(&self.binary)?;
+        let mut child = Command::new(binary.as_ref())
             .args(args)
             .current_dir(root)
             .stdin(Stdio::null())

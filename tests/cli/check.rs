@@ -99,3 +99,67 @@ fn delegated_check_help_does_not_require_the_component() {
     }
     assert!(fs::read_dir(&directory.0).unwrap().next().is_none());
 }
+
+/// Explicit analyzer paths use the caller's cwd for both delegated checks and config preparation.
+#[cfg(unix)]
+#[test]
+fn relative_analyzer_paths_survive_the_project_working_directory() {
+    let directory = TestDir::new();
+    let root = directory.0.join("project");
+    fs::create_dir_all(root.join("src/Ext")).unwrap();
+    fs::create_dir_all(root.join("tools")).unwrap();
+    fs::create_dir(directory.0.join("tools")).unwrap();
+    fs::write(root.join("eska.toml"), "[project]\ntype='configuration'\n").unwrap();
+    fs::write(root.join("src/Configuration.xml"), "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><Configuration uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>Пример</Name></Properties><ChildObjects/></Configuration></MetaDataObject>").unwrap();
+    fs::write(
+        root.join("src/Ext/ObjectModule.bsl"),
+        "Процедура Пример()\nКонецПроцедуры\n",
+    )
+    .unwrap();
+    std::os::unix::fs::symlink(
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/analyzer-check.py"),
+        directory.0.join("tools/bsl-analyzer-app"),
+    )
+    .unwrap();
+    // A mistaken project-relative spawn must fail, rather than accidentally use the same tool.
+    fs::write(root.join("tools/bsl-analyzer-app"), "project-local file").unwrap();
+    for locale in ["ru", "en"] {
+        for binary in [
+            "./tools/bsl-analyzer-app",
+            "tools/bsl-analyzer-app",
+            "bsl-analyzer-app",
+        ] {
+            for owner in ["eska", "eska-check", "eska-project"] {
+                let executable = Path::new(env!("CARGO_BIN_EXE_eska"))
+                    .with_file_name(format!("{owner}{}", std::env::consts::EXE_SUFFIX));
+                let mut command = Command::new(executable);
+                command
+                    .current_dir(&directory.0)
+                    .env("PATH", directory.0.join("tools"))
+                    .args(["--lang", locale, "--project-dir", "project"]);
+                match owner {
+                    "eska" => {
+                        command.arg("check");
+                    }
+                    "eska-project" => {
+                        command.args(["analyzer-config", "prepare"]);
+                    }
+                    _ => {}
+                }
+                let output = command
+                    .args(["--analyzer", binary, "--format", "json"])
+                    .output()
+                    .unwrap();
+                assert!(
+                    output.status.success(),
+                    "{owner} {binary} {locale}: {output:?}"
+                );
+                let document: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+                if owner != "eska-project" {
+                    assert_eq!(document["complete"], true);
+                    assert_eq!(document["status"], "passed");
+                }
+            }
+        }
+    }
+}
