@@ -225,13 +225,11 @@ byte-for-byte rollback index после отказа pre-commit hook. Ручны
 **Статус:** `DONE`
 **Зависит от:** T03, T07
 
-Клонировать существующий готовый проект `eska` через transport `gix`:
+Клонировать Git-репозиторий через transport `gix`.
 
 ```text
 eska clone <repository> [directory]
 ```
-
-Границы первой версии:
 
 - clone, fetch объектов и checkout выполняются через `gix`;
 - для pack и checkout включена параллельная обработка `gix`;
@@ -241,9 +239,11 @@ eska clone <repository> [directory]
   protocol helpers `git-upload-pack`/`ssh`, как upstream `gix clone`;
 - каталог назначения должен отсутствовать: команда не смешивает clone с файлами
   пользователя и не перезаписывает существующий repository;
-- после checkout проект проходит обычный discovery и validation `eska.toml`;
-  repository без валидного проекта `eska` отклоняется;
-- при ошибке удаляется только каталог, созданный текущим запуском;
+- после полного checkout проверяется `eska.toml` в корне репозитория;
+- отсутствие файла или ошибка проверки проекта выводятся в `stderr` с
+  префиксом `WARN`. Рабочая копия сохраняется, команда возвращает 0;
+- при ошибке клонирования или неполном checkout удаляется только каталог,
+  созданный текущим запуском;
 - `clone` не выполняет `init`, не исправляет чужую конфигурацию и не добавляет
   shallow clone, выбор ветки или submodules без отдельной задачи;
 - локальные repositories покрываются integration-тестами; transport,
@@ -257,8 +257,8 @@ eska clone <repository> [directory]
 - `gix/max-performance` включает параллельные pack/index/checkout операции;
   HTTP(S) использует транспорт Curl из `gix`. На Linux он работает с OpenSSL,
   как стандартная сборка `gix clone`. В Linux-релизах OpenSSL линкуется статически;
-- destination сначала захватывается эксклюзивным созданием каталога; при любой
-  обычной ошибке fetch, checkout или project validation удаляется только он;
+- destination сначала захватывается эксклюзивным созданием каталога. Откат
+  при ошибке fetch или checkout удаляет только этот каталог;
 - непустые checkout collisions/errors считаются незавершённым checkout, даже
   когда низкоуровневый вызов `gix` вернул `Ok`;
 - local/file и SSH сохраняют transport-семантику upstream и требуют доступный
@@ -268,7 +268,7 @@ eska clone <repository> [directory]
   cross-platform dependencies требуют несовместимые Windows-only линии
   `windows-sys`, которые нельзя унифицировать из приложения.
 
-Проверки T16: `cargo fmt --check`, `cargo check`,
+Проверки исходной реализации T16: `cargo fmt --check`, `cargo check`,
 `cargo clippy --all-targets --all-features -- -D warnings`,
 `ESKA_TEST_ROOT="$(realpath ../eska-playground)" cargo test` — успешно
 (82 unit, 102 integration). Clone-сценарии покрывают RU/EN, local path,
@@ -284,6 +284,14 @@ CPU и 24 тысячами файлов Designer XML локальный clone з
 последовательно. Аналогичные лимиты подтвердились у upstream `gix clone`.
 ESKA также включает декодер Sirocco из сборки Gitoxide `fast` и использует
 её строчный рендерер для счётчиков и скорости клонирования.
+
+В [#354](https://github.com/odineska/eska/issues/354) проверка проекта отделена
+от ошибок клонирования. Тесты `eska clone` и `eska-vcs clone` проверяют код 0,
+префикс `WARN` в stderr и сохранность рабочей копии при отсутствующем или
+некорректном манифесте в обеих локалях, включая clone внутри другого проекта.
+Оба предупреждения проверены вручную в терминале Linux в соседнем playground.
+Проверки workspace `cargo fmt --check`, `cargo check`,
+`cargo clippy --all-targets --all-features -- -D warnings` и `cargo test` прошли.
 
 ## T17 — Gix-first миграция реализованных VCS-операций
 

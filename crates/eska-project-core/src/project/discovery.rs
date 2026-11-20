@@ -342,23 +342,41 @@ fn resolve_member_configuration(
 /// Returns a structured error for an inaccessible or invalid directory, a missing
 /// project, invalid configuration, or sources outside the project root.
 pub fn discover(start: &Path) -> Result<Project, DiscoveryError> {
-    let start = canonicalize(start)?;
-    if !metadata(&start)?.is_dir() {
-        return Err(DiscoveryError::StartNotDirectory { path: start });
-    }
-
+    let start = canonicalize_directory(start)?;
     for root in start.ancestors() {
-        let path = root.join(FILE_NAME);
-        // A dangling link is a broken nearest config, not permission to fall back
-        // to another project higher in the directory tree.
-        match fs::symlink_metadata(&path) {
-            Ok(_) => return load_project(root, &path),
-            Err(error) if error.kind() == io::ErrorKind::NotFound => {}
-            Err(source) => return Err(DiscoveryError::Io { path, source }),
+        if let Some(project) = find_project_at(root)? {
+            return Ok(project);
         }
     }
-
     Err(DiscoveryError::NotFound { start })
+}
+
+/// Loads a project at the given directory without searching its ancestors.
+///
+/// Returns `None` when there is no manifest at that root.
+///
+/// # Errors
+/// Returns a structured error for an invalid directory or project.
+pub fn discover_at_root(root: &Path) -> Result<Option<Project>, DiscoveryError> {
+    find_project_at(&canonicalize_directory(root)?)
+}
+
+fn canonicalize_directory(path: &Path) -> Result<PathBuf, DiscoveryError> {
+    let path = canonicalize(path)?;
+    if !metadata(&path)?.is_dir() {
+        return Err(DiscoveryError::StartNotDirectory { path });
+    }
+    Ok(path)
+}
+
+fn find_project_at(root: &Path) -> Result<Option<Project>, DiscoveryError> {
+    let path = root.join(FILE_NAME);
+    // A dangling link is a broken manifest, so its error must stop discovery.
+    match fs::symlink_metadata(&path) {
+        Ok(_) => load_project(root, &path).map(Some),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(None),
+        Err(source) => Err(DiscoveryError::Io { path, source }),
+    }
 }
 
 fn load_project(root: &Path, path: &Path) -> Result<Project, DiscoveryError> {
@@ -482,4 +500,27 @@ pub enum ContextDiscoveryError {
         workspace: PathBuf,
     },
     ResolvedBuild(BuildSettingsError),
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::test_support::TestDir;
+
+    #[test]
+    fn root_discovery_ignores_parent_manifest_and_rejects_a_manifest_directory() {
+        let fixture = TestDir::new();
+        fs::write(fixture.0.join(FILE_NAME), "invalid parent TOML").expect("parent manifest");
+        let root = fixture.0.join("clone");
+        fs::create_dir(&root).expect("clone root");
+
+        assert!(discover_at_root(&root).expect("root check").is_none());
+
+        let manifest = root.join(FILE_NAME);
+        fs::create_dir(&manifest).expect("manifest directory");
+        assert!(matches!(
+            discover_at_root(&root),
+            Err(DiscoveryError::ConfigNotFile { path }) if path == manifest
+        ));
+    }
 }

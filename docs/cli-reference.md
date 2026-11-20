@@ -42,7 +42,7 @@
 | [`eska check`](#command-eska-check) | Полная проверка Designer XML и BSL для CI |
 | [`eska fmt`](#command-eska-fmt) | Настраиваемое форматирование BSL и запросов без анализатора |
 | [`eska clean`](#command-eska-clean) | Удалить служебную базу сборки |
-| [`eska clone`](#command-eska-clone) | Клонировать и проверить существующий проект eska |
+| [`eska clone`](#command-eska-clone) | Клонировать Git-репозиторий |
 | [`eska config`](#command-eska-config) | Управлять глобальными настройками этого компьютера |
 | [`eska new`](#command-eska-new) | Создать новый каркас проекта |
 | [`eska init`](#command-eska-init) | Подключить существующую Designer XML выгрузку |
@@ -97,7 +97,7 @@ eska 0.32.0
   check      Полная проверка Designer XML и BSL для CI
   fmt        Настраиваемое форматирование BSL и запросов без анализатора
   clean      Удалить служебную базу сборки
-  clone      Клонировать и проверить существующий проект eska
+  clone      Клонировать Git-репозиторий
   config     Управлять глобальными настройками этого компьютера
   new        Создать новый каркас проекта
   init       Подключить существующую Designer XML выгрузку
@@ -634,7 +634,7 @@ Options:
 <summary>eska clone: синтаксис и все параметры</summary>
 
 ```text
-Клонировать и проверить существующий проект eska
+Клонировать Git-репозиторий
 
 Использование: eska clone [ПАРАМЕТРЫ] <РЕПОЗИТОРИЙ> [КАТАЛОГ]
 
@@ -3498,7 +3498,7 @@ Options:
 | Вход | Назначение |
 | --- | --- |
 | [`eska-vcs`](#command-eska-vcs) | Git/workflow, полки и смысловое сравнение Designer XML |
-| [`eska-vcs clone`](#command-eska-vcs-clone) | Клонировать и проверить существующий проект eska |
+| [`eska-vcs clone`](#command-eska-vcs-clone) | Клонировать Git-репозиторий |
 | [`eska-vcs diff`](#command-eska-vcs-diff) | Показать изменения файлов проекта |
 | [`eska-vcs finish`](#command-eska-vcs-finish) | Завершить активную задачу по правилам workflow |
 | [`eska-vcs history`](#command-eska-vcs-history) | Показать локальную историю commit |
@@ -3522,7 +3522,7 @@ Git/workflow, полки и смысловое сравнение Designer XML
 Использование: eska-vcs [OPTIONS] <COMMAND>
 
 Команды:
-  clone     Клонировать и проверить существующий проект eska
+  clone     Клонировать Git-репозиторий
   diff      Показать изменения файлов проекта
   finish    Завершить активную задачу по правилам workflow
   history   Показать локальную историю commit
@@ -3548,7 +3548,7 @@ Git/workflow, полки и смысловое сравнение Designer XML
 <summary>eska-vcs clone: синтаксис и все параметры</summary>
 
 ```text
-Клонировать и проверить существующий проект eska
+Клонировать Git-репозиторий
 
 Использование: eska-vcs clone [OPTIONS] <РЕПОЗИТОРИЙ> [КАТАЛОГ]
 

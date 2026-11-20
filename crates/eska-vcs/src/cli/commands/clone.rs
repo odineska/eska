@@ -36,17 +36,26 @@ impl CloneHandler<'_> {
             clone::execute_with_progress(plan, progress)
         });
         match result {
-            Ok(project) => {
-                println!(
-                    "{}",
-                    localizer.format(
-                        "clone-created",
-                        &[(
-                            "path",
-                            LocalizationValue::Text(&project.root().to_string_lossy()),
-                        )],
-                    )
-                );
+            Ok(outcome) => {
+                let (message, warning) = match outcome.project {
+                    Ok(Some(_)) => ("clone-created", None),
+                    Ok(None) => (
+                        "clone-repository-created",
+                        Some(path_message(
+                            localizer,
+                            "clone-config-missing",
+                            &outcome.destination,
+                        )),
+                    ),
+                    Err(error) => (
+                        "clone-repository-created",
+                        Some(diagnostics::present_project_error(&error, localizer)),
+                    ),
+                };
+                println!("{}", path_message(localizer, message, &outcome.destination));
+                if let Some(warning) = warning {
+                    eprintln!("WARN {warning}");
+                }
                 ExitCode::SUCCESS
             }
             Err(error) => {
@@ -101,7 +110,6 @@ fn present(error: &CloneError, localizer: &Localizer) -> String {
                 ),
             ],
         ),
-        CloneError::Validation(error) => diagnostics::present_project_error(error, localizer),
         CloneError::Rollback { path, original, .. } => localizer.format(
             "clone-rollback-error",
             &[
