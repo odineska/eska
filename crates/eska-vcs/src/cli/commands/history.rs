@@ -19,8 +19,10 @@ use crate::{
         localization::{LocalizationValue, Localizer},
     },
     project::{
-        discovery,
+        RepositoryContextError,
+        discovery::DiscoveryContext,
         history::{self, HistoryEntry, HistoryError},
+        repository_context,
     },
 };
 
@@ -29,17 +31,27 @@ struct HistoryHandler<'a> {
 }
 
 impl HistoryHandler<'_> {
-    /// Discover the project, read local history and select one presentation.
-    /// Execute the selected VCS operation with localized presentation.
+    /// Read repository history and apply the local workflow when configured.
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
-        let project = match discovery::discover(project_dir) {
-            Ok(project) => project,
-            Err(error) => {
-                eprintln!("{}", diagnostics::present_project_error(&error, localizer));
+        let (repository, context) = match repository_context(project_dir) {
+            Ok(result) => result,
+            Err(RepositoryContextError::Project(error)) => {
+                eprintln!("{}", diagnostics::present_context_error(&error, localizer));
+                return ExitCode::FAILURE;
+            }
+            Err(RepositoryContextError::Repository(error)) => {
+                eprintln!(
+                    "{}",
+                    present_error(&HistoryError::Repository(error), localizer)
+                );
                 return ExitCode::FAILURE;
             }
         };
-        let entries = match history::inspect(&project, self.args.limit) {
+        let workflow = context.as_ref().and_then(|context| match context {
+            DiscoveryContext::Standalone(project) => project.configuration().workflow_settings(),
+            DiscoveryContext::Workspace { workspace, .. } => workspace.workflow_settings(),
+        });
+        let entries = match history::inspect_repository(&repository, workflow, self.args.limit) {
             Ok(entries) => entries,
             Err(error) => {
                 eprintln!("{}", present_error(&error, localizer));

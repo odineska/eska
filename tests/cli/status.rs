@@ -129,6 +129,162 @@ fn workspace() -> (TestDir, PathBuf, PathBuf) {
 }
 
 #[test]
+fn plain_git_status_has_locale_independent_schema_and_tracks_real_head() {
+    let fixture = TestDir::new();
+    git(
+        &fixture.0,
+        &["init", "--initial-branch=main", "--template="],
+    );
+    let unborn = eska(&fixture.0, "en", &["status", "--format", "json"]);
+    assert!(unborn.status.success(), "{unborn:?}");
+    let document: Value = serde_json::from_slice(&unborn.stdout).expect("unborn JSON");
+    assert_eq!(document["repository"]["head"], "unborn");
+    assert_eq!(document["repository"]["branch"], "main");
+    fs::write(fixture.0.join("tracked"), "base\n").expect("tracked");
+    git(&fixture.0, &["add", "."]);
+    git(&fixture.0, &["commit", "-m", "base"]);
+    fs::write(fixture.0.join("tracked"), "changed\n").expect("modified");
+    fs::write(fixture.0.join("added"), "new\n").expect("added");
+    git(&fixture.0, &["add", "added"]);
+    fs::write(fixture.0.join("untracked"), "new\n").expect("untracked");
+    let nested = fixture.0.join("nested");
+    fs::create_dir(&nested).expect("nested cwd");
+    for locale in ["ru", "en"] {
+        let output = eska(&nested, locale, &["status", "--format", "json"]);
+        assert!(output.status.success(), "{output:?}");
+        assert_eq!(output.stderr, [] as [u8; 0]);
+        let document: Value = serde_json::from_slice(&output.stdout).expect("Git status JSON");
+        assert_eq!(
+            document,
+            json!({
+                "schema_version": 4,
+                "repository": {
+                    "root": fixture.0,
+                    "root_encoding": "utf-8",
+                    "head": "attached",
+                    "branch": "main",
+                    "branch_encoding": "utf-8"
+                },
+                "changes": {
+                    "files": 3, "added": 1, "modified": 1, "deleted": 0,
+                    "type_changed": 0, "untracked": 1, "intent_to_add": 0, "conflicts": 0
+                }
+            })
+        );
+        let human = eska(&nested, locale, &["status"]);
+        assert!(human.status.success(), "{human:?}");
+        let text = String::from_utf8_lossy(&human.stdout);
+        assert!(text.contains(if locale == "ru" {
+            "Репозиторий"
+        } else {
+            "Repository"
+        }));
+        assert!(text.contains(if locale == "ru" {
+            "Изменения"
+        } else {
+            "Changes"
+        }));
+        assert!(text.contains("main"));
+    }
+    git(&fixture.0, &["checkout", "--detach"]);
+    let detached = eska(&nested, "en", &["status", "--format", "json"]);
+    assert!(detached.status.success(), "{detached:?}");
+    let document: Value = serde_json::from_slice(&detached.stdout).expect("detached JSON");
+    assert_eq!(document["repository"]["head"], "detached");
+    assert!(document["repository"]["branch"].is_null());
+    assert!(document["repository"]["branch_encoding"].is_null());
+}
+
+#[test]
+fn plain_git_status_respects_nested_repository_and_manifest_guards() {
+    let fixture = TestDir::new();
+    fs::write(fixture.0.join("eska.toml"), "invalid parent manifest = [").expect("parent");
+    git(
+        &fixture.0,
+        &["init", "--initial-branch=outer", "--template="],
+    );
+    let nested = fixture.0.join("nested-git");
+    fs::create_dir(&nested).expect("nested repository");
+    git(&nested, &["init", "--initial-branch=inner", "--template="]);
+    for locale in ["ru", "en"] {
+        let output = eska(&nested, locale, &["status", "--format", "json"]);
+        assert!(output.status.success(), "{output:?}");
+        let document: Value = serde_json::from_slice(&output.stdout).expect("nested JSON");
+        assert_eq!(document["repository"]["root"], json!(nested));
+        assert_eq!(document["repository"]["branch"], "inner");
+        for args in [
+            vec!["status", "--workspace"],
+            vec!["status", "--project", "member"],
+        ] {
+            let output = eska(&nested, locale, &args);
+            assert_eq!(output.status.code(), Some(1));
+            assert_eq!(output.stdout, [] as [u8; 0]);
+            assert!(String::from_utf8_lossy(&output.stderr).contains("eska.toml"));
+        }
+    }
+    fs::write(nested.join("eska.toml"), "invalid local manifest = [").expect("invalid local");
+    let output = eska(&nested, "en", &["status", "--format", "json"]);
+    assert_eq!(output.status.code(), Some(1));
+    assert_eq!(output.stdout, [] as [u8; 0]);
+    assert!(String::from_utf8_lossy(&output.stderr).contains("eska.toml"));
+}
+
+#[test]
+fn selected_workspace_member_reports_its_own_nested_branch_and_changes() {
+    let (_fixture, workspace, member) = workspace();
+    git(
+        &member,
+        &["init", "--initial-branch=task/INNER", "--template="],
+    );
+    git(&member, &["add", "."]);
+    git(&member, &["commit", "-m", "Member baseline"]);
+    fs::write(member.join("pending.txt"), "local to the member").unwrap();
+    for locale in ["ru", "en"] {
+        let output = eska(
+            &workspace,
+            locale,
+            &["status", "-p", "sales-report", "--format", "json"],
+        );
+        assert!(output.status.success(), "{output:?}");
+        let doc: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(doc["workflow"]["branch"], "task/INNER");
+        assert_eq!(doc["changes"]["untracked"], 1);
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn plain_git_status_preserves_non_utf8_root_and_branch() {
+    let fixture = TestDir::new();
+    let root = fixture
+        .0
+        .join(OsString::from_vec(b"repository-\x80".to_vec()));
+    fs::create_dir(&root).expect("repository");
+    git(&root, &["init", "--initial-branch=main", "--template="]);
+    fs::write(root.join("untracked"), "new\n").expect("untracked");
+    let branch = b"topic-\x80";
+    let mut head = b"ref: refs/heads/".to_vec();
+    head.extend_from_slice(branch);
+    head.push(b'\n');
+    fs::write(root.join(".git/HEAD"), head).expect("nonUTF unborn branch");
+    for locale in ["ru", "en"] {
+        let output = eska(&root, locale, &["status", "--format", "json"]);
+        assert!(output.status.success(), "{output:?}");
+        let document: Value = serde_json::from_slice(&output.stdout).expect("nonUTF JSON");
+        assert_eq!(document["schema_version"], 4);
+        assert_eq!(document["repository"]["root_encoding"], "percent");
+        assert_eq!(
+            document["repository"]["root"],
+            percent_encoded(root.as_os_str().as_bytes())
+        );
+        assert_eq!(document["repository"]["branch_encoding"], "percent");
+        assert_eq!(document["repository"]["branch"], percent_encoded(branch));
+        assert_eq!(document["repository"]["head"], "unborn");
+        assert_eq!(document["changes"]["untracked"], 1);
+    }
+}
+
+#[test]
 fn json_output_has_a_stable_locale_independent_schema() {
     let (_fixture, root) = project();
     for locale in ["ru", "en"] {

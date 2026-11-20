@@ -11,6 +11,30 @@ use crate::vcs::{
     workflow::{PolicyError, WorkflowPreset},
 };
 
+/// Git-only status for the complete owning worktree.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct RepositoryStatus {
+    pub root: PathBuf,
+    pub head: HeadState,
+    pub branch: Option<BString>,
+    pub changes: ChangeSummary,
+}
+
+/// Inspect an already opened repository without requiring project configuration.
+///
+/// # Errors
+/// Returns a structured error when HEAD or worktree changes cannot be read.
+pub fn inspect_repository(repository: &Repository) -> Result<RepositoryStatus, StatusError> {
+    let (head, branch) = head_state(&repository.head().map_err(StatusError::Repository)?);
+    let changes = repository.status().map_err(StatusError::Repository)?;
+    Ok(RepositoryStatus {
+        root: repository.work_dir().to_owned(),
+        head,
+        branch,
+        changes: summarize(changes.entries.iter()),
+    })
+}
+
 /// A point-in-time project status. Lock support remains explicit until T21 implements it.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ProjectStatus {
@@ -103,12 +127,19 @@ pub enum StatusError {
 /// # Errors
 /// Returns a structured error when workflow policy or repository data cannot be read.
 pub fn inspect(project: &Project) -> Result<ProjectStatus, StatusError> {
+    let repository = Repository::discover(project.root()).map_err(StatusError::Repository)?;
+    inspect_with_repository(project, &repository)
+}
+
+pub(crate) fn inspect_with_repository(
+    project: &Project,
+    repository: &Repository,
+) -> Result<ProjectStatus, StatusError> {
     let settings = project
         .configuration()
         .workflow_settings()
         .ok_or(StatusError::WorkflowNotConfigured)?;
     let policy = settings.resolve(None).map_err(StatusError::Policy)?;
-    let repository = Repository::discover(project.root()).map_err(StatusError::Repository)?;
     if !project.root().starts_with(repository.work_dir()) {
         return Err(StatusError::ProjectOutsideRepository {
             project: project.root().to_owned(),
@@ -128,7 +159,7 @@ pub fn inspect(project: &Project) -> Result<ProjectStatus, StatusError> {
         changes
             .entries
             .iter()
-            .filter(|entry| belongs_to_project(&repository, project.root(), entry)),
+            .filter(|entry| belongs_to_project(repository, project.root(), entry)),
     );
     let synchronization = repository
         .divergence(&policy.remote_base_reference())
@@ -168,11 +199,20 @@ pub fn inspect_workspace(
     selected: &[&WorkspaceMember],
     include_workspace_files: bool,
 ) -> Result<WorkspaceStatus, StatusError> {
+    let repository = Repository::discover(workspace.root()).map_err(StatusError::Repository)?;
+    inspect_workspace_with_repository(workspace, selected, include_workspace_files, &repository)
+}
+
+pub(crate) fn inspect_workspace_with_repository(
+    workspace: &Workspace,
+    selected: &[&WorkspaceMember],
+    include_workspace_files: bool,
+    repository: &Repository,
+) -> Result<WorkspaceStatus, StatusError> {
     let settings = workspace
         .workflow_settings()
         .ok_or(StatusError::WorkflowNotConfigured)?;
     let policy = settings.resolve(None).map_err(StatusError::Policy)?;
-    let repository = Repository::discover(workspace.root()).map_err(StatusError::Repository)?;
     if !workspace.root().starts_with(repository.work_dir()) {
         return Err(StatusError::ProjectOutsideRepository {
             project: workspace.root().to_owned(),
@@ -195,7 +235,7 @@ pub fn inspect_workspace(
                 status
                     .entries
                     .iter()
-                    .filter(|entry| belongs_to_project(&repository, member.root(), entry)),
+                    .filter(|entry| belongs_to_project(repository, member.root(), entry)),
             );
             WorkspaceProjectStatus {
                 name: member.name().clone(),
@@ -211,11 +251,11 @@ pub fn inspect_workspace(
         .collect::<Vec<_>>();
     let workspace_changes = include_workspace_files.then(|| {
         summarize(status.entries.iter().filter(|entry| {
-            belongs_to_project(&repository, workspace.root(), entry)
+            belongs_to_project(repository, workspace.root(), entry)
                 && !workspace
                     .members()
                     .iter()
-                    .any(|member| belongs_to_project(&repository, member.root(), entry))
+                    .any(|member| belongs_to_project(repository, member.root(), entry))
         }))
     });
     let changes = projects

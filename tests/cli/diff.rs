@@ -1250,3 +1250,138 @@ fn catalog_descriptor(comment: &str) -> String {
 const fn common_module_descriptor() -> &'static str {
     r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><CommonModule><Properties><Name>ОбщийМодуль1</Name></Properties></CommonModule></MetaDataObject>"#
 }
+
+#[test]
+fn selected_workspace_member_compares_revisions_in_its_own_worktree() {
+    let (_fixture, root, member) = workspace();
+    git(&member, &["init", "--initial-branch=main", "--template="]);
+    git(&member, &["add", "."]);
+    git(&member, &["commit", "-m", "Member baseline"]);
+    git(&member, &["tag", "member-base"]);
+    fs::write(member.join("notes.txt"), "local change").unwrap();
+    git(&member, &["add", "notes.txt"]);
+    git(&member, &["commit", "-m", "Member change"]);
+    let out = eska(
+        &root,
+        "en",
+        &[
+            "diff",
+            "-p",
+            "sales-report",
+            "member-base",
+            "HEAD",
+            "--format",
+            "json",
+        ],
+    );
+    assert!(out.status.success(), "{out:?}");
+    let result: Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(result["files"][0]["path"], "notes.txt");
+}
+
+/// Manifest-free Git repositories retain file paths and existing machine contracts.
+#[test]
+fn repository_diff_without_manifest_preserves_files_and_schemas() {
+    let fixture = TestDir::new();
+    let root = &fixture.0;
+    fs::create_dir_all(root.join("src/Catalogs")).unwrap();
+    fs::write(root.join("src/Catalogs/Partners.xml"), "before\n").unwrap();
+    git(root, &["init", "--initial-branch=main", "--template="]);
+    git(root, &["add", "."]);
+    git(root, &["commit", "-m", "base"]);
+    git(root, &["tag", "baseline"]);
+    fs::write(root.join("src/Catalogs/Partners.xml"), "after\n").unwrap();
+    let nested = root.join("src/Catalogs");
+    let mut documents = Vec::new();
+    for locale in ["ru", "en"] {
+        let human = eska(&nested, locale, &["diff"]);
+        assert!(
+            human.status.success(),
+            "{}",
+            String::from_utf8_lossy(&human.stderr)
+        );
+        assert!(String::from_utf8_lossy(&human.stdout).contains("src/Catalogs/Partners.xml"));
+        let raw = eska(&nested, locale, &["diff", "--raw"]);
+        assert!(raw.status.success());
+        assert!(String::from_utf8_lossy(&raw.stdout).contains("src/Catalogs/Partners.xml"));
+        let output = eska(&nested, locale, &["diff", "--format", "json"]);
+        assert!(output.status.success());
+        let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(document["schema_version"], 1);
+        assert_eq!(
+            document["files"],
+            json!([{
+                "path": "src/Catalogs/Partners.xml", "path_encoding": "utf-8",
+                "index": null, "worktree": "modified"
+            }])
+        );
+        documents.push(document);
+        for options in [
+            vec!["diff", "--semantic"],
+            vec!["diff", "--project", "app"],
+            vec!["diff", "--workspace"],
+        ] {
+            let output = eska(&nested, locale, &options);
+            assert!(!output.status.success());
+            assert!(String::from_utf8_lossy(&output.stderr).contains("eska.toml"));
+            assert_eq!(output.stdout, [] as [u8; 0]);
+        }
+    }
+    assert_eq!(documents[0], documents[1]);
+    git(root, &["add", "."]);
+    git(root, &["commit", "-m", "update"]);
+    for locale in ["ru", "en"] {
+        for extra in [vec![], vec!["--since-branch-point"]] {
+            let mut args = vec!["diff", "baseline", "--format", "json"];
+            args.extend(extra);
+            let output = eska(&nested, locale, &args);
+            assert!(
+                output.status.success(),
+                "{}",
+                String::from_utf8_lossy(&output.stderr)
+            );
+            let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+            assert_eq!(document["schema_version"], 2);
+            assert_eq!(document["comparison"]["kind"], "revisions");
+            assert_eq!(document["files"][0]["path"], "src/Catalogs/Partners.xml");
+            assert_eq!(document["files"][0]["change"], "modified");
+        }
+        let raw = eska(&nested, locale, &["diff", "baseline", "--raw"]);
+        assert!(raw.status.success());
+        assert!(String::from_utf8_lossy(&raw.stdout).contains("src/Catalogs/Partners.xml"));
+        let human = eska(&nested, locale, &["diff", "baseline"]);
+        assert!(human.status.success());
+        assert!(String::from_utf8_lossy(&human.stdout).contains("src/Catalogs/Partners.xml"));
+    }
+    fs::write(root.join("eska.toml"), "[project\n").unwrap();
+    for locale in ["ru", "en"] {
+        let output = eska(&nested, locale, &["diff", "--raw"]);
+        assert!(!output.status.success());
+        assert_eq!(output.stdout, [] as [u8; 0]);
+        assert!(String::from_utf8_lossy(&output.stderr).contains("eska.toml"));
+    }
+}
+
+/// Whole-repository paths preserve non-UTF-8 bytes through the existing JSON encoding.
+#[cfg(unix)]
+#[test]
+fn repository_diff_without_manifest_preserves_non_utf8_paths() {
+    use std::{ffi::OsStr, os::unix::ffi::OsStrExt};
+
+    let fixture = TestDir::new();
+    git(
+        &fixture.0,
+        &["init", "--initial-branch=main", "--template="],
+    );
+    fs::write(fixture.0.join(OsStr::from_bytes(b"file-\xff.bsl")), "text").unwrap();
+    for locale in ["ru", "en"] {
+        let output = eska(&fixture.0, locale, &["diff", "--format", "json"]);
+        assert!(output.status.success());
+        let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(document["files"][0]["path_encoding"], "percent");
+        assert_eq!(
+            document["files"][0]["path"],
+            "%66%69%6C%65%2D%FF%2E%62%73%6C"
+        );
+    }
+}

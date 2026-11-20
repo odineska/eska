@@ -157,7 +157,8 @@ impl From<crate::Error> for Failure {
 /// Rejects partial policy, structural failures, interrupted processes, invalid/incomplete streams
 /// and changes to the selected inputs. No failure can be interpreted as a clean report.
 pub fn analyze(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Report, Failure> {
-    let snapshot = files::Snapshot::capture(plan, analyzer)?;
+    let release = analyzer.validated_release(plan.context.root())?;
+    let snapshot = files::Snapshot::capture(plan, analyzer, &release)?;
     let mut declared_objects = 0;
     for source in plan.context.sources() {
         let scope = source.member().map_or(ProjectScope::Standalone, |name| {
@@ -177,7 +178,7 @@ pub fn analyze(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Report, Failure> 
         }
     }
     let _lease = configuration::lease(plan)?;
-    let version = analyzer.validate(plan.context.root())?;
+    let version = release.to_string();
     let expected_version = version.clone();
     analyzer.check_config(plan.context.root(), &plan.path())?;
     let expected = snapshot.modules.clone();
@@ -203,7 +204,7 @@ pub fn analyze(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Report, Failure> 
     }
     let files = output.stdout?;
     configuration::ensure_snapshot(plan)?;
-    if snapshot != files::Snapshot::capture(plan, analyzer)? {
+    if snapshot != files::Snapshot::capture(plan, analyzer, &release)? {
         return Err(Failure::InputsChanged);
     }
     let mut counts = Counts::default();

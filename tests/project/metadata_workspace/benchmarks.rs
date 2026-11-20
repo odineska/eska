@@ -72,13 +72,17 @@ fn sample(root: &Path, cached: bool) -> serde_json::Value {
     session.properties(&id).unwrap();
     let properties_ms = start.elapsed().as_secs_f64() * 1000.0;
     let before = session.source_io_stats();
+    let parses_before_warm_properties = session.cache_stats().parses;
     let start = Instant::now();
     for _ in 0..100 {
         std::hint::black_box(session.node(&node).unwrap());
         session.properties(&id).unwrap();
     }
     let warm_properties_ms = start.elapsed().as_secs_f64() * 10.0;
-    assert_eq!(before.xml_reads, session.source_io_stats().xml_reads);
+    // Cached descriptors skip parsing, but every published property snapshot
+    // revalidates its source even when no changed-path event has arrived.
+    assert_eq!(session.source_io_stats().xml_reads - before.xml_reads, 100);
+    assert_eq!(session.cache_stats().parses, parses_before_warm_properties);
     let start = Instant::now();
     session.source(&node).unwrap();
     let source_ms = start.elapsed().as_secs_f64() * 1000.0;

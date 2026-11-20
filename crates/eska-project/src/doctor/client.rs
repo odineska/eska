@@ -16,10 +16,17 @@ use std::{
 #[serde(deny_unknown_fields)]
 pub(super) struct Packet {
     checks: Vec<Check>,
+    #[serde(default)]
+    repository_available: bool,
     details: Vec<Option<String>>,
 }
 
 impl Packet {
+    /// Only the VCS owner can confirm that the selected directory has a working repository.
+    pub const fn repository_available(&self) -> bool {
+        self.repository_available
+    }
+
     /// Preserve the original machine-first ordering without hiding independent project checks.
     pub fn append_machine(&self, report: &mut Report, details: &mut Vec<Option<String>>) {
         if let (Some(check), Some(detail)) = (self.checks.first(), self.details.first()) {
@@ -95,6 +102,9 @@ pub(super) fn vcs(
     localizer: &Localizer,
 ) -> Packet {
     let mut options = Vec::new();
+    if project.is_none() {
+        options.push(OsString::from("--repository-info"));
+    }
     if let Some(project) = project {
         options.extend(["--project".into(), project.as_os_str().to_owned()]);
     }
@@ -155,6 +165,7 @@ fn failure(component: Component, error: &Error, localizer: &Localizer) -> Packet
         _ => "component.vcs",
     };
     Packet {
+        repository_available: false,
         checks: vec![Check::new(
             id,
             CheckStatus::Fail,

@@ -127,7 +127,7 @@ fn validation_failure_reports_upstream_output_without_localized_json_errors() {
 
 /// Two real protocol processes share a context and release their leases independently of the tree.
 #[test]
-#[ignore = "requires ESKA_BSL_ANALYZER pointing to published bsl-analyzer-app 0.4.0"]
+#[ignore = "requires ESKA_BSL_ANALYZER pointing to a compatible bsl-analyzer-app release"]
 fn published_validation_and_multi_client_leases_use_the_shared_generator() {
     let binary = std::env::var_os("ESKA_BSL_ANALYZER")
         .map(std::path::PathBuf::from)

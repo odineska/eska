@@ -8,10 +8,7 @@ use std::{
 
 use gix::bstr::ByteSlice;
 
-use super::{
-    Project,
-    discovery::{self, DiscoveryError},
-};
+use super::discovery::{self, ContextDiscoveryError, DiscoveryContext};
 use crate::vcs::network;
 
 /// A validated clone request which has not changed the filesystem yet.
@@ -75,26 +72,46 @@ pub fn inspect(
     })
 }
 
-/// Clone, fetch and check out a planned repository through `gix`, then validate the project.
+/// A checked-out repository and the result of looking for a project at its root.
+#[derive(Debug)]
+pub struct CloneOutcome {
+    pub destination: PathBuf,
+    pub context: Result<Option<DiscoveryContext>, ContextDiscoveryError>,
+}
+
+/// Clone, fetch and check out a planned repository through `gix`.
 ///
-/// The destination is claimed exclusively. Any ordinary failure removes only that newly
-/// created directory; a cleanup failure retains the original error and affected path.
+/// The destination is claimed exclusively and retained after a complete checkout.
+/// Project validation is reported in the outcome.
 ///
 /// # Errors
-/// Returns structured clone, checkout, project-validation or rollback errors.
-pub fn execute(plan: ClonePlan) -> Result<Project, CloneError> {
+/// Returns structured destination, clone, checkout or rollback errors.
+pub fn execute(plan: ClonePlan) -> Result<CloneOutcome, CloneError> {
     execute_with_progress(plan, network::Progress::from(None))
 }
 
 pub(crate) fn execute_with_progress(
     plan: ClonePlan,
     progress: network::Progress,
-) -> Result<Project, CloneError> {
-    claim_destination(&plan.destination)?;
-    match clone_and_validate(&plan, progress) {
-        Ok(project) => Ok(project),
-        Err(original) => Err(rollback(plan.destination, original)),
+) -> Result<CloneOutcome, CloneError> {
+    let ClonePlan {
+        repository,
+        destination,
+        remote_name,
+    } = plan;
+    claim_destination(&destination)?;
+    let checkout =
+        network::clone_checkout_with_progress(repository, &destination, &remote_name, progress)
+            .map_err(CloneError::Network)
+            .and_then(|outcome| validate_checkout(&outcome));
+    if let Err(original) = checkout {
+        return Err(rollback(destination, original));
     }
+    let context = discovery::discover_context_within(&destination, &destination);
+    Ok(CloneOutcome {
+        destination,
+        context,
+    })
 }
 
 /// Check out the exact master snapshot as raw sources for the managed library installer.
@@ -125,23 +142,6 @@ fn rollback(destination: PathBuf, original: CloneError) -> CloneError {
             source,
         },
     }
-}
-
-/// Perform the gix fetch and checkout, then apply normal eska discovery.
-fn clone_and_validate(
-    plan: &ClonePlan,
-    progress: network::Progress,
-) -> Result<Project, CloneError> {
-    let outcome = network::clone_checkout_with_progress(
-        plan.repository.clone(),
-        &plan.destination,
-        &plan.remote_name,
-        progress,
-    )
-    .map_err(CloneError::Network)?;
-    validate_checkout(&outcome)?;
-    discovery::discover(&plan.destination)
-        .map_err(|source| CloneError::Validation(Box::new(source)))
 }
 
 const fn validate_checkout(outcome: &network::CloneOutcome) -> Result<(), CloneError> {
@@ -257,7 +257,6 @@ pub enum CloneError {
         collisions: usize,
         errors: usize,
     },
-    Validation(Box<DiscoveryError>),
     Rollback {
         path: PathBuf,
         original: Box<Self>,

@@ -10,16 +10,26 @@ use crate::{
         localization::{LocalizationValue, Localizer},
         progress, shelves,
     },
-    project::{discovery, finish},
+    project::{RepositoryContextError, finish, repository_project},
     vcs::shelves::Error as ShelfError,
 };
 
 /// Execute the selected VCS operation with localized presentation.
 pub fn run(project_dir: &Path, localizer: &Localizer) -> ExitCode {
-    let project = match discovery::discover(project_dir) {
+    let project = match repository_project(project_dir) {
         Ok(project) => project,
-        Err(error) => {
-            eprintln!("{}", diagnostics::present_project_error(&error, localizer));
+        Err(RepositoryContextError::Repository(error)) => {
+            eprintln!(
+                "{}",
+                present_error(&finish::FinishError::Repository(error), localizer)
+            );
+            return ExitCode::FAILURE;
+        }
+        Err(RepositoryContextError::Project(error)) => {
+            eprintln!(
+                "{}",
+                diagnostics::present_repository_context_error(&error, localizer)
+            );
             return ExitCode::FAILURE;
         }
     };

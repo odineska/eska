@@ -11,6 +11,8 @@ use std::{
 use crate::support::TestDir;
 use gix::bstr::ByteSlice;
 
+const PROJECT_CONFIG: &str = "[project]\ntype = \"configuration\"\n";
+
 /// Run Git only to construct and inspect isolated test repositories.
 fn git(root: &Path, args: &[&str]) -> Output {
     Command::new("git")
@@ -42,23 +44,17 @@ fn git_ok(root: &Path, args: &[&str]) {
     );
 }
 
-/// Create a committed eska project that can act as a local clone source.
-fn source_project(valid: bool) -> (TestDir, std::path::PathBuf) {
+/// Create a committed local clone source with an optional project manifest.
+fn source_repository(config: Option<&str>) -> (TestDir, std::path::PathBuf) {
     let fixture = TestDir::new();
     let root = fixture.0.join("source project.git");
     fs::create_dir(&root).expect("source directory");
     git_ok(&root, &["init", "--initial-branch=main", "--template="]);
     fs::create_dir(root.join("src")).expect("source tree");
     fs::write(root.join("src/object.xml"), "<object/>\n").expect("source file");
-    fs::write(
-        root.join("eska.toml"),
-        if valid {
-            "[project]\ntype = \"configuration\"\n"
-        } else {
-            "[project]\ntype = \"unknown\"\n"
-        },
-    )
-    .expect("project config");
+    if let Some(config) = config {
+        fs::write(root.join("eska.toml"), config).expect("project config");
+    }
     git_ok(&root, &["add", "."]);
     git_ok(&root, &["commit", "-m", "fixture"]);
     (fixture, root)
@@ -100,12 +96,80 @@ fn eska_without_helpers(base: &Path, locale: &str, args: &[&str]) -> Output {
 }
 
 #[test]
+fn workspace_clone_validates_members_without_reading_the_parent_workspace() {
+    for (locale, expected) in [("ru", "Проект клонирован"), ("en", "Project cloned")]
+    {
+        let (_source_fixture, source) = source_repository(Some(
+            "[workspace]\n[workspace.members.app]\nconfiguration = 'member'\n",
+        ));
+        fs::create_dir_all(source.join("member/src")).expect("member sources");
+        fs::write(source.join("member/src/object.xml"), "<object/>\n").expect("member source");
+        fs::write(
+            source.join("member/eska.toml"),
+            "[project]\nname = 'member'\ntype = 'configuration'\n",
+        )
+        .expect("member manifest");
+        git_ok(&source, &["add", "."]);
+        git_ok(&source, &["commit", "-m", "workspace member"]);
+        let destination_fixture = TestDir::new();
+        git_ok(
+            &destination_fixture.0,
+            &["init", "--initial-branch=main", "--template="],
+        );
+        fs::write(
+            destination_fixture.0.join("eska.toml"),
+            "invalid parent workspace = [",
+        )
+        .expect("parent workspace");
+        let output = eska(
+            &destination_fixture.0,
+            locale,
+            &["clone", source.to_str().expect("source path"), "nested"],
+        );
+        assert!(output.status.success(), "{}", text(&output.stderr));
+        assert_eq!(output.stderr, [] as [u8; 0]);
+        assert!(text(&output.stdout).contains(expected));
+        assert!(
+            destination_fixture
+                .0
+                .join("nested/member/src/object.xml")
+                .is_file()
+        );
+        assert!(gix::open(destination_fixture.0.join("nested")).is_ok());
+    }
+}
+
+#[test]
+fn invalid_workspace_member_warns_and_preserves_clone() {
+    for locale in ["ru", "en"] {
+        let (_source_fixture, source) = source_repository(Some(
+            "[workspace]\n[workspace.members.app]\nconfiguration = 'missing-member'\n",
+        ));
+        let destination_fixture = TestDir::new();
+        let output = eska(
+            &destination_fixture.0,
+            locale,
+            &[
+                "clone",
+                source.to_str().expect("source path"),
+                "invalid-workspace",
+            ],
+        );
+        assert!(output.status.success(), "{}", text(&output.stderr));
+        assert!(text(&output.stderr).starts_with("WARN "));
+        let destination = destination_fixture.0.join("invalid-workspace");
+        assert!(destination.join("eska.toml").is_file());
+        assert!(gix::open(destination).is_ok());
+    }
+}
+
+#[test]
 fn clones_local_path_and_file_url_in_both_locales() {
     for (locale, expected, as_url) in [
         ("ru", "Проект клонирован", false),
         ("en", "Project cloned", true),
     ] {
-        let (_source_fixture, source) = source_project(true);
+        let (_source_fixture, source) = source_repository(Some(PROJECT_CONFIG));
         let destination_fixture = TestDir::new();
         let source = repository_address(&source, as_url);
         let output = eska(&destination_fixture.0, locale, &["clone", &source]);
@@ -204,7 +268,7 @@ fn missing_local_transport_helper_is_localized_and_rolls_back() {
         ("ru", "Не удалось клонировать репозиторий через gix"),
         ("en", "Could not clone the repository with gix"),
     ] {
-        let (_source_fixture, source) = source_project(true);
+        let (_source_fixture, source) = source_repository(Some(PROJECT_CONFIG));
         let destination_fixture = TestDir::new();
         let output = eska_without_helpers(
             &destination_fixture.0,
@@ -225,7 +289,7 @@ fn missing_local_transport_helper_is_localized_and_rolls_back() {
 
 #[test]
 fn custom_remote_and_explicit_directory_are_persisted() {
-    let (_source_fixture, source) = source_project(true);
+    let (_source_fixture, source) = source_repository(Some(PROJECT_CONFIG));
     let destination_fixture = TestDir::new();
     let output = eska(
         &destination_fixture.0,
@@ -246,52 +310,92 @@ fn custom_remote_and_explicit_directory_are_persisted() {
 }
 
 #[test]
-fn invalid_project_rolls_back_only_new_destination() {
-    for (locale, expected) in [
-        ("ru", "Неизвестный тип проекта"),
-        ("en", "Unknown project type"),
+fn missing_project_warns_and_keeps_clone_inside_a_parent_project() {
+    let (_source_fixture, source) = source_repository(None);
+    let destination_fixture = TestDir::new();
+    fs::create_dir(destination_fixture.0.join("src")).expect("parent sources");
+    fs::write(destination_fixture.0.join("eska.toml"), PROJECT_CONFIG).expect("parent manifest");
+    let source = repository_address(&source, false);
+    for (locale, success, warning) in [
+        (
+            "ru",
+            "Репозиторий клонирован",
+            "WARN Файл eska.toml не найден в корне репозитория",
+        ),
+        (
+            "en",
+            "Repository cloned",
+            "WARN No eska.toml found at the repository root",
+        ),
     ] {
-        let (_source_fixture, source) = source_project(false);
+        let output = eska(&destination_fixture.0, locale, &["clone", &source, locale]);
+        let stdout = text(&output.stdout);
+        let stderr = text(&output.stderr);
+        let destination = destination_fixture.0.join(locale);
+
+        assert_eq!(output.status.code(), Some(0), "{stderr}");
+        assert!(stdout.starts_with(success), "{stdout}");
+        assert!(stdout.contains(destination.to_str().expect("destination path")));
+        assert!(stderr.starts_with(warning), "{stderr}");
+        assert!(!destination.join("eska.toml").exists());
+        assert!(
+            gix::open(&destination)
+                .expect("cloned repository")
+                .head_id()
+                .is_ok()
+        );
+        assert_eq!(
+            fs::read_to_string(destination.join("src/object.xml")).expect("checked out file"),
+            "<object/>\n"
+        );
+    }
+}
+
+#[test]
+fn invalid_project_warns_and_keeps_clone() {
+    const INVALID_CONFIG: &str = "[project]\ntype = \"unknown\"\n";
+    let (_source_fixture, source) = source_repository(Some(INVALID_CONFIG));
+    let source = repository_address(&source, false);
+    for (locale, success, warning) in [
+        (
+            "ru",
+            "Репозиторий клонирован",
+            "WARN Неизвестный тип проекта",
+        ),
+        ("en", "Repository cloned", "WARN Unknown project type"),
+    ] {
         let destination_fixture = TestDir::new();
-        let sentinel = destination_fixture.0.join("user-file");
-        fs::write(&sentinel, "preserved").expect("sentinel");
         let output = eska(
             &destination_fixture.0,
             locale,
-            &[
-                "clone",
-                source.to_str().expect("UTF-8 source path"),
-                "invalid-project",
-            ],
+            &["clone", &source, "invalid-project"],
         );
 
-        assert_eq!(output.status.code(), Some(1));
-        assert_eq!(output.stdout, [] as [u8; 0]);
-        assert!(text(&output.stderr).contains(expected));
-        assert!(!destination_fixture.0.join("invalid-project").exists());
-        assert_eq!(fs::read_to_string(sentinel).expect("sentinel"), "preserved");
+        let stdout = text(&output.stdout);
+        let stderr = text(&output.stderr);
+        let destination = destination_fixture.0.join("invalid-project");
+        assert_eq!(output.status.code(), Some(0), "{stderr}");
+        assert!(stdout.starts_with(success), "{stdout}");
+        assert!(stderr.starts_with(warning), "{stderr}");
+        assert!(gix::open(&destination).is_ok());
+        assert_eq!(
+            fs::read_to_string(destination.join("eska.toml")).expect("checked out manifest"),
+            INVALID_CONFIG
+        );
     }
 }
 
 #[test]
 fn existing_destination_and_help_are_localized() {
     for (locale, help, exists) in [
-        (
-            "ru",
-            "Клонировать и проверить существующий проект eska",
-            "уже существует",
-        ),
-        (
-            "en",
-            "Clone and validate an existing eska project",
-            "already exists",
-        ),
+        ("ru", "Клонировать Git-репозиторий", "уже существует"),
+        ("en", "Clone a Git repository", "already exists"),
     ] {
         let help_output = eska(Path::new("."), locale, &["clone", "--help"]);
         assert!(help_output.status.success());
         assert!(text(&help_output.stdout).contains(help));
 
-        let (_source_fixture, source) = source_project(true);
+        let (_source_fixture, source) = source_repository(Some(PROJECT_CONFIG));
         let destination_fixture = TestDir::new();
         let destination = destination_fixture.0.join("occupied");
         fs::create_dir(&destination).expect("existing destination");

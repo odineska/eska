@@ -8,6 +8,12 @@ fn process_standard_attributes_are_localized_read_only_and_version_gated() {
         &directory.0,
         "<CodeLength>9</CodeLength><CodeType>Number</CodeType><StandardAttributes><r:StandardAttribute name='Code'><r:FillFromFillingValue>true</r:FillFromFillingValue><r:Comment>Saved</r:Comment></r:StandardAttribute></StandardAttributes>",
     );
+    std::fs::create_dir_all(directory.0.join("src/Catalogs/Goods/Ext")).unwrap();
+    std::fs::write(
+        directory.0.join("src/Catalogs/Goods/Ext/ObjectModule.bsl"),
+        "",
+    )
+    .unwrap();
     let owner = json!({"kind":"object", "objectId":"catalog:Goods"});
     let group = json!({"kind":"collection","owner":"catalog:Goods","collection":{"kind":"standardAttributes"}});
     let code = json!({"kind":"standardAttribute","owner":"catalog:Goods","name":"Code"});
@@ -30,6 +36,10 @@ fn process_standard_attributes_are_localized_read_only_and_version_gated() {
                     .any(|node| node["id"] == group),
                 minor >= 54
             );
+            assert_eq!(children["nodes"][0]["id"]["collection"]["kind"], "modules");
+            if minor >= 54 {
+                assert_eq!(children["nodes"][1]["id"], group);
+            }
             if minor < 54 {
                 let denied =
                     client.request("metadata/children", context(&open, json!({"node":group})));

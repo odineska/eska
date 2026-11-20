@@ -7,7 +7,7 @@ use gix::{ObjectId, bstr::ByteSlice};
 use super::Project;
 use crate::vcs::{
     repository::{Commit, Error as RepositoryError, ReferenceTarget, Repository},
-    workflow::{PolicyError, WorkflowPolicy},
+    workflow::{PolicyError, WorkflowPolicy, WorkflowSettings},
 };
 
 /// A local commit and its unambiguous workflow task, when one can be proven.
@@ -43,10 +43,22 @@ pub fn inspect(project: &Project, limit: usize) -> Result<Vec<HistoryEntry>, His
         });
     }
 
+    inspect_repository(
+        &repository,
+        project.configuration().workflow_settings(),
+        limit,
+    )
+}
+
+pub(crate) fn inspect_repository(
+    repository: &Repository,
+    workflow: Option<&WorkflowSettings>,
+    limit: usize,
+) -> Result<Vec<HistoryEntry>, HistoryError> {
     let commits = repository
         .history(limit)
         .map_err(HistoryError::Repository)?;
-    let Some(settings) = project.configuration().workflow_settings() else {
+    let Some(settings) = workflow else {
         return Ok(without_tasks(commits));
     };
     let policy = settings.resolve(None).map_err(HistoryError::Policy)?;
@@ -60,7 +72,7 @@ pub fn inspect(project: &Project, limit: usize) -> Result<Vec<HistoryEntry>, His
     commits
         .into_iter()
         .map(|commit| {
-            let task = task_for_commit(&repository, commit.id, base, &task_tips)?;
+            let task = task_for_commit(repository, commit.id, base, &task_tips)?;
             Ok(HistoryEntry { commit, task })
         })
         .collect()

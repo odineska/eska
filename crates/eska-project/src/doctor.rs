@@ -19,7 +19,7 @@ use eska_project_core::{
     doctor::{self, Check, CheckStatus, Report, Summary},
     project::{
         ProjectName,
-        discovery::{self, DiscoveryContext},
+        discovery::{self, ContextDiscoveryError, DiscoveryContext, DiscoveryError},
         selection::{SelectionIntent, select_projects},
     },
 };
@@ -65,25 +65,68 @@ impl DoctorHandler<'_> {
     pub fn run(&self, project_dir: &Path, localizer: &Localizer) -> ExitCode {
         let mut report = Report::default();
         let mut details = Vec::new();
-        let native = client::native(project_dir, &self.native_options(localizer), localizer);
+        let boundary = discovery::nearest_git_boundary(project_dir);
+        let mut native_options = self.native_options(localizer);
+        // A failed boundary lookup must not allow native discovery to escape upward.
+        let native_boundary = boundary
+            .as_ref()
+            .map_or(Some(project_dir), |boundary| boundary.as_deref());
+        if let Some(boundary) = native_boundary {
+            native_options.extend([
+                "--discovery-boundary".into(),
+                boundary.as_os_str().to_owned(),
+            ]);
+        }
+        let native = client::native(project_dir, &native_options, localizer);
         native.append_machine(&mut report, &mut details);
-        let diagnosis = match discovery::discover_context(project_dir) {
+        let context = match boundary {
+            Ok(Some(root)) => {
+                discovery::discover_context_within(project_dir, &root).and_then(|context| {
+                    context.ok_or_else(|| {
+                        ContextDiscoveryError::Project(DiscoveryError::NotFound {
+                            start: project_dir.to_path_buf(),
+                        })
+                    })
+                })
+            }
+            Ok(None) => discovery::discover_context(project_dir),
+            Err(error) => Err(ContextDiscoveryError::Project(error)),
+        };
+        let diagnosis = match context {
             Ok(context) => self.inspect_context(&context, &native, report, details, localizer),
             Err(error) => {
-                push(
-                    &mut report,
-                    &mut details,
-                    Check::new(
-                        "project.config",
-                        CheckStatus::Fail,
-                        "invalid",
-                        &["status", "diff", "save", "build"],
+                let vcs = client::vcs(project_dir, None, &[project_dir.to_path_buf()], localizer);
+                let optional = matches!(
+                    error,
+                    ContextDiscoveryError::Project(DiscoveryError::NotFound { .. })
+                ) && self.args.project.is_empty()
+                    && !self.args.workspace
+                    && vcs.repository_available();
+                let (check, detail) = if optional {
+                    (
+                        Check::new(
+                            "project.config",
+                            CheckStatus::Warning,
+                            "not-configured",
+                            &["build", "check", "save", "start", "switch", "finish"],
+                        )
+                        .with_remediation("initialize-project"),
+                        localizer.text("doctor-project-optional"),
                     )
-                    .with_remediation("correct-project-config"),
-                    Some(diagnostics::present_context_error(&error, localizer)),
-                );
-                client::vcs(project_dir, None, &[project_dir.to_path_buf()], localizer)
-                    .append(&mut report, &mut details);
+                } else {
+                    (
+                        Check::new(
+                            "project.config",
+                            CheckStatus::Fail,
+                            "invalid",
+                            &["status", "diff", "save", "build"],
+                        )
+                        .with_remediation("correct-project-config"),
+                        diagnostics::present_context_error(&error, localizer),
+                    )
+                };
+                push(&mut report, &mut details, check, Some(detail));
+                vcs.append(&mut report, &mut details);
                 Diagnosis {
                     report,
                     details,
@@ -326,7 +369,7 @@ fn render_human(
 fn style_marker(status: CheckStatus, styled: bool) -> String {
     let (marker, color) = match status {
         CheckStatus::Pass => ("✓", "1;32"),
-        CheckStatus::Warning => ("!", "1;33"),
+        CheckStatus::Warning => ("WARN", "1;33"),
         CheckStatus::Fail => ("✗", "1;31"),
         CheckStatus::Skipped => ("–", "2;90"),
     };
@@ -394,7 +437,12 @@ mod tests {
         let styled = render_human(&report, &details, &localizer, true);
 
         assert!(!plain.contains('\x1b'), "{plain:?}");
-        for sequence in ["\x1b[1;32m✓", "\x1b[1;33m!", "\x1b[1;31m✗", "\x1b[2;90m–"] {
+        for sequence in [
+            "\x1b[1;32m✓",
+            "\x1b[1;33mWARN",
+            "\x1b[1;31m✗",
+            "\x1b[2;90m–",
+        ] {
             assert!(styled.contains(sequence), "{styled:?}");
         }
         assert_eq!(

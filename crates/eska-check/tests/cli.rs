@@ -383,7 +383,7 @@ fn help_is_localized_and_partial_flags_are_rejected() {
 
 /// A real published executable supplies diagnostics with only the CI component installed on PATH.
 #[test]
-#[ignore = "requires ESKA_BSL_ANALYZER pointing to published bsl-analyzer-app 0.4.0"]
+#[ignore = "requires ESKA_BSL_ANALYZER pointing to a compatible bsl-analyzer-app release"]
 fn published_analyzer_produces_the_same_real_report_for_ru_and_en() {
     let directory = support::TestDir::new();
     let root = directory.0.join("Проект");

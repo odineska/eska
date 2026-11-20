@@ -16,21 +16,29 @@ def send(value):
 
 command = sys.argv[1]
 mode = (root / "stream-mode").read_text() if (root / "stream-mode").exists() else "ok"
+release_file = root / "stream-release"
+release = release_file.read_text() if release_file.exists() else "0.4.0"
+modern = tuple(map(int, release.split("."))) >= (0, 4, 4)
 if command == "--version":
-    print("bsl-analyzer " + ("9.9.9" if mode == "wrong-version" else "0.4.0"))
+    print("bsl-analyzer " + ("9.9.9" if mode == "wrong-version" else release))
 elif command == "contract":
-    send({"build_version": "0.4.0", "contract_version": "3.5", "cli": {"commands": [
+    send({"build_version": release, "contract_version": "3.5", "cli": {"commands": [
         {"name": name, "args": [{"name": "config"}]} for name in ["check-config", "analyze", "lsp"]]}})
 elif command == "check-config":
     pass
 elif command == "analyze":
     (root / "analysis-started").write_text(str(os.getpid()))
-    files = sorted(root.rglob("*.bsl"))
+    files = sorted(path for path in root.rglob("*") if path.is_file() and path.suffix.lower() == ".bsl")
+    if modern:
+        files = [path for path in files if not path.name.lower().endswith(".queries.bsl")]
     if mode == "hang":
         time.sleep(30)
     if mode == "empty":
         sys.exit(0)
-    send({"type": "start", "version": "9.9.9" if mode == "stream-version" else "0.4.0", "total_files": len(files)})
+    start = {"type": "start", "version": "9.9.9" if mode == "stream-version" else release, "total_files": len(files)}
+    if modern:
+        start.update(line_base=0, column_base=0)
+    send(start)
     total = 0
     for index, path in enumerate(files):
         diagnostics = []

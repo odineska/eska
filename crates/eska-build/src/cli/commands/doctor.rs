@@ -24,6 +24,9 @@ pub struct DoctorArgs {
     project: Vec<String>,
     #[arg(long)]
     workspace: bool,
+    /// Optional inclusive boundary supplied by the coordinating project owner.
+    #[arg(long)]
+    discovery_boundary: Option<PathBuf>,
 }
 
 impl DoctorArgs {
@@ -67,7 +70,13 @@ impl DoctorArgs {
         };
         let mut checks = vec![machine];
         let mut details = vec![detail];
-        if let Ok(context) = discovery::discover_context(root)
+        // Legacy callers retain unbounded discovery; the coordinator supplies the
+        // same boundary it uses so native prerequisites belong to the selected context.
+        let context = self.discovery_boundary.as_deref().map_or_else(
+            || discovery::discover_context(root).map(Some),
+            |boundary| discovery::discover_context_within(root, boundary),
+        );
+        if let Ok(Some(context)) = context
             && let Ok(selection) = select_projects(
                 &context,
                 &self.project,

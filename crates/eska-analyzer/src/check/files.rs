@@ -4,10 +4,14 @@ use std::{
     collections::{BTreeMap, BTreeSet},
     fs::{self, File},
     io::Read,
-    path::{Component, Path, PathBuf},
+    path::{Path, PathBuf},
 };
 
+use semver::Version;
 use sha2::{Digest, Sha256};
+
+mod forms;
+mod policy;
 
 use super::Failure;
 use crate::{configuration::Plan, process::Analyzer};
@@ -20,32 +24,16 @@ pub(super) struct Snapshot {
 
 impl Snapshot {
     /// The generator remains the only owner of composition; policy exclusions prune directories.
-    pub fn capture(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Self, Failure> {
-        let policy: toml::Table = toml::from_str(plan.context.analyzer_policy().as_toml())
-            .map_err(|_| Failure::PartialPolicy {
-                field: "invalid_policy",
-            })?;
-        for field in ["diff_base", "ignored_authors"] {
-            if policy
-                .get("analysis")
-                .and_then(toml::Value::as_table)
-                .and_then(|table| table.get(field))
-                .is_some_and(|value| match value {
-                    toml::Value::String(value) => !value.is_empty(),
-                    toml::Value::Array(value) => !value.is_empty(),
-                    _ => true,
-                })
-            {
-                return Err(Failure::PartialPolicy {
-                    field: if field == "diff_base" {
-                        "analysis.diff_base"
-                    } else {
-                        "analysis.ignored_authors"
-                    },
-                });
-            }
-        }
-        let exclusions = exclusions(&policy, plan.context.root())?;
+    pub fn capture(
+        plan: &Plan,
+        analyzer: &Analyzer<'_>,
+        release: &Version,
+    ) -> Result<Self, Failure> {
+        let policy = policy::capture(
+            &plan.path(),
+            plan.context.analyzer_policy().as_toml(),
+            analyzer,
+        )?;
         let mut snapshot = Self {
             modules: BTreeSet::new(),
             files: BTreeMap::new(),
@@ -61,7 +49,10 @@ impl Snapshot {
             if analyzer.is_cancelled() {
                 return Err(crate::Error::Cancelled.into());
             }
-            if exclusions.iter().any(|excluded| path.starts_with(excluded))
+            if policy
+                .exclusions
+                .iter()
+                .any(|excluded| path.starts_with(excluded))
                 || !visited.insert(path.clone())
             {
                 continue;
@@ -96,7 +87,8 @@ impl Snapshot {
                     .extension()
                     .and_then(|extension| extension.to_str())
                     .unwrap_or_default();
-                let module = extension.eq_ignore_ascii_case("bsl");
+                let module = extension.eq_ignore_ascii_case("bsl")
+                    && (*release < Version::new(0, 4, 4) || !is_query_extract(&path));
                 if module || extension.eq_ignore_ascii_case("xml") {
                     if path.to_str().is_none() {
                         return Err(Failure::UnsupportedPath { path });
@@ -114,6 +106,8 @@ impl Snapshot {
         if snapshot.modules.is_empty() {
             return Err(Failure::EmptyInput);
         }
+        forms::capture(&mut snapshot, analyzer)?;
+        snapshot.files.extend(policy.parents);
         Ok(snapshot)
     }
 
@@ -132,6 +126,14 @@ impl Snapshot {
         }
         crate::configuration::hex(&hash.finalize())
     }
+}
+
+/// Since 0.4.4 only a dotted filename suffix designates an exported query, regardless of case.
+fn is_query_extract(path: &Path) -> bool {
+    path.file_stem()
+        .and_then(|stem| stem.to_str())
+        .and_then(|stem| stem.rsplit_once('.'))
+        .is_some_and(|(_, suffix)| suffix.eq_ignore_ascii_case("Queries"))
 }
 
 /// Stream source bytes without retaining full configuration text or creating a second index.
@@ -155,58 +157,4 @@ fn fingerprint(path: &Path, analyzer: &Analyzer<'_>) -> Result<[u8; 32], Failure
         }
         hash.update(&buffer[..count]);
     }
-}
-
-/// Literal directory exclusions are relative to the generated config, as in upstream 0.4.0.
-fn exclusions(policy: &toml::Table, root: &Path) -> Result<Vec<PathBuf>, Failure> {
-    let Some(value) = policy
-        .get("source")
-        .and_then(toml::Value::as_table)
-        .and_then(|table| table.get("exclude"))
-    else {
-        return Ok(Vec::new());
-    };
-    let values = value.as_array().ok_or(Failure::PartialPolicy {
-        field: "source.exclude",
-    })?;
-    values
-        .iter()
-        .map(|value| {
-            let value =
-                value
-                    .as_str()
-                    .filter(|value| !value.is_empty())
-                    .ok_or(Failure::PartialPolicy {
-                        field: "source.exclude",
-                    })?;
-            let mut path = root.to_path_buf();
-            for component in Path::new(value).components() {
-                match component {
-                    Component::Normal(value) => path.push(value),
-                    Component::CurDir => {}
-                    Component::ParentDir if path != root => {
-                        path.pop();
-                    }
-                    _ => {
-                        return Err(Failure::PartialPolicy {
-                            field: "source.exclude",
-                        });
-                    }
-                }
-            }
-            if path.try_exists().map_err(|source| Failure::Io {
-                path: path.clone(),
-                source,
-            })? {
-                let canonical = path.canonicalize().map_err(|source| Failure::Io {
-                    path: path.clone(),
-                    source,
-                })?;
-                if canonical != path {
-                    return Err(Failure::UnsupportedPath { path });
-                }
-            }
-            Ok(path)
-        })
-        .collect()
 }

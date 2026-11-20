@@ -11,11 +11,31 @@ use std::{
     time::{Duration, Instant},
 };
 
+use semver::Version;
 use serde_json::Value;
 
 use crate::Error;
 
 const MAX_OUTPUT: u64 = 4 * 1024 * 1024;
+
+/// Bind explicit relative paths to the caller before applying the child's project directory.
+fn executable_path(binary: &Path) -> Result<std::borrow::Cow<'_, Path>, Error> {
+    let bare_name = binary.components().count() == 1
+        && matches!(
+            binary.components().next(),
+            Some(std::path::Component::Normal(_))
+        );
+    if binary.is_absolute() || bare_name {
+        Ok(std::borrow::Cow::Borrowed(binary))
+    } else {
+        std::path::absolute(binary)
+            .map(std::borrow::Cow::Owned)
+            .map_err(|source| Error::ProcessStart {
+                binary: binary.to_path_buf(),
+                source,
+            })
+    }
+}
 
 /// The selected executable and operation limits do not locate a wrapper or a platform.
 pub struct Analyzer<'a> {
@@ -53,24 +73,28 @@ impl Analyzer<'_> {
     /// # Errors
     /// Rejects invalid version output, malformed contracts, process failures and cancellation.
     pub fn validate(&self, root: &Path) -> Result<String, Error> {
+        self.validated_release(root)
+            .map(|version| version.to_string())
+    }
+
+    /// Verify the machine contract before applying release-specific source discovery rules.
+    pub(crate) fn validated_release(&self, root: &Path) -> Result<Version, Error> {
         let output = self.run(root, [OsStr::new("--version")])?;
         let actual = String::from_utf8_lossy(&output.stdout).trim().to_owned();
-        let version = actual.strip_prefix("bsl-analyzer ").filter(|version| {
-            let parts: Vec<_> = version.split('.').collect();
-            parts.len() == 3
-                && parts.iter().all(|part| {
-                    !part.is_empty()
-                        && (part.len() == 1 || !part.starts_with('0'))
-                        && part.bytes().all(|byte| byte.is_ascii_digit())
+        let release = actual.strip_prefix("bsl-analyzer ");
+        let Some(version) =
+            release
+                .and_then(|value| Version::parse(value).ok())
+                .filter(|version| {
+                    output.status.success() && version.pre.is_empty() && version.build.is_empty()
                 })
-        });
-        let Some(version) = version.filter(|_| output.status.success()) else {
+        else {
             return Err(Error::AnalyzerVersion { actual });
         };
         let output = self.run(root, [OsStr::new("contract")])?;
         let contract: Value =
             serde_json::from_slice(&output.stdout).map_err(|_| Error::AnalyzerContract)?;
-        if !output.status.success() || contract["build_version"].as_str() != Some(version) {
+        if !output.status.success() || contract["build_version"].as_str() != release {
             return Err(Error::AnalyzerContract);
         }
         let commands = contract["cli"]["commands"]
@@ -89,7 +113,7 @@ impl Analyzer<'_> {
                 return Err(Error::AnalyzerContract);
             }
         }
-        Ok(version.to_owned())
+        Ok(version)
     }
 
     /// Validate a config in its final parent directory so every relative policy path keeps its meaning.
@@ -143,7 +167,8 @@ impl Analyzer<'_> {
         if self.is_cancelled() {
             return Err(Error::Cancelled);
         }
-        let mut child = Command::new(&self.binary)
+        let binary = executable_path(&self.binary)?;
+        let mut child = Command::new(binary.as_ref())
             .args(args)
             .current_dir(root)
             .stdin(Stdio::null())

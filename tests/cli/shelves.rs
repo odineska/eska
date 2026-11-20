@@ -1,6 +1,9 @@
 //! Public shelf CLI contracts, localization and read-only previews.
 
-use crate::{support::TestDir, vcs::support::git};
+use crate::{
+    support::TestDir,
+    vcs::support::{commit, git},
+};
 use serde_json::Value;
 use std::{
     fs,
@@ -113,6 +116,32 @@ fn json_round_trip_and_previews_are_locale_independent() {
         document(&eska(&root, "en", &["shelves", "--format", "json"]))["shelves"],
         serde_json::json!([])
     );
+}
+
+#[test]
+fn a_plain_nested_worktree_owns_its_shelves() {
+    let (_fixture, outer) = project();
+    let root = outer.join("inner");
+    let dir = root.join("src");
+    fs::create_dir_all(&dir).unwrap();
+    git(&root, &["init", "--initial-branch=main", "--template="]);
+    commit(&root, "base.txt");
+    let outer_index = fs::read(outer.join(".git/index")).unwrap();
+    fs::write(dir.join("work.txt"), "temporary work").unwrap();
+    let saved = document(&eska(&dir, "en", &["shelve", "--format", "json"]));
+    assert!(!dir.join("work.txt").exists());
+    let listed = document(&eska(&root, "ru", &["shelves", "--format", "json"]));
+    assert_eq!(listed["shelves"][0], saved["shelf"]);
+    assert!(!outer.join(".git/eska-shelves").exists());
+    document(&eska(&root, "ru", &["unshelve", "--format", "json"]));
+    assert_eq!(fs::read(dir.join("work.txt")).unwrap(), b"temporary work");
+    assert_eq!(fs::read(outer.join(".git/index")).unwrap(), outer_index);
+    fs::write(root.join("eska.toml"), "broken = [").unwrap();
+    let invalid = eska(&root, "en", &["shelve", "--format", "json"]);
+    assert_eq!(invalid.status.code(), Some(1));
+    let error: Value = serde_json::from_slice(&invalid.stdout).unwrap();
+    assert_eq!(error["error"]["code"], "project-discovery");
+    assert!(dir.join("work.txt").is_file());
 }
 
 /// Human results and help are localized without exposing backend terminology.

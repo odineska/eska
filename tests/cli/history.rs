@@ -148,6 +148,54 @@ fn reading_history_does_not_require_workflow_or_modify_git_state() {
 }
 
 #[test]
+fn plain_git_history_stays_inside_the_worktree_and_keeps_invalid_manifests_visible() {
+    let fixture = TestDir::new();
+    fs::write(fixture.0.join("eska.toml"), "broken = [").unwrap();
+    let root = fixture.0.join("plain");
+    let nested = root.join("dir");
+    fs::create_dir_all(&nested).unwrap();
+    git(&root, &["init", "--initial-branch=main", "--template="]);
+    let id = commit(&root, "base.txt");
+    let args = ["history", "--format", "json"];
+    let ru = eska(&nested, "ru", &args);
+    let en = eska(&nested, "en", &args);
+    assert!(ru.status.success() && en.status.success(), "{ru:?} {en:?}");
+    assert!(ru.stderr.is_empty() && en.stderr.is_empty());
+    assert_eq!(ru.stdout, en.stdout);
+    let result: Value = serde_json::from_slice(&en.stdout).unwrap();
+    assert_eq!(result["commits"][0]["id"], id.to_string());
+    assert_eq!(result["commits"][0]["task"], Value::Null);
+    fs::write(root.join("eska.toml"), "also_broken = [").unwrap();
+    let invalid = eska(&nested, "en", &args);
+    assert_eq!(invalid.status.code(), Some(1));
+    assert_eq!(invalid.stdout, [] as [u8; 0]);
+    assert!(String::from_utf8_lossy(&invalid.stderr).contains("eska.toml"));
+}
+
+#[test]
+fn workspace_root_and_member_use_the_shared_history_policy() {
+    let (fixture, _, task) = project();
+    fs::write(
+        fixture.0.join("eska.toml"),
+        "[workspace]\n[workspace.members.app]\nconfiguration = 'member'\n[vcs.workflow]\npreset = 'trunk'\n",
+    ).unwrap();
+    let member = fixture.0.join("member");
+    fs::create_dir_all(member.join("src")).unwrap();
+    fs::write(
+        member.join("eska.toml"),
+        "[project]\nname = 'app'\ntype = 'configuration'\n",
+    )
+    .unwrap();
+    for start in [&fixture.0, &member] {
+        let output = eska(start, "en", &["history", "-n", "1", "--format", "json"]);
+        assert!(output.status.success(), "{output:?}");
+        let result: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(result["commits"][0]["id"], task.to_string());
+        assert_eq!(result["commits"][0]["task"], "FI-18");
+    }
+}
+
+#[test]
 fn rejects_limits_outside_the_documented_range() {
     let fixture = TestDir::new();
     for limit in ["0", "1001"] {
