@@ -912,3 +912,54 @@ fn localized_help_and_global_base_work_with_default_path() {
     assert!(root.join("eska.toml").exists());
     assert!(!fixture.0.join("eska.toml").exists());
 }
+
+/// A separate clone is standalone even when its parent is an ESKA workspace.
+#[test]
+fn nested_git_onboarding_does_not_enroll_or_reject_a_standalone_clone() {
+    for owner in ["eska", "eska-project"] {
+        for operation in ["init", "new"] {
+            let fixture = empty_workspace();
+            let manifest = fixture.0.join("eska.toml");
+            let original = fs::read(&manifest).expect("workspace bytes");
+            let clone = fixture.0.join("separate-clone");
+            descriptor(&clone.join("src"), "configuration");
+            let git = Command::new("git")
+                .current_dir(&clone)
+                .args(["init", "--initial-branch=main", "--template="])
+                .output()
+                .expect("fixture Git");
+            assert!(git.status.success(), "{git:?}");
+            let binary = Path::new(env!("CARGO_BIN_EXE_eska"))
+                .with_file_name(format!("{owner}{}", std::env::consts::EXE_SUFFIX));
+            let mut command = Command::new(binary);
+            command
+                .current_dir(&clone)
+                .env_remove("ESKA_LANG")
+                .args(["--lang", "en", operation]);
+            if operation == "new" {
+                command.args(["independent", "--type", "configuration"]);
+            }
+            if owner == "eska" {
+                command.args(["--workflow", "trunk", "--no-vcs"]);
+            }
+            let output = command.output().expect("onboarding");
+            assert!(output.status.success(), "{owner} {operation}: {output:?}");
+            assert_eq!(fs::read(&manifest).expect("workspace after"), original);
+            let project = if operation == "new" {
+                clone.join("independent")
+            } else {
+                clone
+            };
+            let config =
+                ProjectConfig::load(&project.join("eska.toml")).expect("standalone config");
+            assert!(
+                config.name().is_none(),
+                "standalone onboarding must not add a member name"
+            );
+            assert_eq!(
+                config.configuration().workflow_settings().is_some(),
+                owner == "eska"
+            );
+        }
+    }
+}

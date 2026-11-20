@@ -55,6 +55,27 @@ pub fn discover_context_within(
     find_context(&start, Some(&boundary))
 }
 
+/// Find the nearest Git marker without opening or validating the repository.
+///
+/// Both `.git` directories and worktree-style files bound discovery. A broken
+/// marker still prevents an unrelated enclosing workspace from claiming its files.
+/// Git availability must be checked separately by the VCS owner.
+///
+/// # Errors
+/// Returns directory or marker-access errors instead of searching past inaccessible paths.
+pub fn nearest_git_boundary(start: &Path) -> Result<Option<PathBuf>, DiscoveryError> {
+    let start = canonicalize_directory(start)?;
+    for root in start.ancestors() {
+        let path = root.join(".git");
+        match fs::symlink_metadata(&path) {
+            Ok(_) => return Ok(Some(root.to_path_buf())),
+            Err(error) if error.kind() == io::ErrorKind::NotFound => {}
+            Err(source) => return Err(DiscoveryError::Io { path, source }),
+        }
+    }
+    Ok(None)
+}
+
 fn find_context(
     start: &Path,
     boundary: Option<&Path>,
@@ -518,6 +539,37 @@ mod tests {
 
     const PROJECT: &str = "[project]\nname = 'member'\ntype = 'report'\nsource = '.'\n";
     const WORKSPACE: &str = "[workspace]\n[workspace.members.app]\nexternal_objects = ['member']\n";
+
+    #[test]
+    fn git_marker_boundaries_include_invalid_files_and_nested_directories() {
+        let fixture = TestDir::new();
+        let outer = &fixture.0;
+        let nested = outer.join("nested");
+        let cwd = nested.join("child");
+        fs::create_dir_all(&cwd).expect("nested directory");
+        assert!(nearest_git_boundary(&cwd).expect("no marker").is_none());
+        fs::create_dir(outer.join(".git")).expect("outer marker");
+        assert_eq!(
+            nearest_git_boundary(&cwd).expect("outer boundary"),
+            Some(outer.clone())
+        );
+        fs::write(nested.join(".git"), "broken worktree marker").expect("nested marker");
+        assert_eq!(
+            nearest_git_boundary(&cwd).expect("nested boundary"),
+            Some(nested)
+        );
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn dangling_git_marker_is_still_a_discovery_boundary() {
+        let fixture = TestDir::new();
+        std::os::unix::fs::symlink("missing", fixture.0.join(".git")).expect("marker");
+        assert_eq!(
+            nearest_git_boundary(&fixture.0).expect("boundary"),
+            Some(fixture.0.clone())
+        );
+    }
 
     #[test]
     fn bounded_discovery_stops_both_searches_at_the_repository_root() {

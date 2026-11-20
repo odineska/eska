@@ -111,13 +111,24 @@ impl WorkspaceMemberEnrollment {
 
 /// Finds a workspace for onboarding while preserving standalone command behavior.
 ///
+/// The nearest Git marker bounds both manifest lookup and workspace inheritance;
+/// a separate worktree must not enroll into an unrelated enclosing workspace.
+///
 /// # Errors
 /// Returns invalid project/workspace configuration errors instead of silently
 /// treating a broken manifest as an ordinary directory.
 pub fn find_workspace(start: &Path) -> Result<Option<Workspace>, ContextDiscoveryError> {
-    match super::discovery::discover_context(start) {
-        Ok(super::discovery::DiscoveryContext::Workspace { workspace, .. }) => Ok(Some(workspace)),
-        Ok(super::discovery::DiscoveryContext::Standalone(_))
+    let boundary =
+        super::discovery::nearest_git_boundary(start).map_err(ContextDiscoveryError::Project)?;
+    let context = boundary.as_deref().map_or_else(
+        || super::discovery::discover_context(start).map(Some),
+        |boundary| super::discovery::discover_context_within(start, boundary),
+    );
+    match context {
+        Ok(Some(super::discovery::DiscoveryContext::Workspace { workspace, .. })) => {
+            Ok(Some(workspace))
+        }
+        Ok(None | Some(super::discovery::DiscoveryContext::Standalone(_)))
         | Err(ContextDiscoveryError::Project(super::discovery::DiscoveryError::NotFound {
             ..
         })) => Ok(None),
