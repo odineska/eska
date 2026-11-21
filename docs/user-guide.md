@@ -4,7 +4,7 @@ ESKA работает с исходниками 1С в формате Designer X
 
 **Проект в активной разработке.** Руководство описывает текущую версию исходников. Для установленного выпуска проверьте доступные команды через `--help` и версии компонентов через `--version`.
 
-[Практический пример с БСП](#practice) · [Справочник CLI](cli-reference.md) · [Настройки Explorer](#settings)
+[Работа в Explorer с примерами CLI](https://odineska.tech/eska/docs/explorer/) · [Практический пример с БСП](#practice) · [Справочник CLI](cli-reference.md) · [Настройки Explorer](#settings)
 
 <a id="capabilities"></a>
 
@@ -539,7 +539,7 @@ cache `eska/libraries`; при нестандартном config — в сосе
 
 ### Дерево метаданных
 
-[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-tree.gif)](https://odineska.tech/eska/docs/#demo-tree)
+[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-tree.gif)](https://odineska.tech/eska/docs/#demo-tree)
 
 В корне показаны конфигурации и подпроекты; разделы метаданных находятся прямо
 внутри проекта. «Общие», коллекции объектов, вложенные реквизиты и табличные части,
@@ -552,6 +552,10 @@ cache `eska/libraries`; при нестандартном config — в сосе
 исключены настройками наблюдения VS Code, используйте ручное обновление.
 
 В **Стандартных реквизитах** видны платформенные поля и их типы, в том числе при отсутствии настройки в XML. Выбор открывает свойства поля в режиме чтения. У объектов с предопределёнными данными дерево открывает их иерархию и исходник. Нажатие на подписку на событие ведёт к обработчику в общем модуле.
+
+У справочника «Товары» в группе **Стандартные реквизиты** можно открыть «Пометка удаления» и посмотреть её тип в карточке свойств.
+
+[![Открыть свойства стандартного реквизита](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-standard-attributes.gif)](https://odineska.tech/eska/docs/#demo-standard-attributes)
 
 <a id="metadata-authoring"></a>
 
@@ -604,7 +608,7 @@ JSON-запросы, `--no-input`, предварительная проверк
 
 [![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.tech/eska/docs/#demo-forms)
 
-[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-form-edit.gif)](https://odineska.tech/eska/docs/#demo-form-edit)
+[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-form-edit.gif)](https://odineska.tech/eska/docs/#demo-form-edit)
 
 ### Открытие и переход от файла
 
@@ -699,7 +703,7 @@ Unsaved BSL сам по себе не меняет Git-статус. Без вс
 
 Панель использует встроенное расширение Git редактора. Изменённые файлы также отмечаются в дереве метаданных. Команды для терминала описаны в [разделе Git](#daily-work).
 
-[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-scm.gif)](https://odineska.tech/eska/docs/#demo-scm)
+[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-scm.gif)](https://odineska.tech/eska/docs/#demo-scm)
 
 <a id="debug"></a>
 
@@ -764,7 +768,7 @@ Standalone-проект этой функцией не отключается. �
 
 ## 10. Свойства и переименование метаданных
 
-[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-properties.gif)](https://odineska.tech/eska/docs/#demo-properties)
+[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-properties.gif)](https://odineska.tech/eska/docs/#demo-properties)
 
 Панель **Свойства** читает объект и схему редактирования из ESKA. Редактор не
 угадывает допустимые поля по внешнему виду XML. Read-only поле показывает
@@ -998,7 +1002,7 @@ dirty-текст сохраняется с ограничением записи
 поддерживаемых источников предоставляет ESKA. Наличие имени в каталоге не означает
 полного вывода типа выражения или проверки выполнения запроса.
 
-[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18-query/explorer-query.gif)](https://odineska.tech/eska/docs/#demo-query)
+[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-query.gif)](https://odineska.tech/eska/docs/#demo-query)
 
 ### Таблицы, поля и соединения
 
@@ -1091,6 +1095,8 @@ ESKA отвечает за разбор поддержанной структу�
 <a id="language"></a>
 
 ## 14. BSL-сервисы и конфигурация анализатора
+
+За диагностику BSL, подсказки параметров и поиск определений в Explorer отвечает языковой сервер bsl-analyzer. Команда ESKA благодарит разработчиков анализатора за открытый сервер и инструменты проверки кода. [Исходники bsl-analyzer](https://github.com/itrous/bsl-analyzer) · [Выпуски анализатора](https://github.com/itrous/bsl-analyzer/releases)
 
 Базовая подсветка BSL/SDBL, скобки, комментарии и отступы входят в Explorer.
 Семантические сервисы работают через отдельный внешний `bsl-analyzer-app`.
@@ -1187,9 +1193,9 @@ read-only и файловые границы. Отказ одной цели о�
 ## 15. Форматирование BSL и запросов
 
 `eska-fmt` работает без анализатора, платформы и metadata-индекса. Общая
-`eska fmt` делегирует ту же операцию. По умолчанию без секции `[format]`
-используется профиль **`1c` версии 1**. Доступны также `eska` и именованные
-пользовательские профили.
+`eska fmt` делегирует ту же операцию. Без секции `[format]` действует профиль
+`eska` версии 1 с лимитом 150 колонок для BSL. В `eska.toml` можно выбрать
+профиль `1c` или задать собственный.
 
 ```toml
 [format]
@@ -1793,12 +1799,14 @@ Rust-инструменты и обычная подготовка через Ex
 | Действие в редакторе | Идентификатор |
 | --- | --- |
 | Выбрать проект и подключиться | `eska.explorer.connect` |
+| Начать проект 1С | `eska.explorer.projectOnboarding` |
 | Перезапустить подключение | `eska.explorer.restart` |
 | Отключиться | `eska.explorer.disconnect` |
 | Показать журнал подключения | `eska.explorer.showLog` |
 | Обновить метаданные | `eska.explorer.refresh` |
 | Обновить метаданные | `eska.explorer.refreshNode` |
 | Открыть исходник | `eska.explorer.openSource` |
+| Открыть в новой вкладке | `eska.explorer.openInNewTab` |
 | Открыть XML | `eska.explorer.openXml` |
 | Свойства | `eska.explorer.properties` |
 | Поиск метаданных | `eska.explorer.search` |
@@ -1856,6 +1864,8 @@ Rust-инструменты и обычная подготовка через Ex
 | Действие в редакторе | Идентификатор |
 | --- | --- |
 | Настроить проект | `eska.explorer.configureProject` |
+| Собрать файл 1С… | `eska.explorer.buildArtifact` |
+| Проверить проект | `eska.explorer.checkProject` |
 | Запустить тестовую базу | `eska.explorer.runTest` |
 | Обновить тестовую базу | `eska.explorer.applyTest` |
 | Обновить тестовую базу и запустить 1С | `eska.explorer.applyAndRunTest` |
@@ -1876,6 +1886,7 @@ Rust-инструменты и обычная подготовка через Ex
 | --- | --- |
 | Открыть файл | `eska.explorer.scm.open` |
 | Открыть изменения | `eska.explorer.scm.diff` |
+| Сравнить две версии | `eska.explorer.scm.compareRevisions` |
 | Индексировать изменения | `eska.explorer.scm.stage` |
 | Отменить индексирование изменений | `eska.explorer.scm.unstage` |
 | Отменить изменения | `eska.explorer.scm.discard` |
