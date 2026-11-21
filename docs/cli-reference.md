@@ -1,19 +1,31 @@
 # Полный справочник команд ESKA
 
-Справочник соответствует публичной справке текущих бинарников. Служебные
-скрытые bridge-команды не являются пользовательскими входами. Справка не
-меняет проект и доступна без платформы 1С или анализатора.
+Синтаксис команд приведён для [ESKA 0.38.0](https://github.com/odineska/eska/releases/tag/v0.38.0).
+Выберите программу и команду в таблице её раздела. В раскрывающемся блоке перечислены аргументы и параметры.
+Для просмотра справки достаточно установленного бинарника.
 
-`eska --version` — версия программы; `eska version` — версия проекта 1С.
-`--project-dir` принимает каталог. Наличие флага `--format`, `--workspace`,
-`--project`, `--member` или `--application` зависит от конкретной команды.
-В примерах ниже `ПУТЬ`, `ФАЙЛ`, `ИМЯ` заменяются вашими значениями.
+Команда `eska --version` показывает версию программы, а `eska version` читает версию проекта 1С.
+Параметр `--project-dir` задаёт начальный каталог для поиска проекта. У команд
+`clone`, `new` и `init` он задаёт базовый каталог для относительных путей.
+В примерах замените имена проектов, файлов и объектов на свои.
 
 [Практическое руководство](user-guide.md) · [Назначение компонентов](user-guide.md#components)
 
 <a id="cli-eska"></a>
 
 ## eska
+
+Из каталога с выгрузкой Designer XML выполните `eska init`, чтобы создать манифест. Для нового проекта используйте `eska new`. Команда `eska doctor` покажет, какие зависимости доступны для дальнейшей работы.
+
+Для изменения метаданных начните со схемы выбранного проекта. В этом примере команда проверяет возможность создать документ и сохраняет план. Последняя строка применяет его к исходникам.
+
+```sh
+eska metadata object-schema --kind document --format json
+eska metadata create --kind document --name Заказ --dry-run --no-input --format json > plan.json
+eska metadata create --plan plan.json --no-input --format json
+```
+
+Для workspace укажите проект через `-p ИМЯ`. Если после предпросмотра изменились исходники, получите новый план. Примеры добавления реквизитов и модулей, операций формы и восстановления записи есть в [руководстве по созданию метаданных](metadata-authoring.md).
 
 | Вход | Назначение |
 | --- | --- |
@@ -80,7 +92,7 @@
 <summary>eska: синтаксис и все параметры</summary>
 
 ```text
-eska 0.32.0
+eska 0.38.0
 Инструментарий разработки проектов 1С:Предприятие
 
 Использование: eska [ПАРАМЕТРЫ] [КОМАНДА]
@@ -1356,7 +1368,7 @@ Options:
 <summary>eska platform list: синтаксис и все параметры</summary>
 
 `--include-distrobox` включает независимый список хоста и настроенного контейнера
-с машинно-читаемыми источниками и частичными результатами. [Контракт JSON](user-guide.md#найти-и-выбрать-платформу).
+с машинно-читаемыми источниками и частичными результатами. [Контракт JSON](user-guide.md#build).
 
 ```text
 Показать платформы в текущем раннере
@@ -1364,10 +1376,11 @@ Options:
 Usage: eska platform list [ПАРАМЕТРЫ]
 
 Options:
-      --ibcmd <ПУТЬ>                 Явный путь к ibcmd (или ESKA_IBCMD)
+      --include-distrobox            Показать подтверждённые платформы на хосте и в настроенном Distrobox с источниками и частичными результатами
       --lang <ЛОКАЛЬ>                Выбрать язык интерфейса
-      --platform-arch <АРХИТЕКТУРА>  Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
+      --ibcmd <ПУТЬ>                 Явный путь к ibcmd (или ESKA_IBCMD)
       --project-dir <КАТАЛОГ>        Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+      --platform-arch <АРХИТЕКТУРА>  Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
       --format <human|json>          Формат вывода [default: human] [possible values: human, json]
   -h, --help                         Показать справку
@@ -1546,6 +1559,10 @@ Options:
 
 ## eska-project
 
+Для самостоятельного проекта конфигурации достаточно `eska-project new demo --type configuration`. Команда создаёт каркас с манифестом и каталогом исходников. Перейдите в `demo` или передайте путь через `--project-dir`. Для существующей выгрузки используйте `init`.
+
+Команда `eska-project validate --format json` проверяет конфигурацию проекта. В workspace команда `eska-project context --application accounting --format json` возвращает состав приложения с именем `accounting` из манифеста. Для работы IDE по протоколу через стандартные потоки предназначена `eska-project serve --stdio`.
+
 | Вход | Назначение |
 | --- | --- |
 | [`eska-project`](#command-eska-project) | Работа с проектами Designer XML |
@@ -1556,6 +1573,9 @@ Options:
 | [`eska-project validate`](#command-eska-project-validate) | Проверить манифесты и корневые дескрипторы Designer XML |
 | [`eska-project context`](#command-eska-project-context) | Определить контекст выбранного приложения |
 | [`eska-project settings-project`](#command-eska-project-settings-project) | Просмотр, проверка и сохранение файлов настроек проекта |
+| [`eska-project settings-project show`](#command-eska-project-settings-project-show) | Прочитать выбранный файл настроек |
+| [`eska-project settings-project preview`](#command-eska-project-settings-project-preview) | Проверить предложенные изменения и показать итоговый текст |
+| [`eska-project settings-project save`](#command-eska-project-settings-project-save) | Сохранить проверенные изменения в выбранном файле настроек |
 | [`eska-project settings-local`](#command-eska-project-settings-local) | Просмотр и редактирование локальных настроек запуска проекта |
 | [`eska-project settings-local show`](#command-eska-project-settings-local-show) | Показать текущие настройки и их ревизию |
 | [`eska-project settings-local save`](#command-eska-project-settings-local-save) | Сохранить настройки из JSON-документа на стандартном вводе |
@@ -1587,8 +1607,6 @@ Options:
 | [`eska-project metadata rename-apply`](#command-eska-project-metadata-rename-apply) | Применить проверенный план переименования по снимку источников |
 | [`eska-project metadata rename-recovery`](#command-eska-project-metadata-rename-recovery) | Проверить или восстановить прерванное переименование |
 | [`eska-project version bump`](#command-eska-project-version-bump) | Увеличить один компонент версии проекта |
-
-<a id="command-eska-project-settings-project"></a>
 
 ### Файлы настроек проекта
 
@@ -1642,7 +1660,101 @@ workspace укажите его каталог. Значения `manifest`, `ig
 обновления. `--application ИМЯ` выбирает приложение workspace для проверки
 или обновления.
 
+<a id="command-eska-project-settings-project"></a>
+
+<details>
+<summary>eska-project settings-project: синтаксис и все параметры</summary>
+
+```text
+Просмотр и изменение файлов настроек проекта
+
+Usage: eska-project settings-project [OPTIONS] <COMMAND>
+
+Commands:
+  show     Прочитать выбранный файл настроек
+  preview  Проверить предложенные изменения и показать итоговый текст
+  save     Сохранить проверенные изменения в выбранном файле настроек
+
+Options:
+      --format <ФОРМАТ>            Формат вывода: human или json [default: human] [possible values: human, json]
+      --lang <ЛОКАЛЬ>              Выбрать язык интерфейса
+      --analyzer <ANALYZER>        Исполняемый файл опубликованного bsl-analyzer-app; по умолчанию ESKA_BSL_ANALYZER или PATH
+      --project-dir <КАТАЛОГ>      Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --application <APPLICATION>  Выбрать приложение, объявленное в eska.toml
+  -h, --help                       Показать справку
+```
+
+</details>
+
+<a id="command-eska-project-settings-project-show"></a>
+
+<details>
+<summary>eska-project settings-project show: синтаксис и все параметры</summary>
+
+```text
+Прочитать выбранный файл настроек
+
+Usage: eska-project settings-project show [OPTIONS] --file <ФАЙЛ>
+
+Options:
+      --file <ФАЙЛ>                Выбрать манифест, правила игнорирования Git или атрибуты Git [possible values: manifest, ignore, attributes]
+      --format <ФОРМАТ>            Формат вывода: human или json [default: human] [possible values: human, json]
+      --lang <ЛОКАЛЬ>              Выбрать язык интерфейса
+      --analyzer <ANALYZER>        Исполняемый файл опубликованного bsl-analyzer-app; по умолчанию ESKA_BSL_ANALYZER или PATH
+  -h, --help                       Показать справку
+      --project-dir <КАТАЛОГ>      Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --application <APPLICATION>  Выбрать приложение, объявленное в eska.toml
+```
+
+</details>
+
+<a id="command-eska-project-settings-project-preview"></a>
+
+<details>
+<summary>eska-project settings-project preview: синтаксис и все параметры</summary>
+
+```text
+Проверить предложенные изменения и показать итоговый текст
+
+Usage: eska-project settings-project preview [OPTIONS] --file <ФАЙЛ>
+
+Options:
+      --file <ФАЙЛ>                Выбрать манифест, правила игнорирования Git или атрибуты Git [possible values: manifest, ignore, attributes]
+      --format <ФОРМАТ>            Формат вывода: human или json [default: human] [possible values: human, json]
+      --lang <ЛОКАЛЬ>              Выбрать язык интерфейса
+      --analyzer <ANALYZER>        Исполняемый файл опубликованного bsl-analyzer-app; по умолчанию ESKA_BSL_ANALYZER или PATH
+  -h, --help                       Показать справку
+      --project-dir <КАТАЛОГ>      Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --application <APPLICATION>  Выбрать приложение, объявленное в eska.toml
+```
+
+</details>
+
+<a id="command-eska-project-settings-project-save"></a>
+
+<details>
+<summary>eska-project settings-project save: синтаксис и все параметры</summary>
+
+```text
+Сохранить проверенные изменения в выбранном файле настроек
+
+Usage: eska-project settings-project save [OPTIONS] --file <ФАЙЛ>
+
+Options:
+      --file <ФАЙЛ>                Выбрать манифест, правила игнорирования Git или атрибуты Git [possible values: manifest, ignore, attributes]
+      --format <ФОРМАТ>            Формат вывода: human или json [default: human] [possible values: human, json]
+      --lang <ЛОКАЛЬ>              Выбрать язык интерфейса
+      --analyzer <ANALYZER>        Исполняемый файл опубликованного bsl-analyzer-app; по умолчанию ESKA_BSL_ANALYZER или PATH
+  -h, --help                       Показать справку
+      --project-dir <КАТАЛОГ>      Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
+      --application <APPLICATION>  Выбрать приложение, объявленное в eska.toml
+```
+
+</details>
+
 ### Локальные профили запуска
+
+Для команд `show`, `save` и `validate` справка доступна через `eska-project settings-local --help`.
 
 ```text
 eska-project --project-dir <путь> settings-local show --format json
@@ -1718,24 +1830,24 @@ HTTP-сервер 1С. Для файловой базы вместо `debug.url`
 <summary>eska-project: синтаксис и все параметры</summary>
 
 ```text
-eska-project 0.32.0
+eska-project 0.38.0
 Работа с проектами Designer XML
 
 Использование: eska-project [OPTIONS] [COMMAND]
 
 Команды:
-  add              Подключить БСП к внешнему отчёту или обработке
-  doctor           Диагностировать окружение текущего проекта
-  serve            Запустить самостоятельный сервер Metadata API проекта через stdio
-  analyzer-config  Производная конфигурация bsl-analyzer
-  validate         Проверить манифесты и корневые дескрипторы Designer XML
-  context          Определить контекст выбранного приложения
-  settings-project Просмотр и изменение файлов настроек проекта
-  settings-local   Просмотр и редактирование локальных настроек запуска проекта
-  new              Создать проект Designer XML без инициализации Git
-  init             Подключить существующую выгрузку Designer XML без инициализации Git
-  metadata         Чтение, изменение и создание метаданных Designer XML
-  version          Показать или изменить версию проекта 1С
+  add               Подключить БСП к внешнему отчёту или обработке
+  doctor            Диагностировать окружение текущего проекта
+  serve             Запустить самостоятельный сервер Metadata API проекта через stdio
+  analyzer-config   Производная конфигурация bsl-analyzer
+  validate          Проверить манифесты и корневые дескрипторы Designer XML
+  context           Определить контекст выбранного приложения
+  settings-local    Просмотр и редактирование локальных настроек запуска проекта
+  settings-project  Просмотр и изменение файлов настроек проекта
+  new               Создать проект Designer XML без инициализации Git
+  init              Подключить существующую выгрузку Designer XML без инициализации Git
+  metadata          Чтение, изменение и создание метаданных Designer XML
+  version           Показать или изменить версию проекта 1С
 Параметры:
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
@@ -2679,6 +2791,14 @@ Options:
 
 ## eska-check
 
+Запускайте проверку из проекта с Designer XML и установленным `bsl-analyzer-app`. В workspace можно выбрать приложение через `--application ИМЯ`. Например, команда ниже проверит контекст проекта и запишет отчёт. Каталог `reports` должен существовать вне исходников, а имя файла должно быть свободно.
+
+```sh
+eska-check --format json --report ./reports/check.json
+```
+
+Код выхода `0` означает, что проверка завершена и пороги соблюдены. Код `1` означает превышение порога, `2` — ошибку аргументов, `3` — незавершённую проверку, `130` — отмену. При коде `3` проверьте путь к анализатору и сообщение об ошибке в отчёте. [Формат отчёта и пороги](check-cli.md)
+
 | Вход | Назначение |
 | --- | --- |
 | [`eska-check`](#command-eska-check-default) | Полная проверка Designer XML и BSL для CI |
@@ -2689,7 +2809,7 @@ Options:
 <summary>eska-check: синтаксис и все параметры</summary>
 
 ```text
-eska-check 0.32.0
+eska-check 0.38.0
 Полная проверка Designer XML и BSL для CI
 
 Использование: eska-check [OPTIONS]
@@ -2712,6 +2832,16 @@ eska-check 0.32.0
 <a id="cli-eska-build"></a>
 
 ## eska-build
+
+Для сборки потребуется платформа 1С с `ibcmd`. Из каталога проекта проверьте доступные установки и план сборки. После проверки плана запустите сборку. Ключ `--manifest` добавляет к артефакту паспорт сборки.
+
+```sh
+eska-build platform list --format json
+eska-build build --dry-run --format json
+eska-build build --manifest
+```
+
+Для обратной операции передайте исходный файл и путь к новому каталогу, например `eska-build unpack ./input/report.erf ./report-xml`. Родительский каталог должен существовать. При ошибке выбора платформы укажите путь к `ibcmd` через `--ibcmd`. [Сборка и распаковка](build-tool.md)
 
 | Вход | Назначение |
 | --- | --- |
@@ -2739,7 +2869,7 @@ eska-check 0.32.0
 <summary>eska-build: синтаксис и все параметры</summary>
 
 ```text
-eska-build 0.32.0
+eska-build 0.38.0
 Сборка и распаковка нативных артефактов 1С
 
 Использование: eska-build [OPTIONS] [COMMAND]
@@ -2987,11 +3117,12 @@ eska-build 0.32.0
 Использование: eska-build platform list [OPTIONS]
 
 Параметры:
+      --include-distrobox            Показать подтверждённые платформы на хосте и в настроенном Distrobox с источниками и частичными результатами
       --ibcmd <ПУТЬ>                 Явный путь к ibcmd (или ESKA_IBCMD)
       --lang <LANG>                  Выбрать язык интерфейса
       --platform-arch <АРХИТЕКТУРА>  Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
-      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
       --project-dir <PROJECT_DIR>    Начать поиск проекта с этого каталога [default: .]
+      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
       --format <human|json>          Формат вывода [default: human] [possible values: human, json]
   -h, --help                         Показать справку
 ```
@@ -3361,6 +3492,8 @@ JSON-ответ для приложения имеет `kind: "application_apply
 
 ## eska-debug
 
+Команда `eska-debug infobases --list ./ibases.v8i` читает указанный список и возвращает базы в JSON. Для проектной отладки настройте профиль подключения и запустите адаптер из DAP-клиента, например с аргументами `dap --profile test --mode attach` для подключения к действующему серверу отладки. Адаптер обменивается сообщениями протокола через stdin и stdout.
+
 Используйте `check`, чтобы сверить исходники перед отладкой `prod`.
 Для DAP-сессии из проекта укажите профиль и режим `launch` или `attach`.
 Команда `standalone` открывает адаптер без проекта ESKA. Список баз из
@@ -3495,6 +3628,17 @@ Options:
 
 ## eska-vcs
 
+В проекте с Git и настроенным workflow команда `eska-vcs status` показывает текущую ветку и изменения. Команда `diff --semantic` группирует изменения по объектам Designer XML. Перед сохранением проверьте, какие файлы войдут в commit.
+
+```sh
+eska-vcs status
+eska-vcs diff --semantic
+eska-vcs save --dry-run
+eska-vcs save -m "Добавлена форма заказа"
+```
+
+Для временного переключения используйте `shelve`. Список полок выводит `shelves`, а `unshelve --dry-run` проверяет возможность восстановления. При конфликте сначала разберите изменения в рабочей копии. [Сценарии работы с Git](vcs-tool.md)
+
 | Вход | Назначение |
 | --- | --- |
 | [`eska-vcs`](#command-eska-vcs) | Git/workflow, полки и смысловое сравнение Designer XML |
@@ -3516,7 +3660,7 @@ Options:
 <summary>eska-vcs: синтаксис и все параметры</summary>
 
 ```text
-eska-vcs 0.32.0
+eska-vcs 0.38.0
 Git/workflow, полки и смысловое сравнение Designer XML
 
 Использование: eska-vcs [OPTIONS] <COMMAND>
@@ -3786,6 +3930,16 @@ Git/workflow, полки и смысловое сравнение Designer XML
 <a id="cli-eska-fmt"></a>
 
 ## eska-fmt
+
+Из каталога проекта выполните `eska-fmt --diff`, чтобы увидеть предлагаемые изменения BSL и запросов. Вызов без параметров записывает изменения. Для одного модуля передайте его путь относительно `--project-dir`.
+
+```sh
+eska-fmt --dump-config --format json
+eska-fmt src/CommonModules/Обмен/Ext/Module.bsl --diff
+eska-fmt --check
+```
+
+В режиме `--check` код `0` означает совпадение с настройками, `1` — нужны правки. Код `2` означает ошибку, `130` — отмену. Выбор правил и настройки BSL, запросов и XML описаны в [справочнике форматирования](formatting.md).
 
 | Вход | Назначение |
 | --- | --- |
