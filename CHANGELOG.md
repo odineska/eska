@@ -6,6 +6,20 @@
 версии соответствуют [семантическому версионированию](https://semver.org/lang/ru/).
 
 
+## [0.38.1](https://github.com/odineska/eska/compare/v0.38.0...v0.38.1) - 2026-11-21
+
+### Исправлено
+
+- *(fmt)* Вызовы выравниваются группами по лимиту строки ([#361](https://github.com/odineska/eska/pull/361))
+
+### Прочее
+
+- Merge pull request #362 from odineska/publication/docs-explorer-cli-7fe0c254
+- *(explorer)* Пять скринкастов ведут из README в руководство
+- *(cli)* Справочник семи программ сверен с выпуском ESKA
+
+
+
 ## [0.38.0](https://github.com/odineska/eska/compare/v0.37.1...v0.38.0) - 2026-11-20
 
 ### Добавлено
