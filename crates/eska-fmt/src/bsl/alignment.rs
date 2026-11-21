@@ -240,11 +240,50 @@ fn call(index: usize, unit: &Unit, tokens: &[Token<'_>], options: &Options) -> O
     })
 }
 
-/// Every separator gets one column; nested commas and punctuation inside literals are opaque.
-fn finish_calls(group: &[Call], options: &Options, output: &mut [Columns]) {
-    let Some(first) = group.first().filter(|_| group.len() > 1) else {
-        return;
-    };
+/// An overflowing row starts the next table. A single row keeps its ordinary spacing.
+fn finish_calls(mut group: &[Call], options: &Options, output: &mut [Columns]) {
+    while group.len() > 1 {
+        let (rows, columns) = fitting_call_prefix(group, options);
+        for call in &group[..rows] {
+            for ((offset, _), column) in call.arguments.iter().zip(&columns) {
+                output[call.unit].insert(*offset, *column);
+            }
+        }
+        group = &group[rows..];
+    }
+}
+
+/// Adding rows can only move columns to the right. Grow the probe before bisecting so a short
+/// table does not require measuring the entire remaining series.
+fn fitting_call_prefix(group: &[Call], options: &Options) -> (usize, Vec<usize>) {
+    let mut rows = 1;
+    let mut columns = Vec::new();
+    let mut probe = 2;
+    while let Some(candidate) = call_columns(&group[..probe], options) {
+        rows = probe;
+        columns = candidate;
+        if rows == group.len() {
+            return (rows, columns);
+        }
+        probe = (rows * 2).min(group.len());
+    }
+
+    let mut overflowing = probe;
+    while overflowing - rows > 1 {
+        let probe = rows.midpoint(overflowing);
+        if let Some(candidate) = call_columns(&group[..probe], options) {
+            rows = probe;
+            columns = candidate;
+        } else {
+            overflowing = probe;
+        }
+    }
+    (rows, columns)
+}
+
+/// Every outer separator gets one column when all the rows fit.
+fn call_columns(group: &[Call], options: &Options) -> Option<Vec<usize>> {
+    let first = group.first()?;
     let mut start = first.start;
     let mut columns = Vec::with_capacity(first.arguments.len());
     for at in 0..first.arguments.len() {
@@ -255,7 +294,7 @@ fn finish_calls(group: &[Call], options: &Options, output: &mut [Columns]) {
             .unwrap_or(start);
         // A table must not manufacture unbounded padding for otherwise ordinary source text.
         if column > 8192 {
-            return;
+            return None;
         }
         columns.push(column);
         start = column + 1 + usize::from(options.space_after_comma);
@@ -265,13 +304,9 @@ fn finish_calls(group: &[Call], options: &Options, output: &mut [Columns]) {
             layout::width(&call.tail, start, options.tab_width) > usize::from(options.column_limit)
         })
     {
-        return;
+        return None;
     }
-    for call in group {
-        for ((offset, _), column) in call.arguments.iter().zip(&columns) {
-            output[call.unit].insert(*offset, *column);
-        }
-    }
+    Some(columns)
 }
 
 /// Blank lines retained by the spacing policy separate horizontal tables; removed lines do not.

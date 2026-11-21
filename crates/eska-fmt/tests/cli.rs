@@ -188,6 +188,45 @@ fn compact_alignment_is_idempotent_through_the_cli() {
     }
 }
 
+#[test]
+fn overflowing_padding_splits_call_tables_through_the_cli() {
+    let directory = TestDir::new();
+    let module = "Module.bsl";
+    let path = directory.0.join(module);
+    let before = concat!(
+        "Call(\"A\",1);\n",
+        "Call(\"Long\",2);\n",
+        "Call(\"B\",1234567890123456);\n",
+        "Call(\"Wider\",3);\n",
+        "Call(\"X\",4);\n",
+    );
+    let style = r#"{"column_limit":28}"#;
+    let apply_args = [module, "--style", style, "--format", "json"];
+    let check_args = [module, "--style", style, "--check", "--format", "json"];
+    fs::write(&path, before).unwrap();
+    let ru = checked(&run(&directory.0, "ru", &check_args), 1);
+    let en = checked(&run(&directory.0, "en", &check_args), 1);
+    assert_eq!(ru, en);
+    assert_eq!(fs::read_to_string(&path).unwrap(), before);
+    for locale in ["ru", "en"] {
+        fs::write(&path, before).unwrap();
+        let applied = run(&directory.0, locale, &apply_args);
+        assert_eq!(String::from_utf8_lossy(&applied.stderr), "");
+        assert_eq!(checked(&applied, 0)["files"][0]["status"], "applied");
+        assert_eq!(
+            fs::read_to_string(&path).unwrap(),
+            concat!(
+                "Call(\"A\"   , 1);\n",
+                "Call(\"Long\", 2);\n",
+                "Call(\"B\", 1234567890123456);\n",
+                "Call(\"Wider\", 3);\n",
+                "Call(\"X\"    , 4);\n",
+            )
+        );
+        checked(&run(&directory.0, locale, &check_args), 0);
+    }
+}
+
 /// A later syntax failure cannot leave an earlier valid module formatted.
 #[test]
 fn complete_preflight_keeps_all_sources_on_failure() {
