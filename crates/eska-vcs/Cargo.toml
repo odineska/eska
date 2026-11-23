@@ -18,7 +18,7 @@ workspace = true
 eska-presentation = { workspace = true }
 clap = { version = "4.6.8", features = ["derive", "string"] }
 eska-project-core = { workspace = true }
-gix = { version = "0.90.0", default-features = false, features = ["comfort", "max-performance", "progress-tree", "revision", "sha1", "status", "worktree-mutation", "zlib-sirocco"] }
+gix = { version = "0.91.0", default-features = false, features = ["comfort", "max-performance", "notify", "progress-tree", "revision", "sha1", "status", "worktree-mutation", "zlib-sirocco"] }
 prodash = { version = "31.0.1", default-features = false, features = ["render-line", "render-line-autoconfigure", "render-line-crossterm"] }
 roxmltree = { version = "0.21.2", default-features = false, features = ["std", "positions"] }
 serde = { version = "1.0.229", features = ["derive"] }
@@ -27,13 +27,13 @@ sha2 = "0.11.1"
 
 [target.'cfg(windows)'.dependencies]
 # curl's ssl feature uses Schannel and the Windows certificate store on this target.
-gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
+gix = { version = "0.91.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 # Match gitoxide's default curl TLS backend, including servers that close after an HTTP challenge.
-gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
+gix = { version = "0.91.0", default-features = false, features = ["blocking-http-transport-curl-openssl"] }
 # Keep Linux release binaries independent of the system OpenSSL version.
 openssl-sys = { version = "0.9.118", features = ["vendored"] }
 
 [target.'cfg(all(not(windows), not(target_os = "linux")))'.dependencies]
-gix = { version = "0.90.0", default-features = false, features = ["blocking-http-transport-curl-rustls"] }
+gix = { version = "0.91.0", default-features = false, features = ["blocking-http-transport-curl-rustls"] }
