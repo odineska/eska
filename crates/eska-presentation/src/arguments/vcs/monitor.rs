@@ -9,6 +9,9 @@ pub struct MonitorArgs {
     #[arg(long, value_enum, default_value_t = OutputFormat::Human)]
     pub format: OutputFormat,
 
+    #[arg(long)]
+    pub events_stdin: bool,
+
     #[arg(short, long, action = clap::ArgAction::Help)]
     pub help: Option<bool>,
 }
@@ -23,6 +26,9 @@ pub fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command 
             argument
                 .help(localizer.text("status-format-help"))
                 .value_name(localizer.text("status-format-value"))
+        })
+        .mut_arg("events_stdin", |argument| {
+            argument.help(localizer.text("monitor-events-stdin-help"))
         })
         .mut_arg("help", |argument| argument.help(localizer.text("cli-help")))
 }

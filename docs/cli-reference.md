@@ -1027,6 +1027,7 @@ Usage: eska monitor [ПАРАМЕТРЫ]
 
 Options:
       --format <ФОРМАТ>        Формат вывода: human или json [default: human] [possible values: human, json]
+      --events-stdin           Читать события файловой системы из stdin в формате NDJSON
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
   -h, --help                   Показать справку

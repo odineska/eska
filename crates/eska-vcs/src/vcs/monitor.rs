@@ -55,11 +55,7 @@ impl Repository {
             watcher,
             recovery_started: None,
             recovery_error: None,
-            snapshot: Snapshot {
-                root,
-                head: self.head()?,
-                status: self.status()?,
-            },
+            snapshot: Snapshot::read(self)?,
         })
     }
 }
@@ -118,36 +114,62 @@ impl Monitor {
             if changes.is_empty() {
                 continue;
             }
-            // Fresh handles discard index, reference, ignore and configuration caches.
-            let repository = Repository::discover(root)?;
-            if repository.work_dir() != root {
-                return Err(Error::NotFound {
-                    start: root.clone(),
-                });
-            }
-            let head = repository.head()?;
-            let paths = if head == self.snapshot.head {
-                narrow_paths(&repository, &changes)?
-            } else {
-                None
-            };
-            let status = match paths {
-                Some(paths) => {
-                    let partial = repository.status_paths(&paths)?;
-                    let mut entries = self.snapshot.status.entries.clone();
-                    entries.retain(|entry| !paths.iter().any(|path| within(&entry.path, path)));
-                    entries.extend(partial.entries);
-                    entries.sort_by(|a, b| a.path.cmp(&b.path));
-                    Status { entries }
-                }
-                None => repository.status()?,
-            };
-            if head != self.snapshot.head || status != self.snapshot.status {
-                self.snapshot.head = head;
-                self.snapshot.status = status;
+            if self.snapshot.reconcile(&changes)? {
                 return Ok(Some(&self.snapshot));
             }
         }
+    }
+}
+
+impl Snapshot {
+    /// Read a baseline without installing filesystem watches.
+    ///
+    /// # Errors
+    /// Returns an error if HEAD or status cannot be read.
+    pub(crate) fn read(repository: &Repository) -> Result<Self, Error> {
+        Ok(Self {
+            root: repository.work_dir().to_owned(),
+            head: repository.head()?,
+            status: repository.status()?,
+        })
+    }
+
+    /// Reconcile invalidations against a fresh authoritative repository handle.
+    ///
+    /// # Errors
+    /// Returns an error if the repository disappeared or its snapshot cannot be read.
+    pub(crate) fn reconcile(&mut self, changes: &Changes) -> Result<bool, Error> {
+        let root = &self.root;
+        // Fresh handles discard index, reference, ignore and configuration caches.
+        let repository = Repository::discover(root)?;
+        if repository.work_dir() != root {
+            return Err(Error::NotFound {
+                start: root.clone(),
+            });
+        }
+        let head = repository.head()?;
+        let paths = if head == self.head {
+            narrow_paths(&repository, changes)?
+        } else {
+            None
+        };
+        let status = match paths {
+            Some(paths) => {
+                let partial = repository.status_paths(&paths)?;
+                let mut entries = self.status.entries.clone();
+                entries.retain(|entry| !paths.iter().any(|path| within(&entry.path, path)));
+                entries.extend(partial.entries);
+                entries.sort_by(|a, b| a.path.cmp(&b.path));
+                Status { entries }
+            }
+            None => repository.status()?,
+        };
+        if head != self.head || status != self.status {
+            self.head = head;
+            self.status = status;
+            return Ok(true);
+        }
+        Ok(false)
     }
 }
 

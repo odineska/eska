@@ -1409,3 +1409,5 @@ monitor-about = Watch for changes in the repository
 monitor-usage = eska monitor [OPTIONS]
 monitor-status = Changed paths in { $root } ({ $files })
 monitor-error = Could not monitor the repository. { $reason }
+
+monitor-events-stdin-help = Read filesystem events from stdin as NDJSON

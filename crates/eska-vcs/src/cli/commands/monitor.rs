@@ -1,5 +1,7 @@
 //! Versioned newline-delimited repository snapshots for long-lived consumers.
 
+mod events_stdin;
+
 use crate::vcs::{
     monitor::Snapshot,
     repository::{Error, Head, Repository},
@@ -19,6 +21,13 @@ use std::{
 };
 
 pub fn run(args: &MonitorArgs, root: &Path, localizer: &Localizer) -> ExitCode {
+    if args.events_stdin {
+        return events_stdin::run(args, root, localizer);
+    }
+    run_native(args, root, localizer)
+}
+
+fn run_native(args: &MonitorArgs, root: &Path, localizer: &Localizer) -> ExitCode {
     let mut output = io::stdout().lock();
     let mut output_connected = stdout_connected();
     let result = Repository::discover(root).and_then(|repository| repository.monitor());
@@ -27,13 +36,9 @@ pub fn run(args: &MonitorArgs, root: &Path, localizer: &Localizer) -> ExitCode {
         Err(error) => return fail(&mut output, args.format, &error, localizer),
     };
     loop {
-        if let Err(error) = write_snapshot(&mut output, args.format, monitor.snapshot(), localizer)
+        if let Err(exit) = publish_snapshot(&mut output, args.format, monitor.snapshot(), localizer)
         {
-            if error.kind() == io::ErrorKind::BrokenPipe {
-                return ExitCode::SUCCESS;
-            }
-            eprintln!("{}", localizer.text("status-json-error"));
-            return ExitCode::FAILURE;
+            return exit;
         }
         match monitor.next_snapshot_while(&mut output_connected) {
             Ok(Some(_)) => {}
@@ -110,6 +115,22 @@ fn fail(
         )
     );
     ExitCode::FAILURE
+}
+
+fn publish_snapshot(
+    output: &mut impl Write,
+    format: OutputFormat,
+    snapshot: &Snapshot,
+    localizer: &Localizer,
+) -> Result<(), ExitCode> {
+    write_snapshot(output, format, snapshot, localizer).map_err(|error| {
+        if error.kind() == io::ErrorKind::BrokenPipe {
+            ExitCode::SUCCESS
+        } else {
+            eprintln!("{}", localizer.text("status-json-error"));
+            ExitCode::FAILURE
+        }
+    })
 }
 
 fn write_snapshot(

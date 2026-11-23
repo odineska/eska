@@ -160,14 +160,14 @@ fn native_snapshots_reconcile_literal_paths_index_head_and_ignores_in_both_local
         git(&root.0, &["add", "other"]);
         assert_eq!(stream.next()["changes"][0]["index"], "modified");
         let changed = Instant::now();
-        fs::write(root.0.join("[literal]*"), "new\n").unwrap();
+        fs::write(root.0.join("[literal]"), "new\n").unwrap();
         let snapshot = stream.next();
         eprintln!("monitor native file {locale}: {:?}", changed.elapsed());
         assert_eq!(snapshot["changes"].as_array().unwrap().len(), 2);
-        assert_eq!(snapshot["changes"][0]["path"], "[literal]*");
-        fs::write(root.0.join("[literal]*"), "different\n").unwrap();
+        assert_eq!(snapshot["changes"][0]["path"], "[literal]");
+        fs::write(root.0.join("[literal]"), "different\n").unwrap();
         stream.quiet();
-        fs::remove_file(root.0.join("[literal]*")).unwrap();
+        fs::remove_file(root.0.join("[literal]")).unwrap();
         assert_eq!(stream.next()["changes"].as_array().unwrap().len(), 1);
         fs::write(root.0.join(".gitignore"), "ignored\n").unwrap();
         assert_eq!(stream.next()["changes"].as_array().unwrap().len(), 2);
