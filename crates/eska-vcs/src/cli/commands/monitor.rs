@@ -165,7 +165,7 @@ fn write_snapshot(
     output.flush()
 }
 
-fn document(snapshot: &Snapshot) -> Value {
+pub(crate) fn document(snapshot: &Snapshot) -> Value {
     let (root, root_encoding) = json_path(snapshot.root.as_os_str());
     let (head, reference, commit) = match &snapshot.head {
         Head::Attached { reference, id } => ("attached", Some(reference), Some(id.to_string())),
@@ -179,7 +179,16 @@ fn document(snapshot: &Snapshot) -> Value {
         let (path, path_encoding) = json_git_text(&entry.path);
         json!({"path":path,"path_encoding":path_encoding,"index":entry.index.map(kind),"worktree":entry.worktree.map(kind)})
     }).collect();
-    json!({"schema_version":1,"kind":"snapshot","repository":{"root":root,"root_encoding":root_encoding,"head":head,"branch":branch.as_ref().map(|(value,_)|value),"branch_encoding":branch.as_ref().map(|(_,encoding)|encoding),"commit":commit},"changes":changes})
+    let conflicts: Vec<_> = snapshot.scm.conflicts.iter().map(|entry| {
+        let (path, path_encoding) = json_git_text(&entry.path);
+        json!({"path":path,"path_encoding":path_encoding,"base":entry.base,"ours":entry.ours,"theirs":entry.theirs})
+    }).collect();
+    let renames: Vec<_> = snapshot.scm.renames.iter().map(|(from, to)| {
+        let (from, from_encoding) = json_git_text(from);
+        let (to, to_encoding) = json_git_text(to);
+        json!({"stage":"index","from":from,"from_encoding":from_encoding,"to":to,"to_encoding":to_encoding})
+    }).collect();
+    json!({"conflicts":conflicts,"renames":renames,"schema_version":1,"kind":"snapshot","repository":{"root":root,"root_encoding":root_encoding,"head":head,"branch":branch.as_ref().map(|(value,_)|value),"branch_encoding":branch.as_ref().map(|(_,encoding)|encoding),"commit":commit},"changes":changes})
 }
 
 const fn kind(change: Change) -> &'static str {

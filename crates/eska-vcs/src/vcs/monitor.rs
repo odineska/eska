@@ -21,6 +21,7 @@ pub struct Snapshot {
     pub root: PathBuf,
     pub head: Head,
     pub status: Status,
+    pub scm: super::scm_details::Details,
 }
 
 /// Owns the current coverage strategy and the latest reconciled view.
@@ -169,10 +170,13 @@ impl Snapshot {
     /// # Errors
     /// Returns an error if HEAD or status cannot be read.
     pub(crate) fn read(repository: &Repository) -> Result<Self, Error> {
+        let status = repository.status()?;
+        let scm = super::scm_details::Details::read(repository, &status)?;
         Ok(Self {
             root: repository.work_dir().to_owned(),
             head: repository.head()?,
-            status: repository.status()?,
+            status,
+            scm,
         })
     }
 
@@ -206,7 +210,9 @@ impl Snapshot {
             }
             None => repository.status()?,
         };
-        if head != self.head || status != self.status {
+        let scm = super::scm_details::Details::read(&repository, &status)?;
+        if head != self.head || status != self.status || scm != self.scm {
+            self.scm = scm;
             self.head = head;
             self.status = status;
             return Ok(true);

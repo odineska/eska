@@ -229,3 +229,36 @@ fn metadata_probe_reports_an_invalid_index_without_input() {
         std::thread::sleep(Duration::from_millis(20));
     }
 }
+
+#[test]
+fn exact_rename_details_exist_initially_and_after_index_event() {
+    let fixture = TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init"]);
+    fs::write(root.join("before"), "same\n").unwrap();
+    git(root, &["add", "."]);
+    git(root, &["commit", "-m", "base"]);
+    fs::rename(root.join("before"), root.join("after")).unwrap();
+    git(root, &["add", "--all"]);
+    let mut stream = Stream::start(root, "ru");
+    let initial = stream.next();
+    assert_eq!(
+        initial["renames"],
+        json!([{"stage":"index","from":"before","from_encoding":"utf-8","to":"after","to_encoding":"utf-8"}])
+    );
+    assert_eq!(initial["conflicts"], json!([]));
+    git(
+        root,
+        &[
+            "restore",
+            "--staged",
+            "--source=HEAD",
+            "--",
+            "before",
+            "after",
+        ],
+    );
+    stream.send(&json!({"schema_version":1,"full":true}));
+    assert_eq!(stream.next()["renames"], json!([]));
+    stream.close();
+}

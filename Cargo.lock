@@ -900,6 +900,7 @@ dependencies = [
 name = "eska-vcs"
 version = "0.38.1"
 dependencies = [
+ "base64",
  "clap",
  "eska-presentation",
  "eska-project-core",

@@ -15,6 +15,7 @@ authors = ["Aleksey Kalsin <aleksey@kalsin.pro>"]
 workspace = true
 
 [dependencies]
+base64 = { version = "0.23.1", default-features = false, features = ["std"] }
 eska-presentation = { workspace = true }
 clap = { version = "4.6.8", features = ["derive", "string"] }
 eska-project-core = { workspace = true }
