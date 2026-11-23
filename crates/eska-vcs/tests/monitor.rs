@@ -2,7 +2,7 @@
 use serde_json::Value;
 use std::{
     fs,
-    io::{BufRead, BufReader},
+    io::{BufRead, BufReader, Read},
     path::Path,
     process::{Child, Command, Stdio},
     sync::mpsc::{self, Receiver},
@@ -44,19 +44,28 @@ impl Drop for Stream {
 }
 impl Stream {
     fn start(root: &Path, locale: &str) -> Self {
-        let mut child = Command::new(env!("CARGO_BIN_EXE_eska-vcs"))
+        Self::start_with_limit(root, locale, usize::MAX)
+    }
+    fn spawn(root: &Path, locale: &str, stdout: Stdio) -> Child {
+        Command::new(env!("CARGO_BIN_EXE_eska-vcs"))
             .args(["--lang", locale, "--project-dir"])
             .arg(root)
             .args(["monitor", "--format", "json"])
             .stdin(Stdio::null())
-            .stdout(Stdio::piped())
+            .stdout(stdout)
             .stderr(Stdio::piped())
             .spawn()
-            .unwrap();
+            .unwrap()
+    }
+    fn start_with_limit(root: &Path, locale: &str, limit: usize) -> Self {
+        let mut child = Self::spawn(root, locale, Stdio::piped());
         let stdout = child.stdout.take().unwrap();
+        Self::read(child, stdout, limit)
+    }
+    fn read(child: Child, stdout: impl Read + Send + 'static, limit: usize) -> Self {
         let (sender, lines) = mpsc::channel();
         std::thread::spawn(move || {
-            for line in BufReader::new(stdout).lines() {
+            for line in BufReader::new(stdout).lines().take(limit) {
                 let Ok(line) = line else { break };
                 if sender.send(serde_json::from_str(&line).unwrap()).is_err() {
                     break;
@@ -72,9 +81,59 @@ impl Stream {
     }
     fn quiet(&self) {
         assert!(
-            self.lines.recv_timeout(Duration::from_millis(180)).is_err(),
+            matches!(
+                self.lines.recv_timeout(Duration::from_millis(180)),
+                Err(mpsc::RecvTimeoutError::Timeout)
+            ),
             "unchanged status must be silent"
         );
+    }
+    #[cfg(unix)]
+    fn wait_for_success(&mut self) {
+        let deadline = Instant::now() + Duration::from_secs(3);
+        loop {
+            if let Some(status) = self.child.try_wait().unwrap() {
+                assert!(status.success(), "{status}");
+                break;
+            }
+            assert!(
+                Instant::now() < deadline,
+                "closed stdout must stop a quiet monitor"
+            );
+            std::thread::sleep(Duration::from_millis(20));
+        }
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn closed_stdout_stops_a_quiet_monitor_without_repository_events() {
+    let root = TestDir::new();
+    git(&root.0, &["init", "-b", "main"]);
+    for locale in ["ru-RU", "en-US"] {
+        // The reader drops stdout after the baseline, like `monitor | head -n1`.
+        let mut stream = Stream::start_with_limit(&root.0, locale, 1);
+        assert_eq!(stream.next()["kind"], "snapshot");
+        stream.wait_for_success();
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn socket_stdout_stays_open_while_idle_and_stops_when_reader_closes() {
+    use std::{net::Shutdown, os::fd::OwnedFd, os::unix::net::UnixStream};
+
+    let root = TestDir::new();
+    git(&root.0, &["init", "-b", "main"]);
+    for locale in ["ru-RU", "en-US"] {
+        // Match Node child_process stdout, which uses a socket instead of a FIFO.
+        let (reader, writer) = UnixStream::pair().unwrap();
+        let child = Stream::spawn(&root.0, locale, Stdio::from(OwnedFd::from(writer)));
+        let mut stream = Stream::read(child, reader.try_clone().unwrap(), usize::MAX);
+        assert_eq!(stream.next()["kind"], "snapshot");
+        stream.quiet();
+        reader.shutdown(Shutdown::Both).unwrap();
+        stream.wait_for_success();
     }
 }
 

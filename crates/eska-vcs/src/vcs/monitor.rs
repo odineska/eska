@@ -70,12 +70,19 @@ impl Monitor {
         &self.snapshot
     }
 
-    /// Wait for native invalidations with a bounded service interval and publish only a different complete snapshot.
+    /// Wait for a different complete snapshot while the caller still needs the stream.
+    /// The predicate runs between bounded native-service intervals, without extra status scans.
     ///
     /// # Errors
     /// Coverage failures are terminal: an incomplete watch must never look like a quiet repository.
-    pub fn next_snapshot(&mut self) -> Result<&Snapshot, Error> {
+    pub fn next_snapshot_while(
+        &mut self,
+        mut keep_running: impl FnMut() -> bool,
+    ) -> Result<Option<&Snapshot>, Error> {
         loop {
+            if !keep_running() {
+                return Ok(None);
+            }
             let delay = self
                 .watcher
                 .next_timeout(Instant::now())
@@ -138,7 +145,7 @@ impl Monitor {
             if head != self.snapshot.head || status != self.snapshot.status {
                 self.snapshot.head = head;
                 self.snapshot.status = status;
-                return Ok(&self.snapshot);
+                return Ok(Some(&self.snapshot));
             }
         }
     }

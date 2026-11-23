@@ -20,6 +20,7 @@ use std::{
 
 pub fn run(args: &MonitorArgs, root: &Path, localizer: &Localizer) -> ExitCode {
     let mut output = io::stdout().lock();
+    let mut output_connected = stdout_connected();
     let result = Repository::discover(root).and_then(|repository| repository.monitor());
     let mut monitor = match result {
         Ok(monitor) => monitor,
@@ -34,10 +35,47 @@ pub fn run(args: &MonitorArgs, root: &Path, localizer: &Localizer) -> ExitCode {
             eprintln!("{}", localizer.text("status-json-error"));
             return ExitCode::FAILURE;
         }
-        if let Err(error) = monitor.next_snapshot() {
-            return fail(&mut output, args.format, &error, localizer);
+        match monitor.next_snapshot_while(&mut output_connected) {
+            Ok(Some(_)) => {}
+            Ok(None) => return ExitCode::SUCCESS,
+            Err(error) => return fail(&mut output, args.format, &error, localizer),
         }
     }
+}
+
+#[cfg(unix)]
+fn stdout_connected() -> impl FnMut() -> bool {
+    use rustix::{
+        event::{PollFd, PollFlags, Timespec, poll},
+        fs::{FileType, fstat},
+    };
+
+    let output = io::stdout();
+    let watch = fstat(&output).is_ok_and(|stat| {
+        matches!(
+            FileType::from_raw_mode(stat.st_mode),
+            FileType::Fifo | FileType::Socket
+        )
+    });
+    move || {
+        if !watch {
+            return true;
+        }
+        // Node child_process uses sockets on Unix; shell pipelines generally use FIFOs.
+        // Only terminal conditions matter: a full transport is still connected.
+        let mut descriptors = [PollFd::new(&output, PollFlags::empty())];
+        poll(&mut descriptors, Some(&Timespec::default())).is_err()
+            || !descriptors[0]
+                .revents()
+                .intersects(PollFlags::ERR | PollFlags::HUP | PollFlags::NVAL)
+    }
+}
+
+// std has no safe non-writing pipe-disconnection query on Windows. Keep detecting
+// BrokenPipe on actual output there, without treating stdin EOF as cancellation.
+#[cfg(not(unix))]
+fn stdout_connected() -> impl FnMut() -> bool {
+    || true
 }
 
 fn fail(
