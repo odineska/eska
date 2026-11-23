@@ -35,7 +35,12 @@ fn run_native(args: &MonitorArgs, root: &Path, localizer: &Localizer) -> ExitCod
         Ok(monitor) => monitor,
         Err(error) => return fail(&mut output, args.format, &error, localizer),
     };
+    let mut reported_polling = false;
     loop {
+        if monitor.is_polling() && !reported_polling {
+            eprintln!("{}", localizer.text("monitor-polling"));
+            reported_polling = true;
+        }
         if let Err(exit) = publish_snapshot(&mut output, args.format, monitor.snapshot(), localizer)
         {
             return exit;

@@ -1409,5 +1409,6 @@ monitor-about = Отслеживать изменения в репозитор�
 monitor-usage = eska monitor [ПАРАМЕТРЫ]
 monitor-status = Изменённые пути в { $root } ({ $files })
 monitor-error = Не удалось отследить изменения репозитория. { $reason }
+monitor-polling = Файловые уведомления недоступны. ESKA продолжает проверять статус с интервалом пять секунд.
 
 monitor-events-stdin-help = Читать события файловой системы из stdin в формате NDJSON
