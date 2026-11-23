@@ -7,6 +7,7 @@ XML. Сборка из checkout: `cargo build -p eska-vcs`. Полная `eska`,
 
 ```sh
 eska-vcs --project-dir "$PROJECT_ROOT" status --format json
+eska-vcs --project-dir "$PROJECT_ROOT" monitor --format json
 eska-vcs --project-dir "$PROJECT_ROOT" diff --semantic --format json
 eska-vcs --project-dir "$PROJECT_ROOT" history --limit 10 --format json
 eska-vcs --project-dir "$PROJECT_ROOT" start TASK-123
@@ -17,7 +18,7 @@ eska-vcs --project-dir "$PROJECT_ROOT" shelves --format json
 ```
 
 `PROJECT_ROOT` задаёт вызывающая среда. Доступны `clone`, `status`, `diff`,
-`history`, `start`, `switch`, `save`, `finish`, `shelve`, `unshelve`, `shelves`.
+`history`, `monitor`, `start`, `switch`, `save`, `finish`, `shelve`, `unshelve`, `shelves`.
 Без подкоманды выводится ошибка аргументов. Глобальные `--lang ru|en`,
 `--project-dir`, `--help`, `--version` не запускают другие ESKA-компоненты.
 Аргументы, проектные/workspace selectors, revision/semantic diff и ограничения
@@ -132,3 +133,50 @@ Windows/macOS и Remote этим результатом не подтвержд�
 следующая Session получала `Locked`, после — захватывает lock сразу.
 Это исправляет подтверждённый механизм удержания, но без syscall trace не
 приписывает ему каждый прежний случай `Shelf(Locked)`.
+
+## Непрерывное наблюдение
+
+`eska-vcs [--project-dir <root>] monitor --format json` и
+`eska [--project-dir <root>] monitor --format json` выводят по одному JSON-объекту
+на строку (NDJSON). Команда охватывает всё ближайшее рабочее дерево Git, включая
+linked worktree и репозитории без `eska.toml`. По умолчанию выводятся корень и
+количество изменённых путей.
+
+После регистрации файловых наблюдателей команда выводит начальный снимок.
+Дальше она публикует снимки при изменении HEAD или набора статусов. Быстрые
+промежуточные состояния могут объединяться. Получатель заменяет предыдущий
+снимок целиком.
+
+```json
+{"schema_version":1,"kind":"snapshot","repository":{"root":"/work/example","root_encoding":"utf-8","head":"attached","branch":"main","branch_encoding":"utf-8","commit":"0123456789012345678901234567890123456789"},"changes":[{"path":"src/Module.bsl","path_encoding":"utf-8","index":null,"worktree":"modified"}]}
+```
+
+У `head` три значения `attached`, `detached` и `unborn`. При `unborn` поле
+`commit` равно `null`. При `detached` поля `branch` и `branch_encoding` равны
+`null`. Строки `changes` отсортированы по исходным байтам пути. `index` описывает
+разницу между HEAD и индексом, а `worktree` — между индексом и рабочим деревом.
+Допустимые значения полей `null`, `added`, `modified`, `deleted`, `type_changed`,
+`untracked`, `intent_to_add` и `conflict`.
+Переименования представлены удалением и добавлением. Пути относительны корню
+Git. Кодировка `utf-8` сохраняет допустимый текст. Для остальных Git-путей
+и строк `percent` кодирует каждый байт как `%XX`. Для корня Windows
+`utf-16-percent` кодирует каждую единицу UTF-16 как `%XXXX`.
+
+`gix::Repository::monitor` использует режим `IgnoreAware`. Команда проверяет
+наличие файловых событий с интервалом до 40 мс и объединяет события Git
+за 45 мс. Для обычных правок status пересчитывается по затронутым путям,
+а устаревшие записи внутри этих путей удаляются. При изменениях HEAD, индекса,
+конфигурации, правил игнорирования, атрибутов или структуры репозитория выполняется
+полный пересчёт. Он также используется при потере файловых событий, сравнении
+без учёта регистра и нормализации Unicode. Для пути внутри submodule проверяется
+его gitlink. Наблюдение за конфигурацией и атрибутами ограничено файлами,
+доступными наблюдателю репозитория.
+
+При сбое наблюдение возобновляется с интервалом 100 мс. После восстановления
+выполняется полный пересчёт. Если наблюдение не удалось восстановить за две
+секунды или чтение состояния завершилось ошибкой, команда завершает поток с
+ненулевым кодом. В JSON-режиме она отправляет объект с `kind: "error"`,
+`schema_version: 1` и кодом `monitor_failed`, `repository_not_found` или
+`invalid_index`. Диагностика выводится на выбранном языке в `stderr`.
+В терминале наблюдение завершает Ctrl+C. Индекс и рабочие файлы используются
+только для чтения.

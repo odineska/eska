@@ -65,6 +65,7 @@ eska metadata create --plan plan.json --no-input --format json
 | [`eska doctor`](#command-eska-doctor) | Диагностировать окружение текущего проекта |
 | [`eska finish`](#command-eska-finish) | Завершить активную задачу по правилам workflow |
 | [`eska history`](#command-eska-history) | Показать локальную историю commit |
+| [`eska monitor`](#command-eska-monitor) | Отслеживать изменения в репозитории |
 | [`eska save`](#command-eska-save) | Сохранить текущие изменения проекта в историю Git |
 | [`eska start`](#command-eska-start) | Начать работу над задачей по workflow проекта |
 | [`eska status`](#command-eska-status) | Показать состояние проекта и workflow |
@@ -120,6 +121,7 @@ eska 0.38.0
   doctor     Диагностировать окружение текущего проекта
   finish     Завершить активную задачу по правилам workflow
   history    Показать локальную историю commit
+  monitor    Отслеживать изменения в репозитории
   save       Сохранить текущие изменения проекта в историю Git
   start      Начать работу над задачей по workflow проекта
   status     Показать состояние проекта и workflow
@@ -1009,6 +1011,25 @@ Options:
   -h, --help                   Показать справку
       --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
       --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+```
+
+</details>
+
+<a id="command-eska-monitor"></a>
+
+<details>
+<summary>eska monitor: синтаксис и все параметры</summary>
+
+```text
+Отслеживать изменения в репозитории
+
+Usage: eska monitor [ПАРАМЕТРЫ]
+
+Options:
+      --format <ФОРМАТ>        Формат вывода: human или json [default: human] [possible values: human, json]
+      --lang <ЛОКАЛЬ>          Выбрать язык интерфейса
+      --project-dir <КАТАЛОГ>  Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
+  -h, --help                   Показать справку
 ```
 
 </details>
@@ -3646,6 +3667,7 @@ eska-vcs save -m "Добавлена форма заказа"
 | [`eska-vcs diff`](#command-eska-vcs-diff) | Показать изменения файлов проекта |
 | [`eska-vcs finish`](#command-eska-vcs-finish) | Завершить активную задачу по правилам workflow |
 | [`eska-vcs history`](#command-eska-vcs-history) | Показать локальную историю commit |
+| [`eska-vcs monitor`](#command-eska-vcs-monitor) | Отслеживать изменения в репозитории |
 | [`eska-vcs save`](#command-eska-vcs-save) | Сохранить текущие изменения проекта в историю Git |
 | [`eska-vcs shelve`](#command-eska-vcs-shelve) | Сохранить незакоммиченные изменения текущей ветки в полку |
 | [`eska-vcs unshelve`](#command-eska-vcs-unshelve) | Восстановить полку текущей ветки с сохранением index и рабочих файлов |
@@ -3670,6 +3692,7 @@ Git/workflow, полки и смысловое сравнение Designer XML
   diff      Показать изменения файлов проекта
   finish    Завершить активную задачу по правилам workflow
   history   Показать локальную историю commit
+  monitor   Отслеживать изменения в репозитории
   save      Сохранить текущие изменения проекта в историю Git
   shelve    Сохранить незакоммиченные изменения текущей ветки в полку
   unshelve  Восстановить полку текущей ветки с сохранением index и рабочих файлов
@@ -3880,6 +3903,12 @@ Git/workflow, полки и смысловое сравнение Designer XML
 ```
 
 </details>
+
+<a id="command-eska-vcs-monitor"></a>
+
+`eska-vcs monitor` принимает те же параметры, что и `eska monitor`. При
+`--format json` команда выдаёт начальное состояние Git и последующие снимки
+в формате NDJSON. [Параметры команды](#command-eska-monitor) · [Формат потока](vcs-tool.md#непрерывное-наблюдение)
 
 <a id="command-eska-vcs-status"></a>
 

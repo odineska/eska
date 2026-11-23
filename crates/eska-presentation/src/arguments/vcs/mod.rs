@@ -4,6 +4,7 @@ pub mod clone;
 pub mod diff;
 pub mod finish;
 pub mod history;
+pub mod monitor;
 pub mod save;
 pub mod shelves;
 pub mod start;

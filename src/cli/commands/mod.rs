@@ -8,7 +8,7 @@ use eska_presentation::arguments::{
     build::{self, clean, config, import, patch, platform, runtime},
     check, formatting,
     project::{add, doctor, init, metadata, new, version},
-    vcs::{clone, diff, finish, history, save, shelves, start, status, switch},
+    vcs::{clone, diff, finish, history, monitor, save, shelves, start, status, switch},
 };
 
 use super::localization::Localizer;
@@ -63,6 +63,8 @@ pub(super) enum Commands {
     #[command(disable_help_flag = true)]
     History(history::HistoryArgs),
     #[command(disable_help_flag = true)]
+    Monitor(monitor::MonitorArgs),
+    #[command(disable_help_flag = true)]
     Save(save::SaveArgs),
     #[command(disable_help_flag = true)]
     Start(start::StartArgs),
@@ -102,6 +104,7 @@ pub(super) fn run(
             | Commands::Diff(_)
             | Commands::Finish(_)
             | Commands::History(_)
+            | Commands::Monitor(_)
             | Commands::Save(_)
             | Commands::Start(_)
             | Commands::Status(_)
@@ -158,6 +161,7 @@ pub(super) fn localize(command: clap::Command, localizer: &Localizer) -> clap::C
         .mut_subcommand("doctor", |command| doctor::localize(command, localizer))
         .mut_subcommand("finish", |command| finish::localize(command, localizer))
         .mut_subcommand("history", |command| history::localize(command, localizer))
+        .mut_subcommand("monitor", |command| monitor::localize(command, localizer))
         .mut_subcommand("save", |command| save::localize(command, localizer))
         .mut_subcommand("start", |command| start::localize(command, localizer))
         .mut_subcommand("status", |command| status::localize(command, localizer))

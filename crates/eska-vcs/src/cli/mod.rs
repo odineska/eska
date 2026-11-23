@@ -48,6 +48,8 @@ enum Commands {
     #[command(disable_help_flag = true)]
     History(commands::history::HistoryArgs),
     #[command(disable_help_flag = true)]
+    Monitor(commands::monitor::MonitorArgs),
+    #[command(disable_help_flag = true)]
     Save(commands::save::SaveArgs),
     #[command(disable_help_flag = true)]
     Shelve(commands::shelves::ShelveArgs),
@@ -93,6 +95,7 @@ pub fn run() -> ExitCode {
         Commands::Diff(args) => commands::diff::run(&args, &cli.project_dir, &localizer),
         Commands::Finish(_) => commands::finish::run(&cli.project_dir, &localizer),
         Commands::History(args) => commands::history::run(&args, &cli.project_dir, &localizer),
+        Commands::Monitor(args) => commands::monitor::run(&args, &cli.project_dir, &localizer),
         Commands::Save(args) => commands::save::run(&args, &cli.project_dir, &localizer),
         Commands::Shelve(args) => commands::shelves::shelve(&args, &cli.project_dir, &localizer),
         Commands::Unshelve(args) => {
@@ -146,6 +149,9 @@ fn localized(localizer: &Localizer) -> clap::Command {
         })
         .mut_subcommand("start", |command| {
             commands::start::localize(command, localizer)
+        })
+        .mut_subcommand("monitor", |command| {
+            commands::monitor::localize(command, localizer)
         })
         .mut_subcommand("status", |command| {
             commands::status::localize(command, localizer)

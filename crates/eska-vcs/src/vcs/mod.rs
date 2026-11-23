@@ -3,6 +3,7 @@
 pub mod command;
 pub mod diff;
 pub mod git;
+pub mod monitor;
 pub mod network;
 pub mod repository;
 pub mod shelves;
