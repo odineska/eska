@@ -52,6 +52,47 @@ impl Repository {
 }
 
 impl FileVersionReader<'_> {
+    /// Read one bounded Git blob without touching the worktree.
+    pub(crate) fn scm_blob(
+        &self,
+        path: &BStr,
+        stage: Option<gix::index::entry::Stage>,
+    ) -> Result<Option<Vec<u8>>, Error> {
+        let id = if let Some(stage) = stage {
+            self.index
+                .entry_by_path_and_stage(path, stage)
+                .map(|entry| entry.id)
+        } else if let Some(tree) = &self.head {
+            let path = gix::path::from_bstr(path)
+                .map_err(|source| Error::operation(Operation::Status, source))?;
+            tree.lookup_entry_by_path(path.as_ref())
+                .map_err(|source| Error::operation(Operation::Status, source))?
+                .map(|entry| entry.object_id())
+        } else {
+            None
+        };
+        let Some(id) = id else {
+            return Ok(None);
+        };
+        let header = self
+            .repository
+            .inner
+            .find_header(id)
+            .map_err(|source| Error::operation(Operation::Status, source))?;
+        if header.size() > 32 * 1024 * 1024 || header.kind() != gix::objs::Kind::Blob {
+            return Err(Error::operation(
+                Operation::Status,
+                io::Error::other("SCM blob limit or type"),
+            ));
+        }
+        let mut blob = self
+            .repository
+            .inner
+            .find_blob(id)
+            .map_err(|source| Error::operation(Operation::Status, source))?;
+        Ok(Some(std::mem::take(&mut blob.data)))
+    }
+
     /// Read one file using the retained Git snapshots and its current worktree contents.
     pub(crate) fn read(&self, path: &BStr) -> Result<FileVersions, Error> {
         let head = self.head_blob(path)?;

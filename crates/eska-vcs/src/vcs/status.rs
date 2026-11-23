@@ -62,6 +62,22 @@ impl Repository {
     /// # Errors
     /// Returns an index preflight error or `Operation::Status` for unreadable data or unrepresentable paths.
     pub fn status(&self) -> Result<Status, Error> {
+        self.status_patterns(Vec::new())
+    }
+
+    pub(super) fn status_paths(&self, paths: &[BString]) -> Result<Status, Error> {
+        let patterns = paths
+            .iter()
+            .map(|path| {
+                let mut pattern = BString::from(":(top,literal)");
+                pattern.extend_from_slice(path);
+                pattern
+            })
+            .collect();
+        self.status_patterns(patterns)
+    }
+
+    fn status_patterns(&self, patterns: Vec<BString>) -> Result<Status, Error> {
         self.check_index_size()?;
         let platform = self
             .inner
@@ -72,7 +88,7 @@ impl Repository {
             .index_worktree_rewrites(None)
             .dirwalk_options(|options| options.empty_patterns_match_prefix(false));
         let iter = platform
-            .into_iter(Vec::<BString>::new())
+            .into_iter(patterns)
             .map_err(|source| Error::operation(Operation::Status, source))?;
         let mut paths = BTreeMap::new();
         for item in iter {

@@ -122,6 +122,7 @@ mod tests {
                     "doctor",
                     "finish",
                     "history",
+                    "monitor",
                     "save",
                     "start",
                     "status",

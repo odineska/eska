@@ -1,5 +1,7 @@
 //! Narrow process contracts; callers retain ownership of their surrounding file transactions.
 
+use crate::vcs::scm_bridge as scm;
+
 use crate::vcs::{
     git,
     repository::{Error, Head, Repository},
@@ -27,6 +29,20 @@ pub struct BridgeArgs {
 
 #[derive(Debug, Subcommand)]
 enum Operation {
+    ScmRoot,
+    ScmStatus,
+    ScmBlob {
+        #[arg(long, value_enum)]
+        revision: scm::Revision,
+        file: PathBuf,
+    },
+    ScmFiles {
+        #[arg(value_enum)]
+        action: scm::Action,
+        #[arg(long)]
+        paths_stdin: bool,
+        files: Vec<PathBuf>,
+    },
     LibraryCheckout {
         repository: OsString,
         #[arg(long)]
@@ -133,6 +149,17 @@ impl BridgeArgs {
     /// Emit a complete machine response; mutators require an exclusively owned new namespace.
     pub fn run(&self, root: &Path) -> ExitCode {
         let (operation, result): (&str, Result<Value, Value>) = match &self.operation {
+            Operation::ScmRoot => ("scm_root", scm::root(root)),
+            Operation::ScmStatus => ("scm_status", scm::status(root)),
+            Operation::ScmBlob { revision, file } => ("scm_blob", scm::blob(root, *revision, file)),
+            Operation::ScmFiles {
+                action,
+                files,
+                paths_stdin,
+            } => (
+                "scm_files",
+                scm::files_input(root, *action, files, *paths_stdin),
+            ),
             Operation::LibraryCheckout {
                 repository,
                 destination,
@@ -215,17 +242,21 @@ impl BridgeArgs {
                     .map(|count| json!({"local_changes": count})),
             ),
         };
-        let (data, error, code) = match result {
-            Ok(data) => (Some(data), None, ExitCode::SUCCESS),
-            Err(error) => (None, Some(error), ExitCode::FAILURE),
-        };
-        let document = json!({"schema_version":1,"operation":operation,"data":data,"error":error});
-        let mut stdout = io::stdout().lock();
-        if serde_json::to_writer(&mut stdout, &document).is_err() || writeln!(stdout).is_err() {
-            return ExitCode::FAILURE;
-        }
-        code
+        emit_response(operation, result)
     }
+}
+
+fn emit_response(operation: &str, result: Result<Value, Value>) -> ExitCode {
+    let (data, error, code) = match result {
+        Ok(data) => (Some(data), None, ExitCode::SUCCESS),
+        Err(error) => (None, Some(error), ExitCode::FAILURE),
+    };
+    let document = json!({"schema_version":1,"operation":operation,"data":data,"error":error});
+    let mut stdout = io::stdout().lock();
+    if serde_json::to_writer(&mut stdout, &document).is_err() || writeln!(stdout).is_err() {
+        return ExitCode::FAILURE;
+    }
+    code
 }
 
 fn library_checkout(

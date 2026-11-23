@@ -227,7 +227,7 @@ impl Repository {
     pub fn head(&self) -> Result<Head, Error> {
         let error = |source| Error::operation(Operation::Head, source);
         let mut head = self.inner.head().map_err(error)?;
-        if let gix::head::Kind::Unborn(reference) = &head.kind {
+        if let Some(reference) = head.referent_name().filter(|_| head.is_unborn()) {
             return Ok(Head::Unborn {
                 reference: reference.as_bstr().to_owned(),
             });
@@ -261,7 +261,7 @@ impl Repository {
         for reference in iter {
             let reference =
                 reference.map_err(|source| Error::operation(Operation::References, source))?;
-            let target = match &reference.inner.target {
+            let target = match &reference.inner().target {
                 gix::refs::Target::Object(id) => ReferenceTarget::Object(*id),
                 gix::refs::Target::Symbolic(name) => {
                     ReferenceTarget::Symbolic(name.as_bstr().to_owned())

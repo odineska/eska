@@ -3,8 +3,9 @@
 use std::{
     ffi::OsStr,
     fmt, io,
+    io::Write,
     path::Path,
-    process::{Command, ExitStatus, Output},
+    process::{Command, ExitStatus, Output, Stdio},
 };
 
 use gix::bstr::{BString, ByteSlice};
@@ -253,6 +254,76 @@ impl<'a> Executor<'a> {
                 stderr: BString::default(),
             })
         }
+    }
+
+    /// Execute a validated, literal list of SCM file paths.
+    pub(crate) fn scm_files(
+        &self,
+        action: &str,
+        unborn: bool,
+        paths: &[std::path::PathBuf],
+    ) -> Result<(), Error> {
+        let mut args = vec![OsStr::new("--literal-pathspecs")];
+        match action {
+            "stage" => args.extend([OsStr::new("add"), OsStr::new("--all")]),
+            "unstage" if unborn => args.extend([
+                OsStr::new("rm"),
+                OsStr::new("--cached"),
+                OsStr::new("--force"),
+                OsStr::new("--ignore-unmatch"),
+            ]),
+            "unstage" => args.extend([
+                OsStr::new("restore"),
+                OsStr::new("--staged"),
+                OsStr::new("--source=HEAD"),
+            ]),
+            _ => args.extend([OsStr::new("restore"), OsStr::new("--worktree")]),
+        }
+        args.extend([
+            OsStr::new("--pathspec-from-file=-"),
+            OsStr::new("--pathspec-file-nul"),
+        ]);
+        let mut input = Vec::new();
+        for path in paths {
+            let bytes = gix::path::into_bstr(path.as_path()).map_err(|source| Error::Spawn {
+                operation: Operation::Stage,
+                source: io::Error::other(source),
+            })?;
+            input.extend_from_slice(&bytes);
+            input.push(0);
+        }
+        let mut child = self
+            .command()
+            .env("LC_ALL", "C")
+            .args(args)
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .spawn()
+            .map_err(|source| Error::Spawn {
+                operation: Operation::Stage,
+                source,
+            })?;
+        let written = child
+            .stdin
+            .take()
+            .ok_or_else(|| io::Error::other("missing Git stdin"))
+            .and_then(|mut stdin| stdin.write_all(&input));
+        let output = child.wait_with_output().map_err(|source| Error::Spawn {
+            operation: Operation::Stage,
+            source,
+        })?;
+        if !output.status.success() {
+            return Err(Error::Failed {
+                operation: Operation::Stage,
+                status: output.status,
+                stderr: output.stderr.into(),
+            });
+        }
+        written.map_err(|source| Error::Spawn {
+            operation: Operation::Stage,
+            source,
+        })
     }
 
     fn success<I, S>(&self, operation: Operation, args: I) -> Result<(), Error>

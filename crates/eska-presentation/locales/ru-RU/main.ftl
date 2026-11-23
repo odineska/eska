@@ -1404,3 +1404,11 @@ project-document-too-large = Документ настроек проекта п
 project-document-changed = Настройки проекта изменились. Перечитайте их перед сохранением правок.
 
 platform-include-distrobox-help = Показать подтверждённые платформы на хосте и в настроенном Distrobox с источниками и частичными результатами
+
+monitor-about = Отслеживать изменения в репозитории
+monitor-usage = eska monitor [ПАРАМЕТРЫ]
+monitor-status = Изменённые пути в { $root } ({ $files })
+monitor-error = Не удалось отследить изменения репозитория. { $reason }
+monitor-polling = Файловые уведомления недоступны. ESKA продолжает проверять статус с интервалом пять секунд.
+
+monitor-events-stdin-help = Читать события файловой системы из stdin в формате NDJSON
