@@ -169,20 +169,16 @@ fn native_snapshots_reconcile_literal_paths_index_head_and_ignores_in_both_local
         baselines.push(baseline);
         // Scoped updates must not drop a staged change outside their literal pathspec.
         fs::write(root.0.join("other"), "staged\n").unwrap();
-        // Separate file and index notifications deterministically before staging.
-        let unstaged = stream.next();
-        assert_eq!(unstaged["changes"].as_array().unwrap().len(), 1);
-        let unstaged_other = unstaged["changes"][0].clone();
-        assert_eq!(unstaged_other["path"], "other");
-        assert!(unstaged_other["index"].is_null());
-        assert_eq!(unstaged_other["worktree"], "modified");
+        let unstaged_other = serde_json::json!({
+            "path": "other", "path_encoding": "utf-8", "index": null, "worktree": "modified"
+        });
         let mut staged_other = unstaged_other.clone();
         staged_other["index"] = "modified".into();
         staged_other["worktree"] = Value::Null;
         let mut both_modified = staged_other.clone();
         both_modified["worktree"] = "modified".into();
         git(&root.0, &["add", "other"]);
-        // The file event can precede the separate index notification.
+        // File and index notifications can arrive separately or in the same batch.
         stream.until(|snapshot| {
             let changes = snapshot["changes"].as_array().unwrap();
             assert_eq!(changes.len(), 1, "{snapshot}");
