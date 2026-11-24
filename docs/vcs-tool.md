@@ -253,13 +253,15 @@ Git. Кодировка `utf-8` сохраняет допустимый текс
 Explorer. Они возвращают один JSON-документ
 `{schema_version:1, operation, data, error}` и не зависят от языка CLI.
 `operation` использует имена `scm_root`, `scm_status`, `scm_blob`, `scm_files`,
-`scm_branches`, `scm_checkout`, `scm_stage_lines`.
+`scm_branches`, `scm_checkout`, `scm_refs`, `scm_switch`, `scm_stage_lines`.
 При ошибке `data` равен `null`, `error` содержит машинный код, exit code — 1.
 
 - `scm-root` находит ближайший рабочий репозиторий от `--project-dir` и возвращает
   `root`, `root_encoding`, `mutations_available` и `branches_available`. Два
   флага показывают доступность системного Git и вычисляются одной проверкой.
   При `branches_available: true` Explorer может запросить список веток для выбора.
+  `branch_actions_available` сообщает поддержку расширенного выбора ссылок,
+  создания ветки и detached checkout; флаг также требует системного Git.
   Дополнительный `line_staging_available: true` означает поддержку индексирования
   выделенных строк через встроенный gix; system Git для него не нужен.
   Отсутствующий флаг в старом backend клиент трактует как `false`.
@@ -277,6 +279,22 @@ Explorer. Они возвращают один JSON-документ
   `references` и `checkout_failed`. При отказе Git возвращается `checkout_failed`.
   После переключения клиент запрашивает `scm-status`. Дальнейшие изменения
   HEAD ему передаёт уже работающий монитор.
+- `scm-refs` возвращает `{refs:[{name,kind}]}`: существующие UTF-8 ссылки
+  `local`, `remote`, `tag`. Символические ссылки (например `origin/HEAD`) не
+  предлагаются. Имена проверяются через gix; отдельный Git watcher не создаётся.
+- `scm-switch --kind head|local|remote|tag|commit [--branch NAME] [--detached] -- TARGET`
+  принимает точную ссылку выбранного вида (`head` допускает только `HEAD`),
+  либо 7–64 шестнадцатеричных символа существующего commit ID. Выражения revspec
+  не принимаются. `--branch` создаёт новую ветку и сразу переключается на неё;
+  существующие и недопустимые имена отклоняются. Без этого параметра local
+  переключает ветку, remote создаёт отслеживающую локальную ветку, tag/commit
+  переключают в detached HEAD. `--detached` явно отсоединяет HEAD и для веток.
+  Конфликтный индекс отклоняется; безопасность worktree, игнорируемых файлов
+  и занятых веток проверяет Git (`switch --no-guess --no-overwrite-ignore`).
+  Принудительное переключение и автоматическое сохранение в stash отсутствуют.
+  Создание из HEAD поддерживается и до первого commit. Дополнительный код
+  `branch_exists` сообщает о занятом имени, остальные ошибки совпадают с checkout.
+  Клиент сохраняет старое меню для backend без `branch_actions_available`.
 - `scm-status` возвращает полный снимок schema 1 команды `monitor`. Дополнительный
   массив `conflicts` содержит `path`, `path_encoding` и booleans `base`, `ours`,
   `theirs`: наличие соответствующих стадий индекса. Массив `renames` содержит

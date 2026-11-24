@@ -11,6 +11,7 @@ pub(crate) mod snapshot;
 pub mod status;
 pub mod workflow;
 
+pub(crate) mod scm_branches;
 pub(crate) mod scm_bridge;
 
 pub mod scm_details;

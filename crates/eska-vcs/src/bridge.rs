@@ -37,6 +37,18 @@ enum ScmOperation {
     Status,
     #[command(name = "scm-branches")]
     Branches,
+    #[command(name = "scm-refs")]
+    Refs,
+    #[command(name = "scm-switch")]
+    Switch {
+        #[arg(long, value_enum)]
+        kind: crate::vcs::scm_branches::Kind,
+        #[arg(long)]
+        branch: Option<String>,
+        #[arg(long)]
+        detached: bool,
+        target: String,
+    },
     #[command(name = "scm-checkout")]
     Checkout { branch: String },
     #[command(name = "scm-blob")]
@@ -168,6 +180,16 @@ impl ScmOperation {
             Self::Root => ("scm_root", scm::root(root)),
             Self::Status => ("scm_status", scm::status(root)),
             Self::Branches => ("scm_branches", scm::branches(root)),
+            Self::Refs => ("scm_refs", crate::vcs::scm_branches::refs(root)),
+            Self::Switch {
+                kind,
+                branch,
+                detached,
+                target,
+            } => (
+                "scm_switch",
+                crate::vcs::scm_branches::change(root, *kind, target, branch.as_deref(), *detached),
+            ),
             Self::Checkout { branch } => ("scm_checkout", scm::checkout(root, branch)),
             Self::Blob { revision, file } => ("scm_blob", scm::blob(root, *revision, file)),
             Self::Files {

@@ -154,6 +154,32 @@ impl<'a> Executor<'a> {
         )
     }
 
+    /// Use only checked references; Git enforces dirty and linked-worktree safety.
+    pub(crate) fn scm_switch(
+        &self,
+        kind: super::scm_branches::Kind,
+        name: &str,
+        target: &str,
+        branch: Option<&str>,
+        detached: bool,
+    ) -> Result<(), Error> {
+        use super::scm_branches::Kind;
+        let mut args = vec!["switch", "--no-guess", "--no-overwrite-ignore"];
+        if let Some(branch) = branch {
+            args.extend(["--create", branch]);
+            if !matches!(kind, Kind::Head) {
+                args.push(target);
+            }
+        } else if detached || matches!(kind, Kind::Tag | Kind::Commit | Kind::Head) {
+            args.extend(["--detach", target]);
+        } else if matches!(kind, Kind::Remote) {
+            args.extend(["--track", target]);
+        } else {
+            args.extend(["--", name]);
+        }
+        self.success(Operation::Switch, args)
+    }
+
     /// Clean only captured tracked paths using a NUL-delimited literal pathspec file.
     ///
     /// # Errors
