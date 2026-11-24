@@ -479,11 +479,7 @@ fn metadata_read(
         }
         "metadata/search" => search(project, args),
         "metadata/revealSource" => reveal_source(labels, project, args),
-        "metadata/sourceLabels" => super::source_labels::labels(
-            labels,
-            project.project().configuration().project_type(),
-            args,
-        ),
+        "metadata/sourceLabels" => super::source_labels::workspace_labels(labels, project, args),
         "metadata/reveal" => {
             let id: ObjectId = params::decode(&args["objectId"])?;
             let ancestry = reveal_ancestry(project, &id)?;
