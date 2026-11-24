@@ -161,14 +161,16 @@ fn stdin_snapshots_reconcile_renames_deletions_and_ignores_in_both_languages() {
 #[test]
 fn linked_worktree_probes_index_and_head_without_input_or_idle_status_scans() {
     let root = fixture();
-    let container = TestDir::new();
-    let linked = container.0.join("linked");
-    git(
-        &root.0,
-        &["worktree", "add", "-b", "linked", linked.to_str().unwrap()],
-    );
+    let linked = root.0.join("linked");
+    // Git for Windows does not accept canonical verbatim paths as worktree targets.
+    git(&root.0, &["worktree", "add", "-b", "linked", "linked"]);
     let mut stream = Stream::start(&linked, "en-US");
-    assert_eq!(stream.next()["repository"]["branch"], "linked");
+    let initial = stream.next();
+    assert_eq!(initial["repository"]["branch"], "linked");
+    assert_eq!(
+        fs::canonicalize(Path::new(initial["repository"]["root"].as_str().unwrap())).unwrap(),
+        fs::canonicalize(&linked).unwrap()
+    );
     // A worktree-only edit must remain quiet: the idle probe reads metadata, not status.
     fs::write(linked.join("tracked"), "staged externally\n").unwrap();
     stream.quiet(Duration::from_millis(1300));
