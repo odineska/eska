@@ -337,6 +337,168 @@ fn workspace() -> (TestDir, PathBuf, PathBuf, PathBuf) {
     (fixture, root, report, processing)
 }
 
+#[test]
+fn staged_project_and_workspace_save_preserve_the_other_index_entries_and_worktree() {
+    for (locale, one, two) in [
+        ("ru", "Включено файлов: 1.", "Включено файлов: 2."),
+        ("en", "Included files: 1.", "Included files: 2."),
+    ] {
+        let (fixture, root, report, processing) = workspace();
+        let repo = &fixture.0;
+        let report_path = "tools/src/sales-report/Report.xml";
+        let processing_path = "tools/src/import-orders/Processing.xml";
+        let new_path = "tools/New [literal].bsl";
+        fs::write(report.join("Report.xml"), "staged report\n").unwrap();
+        fs::write(processing.join("Processing.xml"), "staged processing\n").unwrap();
+        fs::write(root.join("New [literal].bsl"), "staged addition\n").unwrap();
+        fs::write(repo.join("outside.txt"), "staged sibling\n").unwrap();
+        git_ok(
+            repo,
+            &[
+                "--literal-pathspecs",
+                "add",
+                "--",
+                processing_path,
+                report_path,
+                new_path,
+                "outside.txt",
+            ],
+        );
+        fs::write(report.join("Report.xml"), "later report edit\n").unwrap();
+        fs::remove_file(root.join("New [literal].bsl")).unwrap();
+        fs::write(root.join("README.md"), "workspace worktree only\n").unwrap();
+        let index = repo.join(".git/index");
+        let original = fs::read(&index).unwrap();
+
+        let project = ["--project", "sales-report"];
+        let preview = staged_save(&root, locale, &project, true);
+        assert!(preview.contains(one) && preview.contains("- Report.xml"));
+        assert!(!preview.contains("Processing.xml") && !preview.contains("outside.txt"));
+        assert!(!preview.contains("working tree") && !preview.contains("рабочее дерево"));
+        assert_eq!(fs::read(&index).unwrap(), original);
+        staged_save(&root, locale, &project, false);
+        assert_eq!(fs::read(&index).unwrap(), original);
+        assert_eq!(
+            git_ok(repo, &["show", &format!("HEAD:{report_path}")]),
+            b"staged report\n"
+        );
+        assert_eq!(
+            fs::read(report.join("Report.xml")).unwrap(),
+            b"later report edit\n"
+        );
+        assert_eq!(
+            git_ok(repo, &["show", &format!("HEAD:{processing_path}")]),
+            b"base\n"
+        );
+
+        let preview = staged_save(&report, locale, &["--workspace"], true);
+        assert!(
+            preview.contains(two)
+                && preview.contains("New [literal].bsl")
+                && preview.contains("Processing.xml")
+        );
+        assert!(
+            !preview.contains("README.md")
+                && !preview.contains("outside.txt")
+                && !preview.contains("Report.xml")
+        );
+        staged_save(&report, locale, &["--workspace"], false);
+        assert_eq!(fs::read(&index).unwrap(), original);
+        assert_eq!(
+            git_ok(repo, &["show", &format!("HEAD:{new_path}")]),
+            b"staged addition\n"
+        );
+        assert_eq!(
+            git_ok(repo, &["show", &format!("HEAD:{processing_path}")]),
+            b"staged processing\n"
+        );
+        assert!(!root.join("New [literal].bsl").exists());
+        assert_eq!(git_ok(repo, &["show", "HEAD:tools/README.md"]), b"base\n");
+        assert_eq!(
+            git_ok(repo, &["diff", "--cached", "--name-only"]),
+            b"outside.txt\n"
+        );
+        assert_eq!(git_ok(repo, &["show", ":outside.txt"]), b"staged sibling\n");
+    }
+}
+
+fn staged_save(root: &Path, locale: &str, scope: &[&str], dry_run: bool) -> String {
+    let mut args = vec!["save", "--staged", "-m", "save prepared changes"];
+    args.extend_from_slice(scope);
+    if dry_run {
+        args.push("--dry-run");
+    }
+    let output = eska(root, locale, &args);
+    assert!(output.status.success(), "{}", text(&output.stderr));
+    assert_eq!(output.stderr, [] as [u8; 0]);
+    text(&output.stdout)
+}
+
+#[test]
+fn staged_save_with_an_empty_selection_refuses_to_stage_the_worktree() {
+    for (locale, no_changes) in [
+        ("ru", "В выбранной области нет индексированных изменений."),
+        ("en", "No staged changes in the selected scope."),
+    ] {
+        let (fixture, root) = project();
+        let repo = &fixture.0;
+        fs::write(root.join("src/module.bsl"), "working only\n").unwrap();
+        fs::write(repo.join("outside.txt"), "outside staged\n").unwrap();
+        git_ok(repo, &["add", "--", "outside.txt"]);
+        let head = git_ok(repo, &["rev-parse", "HEAD"]);
+        let index = fs::read(repo.join(".git/index")).unwrap();
+        for dry_run in [false, true] {
+            let mut args = vec!["save", "--staged", "-m", "must not save"];
+            if dry_run {
+                args.push("--dry-run");
+            }
+            let output = eska(&root, locale, &args);
+            assert_eq!(output.status.code(), Some(1), "{}", text(&output.stderr));
+            assert_eq!(output.stdout, [] as [u8; 0]);
+            assert!(text(&output.stderr).contains(no_changes));
+            assert_eq!(git_ok(repo, &["rev-parse", "HEAD"]), head);
+            assert_eq!(fs::read(repo.join(".git/index")).unwrap(), index);
+            assert!(!repo.join(".git/index.lock").exists());
+        }
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn rejected_staged_save_exposes_only_the_selected_index_to_hooks() {
+    let (fixture, root) = project();
+    let repo = &fixture.0;
+    let path = "workspace/Billing/src/module.bsl";
+    fs::write(root.join("src/module.bsl"), "prepared module\n").unwrap();
+    fs::write(repo.join("outside.txt"), "prepared sibling\n").unwrap();
+    git_ok(repo, &["add", "--", path, "outside.txt"]);
+    fs::write(root.join("src/module.bsl"), "unprepared module\n").unwrap();
+    let head = git_ok(repo, &["rev-parse", "HEAD"]);
+    let index = fs::read(repo.join(".git/index")).unwrap();
+    let hook = repo.join(".git/hooks/pre-commit");
+    fs::create_dir_all(hook.parent().unwrap()).unwrap();
+    fs::write(
+        &hook,
+        "#!/bin/sh\ngit diff --cached --name-only > \"$(git rev-parse --git-path selected-paths)\"\nexit 1\n",
+    )
+    .unwrap();
+    fs::set_permissions(&hook, fs::Permissions::from_mode(0o755)).unwrap();
+
+    let output = eska(&root, "en", &["save", "--staged", "-m", "rejected"]);
+    assert_eq!(output.status.code(), Some(1), "{}", text(&output.stderr));
+    assert_eq!(
+        fs::read(repo.join(".git/selected-paths")).unwrap(),
+        format!("{path}\n").as_bytes()
+    );
+    assert_eq!(git_ok(repo, &["rev-parse", "HEAD"]), head);
+    assert_eq!(fs::read(repo.join(".git/index")).unwrap(), index);
+    assert_eq!(
+        fs::read(root.join("src/module.bsl")).unwrap(),
+        b"unprepared module\n"
+    );
+    assert!(!repo.join(".git/index.lock").exists());
+}
+
 fn text(bytes: &[u8]) -> String {
     String::from_utf8_lossy(bytes).replace(['\u{2068}', '\u{2069}'], "")
 }

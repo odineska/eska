@@ -554,3 +554,227 @@ fn branch_listing_preserves_non_utf8_names() {
         );
     }
 }
+
+#[test]
+fn branch_picker_creates_from_exact_refs_and_preserves_existing_names() {
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init"]);
+    git(root, &["commit", "--allow-empty", "-m", "base"]);
+    git(root, &["tag", "v1"]);
+    git(
+        root,
+        &[
+            "remote",
+            "add",
+            "origin",
+            "https://example.invalid/repository",
+        ],
+    );
+    git(root, &["update-ref", "refs/remotes/origin/topic", "HEAD"]);
+    for locale in ["ru", "en"] {
+        let refs = bridge(root, locale, &["scm-refs"], None, true);
+        assert!(
+            refs["data"]["refs"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|reference| reference["kind"] == "tag" && reference["name"] == "v1")
+        );
+        let branch = format!("created-{locale}");
+        bridge(
+            root,
+            locale,
+            &[
+                "scm-switch",
+                "--kind",
+                "tag",
+                "--branch",
+                &branch,
+                "--",
+                "v1",
+            ],
+            None,
+            true,
+        );
+        assert_eq!(
+            bridge(root, locale, &["scm-status"], None, true)["data"]["repository"]["branch"],
+            branch
+        );
+        assert_eq!(
+            bridge(
+                root,
+                locale,
+                &[
+                    "scm-switch",
+                    "--kind",
+                    "head",
+                    "--branch",
+                    &branch,
+                    "--",
+                    "HEAD"
+                ],
+                None,
+                false
+            )["error"],
+            "branch_exists"
+        );
+        assert_eq!(
+            bridge(
+                root,
+                locale,
+                &[
+                    "scm-switch",
+                    "--kind",
+                    "head",
+                    "--branch",
+                    "bad..name",
+                    "--",
+                    "HEAD"
+                ],
+                None,
+                false
+            )["error"],
+            "branch_invalid"
+        );
+        bridge(
+            root,
+            locale,
+            &["scm-switch", "--kind", "tag", "--", "v1"],
+            None,
+            true,
+        );
+        assert!(
+            bridge(root, locale, &["scm-status"], None, true)["data"]["repository"]["branch"]
+                .is_null()
+        );
+    }
+    bridge(
+        root,
+        "en",
+        &["scm-switch", "--kind", "remote", "--", "origin/topic"],
+        None,
+        true,
+    );
+}
+
+#[test]
+fn branch_picker_supports_unborn_and_rejects_missing_refs_and_occupied_branches() {
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init"]);
+    bridge(
+        root,
+        "en",
+        &[
+            "scm-switch",
+            "--kind",
+            "head",
+            "--branch",
+            "topic",
+            "--",
+            "HEAD",
+        ],
+        None,
+        true,
+    );
+    git(root, &["commit", "--allow-empty", "-m", "base"]);
+    let commit = Command::new("git")
+        .current_dir(root)
+        .args(["rev-parse", "HEAD"])
+        .output()
+        .unwrap();
+    let commit = std::str::from_utf8(&commit.stdout).unwrap().trim();
+    bridge(
+        root,
+        "ru",
+        &[
+            "scm-switch",
+            "--kind",
+            "commit",
+            "--branch",
+            "from-commit",
+            "--",
+            commit,
+        ],
+        None,
+        true,
+    );
+    bridge(
+        root,
+        "ru",
+        &["scm-switch", "--kind", "commit", "--", commit],
+        None,
+        true,
+    );
+    for (kind, target) in [
+        ("local", "missing"),
+        ("local", "--detach"),
+        ("commit", "HEAD~1"),
+        ("commit", "0000000"),
+        ("head", "other"),
+    ] {
+        bridge(
+            root,
+            "en",
+            &["scm-switch", "--kind", kind, "--", target],
+            None,
+            false,
+        );
+    }
+    let worktree = root.join("linked");
+    git(
+        root,
+        &["worktree", "add", worktree.to_str().unwrap(), "from-commit"],
+    );
+    bridge(
+        root,
+        "ru",
+        &["scm-switch", "--kind", "local", "--", "from-commit"],
+        None,
+        false,
+    );
+}
+
+#[test]
+fn branch_picker_commit_prefix_does_not_resolve_hexadecimal_refs() {
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init"]);
+    git(root, &["commit", "--allow-empty", "-m", "base"]);
+    let commit = Command::new("git")
+        .current_dir(root)
+        .args(["rev-parse", "HEAD"])
+        .output()
+        .unwrap();
+    let commit = std::str::from_utf8(&commit.stdout).unwrap().trim();
+    git(
+        root,
+        &[
+            "-c",
+            "advice.detachedHead=false",
+            "commit",
+            "--allow-empty",
+            "-m",
+            "other",
+        ],
+    );
+    git(root, &["branch", &commit[..7]]);
+    bridge(
+        root,
+        "en",
+        &["scm-switch", "--kind", "commit", "--", &commit[..7]],
+        None,
+        true,
+    );
+    let actual = Command::new("git")
+        .current_dir(root)
+        .args(["rev-parse", "HEAD"])
+        .output()
+        .unwrap();
+    assert_eq!(
+        std::str::from_utf8(&actual.stdout).unwrap().trim(),
+        commit,
+        "a hexadecimal ref must not shadow an object prefix"
+    );
+}

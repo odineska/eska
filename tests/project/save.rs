@@ -165,3 +165,134 @@ fn creates_the_first_commit() {
     assert_eq!(result.files, 2);
     assert_eq!(git(&fixture.0, &["log", "-1", "--format=%s"]), b"initial\n");
 }
+
+/// A staged save reads blobs from the real index and leaves siblings and worktree untouched.
+#[test]
+fn staged_save_preserves_partial_staging_and_sibling_index() {
+    let (fixture, root) = nested_project();
+    fs::write(root.join("src/module.bsl"), "staged blob\n").unwrap();
+    git(&fixture.0, &["add", "workspace/Billing/src/module.bsl"]);
+    fs::write(root.join("src/module.bsl"), "unstaged blob\n").unwrap();
+    fs::write(fixture.0.join("outside.txt"), "outside staged\n").unwrap();
+    git(&fixture.0, &["add", "outside.txt"]);
+    fs::write(root.join("src/new.bsl"), "untracked\n").unwrap();
+    let index = fs::read(fixture.0.join(".git/index")).unwrap();
+    let project = discovery::discover(&root).unwrap();
+    let plan = save::plan_staged(&project).unwrap();
+    assert_eq!(plan.files().len(), 1);
+    assert_eq!(plan.files()[0].worktree(), None);
+    save::execute_staged(&project, "staged only").unwrap();
+    assert_eq!(
+        git(
+            &fixture.0,
+            &["show", "HEAD:workspace/Billing/src/module.bsl"]
+        ),
+        b"staged blob\n"
+    );
+    assert_eq!(git(&fixture.0, &["show", "HEAD:outside.txt"]), b"base\n");
+    assert_eq!(fs::read(fixture.0.join(".git/index")).unwrap(), index);
+    assert_eq!(
+        fs::read(root.join("src/module.bsl")).unwrap(),
+        b"unstaged blob\n"
+    );
+}
+
+#[test]
+fn staged_save_does_not_fall_back_to_unstaged_changes() {
+    let (fixture, root) = nested_project();
+    fs::write(root.join("src/module.bsl"), "unstaged\n").unwrap();
+    fs::write(fixture.0.join("outside.txt"), "staged outside\n").unwrap();
+    git(&fixture.0, &["add", "outside.txt"]);
+    let index = fs::read(fixture.0.join(".git/index")).unwrap();
+    let head = git(&fixture.0, &["rev-parse", "HEAD"]);
+    let project = discovery::discover(&root).unwrap();
+    assert!(matches!(
+        save::plan_staged(&project),
+        Err(save::SaveError::NoStagedChanges)
+    ));
+    assert!(matches!(
+        save::execute_staged(&project, "empty"),
+        Err(save::SaveError::NoStagedChanges)
+    ));
+    assert_eq!(git(&fixture.0, &["rev-parse", "HEAD"]), head);
+    assert_eq!(fs::read(fixture.0.join(".git/index")).unwrap(), index);
+    assert!(!fixture.0.join(".git/index.lock").exists());
+}
+
+#[test]
+fn staged_save_excludes_intent_to_add_inside_and_outside_scope() {
+    let (fixture, root) = nested_project();
+    fs::write(root.join("src/module.bsl"), "selected\n").unwrap();
+    git(&fixture.0, &["add", "workspace/Billing/src/module.bsl"]);
+    fs::write(root.join("src/intent.bsl"), "intent\n").unwrap();
+    fs::write(fixture.0.join("intent.txt"), "intent\n").unwrap();
+    git(
+        &fixture.0,
+        &[
+            "add",
+            "-N",
+            "workspace/Billing/src/intent.bsl",
+            "intent.txt",
+        ],
+    );
+    let index = fs::read(fixture.0.join(".git/index")).unwrap();
+    let project = discovery::discover(&root).unwrap();
+    assert_eq!(save::plan_staged(&project).unwrap().files().len(), 1);
+    assert_eq!(save::execute_staged(&project, "selected").unwrap().files, 1);
+    assert_eq!(fs::read(fixture.0.join(".git/index")).unwrap(), index);
+    assert!(
+        !git(&fixture.0, &["ls-tree", "-r", "--name-only", "HEAD"])
+            .as_bstr()
+            .contains_str("intent")
+    );
+}
+
+#[test]
+fn staged_save_respects_existing_index_lock() {
+    let (fixture, root) = nested_project();
+    fs::write(root.join("src/module.bsl"), "selected\n").unwrap();
+    git(&fixture.0, &["add", "workspace/Billing/src/module.bsl"]);
+    let head = git(&fixture.0, &["rev-parse", "HEAD"]);
+    let index = fs::read(fixture.0.join(".git/index")).unwrap();
+    fs::write(fixture.0.join(".git/index.lock"), "existing lock").unwrap();
+    let project = discovery::discover(&root).unwrap();
+    assert!(save::execute_staged(&project, "selected").is_err());
+    assert_eq!(git(&fixture.0, &["rev-parse", "HEAD"]), head);
+    assert_eq!(fs::read(fixture.0.join(".git/index")).unwrap(), index);
+    assert_eq!(
+        fs::read(fixture.0.join(".git/index.lock")).unwrap(),
+        b"existing lock"
+    );
+}
+
+#[test]
+fn staged_save_creates_the_first_commit() {
+    let fixture = repository();
+    fs::create_dir_all(fixture.0.join("src")).unwrap();
+    fs::write(
+        fixture.0.join("eska.toml"),
+        "[project]\ntype = 'configuration'\n",
+    )
+    .unwrap();
+    fs::write(fixture.0.join("src/module.bsl"), "selected\n").unwrap();
+    git(&fixture.0, &["config", "user.name", "Eska Test"]);
+    git(
+        &fixture.0,
+        &["config", "user.email", "eska@example.invalid"],
+    );
+    git(&fixture.0, &["add", "src/module.bsl"]);
+    let index = fs::read(fixture.0.join(".git/index")).unwrap();
+    let project = discovery::discover(&fixture.0).unwrap();
+    assert_eq!(save::plan_staged(&project).unwrap().files().len(), 1);
+    assert_eq!(
+        save::execute_staged(&project, "initial selected")
+            .unwrap()
+            .files,
+        1
+    );
+    assert_eq!(
+        git(&fixture.0, &["ls-tree", "-r", "--name-only", "HEAD"]),
+        b"src/module.bsl\n"
+    );
+    assert_eq!(fs::read(fixture.0.join(".git/index")).unwrap(), index);
+}

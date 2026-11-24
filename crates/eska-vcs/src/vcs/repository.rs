@@ -220,6 +220,114 @@ impl Repository {
         self.inner.index_path()
     }
 
+    /// Exclude concurrent Git index writers without replacing the real index.
+    pub(crate) fn lock_index(&self) -> Result<gix::lock::File, Error> {
+        gix::lock::File::acquire(
+            self.index_path(),
+            gix::lock::acquire::Fail::Immediately,
+            None,
+            self.inner.objects.shared_repository_permissions,
+            None,
+        )
+        .map_err(|source| Error::operation(Operation::Status, source))
+    }
+
+    /// Compare only HEAD and index, returning scoped staged paths and their commit tree.
+    pub(crate) fn scoped_staged_index(
+        &self,
+        root: &Path,
+    ) -> Result<(Vec<super::status::PathStatus>, gix::index::State), Error> {
+        let error = |source| Error::operation(Operation::Status, source);
+        self.check_index_size()?;
+        let index = self.inner.index_or_empty().map_err(error)?;
+        if index.is_sparse()
+            || index.entries().iter().any(|entry| {
+                entry
+                    .flags
+                    .contains(gix::index::entry::Flags::SKIP_WORKTREE)
+            })
+        {
+            return Err(Error::operation(
+                Operation::Status,
+                "unsupported staged index state",
+            ));
+        }
+        let conflicts = index
+            .entries()
+            .iter()
+            .filter(|entry| entry.stage() != gix::index::entry::Stage::Unconflicted)
+            .map(|entry| entry.path(&index).to_owned())
+            .collect::<std::collections::BTreeSet<_>>();
+        if !conflicts.is_empty() {
+            let paths = conflicts
+                .into_iter()
+                .map(|path| super::status::PathStatus {
+                    path,
+                    index: Some(super::status::Change::Conflict),
+                    worktree: None,
+                })
+                .collect();
+            return Ok((paths, gix::index::State::new(self.inner.object_hash())));
+        }
+        let tree = match self.head()?.id() {
+            Some(id) => self
+                .inner
+                .find_commit(id)
+                .map_err(error)?
+                .tree_id()
+                .map_err(error)?
+                .detach(),
+            None => ObjectId::empty_tree(self.inner.object_hash()),
+        };
+        // Scope selection is relative to the repository, even when invoked inside
+        // a workspace member. The default pathspec would restrict it to the cwd.
+        let mut pathspec = self
+            .inner
+            .pathspec(
+                false,
+                None::<&str>,
+                false,
+                &index,
+                gix::worktree::stack::state::attributes::Source::IdMapping,
+            )
+            .map_err(error)?;
+        let mut paths = std::collections::BTreeMap::new();
+        let outcome = self
+            .inner
+            .tree_index_status(
+                &tree,
+                &index,
+                Some(&mut pathspec),
+                gix::status::tree_index::TrackRenames::Disabled,
+                |change, _, _| {
+                    let path = change.location();
+                    if gix::path::from_bstr(path)
+                        .is_ok_and(|path| self.work_dir.join(path).starts_with(root))
+                    {
+                        super::status::record_index(&mut paths, &change.into_owned());
+                    }
+                    Ok(gix::diff::index::Action::Continue(()))
+                },
+            )
+            .map_err(error)?;
+        let mut target = outcome.tree_index;
+        target.remove_entries(|_, path, _| paths.contains_key(path));
+        for entry in index.entries() {
+            let path = entry.path(&index);
+            if paths.contains_key(path) {
+                target.dangerously_push_entry(
+                    gix::index::entry::Stat::default(),
+                    entry.id,
+                    entry.flags,
+                    entry.mode,
+                    path,
+                );
+            }
+        }
+        target.sort_entries();
+        Ok((paths.into_values().collect(), target))
+    }
+
     /// Read HEAD and validate its commit target, distinguishing unborn and detached states.
     ///
     /// # Errors

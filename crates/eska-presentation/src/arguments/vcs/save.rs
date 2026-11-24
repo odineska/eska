@@ -8,6 +8,9 @@ pub struct SaveArgs {
     #[arg(short, long, value_name = "MESSAGE")]
     pub message: Option<String>,
 
+    #[arg(long, requires = "message")]
+    pub staged: bool,
+
     #[arg(short = 'p', long)]
     pub project: Vec<String>,
 
@@ -31,6 +34,9 @@ pub fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command 
             argument
                 .help(localizer.text("save-message-help"))
                 .value_name(localizer.text("save-message-value"))
+        })
+        .mut_arg("staged", |argument| {
+            argument.help(localizer.text("save-staged-help"))
         })
         .mut_arg("project", |argument| {
             argument

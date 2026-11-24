@@ -154,6 +154,32 @@ impl<'a> Executor<'a> {
         )
     }
 
+    /// Use only checked references; Git enforces dirty and linked-worktree safety.
+    pub(crate) fn scm_switch(
+        &self,
+        kind: super::scm_branches::Kind,
+        name: &str,
+        target: &str,
+        branch: Option<&str>,
+        detached: bool,
+    ) -> Result<(), Error> {
+        use super::scm_branches::Kind;
+        let mut args = vec!["switch", "--no-guess", "--no-overwrite-ignore"];
+        if let Some(branch) = branch {
+            args.extend(["--create", branch]);
+            if !matches!(kind, Kind::Head) {
+                args.push(target);
+            }
+        } else if detached || matches!(kind, Kind::Tag | Kind::Commit | Kind::Head) {
+            args.extend(["--detach", target]);
+        } else if matches!(kind, Kind::Remote) {
+            args.extend(["--track", target]);
+        } else {
+            args.extend(["--", name]);
+        }
+        self.success(Operation::Switch, args)
+    }
+
     /// Clean only captured tracked paths using a NUL-delimited literal pathspec file.
     ///
     /// # Errors
@@ -258,6 +284,29 @@ impl<'a> Executor<'a> {
                 operation: Operation::Commit,
                 status,
                 stderr: BString::default(),
+            })
+        }
+    }
+
+    /// Commit an isolated index, retaining Git hooks and configured signing.
+    pub(crate) fn commit_index(&self, index: &Path, message: &str) -> Result<(), Error> {
+        let output = self
+            .command()
+            .env("GIT_INDEX_FILE", super::git::native_path(index).as_os_str())
+            .env("LC_ALL", "C")
+            .args(["commit", "--quiet", "--message", message])
+            .output()
+            .map_err(|source| Error::Spawn {
+                operation: Operation::Commit,
+                source,
+            })?;
+        if output.status.success() {
+            Ok(())
+        } else {
+            Err(Error::Failed {
+                operation: Operation::Commit,
+                status: output.status,
+                stderr: output.stderr.into(),
             })
         }
     }

@@ -405,6 +405,7 @@ save-preview-scope-member = Область: проект { $project } ({ $path }
 save-preview-scope-workspace = Область: workspace { $path }
 save-preview-files = Включено файлов: { $files }.
 save-preview-file = - { $path } — index: { $index }; рабочее дерево: { $worktree }
+save-preview-staged-file = - { $path } — { $index } в индексе
 save-preview-message = Сообщение commit:
 save-preview-state-unchanged = без изменений
 save-preview-state-added = добавлен
@@ -1412,3 +1413,8 @@ monitor-error = Не удалось отследить изменения реп
 monitor-polling = Файловые уведомления недоступны. ESKA продолжает проверять статус с интервалом пять секунд.
 
 monitor-events-stdin-help = Читать события файловой системы из stdin в формате NDJSON
+
+save-staged-help = Сохранить только индексированные изменения (требует --message)
+save-operation-in-progress = Сохранение индексированных изменений недоступно во время незавершённой операции Git.
+
+save-no-staged-changes = В выбранной области нет индексированных изменений. Добавьте нужные файлы в индекс.

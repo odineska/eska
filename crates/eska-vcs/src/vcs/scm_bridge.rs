@@ -38,7 +38,7 @@ pub fn root(start: &Path) -> Reply {
     let (root, root_encoding) = json_path(repo.work_dir().as_os_str());
     let git_available = Executor::new(repo.work_dir()).git_available();
     Ok(json!({"root":root,"root_encoding":root_encoding,
-        "mutations_available":git_available,"branches_available":git_available}))
+        "mutations_available":git_available,"branches_available":git_available,"branch_actions_available":git_available,"line_staging_available":true}))
 }
 /// List existing local branch names without remote guessing or a second repository watcher.
 pub fn branches(start: &Path) -> Reply {
@@ -96,7 +96,7 @@ pub fn status(start: &Path) -> Reply {
 }
 
 /// Reject recursive pathspecs, metadata and traversal through foreign worktrees or symlink directories.
-fn validate(repo: &Repository, path: &Path) -> Result<(), Value> {
+pub(super) fn validate(repo: &Repository, path: &Path) -> Result<(), Value> {
     if path.as_os_str().is_empty()
         || path.components().any(
             |part| !matches!(part, Component::Normal(name) if !name.eq_ignore_ascii_case(".git")),
@@ -261,4 +261,8 @@ fn files(start: &Path, action: Action, paths: &[PathBuf]) -> Reply {
         fs::remove_file(repo.work_dir().join(path)).map_err(|_| json!("mutation"))?;
     }
     Ok(json!({}))
+}
+
+pub fn stage_lines_input(start: &Path, path: &Path) -> Reply {
+    super::scm_stage_lines::input(start, path)
 }

@@ -405,6 +405,7 @@ save-preview-scope-member = Scope: project { $project } ({ $path })
 save-preview-scope-workspace = Scope: workspace { $path }
 save-preview-files = Included files: { $files }.
 save-preview-file = - { $path } — index: { $index }; working tree: { $worktree }
+save-preview-staged-file = - { $path } — { $index } in the index
 save-preview-message = Commit message:
 save-preview-state-unchanged = unchanged
 save-preview-state-added = added
@@ -1412,3 +1413,8 @@ monitor-error = Could not monitor the repository. { $reason }
 monitor-polling = File notifications are unavailable. ESKA will continue checking status at five-second intervals.
 
 monitor-events-stdin-help = Read filesystem events from stdin as NDJSON
+
+save-staged-help = Save only staged changes (requires --message)
+save-operation-in-progress = Saving staged changes is unavailable during an unfinished Git operation.
+
+save-no-staged-changes = No staged changes in the selected scope. Stage the files to save first.

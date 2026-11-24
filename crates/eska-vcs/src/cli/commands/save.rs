@@ -94,7 +94,9 @@ impl SaveHandler<'_> {
         if self.args.dry_run {
             return self.preview_project(project, name, localizer);
         }
-        let result = if let Some(message) = self.args.message.as_deref() {
+        let result = if self.args.staged {
+            save::execute_staged(project, self.args.message.as_deref().unwrap_or_default())
+        } else if let Some(message) = self.args.message.as_deref() {
             save::execute(project, Some(message))
         } else {
             let draft = match generate_draft(project, localizer) {
@@ -113,7 +115,12 @@ impl SaveHandler<'_> {
         if self.args.dry_run {
             return self.preview_workspace(workspace, localizer);
         }
-        let result = if let Some(message) = self.args.message.as_deref() {
+        let result = if self.args.staged {
+            save::execute_workspace_staged(
+                workspace,
+                self.args.message.as_deref().unwrap_or_default(),
+            )
+        } else if let Some(message) = self.args.message.as_deref() {
             save::execute_workspace(workspace, Some(message))
         } else {
             let draft = match generate_workspace_draft(workspace, localizer) {
@@ -139,7 +146,11 @@ impl SaveHandler<'_> {
         {
             return present_failure(&error, localizer);
         }
-        let plan = match save::plan(project) {
+        let plan = match if self.args.staged {
+            save::plan_staged(project)
+        } else {
+            save::plan(project)
+        } {
             Ok(plan) => plan,
             Err(error) => return present_failure(&error, localizer),
         };
@@ -160,6 +171,7 @@ impl SaveHandler<'_> {
                 root: project.root(),
             },
             &message,
+            self.args.staged,
             localizer,
         )
     }
@@ -170,7 +182,11 @@ impl SaveHandler<'_> {
         {
             return present_failure(&error, localizer);
         }
-        let plan = match save::plan_workspace(workspace) {
+        let plan = match if self.args.staged {
+            save::plan_workspace_staged(workspace)
+        } else {
+            save::plan_workspace(workspace)
+        } {
             Ok(plan) => plan,
             Err(error) => return present_failure(&error, localizer),
         };
@@ -190,6 +206,7 @@ impl SaveHandler<'_> {
                 root: workspace.root(),
             },
             &message,
+            self.args.staged,
             localizer,
         )
     }
@@ -210,6 +227,7 @@ fn present_preview(
     plan: &save::SavePlan,
     scope: PreviewScope<'_>,
     message: &str,
+    staged: bool,
     localizer: &Localizer,
 ) -> ExitCode {
     println!("{}", localizer.text("save-preview-title"));
@@ -255,6 +273,19 @@ fn present_preview(
     for file in plan.files() {
         let path = changes::display_path(file.path());
         let index = localizer.text(save_state_key(file.index()));
+        if staged {
+            println!(
+                "{}",
+                localizer.format(
+                    "save-preview-staged-file",
+                    &[
+                        ("path", LocalizationValue::Text(&path)),
+                        ("index", LocalizationValue::Text(&index))
+                    ],
+                )
+            );
+            continue;
+        }
         let worktree = localizer.text(save_state_key(file.worktree()));
         println!(
             "{}",
@@ -621,6 +652,7 @@ fn present_error(error: &save::SaveError, localizer: &Localizer) -> String {
             localizer.text("save-project-outside-repository")
         }
         save::SaveError::DetachedHead => localizer.text("save-detached-head"),
+        save::SaveError::NoStagedChanges => localizer.text("save-no-staged-changes"),
         save::SaveError::NoChanges => localizer.text("save-no-changes"),
         save::SaveError::Conflicts { files } => localizer.format(
             "save-conflicts",
@@ -629,6 +661,7 @@ fn present_error(error: &save::SaveError, localizer: &Localizer) -> String {
                 LocalizationValue::Number(i64::try_from(*files).unwrap_or(i64::MAX)),
             )],
         ),
+        save::SaveError::OperationInProgress => localizer.text("save-operation-in-progress"),
         save::SaveError::EmptyMessage => localizer.text("save-empty-message"),
         save::SaveError::IndexSnapshot { path, .. } => path_error(
             localizer,
