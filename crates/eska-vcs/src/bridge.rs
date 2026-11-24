@@ -31,6 +31,10 @@ pub struct BridgeArgs {
 enum Operation {
     ScmRoot,
     ScmStatus,
+    ScmBranches,
+    ScmCheckout {
+        branch: String,
+    },
     ScmBlob {
         #[arg(long, value_enum)]
         revision: scm::Revision,
@@ -151,6 +155,8 @@ impl BridgeArgs {
         let (operation, result): (&str, Result<Value, Value>) = match &self.operation {
             Operation::ScmRoot => ("scm_root", scm::root(root)),
             Operation::ScmStatus => ("scm_status", scm::status(root)),
+            Operation::ScmBranches => ("scm_branches", scm::branches(root)),
+            Operation::ScmCheckout { branch } => ("scm_checkout", scm::checkout(root, branch)),
             Operation::ScmBlob { revision, file } => ("scm_blob", scm::blob(root, *revision, file)),
             Operation::ScmFiles {
                 action,

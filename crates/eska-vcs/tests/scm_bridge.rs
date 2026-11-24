@@ -347,3 +347,210 @@ fn repeated_reads_are_stable_and_repeated_discard_fails_closed() {
     assert_eq!(snapshot["repository"]["head"], "attached");
     assert_eq!(snapshot["changes"], json!([]));
 }
+
+#[test]
+fn local_branch_contract_is_sorted_locale_independent_and_manifest_free() {
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init", "-b", "main"]);
+    fs::write(root.join("file"), "base\n").unwrap();
+    git(root, &["add", "."]);
+    git(root, &["commit", "-m", "base"]);
+    git(root, &["branch", "topic/ветка"]);
+    git(root, &["branch", "alpha"]);
+    git(root, &["tag", "tag-only"]);
+    git(
+        root,
+        &["update-ref", "refs/remotes/origin/remote-only", "HEAD"],
+    );
+    git(root, &["pack-refs", "--all"]);
+    let expected = json!({"branches":[
+        {"name":"alpha","name_encoding":"utf-8"},
+        {"name":"main","name_encoding":"utf-8"},
+        {"name":"topic/ветка","name_encoding":"utf-8"}
+    ]});
+    for locale in ["ru-RU", "en-US"] {
+        let discovered = bridge(root, locale, &["scm-root"], None, true);
+        assert_eq!(discovered["data"]["branches_available"], true);
+        assert_eq!(discovered["data"]["mutations_available"], true);
+        let listed = bridge(root, locale, &["scm-branches"], None, true);
+        assert_eq!(listed["operation"], "scm_branches");
+        assert_eq!(listed["schema_version"], 1);
+        assert_eq!(listed["error"], Value::Null);
+        assert_eq!(listed["data"], expected);
+        git(root, &["checkout", "--detach"]);
+        let switched = bridge(
+            root,
+            locale,
+            &["scm-checkout", "--", "topic/ветка"],
+            None,
+            true,
+        );
+        assert_eq!(switched["operation"], "scm_checkout");
+        assert_eq!(switched["data"], json!({}));
+        assert_eq!(switched["error"], Value::Null);
+        assert_eq!(
+            bridge(root, locale, &["scm-status"], None, true)["data"]["repository"]["branch"],
+            "topic/ветка"
+        );
+        for (name, reason) in [
+            ("--force", "branch_invalid"),
+            ("-", "branch_invalid"),
+            ("@{-1}", "branch_invalid"),
+            ("HEAD", "branch_invalid"),
+            ("@", "branch_invalid"),
+            ("main~1", "branch_invalid"),
+            ("origin/remote-only", "branch_not_found"),
+            ("tag-only", "branch_not_found"),
+            ("absent", "branch_not_found"),
+        ] {
+            let rejected = bridge(root, locale, &["scm-checkout", "--", name], None, false);
+            assert_eq!(rejected["error"], reason, "{name}");
+            assert_eq!(rejected["data"], Value::Null);
+        }
+    }
+}
+
+#[test]
+fn branch_checkout_preserves_conflicting_tracked_staged_untracked_and_ignored_files() {
+    for locale in ["ru-RU", "en-US"] {
+        let fixture = support::TestDir::new();
+        let root = &fixture.0;
+        git(root, &["init", "-b", "main"]);
+        fs::write(root.join("file"), "base\n").unwrap();
+        fs::write(root.join(".gitignore"), "ignored\n").unwrap();
+        git(root, &["add", "."]);
+        git(root, &["commit", "-m", "base"]);
+        git(root, &["checkout", "-b", "target"]);
+        for path in ["file", "untracked", "ignored"] {
+            fs::write(root.join(path), "target\n").unwrap();
+            git(root, &["add", "-f", "--", path]);
+        }
+        git(root, &["commit", "-m", "target"]);
+        git(root, &["checkout", "main"]);
+        for (path, staged) in [
+            ("file", false),
+            ("file", true),
+            ("untracked", false),
+            ("ignored", false),
+        ] {
+            fs::write(root.join(path), "keep my work\n").unwrap();
+            if staged {
+                git(root, &["add", "file"]);
+            }
+            let head = fs::read(root.join(".git/HEAD")).unwrap();
+            let rejected = bridge(root, locale, &["scm-checkout", "--", "target"], None, false);
+            assert_eq!(rejected["error"], "checkout_failed");
+            assert_eq!(
+                fs::read_to_string(root.join(path)).unwrap(),
+                "keep my work\n"
+            );
+            assert_eq!(fs::read(root.join(".git/HEAD")).unwrap(), head);
+            // Git may refresh stat entries while refusing checkout; staged content
+            // must remain unchanged even if that non-semantic refresh occurs.
+            if staged {
+                let blob = bridge(
+                    root,
+                    locale,
+                    &["scm-blob", "--revision", "index", "--", "file"],
+                    None,
+                    true,
+                );
+                assert_eq!(blob["data"]["content"], "a2VlcCBteSB3b3JrCg==");
+                git(root, &["restore", "--staged", "file"]);
+            } else {
+                assert_eq!(
+                    bridge(
+                        root,
+                        locale,
+                        &["scm-blob", "--revision", "index", "--", "file"],
+                        None,
+                        true
+                    )["data"]["content"],
+                    "YmFzZQo="
+                );
+            }
+            if path == "file" {
+                git(root, &["restore", "file"]);
+            } else {
+                fs::remove_file(root.join(path)).unwrap();
+            }
+        }
+        let foreign = root.join("other-worktree");
+        git(
+            root,
+            &["worktree", "add", foreign.to_str().unwrap(), "target"],
+        );
+        let rejected = bridge(root, locale, &["scm-checkout", "--", "target"], None, false);
+        assert_eq!(rejected["error"], "checkout_failed");
+        assert_eq!(fs::read_to_string(root.join("file")).unwrap(), "base\n");
+        assert_eq!(
+            fs::read_to_string(foreign.join("file")).unwrap(),
+            "target\n"
+        );
+    }
+}
+
+#[test]
+fn branches_capability_is_false_without_git_and_reads_remain_available() {
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init", "-b", "main"]);
+    fs::write(root.join("file"), "base\n").unwrap();
+    git(root, &["add", "."]);
+    git(root, &["commit", "-m", "base"]);
+    let empty_path = root.join("empty-path");
+    fs::create_dir(&empty_path).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        for (operation, success) in [
+            ("scm-root", true),
+            ("scm-status", true),
+            ("scm-branches", false),
+        ] {
+            let output = Command::new(env!("CARGO_BIN_EXE_eska-vcs"))
+                .env("PATH", &empty_path)
+                .args(["--lang", locale, "--project-dir"])
+                .arg(root)
+                .args(["__bridge", operation])
+                .output()
+                .unwrap();
+            assert_eq!(output.status.success(), success, "{output:?}");
+            assert!(output.stderr.is_empty(), "{output:?}");
+            let reply: Value = serde_json::from_slice(&output.stdout).unwrap();
+            if operation == "scm-root" {
+                assert_eq!(reply["data"]["branches_available"], false);
+                assert_eq!(reply["data"]["mutations_available"], false);
+            } else if !success {
+                assert_eq!(reply["error"], "git_unavailable");
+            }
+        }
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn branch_listing_preserves_non_utf8_names() {
+    use std::{ffi::OsStr, os::unix::ffi::OsStrExt};
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init", "-b", "main"]);
+    fs::write(root.join("file"), "base\n").unwrap();
+    git(root, &["add", "."]);
+    git(root, &["commit", "-m", "base"]);
+    let head = fs::read(root.join(".git/refs/heads/main")).unwrap();
+    fs::write(
+        root.join(".git/refs/heads")
+            .join(OsStr::from_bytes(b"raw-\xff")),
+        head,
+    )
+    .unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        assert_eq!(
+            bridge(root, locale, &["scm-branches"], None, true)["data"]["branches"],
+            json!([
+                {"name":"main","name_encoding":"utf-8"},
+                {"name":"%72%61%77%2D%FF","name_encoding":"percent"}
+            ])
+        );
+    }
+}

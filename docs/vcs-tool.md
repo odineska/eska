@@ -237,11 +237,31 @@ Git. Кодировка `utf-8` сохраняет допустимый текс
 Скрытые команды `__bridge scm-*` предназначены для согласованного клиента
 Explorer. Они возвращают один JSON-документ
 `{schema_version:1, operation, data, error}` и не зависят от языка CLI.
-`operation` использует имена `scm_root`, `scm_status`, `scm_blob`, `scm_files`.
+`operation` использует имена `scm_root`, `scm_status`, `scm_blob`, `scm_files`,
+`scm_branches`, `scm_checkout`.
 При ошибке `data` равен `null`, `error` содержит машинный код, exit code — 1.
 
 - `scm-root` находит ближайший рабочий репозиторий от `--project-dir` и возвращает
-  `root`, `root_encoding`, `mutations_available` (доступность системного Git).
+  `root`, `root_encoding`, `mutations_available` и `branches_available`. Два
+  флага показывают доступность системного Git и вычисляются одной проверкой.
+  При `branches_available: false` клиент сохраняет чтение статуса, но не
+  предлагает выбор и переключение веток.
+- `scm-branches` возвращает `{branches:[{name,name_encoding}]}`: существующие
+  локальные `refs/heads/` с короткими именами, отсортированные по исходным
+  байтам. Кодировки `utf-8` и `percent` совпадают с кодировками строк монитора.
+  Remote-tracking refs и tags в список не входят; у unborn-репозитория список
+  может быть пустым. Для предложения выбора требуется системный Git.
+- `scm-checkout -- BRANCH` переключает только существующую локальную ветку
+  с коротким именем UTF-8 и возвращает `{}`. Команда не требует `eska.toml`
+  или workflow policy, не создаёт ветки, не угадывает remote refs и не применяет
+  force. Git сохраняет незакоммиченные данные и отказывает при конфликте
+  с tracked, staged, untracked или ignored-файлами и для ветки, занятой другим
+  worktree. Совместимые локальные изменения могут перейти в выбранную ветку.
+  Аргументы и Git-спецсинтаксис вместо короткого имени отвергаются.
+  Машинные причины: `branch_invalid`, `branch_not_found`, `git_unavailable`,
+  `references`, `checkout_failed`; последняя означает безопасный отказ Git.
+  После успешного переключения клиент запрашивает новый снимок существующего
+  монитора; отдельный наблюдатель или native Git repository не требуется.
 - `scm-status` возвращает полный снимок schema 1 команды `monitor`. Дополнительный
   массив `conflicts` содержит `path`, `path_encoding` и booleans `base`, `ours`,
   `theirs`: наличие соответствующих стадий индекса. Массив `renames` содержит

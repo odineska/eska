@@ -144,7 +144,13 @@ impl<'a> Executor<'a> {
     pub fn switch_existing_branch(&self, branch: &str) -> Result<(), Error> {
         self.success(
             Operation::Switch,
-            ["switch", "--no-guess", "--no-overwrite-ignore", branch],
+            [
+                "switch",
+                "--no-guess",
+                "--no-overwrite-ignore",
+                "--",
+                branch,
+            ],
         )
     }
 
