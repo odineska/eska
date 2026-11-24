@@ -393,11 +393,23 @@ impl<'a> Session<'a> {
 
 /// Reject states whose complete contents cannot be captured by this backend.
 pub(crate) fn preflight(repository: &Repository) -> Result<(Vec<u8>, String), Error> {
+    preflight_head(repository, false)
+}
+
+/// Switching from detached HEAD is safe only when there is nothing to shelve.
+pub(crate) fn switch_preflight(repository: &Repository) -> Result<(Vec<u8>, String), Error> {
+    preflight_head(repository, true)
+}
+
+fn preflight_head(repository: &Repository, for_switch: bool) -> Result<(Vec<u8>, String), Error> {
     if repository.has_in_progress_operation() {
         return Err(Error::InProgress);
     }
     let (reference, id) = match repository.head()? {
         Head::Attached { reference, id } => (reference, id),
+        Head::Detached { id } if for_switch && !repository.status()?.is_dirty() => {
+            (Vec::new().into(), id)
+        }
         Head::Detached { .. } => return Err(Error::Detached),
         Head::Unborn { .. } => return Err(Error::Unborn),
     };
@@ -405,6 +417,9 @@ pub(crate) fn preflight(repository: &Repository) -> Result<(Vec<u8>, String), Er
         return Err(Error::Locked);
     }
     if !repository.index_path().is_file() {
+        if for_switch && !repository.status()?.is_dirty() {
+            return Ok((reference.to_vec(), id.to_string()));
+        }
         return Err(Error::UnsupportedIndex);
     }
     shelf_index(repository, &repository.index_path())?;
@@ -659,3 +674,25 @@ pub(crate) fn validate_saved(repository: &Repository, id: &str) -> Result<(), Er
 
 #[cfg(test)]
 mod tests;
+
+pub(crate) const fn error_code(error: &Error) -> &'static str {
+    match error {
+        Error::Repository(_) => "repository",
+        Error::Command(_) => "command",
+        Error::Io(_) => "io",
+        Error::InvalidShelf => "invalid-shelf",
+        Error::Locked => "locked",
+        Error::Detached => "detached",
+        Error::Unborn => "unborn",
+        Error::InProgress => "in-progress",
+        Error::UnsupportedIndex => "unsupported-index",
+        Error::Empty => "empty",
+        Error::Exists => "shelf-exists",
+        Error::Missing => "shelf-missing",
+        Error::WrongBranch => "wrong-branch",
+        Error::MovedBranch => "moved-branch",
+        Error::Dirty => "dirty",
+        Error::Collision(_) => "collision",
+        Error::Incomplete => "incomplete",
+    }
+}

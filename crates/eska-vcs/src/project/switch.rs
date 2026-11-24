@@ -1,4 +1,4 @@
-//! Repository-wide task switching with branch-bound capture and restoration.
+//! Repository-wide literal branch switching with branch-bound capture and restoration.
 
 use super::{Project, discovery::DiscoveryContext};
 use crate::vcs::{
@@ -12,13 +12,12 @@ use std::path::{Path, PathBuf};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SwitchTarget<'a> {
-    Task(&'a str),
+    Branch(&'a str),
     Base,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct SwitchResult {
-    pub task: Option<String>,
     pub branch: String,
     pub saved: Option<Shelf>,
     pub restored: Option<Shelf>,
@@ -28,13 +27,14 @@ pub struct SwitchResult {
 #[derive(Debug)]
 pub enum SwitchError {
     WorkflowNotConfigured,
+    InvalidBranch,
     Policy(PolicyError),
     Repository(RepositoryError),
     ProjectOutsideRepository {
         project: PathBuf,
         repository: PathBuf,
     },
-    TaskBranchMissing {
+    BranchMissing {
         branch: String,
     },
     BaseBranchMissing {
@@ -47,7 +47,7 @@ pub enum SwitchError {
     Command(CommandError),
 }
 
-/// Activate an existing task/base branch while preserving both branches' pending changes.
+/// Activate an existing local/base branch while preserving both branches' pending changes.
 ///
 /// # Errors
 /// Rejects invalid policy, conflicting shelves and unsafe Git states before switching.
@@ -80,6 +80,18 @@ pub fn execute_context(
     execute_scope(root, settings, target, dry_run)
 }
 
+/// Switch to an exact existing local branch without requiring a project manifest.
+///
+/// # Errors
+/// Rejects invalid local references and unsafe repository or shelf states.
+pub fn execute_branch(
+    root: &Path,
+    branch: &str,
+    dry_run: bool,
+) -> Result<SwitchResult, SwitchError> {
+    execute_scope(root, None, SwitchTarget::Branch(branch), dry_run)
+}
+
 /// Resolve the requested branch before acquiring a mutation lock or creating a shelf.
 fn execute_scope(
     root: &Path,
@@ -87,22 +99,27 @@ fn execute_scope(
     target: SwitchTarget<'_>,
     dry_run: bool,
 ) -> Result<SwitchResult, SwitchError> {
-    let policy = settings
-        .ok_or(SwitchError::WorkflowNotConfigured)?
-        .resolve(None)
-        .map_err(SwitchError::Policy)?;
-    let (task, branch) = match target {
-        SwitchTarget::Task(task) => (
-            Some(task.to_owned()),
-            policy
-                .plan(task)
-                .map_err(SwitchError::Policy)?
-                .working_branch,
-        ),
-        SwitchTarget::Base => (None, policy.base_branch().to_owned()),
+    let branch = match target {
+        SwitchTarget::Branch(branch) => {
+            let reference = format!("refs/heads/{branch}");
+            if branch.is_empty()
+                || branch.starts_with('-')
+                || branch == "@"
+                || gix::validate::reference::branch_name(reference.as_bytes().as_bstr()).is_err()
+            {
+                return Err(SwitchError::InvalidBranch);
+            }
+            branch.to_owned()
+        }
+        SwitchTarget::Base => settings
+            .ok_or(SwitchError::WorkflowNotConfigured)?
+            .resolve(None)
+            .map_err(SwitchError::Policy)?
+            .base_branch()
+            .to_owned(),
     };
     let repository = Repository::discover(root).map_err(SwitchError::Repository)?;
-    if !root.starts_with(repository.work_dir()) {
+    if matches!(target, SwitchTarget::Base) && !root.starts_with(repository.work_dir()) {
         return Err(SwitchError::ProjectOutsideRepository {
             project: root.to_owned(),
             repository: repository.work_dir().to_owned(),
@@ -113,7 +130,12 @@ fn execute_scope(
     } else {
         Some(Session::acquire(&repository).map_err(SwitchError::Shelf)?)
     };
-    let mut result = prepare(&repository, task, branch, dry_run)?;
+    let mut result = prepare(
+        &repository,
+        branch,
+        matches!(target, SwitchTarget::Base),
+        dry_run,
+    )?;
     if let Some(session) = session {
         apply(&repository, &session, &mut result)?;
     }
@@ -123,11 +145,11 @@ fn execute_scope(
 /// Preview the complete branch transition, including the current and target shelves.
 fn prepare(
     repository: &Repository,
-    task: Option<String>,
     branch: String,
+    base: bool,
     dry_run: bool,
 ) -> Result<SwitchResult, SwitchError> {
-    let (current, _) = shelves::preflight(repository).map_err(SwitchError::Shelf)?;
+    let (current, _) = shelves::switch_preflight(repository).map_err(SwitchError::Shelf)?;
     let target_ref = format!("refs/heads/{branch}");
     let target_id = repository
         .references()
@@ -142,12 +164,12 @@ fn prepare(
             None
         })
         .ok_or_else(|| {
-            if task.is_some() {
-                SwitchError::TaskBranchMissing {
+            if base {
+                SwitchError::BaseBranchMissing {
                     branch: branch.clone(),
                 }
             } else {
-                SwitchError::BaseBranchMissing {
+                SwitchError::BranchMissing {
                     branch: branch.clone(),
                 }
             }
@@ -184,7 +206,6 @@ fn prepare(
         None
     };
     Ok(SwitchResult {
-        task,
         branch,
         saved,
         restored,
@@ -201,17 +222,11 @@ fn apply(
     if result.saved.is_some() {
         result.saved = Some(session.capture().map_err(SwitchError::Shelf)?);
     }
-    let (current, _) = shelves::preflight(repository).map_err(SwitchError::Shelf)?;
-    if current != format!("refs/heads/{}", result.branch).as_bytes()
-        && let Err(error) =
+    let (current, _) = shelves::switch_preflight(repository).map_err(SwitchError::Shelf)?;
+    if current != format!("refs/heads/{}", result.branch).as_bytes() {
+        checkout_with_rollback(session, result.saved.as_ref(), || {
             Executor::new(repository.work_dir()).switch_existing_branch(&result.branch)
-    {
-        // A failed checkout may leave the original branch active. Restore only when its
-        // own shelf still matches; never apply it to a branch activated by a failing hook.
-        if let Some(saved) = &result.saved {
-            let _ = session.restore(Some(&saved.id));
-        }
-        return Err(SwitchError::Command(error));
+        })?;
     }
     if let Some(saved) = &result.restored {
         result.restored = Some(
@@ -219,6 +234,50 @@ fn apply(
                 .restore(Some(&saved.id))
                 .map_err(SwitchError::Shelf)?,
         );
+    }
+    Ok(())
+}
+
+/// Capture and switch a validated SCM selection which is not an existing attached local branch.
+/// The adapter validates reference kind, target and branch collisions before calling this.
+pub(crate) fn execute_selection(
+    repository: &Repository,
+    kind: crate::vcs::scm_branches::Kind,
+    name: &str,
+    target: &str,
+    branch: Option<&str>,
+    detached: bool,
+) -> Result<bool, SwitchError> {
+    let session = Session::acquire(repository).map_err(SwitchError::Shelf)?;
+    shelves::switch_preflight(repository).map_err(SwitchError::Shelf)?;
+    let saved = if repository
+        .status()
+        .map_err(SwitchError::Repository)?
+        .is_dirty()
+    {
+        Some(session.capture().map_err(SwitchError::Shelf)?)
+    } else {
+        None
+    };
+    checkout_with_rollback(&session, saved.as_ref(), || {
+        Executor::new(repository.work_dir()).scm_switch(kind, name, target, branch, detached)
+    })?;
+    Ok(saved.is_some())
+}
+
+/// Retain the durable source shelf if checkout or guarded restoration fails.
+fn checkout_with_rollback(
+    session: &Session<'_>,
+    saved: Option<&Shelf>,
+    checkout: impl FnOnce() -> Result<(), CommandError>,
+) -> Result<(), SwitchError> {
+    if let Err(error) = checkout() {
+        // Restore validates branch/base and collisions, including a hook changing HEAD.
+        // A failed rollback keeps the complete shelf for explicit recovery.
+        if let Some(saved) = saved {
+            let _ = session.restore(Some(&saved.id));
+        }
+        return Err(SwitchError::Command(error));
     }
     Ok(())
 }

@@ -26,14 +26,12 @@ fn switches_between_existing_task_and_base_without_fetching() {
     git(&root.0, &["remote", "add", "origin", "missing.git"]);
     let project = project(&root.0);
 
-    let task =
-        switch::execute(&project, switch::SwitchTarget::Task("FI-34")).expect("switch to task");
-    assert_eq!(task.task.as_deref(), Some("FI-34"));
+    let task = switch::execute(&project, switch::SwitchTarget::Branch("task/FI-34"))
+        .expect("switch to task");
     assert_eq!(task.branch, "task/FI-34");
     assert_eq!(current_branch(&root.0), b"task/FI-34");
 
     let base = switch::execute(&project, switch::SwitchTarget::Base).expect("switch to base");
-    assert_eq!(base.task, None);
     assert_eq!(base.branch, "main");
     assert_eq!(current_branch(&root.0), b"main");
 }
@@ -45,8 +43,8 @@ fn preserves_changes_outside_a_nested_project() {
     git(&root.0, &["branch", "task/FI-34"]);
     let project = project(&root.0.join("nested"));
     fs::write(root.0.join("outside.txt"), "dirty\n").expect("write outside change");
-    let result =
-        switch::execute(&project, switch::SwitchTarget::Task("FI-34")).expect("save and switch");
+    let result = switch::execute(&project, switch::SwitchTarget::Branch("task/FI-34"))
+        .expect("save and switch");
     assert!(result.saved.is_some());
     assert!(!root.0.join("outside.txt").exists());
     let result = switch::execute(&project, switch::SwitchTarget::Base).expect("switch and restore");
@@ -60,12 +58,12 @@ fn reports_a_missing_task_branch_without_creating_it() {
     commit(&root.0, "initial.txt");
     let project = project(&root.0);
 
-    let error = switch::execute(&project, switch::SwitchTarget::Task("FI-404"))
+    let error = switch::execute(&project, switch::SwitchTarget::Branch("task/FI-404"))
         .expect_err("missing task must fail");
 
     assert!(matches!(
         error,
-        switch::SwitchError::TaskBranchMissing { branch } if branch == "task/FI-404"
+        switch::SwitchError::BranchMissing { branch } if branch == "task/FI-404"
     ));
     assert_eq!(
         git_output(
@@ -92,13 +90,13 @@ fn round_trip_between_two_dirty_tasks_restores_exact_indexes() {
     git(&root.0, &["branch", "task/A"]);
     git(&root.0, &["branch", "task/B"]);
     let project = project(&root.0);
-    switch::execute(&project, switch::SwitchTarget::Task("A")).unwrap();
+    switch::execute(&project, switch::SwitchTarget::Branch("task/A")).unwrap();
     fs::write(root.0.join("file"), b"A staged\r\n").unwrap();
     git(&root.0, &["add", "file"]);
     fs::write(root.0.join("file"), b"A unstaged\r\n").unwrap();
     fs::write(root.0.join("A new"), b"A").unwrap();
     let a_index = fs::read(root.0.join(".git/index")).unwrap();
-    let transition = switch::execute(&project, switch::SwitchTarget::Task("B")).unwrap();
+    let transition = switch::execute(&project, switch::SwitchTarget::Branch("task/B")).unwrap();
     assert!(transition.saved.is_some());
     assert!(transition.restored.is_none());
     assert_eq!(fs::read(root.0.join("file")).unwrap(), b"file\n");
@@ -107,13 +105,13 @@ fn round_trip_between_two_dirty_tasks_restores_exact_indexes() {
     git(&root.0, &["add", "file"]);
     fs::remove_file(root.0.join("file")).unwrap();
     let b_index = fs::read(root.0.join(".git/index")).unwrap();
-    let transition = switch::execute(&project, switch::SwitchTarget::Task("A")).unwrap();
+    let transition = switch::execute(&project, switch::SwitchTarget::Branch("task/A")).unwrap();
     assert!(transition.saved.is_some());
     assert!(transition.restored.is_some());
     assert_eq!(fs::read(root.0.join(".git/index")).unwrap(), a_index);
     assert_eq!(fs::read(root.0.join("file")).unwrap(), b"A unstaged\r\n");
     assert_eq!(fs::read(root.0.join("A new")).unwrap(), b"A");
-    switch::execute(&project, switch::SwitchTarget::Task("B")).unwrap();
+    switch::execute(&project, switch::SwitchTarget::Branch("task/B")).unwrap();
     assert_eq!(fs::read(root.0.join(".git/index")).unwrap(), b_index);
     assert!(!root.0.join("file").exists());
 }
@@ -127,7 +125,7 @@ fn invalid_target_shelf_preserves_the_dirty_source() {
         commit(&root.0, "initial");
         git(&root.0, &["branch", "task/A"]);
         let project = project(&root.0);
-        switch::execute(&project, switch::SwitchTarget::Task("A")).unwrap();
+        switch::execute(&project, switch::SwitchTarget::Branch("task/A")).unwrap();
         fs::write(root.0.join("A"), b"target").unwrap();
         switch::execute(&project, switch::SwitchTarget::Base).unwrap();
         let repo = Repository::discover(&root.0).unwrap();
@@ -148,7 +146,7 @@ fn invalid_target_shelf_preserves_the_dirty_source() {
         fs::write(root.0.join("source"), b"keep").unwrap();
         let index = fs::read(repo.index_path()).unwrap();
         assert!(matches!(
-            switch::execute(&project, switch::SwitchTarget::Task("A")),
+            switch::execute(&project, switch::SwitchTarget::Branch("task/A")),
             Err(switch::SwitchError::Shelf(_))
         ));
         assert_eq!(current_branch(&root.0), b"main");
@@ -172,7 +170,7 @@ fn ignored_checkout_collision_keeps_both_file_contents() {
     fs::write(root.0.join("pending"), b"source pending").unwrap();
     let project = project(&root.0);
     assert!(matches!(
-        switch::execute(&project, switch::SwitchTarget::Task("A")),
+        switch::execute(&project, switch::SwitchTarget::Branch("task/A")),
         Err(switch::SwitchError::Command(_))
     ));
     assert_eq!(current_branch(&root.0), b"main");
@@ -198,7 +196,7 @@ fn target_checked_out_elsewhere_is_rejected_before_capture() {
     let project = project(&root.0);
     fs::write(root.0.join("pending"), b"source pending").unwrap();
     assert!(matches!(
-        switch::execute(&project, switch::SwitchTarget::Task("A")),
+        switch::execute(&project, switch::SwitchTarget::Branch("task/A")),
         Err(switch::SwitchError::TargetCheckedOut { .. })
     ));
     assert_eq!(current_branch(&root.0), b"main");

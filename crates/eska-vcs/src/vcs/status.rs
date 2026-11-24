@@ -65,18 +65,18 @@ impl Repository {
     /// # Errors
     /// Returns an index preflight error or `Operation::Status` for unreadable data or unrepresentable paths.
     pub fn status(&self) -> Result<Status, Error> {
-        self.status_paths(&[], self.status_autocrlf()?.as_ref())
+        self.status_paths(&[], &self.status_config()?)
     }
 
-    pub(super) fn status_autocrlf(&self) -> Result<Option<BString>, Error> {
-        effective_autocrlf(&self.inner)
+    pub(super) fn status_config(&self) -> Result<gix::config::File, Error> {
+        effective_git_config(&self.inner)
             .map_err(|source| Error::operation(Operation::Status, source))
     }
 
     pub(super) fn status_paths(
         &self,
         paths: &[BString],
-        autocrlf: Option<&BString>,
+        effective: &gix::config::File,
     ) -> Result<Status, Error> {
         self.check_index_size()?;
         let patterns = paths
@@ -87,8 +87,11 @@ impl Repository {
                 pattern
             })
             .collect::<Vec<_>>();
+        let autocrlf = effective
+            .string_implicit(Core::AUTO_CRLF)
+            .map(|value| value.unwrap_or_else(|| "true".into()));
         let mut configured;
-        let repository = if let Some(value) = autocrlf
+        let repository = if let Some(value) = autocrlf.as_ref()
             && self
                 .inner
                 .config_snapshot()
@@ -105,6 +108,33 @@ impl Repository {
         } else {
             &self.inner
         };
+        let mut attributes_repository;
+        let mut lfs_attributes = if super::lfs::standard_driver(effective) {
+            let attributes_source = if let Some(value) = effective.string(Core::ATTRIBUTES_FILE) {
+                attributes_repository = repository.clone();
+                let mut config = attributes_repository.config_snapshot_mut();
+                config
+                    .set_value(&Core::ATTRIBUTES_FILE, value.as_bstr())
+                    .and_then(|_| config.commit())
+                    .map_err(|source| Error::operation(Operation::Status, source))?;
+                &attributes_repository
+            } else {
+                repository
+            };
+            let index = repository
+                .index_or_empty()
+                .map_err(|source| Error::operation(Operation::Status, source))?;
+            Some(
+                attributes_source
+                    .attributes_only(
+                        &index,
+                        gix::worktree::stack::state::attributes::Source::WorktreeThenIdMapping,
+                    )
+                    .map_err(|source| Error::operation(Operation::Status, source))?,
+            )
+        } else {
+            None
+        };
         let platform = repository
             .status(gix::progress::Discard)
             .map_err(|source| Error::operation(Operation::Status, source))?
@@ -119,7 +149,15 @@ impl Repository {
         for item in iter {
             match item.map_err(|source| Error::operation(Operation::Status, source))? {
                 gix::status::Item::TreeIndex(change) => record_index(&mut paths, &change),
-                gix::status::Item::IndexWorktree(change) => record_worktree(&mut paths, &change),
+                gix::status::Item::IndexWorktree(change) => {
+                    if let Some(attributes) = lfs_attributes.as_mut()
+                        && super::lfs::is_materialized(repository, attributes, &change)
+                            .map_err(|source| Error::operation(Operation::Status, source))?
+                    {
+                        continue;
+                    }
+                    record_worktree(&mut paths, &change);
+                }
             }
         }
         for entry in paths.values() {
@@ -179,12 +217,6 @@ pub(super) fn effective_git_config(repository: &gix::Repository) -> gix::Result<
         ..Default::default()
     })?;
     Ok(config)
-}
-
-fn effective_autocrlf(repository: &gix::Repository) -> gix::Result<Option<BString>> {
-    Ok(effective_git_config(repository)?
-        .string_implicit(Core::AUTO_CRLF)
-        .map(|value| value.unwrap_or_else(|| "true".into())))
 }
 
 fn entry<'a>(paths: &'a mut BTreeMap<BString, PathStatus>, path: &BStr) -> &'a mut PathStatus {

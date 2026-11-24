@@ -1,6 +1,8 @@
 //! Portable input transport, authoritative reconciliation and metadata-only probes.
 use serde_json::{Value, json};
+use sha2::{Digest, Sha256};
 use std::{
+    fmt::Write as _,
     fs,
     io::{BufRead, BufReader, Write},
     path::Path,
@@ -45,7 +47,14 @@ impl Drop for Stream {
 }
 impl Stream {
     fn start(root: &Path, locale: &str) -> Self {
-        let mut child = Command::new(env!("CARGO_BIN_EXE_eska-vcs"))
+        Self::start_with(
+            root,
+            locale,
+            &mut Command::new(env!("CARGO_BIN_EXE_eska-vcs")),
+        )
+    }
+    fn start_with(root: &Path, locale: &str, command: &mut Command) -> Self {
+        let mut child = command
             .args(["--lang", locale, "--project-dir"])
             .arg(root)
             .args(["monitor", "--events-stdin", "--format", "json"])
@@ -104,6 +113,73 @@ impl Stream {
         }
     }
 }
+
+#[test]
+fn materialized_lfs_is_clean_with_user_and_system_filter_configuration() {
+    let fixture = TestDir::new();
+    let root = fixture.0.join("repo");
+    fs::create_dir(&root).unwrap();
+    git(&root, &["init", "-b", "develop"]);
+    let working = b"actual binary data\0\xff";
+    let digest = Sha256::digest(working)
+        .iter()
+        .fold(String::with_capacity(64), |mut hex, byte| {
+            write!(hex, "{byte:02x}").unwrap();
+            hex
+        });
+    let pointer = format!(
+        "version https://git-lfs.github.com/spec/v1\noid sha256:{digest}\nsize {}\n",
+        working.len(),
+    );
+    fs::write(root.join(".gitattributes"), "*.png filter=lfs -text\n").unwrap();
+    fs::write(root.join("asset.png"), pointer).unwrap();
+    fs::write(root.join("module.bsl"), "// base\n").unwrap();
+    git(&root, &["add", "."]);
+    git(&root, &["commit", "-m", "base"]);
+    let config = fixture.0.join("lfs.gitconfig");
+    fs::write(
+        &config,
+        "[filter \"lfs\"]\nprocess = git-lfs filter-process\nrequired = true\n",
+    )
+    .unwrap();
+    fs::write(root.join("module.bsl"), "// changed\n").unwrap();
+    for system in [false, true] {
+        fs::write(root.join("asset.png"), working).unwrap();
+        let mut command = Command::new(env!("CARGO_BIN_EXE_eska-vcs"));
+        if system {
+            command
+                .env_remove("GIT_CONFIG_NOSYSTEM")
+                .env("GIT_CONFIG_SYSTEM", &config)
+                .env("GIT_CONFIG_GLOBAL", fixture.0.join("absent"));
+        } else {
+            command
+                .env("GIT_CONFIG_NOSYSTEM", "1")
+                .env("GIT_CONFIG_GLOBAL", &config);
+        }
+        let mut stream = Stream::start_with(&root, "en", &mut command);
+        let initial = stream.next();
+        assert_eq!(initial["changes"].as_array().unwrap().len(), 1);
+        assert_eq!(
+            entry(&initial, "module.bsl").unwrap()["worktree"],
+            "modified"
+        );
+
+        let mut changed = working.to_vec();
+        changed[0] ^= 1;
+        fs::write(root.join("asset.png"), changed).unwrap();
+        stream.paths(&["asset.png"]);
+        assert_eq!(
+            entry(&stream.next(), "asset.png").unwrap()["worktree"],
+            "modified"
+        );
+
+        fs::write(root.join("asset.png"), working).unwrap();
+        stream.paths(&["asset.png"]);
+        assert!(entry(&stream.next(), "asset.png").is_none());
+        stream.close();
+    }
+}
+
 fn entry<'a>(snapshot: &'a Value, path: &str) -> Option<&'a Value> {
     snapshot["changes"]
         .as_array()

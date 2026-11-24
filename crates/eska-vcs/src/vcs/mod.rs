@@ -16,4 +16,5 @@ pub(crate) mod scm_bridge;
 
 pub mod scm_details;
 
+mod lfs;
 mod scm_stage_lines;

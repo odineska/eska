@@ -1,7 +1,7 @@
 //! Checked reference selection for the SCM branch picker.
 use super::{
     command::Executor,
-    repository::{ReferenceTarget, Repository},
+    repository::{Head, ReferenceTarget, Repository},
 };
 use gix::bstr::ByteSlice;
 use serde_json::{Value, json};
@@ -118,8 +118,37 @@ pub fn change(start: &Path, kind: Kind, name: &str, branch: Option<&str>, detach
     if !executor.git_available() {
         return Err(json!("git_unavailable"));
     }
-    executor
-        .scm_switch(kind, name, &target, branch, detached)
-        .map_err(|_| json!("checkout_failed"))?;
-    Ok(json!({}))
+    // Preserve branch creation before the first commit: no checkout or shelf is possible.
+    if matches!(
+        repo.head().map_err(|_| json!("repository"))?,
+        Head::Unborn { .. }
+    ) && matches!(kind, Kind::Head)
+        && branch.is_some()
+    {
+        executor
+            .scm_switch(kind, name, &target, branch, detached)
+            .map_err(|_| json!("checkout_failed"))?;
+        return Ok(json!({"saved":false,"restored":false}));
+    }
+    if matches!(kind, Kind::Local) && branch.is_none() && !detached {
+        let result =
+            crate::project::switch::execute_branch(start, name, false).map_err(switch_error)?;
+        return Ok(json!({"saved":result.saved.is_some(),"restored":result.restored.is_some()}));
+    }
+    let saved =
+        crate::project::switch::execute_selection(&repo, kind, name, &target, branch, detached)
+            .map_err(switch_error)?;
+    Ok(json!({"saved":saved,"restored":false}))
+}
+
+fn switch_error(error: crate::project::switch::SwitchError) -> Value {
+    use crate::project::switch::SwitchError;
+    json!(match error {
+        SwitchError::Shelf(error) => super::shelves::error_code(&error),
+        SwitchError::InvalidBranch => "branch_invalid",
+        SwitchError::BranchMissing { .. } => "branch_not_found",
+        SwitchError::TargetCheckedOut { .. } => "target-checked-out",
+        SwitchError::Command(_) => "checkout_failed",
+        _ => "repository",
+    })
 }

@@ -9,6 +9,7 @@ use gix::{
     bstr::{BStr, BString},
     notify::{Changes, Scope},
 };
+use sha2::{Digest, Sha256};
 
 use super::{
     repository::{Error, Head, Operation, Repository},
@@ -22,7 +23,7 @@ pub struct Snapshot {
     pub head: Head,
     pub status: Status,
     pub scm: super::scm_details::Details,
-    autocrlf: Option<BString>,
+    config_fingerprint: [u8; 32],
 }
 
 /// Owns the current coverage strategy and the latest reconciled view.
@@ -171,15 +172,15 @@ impl Snapshot {
     /// # Errors
     /// Returns an error if HEAD or status cannot be read.
     pub(crate) fn read(repository: &Repository) -> Result<Self, Error> {
-        let autocrlf = repository.status_autocrlf()?;
-        let status = repository.status_paths(&[], autocrlf.as_ref())?;
+        let config = repository.status_config()?;
+        let status = repository.status_paths(&[], &config)?;
         let scm = super::scm_details::Details::read(repository, &status)?;
         Ok(Self {
             root: repository.work_dir().to_owned(),
             head: repository.head()?,
             status,
             scm,
-            autocrlf,
+            config_fingerprint: Sha256::digest(config.to_bstring()).into(),
         })
     }
 
@@ -197,25 +198,26 @@ impl Snapshot {
             });
         }
         let head = repository.head()?;
-        let autocrlf = repository.status_autocrlf()?;
-        let paths = if head == self.head && autocrlf == self.autocrlf {
+        let config = repository.status_config()?;
+        let config_fingerprint: [u8; 32] = Sha256::digest(config.to_bstring()).into();
+        let paths = if head == self.head && config_fingerprint == self.config_fingerprint {
             narrow_paths(&repository, changes)?
         } else {
             None
         };
         let status = match paths {
             Some(paths) => {
-                let partial = repository.status_paths(&paths, autocrlf.as_ref())?;
+                let partial = repository.status_paths(&paths, &config)?;
                 let mut entries = self.status.entries.clone();
                 entries.retain(|entry| !paths.iter().any(|path| within(&entry.path, path)));
                 entries.extend(partial.entries);
                 entries.sort_by(|a, b| a.path.cmp(&b.path));
                 Status { entries }
             }
-            None => repository.status_paths(&[], autocrlf.as_ref())?,
+            None => repository.status_paths(&[], &config)?,
         };
         let scm = super::scm_details::Details::read(&repository, &status)?;
-        self.autocrlf = autocrlf;
+        self.config_fingerprint = config_fingerprint;
         if head != self.head || status != self.status || scm != self.scm {
             self.scm = scm;
             self.head = head;
