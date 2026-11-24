@@ -69,7 +69,7 @@ eska metadata create --plan plan.json --no-input --format json
 | [`eska save`](#command-eska-save) | Сохранить текущие изменения проекта в историю Git |
 | [`eska start`](#command-eska-start) | Начать работу над задачей по workflow проекта |
 | [`eska status`](#command-eska-status) | Показать состояние проекта и workflow |
-| [`eska switch`](#command-eska-switch) | Переключиться на существующую задачу или базовую ветку workflow |
+| [`eska switch`](#command-eska-switch) | Переключиться на существующую локальную ветку или базовую ветку workflow |
 | [`eska shelve`](#command-eska-shelve) | Сохранить незакоммиченные изменения текущей ветки в полку |
 | [`eska unshelve`](#command-eska-unshelve) | Восстановить полку текущей ветки с сохранением index и рабочих файлов |
 | [`eska shelves`](#command-eska-shelves) | Показать сохранённые полки всех веток репозитория |
@@ -125,7 +125,7 @@ eska 0.38.0
   save       Сохранить текущие изменения проекта в историю Git
   start      Начать работу над задачей по workflow проекта
   status     Показать состояние проекта и workflow
-  switch     Переключиться на существующую задачу или базовую ветку workflow
+  switch     Переключиться на существующую локальную ветку или базовую ветку workflow
   shelve     Сохранить незакоммиченные изменения текущей ветки в полку
   unshelve   Восстановить полку текущей ветки с сохранением index и рабочих файлов
   shelves    Показать сохранённые полки всех веток репозитория
@@ -1063,12 +1063,12 @@ Options:
 <summary>eska switch: синтаксис и все параметры</summary>
 
 ```text
-Переключиться на существующую задачу или базовую ветку workflow
+Переключиться на существующую локальную ветку или базовую ветку workflow
 
-Usage: eska switch [--dry-run] [--format human|json] <ЗАДАЧА> | --base
+Usage: eska switch [--dry-run] [--format human|json] <ВЕТКА> | --base
 
 Arguments:
-  [ЗАДАЧА]  Идентификатор существующей задачи
+  [ВЕТКА]  Точное имя существующей локальной ветки
 
 Options:
       --base                   Переключиться на базовую ветку workflow без завершения задачи
@@ -3676,7 +3676,7 @@ eska-vcs save -m "Добавлена форма заказа"
 | [`eska-vcs shelves`](#command-eska-vcs-shelves) | Показать сохранённые полки всех веток репозитория |
 | [`eska-vcs start`](#command-eska-vcs-start) | Начать работу над задачей по workflow проекта |
 | [`eska-vcs status`](#command-eska-vcs-status) | Показать состояние проекта и workflow |
-| [`eska-vcs switch`](#command-eska-vcs-switch) | Переключиться на существующую задачу или базовую ветку workflow |
+| [`eska-vcs switch`](#command-eska-vcs-switch) | Переключиться на существующую локальную ветку или базовую ветку workflow |
 
 <a id="command-eska-vcs"></a>
 
@@ -3701,7 +3701,7 @@ Git/workflow, полки и смысловое сравнение Designer XML
   shelves   Показать сохранённые полки всех веток репозитория
   start     Начать работу над задачей по workflow проекта
   status    Показать состояние проекта и workflow
-  switch    Переключиться на существующую задачу или базовую ветку workflow
+  switch    Переключиться на существующую локальную ветку или базовую ветку workflow
 Параметры:
       --lang <LANG>                Выбрать язык интерфейса
       --project-dir <PROJECT_DIR>  Начать поиск проекта с этого каталога [default: .]
@@ -3940,12 +3940,12 @@ Git/workflow, полки и смысловое сравнение Designer XML
 <summary>eska-vcs switch: синтаксис и все параметры</summary>
 
 ```text
-Переключиться на существующую задачу или базовую ветку workflow
+Переключиться на существующую локальную ветку или базовую ветку workflow
 
-Использование: eska-vcs switch [OPTIONS] <ЗАДАЧА|--base>
+Использование: eska-vcs switch [OPTIONS] <ВЕТКА|--base>
 
 Аргументы:
-  [ЗАДАЧА]  Идентификатор существующей задачи
+  [ВЕТКА]  Точное имя существующей локальной ветки
 
 Параметры:
       --base                       Переключиться на базовую ветку workflow без завершения задачи

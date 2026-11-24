@@ -349,19 +349,17 @@ start-fetch-command-error = Не удалось выполнить получе�
 start-ancestry-error = Не удалось проверить историю базовой ветки Git.
 start-update-base-error = Не удалось безопасно обновить базовую ветку Git.
 start-switch-error = Не удалось создать или активировать ветку задачи.
-switch-about = Переключиться на существующую задачу или базовую ветку workflow
-switch-usage = eska switch [--dry-run] [--format human|json] <ЗАДАЧА> | --base
-switch-task-help = Идентификатор существующей задачи
-switch-task-value = ЗАДАЧА
+switch-about = Переключиться на существующую локальную ветку или базовую ветку workflow
+switch-usage = eska switch [--dry-run] [--format human|json] <ВЕТКА> | --base
+switch-branch-help = Точное имя существующей локальной ветки
+switch-branch-value = ВЕТКА
 switch-base-help = Переключиться на базовую ветку workflow без завершения задачи
-switch-task-activated = Активирована задача { $task } в ветке { $branch }.
 switch-base-activated = Активирована базовая ветка { $branch } без завершения задачи.
 switch-workflow-missing = Для проекта не настроен workflow.
 switch-policy-error = Настроенная workflow policy неполна или некорректна.
-switch-task-invalid = Идентификатор задачи нельзя использовать в имени ветки по настроенной workflow policy.
 switch-repository-error = Не удалось прочитать состояние Git-репозитория.
 switch-project-outside-repository = Проект находится за пределами найденного рабочего дерева Git.
-switch-task-branch-missing = Локальная ветка задачи { $branch } не найдена. Создайте её через eska start.
+switch-branch-missing = Локальная ветка { $branch } не существует.
 switch-base-branch-missing = Локальная базовая ветка { $branch } не найдена.
 switch-command-error = Не удалось активировать выбранную локальную ветку. Проверьте текущую ветку и изменения через eska status, сохранённые полки — через eska shelves.
 finish-about = Завершить активную задачу по правилам workflow
@@ -1418,3 +1416,7 @@ save-staged-help = Сохранить только индексированны�
 save-operation-in-progress = Сохранение индексированных изменений недоступно во время незавершённой операции Git.
 
 save-no-staged-changes = В выбранной области нет индексированных изменений. Добавьте нужные файлы в индекс.
+
+switch-branch-activated = Активирована ветка { $branch }.
+
+switch-branch-invalid = Укажите точное имя локальной ветки без ревизий и путей.

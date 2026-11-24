@@ -404,7 +404,7 @@ fn task_switch_and_shelves_preserve_both_stages_without_other_components() {
             &root,
             bin.as_os_str(),
             locale,
-            &["switch", &id, "--format", "json"],
+            &["switch", &format!("task/{id}"), "--format", "json"],
         ));
         assert_eq!(fs::read(root.join(".git/index")).unwrap(), index);
         assert_eq!(

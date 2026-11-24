@@ -63,13 +63,17 @@ fn switches_to_a_task_and_back_to_base_in_both_locales() {
     for (locale, task_message, base_message) in [
         (
             "ru",
-            "Активирована задача FI-34",
+            "Активирована ветка task/FI-34",
             "Активирована базовая ветка main",
         ),
-        ("en", "Activated task FI-34", "Activated base branch main"),
+        (
+            "en",
+            "Activated branch task/FI-34",
+            "Activated base branch main",
+        ),
     ] {
         let (_fixture, root) = project();
-        let task = eska(&root, locale, &["switch", "FI-34"]);
+        let task = eska(&root, locale, &["switch", "task/FI-34"]);
         assert!(task.status.success(), "{}", text(&task.stderr));
         assert!(text(&task.stdout).contains(task_message));
         assert_eq!(current_branch(&root), b"task/FI-34");
@@ -111,7 +115,7 @@ fn uses_branch_names_overridden_on_the_trunk_preset() {
     git_ok(&root, &["commit", "-m", "base"]);
     git_ok(&root, &["branch", "feature/FI-34"]);
 
-    let task = eska(&root, "ru", &["switch", "FI-34"]);
+    let task = eska(&root, "ru", &["switch", "feature/FI-34"]);
     assert!(task.status.success(), "{}", text(&task.stderr));
     assert_eq!(current_branch(&root), b"feature/FI-34");
 
@@ -123,8 +127,8 @@ fn uses_branch_names_overridden_on_the_trunk_preset() {
 #[test]
 fn missing_task_errors_are_localized_and_preserve_dirty_state() {
     for (locale, missing_message) in [
-        ("ru", "Создайте её через eska start"),
-        ("en", "Create it with eska start"),
+        ("ru", "Локальная ветка FI-404 не существует"),
+        ("en", "Local branch FI-404 does not exist"),
     ] {
         let (_fixture, root) = project();
         fs::write(root.join("dirty.txt"), "dirty\n").expect("write dirty file");
@@ -140,8 +144,8 @@ fn missing_task_errors_are_localized_and_preserve_dirty_state() {
 #[test]
 fn help_and_target_exclusivity_are_localized() {
     for (locale, expected) in [
-        ("ru", "Переключиться на существующую задачу"),
-        ("en", "Switch to an existing task"),
+        ("ru", "Переключиться на существующую локальную ветку"),
+        ("en", "Switch to an existing local branch"),
     ] {
         let help = eska(Path::new("."), locale, &["switch", "--help"]);
         assert!(help.status.success(), "{help:?}");
@@ -149,7 +153,7 @@ fn help_and_target_exclusivity_are_localized() {
 
         let missing = eska(Path::new("."), locale, &["switch"]);
         assert_eq!(missing.status.code(), Some(2));
-        let conflict = eska(Path::new("."), locale, &["switch", "FI-34", "--base"]);
+        let conflict = eska(Path::new("."), locale, &["switch", "task/FI-34", "--base"]);
         assert_eq!(conflict.status.code(), Some(2));
     }
 }
@@ -174,12 +178,12 @@ fn dirty_switch_preview_and_same_branch_are_read_only() {
     let ru = eska(
         &root,
         "ru",
-        &["switch", "FI-34", "--dry-run", "--format", "json"],
+        &["switch", "task/FI-34", "--dry-run", "--format", "json"],
     );
     let en = eska(
         &root,
         "en",
-        &["switch", "FI-34", "--dry-run", "--format", "json"],
+        &["switch", "task/FI-34", "--dry-run", "--format", "json"],
     );
     assert!(ru.status.success(), "{ru:?}");
     assert_eq!(ru.stdout, en.stdout);
@@ -194,7 +198,7 @@ fn dirty_switch_preview_and_same_branch_are_read_only() {
     let same = eska(&root, "en", &["switch", "--base", "--format", "json"]);
     assert!(same.status.success(), "{same:?}");
     assert_eq!(fs::read(root.join("pending")).unwrap(), b"source");
-    let task = eska(&root, "en", &["switch", "FI-34", "--format", "json"]);
+    let task = eska(&root, "en", &["switch", "task/FI-34", "--format", "json"]);
     assert!(task.status.success(), "{task:?}");
     let document: serde_json::Value = serde_json::from_slice(&task.stdout).unwrap();
     assert!(document["saved"]["id"].is_string());
@@ -243,7 +247,7 @@ fn workspace_switch_restores_all_repository_paths() {
     fs::write(processing.join("source.xml"), b"processing unstaged").unwrap();
     fs::write(fixture.0.join("outside"), b"outside workspace").unwrap();
     let index = fs::read(fixture.0.join(".git/index")).unwrap();
-    let result = eska(&report, "en", &["switch", "A"]);
+    let result = eska(&report, "en", &["switch", "task/A"]);
     assert!(result.status.success(), "{result:?}");
     assert_eq!(fs::read(processing.join("source.xml")).unwrap(), b"base");
     assert!(!fixture.0.join("outside").exists());
@@ -262,4 +266,65 @@ fn workspace_switch_restores_all_repository_paths() {
         fs::read(fixture.0.join("outside")).unwrap(),
         b"outside workspace"
     );
+}
+
+/// Literal switching needs neither a manifest nor a workflow, and never guesses a prefix.
+#[test]
+fn exact_branch_switch_without_manifest_and_detached_return() {
+    for locale in ["ru", "en"] {
+        let fixture = TestDir::new();
+        let root = &fixture.0;
+        git_ok(root, &["init", "--initial-branch=main", "--template="]);
+        fs::write(root.join("file"), b"base").unwrap();
+        git_ok(root, &["add", "."]);
+        git_ok(root, &["commit", "-m", "base"]);
+        git_ok(root, &["branch", "develop"]);
+        git_ok(root, &["branch", "task/develop"]);
+        fs::write(root.join("file"), b"staged\r\n").unwrap();
+        git_ok(root, &["add", "file"]);
+        fs::write(root.join("file"), b"unstaged\r\n").unwrap();
+        fs::write(root.join("new"), b"untracked").unwrap();
+        let index = fs::read(root.join(".git/index")).unwrap();
+        let output = eska(root, locale, &["switch", "develop", "--format", "json"]);
+        assert!(output.status.success(), "{output:?}");
+        let document: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(document["branch"], "develop");
+        assert!(document["task"].is_null());
+        assert_eq!(current_branch(root), b"develop");
+        git_ok(root, &["checkout", "--detach"]);
+        let output = eska(root, locale, &["switch", "main", "--format", "json"]);
+        assert!(output.status.success(), "{output:?}");
+        assert_eq!(fs::read(root.join(".git/index")).unwrap(), index);
+        assert_eq!(fs::read(root.join("file")).unwrap(), b"unstaged\r\n");
+        assert_eq!(fs::read(root.join("new")).unwrap(), b"untracked");
+    }
+}
+
+#[test]
+fn literal_validation_and_dirty_detached_fail_without_changes() {
+    for locale in ["ru", "en"] {
+        let (_fixture, root) = project();
+        for branch in ["../main", "main~0", "main:path", "@{-1}", "missing"] {
+            let output = eska(&root, locale, &["switch", branch, "--format", "json"]);
+            assert_eq!(output.status.code(), Some(1), "{output:?}");
+            let document: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+            assert_eq!(document["schema_version"], 1);
+            assert_eq!(document["status"], "error");
+            assert_eq!(
+                document["error"]["code"],
+                if branch == "missing" {
+                    "branch-missing"
+                } else {
+                    "branch-invalid"
+                }
+            );
+        }
+        git_ok(&root, &["checkout", "--detach"]);
+        fs::write(root.join("pending"), b"keep").unwrap();
+        let output = eska(&root, locale, &["switch", "main", "--format", "json"]);
+        assert_eq!(output.status.code(), Some(1));
+        let document: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(document["error"]["code"], "detached");
+        assert_eq!(fs::read(root.join("pending")).unwrap(), b"keep");
+    }
 }

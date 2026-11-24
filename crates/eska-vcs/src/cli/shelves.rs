@@ -224,27 +224,7 @@ pub(super) fn present_error(error: &Error, localizer: &Localizer) -> String {
 }
 
 /// Keep error identifiers stable and independent of locale.
-pub(super) const fn error_code(error: &Error) -> &'static str {
-    match error {
-        Error::Repository(_) => "repository",
-        Error::Command(_) => "command",
-        Error::Io(_) => "io",
-        Error::InvalidShelf => "invalid-shelf",
-        Error::Locked => "locked",
-        Error::Detached => "detached",
-        Error::Unborn => "unborn",
-        Error::InProgress => "in-progress",
-        Error::UnsupportedIndex => "unsupported-index",
-        Error::Empty => "empty",
-        Error::Exists => "shelf-exists",
-        Error::Missing => "shelf-missing",
-        Error::WrongBranch => "wrong-branch",
-        Error::MovedBranch => "moved-branch",
-        Error::Dirty => "dirty",
-        Error::Collision(_) => "collision",
-        Error::Incomplete => "incomplete",
-    }
-}
+pub(super) use crate::vcs::shelves::error_code;
 
 /// Localize file states while retaining the serialized machine names unchanged.
 fn change_text(value: Option<&str>, localizer: &Localizer) -> String {

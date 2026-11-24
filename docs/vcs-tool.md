@@ -83,9 +83,26 @@ repository; finish проверяет интеграцию/публикацию 
 не публикует изменения. Switch и полки работают со всем repository, включая
 соседние workspace members и файлы вне вложенного проекта.
 
-`start`, `save`, `switch` и `finish` ищут `eska.toml` только в текущем рабочем
+`start`, `save`, `switch --base` и `finish` ищут `eska.toml` только в текущем рабочем
 дереве Git. Если внутри независимого вложенного репозитория манифест отсутствует,
 команды завершаются до изменения файлов, индекса или веток.
+
+`eska switch develop` и `eska-vcs switch develop` выбирают точную локальную
+ветку `develop`, независимо от workflow и шаблона task-веток. Позиционное имя
+не требует `eska.toml`: поиск начинается от `--project-dir` в текущем Git
+worktree. `--base` по-прежнему требует manifest и workflow policy.
+Команда автоматически сохраняет изменения исходной ветки и восстанавливает
+полку целевой ветки. Чистый detached HEAD допускается; грязный отклоняется до
+изменений. Ветки не создаются, remote refs, теги и revision expressions
+не разрешаются. `--dry-run` выполняет только проверки.
+
+JSON success сохраняет схему 1: `operation: "switch"`, `dry_run`, `branch`,
+`task: null`, nullable `saved` и `restored`. Ошибка возвращает exit code 1 и
+`{"schema_version":1,"status":"error","error":{"code":"…"}}` в stdout;
+локализованное пояснение идёт только в stderr. `branch-invalid` означает
+некорректное буквальное имя, `branch-missing` — отсутствие локальной ветки.
+`scm-root.safe_switch_available` сообщает поддержку этого безопасного пути
+отдельно от runtime capability `branches_available` (для переключения нужен Git).
 
 Полка сохраняет raw index, отдельные staged/unstaged байты, non-ignored
 untracked, удаления и mode. Дерево для защиты staged-объектов строится через
@@ -291,7 +308,14 @@ Explorer. Они возвращают один JSON-документ
   переключают в detached HEAD. `--detached` явно отсоединяет HEAD и для веток.
   Конфликтный индекс отклоняется; безопасность worktree, игнорируемых файлов
   и занятых веток проверяет Git (`switch --no-guess --no-overwrite-ignore`).
-  Принудительное переключение и автоматическое сохранение в stash отсутствуют.
+  Перед checkout весь dirty worktree сохраняется в branch-bound полку; при
+  возврате на существующую локальную ветку восстанавливается её полка.
+  Создание веток и переход в detached HEAD не восстанавливают чужие полки.
+  Чистый detached допускается, грязный отклоняется с кодом `detached`.
+  Success data содержит `saved`/`restored` booleans; ошибки полок используют
+  те же коды, что публичный `switch`. Ошибка checkout сохраняет durable полку
+  и пробует вернуть её только на совпадающую исходную ветку.
+  Принудительное переключение и Git stash отсутствуют.
   Создание из HEAD поддерживается и до первого commit. Дополнительный код
   `branch_exists` сообщает о занятом имени, остальные ошибки совпадают с checkout.
   Клиент сохраняет старое меню для backend без `branch_actions_available`.

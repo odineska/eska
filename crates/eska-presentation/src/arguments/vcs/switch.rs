@@ -8,10 +8,10 @@ use clap::{ArgGroup, Args};
 #[command(group(
     ArgGroup::new("target")
         .required(true)
-        .args(["task", "base"])
+        .args(["branch", "base"])
 ))]
 pub struct SwitchArgs {
-    pub task: Option<String>,
+    pub branch: Option<String>,
 
     #[arg(long)]
     pub base: bool,
@@ -32,10 +32,10 @@ pub fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command 
     command
         .about(localizer.text("switch-about"))
         .override_usage(localizer.text("switch-usage"))
-        .mut_arg("task", |argument| {
+        .mut_arg("branch", |argument| {
             argument
-                .help(localizer.text("switch-task-help"))
-                .value_name(localizer.text("switch-task-value"))
+                .help(localizer.text("switch-branch-help"))
+                .value_name(localizer.text("switch-branch-value"))
         })
         .mut_arg("base", |argument| {
             argument.help(localizer.text("switch-base-help"))

@@ -518,6 +518,7 @@ fn branches_capability_is_false_without_git_and_reads_remain_available() {
             assert!(output.stderr.is_empty(), "{output:?}");
             let reply: Value = serde_json::from_slice(&output.stdout).unwrap();
             if operation == "scm-root" {
+                assert_eq!(reply["data"]["safe_switch_available"], true);
                 assert_eq!(reply["data"]["branches_available"], false);
                 assert_eq!(reply["data"]["mutations_available"], false);
             } else if !success {
@@ -777,4 +778,60 @@ fn branch_picker_commit_prefix_does_not_resolve_hexadecimal_refs() {
         commit,
         "a hexadecimal ref must not shadow an object prefix"
     );
+}
+
+/// Every actual branch-picker checkout shelves source bytes before changing HEAD.
+#[test]
+fn branch_picker_shelves_create_remote_tag_and_detached_transitions() {
+    for selection in [
+        vec!["--kind", "head", "--branch", "created", "--", "HEAD"],
+        vec!["--kind", "remote", "--", "origin/remote-topic"],
+        vec!["--kind", "tag", "--", "v1"],
+        vec!["--kind", "local", "--detached", "--", "topic"],
+    ] {
+        let fixture = support::TestDir::new();
+        let root = &fixture.0;
+        git(root, &["init", "--initial-branch=main"]);
+        fs::write(root.join("file"), b"base").unwrap();
+        git(root, &["add", "."]);
+        git(root, &["commit", "-m", "base"]);
+        git(root, &["branch", "topic"]);
+        git(root, &["tag", "v1"]);
+        git(root, &["remote", "add", "origin", "."]);
+        git(
+            root,
+            &[
+                "config",
+                "remote.origin.fetch",
+                "+refs/heads/*:refs/remotes/origin/*",
+            ],
+        );
+        git(
+            root,
+            &["update-ref", "refs/remotes/origin/remote-topic", "HEAD"],
+        );
+        fs::write(root.join("file"), b"staged\r\n").unwrap();
+        git(root, &["add", "file"]);
+        fs::write(root.join("file"), b"unstaged\r\n").unwrap();
+        fs::write(root.join("new"), b"untracked").unwrap();
+        let index = fs::read(root.join(".git/index")).unwrap();
+        let mut args = vec!["scm-switch"];
+        args.extend(selection);
+        let result = bridge(root, "ru", &args, None, true);
+        assert_eq!(result["data"]["saved"], true);
+        assert_eq!(result["data"]["restored"], false);
+        assert_eq!(fs::read(root.join("file")).unwrap(), b"base");
+        assert!(!root.join("new").exists());
+        let result = bridge(
+            root,
+            "en",
+            &["scm-switch", "--kind", "local", "--", "main"],
+            None,
+            true,
+        );
+        assert_eq!(result["data"]["restored"], true);
+        assert_eq!(fs::read(root.join(".git/index")).unwrap(), index);
+        assert_eq!(fs::read(root.join("file")).unwrap(), b"unstaged\r\n");
+        assert_eq!(fs::read(root.join("new")).unwrap(), b"untracked");
+    }
 }
