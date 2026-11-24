@@ -14,3 +14,5 @@ pub mod workflow;
 pub(crate) mod scm_bridge;
 
 pub mod scm_details;
+
+mod scm_stage_lines;

@@ -150,9 +150,8 @@ impl Repository {
 }
 
 /// Resolve Git's file scopes and includes for the worktree being compared.
-/// Import only its EOL policy into the status filter. Repository and index
-/// discovery, external filter commands and write operations retain their own configuration.
-fn effective_autocrlf(repository: &gix::Repository) -> gix::Result<Option<BString>> {
+/// Consumers apply only the settings needed for their specific operation.
+pub(super) fn effective_git_config(repository: &gix::Repository) -> gix::Result<gix::config::File> {
     let mut options = gix::open::Options::default();
     options.permissions.config.git_binary = true;
     options.permissions.config.env = false;
@@ -179,7 +178,11 @@ fn effective_autocrlf(repository: &gix::Repository) -> gix::Result<Option<BStrin
         ),
         ..Default::default()
     })?;
-    Ok(config
+    Ok(config)
+}
+
+fn effective_autocrlf(repository: &gix::Repository) -> gix::Result<Option<BString>> {
+    Ok(effective_git_config(repository)?
         .string_implicit(Core::AUTO_CRLF)
         .map(|value| value.unwrap_or_else(|| "true".into())))
 }

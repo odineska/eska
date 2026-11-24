@@ -28,25 +28,37 @@ pub struct BridgeArgs {
 }
 
 #[derive(Debug, Subcommand)]
-enum Operation {
-    ScmRoot,
-    ScmStatus,
-    ScmBranches,
-    ScmCheckout {
-        branch: String,
-    },
-    ScmBlob {
+enum ScmOperation {
+    #[command(name = "scm-root")]
+    Root,
+    #[command(name = "scm-stage-lines")]
+    StageLines { file: PathBuf },
+    #[command(name = "scm-status")]
+    Status,
+    #[command(name = "scm-branches")]
+    Branches,
+    #[command(name = "scm-checkout")]
+    Checkout { branch: String },
+    #[command(name = "scm-blob")]
+    Blob {
         #[arg(long, value_enum)]
         revision: scm::Revision,
         file: PathBuf,
     },
-    ScmFiles {
+    #[command(name = "scm-files")]
+    Files {
         #[arg(value_enum)]
         action: scm::Action,
         #[arg(long)]
         paths_stdin: bool,
         files: Vec<PathBuf>,
     },
+}
+
+#[derive(Debug, Subcommand)]
+enum Operation {
+    #[command(flatten)]
+    Scm(ScmOperation),
     LibraryCheckout {
         repository: OsString,
         #[arg(long)]
@@ -149,16 +161,16 @@ pub fn source_changes(
         .count())
 }
 
-impl BridgeArgs {
-    /// Emit a complete machine response; mutators require an exclusively owned new namespace.
-    pub fn run(&self, root: &Path) -> ExitCode {
-        let (operation, result): (&str, Result<Value, Value>) = match &self.operation {
-            Operation::ScmRoot => ("scm_root", scm::root(root)),
-            Operation::ScmStatus => ("scm_status", scm::status(root)),
-            Operation::ScmBranches => ("scm_branches", scm::branches(root)),
-            Operation::ScmCheckout { branch } => ("scm_checkout", scm::checkout(root, branch)),
-            Operation::ScmBlob { revision, file } => ("scm_blob", scm::blob(root, *revision, file)),
-            Operation::ScmFiles {
+impl ScmOperation {
+    fn run(&self, root: &Path) -> (&'static str, Result<Value, Value>) {
+        match self {
+            Self::StageLines { file } => ("scm_stage_lines", scm::stage_lines_input(root, file)),
+            Self::Root => ("scm_root", scm::root(root)),
+            Self::Status => ("scm_status", scm::status(root)),
+            Self::Branches => ("scm_branches", scm::branches(root)),
+            Self::Checkout { branch } => ("scm_checkout", scm::checkout(root, branch)),
+            Self::Blob { revision, file } => ("scm_blob", scm::blob(root, *revision, file)),
+            Self::Files {
                 action,
                 files,
                 paths_stdin,
@@ -166,6 +178,15 @@ impl BridgeArgs {
                 "scm_files",
                 scm::files_input(root, *action, files, *paths_stdin),
             ),
+        }
+    }
+}
+
+impl BridgeArgs {
+    /// Emit a complete machine response; mutators require an exclusively owned new namespace.
+    pub fn run(&self, root: &Path) -> ExitCode {
+        let (operation, result): (&str, Result<Value, Value>) = match &self.operation {
+            Operation::Scm(operation) => operation.run(root),
             Operation::LibraryCheckout {
                 repository,
                 destination,

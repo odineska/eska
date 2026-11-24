@@ -253,13 +253,16 @@ Git. Кодировка `utf-8` сохраняет допустимый текс
 Explorer. Они возвращают один JSON-документ
 `{schema_version:1, operation, data, error}` и не зависят от языка CLI.
 `operation` использует имена `scm_root`, `scm_status`, `scm_blob`, `scm_files`,
-`scm_branches`, `scm_checkout`.
+`scm_branches`, `scm_checkout`, `scm_stage_lines`.
 При ошибке `data` равен `null`, `error` содержит машинный код, exit code — 1.
 
 - `scm-root` находит ближайший рабочий репозиторий от `--project-dir` и возвращает
   `root`, `root_encoding`, `mutations_available` и `branches_available`. Два
   флага показывают доступность системного Git и вычисляются одной проверкой.
   При `branches_available: true` Explorer может запросить список веток для выбора.
+  Дополнительный `line_staging_available: true` означает поддержку индексирования
+  выделенных строк через встроенный gix; system Git для него не нужен.
+  Отсутствующий флаг в старом backend клиент трактует как `false`.
 - `scm-branches` возвращает список локальных веток в формате
   `{branches:[{name,name_encoding}]}`. Короткие имена из `refs/heads/`
   отсортированы по исходным байтам. Кодировки `utf-8` и `percent` совпадают
@@ -292,7 +295,51 @@ Explorer. Они возвращают один JSON-документ
   не меняя индекс; untracked-файл удаляется. Подтверждение удаления и проверка
   несохранённых документов принадлежат UI. Конфликтный `discard` запрещён.
 
-Чтение выполняет `gix`; для точечных изменений индекса и tracked worktree
+- `scm-stage-lines -- FILE` читает из stdin JSON schema 1 и возвращает `{}`:
+
+  ```json
+  {"schema_version":1,"index_sha256":"<64 lowercase hex>","worktree_sha256":"<64 lowercase hex>","side":"worktree","ranges":[{"start":0,"end":1}]}
+  ```
+
+  Путь задаётся относительно корня репозитория. SHA-256 считается по исходным
+  байтам канонического blob выбранного файла в индексе и исходным байтам
+  рабочего файла соответственно. Отсутствующая запись индекса, intent-to-add
+  или удалённый рабочий файл соответствуют SHA-256 пустого массива байтов.
+  `side` принимает `index` или `worktree`; диапазоны строк нумеруются от нуля,
+  `end` не включается. Последний перевод строки не создаёт дополнительную строку.
+  Диапазоны могут пересекаться. Лимиты: 64 KiB stdin, 2048 диапазонов,
+  по 8 MiB и 200000 строк на каждую версию текста.
+
+  Backend строит Histogram line diff через закреплённый gix/imara. Можно выбрать
+  отдельные вставленные строки справа, удалённые слева, замены 1:1 на любой стороне
+  и строки нового untracked/intent-to-add файла. При замене разного количества строк нужно
+  выбрать весь изменённый фрагмент на одной стороне; частичный выбор возвращает
+  `ambiguous_lines`, и клиент предлагает выбрать фрагмент полностью.
+  Выбор только неизменённых строк возвращает `empty_selection`.
+
+  Конвертация CRLF/LF выполняется через gix и учитывает `.gitattributes` и настройки
+  `core.autocrlf`, `core.eol`, `core.safecrlf`, `core.attributesFile`, в том числе
+  из системного конфига. Поддерживается UTF-8 текст с LF или CRLF. Файлы с bare CR,
+  двоичные файлы, symlink и gitlink, а также `filter`, `ident`, `working-tree-encoding`
+  и пользовательский diff возвращают `unsupported_text`. Sparse/split index и
+  индекс с данными resolve-undo возвращают `index`. Игнорируемый untracked-файл
+  возвращает `ignored`, конфликт выбранного пути — `conflict`. Для существующих
+  файлов сохраняется mode из индекса, для новых применяется `core.fileMode`.
+
+  Блокировка `index.lock` удерживается с чтения снимка до атомарной замены индекса.
+  Перед записью повторно проверяются путь и точные index/worktree bytes;
+  несовпадение возвращает `stale_status`. Новый blob записывается через gix,
+  остальные entries индекса сохраняются. Рабочий файл не записывается.
+  Второй watcher не создаётся; клиент обновляет уже имеющийся SCM monitor.
+  Машинные ошибки: `input`, `input_limit`, `path`, `repository`, `index`,
+  `index_locked`, `stale_status`, `empty_selection`, `ambiguous_lines`,
+  `unsupported_text`, `conflict`, `mutation`, `ignored`, `oversize`.
+  После `stale_status` клиент перечитывает diff и предлагает повторный выбор.
+  Lock защищает от обычных Git writers; внешняя программа, игнорирующая lock,
+  и правка worktree после последней проверки не блокируются.
+
+Чтение и индексирование строк выполняет `gix`; для остальных точечных изменений
+индекса и tracked worktree
 используется изолированный compatibility fallback системного Git с literal
 pathspecs. Каталоги, traversal, `.git`, вложенные репозитории и пути через
 symlink-каталоги отвергаются до изменения. Игнорируемые файлы не выбираются
