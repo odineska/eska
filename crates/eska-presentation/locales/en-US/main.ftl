@@ -1412,3 +1412,8 @@ monitor-error = Could not monitor the repository. { $reason }
 monitor-polling = File notifications are unavailable. ESKA will continue checking status at five-second intervals.
 
 monitor-events-stdin-help = Read filesystem events from stdin as NDJSON
+
+save-staged-help = Save only staged changes (requires --message)
+save-operation-in-progress = Saving staged changes is unavailable during an unfinished Git operation.
+
+save-no-staged-changes = No staged changes in the selected scope. Stage the files to save first.

@@ -262,6 +262,29 @@ impl<'a> Executor<'a> {
         }
     }
 
+    /// Commit an isolated index, retaining Git hooks and configured signing.
+    pub(crate) fn commit_index(&self, index: &Path, message: &str) -> Result<(), Error> {
+        let output = self
+            .command()
+            .env("GIT_INDEX_FILE", super::git::native_path(index).as_os_str())
+            .env("LC_ALL", "C")
+            .args(["commit", "--quiet", "--message", message])
+            .output()
+            .map_err(|source| Error::Spawn {
+                operation: Operation::Commit,
+                source,
+            })?;
+        if output.status.success() {
+            Ok(())
+        } else {
+            Err(Error::Failed {
+                operation: Operation::Commit,
+                status: output.status,
+                stderr: output.stderr.into(),
+            })
+        }
+    }
+
     /// Execute a validated, literal list of SCM file paths.
     pub(crate) fn scm_files(
         &self,

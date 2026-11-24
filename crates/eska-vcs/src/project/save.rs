@@ -69,10 +69,12 @@ pub enum SaveError {
     },
     DetachedHead,
     NoChanges,
+    NoStagedChanges,
     Conflicts {
         files: usize,
     },
     EmptyMessage,
+    OperationInProgress,
     IndexSnapshot {
         path: PathBuf,
         source: io::Error,
@@ -101,6 +103,135 @@ pub fn plan(project: &Project) -> Result<SavePlan, SaveError> {
 /// Returns the same preflight failures as [`execute_workspace`].
 pub fn plan_workspace(workspace: &Workspace) -> Result<SavePlan, SaveError> {
     prepare_scope(workspace.root()).map(|prepared| prepared.plan)
+}
+
+/// Preview only staged paths inside one project.
+///
+/// # Errors
+/// Returns repository, scope, conflict or empty-index preflight errors.
+pub fn plan_staged(project: &Project) -> Result<SavePlan, SaveError> {
+    prepare_staged_scope(project.root()).map(|(prepared, _)| prepared.plan)
+}
+
+/// Preview only staged paths inside one workspace.
+///
+/// # Errors
+/// Returns repository, scope, conflict or empty-index preflight errors.
+pub fn plan_workspace_staged(workspace: &Workspace) -> Result<SavePlan, SaveError> {
+    prepare_staged_scope(workspace.root()).map(|(prepared, _)| prepared.plan)
+}
+
+/// Commit only the selected project's staged blobs and modes.
+///
+/// # Errors
+/// Returns preflight, index lock, index I/O or Git commit errors.
+pub fn execute_staged(project: &Project, message: &str) -> Result<SaveResult, SaveError> {
+    execute_staged_scope(project.root(), message)
+}
+
+/// Commit only the selected workspace's staged blobs and modes.
+///
+/// # Errors
+/// Returns preflight, index lock, index I/O or Git commit errors.
+pub fn execute_workspace_staged(
+    workspace: &Workspace,
+    message: &str,
+) -> Result<SaveResult, SaveError> {
+    execute_staged_scope(workspace.root(), message)
+}
+
+fn prepare_staged_scope(
+    root: &std::path::Path,
+) -> Result<(PreparedSave, gix::index::State), SaveError> {
+    let repository = Repository::discover(root).map_err(SaveError::Repository)?;
+    ensure_scope_in_repository(root, &repository)?;
+    if matches!(
+        repository.head().map_err(SaveError::Repository)?,
+        Head::Detached { .. }
+    ) {
+        return Err(SaveError::DetachedHead);
+    }
+    if repository.has_in_progress_operation() {
+        return Err(SaveError::OperationInProgress);
+    }
+    let (entries, state) = repository
+        .scoped_staged_index(root)
+        .map_err(SaveError::Repository)?;
+    let conflicts = entries
+        .iter()
+        .filter(|entry| entry.index == Some(Change::Conflict))
+        .count();
+    if conflicts > 0 {
+        return Err(SaveError::Conflicts { files: conflicts });
+    }
+    let files = entries
+        .iter()
+        .filter_map(|entry| save_file(&repository, root, entry))
+        .collect::<Vec<_>>();
+    if files.is_empty() {
+        return Err(SaveError::NoStagedChanges);
+    }
+    Ok((
+        PreparedSave {
+            repository,
+            plan: SavePlan { files },
+        },
+        state,
+    ))
+}
+
+fn execute_staged_scope(root: &std::path::Path, message: &str) -> Result<SaveResult, SaveError> {
+    validate_message(message)?;
+    let repository = Repository::discover(root).map_err(SaveError::Repository)?;
+    let index_path = repository.index_path();
+    // Keep the real index immutable until Git has finished running hooks and signing.
+    let lock = repository.lock_index().map_err(SaveError::Repository)?;
+    let (
+        PreparedSave {
+            repository: _,
+            plan,
+        },
+        state,
+    ) = prepare_staged_scope(root)?;
+    let directory = repository.git_dir();
+    let snapshot_error = |source| SaveError::IndexSnapshot {
+        path: index_path.clone(),
+        source,
+    };
+    let mut temporary = gix::tempfile::new(
+        directory,
+        gix::tempfile::ContainingDirectory::Exists,
+        gix::tempfile::AutoRemove::Tempfile,
+    )
+    .map_err(snapshot_error)?;
+    temporary
+        .with_mut(|output| {
+            gix::index::File::from_state(state, output.path())
+                .write_to(output, gix::index::write::Options::default())
+        })
+        .map_err(snapshot_error)?
+        .map_err(|source| snapshot_error(io::Error::other(source)))?;
+    let temporary_path = temporary
+        .with_mut(|output| output.path().to_owned())
+        .map_err(snapshot_error)?;
+    let temporary = temporary.close().map_err(snapshot_error)?;
+    // The real entries already match the new HEAD inside scope, so no index rewrite
+    // or rollback can overwrite sibling staging or a later external index update.
+    Executor::new(root)
+        .commit_index(&temporary_path, message)
+        .map_err(SaveError::Command)?;
+    drop(temporary);
+    drop(lock);
+    let commit = Repository::discover(root)
+        .map_err(SaveError::Repository)?
+        .head()
+        .map_err(SaveError::Repository)?
+        .id()
+        .ok_or(SaveError::CommitNotCreated)?;
+    Ok(SaveResult {
+        commit,
+        files: plan.files.len(),
+    })
 }
 
 /// Validate a supplied commit message before preparing or executing a save.

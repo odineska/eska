@@ -192,7 +192,10 @@ fn entry<'a>(paths: &'a mut BTreeMap<BString, PathStatus>, path: &BStr) -> &'a m
     })
 }
 
-fn record_index(paths: &mut BTreeMap<BString, PathStatus>, change: &gix::diff::index::Change) {
+pub(super) fn record_index(
+    paths: &mut BTreeMap<BString, PathStatus>,
+    change: &gix::diff::index::Change,
+) {
     use gix::diff::index::Change as GitChange;
     let kind = match change {
         GitChange::Addition { .. } => Change::Added,
