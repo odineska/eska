@@ -6,7 +6,7 @@ use crate::vcs::{
     status::Change,
 };
 use base64::{Engine as _, engine::general_purpose::STANDARD};
-use eska_presentation::encoding::json_path;
+use eska_presentation::encoding::{json_git_text, json_path};
 use gix::bstr::ByteSlice;
 use serde_json::{Value, json};
 use std::{
@@ -36,10 +36,59 @@ fn repository(root: &Path) -> Result<Repository, Value> {
 pub fn root(start: &Path) -> Reply {
     let repo = repository(start)?;
     let (root, root_encoding) = json_path(repo.work_dir().as_os_str());
-    Ok(
-        json!({"root":root,"root_encoding":root_encoding,"mutations_available":Executor::new(repo.work_dir()).git_available()}),
-    )
+    let git_available = Executor::new(repo.work_dir()).git_available();
+    Ok(json!({"root":root,"root_encoding":root_encoding,
+        "mutations_available":git_available,"branches_available":git_available}))
 }
+/// List existing local branch names without remote guessing or a second repository watcher.
+pub fn branches(start: &Path) -> Reply {
+    let repo = repository(start)?;
+    if !Executor::new(repo.work_dir()).git_available() {
+        return Err(json!("git_unavailable"));
+    }
+    let branches = repo
+        .references()
+        .map_err(|_| json!("references"))?
+        .into_iter()
+        .filter_map(|reference| {
+            reference.name.strip_prefix(b"refs/heads/").map(|name| {
+                let (name, name_encoding) = json_git_text(name);
+                json!({"name":name,"name_encoding":name_encoding})
+            })
+        })
+        .collect::<Vec<_>>();
+    Ok(json!({"branches":branches}))
+}
+
+/// Switch only to an exact local branch; Git retains its worktree safety checks.
+pub fn checkout(start: &Path, branch: &str) -> Reply {
+    let reference = format!("refs/heads/{branch}");
+    if branch.is_empty()
+        || branch.starts_with('-')
+        || branch == "@"
+        || gix::validate::reference::branch_name(reference.as_bytes().as_bstr()).is_err()
+    {
+        return Err(json!("branch_invalid"));
+    }
+    let repo = repository(start)?;
+    if !repo
+        .references()
+        .map_err(|_| json!("references"))?
+        .iter()
+        .any(|candidate| candidate.name.as_slice() == reference.as_bytes())
+    {
+        return Err(json!("branch_not_found"));
+    }
+    let executor = Executor::new(repo.work_dir());
+    if !executor.git_available() {
+        return Err(json!("git_unavailable"));
+    }
+    executor
+        .switch_existing_branch(branch)
+        .map_err(|_| json!("checkout_failed"))?;
+    Ok(json!({}))
+}
+
 pub fn status(start: &Path) -> Reply {
     let repo = repository(start)?;
     let snapshot = Snapshot::read(&repo).map_err(|_| json!("status"))?;

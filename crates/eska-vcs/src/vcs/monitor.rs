@@ -22,6 +22,7 @@ pub struct Snapshot {
     pub head: Head,
     pub status: Status,
     pub scm: super::scm_details::Details,
+    autocrlf: Option<BString>,
 }
 
 /// Owns the current coverage strategy and the latest reconciled view.
@@ -170,13 +171,15 @@ impl Snapshot {
     /// # Errors
     /// Returns an error if HEAD or status cannot be read.
     pub(crate) fn read(repository: &Repository) -> Result<Self, Error> {
-        let status = repository.status()?;
+        let autocrlf = repository.status_autocrlf()?;
+        let status = repository.status_paths(&[], autocrlf.as_ref())?;
         let scm = super::scm_details::Details::read(repository, &status)?;
         Ok(Self {
             root: repository.work_dir().to_owned(),
             head: repository.head()?,
             status,
             scm,
+            autocrlf,
         })
     }
 
@@ -194,23 +197,25 @@ impl Snapshot {
             });
         }
         let head = repository.head()?;
-        let paths = if head == self.head {
+        let autocrlf = repository.status_autocrlf()?;
+        let paths = if head == self.head && autocrlf == self.autocrlf {
             narrow_paths(&repository, changes)?
         } else {
             None
         };
         let status = match paths {
             Some(paths) => {
-                let partial = repository.status_paths(&paths)?;
+                let partial = repository.status_paths(&paths, autocrlf.as_ref())?;
                 let mut entries = self.status.entries.clone();
                 entries.retain(|entry| !paths.iter().any(|path| within(&entry.path, path)));
                 entries.extend(partial.entries);
                 entries.sort_by(|a, b| a.path.cmp(&b.path));
                 Status { entries }
             }
-            None => repository.status()?,
+            None => repository.status_paths(&[], autocrlf.as_ref())?,
         };
         let scm = super::scm_details::Details::read(&repository, &status)?;
+        self.autocrlf = autocrlf;
         if head != self.head || status != self.status || scm != self.scm {
             self.scm = scm;
             self.head = head;

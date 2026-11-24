@@ -2,7 +2,10 @@
 
 use std::{collections::BTreeMap, fs, io};
 
-use gix::bstr::{BStr, BString, ByteSlice};
+use gix::{
+    bstr::{BStr, BString, ByteSlice},
+    config::{file::includes, tree::Core},
+};
 
 use super::repository::{Error, Operation, Repository};
 
@@ -62,10 +65,20 @@ impl Repository {
     /// # Errors
     /// Returns an index preflight error or `Operation::Status` for unreadable data or unrepresentable paths.
     pub fn status(&self) -> Result<Status, Error> {
-        self.status_patterns(Vec::new())
+        self.status_paths(&[], self.status_autocrlf()?.as_ref())
     }
 
-    pub(super) fn status_paths(&self, paths: &[BString]) -> Result<Status, Error> {
+    pub(super) fn status_autocrlf(&self) -> Result<Option<BString>, Error> {
+        effective_autocrlf(&self.inner)
+            .map_err(|source| Error::operation(Operation::Status, source))
+    }
+
+    pub(super) fn status_paths(
+        &self,
+        paths: &[BString],
+        autocrlf: Option<&BString>,
+    ) -> Result<Status, Error> {
+        self.check_index_size()?;
         let patterns = paths
             .iter()
             .map(|path| {
@@ -73,14 +86,26 @@ impl Repository {
                 pattern.extend_from_slice(path);
                 pattern
             })
-            .collect();
-        self.status_patterns(patterns)
-    }
-
-    fn status_patterns(&self, patterns: Vec<BString>) -> Result<Status, Error> {
-        self.check_index_size()?;
-        let platform = self
-            .inner
+            .collect::<Vec<_>>();
+        let mut configured;
+        let repository = if let Some(value) = autocrlf
+            && self
+                .inner
+                .config_snapshot()
+                .string(Core::AUTO_CRLF)
+                .as_ref()
+                != Some(value)
+        {
+            configured = self.inner.clone();
+            let mut config = configured.config_snapshot_mut();
+            config
+                .set_value(&Core::AUTO_CRLF, value)
+                .and_then(|_| config.commit())
+                .map_err(|source| Error::operation(Operation::Status, source))?
+        } else {
+            &self.inner
+        };
+        let platform = repository
             .status(gix::progress::Discard)
             .map_err(|source| Error::operation(Operation::Status, source))?
             .untracked_files(gix::status::UntrackedFiles::Files)
@@ -122,6 +147,41 @@ impl Repository {
             Err(source) => Err(Error::Io { path, source }),
         }
     }
+}
+
+/// Resolve Git's file scopes and includes for the worktree being compared.
+/// Import only its EOL policy into the status filter. Repository and index
+/// discovery, external filter commands and write operations retain their own configuration.
+fn effective_autocrlf(repository: &gix::Repository) -> gix::Result<Option<BString>> {
+    let mut options = gix::open::Options::default();
+    options.permissions.config.git_binary = true;
+    options.permissions.config.env = false;
+    options.permissions.config.includes = false;
+    let mut config = gix::config(None, &options)?;
+    config.append(repository.config_snapshot().plumbing().clone())?;
+
+    // Resolve conditional includes after all file scopes are present, with the
+    // actual linked worktree, branch and remote URLs available to Gitoxide.
+    let branch = repository.head_name()?;
+    let home = gix::path::env::home_dir();
+    let install_dir = repository.install_dir().ok();
+    config.resolve_includes(gix::config::file::init::Options {
+        includes: includes::Options::follow(
+            gix::config::path::interpolate::Context {
+                home_dir: home.as_deref(),
+                git_install_dir: install_dir.as_deref(),
+                home_for_user: Some(gix::config::path::interpolate::home_for_user),
+            },
+            includes::conditional::Context {
+                git_dir: Some(repository.git_dir()),
+                branch_name: branch.as_ref().map(AsRef::as_ref),
+            },
+        ),
+        ..Default::default()
+    })?;
+    Ok(config
+        .string_implicit(Core::AUTO_CRLF)
+        .map(|value| value.unwrap_or_else(|| "true".into())))
 }
 
 fn entry<'a>(paths: &'a mut BTreeMap<BString, PathStatus>, path: &BStr) -> &'a mut PathStatus {

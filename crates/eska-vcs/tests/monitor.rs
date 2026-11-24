@@ -79,6 +79,18 @@ impl Stream {
             .recv_timeout(Duration::from_secs(5))
             .expect("native snapshot within five seconds")
     }
+    fn until(&self, mut matches: impl FnMut(&Value) -> bool) -> Value {
+        let deadline = Instant::now() + Duration::from_secs(5);
+        loop {
+            let snapshot = self
+                .lines
+                .recv_timeout(deadline.saturating_duration_since(Instant::now()))
+                .expect("expected native snapshot within five seconds");
+            if matches(&snapshot) {
+                return snapshot;
+            }
+        }
+    }
     fn quiet(&self) {
         assert!(
             matches!(
@@ -157,18 +169,36 @@ fn native_snapshots_reconcile_literal_paths_index_head_and_ignores_in_both_local
         baselines.push(baseline);
         // Scoped updates must not drop a staged change outside their literal pathspec.
         fs::write(root.0.join("other"), "staged\n").unwrap();
+        let unstaged_other = serde_json::json!({
+            "path": "other", "path_encoding": "utf-8", "index": null, "worktree": "modified"
+        });
+        let mut staged_other = unstaged_other.clone();
+        staged_other["index"] = "modified".into();
+        staged_other["worktree"] = Value::Null;
+        let mut both_modified = staged_other.clone();
+        both_modified["worktree"] = "modified".into();
         git(&root.0, &["add", "other"]);
-        assert_eq!(stream.next()["changes"][0]["index"], "modified");
-        let changed = Instant::now();
+        // File and index notifications can arrive separately or in the same batch.
+        stream.until(|snapshot| {
+            let changes = snapshot["changes"].as_array().unwrap();
+            assert_eq!(changes.len(), 1, "{snapshot}");
+            assert!(
+                [&unstaged_other, &staged_other, &both_modified].contains(&&changes[0]),
+                "unexpected staging transition: {snapshot}"
+            );
+            changes[0] == staged_other
+        });
+        let edit_started = Instant::now();
         fs::write(root.0.join("[literal]"), "new\n").unwrap();
         let snapshot = stream.next();
-        eprintln!("monitor native file {locale}: {:?}", changed.elapsed());
+        eprintln!("monitor native file {locale}: {:?}", edit_started.elapsed());
         assert_eq!(snapshot["changes"].as_array().unwrap().len(), 2);
         assert_eq!(snapshot["changes"][0]["path"], "[literal]");
+        assert_eq!(snapshot["changes"][1], staged_other);
         fs::write(root.0.join("[literal]"), "different\n").unwrap();
         stream.quiet();
         fs::remove_file(root.0.join("[literal]")).unwrap();
-        assert_eq!(stream.next()["changes"].as_array().unwrap().len(), 1);
+        assert_eq!(stream.next()["changes"], serde_json::json!([staged_other]));
         fs::write(root.0.join(".gitignore"), "ignored\n").unwrap();
         assert_eq!(stream.next()["changes"].as_array().unwrap().len(), 2);
         fs::write(root.0.join("ignored"), "ignored\n").unwrap();
@@ -185,7 +215,19 @@ fn native_snapshots_reconcile_literal_paths_index_head_and_ignores_in_both_local
         fs::remove_file(root.0.join("ignored")).unwrap();
         stream.next();
         git(&root.0, &["restore", "--staged", "--worktree", "other"]);
-        assert_eq!(stream.next()["changes"], serde_json::json!([]));
+        // Index and worktree restoration can be reconciled in separate batches.
+        stream.until(|snapshot| {
+            let changes = snapshot["changes"].as_array().unwrap();
+            if changes.is_empty() {
+                return true;
+            }
+            assert_eq!(changes.len(), 1, "{snapshot}");
+            assert!(
+                [&unstaged_other, &staged_other, &both_modified].contains(&&changes[0]),
+                "unexpected restoration transition: {snapshot}"
+            );
+            false
+        });
         git(&root.0, &["checkout", "--detach"]);
         assert_eq!(stream.next()["repository"]["head"], "detached");
         git(&root.0, &["checkout", "main"]);
@@ -213,13 +255,14 @@ fn unborn_and_linked_worktree_roots_need_no_manifest() {
         }
     }
     let linked = root.0.join("linked");
-    git(
-        &root.0,
-        &["worktree", "add", "-b", "linked", linked.to_str().unwrap()],
-    );
+    // Git for Windows does not accept canonical verbatim paths as worktree targets.
+    git(&root.0, &["worktree", "add", "-b", "linked", "linked"]);
     let linked_stream = Stream::start(&linked, "en-US");
     let snapshot = linked_stream.next();
-    assert_eq!(snapshot["repository"]["root"], linked.to_str().unwrap());
+    assert_eq!(
+        fs::canonicalize(Path::new(snapshot["repository"]["root"].as_str().unwrap())).unwrap(),
+        fs::canonicalize(&linked).unwrap()
+    );
     assert_eq!(snapshot["repository"]["branch"], "linked");
     fs::write(linked.join("tracked"), "changed\n").unwrap();
     assert_eq!(linked_stream.next()["changes"][0]["worktree"], "modified");
