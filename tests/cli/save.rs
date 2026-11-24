@@ -370,25 +370,13 @@ fn staged_project_and_workspace_save_preserve_the_other_index_entries_and_worktr
         let index = repo.join(".git/index");
         let original = fs::read(&index).unwrap();
 
-        let project = ["--project", "sales-report", "-m", "save prepared report"];
-        let preview = eska(
-            &root,
-            locale,
-            &[&["save", "--staged", "--dry-run"], project.as_slice()].concat(),
-        );
-        assert!(preview.status.success(), "{}", text(&preview.stderr));
-        assert_eq!(preview.stderr, [] as [u8; 0]);
-        let preview = text(&preview.stdout);
+        let project = ["--project", "sales-report"];
+        let preview = staged_save(&root, locale, &project, true);
         assert!(preview.contains(one) && preview.contains("- Report.xml"));
         assert!(!preview.contains("Processing.xml") && !preview.contains("outside.txt"));
+        assert!(!preview.contains("working tree") && !preview.contains("рабочее дерево"));
         assert_eq!(fs::read(&index).unwrap(), original);
-        let commit = eska(
-            &root,
-            locale,
-            &[&["save", "--staged"], project.as_slice()].concat(),
-        );
-        assert!(commit.status.success(), "{}", text(&commit.stderr));
-        assert_eq!(commit.stderr, [] as [u8; 0]);
+        staged_save(&root, locale, &project, false);
         assert_eq!(fs::read(&index).unwrap(), original);
         assert_eq!(
             git_ok(repo, &["show", &format!("HEAD:{report_path}")]),
@@ -403,20 +391,7 @@ fn staged_project_and_workspace_save_preserve_the_other_index_entries_and_worktr
             b"base\n"
         );
 
-        let preview = eska(
-            &report,
-            locale,
-            &[
-                "save",
-                "--workspace",
-                "--staged",
-                "--dry-run",
-                "-m",
-                "save prepared workspace",
-            ],
-        );
-        assert!(preview.status.success(), "{}", text(&preview.stderr));
-        let preview = text(&preview.stdout);
+        let preview = staged_save(&report, locale, &["--workspace"], true);
         assert!(
             preview.contains(two)
                 && preview.contains("New [literal].bsl")
@@ -427,18 +402,7 @@ fn staged_project_and_workspace_save_preserve_the_other_index_entries_and_worktr
                 && !preview.contains("outside.txt")
                 && !preview.contains("Report.xml")
         );
-        let commit = eska(
-            &report,
-            locale,
-            &[
-                "save",
-                "--workspace",
-                "--staged",
-                "-m",
-                "save prepared workspace",
-            ],
-        );
-        assert!(commit.status.success(), "{}", text(&commit.stderr));
+        staged_save(&report, locale, &["--workspace"], false);
         assert_eq!(fs::read(&index).unwrap(), original);
         assert_eq!(
             git_ok(repo, &["show", &format!("HEAD:{new_path}")]),
@@ -456,6 +420,18 @@ fn staged_project_and_workspace_save_preserve_the_other_index_entries_and_worktr
         );
         assert_eq!(git_ok(repo, &["show", ":outside.txt"]), b"staged sibling\n");
     }
+}
+
+fn staged_save(root: &Path, locale: &str, scope: &[&str], dry_run: bool) -> String {
+    let mut args = vec!["save", "--staged", "-m", "save prepared changes"];
+    args.extend_from_slice(scope);
+    if dry_run {
+        args.push("--dry-run");
+    }
+    let output = eska(root, locale, &args);
+    assert!(output.status.success(), "{}", text(&output.stderr));
+    assert_eq!(output.stderr, [] as [u8; 0]);
+    text(&output.stdout)
 }
 
 #[test]

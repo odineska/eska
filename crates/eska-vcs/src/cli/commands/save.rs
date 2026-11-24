@@ -171,6 +171,7 @@ impl SaveHandler<'_> {
                 root: project.root(),
             },
             &message,
+            self.args.staged,
             localizer,
         )
     }
@@ -205,6 +206,7 @@ impl SaveHandler<'_> {
                 root: workspace.root(),
             },
             &message,
+            self.args.staged,
             localizer,
         )
     }
@@ -225,6 +227,7 @@ fn present_preview(
     plan: &save::SavePlan,
     scope: PreviewScope<'_>,
     message: &str,
+    staged: bool,
     localizer: &Localizer,
 ) -> ExitCode {
     println!("{}", localizer.text("save-preview-title"));
@@ -270,6 +273,19 @@ fn present_preview(
     for file in plan.files() {
         let path = changes::display_path(file.path());
         let index = localizer.text(save_state_key(file.index()));
+        if staged {
+            println!(
+                "{}",
+                localizer.format(
+                    "save-preview-staged-file",
+                    &[
+                        ("path", LocalizationValue::Text(&path)),
+                        ("index", LocalizationValue::Text(&index))
+                    ],
+                )
+            );
+            continue;
+        }
         let worktree = localizer.text(save_state_key(file.worktree()));
         println!(
             "{}",

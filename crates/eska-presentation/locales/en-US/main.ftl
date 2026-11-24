@@ -405,6 +405,7 @@ save-preview-scope-member = Scope: project { $project } ({ $path })
 save-preview-scope-workspace = Scope: workspace { $path }
 save-preview-files = Included files: { $files }.
 save-preview-file = - { $path } — index: { $index }; working tree: { $worktree }
+save-preview-staged-file = - { $path } — { $index } in the index
 save-preview-message = Commit message:
 save-preview-state-unchanged = unchanged
 save-preview-state-added = added

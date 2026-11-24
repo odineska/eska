@@ -405,6 +405,7 @@ save-preview-scope-member = Область: проект { $project } ({ $path }
 save-preview-scope-workspace = Область: workspace { $path }
 save-preview-files = Включено файлов: { $files }.
 save-preview-file = - { $path } — index: { $index }; рабочее дерево: { $worktree }
+save-preview-staged-file = - { $path } — { $index } в индексе
 save-preview-message = Сообщение commit:
 save-preview-state-unchanged = без изменений
 save-preview-state-added = добавлен

@@ -279,13 +279,25 @@ impl Repository {
                 .detach(),
             None => ObjectId::empty_tree(self.inner.object_hash()),
         };
+        // Scope selection is relative to the repository, even when invoked inside
+        // a workspace member. The default pathspec would restrict it to the cwd.
+        let mut pathspec = self
+            .inner
+            .pathspec(
+                false,
+                None::<&str>,
+                false,
+                &index,
+                gix::worktree::stack::state::attributes::Source::IdMapping,
+            )
+            .map_err(error)?;
         let mut paths = std::collections::BTreeMap::new();
         let outcome = self
             .inner
             .tree_index_status(
                 &tree,
                 &index,
-                None,
+                Some(&mut pathspec),
                 gix::status::tree_index::TrackRenames::Disabled,
                 |change, _, _| {
                     let path = change.location();

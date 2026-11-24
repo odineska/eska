@@ -110,7 +110,7 @@ pub fn plan_workspace(workspace: &Workspace) -> Result<SavePlan, SaveError> {
 /// # Errors
 /// Returns repository, scope, conflict or empty-index preflight errors.
 pub fn plan_staged(project: &Project) -> Result<SavePlan, SaveError> {
-    prepare_staged_scope(project.root()).map(|(prepared, _)| prepared.plan)
+    plan_staged_scope(project.root())
 }
 
 /// Preview only staged paths inside one workspace.
@@ -118,7 +118,7 @@ pub fn plan_staged(project: &Project) -> Result<SavePlan, SaveError> {
 /// # Errors
 /// Returns repository, scope, conflict or empty-index preflight errors.
 pub fn plan_workspace_staged(workspace: &Workspace) -> Result<SavePlan, SaveError> {
-    prepare_staged_scope(workspace.root()).map(|(prepared, _)| prepared.plan)
+    plan_staged_scope(workspace.root())
 }
 
 /// Commit only the selected project's staged blobs and modes.
@@ -140,11 +140,16 @@ pub fn execute_workspace_staged(
     execute_staged_scope(workspace.root(), message)
 }
 
-fn prepare_staged_scope(
-    root: &std::path::Path,
-) -> Result<(PreparedSave, gix::index::State), SaveError> {
+fn plan_staged_scope(root: &std::path::Path) -> Result<SavePlan, SaveError> {
     let repository = Repository::discover(root).map_err(SaveError::Repository)?;
-    ensure_scope_in_repository(root, &repository)?;
+    prepare_staged_index(root, &repository).map(|(plan, _)| plan)
+}
+
+fn prepare_staged_index(
+    root: &std::path::Path,
+    repository: &Repository,
+) -> Result<(SavePlan, gix::index::State), SaveError> {
+    ensure_scope_in_repository(root, repository)?;
     if matches!(
         repository.head().map_err(SaveError::Repository)?,
         Head::Detached { .. }
@@ -166,18 +171,12 @@ fn prepare_staged_scope(
     }
     let files = entries
         .iter()
-        .filter_map(|entry| save_file(&repository, root, entry))
+        .filter_map(|entry| save_file(repository, root, entry))
         .collect::<Vec<_>>();
     if files.is_empty() {
         return Err(SaveError::NoStagedChanges);
     }
-    Ok((
-        PreparedSave {
-            repository,
-            plan: SavePlan { files },
-        },
-        state,
-    ))
+    Ok((SavePlan { files }, state))
 }
 
 fn execute_staged_scope(root: &std::path::Path, message: &str) -> Result<SaveResult, SaveError> {
@@ -185,14 +184,8 @@ fn execute_staged_scope(root: &std::path::Path, message: &str) -> Result<SaveRes
     let repository = Repository::discover(root).map_err(SaveError::Repository)?;
     let index_path = repository.index_path();
     // Keep the real index immutable until Git has finished running hooks and signing.
-    let lock = repository.lock_index().map_err(SaveError::Repository)?;
-    let (
-        PreparedSave {
-            repository: _,
-            plan,
-        },
-        state,
-    ) = prepare_staged_scope(root)?;
+    let _lock = repository.lock_index().map_err(SaveError::Repository)?;
+    let (plan, state) = prepare_staged_index(root, &repository)?;
     let directory = repository.git_dir();
     let snapshot_error = |source| SaveError::IndexSnapshot {
         path: index_path.clone(),
@@ -221,9 +214,7 @@ fn execute_staged_scope(root: &std::path::Path, message: &str) -> Result<SaveRes
         .commit_index(&temporary_path, message)
         .map_err(SaveError::Command)?;
     drop(temporary);
-    drop(lock);
-    let commit = Repository::discover(root)
-        .map_err(SaveError::Repository)?
+    let commit = repository
         .head()
         .map_err(SaveError::Repository)?
         .id()
