@@ -53,6 +53,13 @@ case "$1:$2:$3" in
     else
       printf '0123456789012345678901234567890123456789\n'
     fi ;;
+  infobase:config:checksum)
+    checksum_file=main-checksum
+    for argument in "$@"; do
+      if test "$argument" = --db; then checksum_file=database-checksum; fi
+    done
+    test -f "$checksum_file" || exit 2
+    cat "$checksum_file" ;;
   infobase:config:apply)
     if test -f record-apply-arguments; then printf '%s\n' "$@" > apply-arguments; fi
     if test -f require-restructuring-confirmation; then
@@ -68,6 +75,7 @@ case "$1:$2:$3" in
     fi
     test ! -f fail-apply || exit 1
     if test -f next-generation; then cp next-generation generation-override; fi
+    if test -f replacement-database-checksum; then cp replacement-database-checksum database-checksum; fi
     if test -f apply-generation-output; then cat apply-generation-output; fi ;;
   infobase:config:import)
     if test "$4" = files; then
@@ -143,6 +151,52 @@ fn full_restructuring_requires_the_reviewed_initialize_plan() {
             .lines()
             .any(|argument| argument == "--force")
     );
+}
+
+#[test]
+fn full_file_apply_records_the_new_generation_only_if_the_imported_contents_match() {
+    let directory = TestDir::new();
+    let root = &directory.0;
+    let module = prepare(root);
+    for file in [root.join("ibcmd"), root.join(".eska/settings_local.toml")] {
+        let content = fs::read_to_string(&file).unwrap();
+        fs::write(file, content.replace("8.3.27.2342", "8.5.4.3000")).unwrap();
+    }
+    let checksum = "c".repeat(64);
+    for file in ["main-checksum", "database-checksum"] {
+        fs::write(root.join(file), format!("{checksum}\n")).unwrap();
+    }
+    let logged = "a".repeat(40);
+    let published = "b".repeat(40);
+    fs::write(
+        root.join("apply-generation-output"),
+        format!("[INFO] Configuration generation is created: {logged}\n"),
+    )
+    .unwrap();
+    fs::write(root.join("next-generation"), format!("{published}\n")).unwrap();
+    initialize(root);
+    let (output, unchanged) = apply(root, "en-US", &[]);
+    assert!(output.status.success(), "{unchanged}");
+    assert_eq!(unchanged["plan"]["mode"], "unchanged");
+    assert_eq!(
+        unchanged["plan"]["inspection"]["baseline_generation"],
+        published
+    );
+
+    fs::write(module, "A = 2;").unwrap();
+    fs::write(root.join("replacement-database-checksum"), "d".repeat(64)).unwrap();
+    fs::write(root.join("next-generation"), "e".repeat(40)).unwrap();
+    let (_, preview) = apply(root, "en-US", &["--initialize"]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, error) = apply(root, "en-US", &["--initialize", "--confirm", token]);
+    assert!(!output.status.success(), "{error}");
+    assert_eq!(error["error"]["code"], "stale_preview");
+    let (_, preview) = apply(root, "en-US", &["--initialize"]);
+    assert_eq!(
+        preview["plan"]["inspection"]["baseline_generation"],
+        published
+    );
+    assert_eq!(preview["plan"]["inspection"]["pending_apply"], true);
 }
 
 fn probe(root: &Path, language: &str, input: Option<&[u8]>) -> (Output, Value) {
