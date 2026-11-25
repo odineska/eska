@@ -1,5 +1,6 @@
 //! Property mutations share the checked source resolver, support rules and invalidation boundary.
 
+use crate::project::metadata_edit::EditingProfile;
 use std::path::PathBuf;
 
 use super::{
@@ -269,7 +270,7 @@ impl ProjectSession {
             }
         }
         let plan = document.update(expected, path, change)?;
-        let modern = document.modern;
+        let profile = document.profile;
         self.validate_predefined_constraints(id, &plan)?;
         let kind = self.object(id)?.kind;
         let plan = if numbering::linked_field(kind, path) {
@@ -282,7 +283,7 @@ impl ProjectSession {
                 kind,
                 context,
                 &path[0].key.name,
-                modern,
+                profile,
             )?
         } else {
             Self::scalar_property_plan(id, location.path, plan)
@@ -481,12 +482,12 @@ impl ProjectSession {
             .inline
             .first()
             .is_some_and(|item| item.kind == MetadataKind::PredefinedItem);
-        let modern = self
-            .project()
-            .configuration()
-            .build_settings()
-            .platform_version()
-            .is_some_and(|version| version.as_str().starts_with("8.5.1."));
+        let profile = EditingProfile::for_platform(
+            self.project()
+                .configuration()
+                .build_settings()
+                .platform_version(),
+        );
         Ok(EditingDocument {
             input,
             id,
@@ -496,7 +497,7 @@ impl ProjectSession {
                 owner.parent()
             },
             predefined,
-            modern,
+            profile,
         })
     }
 

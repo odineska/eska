@@ -470,7 +470,7 @@ mod tests {
             id: &id,
             parent: None,
             predefined: false,
-            modern: false,
+            profile: super::super::EditingProfile::Base,
         };
         let editing = document.inspect().unwrap();
         let field = editing

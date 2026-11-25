@@ -1,5 +1,6 @@
 //! Reviewed Designer writer mappings over the installed EDT property model.
 
+use crate::project::metadata_edit::EditingProfile;
 use roxmltree::Node;
 use serde::{Serialize, Serializer};
 
@@ -205,7 +206,7 @@ pub(super) fn field_type(
     class: &str,
     node: Node<'_, '_>,
     top: bool,
-    modern: bool,
+    profile: EditingProfile,
 ) -> Option<&'static str> {
     include_str!("fields.tsv").lines().skip(1).find_map(|line| {
         let mut columns = line.split('\t');
@@ -214,12 +215,12 @@ pub(super) fn field_type(
         let name = columns.next()?;
         let kind = columns.next()?;
         let property = columns.next()?;
-        let profile = columns.next()?;
+        let catalog = columns.next()?;
         (owner == class
             && namespace == node.tag_name().namespace().unwrap_or_default()
             && name == node.tag_name().name()
             && (!top || property == "1")
-            && (modern || profile == "8.3.27"))
+            && (profile.modern() || catalog == "8.3.27"))
             .then_some(kind)
     })
 }
@@ -237,7 +238,11 @@ pub fn initial_field(
     let node = document
         .descendants()
         .find(|node| node.has_tag_name((MD, property)))?;
-    scalar(node, Some(field_type(owner, node, true, false)?), false)
+    scalar(
+        node,
+        Some(field_type(owner, node, true, EditingProfile::Base)?),
+        EditingProfile::Base,
+    )
 }
 
 /// Read-only identities and payload format switches cannot be changed as scalar properties.
@@ -263,7 +268,7 @@ pub(super) fn protected(name: &str) -> bool {
 pub(super) fn scalar(
     node: Node<'_, '_>,
     model_type: Option<&str>,
-    modern: bool,
+    profile: EditingProfile,
 ) -> Option<ScalarSchema> {
     let model_type = model_type?;
     if super::lengths::inherited_from_numerator(node)
@@ -353,7 +358,7 @@ pub(super) fn scalar(
     if model_type == "ELong" {
         return session_age(node);
     }
-    let mut result = schema(model_type, modern)?;
+    let mut result = schema(model_type, profile)?;
     if let ScalarSchema::Integer { min, max } = &mut result {
         (*min, *max) = integer_bounds(node)?;
     }
@@ -471,7 +476,7 @@ fn sibling_number(node: Node<'_, '_>, name: &str) -> Option<i64> {
 }
 
 /// Domain tokens remain machine-readable; translations are added by the IDE adapter.
-pub(super) fn schema(model_type: &str, modern: bool) -> Option<ScalarSchema> {
+pub(super) fn schema(model_type: &str, profile: EditingProfile) -> Option<ScalarSchema> {
     match model_type {
         "EString" => Some(ScalarSchema::Text { domain: None }),
         "EBoolean" => Some(ScalarSchema::Boolean),
@@ -487,7 +492,8 @@ pub(super) fn schema(model_type: &str, modern: bool) -> Option<ScalarSchema> {
                 .filter_map(|line| line.split_once('\t'))
                 .filter(|(kind, value)| {
                     *kind == domain
-                        && (modern
+                        && (*value != "Version8_5_4" || profile == EditingProfile::V854)
+                        && (profile.modern()
                             || !matches!(
                                 *value,
                                 "Version8_5_1"
@@ -534,5 +540,34 @@ pub(super) fn nested_type(
             Some("EBoolean")
         }
         _ => None,
+    }
+}
+
+#[cfg(test)]
+mod profile_tests {
+    use super::*;
+    use crate::project::build::PlatformVersion;
+    #[test]
+    fn compatibility_values_follow_platform_series_not_build_number() {
+        for (version, expected, latest) in [
+            ("8.3.27.1859", "8.3.27", false),
+            ("8.5.1.1150", "8.5.1", false),
+            ("8.5.4", "8.5.4", true),
+            ("8.5.4.2072", "8.5.4", true),
+            ("8.5.4.2073", "8.5.4", true),
+        ] {
+            let version = PlatformVersion::parse(version).unwrap();
+            let profile = EditingProfile::for_platform(Some(&version));
+            assert_eq!(profile.name(), expected);
+            let ScalarSchema::Enum { values, .. } = schema("CompatibilityMode", profile).unwrap()
+            else {
+                panic!()
+            };
+            assert_eq!(values.iter().any(|value| value == "Version8_5_4"), latest);
+            assert_eq!(
+                values.iter().any(|value| value == "Version8_5_1"),
+                profile.modern()
+            );
+        }
     }
 }

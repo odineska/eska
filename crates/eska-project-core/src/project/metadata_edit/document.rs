@@ -1,5 +1,6 @@
 //! Bind logical field addresses to one freshly parsed descriptor snapshot.
 
+use crate::project::metadata_edit::EditingProfile;
 use roxmltree::Node;
 use serde::{Deserialize, Serialize};
 
@@ -72,7 +73,7 @@ pub struct EditingDocument<'a> {
     pub id: &'a ObjectId,
     pub parent: Option<ObjectId>,
     pub predefined: bool,
-    pub modern: bool,
+    pub profile: EditingProfile,
 }
 
 impl EditingDocument<'_> {
@@ -125,7 +126,7 @@ impl EditingDocument<'_> {
                 });
                 continue;
             }
-            let kind = schema::field_type(&class, node, true, self.modern);
+            let kind = schema::field_type(&class, node, true, self.profile);
             self.visit(node, kind, &mut vec![step.clone()], &mut fields);
             if fields.len() == count {
                 read_only_properties.push(ReadOnlyProperty {
@@ -166,7 +167,7 @@ impl EditingDocument<'_> {
         }
         Ok(PropertyEditing {
             snapshot: snapshot(self.input),
-            profile: if self.modern { "8.5.1" } else { "8.3.27" },
+            profile: self.profile.name(),
             read_only_properties,
             fields,
         })
@@ -357,7 +358,7 @@ impl EditingDocument<'_> {
                 language: None,
             });
         }
-        if let Some(schema) = schema::scalar(node, model_type, self.modern) {
+        if let Some(schema) = schema::scalar(node, model_type, self.profile) {
             let value: String = node
                 .children()
                 .filter(Node::is_text)
@@ -390,7 +391,7 @@ impl EditingDocument<'_> {
             return;
         };
         for (child, step) in children(node) {
-            let kind = child_type(class, node, child, &path[0].key.name, self.modern);
+            let kind = child_type(class, node, child, &path[0].key.name, self.profile);
             path.push(step);
             self.visit(child, kind, path, fields);
             path.pop();
@@ -419,7 +420,7 @@ fn child_type<'a>(
     parent: Node<'_, '_>,
     child: Node<'_, '_>,
     root: &str,
-    modern: bool,
+    profile: EditingProfile,
 ) -> Option<&'a str> {
     if (super::references::target(class).is_some()
         && child.has_tag_name((schema::READABLE, "Item")))
@@ -437,7 +438,7 @@ fn child_type<'a>(
             return Some(super::choice_fields::DOMAIN);
         }
         super::choice_links::is_link(parent)
-            .then(|| schema::field_type(class, child, false, modern))
+            .then(|| schema::field_type(class, child, false, profile))
             .flatten()
     } else if class == "LocalStringMapEntry" && child.has_tag_name((schema::CORE, "content")) {
         Some("EString")
@@ -466,7 +467,7 @@ fn child_type<'a>(
     {
         Some(class)
     } else {
-        schema::field_type(class, child, false, modern)
+        schema::field_type(class, child, false, profile)
             .or_else(|| schema::nested_type(root, parent, child))
     }
 }
