@@ -11,12 +11,16 @@ use crate::{
 
 /// Create a committed eligible change for dry-run CLI contract checks.
 fn project() -> (TestDir, PathBuf) {
+    project_version("8.3.27.2325")
+}
+
+fn project_version(version: &str) -> (TestDir, PathBuf) {
     let fixture = repository();
     let root = fixture.0.join("project");
     fs::create_dir_all(root.join("src/CommonModules/Math/Ext")).expect("create source tree");
     fs::write(
         root.join("eska.toml"),
-        "[project]\ntype = 'configuration'\n[build]\nplatform_version = '8.3.27.2325'\n[vcs.workflow]\npreset = 'trunk'\n",
+        format!("[project]\ntype = 'configuration'\n[build]\nplatform_version = '{version}'\n[vcs.workflow]\npreset = 'trunk'\n"),
     )
     .expect("write project configuration");
     fs::write(root.join("src/Configuration.xml"), "<Configuration/>")
@@ -151,6 +155,11 @@ fn process_plan_and_snapshot_reject_stale_state_without_writing() {
 
 /// Install a fake paired ibcmd and Designer that exercises every pipeline transition.
 fn fake_platform(fixture: &TestDir) -> PathBuf {
+    fake_platform_version(fixture, "8.3.27.2325")
+}
+
+/// Model a selected platform release without hard-coding the runner compatibility policy.
+fn fake_platform_version(fixture: &TestDir, version: &str) -> PathBuf {
     let ibcmd = fixture.0.join("ibcmd");
     fs::write(
         &ibcmd,
@@ -176,6 +185,10 @@ exit 0
 "#,
     )
     .expect("write fake ibcmd");
+    let script = fs::read_to_string(&ibcmd)
+        .unwrap()
+        .replace("8.3.27.2325", version);
+    fs::write(&ibcmd, script).unwrap();
     let designer = fixture.0.join("1cv8");
     fs::write(
         &designer,
@@ -295,6 +308,8 @@ fn assert_pipeline(
     let json: Value = serde_json::from_slice(&first.stdout).expect("build JSON");
     assert_eq!(json["status"], "built");
     assert_eq!(json["validation"], "metadata_bsl_applicability");
+    assert_eq!(json["runtime_verified"], false);
+    assert_eq!(json["requires_safe_mode_disabled"], true);
     assert_eq!(
         fs::read(&output_path).expect("artifact"),
         b"extension-artifact"
@@ -421,6 +436,84 @@ fn failed_patch_component_keeps_sources_and_previous_artifact() {
                         .to_string_lossy()
                         .starts_with(".eska-patch-")
                 }));
+            }
+        }
+    }
+}
+
+/// A new build is accepted through the same required operations, rather than a release allowlist.
+#[test]
+fn patch_checks_capabilities_across_platform_releases() {
+    for version in ["8.3.27.2342", "8.5.4.2072", "8.5.4.9999"] {
+        let (_fixture, root) = project_version(version);
+        let platform = TestDir::new();
+        let ibcmd = fake_platform_version(&platform, version);
+        assert_pipeline(&root, &platform, &ibcmd, "eska-build");
+    }
+}
+
+/// Missing required operations and a missing Designer never publish or leave owned staging.
+#[test]
+fn patch_platform_capability_failures_do_not_publish() {
+    let (_fixture, root) = project();
+    for missing in [
+        "designer",
+        "designer-result",
+        "extension create",
+        "config check",
+        "config apply",
+        "config save",
+    ] {
+        let platform = TestDir::new();
+        let ibcmd = fake_platform(&platform);
+        if missing == "designer" {
+            fs::remove_file(platform.0.join("1cv8")).unwrap();
+        } else if missing == "designer-result" {
+            let designer = platform.0.join("1cv8");
+            let script = fs::read_to_string(&designer)
+                .unwrap()
+                .replace("printf '0'", "printf '101'");
+            fs::write(designer, script).unwrap();
+        } else {
+            let script = fs::read_to_string(&ibcmd).unwrap().replace(
+                "last=",
+                &format!("if [ \"$1 $2\" = \"{missing}\" ]; then echo missing-capability >&2; exit 1; fi\nlast="),
+            );
+            fs::write(&ibcmd, script).unwrap();
+        }
+        for locale in ["ru", "en"] {
+            let output_path = platform.0.join("failed.cfe");
+            let output = Command::new(owner_binary("eska-build"))
+                .current_dir(&root)
+                .args(["--lang", locale, "patch", "--format", "json", "--ibcmd"])
+                .arg(&ibcmd)
+                .arg("--output")
+                .arg(&output_path)
+                .output()
+                .unwrap();
+            assert_eq!(output.status.code(), Some(1), "{missing}: {output:?}");
+            let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+            assert_eq!(
+                document["error"]["code"],
+                if missing == "designer-result" {
+                    "validation"
+                } else {
+                    "tool"
+                },
+                "{output:?}"
+            );
+            assert!(!output_path.exists());
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            assert!(stderr.contains("[8.3.27.2325]"), "{stderr}");
+            assert!(fs::read_dir(&platform.0).unwrap().all(|entry| {
+                !entry
+                    .unwrap()
+                    .file_name()
+                    .to_string_lossy()
+                    .starts_with(".eska-patch-")
+            }));
+            if missing != "designer" && missing != "designer-result" {
+                assert!(stderr.contains("missing-capability"), "{stderr}");
             }
         }
     }
