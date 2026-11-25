@@ -280,8 +280,12 @@ fn write_plan(
     let state = mark_pending(&target.state, confirmation.as_bytes())?;
 
     progress(Stage::Import);
-    match plan.mode {
-        Mode::Initialize => target.import_full(source)?,
+    let apply_arguments = match plan.mode {
+        Mode::Initialize => {
+            target.import_full(source)?;
+            // The confirmed full import already authorizes restructuring the test database.
+            vec![OsString::from("--force")]
+        }
         Mode::Incremental => {
             let (arguments, input) = partial.ok_or(ApplyError::StalePreview)?;
             target.command(
@@ -291,11 +295,12 @@ fn write_plan(
                 input,
                 Stage::Import,
             )?;
+            Vec::new()
         }
         Mode::Unchanged | Mode::Unsupported => return Err(ApplyError::StalePreview),
-    }
+    };
     progress(Stage::Apply);
-    let applied = target.command(&["apply"], &[], None, None, Stage::Apply)?;
+    let applied = target.command(&["apply"], &apply_arguments, None, None, Stage::Apply)?;
     let generation = target.applied_generation(&applied)?;
     let document = Baseline {
         generation: generation.clone(),

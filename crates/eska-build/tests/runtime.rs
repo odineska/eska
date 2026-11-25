@@ -54,6 +54,14 @@ case "$1:$2:$3" in
       printf '0123456789012345678901234567890123456789\n'
     fi ;;
   infobase:config:apply)
+    if test -f record-apply-arguments; then printf '%s\n' "$@" > apply-arguments; fi
+    if test -f require-restructuring-confirmation; then
+      confirmed=no
+      for argument in "$@"; do
+        if test "$argument" = --force; then confirmed=yes; fi
+      done
+      test "$confirmed" = yes || exit 255
+    fi
     if test -f pause-apply; then
       touch apply-ready
       exec sleep 30
@@ -95,6 +103,45 @@ fn initialize(root: &Path) {
             .0
             .status
             .success()
+    );
+}
+
+#[test]
+fn full_restructuring_requires_the_reviewed_initialize_plan() {
+    let directory = TestDir::new();
+    let root = &directory.0;
+    let module = prepare(root);
+    let arguments = root.join("apply-arguments");
+    let needs_confirmation = root.join("require-restructuring-confirmation");
+    fs::write(root.join("record-apply-arguments"), "").unwrap();
+    fs::write(&needs_confirmation, "").unwrap();
+
+    let (output, preview) = apply(root, "en-US", &["--initialize"]);
+    assert!(output.status.success(), "{preview}");
+    assert_eq!(preview["plan"]["mode"], "initialize");
+    assert!(!arguments.exists());
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, applied) = apply(root, "en-US", &["--initialize", "--confirm", token]);
+    assert!(output.status.success(), "{applied}");
+    assert!(
+        fs::read_to_string(&arguments)
+            .unwrap()
+            .lines()
+            .any(|argument| argument == "--force")
+    );
+
+    fs::remove_file(needs_confirmation).unwrap();
+    fs::write(module, "A = 2;").unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "incremental");
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, applied) = apply(root, "en-US", &["--confirm", token]);
+    assert!(output.status.success(), "{applied}");
+    assert!(
+        !fs::read_to_string(arguments)
+            .unwrap()
+            .lines()
+            .any(|argument| argument == "--force")
     );
 }
 
