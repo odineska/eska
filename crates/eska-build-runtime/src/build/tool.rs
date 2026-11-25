@@ -416,15 +416,32 @@ impl Ibcmd {
         path.set_file_name(filename);
         program
     }
-    /// Discover `ibcmd` and require the exact project platform version.
+    /// Discover `ibcmd` for a project series or an exact platform request.
     ///
     /// Explicit CLI values take precedence over environment values. Distrobox is
     /// considered only when its container is explicitly configured.
     ///
     /// # Errors
     /// Returns a structured error when an override is unsafe, the executable is
-    /// unavailable, its version cannot be read, or the exact version differs.
+    /// unavailable, its version cannot be read, or no installed build matches.
     pub fn discover(expected: &PlatformVersion, options: &ToolOptions) -> Result<Self, ToolError> {
+        if expected.is_series() && options.explicit_ibcmd().is_none() {
+            let installed = Self::installed(options)?;
+            if let Some(platform) = installed
+                .iter()
+                .find(|platform| expected.matches_installation(platform.version()))
+            {
+                return Ok(Self::from_installation(platform.clone(), options));
+            }
+            return Err(ToolError::SeriesNotFound {
+                expected: expected.clone(),
+                available: installed
+                    .into_iter()
+                    .map(|platform| platform.version)
+                    .collect(),
+            });
+        }
+
         let arch = options
             .platform_arch
             .clone()
@@ -473,31 +490,38 @@ impl Ibcmd {
             }
         };
 
-        let output = probe_runner(&runner, &["--version".into()], options)?;
-        if !output.status.success() {
-            return Err(ToolError::VersionCommandFailed {
-                source,
-                stderr: String::from_utf8_lossy(&output.stderr).trim().to_owned(),
-            });
-        }
-        let version = parse_version(&output.stdout, &output.stderr)
-            .ok_or_else(|| ToolError::VersionUnreadable(source.clone()))?;
-        if version != *expected {
+        let platform = platform_from_runner(&runner, source, options)?;
+        if !expected.matches_installation(platform.version()) {
             return Err(ToolError::VersionMismatch {
                 expected: expected.clone(),
-                actual: version,
-                source,
+                actual: platform.version,
+                source: Box::new(platform.source),
             });
         }
-        Ok(Self {
+        Ok(Self::from_installation(platform, options))
+    }
+
+    fn from_installation(platform: InstalledPlatform, options: &ToolOptions) -> Self {
+        let runner = match &platform.source {
+            ToolSource::Explicit(path) | ToolSource::Path(path) | ToolSource::Standard(path) => {
+                Runner::Host(path.clone())
+            }
+            ToolSource::Distrobox { container, path } => Runner::Distrobox {
+                container: container.clone(),
+                path: path.clone(),
+            },
+        };
+        #[cfg(not(unix))]
+        let _ = options;
+        Self {
             #[cfg(unix)]
             cancellation: Arc::new(Cancellation::default()),
             #[cfg(unix)]
             outer_cancellation: options.cancellation.clone(),
             runner,
-            source,
-            version,
-        })
+            source: platform.source,
+            version: platform.version,
+        }
     }
 
     /// Scan platform installations available through the effective runner.
@@ -749,6 +773,10 @@ pub enum ToolError {
         expected: PlatformVersion,
         standard: PathBuf,
     },
+    SeriesNotFound {
+        expected: PlatformVersion,
+        available: Vec<PlatformVersion>,
+    },
     Run(io::Error),
     VersionCommandFailed {
         source: ToolSource,
@@ -758,7 +786,7 @@ pub enum ToolError {
     VersionMismatch {
         expected: PlatformVersion,
         actual: PlatformVersion,
-        source: ToolSource,
+        source: Box<ToolSource>,
     },
 }
 
@@ -779,7 +807,7 @@ fn scan_host(arch: &str, options: &ToolOptions) -> Result<Vec<InstalledPlatform>
             let Some(_) = entry
                 .file_name()
                 .to_str()
-                .and_then(|value| PlatformVersion::parse(value).ok())
+                .and_then(|value| PlatformVersion::parse_exact(value).ok())
             else {
                 continue;
             };
@@ -842,7 +870,7 @@ fn scan_distrobox(
             .parent()
             .and_then(Path::file_name)
             .and_then(OsStr::to_str)
-            .and_then(|value| PlatformVersion::parse(value).ok())
+            .and_then(|value| PlatformVersion::parse_exact(value).ok())
         else {
             continue;
         };
@@ -1205,7 +1233,7 @@ fn parse_version(stdout: &[u8], stderr: &[u8]) -> Option<PlatformVersion> {
         .find_map(|token| {
             let token = token
                 .trim_matches(|character: char| !character.is_ascii_digit() && character != '.');
-            PlatformVersion::parse(token).ok()
+            PlatformVersion::parse_exact(token).ok()
         })
 }
 

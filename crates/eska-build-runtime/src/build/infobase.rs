@@ -10,7 +10,7 @@ use std::{
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
-use super::BuildPlan;
+use super::{BuildPlan, PlatformVersion};
 
 const OWNER_FILE: &str = "owner";
 const OWNER_MARKER: &[u8] = b"eska-managed-infobase-v1\n";
@@ -63,9 +63,10 @@ impl<'a> LockedInfobase<'a> {
 
     pub(super) fn prepare(
         self,
+        platform_version: &PlatformVersion,
         base_configuration: Option<&Path>,
     ) -> Result<ManagedInfobase, ManagedInfobaseError> {
-        let state = StateDocument::capture(self.plan, base_configuration)?;
+        let state = StateDocument::capture(platform_version, base_configuration)?;
         let reusable = read_state(&self.root).is_some_and(|saved| saved == state)
             && fs::symlink_metadata(self.root.join("data"))
                 .is_ok_and(|metadata| metadata.file_type().is_dir());
@@ -281,12 +282,12 @@ struct StateDocument {
 impl StateDocument {
     /// Capture every input that changes the reusable infobase contents.
     fn capture(
-        plan: &BuildPlan,
+        platform_version: &PlatformVersion,
         base_configuration: Option<&Path>,
     ) -> Result<Self, ManagedInfobaseError> {
         Ok(Self {
             schema_version: 1,
-            platform_version: plan.platform_version().as_str().to_owned(),
+            platform_version: platform_version.as_str().to_owned(),
             base_configuration_sha256: base_configuration.map(file_checksum).transpose()?,
         })
     }

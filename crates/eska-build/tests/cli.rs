@@ -74,6 +74,100 @@ fn command_at(binary: &Path, root: &Path, config: &Path, locale: &str) -> Comman
     command
 }
 
+#[test]
+fn build_reports_the_installed_build_for_a_series_requirement() {
+    let fixture = support::TestDir::new();
+    let project = project(&fixture.0.join("series"), ProjectType::Configuration);
+    let binary = ibcmd_fixture::executable(&repository());
+    let result = command(project.root(), &fixture.0.join("config"), "en-US")
+        .args([
+            "build",
+            "--format",
+            "json",
+            "--platform-version",
+            "8.3.27",
+            "--ibcmd",
+        ])
+        .arg(binary)
+        .output()
+        .unwrap();
+    let report = document(&result, true);
+    assert_eq!(report["platform"]["version"], "8.3.27.2325");
+}
+
+#[cfg(unix)]
+#[test]
+fn distrobox_resolves_series_numerically_and_respects_an_exact_pin() {
+    use std::os::unix::fs::PermissionsExt as _;
+
+    let fixture = support::TestDir::new();
+    let project = project(&fixture.0.join("series"), ProjectType::Configuration);
+    let bin = fixture.0.join("bin");
+    fs::create_dir(&bin).unwrap();
+    let distrobox = bin.join("distrobox");
+    fs::write(
+        &distrobox,
+        r#"#!/bin/sh
+while [ "$#" -gt 0 ] && [ "$1" != -- ]; do shift; done
+[ "$#" -gt 1 ] || exit 2
+shift
+[ "$1" = sh ] && [ "$2" = -c ] && shift 5
+case "$1" in
+  find) printf '%s\n' /opt/1cv8/arm64/8.5.4.10000/ibcmd /opt/1cv8/arm64/8.5.5.1/ibcmd /opt/1cv8/arm64/8.5.4.999/ibcmd ;;
+  /opt/1cv8/arm64/*/ibcmd) version=${1%/ibcmd}; printf '%s\n' "${version##*/}" ;;
+  *) exit 2 ;;
+esac
+"#,
+    )
+    .unwrap();
+    fs::set_permissions(distrobox, fs::Permissions::from_mode(0o755)).unwrap();
+
+    for (requested, found) in [("8.5.4", "8.5.4.10000"), ("8.5.4.999", "8.5.4.999")] {
+        let mut previous = None;
+        for locale in ["ru-RU", "en-US"] {
+            let output = command(project.root(), &fixture.0.join("config"), locale)
+                .env("PATH", &bin)
+                .args([
+                    "build",
+                    "--dry-run",
+                    "--format=json",
+                    "--distrobox=box",
+                    "--platform-arch=arm64",
+                    "--platform-version",
+                    requested,
+                ])
+                .output()
+                .unwrap();
+            let report = document(&output, true);
+            let platform = &report["projects"][0]["platform"];
+            assert_eq!(platform["required_version"], requested);
+            assert_eq!(platform["found_version"], found);
+            if let Some(previous) = previous {
+                assert_eq!(report, previous);
+            }
+            previous = Some(report);
+        }
+    }
+
+    let output = command(project.root(), &fixture.0.join("config"), "en-US")
+        .env("PATH", &bin)
+        .args([
+            "build",
+            "--dry-run",
+            "--distrobox=box",
+            "--platform-arch=arm64",
+            "--platform-version=8.3.27",
+        ])
+        .output()
+        .unwrap();
+    assert_eq!(output.status.code(), Some(1));
+    let message = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        message.contains("8.3.27") && message.contains("8.5.4.10000"),
+        "{message}"
+    );
+}
+
 /// Only build and VCS executables are installed; imports still preserve consent and source identity.
 #[test]
 fn import_works_with_only_build_and_vcs_installed() {

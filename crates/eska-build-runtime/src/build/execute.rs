@@ -7,7 +7,8 @@ use std::{
 };
 
 use super::{
-    ArtifactType, BuildPlan, Ibcmd, ManagedInfobaseError, ManifestError, ProcessStream, RunError,
+    ArtifactType, BuildPlan, Ibcmd, ManagedInfobaseError, ManifestError, PlatformVersion,
+    ProcessStream, RunError,
     base_configuration::{self, PreparedBase},
     infobase::{LockedInfobase, ManagedInfobase},
     manifest,
@@ -28,11 +29,17 @@ pub enum BuildStage {
 pub struct BuildResult {
     output: PathBuf,
     manifest: Option<PathBuf>,
+    platform_version: PlatformVersion,
     duration: Duration,
     tool_output: Vec<u8>,
 }
 
 impl BuildResult {
+    #[must_use]
+    pub const fn platform_version(&self) -> &PlatformVersion {
+        &self.platform_version
+    }
+
     #[must_use]
     pub fn output(&self) -> &Path {
         &self.output
@@ -202,6 +209,7 @@ where
     Ok(BuildResult {
         output: plan.output().to_owned(),
         manifest: manifest_path,
+        platform_version: ibcmd.version().clone(),
         duration: started.elapsed(),
         tool_output: artifact.tool_output,
     })
@@ -289,7 +297,10 @@ where
     F: FnMut(BuildStage, ProcessStream, &[u8]),
 {
     let infobase = lease
-        .prepare(base.as_ref().map(|base| base.path.as_path()))
+        .prepare(
+            ibcmd.version(),
+            base.as_ref().map(|base| base.path.as_path()),
+        )
         .map_err(BuildError::ManagedInfobase)?;
     let mut created = None;
     if infobase.needs_creation() {

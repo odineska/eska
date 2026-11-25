@@ -21,7 +21,7 @@ pub fn present_tool_error(error: &ToolError, localizer: &Localizer) -> String {
     present_tool_error_with_links(error, localizer, false)
 }
 
-/// Present platform discovery and exact-version failures shared by platform consumers.
+/// Present platform discovery and version failures shared by platform consumers.
 pub fn present_tool_error_with_links(
     error: &ToolError,
     localizer: &Localizer,
@@ -70,6 +70,29 @@ pub fn present_tool_error_with_links(
                 (
                     "path",
                     LocalizationValue::Text(&path_output::render(standard, hyperlinks)),
+                ),
+            ],
+        ),
+        ToolError::SeriesNotFound {
+            expected,
+            available,
+        } => localizer.format(
+            if available.is_empty() {
+                "build-series-missing-empty"
+            } else {
+                "build-series-missing"
+            },
+            &[
+                ("version", LocalizationValue::Text(expected.as_str())),
+                (
+                    "available",
+                    LocalizationValue::Text(
+                        &available
+                            .iter()
+                            .map(crate::project::build::PlatformVersion::as_str)
+                            .collect::<Vec<_>>()
+                            .join(", "),
+                    ),
                 ),
             ],
         ),

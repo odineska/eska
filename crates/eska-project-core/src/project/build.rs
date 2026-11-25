@@ -8,46 +8,95 @@ use std::{
 pub const DEFAULT_ARTIFACTS_DIRECTORY: &str = "build";
 
 #[derive(Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PlatformVersion(String);
+pub struct PlatformVersion {
+    text: String,
+    series: [u32; 3],
+    build: Option<u32>,
+}
 
 impl PlatformVersion {
-    /// Parse an exact four-component numeric 1C platform version.
+    /// Parse a 1C platform series or an exact installed version.
     ///
     /// # Errors
-    /// Returns the original value when it is not in `major.minor.patch.build` form.
+    /// Returns the original value unless it contains three or four numeric components.
     pub fn parse(value: &str) -> Result<Self, BuildSettingsError> {
-        let components: Vec<_> = value.split('.').collect();
-        if components.len() != 4
-            || components.iter().any(|component| {
-                component.is_empty()
-                    || !component.bytes().all(|byte| byte.is_ascii_digit())
-                    || component.parse::<u32>().is_err()
-            })
-        {
+        let invalid = || BuildSettingsError::InvalidPlatformVersion {
+            value: value.to_owned(),
+        };
+        let mut components = value.split('.').map(|part| {
+            if part.bytes().all(|byte| byte.is_ascii_digit()) {
+                part.parse::<u32>().ok()
+            } else {
+                None
+            }
+        });
+        let series = [
+            components.next().flatten().ok_or_else(invalid)?,
+            components.next().flatten().ok_or_else(invalid)?,
+            components.next().flatten().ok_or_else(invalid)?,
+        ];
+        let build = if let Some(build) = components.next() {
+            Some(build.ok_or_else(invalid)?)
+        } else {
+            None
+        };
+        if components.next().is_some() {
+            return Err(invalid());
+        }
+        Ok(Self {
+            text: value.to_owned(),
+            series,
+            build,
+        })
+    }
+
+    /// Parse the full version reported by an installed platform.
+    ///
+    /// # Errors
+    /// Returns the original value when it does not specify a build number.
+    pub fn parse_exact(value: &str) -> Result<Self, BuildSettingsError> {
+        let version = Self::parse(value)?;
+        if version.is_series() {
             return Err(BuildSettingsError::InvalidPlatformVersion {
                 value: value.to_owned(),
             });
         }
-        Ok(Self(value.to_owned()))
+        Ok(version)
+    }
+
+    #[must_use]
+    pub const fn is_series(&self) -> bool {
+        self.build.is_none()
+    }
+
+    #[must_use]
+    pub const fn series_components(&self) -> [u32; 3] {
+        self.series
+    }
+
+    /// A series accepts any build of that series. An exact request pins the build.
+    #[must_use]
+    pub fn matches_installation(&self, actual: &Self) -> bool {
+        !actual.is_series()
+            && if self.is_series() {
+                self.series_components() == actual.series_components()
+            } else {
+                self == actual
+            }
     }
 
     #[must_use]
     pub fn as_str(&self) -> &str {
-        &self.0
+        &self.text
     }
 }
 
 impl Ord for PlatformVersion {
     fn cmp(&self, other: &Self) -> Ordering {
-        self.0
-            .split('.')
-            .map(|part| part.parse::<u32>().unwrap_or_default())
-            .cmp(
-                other
-                    .0
-                    .split('.')
-                    .map(|part| part.parse::<u32>().unwrap_or_default()),
-            )
+        self.series
+            .cmp(&other.series)
+            .then_with(|| self.build.cmp(&other.build))
+            .then_with(|| self.text.cmp(&other.text))
     }
 }
 
@@ -154,20 +203,36 @@ mod tests {
     use super::*;
 
     #[test]
-    /// Accept only the exact numeric version shape used by 1C distributions.
-    fn platform_version_requires_four_numeric_components() {
+    fn platform_request_accepts_a_series_or_an_exact_build() {
         assert_eq!(
             PlatformVersion::parse("8.3.27.2325")
                 .expect("valid version")
                 .as_str(),
             "8.3.27.2325"
         );
-        for value in ["", "8.3", "8.3.27.x", "8.3.27.2325.1", " 8.3.27.2325"] {
+        for value in [
+            "",
+            "8.3",
+            "8.3.27.x",
+            "8.3.27.2325.1",
+            " 8.3.27.2325",
+            "8.+5.4",
+        ] {
             assert!(matches!(
                 PlatformVersion::parse(value),
                 Err(BuildSettingsError::InvalidPlatformVersion { .. })
             ));
         }
+        let series = PlatformVersion::parse("8.5.4").expect("series");
+        let first_build = PlatformVersion::parse_exact("8.5.4.2072").expect("exact version");
+        let next_build = PlatformVersion::parse_exact("8.5.4.2073").expect("exact version");
+        let other_series = PlatformVersion::parse_exact("8.5.1.1150").expect("exact version");
+        assert!(series.matches_installation(&first_build));
+        assert!(series.matches_installation(&next_build));
+        assert!(!series.matches_installation(&other_series));
+        assert!(!first_build.matches_installation(&next_build));
+        assert!(!series.matches_installation(&series));
+        assert!(PlatformVersion::parse_exact("8.5.4").is_err());
     }
 
     #[test]

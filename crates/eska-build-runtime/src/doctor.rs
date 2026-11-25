@@ -124,7 +124,7 @@ fn tool_failure(error: &ToolError) -> (&'static str, Option<String>, Option<&'st
         ToolError::DistroboxContainerRequired => ("container-required", None, Some("distrobox")),
         ToolError::Scan { .. } => ("scan-failed", None, Some("host")),
         ToolError::ScanCommandFailed { .. } => ("scan-failed", None, Some("distrobox")),
-        ToolError::NotFound { .. } => ("not-found", None, None),
+        ToolError::NotFound { .. } | ToolError::SeriesNotFound { .. } => ("not-found", None, None),
         ToolError::Run(_) => ("run-failed", None, None),
         ToolError::VersionCommandFailed { source, .. } => {
             ("version-command-failed", None, Some(source.runner_kind()))

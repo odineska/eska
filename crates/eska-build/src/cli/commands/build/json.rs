@@ -168,7 +168,7 @@ impl BuildDocument {
                 path_encoding,
             },
             platform: PlatformDocument {
-                version: plan.platform_version().as_str().to_owned(),
+                version: result.platform_version().as_str().to_owned(),
             },
             duration_ms: result.duration().as_millis(),
         }
@@ -254,7 +254,7 @@ impl WorkspaceBuildEntry {
                 path_encoding,
             }),
             platform: PlatformDocument {
-                version: plan.platform_version().as_str().to_owned(),
+                version: result.platform_version().as_str().to_owned(),
             },
             duration_ms: Some(result.duration().as_millis()),
             error: None,

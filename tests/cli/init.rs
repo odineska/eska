@@ -300,7 +300,7 @@ fn standalone_init_validates_the_selected_platform_before_writing() {
             let error = failure(&output, code, locale);
             assert!(error.contains(if code == 2 {
                 if locale == "ru" {
-                    "четырёх чисел"
+                    "линейку платформы"
                 } else {
                     "four numeric"
                 }
