@@ -199,6 +199,42 @@ fn full_file_apply_records_the_new_generation_only_if_the_imported_contents_matc
     assert_eq!(preview["plan"]["inspection"]["pending_apply"], true);
 }
 
+#[test]
+fn full_file_apply_without_checksum_does_not_save_an_unverified_generation() {
+    for checksum in [None, Some("invalid checksum")] {
+        let directory = TestDir::new();
+        let root = &directory.0;
+        prepare(root);
+        for file in [root.join("ibcmd"), root.join(".eska/settings_local.toml")] {
+            let content = fs::read_to_string(&file).unwrap();
+            fs::write(file, content.replace("8.3.27.2342", "8.5.4.3000")).unwrap();
+        }
+        if let Some(checksum) = checksum {
+            fs::write(root.join("main-checksum"), checksum).unwrap();
+        }
+        let original = "0123456789012345678901234567890123456789";
+        fs::write(
+            root.join("apply-generation-output"),
+            format!("[INFO] Configuration generation is created: {original}\n"),
+        )
+        .unwrap();
+        // A matching observed generation needs no checksum fallback.
+        initialize(root);
+        fs::write(root.join("next-generation"), "b".repeat(40)).unwrap();
+        let (_, preview) = apply(root, "en-US", &["--initialize"]);
+        let token = preview["plan"]["confirmation"].as_str().unwrap();
+        let (output, error) = apply(root, "ru-RU", &["--initialize", "--confirm", token]);
+        assert!(!output.status.success(), "{error}");
+        assert_eq!(error["error"]["code"], "stale_preview");
+        let (_, pending) = apply(root, "en-US", &["--initialize"]);
+        assert_eq!(
+            pending["plan"]["inspection"]["baseline_generation"],
+            original
+        );
+        assert_eq!(pending["plan"]["inspection"]["pending_apply"], true);
+    }
+}
+
 fn probe(root: &Path, language: &str, input: Option<&[u8]>) -> (Output, Value) {
     let mut command = Command::new(env!("CARGO_BIN_EXE_eska-build"));
     command

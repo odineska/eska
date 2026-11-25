@@ -304,9 +304,10 @@ fn write_plan(
     };
     progress(Stage::Apply);
     let applied = target.command(&["apply"], &apply_arguments, None, None, Stage::Apply)?;
-    let generation = match imported_checksum {
-        Some(checksum) => target.initialized_file_generation(&applied, &checksum)?,
-        None => target.applied_generation(&applied)?,
+    let generation = if plan.mode == Mode::Initialize && target.requires_file_generation_check() {
+        target.initialized_file_generation(&applied, imported_checksum.as_deref())?
+    } else {
+        target.applied_generation(&applied)?
     };
     let document = Baseline {
         generation: generation.clone(),
@@ -606,11 +607,14 @@ impl Target {
         }
     }
 
+    fn requires_file_generation_check(&self) -> bool {
+        matches!(self.connection, Connection::File(_))
+            && self.extension.is_none()
+            && self.platform.version().series_components() >= [8, 5, 4]
+    }
+
     fn imported_configuration_checksum(&self) -> Result<Option<String>, ApplyError> {
-        if !matches!(self.connection, Connection::File(_))
-            || self.extension.is_some()
-            || self.platform.version().series_components() < [8, 5, 4]
-        {
+        if !self.requires_file_generation_check() {
             return Ok(None);
         }
         self.native_configuration_checksum(&[])
@@ -635,7 +639,7 @@ impl Target {
     fn initialized_file_generation(
         &self,
         output: &[u8],
-        imported_checksum: &str,
+        imported_checksum: Option<&str>,
     ) -> Result<String, ApplyError> {
         let generation = self.generation()?;
         if ibcmd_generation::from_apply_output(output, false).as_deref() == Some(&generation) {
@@ -643,6 +647,7 @@ impl Target {
         }
         // Restructuring can publish a new generation after ibcmd logs the imported one.
         // Bind the observed generation to both configuration states before saving it.
+        let imported_checksum = imported_checksum.ok_or(ApplyError::StalePreview)?;
         if self.native_configuration_checksum(&[])?.as_deref() != Some(imported_checksum)
             || self
                 .native_configuration_checksum(&["--db".into()])?
