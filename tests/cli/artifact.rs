@@ -1336,3 +1336,100 @@ fn human_results_preserve_plain_paths_and_markers_in_both_locales() {
         assert!(!stderr.contains('\x1b'));
     }
 }
+
+/// Standalone export is shared by supported releases and never creates an infobase.
+#[test]
+fn standalone_unpack_exports_all_artifacts_without_infobase() {
+    for version in ["8.5.4.2072", "8.5.4.3000"] {
+        for (extension, tag) in [
+            ("cf", "Configuration"),
+            ("cfe", "Configuration"),
+            ("epf", "ExternalDataProcessor"),
+            ("erf", "ExternalReport"),
+        ] {
+            let fixture = TestDir::new();
+            let input = artifact(&fixture.0, extension, tag, "Incoming", UUID);
+            let log = fixture.0.join("ibcmd.log");
+            let destination = fixture.0.join("unpacked");
+            let output = Command::new(
+                Path::new(env!("CARGO_BIN_EXE_eska"))
+                    .with_file_name(format!("eska-build{}", std::env::consts::EXE_SUFFIX)),
+            )
+            .current_dir(&fixture.0)
+            .env("FAKE_IBCMD_VERSION", version)
+            .env("FAKE_IBCMD_STANDALONE_FILES", "1")
+            .env("FAKE_IBCMD_LOG", &log)
+            .args(["--lang", "en", "unpack"])
+            .arg(input)
+            .arg(&destination)
+            .args(["--platform-version", version, "--format", "json", "--ibcmd"])
+            .arg(super::build::fake_ibcmd(&fixture))
+            .output()
+            .unwrap();
+            assert!(output.status.success(), "{output:?}");
+            assert!(destination.is_dir());
+            if matches!(extension, "epf" | "erf") {
+                assert!(destination.join("incoming/Ext").is_dir());
+            }
+            let calls = fs::read_to_string(log).unwrap();
+            assert!(
+                calls
+                    .lines()
+                    .any(|line| line.starts_with("config export ") && line.contains("--file=")),
+                "{calls}"
+            );
+            assert!(!calls.contains("infobase create"), "{calls}");
+            assert!(!fixture.0.join(".eska/infobases").exists());
+        }
+    }
+}
+
+/// A CF rejected by standalone export retains the compatible load/export pipeline.
+#[test]
+fn standalone_cf_export_retries_only_the_owned_snapshot_via_infobase() {
+    for locale in ["ru", "en"] {
+        let fixture = TestDir::new();
+        let input = artifact(&fixture.0, "cf", "Configuration", "Incoming", UUID);
+        let original = fs::read(&input).unwrap();
+        let log = fixture.0.join("ibcmd.log");
+        let destination = fixture.0.join("unpacked");
+        let output = Command::new(
+            Path::new(env!("CARGO_BIN_EXE_eska"))
+                .with_file_name(format!("eska-build{}", std::env::consts::EXE_SUFFIX)),
+        )
+        .current_dir(&fixture.0)
+        .env("FAKE_IBCMD_VERSION", "8.5.4.2072")
+        .env("FAKE_IBCMD_LOG", &log)
+        .args(["--lang", locale, "unpack"])
+        .arg(&input)
+        .arg(&destination)
+        .args([
+            "--platform-version",
+            "8.5.4.2072",
+            "--format",
+            "json",
+            "--ibcmd",
+        ])
+        .arg(super::build::fake_ibcmd(&fixture))
+        .output()
+        .unwrap();
+        assert!(output.status.success(), "{output:?}");
+        assert!(destination.join("Configuration.xml").is_file());
+        assert_eq!(fs::read(input).unwrap(), original);
+        let calls = fs::read_to_string(log).unwrap();
+        let stages = calls
+            .lines()
+            .filter(|line| !line.starts_with("--version"))
+            .map(|line| line.split(" --").next().unwrap())
+            .collect::<Vec<_>>();
+        assert_eq!(
+            stages,
+            [
+                "config export",
+                "infobase create",
+                "infobase config load",
+                "infobase config export"
+            ]
+        );
+    }
+}

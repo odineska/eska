@@ -1,7 +1,7 @@
-//! Execute the verified 8.3 pipeline through the existing platform runner.
+//! Export native artifact snapshots through the existing platform runner.
 
 use crate::native_path;
-use std::{ffi::OsString, fs, path::Path};
+use std::{ffi::OsString, fs, io, path::Path};
 
 use super::{
     ArtifactError, Identity, PublicationError,
@@ -10,7 +10,7 @@ use super::{
     snapshot::{self, Snapshot},
 };
 use crate::build::{Ibcmd, ProcessStream};
-use eska_project_core::artifact::Staging;
+use eska_project_core::{artifact::Staging, project::ProjectType};
 
 /// An owned, unpacked artifact whose sources survive until publication or cancellation.
 pub struct PreparedArtifact {
@@ -57,24 +57,33 @@ impl PreparedArtifact {
         );
         let data = staging.path().join("infobase");
         let pid = staging.path().join("ibcmd.pid");
-        run(
-            tool,
-            &pid,
-            "create-infobase",
-            vec!["infobase".into(), "create".into(), option("--data=", &data)],
-            &mut output,
-        )?;
+        if !tool.supports_standalone_config_files() {
+            run(
+                tool,
+                &pid,
+                "create-infobase",
+                vec!["infobase".into(), "create".into(), option("--data=", &data)],
+                &mut output,
+            )?;
+        }
         export_sources(tool, &pid, &data, &snapshot, &export, &mut output)?;
         // External exports may replace a dotted filename's suffix with `.xml`.
         // Inspect the actual descriptor instead of predicting the platform's naming rules.
-        let (exported, identity) = if let Some(identity) = inspect_identity(&unpacked)? {
-            (&unpacked, identity)
-        } else {
-            let identity = inspect_identity(&export)?
-                .ok_or_else(|| ArtifactError::MissingDescriptor(export.clone()))?;
-            (&export, identity)
-        };
+        let (exported, (descriptor, identity)) =
+            if let Some(descriptor) = export_descriptor(&unpacked)? {
+                (&unpacked, descriptor)
+            } else {
+                let descriptor = export_descriptor(&export)?
+                    .ok_or_else(|| ArtifactError::MissingDescriptor(export.clone()))?;
+                (&export, descriptor)
+            };
         fs::rename(exported, &sources).map_err(|error| io_error(exported, error))?;
+        if matches!(
+            identity.project_type,
+            ProjectType::Processing | ProjectType::Report
+        ) {
+            complete_external_container(&sources.join(descriptor))?;
+        }
         let snapshot = snapshot::capture(&sources)?;
         Ok(Self {
             staging,
@@ -158,6 +167,34 @@ impl PreparedArtifact {
     }
 }
 
+/// Read only the real directory written by the platform.
+fn export_descriptor(directory: &Path) -> Result<Option<(OsString, Identity)>, ArtifactError> {
+    let metadata = fs::symlink_metadata(directory).map_err(|error| io_error(directory, error))?;
+    if !metadata.is_dir() {
+        return Err(ArtifactError::UnsafePath(directory.to_owned()));
+    }
+    eska_project_core::artifact::inspect_descriptor(directory).map_err(super::structural_error)
+}
+
+/// Native export omits empty external-object directories that native import requires.
+fn complete_external_container(descriptor: &Path) -> Result<(), ArtifactError> {
+    let object = descriptor.with_extension("");
+    ensure_export_directory(&object)?;
+    ensure_export_directory(&object.join("Ext"))
+}
+
+/// Validate each component before writing so an export cannot redirect directory creation.
+fn ensure_export_directory(path: &Path) -> Result<(), ArtifactError> {
+    match fs::symlink_metadata(path) {
+        Ok(metadata) if metadata.is_dir() => Ok(()),
+        Ok(_) => Err(ArtifactError::UnsafePath(path.to_owned())),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {
+            fs::create_dir(path).map_err(|error| io_error(path, error))
+        }
+        Err(error) => Err(io_error(path, error)),
+    }
+}
+
 /// Retain filesystem errors separately from the explicit cancellation branch.
 const fn publication_io(
     source: std::io::Error,
@@ -186,9 +223,74 @@ pub fn new_destination(destination: &Path) -> Result<std::path::PathBuf, Artifac
     }
 }
 
-/// Load CF into the isolated database because direct file export rejects some valid CFs.
-/// Extensions and external objects retain the platform's direct file export path.
+/// Export files directly on supported platforms; older CF export needs a loaded database.
 fn export_sources<F>(
+    tool: &Ibcmd,
+    pid: &Path,
+    data: &Path,
+    snapshot: &Path,
+    destination: &Path,
+    output: &mut F,
+) -> Result<(), ArtifactError>
+where
+    F: FnMut(ProcessStream, &[u8]),
+{
+    if tool.supports_standalone_config_files() {
+        let direct = run(
+            tool,
+            pid,
+            "export",
+            vec![
+                "config".into(),
+                "export".into(),
+                option("--data=", data),
+                option("--file=", snapshot),
+                native_path(destination).as_os_str().to_owned(),
+            ],
+            output,
+        );
+        let Err(ArtifactError::Platform {
+            output: direct_output,
+            ..
+        }) = direct
+        else {
+            return direct;
+        };
+        if snapshot
+            .extension()
+            .is_none_or(|extension| extension != "cf")
+        {
+            return Err(ArtifactError::Platform {
+                stage: "export",
+                output: direct_output,
+            });
+        }
+        // Valid CFs can still fail standalone export. Retry only this owned snapshot;
+        // cancellation/process failures never enter the compatibility pipeline.
+        if destination.exists() {
+            fs::remove_dir_all(destination).map_err(|error| io_error(destination, error))?;
+        }
+        let compatibility = run(
+            tool,
+            pid,
+            "create-infobase",
+            vec!["infobase".into(), "create".into(), option("--data=", data)],
+            output,
+        )
+        .and_then(|()| export_via_infobase(tool, pid, data, snapshot, destination, output));
+        return match compatibility {
+            Err(ArtifactError::Platform { stage, output }) => Err(ArtifactError::Platform {
+                stage,
+                output: format!("{direct_output}\n{output}"),
+            }),
+            result => result,
+        };
+    }
+    export_via_infobase(tool, pid, data, snapshot, destination, output)
+}
+
+/// Keep the compatible database pipeline shared by old platforms and failed CF file exports.
+fn export_via_infobase<F>(
     tool: &Ibcmd,
     pid: &Path,
     data: &Path,
@@ -283,6 +385,25 @@ mod tests {
             identity,
             snapshot,
         }
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn empty_external_export_cannot_create_a_container_through_a_symlink() {
+        use std::os::unix::fs::symlink;
+
+        let directory = TestDir::new();
+        let descriptor = directory.0.join("Object.xml");
+        let object = directory.0.join("Object");
+        let outside = directory.0.join("outside");
+        fs::create_dir(&outside).unwrap();
+        symlink(&outside, &object).unwrap();
+
+        assert!(matches!(
+            complete_external_container(&descriptor),
+            Err(ArtifactError::UnsafePath(path)) if path == object
+        ));
+        assert!(!outside.join("Ext").exists());
     }
 
     #[test]

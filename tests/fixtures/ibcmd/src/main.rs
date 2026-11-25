@@ -35,6 +35,9 @@ fn run(arguments: &[OsString]) -> Result<(), String> {
         [group, command, rest @ ..] if group == "config" && command == "import" => {
             import_configuration(rest);
         }
+        [group, command, rest @ ..] if group == "config" && command == "export" => {
+            export_configuration(rest)?;
+        }
         [group, command, rest @ ..] if group == "infobase" && command == "create" => {
             create_infobase(rest);
         }
@@ -82,9 +85,10 @@ fn export_configuration(arguments: &[OsString]) -> Result<(), String> {
         return Err("[ERROR] fake export failure".to_owned());
     }
     let source = if let Some(source) = option_path(arguments, "--file=") {
-        if source
-            .extension()
-            .is_some_and(|extension| extension == "cf")
+        if !env_flag("FAKE_IBCMD_STANDALONE_FILES")
+            && source
+                .extension()
+                .is_some_and(|extension| extension == "cf")
         {
             return Err("direct CF export is unsupported by this fixture".to_owned());
         }

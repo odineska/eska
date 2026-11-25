@@ -3,7 +3,7 @@
 mod identity;
 mod staging;
 
-pub use identity::{Identity, inspect_identity};
+pub use identity::{Identity, inspect_descriptor, inspect_identity};
 pub use staging::Staging;
 use std::{io, path::PathBuf};
 
