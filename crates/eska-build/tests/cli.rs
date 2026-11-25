@@ -234,6 +234,48 @@ fn distrobox_resolves_series_numerically_and_respects_an_exact_pin() {
 
 #[cfg(unix)]
 #[test]
+fn explicit_ibcmd_path_is_resolved_inside_the_selected_distrobox() {
+    let fixture = support::TestDir::new();
+    let project = project(&fixture.0.join("series"), ProjectType::Configuration);
+    let bin = fixture.0.join("bin");
+    fs::create_dir(&bin).unwrap();
+    prepare_series_distrobox(&bin);
+    let probes = fixture.0.join("probes");
+    let path = "/opt/1cv8/arm64/8.5.4.999/ibcmd";
+    let mut previous = None;
+
+    for locale in ["ru-RU", "en-US"] {
+        fs::write(&probes, "").unwrap();
+        let output = command(project.root(), &fixture.0.join("config"), locale)
+            .env("PATH", &bin)
+            .env("PROBE_LOG", &probes)
+            .args([
+                "build",
+                "--dry-run",
+                "--format=json",
+                "--distrobox=box",
+                "--platform-version=8.5.4",
+                "--ibcmd",
+                path,
+            ])
+            .output()
+            .unwrap();
+        let report = document(&output, true);
+        let platform = &report["projects"][0]["platform"];
+        assert_eq!(platform["runner"], "distrobox");
+        assert_eq!(platform["required_version"], "8.5.4");
+        assert_eq!(platform["found_version"], "8.5.4.999");
+        assert_eq!(fs::read_to_string(&probes).unwrap(), format!("{path}\n"));
+        assert!(output.stderr.is_empty(), "{:?}", output.stderr);
+        if let Some(previous) = previous {
+            assert_eq!(report, previous);
+        }
+        previous = Some(report);
+    }
+}
+
+#[cfg(unix)]
+#[test]
 fn series_selection_verifies_the_version_of_ibcmd_on_path() {
     use std::os::unix::fs::PermissionsExt as _;
 

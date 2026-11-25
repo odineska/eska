@@ -131,6 +131,7 @@ pub struct ToolOptions {
     distrobox: Option<String>,
     runner: RunnerPreference,
     project_local: bool,
+    ibcmd_in_container: bool,
 }
 
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -150,6 +151,7 @@ impl ToolOptions {
         distrobox: Option<String>,
     ) -> Self {
         Self {
+            ibcmd_in_container: ibcmd.is_some() && distrobox.is_some(),
             inventory_deadline: None,
             #[cfg(unix)]
             cancellation: None,
@@ -167,6 +169,7 @@ impl ToolOptions {
         Self {
             inventory_deadline: Some(std::time::Instant::now() + std::time::Duration::from_secs(5)),
             ibcmd: None,
+            ibcmd_in_container: false,
             runner: if container.is_some() {
                 RunnerPreference::Distrobox
             } else {
@@ -244,7 +247,8 @@ impl ToolOptions {
     }
 
     fn explicit_runner(&self, path: PathBuf) -> Result<(Runner, ToolSource), ToolError> {
-        if self.project_local
+        // Only a path paired with a selected container belongs to the container filesystem.
+        if self.ibcmd_in_container
             && let Some(container) = &self.distrobox
         {
             validate_component(container)
@@ -1533,5 +1537,21 @@ mod tests {
             assert!(validate_component(value).is_err());
         }
         assert!(validate_component("1c-ubuntu_env.1").is_ok());
+    }
+
+    #[test]
+    fn machine_container_default_does_not_reinterpret_an_explicit_host_path() {
+        let root = env::var_os("ESKA_TEST_ROOT").expect("ESKA_TEST_ROOT");
+        let directory = tempfile::tempdir_in(root).unwrap();
+        let path = directory.path().join("ibcmd");
+        std::fs::write(&path, "").unwrap();
+        let options = ToolOptions::new(Some(path.clone()), None, None).with_machine_defaults(
+            RunnerPreference::Distrobox,
+            None,
+            Some("default-box".into()),
+        );
+        let (runner, source) = options.explicit_runner(path.clone()).unwrap();
+        assert!(matches!(runner, Runner::Host(executable) if executable == path));
+        assert_eq!(source, ToolSource::Explicit(path));
     }
 }
