@@ -32,6 +32,9 @@ fn run(arguments: &[OsString]) -> Result<(), String> {
     log_invocation(arguments).map_err(|error| format!("log invocation: {error}"))?;
     match arguments {
         [command] if command == "--version" => print_version(),
+        [group, command, rest @ ..] if group == "config" && command == "import" => {
+            import_configuration(rest);
+        }
         [group, command, rest @ ..] if group == "infobase" && command == "create" => {
             create_infobase(rest);
         }

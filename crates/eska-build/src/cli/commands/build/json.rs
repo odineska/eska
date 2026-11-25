@@ -204,13 +204,12 @@ impl BuildPlanEntryDocument {
                 .plan
                 .base_configuration()
                 .map(BuildBaseDocument::new),
-            infobase: prepared
-                .plan
-                .recreates_infobase()
-                .then(|| BuildPlanInfobaseDocument {
-                    root: BuildPlanPathDocument::new(prepared.plan.infobase_root()),
-                    mode: "recreate",
-                }),
+            infobase: (prepared.plan.uses_managed_infobase(tool)
+                && prepared.plan.recreates_infobase())
+            .then(|| BuildPlanInfobaseDocument {
+                root: BuildPlanPathDocument::new(prepared.plan.infobase_root()),
+                mode: "recreate",
+            }),
             artifact: BuildPlanArtifactDocument {
                 r#type: prepared.plan.artifact_type().as_str(),
                 path: artifact_path,

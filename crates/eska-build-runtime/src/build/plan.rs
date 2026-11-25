@@ -3,7 +3,7 @@ use std::{
     path::{Component, Path, PathBuf},
 };
 
-use super::PlatformVersion;
+use super::{Ibcmd, PlatformVersion};
 use eska_project_core::application::LibrarySelection;
 
 /// Exactly one native base is selected for an external artifact.
@@ -212,6 +212,14 @@ impl BuildPlan {
     #[must_use]
     pub const fn base_configuration(&self) -> Option<&BaseConfiguration> {
         self.base_configuration.as_ref()
+    }
+
+    /// Whether execution needs a reusable infobase rather than standalone file import.
+    #[must_use]
+    pub fn uses_managed_infobase(&self, ibcmd: &Ibcmd) -> bool {
+        self.library_build.is_some()
+            || self.base_configuration.is_some()
+            || !ibcmd.supports_standalone_config_files()
     }
 
     #[must_use]

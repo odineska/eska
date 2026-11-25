@@ -341,7 +341,7 @@ fn dry_run_honors_selector_and_platform_override() {
     let config_before = fs::read(&manifest).expect("workspace config");
     let output = Command::new(env!("CARGO_BIN_EXE_eska"))
         .current_dir(&fixture.0)
-        .env("FAKE_IBCMD_VERSION", "8.5.4.1234")
+        .env("FAKE_IBCMD_VERSION", "8.3.27.2342")
         .args([
             "--lang",
             "en",
@@ -350,7 +350,7 @@ fn dry_run_honors_selector_and_platform_override() {
             "-p",
             "import-orders",
             "--platform-version",
-            "8.5.4.1234",
+            "8.3.27.2342",
             "--recreate-infobase",
             "--format",
             "json",
@@ -367,11 +367,11 @@ fn dry_run_honors_selector_and_platform_override() {
     assert_eq!(document["projects"][0]["name"], "import-orders");
     assert_eq!(
         document["projects"][0]["platform"]["required_version"],
-        "8.5.4.1234"
+        "8.3.27.2342"
     );
     assert_eq!(
         document["projects"][0]["platform"]["found_version"],
-        "8.5.4.1234"
+        "8.3.27.2342"
     );
     assert_eq!(document["projects"][0]["infobase"]["mode"], "recreate");
     assert_eq!(
@@ -1486,4 +1486,126 @@ fn workspace_manifest_keeps_each_member_transaction_independent() {
             .expect("preserved manifest"),
         b"old manifest"
     );
+}
+
+/// Supported releases use standalone import, retaining manifests and prior outputs on failure.
+#[test]
+fn standalone_build_preserves_publication_contract_without_infobase() {
+    for version in ["8.5.4.2072", "8.5.4.3000"] {
+        for (kind, extension) in [
+            ("configuration", "cf"),
+            ("extension", "cfe"),
+            ("processing", "epf"),
+            ("report", "erf"),
+        ] {
+            for locale in ["ru", "en"] {
+                let fixture = TestDir::new();
+                let ibcmd = fake_ibcmd(&fixture);
+                let root = project(&fixture, kind, "Standalone");
+                let config = root.join("eska.toml");
+                fs::write(
+                    &config,
+                    fs::read_to_string(&config)
+                        .unwrap()
+                        .replace("8.3.27.2325", version),
+                )
+                .unwrap();
+                let log = fixture.0.join("ibcmd.log");
+                let invoke = |fail: bool, mode: &str| {
+                    Command::new(env!("CARGO_BIN_EXE_eska"))
+                        .current_dir(&root)
+                        .env("FAKE_IBCMD_VERSION", version)
+                        .env("FAKE_IBCMD_LOG", &log)
+                        .env("FAKE_IBCMD_FAIL_IMPORT", if fail { "1" } else { "0" })
+                        .args([
+                            "--lang",
+                            locale,
+                            "build",
+                            "--recreate-infobase",
+                            "--format",
+                            "json",
+                            "--ibcmd",
+                        ])
+                        .arg(&ibcmd)
+                        .arg(mode)
+                        .output()
+                        .unwrap()
+                };
+                let preview = invoke(false, "--dry-run");
+                assert!(preview.status.success(), "{preview:?}");
+                let plan: Value = serde_json::from_slice(&preview.stdout).unwrap();
+                assert!(plan["projects"][0]["infobase"].is_null(), "{plan}");
+                for _ in 0..2 {
+                    let output = invoke(false, "--manifest");
+                    assert!(output.status.success(), "{output:?}");
+                }
+                let artifact = root.join(format!("build/Standalone.{extension}"));
+                let manifest = root.join(format!("build/Standalone.{extension}.manifest.json"));
+                let before = fs::read(&artifact).unwrap();
+                let passport = fs::read(&manifest).unwrap();
+                assert!(!invoke(true, "--manifest").status.success());
+                assert_eq!(fs::read(artifact).unwrap(), before);
+                assert_eq!(fs::read(manifest).unwrap(), passport);
+                assert!(!root.join("build/.eska/infobases").exists());
+                let calls = fs::read_to_string(log).unwrap();
+                assert_eq!(
+                    calls
+                        .lines()
+                        .filter(|line| line.starts_with("config import"))
+                        .count(),
+                    3
+                );
+                assert!(!calls.contains("infobase create"), "{calls}");
+            }
+        }
+    }
+}
+
+/// File-capable platforms retain the managed infobase when an external object needs context.
+#[test]
+fn standalone_capability_keeps_external_base_configuration_context() {
+    for kind in ["processing", "report"] {
+        let fixture = TestDir::new();
+        let ibcmd = fake_ibcmd(&fixture);
+        let root = project(&fixture, kind, "Contextual");
+        let config = root.join("eska.toml");
+        fs::write(
+            &config,
+            fs::read_to_string(&config)
+                .unwrap()
+                .replace("8.3.27.2325", "8.5.4.2072"),
+        )
+        .unwrap();
+        let base = fixture.0.join("base.cf");
+        fs::write(&base, b"base configuration").unwrap();
+        let log = fixture.0.join("ibcmd.log");
+        let output = Command::new(env!("CARGO_BIN_EXE_eska"))
+            .current_dir(&root)
+            .env("FAKE_IBCMD_VERSION", "8.5.4.2072")
+            .env("FAKE_IBCMD_LOG", &log)
+            .args(["--lang", "en", "build", "--base-configuration"])
+            .arg(&base)
+            .arg("--ibcmd")
+            .arg(&ibcmd)
+            .output()
+            .unwrap();
+        assert!(output.status.success(), "{output:?}");
+        let calls = fs::read_to_string(log).unwrap();
+        assert!(
+            calls
+                .lines()
+                .any(|line| line.starts_with("infobase create") && line.contains("--load=")),
+            "{calls}"
+        );
+        assert!(
+            calls
+                .lines()
+                .any(|line| line.starts_with("infobase config import")),
+            "{calls}"
+        );
+        assert!(
+            !calls.lines().any(|line| line.starts_with("config import")),
+            "{calls}"
+        );
+    }
 }

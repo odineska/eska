@@ -575,6 +575,12 @@ impl Ibcmd {
         &self.version
     }
 
+    /// Standalone file import and export were introduced for the 8.5.4 series.
+    #[must_use]
+    pub(crate) fn supports_standalone_config_files(&self) -> bool {
+        self.version.series_components() >= [8, 5, 4]
+    }
+
     /// Share a caller's Unix cancellation lifetime across process queries and native setup.
     #[cfg(unix)]
     #[must_use]

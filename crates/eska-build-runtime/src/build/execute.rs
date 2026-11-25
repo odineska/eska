@@ -92,10 +92,10 @@ pub enum BuildError {
     LibraryConfiguration(Box<eska_project_core::config::global::GlobalConfigError>),
 }
 
-/// Build a native 1C artifact through a reusable managed file infobase.
+/// Build a native 1C artifact using standalone file import or a managed file infobase.
 ///
-/// The pipeline reuses a compatible file infobase or creates one with an optional base `.cf`,
-/// then imports the Designer XML directory with `infobase config import --out`.
+/// Supported platforms import independent Designer XML directly with `config import --out`.
+/// Context-dependent inputs and older platforms reuse or create a managed file infobase.
 /// The destination is replaced only after `ibcmd` produced a non-empty file.
 ///
 /// # Errors
@@ -166,7 +166,11 @@ where
     ibcmd
         .begin_interruptible_operation()
         .map_err(|source| BuildError::Run {
-            stage: BuildStage::CreateInfobase,
+            stage: if plan.uses_managed_infobase(ibcmd) {
+                BuildStage::CreateInfobase
+            } else {
+                BuildStage::ImportSources
+            },
             source,
         })?;
     let parent = plan
@@ -187,15 +191,7 @@ where
         || plan.clone(),
         |snapshot| plan.with_snapshot_source(snapshot.source().to_owned()),
     );
-    let lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
-    let artifact = prepare_artifact(
-        plan,
-        &effective_plan,
-        ibcmd,
-        lease,
-        &workspace.path,
-        on_output,
-    )?;
+    let artifact = prepare_artifact(plan, &effective_plan, ibcmd, &workspace.path, on_output)?;
     let manifest_path = publish_result(
         plan,
         ibcmd,
@@ -225,7 +221,6 @@ fn prepare_artifact<F>(
     plan: &BuildPlan,
     effective_plan: &BuildPlan,
     ibcmd: &Ibcmd,
-    lease: LockedInfobase<'_>,
     workspace: &Path,
     on_output: &mut F,
 ) -> Result<PreparedArtifact, BuildError>
@@ -234,6 +229,7 @@ where
 {
     let import_source = import_source(effective_plan)?;
     if let Some(library) = plan.library_build() {
+        let _lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
         let prepared = super::shared_library::prepare(
             library,
             effective_plan.source(),
@@ -247,6 +243,18 @@ where
             tool_output: prepared.tool_output,
         });
     }
+    let pid_file = workspace.join("ibcmd.pid");
+    let artifact = workspace.join(format!("artifact.{}", plan.artifact_type().extension()));
+    if !plan.uses_managed_infobase(ibcmd) {
+        let imported =
+            import_artifact(ibcmd, &import_source, None, &artifact, &pid_file, on_output)?;
+        return Ok(PreparedArtifact {
+            path: artifact,
+            base: None,
+            tool_output: collect_tool_output(&[], None, &imported),
+        });
+    }
+    let lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
     let mut effective_base_configuration = base_configuration::prepare(
         plan,
         ibcmd,
@@ -255,8 +263,6 @@ where
         effective_plan.source() != plan.source(),
         on_output,
     )?;
-    let pid_file = workspace.join("ibcmd.pid");
-    let artifact = workspace.join(format!("artifact.{}", plan.artifact_type().extension()));
     let (infobase, create_output) = prepare_infobase(
         lease,
         effective_base_configuration.as_mut(),
@@ -267,7 +273,7 @@ where
     let import_output = import_artifact(
         ibcmd,
         &import_source,
-        infobase.data(),
+        Some(infobase.data()),
         &artifact,
         &pid_file,
         on_output,
@@ -326,11 +332,11 @@ where
     Ok((infobase, created))
 }
 
-/// Import only into the leased database and validate the staged artifact before publication.
+/// Import into a standalone file or leased database and validate before publication.
 fn import_artifact<F>(
     ibcmd: &Ibcmd,
     source: &Path,
-    data: &Path,
+    data: Option<&Path>,
     artifact: &Path,
     pid: &Path,
     on_output: &mut F,
@@ -338,20 +344,20 @@ fn import_artifact<F>(
 where
     F: FnMut(BuildStage, ProcessStream, &[u8]),
 {
-    let output = run(
-        ibcmd,
-        BuildStage::ImportSources,
-        [
-            OsString::from("infobase"),
-            OsString::from("config"),
-            OsString::from("import"),
-            option("--data", data),
-            option("--out", artifact),
-            native_path(source).as_os_str().to_owned(),
-        ],
-        pid,
-        on_output,
-    )?;
+    let mut arguments = Vec::new();
+    if let Some(data) = data {
+        arguments.push(OsString::from("infobase"));
+        arguments.push(OsString::from("config"));
+        arguments.push(OsString::from("import"));
+        arguments.push(option("--data", data));
+    } else {
+        arguments.extend([OsString::from("config"), OsString::from("import")]);
+        // Standalone commands still own server IPC state, but never create an infobase.
+        arguments.push(option("--data", &pid.with_extension("data")));
+    }
+    arguments.push(option("--out", artifact));
+    arguments.push(native_path(source).as_os_str().to_owned());
+    let output = run(ibcmd, BuildStage::ImportSources, arguments, pid, on_output)?;
     reject_interrupted_import(ibcmd, BuildStage::ImportSources)?;
     validate_artifact(artifact)?;
     Ok(output)
