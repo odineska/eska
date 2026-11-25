@@ -150,6 +150,31 @@ fn property_dtos_include_contextual_and_nested_captions() {
     assert!(result.get("caption").is_none());
 }
 
+#[test]
+fn report_analytics_schema_caption_preserves_the_xml_reference() {
+    let labels = dto::Labels::new().unwrap();
+    let reference = "Report.Dashboard.Template.Schema";
+    let property = LocatedProperty {
+        property: MetadataProperty {
+            key: PropertyKey {
+                namespace: Some("http://v8.1c.ru/8.3/MDClasses".into()),
+                name: "MainAnalyticsSystemSchema".into(),
+            },
+            qualifiers: vec![],
+            value: MetadataValue::Text(reference.into()),
+        },
+        range: 10..90,
+    };
+    let report = dto::property(&labels, MetadataKind::Report, &property);
+    assert_eq!(
+        report["caption"],
+        json!({"ru-RU": "Основная схема системы аналитики", "en-US": "Main analytics system schema"})
+    );
+    assert_eq!(report["value"]["text"], reference);
+    let configuration = dto::property(&labels, MetadataKind::Configuration, &property);
+    assert!(configuration.get("caption").is_none());
+}
+
 /// Form captions and boolean hints are namespace-scoped; literal text stays literal.
 #[test]
 fn form_property_captions_preserve_raw_values_and_boolean_context() {
