@@ -270,10 +270,11 @@ where
         &pid_file,
         on_output,
     )?;
-    let import_output = import_artifact(
+    let import_output = import_with_context(
+        plan,
         ibcmd,
         &import_source,
-        Some(infobase.data()),
+        infobase.data(),
         &artifact,
         &pid_file,
         on_output,
@@ -330,6 +331,64 @@ where
         base.tool_output = shared.tool_output;
     }
     Ok((infobase, created))
+}
+
+/// Retry only platform-rejected contextual external imports through the paired Designer.
+fn import_with_context<F>(
+    plan: &BuildPlan,
+    ibcmd: &Ibcmd,
+    source: &Path,
+    data: &Path,
+    artifact: &Path,
+    pid: &Path,
+    on_output: &mut F,
+) -> Result<std::process::Output, BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let imported = import_artifact(ibcmd, source, Some(data), artifact, pid, on_output);
+    let Err(BuildError::CommandFailed { stderr, .. }) = imported else {
+        return imported;
+    };
+    reject_interrupted_import(ibcmd, BuildStage::ImportSources)?;
+    let eligible = plan.base_configuration().is_some()
+        && matches!(
+            plan.artifact_type(),
+            ArtifactType::Processing | ArtifactType::Report
+        )
+        && ibcmd.supports_standalone_config_files();
+    let available = eligible && ibcmd.designer_available().unwrap_or(false);
+    reject_interrupted_import(ibcmd, BuildStage::ImportSources)?;
+    if !available {
+        return Err(BuildError::CommandFailed {
+            stage: BuildStage::ImportSources,
+            stderr,
+        });
+    }
+    let expected = if plan.artifact_type() == ArtifactType::Processing {
+        ProjectType::Processing
+    } else {
+        ProjectType::Report
+    };
+    let descriptor = external_descriptor(source, expected)?;
+    super::external_designer::import(ibcmd, &descriptor, data, artifact, pid, on_output)
+        .map(|mut output| {
+            let mut previous = stderr.as_bytes().to_vec();
+            previous.push(b'\n');
+            previous.extend_from_slice(&output.stderr);
+            output.stderr = previous;
+            output
+        })
+        .map_err(|error| match error {
+            BuildError::CommandFailed {
+                stage,
+                stderr: designer,
+            } => BuildError::CommandFailed {
+                stage,
+                stderr: format!("{stderr}\n{designer}"),
+            },
+            error => error,
+        })
 }
 
 /// Import into a standalone file or leased database and validate before publication.
@@ -493,15 +552,20 @@ fn import_source(plan: &BuildPlan) -> Result<PathBuf, BuildError> {
         ArtifactType::Report => ProjectType::Report,
         ArtifactType::Configuration | ArtifactType::Extension => unreachable!(),
     };
-    let entries =
-        fs::read_dir(plan.source()).map_err(|source| BuildError::DescriptorDirectory {
-            path: plan.source().to_owned(),
-            source,
-        })?;
+    external_descriptor(plan.source(), expected)?;
+    Ok(plan.source().to_owned())
+}
+
+/// Select the validated root XML file required by Designer's external-object batch command.
+fn external_descriptor(directory: &Path, expected: ProjectType) -> Result<PathBuf, BuildError> {
+    let entries = fs::read_dir(directory).map_err(|source| BuildError::DescriptorDirectory {
+        path: directory.to_owned(),
+        source,
+    })?;
     let mut descriptors = Vec::new();
     for entry in entries {
         let entry = entry.map_err(|source| BuildError::DescriptorDirectory {
-            path: plan.source().to_owned(),
+            path: directory.to_owned(),
             source,
         })?;
         let path = entry.path();
@@ -527,9 +591,9 @@ fn import_source(plan: &BuildPlan) -> Result<PathBuf, BuildError> {
         }
     }
     match descriptors.as_slice() {
-        [_descriptor] => Ok(plan.source().to_owned()),
-        [] => Err(BuildError::DescriptorMissing(plan.source().to_owned())),
-        _ => Err(BuildError::DescriptorsMultiple(plan.source().to_owned())),
+        [descriptor] => Ok(descriptor.to_owned()),
+        [] => Err(BuildError::DescriptorMissing(directory.to_owned())),
+        _ => Err(BuildError::DescriptorsMultiple(directory.to_owned())),
     }
 }
 
