@@ -263,6 +263,34 @@ fn probe(root: &Path, language: &str, input: Option<&[u8]>) -> (Output, Value) {
 }
 
 #[test]
+fn runtime_without_a_version_reuses_the_verified_inventory_installation() {
+    let directory = TestDir::new();
+    let root = &directory.0;
+    prepare(root);
+    let settings = root.join(".eska/settings_local.toml");
+    let content = fs::read_to_string(&settings).unwrap();
+    fs::write(settings, content.replace("version='8.3.27.2342'\n", "")).unwrap();
+    let ibcmd = root.join("ibcmd");
+    let content = fs::read_to_string(&ibcmd).unwrap();
+    fs::write(
+        ibcmd,
+        content.replace(
+            "--version::) printf",
+            "--version::) printf 'probe\\n' >> version-calls; printf",
+        ),
+    )
+    .unwrap();
+    fs::write(root.join("1cv8c"), "").unwrap();
+    let (output, report) = probe(root, "en-US", None);
+    assert!(output.status.success(), "{report}");
+    assert_eq!(report["status"], "ready");
+    assert_eq!(
+        fs::read_to_string(root.join("version-calls")).unwrap(),
+        "probe\n"
+    );
+}
+
+#[test]
 fn probe_checks_the_submitted_profile_without_loading_or_writing_saved_settings() {
     let root = TestDir::new();
     let root = &root.0;

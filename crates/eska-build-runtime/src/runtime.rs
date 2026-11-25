@@ -126,17 +126,15 @@ fn select_platform(
         .map(PlatformVersion::parse)
         .transpose()
         .map_err(|_| RuntimeError::PlatformUnavailable)?;
-    let installed;
-    let version = if let Some(version) = configured.as_ref().or(project_version) {
-        version
-    } else {
-        installed = Ibcmd::installed(&options).map_err(RuntimeError::Platform)?;
-        installed
-            .first()
-            .ok_or(RuntimeError::PlatformUnavailable)?
-            .version()
-    };
-    Ibcmd::discover(version, &options).map_err(RuntimeError::Platform)
+    if let Some(version) = configured.as_ref().or(project_version) {
+        return Ibcmd::discover(version, &options).map_err(RuntimeError::Platform);
+    }
+    let installed = Ibcmd::installed(&options).map_err(RuntimeError::Platform)?;
+    let platform = installed
+        .into_iter()
+        .next()
+        .ok_or(RuntimeError::PlatformUnavailable)?;
+    Ok(Ibcmd::from_installation(platform, &options))
 }
 
 /// Return the directory of an existing, regular file infobase.

@@ -461,7 +461,8 @@ impl Ibcmd {
         } else if runner_preference != RunnerPreference::Distrobox
             && let Some(path) = find_on_path("ibcmd")
         {
-            (Runner::Host(path.clone()), ToolSource::Path(path))
+            return discover_host_path(expected, options, path, standard_path(&arch, expected))
+                .map(|platform| Self::from_installation(platform, options));
         } else {
             let standard = standard_path(&arch, expected);
             if runner_preference != RunnerPreference::Distrobox && standard.is_file() {
@@ -501,7 +502,7 @@ impl Ibcmd {
         Ok(Self::from_installation(platform, options))
     }
 
-    fn from_installation(platform: InstalledPlatform, options: &ToolOptions) -> Self {
+    pub(crate) fn from_installation(platform: InstalledPlatform, options: &ToolOptions) -> Self {
         let runner = platform.source.runner();
         #[cfg(not(unix))]
         let _ = options;
@@ -764,6 +765,34 @@ pub enum ToolError {
         actual: PlatformVersion,
         source: Box<ToolSource>,
     },
+}
+
+/// A PATH wrapper may target another version even when the requested installation exists.
+fn discover_host_path(
+    expected: &PlatformVersion,
+    options: &ToolOptions,
+    path: PathBuf,
+    standard: PathBuf,
+) -> Result<InstalledPlatform, ToolError> {
+    let verify = |source: ToolSource| {
+        let platform = platform_from_runner(&source.runner(), source, options)?;
+        if !expected.matches_installation(platform.version()) {
+            return Err(ToolError::VersionMismatch {
+                expected: expected.clone(),
+                actual: platform.version,
+                source: Box::new(platform.source),
+            });
+        }
+        Ok(platform)
+    };
+    match verify(ToolSource::Path(path)) {
+        Err(
+            ToolError::VersionCommandFailed { .. }
+            | ToolError::VersionUnreadable(_)
+            | ToolError::VersionMismatch { .. },
+        ) if standard.is_file() => verify(ToolSource::Standard(standard)),
+        result => result,
+    }
 }
 
 /// Select a series without probing unrelated installations or hiding process errors.
@@ -1410,6 +1439,78 @@ mod tests {
                 })
                 .sum();
             assert_eq!(probes, if same_executable { 1 } else { 2 });
+        }
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn exact_host_lookup_uses_standard_only_after_a_local_path_version_failure() {
+        use std::os::unix::fs::PermissionsExt as _;
+
+        let root = env::var_os("ESKA_TEST_ROOT").expect("ESKA_TEST_ROOT");
+        for path_output in ["8.5.4.2072", "8.3.27.2325", "unreadable", "failed"] {
+            let directory = tempfile::tempdir_in(&root).unwrap();
+            let path_bin = directory.path().join("bin");
+            let standard_bin = directory.path().join("standard");
+            std::fs::create_dir(&path_bin).unwrap();
+            std::fs::create_dir(&standard_bin).unwrap();
+            let path = path_bin.join("ibcmd");
+            let standard = standard_bin.join("ibcmd");
+            for (path, output) in [(&path, path_output), (&standard, "8.5.4.2072")] {
+                let script = format!(
+                    "#!/bin/sh\nprintf 'probe\\n' >> \"$0.calls\"\nprintf '{output}\\n'\n{}\n",
+                    if output == "failed" {
+                        "exit 2"
+                    } else {
+                        "exit 0"
+                    }
+                );
+                std::fs::write(path, script).unwrap();
+                std::fs::set_permissions(path, std::fs::Permissions::from_mode(0o755)).unwrap();
+            }
+            std::fs::write(standard_bin.join("1cv8"), "").unwrap();
+            let options = ToolOptions::default();
+            let expected = PlatformVersion::parse_exact("8.5.4.2072").unwrap();
+            let platform =
+                discover_host_path(&expected, &options, path.clone(), standard.clone()).unwrap();
+            let matching_path = path_output == "8.5.4.2072";
+            assert_eq!(
+                platform.source,
+                if matching_path {
+                    ToolSource::Path(path.clone())
+                } else {
+                    ToolSource::Standard(standard.clone())
+                }
+            );
+            let tool = Ibcmd::from_installation(platform, &options);
+            assert_eq!(tool.designer_available().unwrap(), !matching_path);
+            assert_eq!(
+                std::fs::read_to_string(path.with_file_name("ibcmd.calls")).unwrap(),
+                "probe\n"
+            );
+            let standard_calls = standard.with_file_name("ibcmd.calls");
+            assert_eq!(standard_calls.exists(), !matching_path);
+            if !matching_path {
+                assert_eq!(std::fs::read_to_string(&standard_calls).unwrap(), "probe\n");
+            }
+            std::fs::remove_file(&standard).unwrap();
+            let result = discover_host_path(&expected, &options, path.clone(), standard.clone());
+            match path_output {
+                "8.5.4.2072" => assert!(result.is_ok()),
+                "8.3.27.2325" => assert!(matches!(result, Err(ToolError::VersionMismatch { .. }))),
+                "unreadable" => assert!(matches!(result, Err(ToolError::VersionUnreadable(_)))),
+                _ => assert!(matches!(
+                    result,
+                    Err(ToolError::VersionCommandFailed { .. })
+                )),
+            }
+            // A runner startup error is not a local version refusal.
+            std::fs::write(&standard, "").unwrap();
+            std::fs::remove_file(&path).unwrap();
+            assert!(matches!(
+                discover_host_path(&expected, &options, path, standard),
+                Err(ToolError::Run(_))
+            ));
         }
     }
 
