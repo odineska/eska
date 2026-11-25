@@ -113,8 +113,19 @@ while [ "$#" -gt 0 ] && [ "$1" != -- ]; do shift; done
 shift
 [ "$1" = sh ] && [ "$2" = -c ] && shift 5
 case "$1" in
-  find) printf '%s\n' /opt/1cv8/arm64/8.5.4.10000/ibcmd /opt/1cv8/arm64/8.5.5.1/ibcmd /opt/1cv8/arm64/8.5.4.999/ibcmd ;;
-  /opt/1cv8/arm64/*/ibcmd) version=${1%/ibcmd}; printf '%s\n' "${version##*/}" ;;
+  find) printf '%s\n' /opt/1cv8/arm64/8.5.4.10000/ibcmd /opt/1cv8/arm64/8.5.5.1/ibcmd /opt/1cv8/arm64/8.5.4.999/ibcmd /opt/1cv8/arm64/8.3.27.2325/ibcmd ;;
+  /opt/1cv8/arm64/*/ibcmd)
+    printf '%s\n' "$1" >> "$PROBE_LOG"
+    case "$1" in
+      */8.3.27.2325/ibcmd) exit 2 ;;
+      */8.5.4.10000/ibcmd)
+        case "$FAIL_NEWEST" in
+          yes) exit 2 ;;
+          unreadable) printf 'invalid version\n'; exit 0 ;;
+        esac ;;
+      */8.5.4.999/ibcmd) [ "$FAIL_OLDER" != yes ] || exit 2 ;;
+    esac
+    version=${1%/ibcmd}; printf '%s\n' "${version##*/}" ;;
   *) exit 2 ;;
 esac
 "#,
@@ -125,8 +136,11 @@ esac
     for (requested, found) in [("8.5.4", "8.5.4.10000"), ("8.5.4.999", "8.5.4.999")] {
         let mut previous = None;
         for locale in ["ru-RU", "en-US"] {
+            let probes = fixture.0.join("probes");
+            fs::write(&probes, "").unwrap();
             let output = command(project.root(), &fixture.0.join("config"), locale)
                 .env("PATH", &bin)
+                .env("PROBE_LOG", &probes)
                 .args([
                     "build",
                     "--dry-run",
@@ -142,6 +156,10 @@ esac
             let platform = &report["projects"][0]["platform"];
             assert_eq!(platform["required_version"], requested);
             assert_eq!(platform["found_version"], found);
+            assert_eq!(
+                fs::read_to_string(probes).unwrap(),
+                format!("/opt/1cv8/arm64/{found}/ibcmd\n")
+            );
             if let Some(previous) = previous {
                 assert_eq!(report, previous);
             }
@@ -156,16 +174,96 @@ esac
             "--dry-run",
             "--distrobox=box",
             "--platform-arch=arm64",
-            "--platform-version=8.3.27",
+            "--platform-version=8.3.26",
         ])
         .output()
         .unwrap();
     assert_eq!(output.status.code(), Some(1));
     let message = String::from_utf8_lossy(&output.stderr);
     assert!(
-        message.contains("8.3.27") && message.contains("8.5.4.10000"),
+        message.contains("8.3.26") && message.contains("8.5.4.10000"),
         "{message}"
     );
+
+    // A local version failure permits the next build in the same series.
+    let probes = fixture.0.join("probes");
+    fs::write(&probes, "").unwrap();
+    for (failure, error_code) in [
+        ("yes", "ibcmd-version-command-failed"),
+        ("unreadable", "ibcmd-version-unreadable"),
+    ] {
+        for fail_older in [false, true] {
+            fs::write(&probes, "").unwrap();
+            let output = command(project.root(), &fixture.0.join("config"), "en-US")
+                .env("PATH", &bin)
+                .env("PROBE_LOG", &probes)
+                .env("FAIL_NEWEST", failure)
+                .env("FAIL_OLDER", if fail_older { "yes" } else { "no" })
+                .args([
+                    "build",
+                    "--dry-run",
+                    "--format=json",
+                    "--distrobox=box",
+                    "--platform-arch=arm64",
+                    "--platform-version=8.5.4",
+                ])
+                .output()
+                .unwrap();
+            let report = document(&output, !fail_older);
+            if fail_older {
+                assert_eq!(report["error"]["code"], error_code);
+                assert!(String::from_utf8_lossy(&output.stderr).contains("8.5.4.10000"));
+            } else {
+                assert_eq!(
+                    report["projects"][0]["platform"]["found_version"],
+                    "8.5.4.999"
+                );
+            }
+            assert_eq!(
+                fs::read_to_string(&probes).unwrap(),
+                "/opt/1cv8/arm64/8.5.4.10000/ibcmd\n/opt/1cv8/arm64/8.5.4.999/ibcmd\n"
+            );
+        }
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn series_selection_verifies_the_version_of_ibcmd_on_path() {
+    use std::os::unix::fs::PermissionsExt as _;
+
+    let fixture = support::TestDir::new();
+    let project = project(&fixture.0.join("series"), ProjectType::Configuration);
+    let bin = fixture.0.join("bin");
+    fs::create_dir(&bin).unwrap();
+    let ibcmd = bin.join("ibcmd");
+    fs::write(
+        &ibcmd,
+        r#"#!/bin/sh
+printf '%s\n' probe >> "$PROBE_LOG"
+printf '99.99.99.9\n'
+"#,
+    )
+    .unwrap();
+    fs::set_permissions(ibcmd, fs::Permissions::from_mode(0o755)).unwrap();
+    let probes = fixture.0.join("probes");
+    let output = command(project.root(), &fixture.0.join("config"), "en-US")
+        .env("PATH", &bin)
+        .env("PROBE_LOG", &probes)
+        .args([
+            "build",
+            "--dry-run",
+            "--format=json",
+            "--platform-version=99.99.99",
+        ])
+        .output()
+        .unwrap();
+    let report = document(&output, true);
+    assert_eq!(
+        report["projects"][0]["platform"]["found_version"],
+        "99.99.99.9"
+    );
+    assert_eq!(fs::read_to_string(probes).unwrap(), "probe\n");
 }
 
 /// Only build and VCS executables are installed; imports still preserve consent and source identity.

@@ -426,20 +426,8 @@ impl Ibcmd {
     /// unavailable, its version cannot be read, or no installed build matches.
     pub fn discover(expected: &PlatformVersion, options: &ToolOptions) -> Result<Self, ToolError> {
         if expected.is_series() && options.explicit_ibcmd().is_none() {
-            let installed = Self::installed(options)?;
-            if let Some(platform) = installed
-                .iter()
-                .find(|platform| expected.matches_installation(platform.version()))
-            {
-                return Ok(Self::from_installation(platform.clone(), options));
-            }
-            return Err(ToolError::SeriesNotFound {
-                expected: expected.clone(),
-                available: installed
-                    .into_iter()
-                    .map(|platform| platform.version)
-                    .collect(),
-            });
+            return discover_series(expected, options)
+                .map(|platform| Self::from_installation(platform, options));
         }
 
         let arch = options
@@ -529,37 +517,15 @@ impl Ibcmd {
     /// # Errors
     /// Returns a structured error when the runner cannot be inspected or a candidate is invalid.
     pub fn installed(options: &ToolOptions) -> Result<Vec<InstalledPlatform>, ToolError> {
-        let arch = options
-            .platform_arch
-            .clone()
-            .or_else(|| env::var(ARCH_ENV).ok())
-            .unwrap_or_else(default_architecture);
-        validate_component(&arch).map_err(|()| ToolError::InvalidArchitecture(arch.clone()))?;
-        if let Some(path) = options.explicit_ibcmd() {
-            let (runner, source) = options.explicit_runner(path)?;
-            return platform_from_runner(&runner, source, options).map(|platform| vec![platform]);
-        }
-        let distrobox_override = options.distrobox_name();
-        let preference = if distrobox_override.is_some() {
-            RunnerPreference::Distrobox
-        } else {
-            options.runner
-        };
-        let mut installed = if preference == RunnerPreference::Distrobox {
-            let container = distrobox_override.ok_or(ToolError::DistroboxContainerRequired)?;
-            scan_distrobox(&container, &arch, options)?
-        } else {
-            let host = scan_host(&arch, options)?;
-            if host.is_empty() && preference == RunnerPreference::Auto {
-                if let Some(container) = distrobox_override {
-                    scan_distrobox(&container, &arch, options)?
-                } else {
-                    host
-                }
-            } else {
-                host
+        let mut installed = Vec::new();
+        for candidate in installation_candidates(options)? {
+            let version = candidate.version.clone();
+            let container = matches!(candidate.source, ToolSource::Distrobox { .. });
+            let platform = candidate.verify(options)?;
+            if !container || version.is_none() || version.as_ref() == Some(platform.version()) {
+                installed.push(platform);
             }
-        };
+        }
         installed.sort_by(|left, right| right.version.cmp(&left.version));
         installed.dedup_by(|left, right| left.version == right.version);
         Ok(installed)
@@ -796,8 +762,119 @@ pub enum ToolError {
     },
 }
 
-/// Inspect standard host installation directories and verify each discovered executable.
-fn scan_host(arch: &str, options: &ToolOptions) -> Result<Vec<InstalledPlatform>, ToolError> {
+/// Select a series without probing unrelated installations or hiding process errors.
+fn discover_series(
+    expected: &PlatformVersion,
+    options: &ToolOptions,
+) -> Result<InstalledPlatform, ToolError> {
+    let mut candidates = installation_candidates(options)?;
+    // PATH has no reliable version hint. Inspect it before pruning standard builds.
+    let path = candidates
+        .iter()
+        .position(|candidate| candidate.version.is_none())
+        .map(|index| candidates.remove(index).verify(options));
+    let (path, path_error) = match path {
+        Some(Ok(platform)) => (Some(platform), None),
+        Some(Err(
+            error @ (ToolError::VersionCommandFailed { .. } | ToolError::VersionUnreadable(_)),
+        )) => (None, Some(error)),
+        Some(Err(error)) => return Err(error),
+        None => (None, None),
+    };
+    candidates.sort_by(|left, right| right.version.cmp(&left.version));
+    let mut available: Vec<_> = candidates
+        .iter()
+        .filter_map(|candidate| candidate.version.clone())
+        .collect();
+    if let Some(platform) = &path {
+        available.push(platform.version.clone());
+    }
+    let selected = path.filter(|platform| expected.matches_installation(platform.version()));
+    let mut candidate_error = None;
+    for candidate in candidates {
+        let Some(version) = &candidate.version else {
+            continue;
+        };
+        if !expected.matches_installation(version)
+            || selected
+                .as_ref()
+                .is_some_and(|platform| version <= platform.version())
+        {
+            continue;
+        }
+        let platform = match candidate.verify(options) {
+            Ok(platform) => platform,
+            Err(
+                error @ (ToolError::VersionCommandFailed { .. } | ToolError::VersionUnreadable(_)),
+            ) => {
+                candidate_error.get_or_insert(error);
+                continue;
+            }
+            Err(error) => return Err(error),
+        };
+        if &platform.version != version {
+            candidate_error.get_or_insert_with(|| ToolError::VersionMismatch {
+                expected: version.clone(),
+                actual: platform.version,
+                source: Box::new(platform.source),
+            });
+            continue;
+        }
+        return Ok(platform);
+    }
+    if let Some(platform) = selected {
+        return Ok(platform);
+    }
+    if let Some(error) = candidate_error.or(path_error) {
+        return Err(error);
+    }
+    available.sort_by(|left, right| right.cmp(left));
+    available.dedup();
+    Err(ToolError::SeriesNotFound {
+        expected: expected.clone(),
+        available,
+    })
+}
+
+/// An unverified location; standard directory names provide a version hint only.
+struct InstallationCandidate {
+    runner: Runner,
+    source: ToolSource,
+    version: Option<PlatformVersion>,
+}
+
+impl InstallationCandidate {
+    fn verify(&self, options: &ToolOptions) -> Result<InstalledPlatform, ToolError> {
+        platform_from_runner(&self.runner, self.source.clone(), options)
+    }
+}
+
+fn installation_candidates(options: &ToolOptions) -> Result<Vec<InstallationCandidate>, ToolError> {
+    let arch = options
+        .platform_arch
+        .clone()
+        .or_else(|| env::var(ARCH_ENV).ok())
+        .unwrap_or_else(default_architecture);
+    validate_component(&arch).map_err(|()| ToolError::InvalidArchitecture(arch.clone()))?;
+    if let Some(path) = options.explicit_ibcmd() {
+        let (runner, source) = options.explicit_runner(path)?;
+        return Ok(vec![InstallationCandidate {
+            runner,
+            source,
+            version: None,
+        }]);
+    }
+    if let Some(container) = options.distrobox_name() {
+        return scan_distrobox(&container, &arch, options);
+    }
+    if options.runner == RunnerPreference::Distrobox {
+        return Err(ToolError::DistroboxContainerRequired);
+    }
+    scan_host(&arch)
+}
+
+/// Enumerate standard host installation directories without starting their executables.
+fn scan_host(arch: &str) -> Result<Vec<InstallationCandidate>, ToolError> {
     let mut installed = Vec::new();
     for root in standard_roots(arch) {
         let entries = match std::fs::read_dir(&root) {
@@ -810,7 +887,7 @@ fn scan_host(arch: &str, options: &ToolOptions) -> Result<Vec<InstalledPlatform>
                 path: root.clone(),
                 source,
             })?;
-            let Some(_) = entry
+            let Some(version) = entry
                 .file_name()
                 .to_str()
                 .and_then(|value| PlatformVersion::parse_exact(value).ok())
@@ -819,20 +896,20 @@ fn scan_host(arch: &str, options: &ToolOptions) -> Result<Vec<InstalledPlatform>
             };
             let path = standard_executable(&entry.path());
             if path.is_file() {
-                installed.push(platform_from_runner(
-                    &Runner::Host(path.clone()),
-                    ToolSource::Standard(path),
-                    options,
-                )?);
+                installed.push(InstallationCandidate {
+                    runner: Runner::Host(path.clone()),
+                    source: ToolSource::Standard(path),
+                    version: Some(version),
+                });
             }
         }
     }
     if let Some(path) = find_on_path("ibcmd") {
-        installed.push(platform_from_runner(
-            &Runner::Host(path.clone()),
-            ToolSource::Path(path),
-            options,
-        )?);
+        installed.push(InstallationCandidate {
+            runner: Runner::Host(path.clone()),
+            source: ToolSource::Path(path),
+            version: None,
+        });
     }
     Ok(installed)
 }
@@ -842,7 +919,7 @@ fn scan_distrobox(
     container: &str,
     arch: &str,
     options: &ToolOptions,
-) -> Result<Vec<InstalledPlatform>, ToolError> {
+) -> Result<Vec<InstallationCandidate>, ToolError> {
     validate_component(container)
         .map_err(|()| ToolError::InvalidContainer(container.to_owned()))?;
     let root = format!("/opt/1cv8/{arch}");
@@ -884,17 +961,14 @@ fn scan_distrobox(
             container: container.to_owned(),
             path: path.clone(),
         };
-        let platform = platform_from_runner(
-            &Runner::Distrobox {
+        installed.push(InstallationCandidate {
+            runner: Runner::Distrobox {
                 container: container.to_owned(),
                 path,
             },
             source,
-            options,
-        )?;
-        if platform.version == version {
-            installed.push(platform);
-        }
+            version: Some(version),
+        });
     }
     Ok(installed)
 }
