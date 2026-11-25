@@ -8,6 +8,7 @@ use std::{
 };
 
 use super::{Error, MAX_FILE_BYTES, MAX_RECORDS, MAX_RETAINED_BYTES, Record, is_id};
+use crate::file_lock::FileLock;
 use crate::project::metadata_edit::snapshot;
 
 const LOCK_FILE: &str = ".eska-query-recovery.lock";
@@ -181,8 +182,8 @@ impl Store {
         self.directory.join(format!("{id}.json"))
     }
 
-    /// A persistent lock inode is never removed; process exit releases its OS lock automatically.
-    fn lock(&self) -> Result<File, Error> {
+    /// Keep the lock inode stable across checkpoints and release ownership when the operation ends.
+    fn lock(&self) -> Result<FileLock, Error> {
         let path = self.directory.join(LOCK_FILE);
         if !missing(&path)? && !fs::symlink_metadata(&path)?.file_type().is_file() {
             return Err(Error::UnsafePath);
@@ -192,11 +193,10 @@ impl Store {
         #[cfg(unix)]
         private_mode(&mut options);
         let file = options.open(path)?;
-        match file.try_lock() {
-            Ok(()) => Ok(file),
-            Err(TryLockError::WouldBlock) => Err(Error::Busy),
-            Err(TryLockError::Error(error)) => Err(error.into()),
-        }
+        FileLock::try_lock(file).map_err(|error| match error {
+            TryLockError::WouldBlock => Error::Busy,
+            TryLockError::Error(error) => error.into(),
+        })
     }
 
     /// Bound both individual reads and the total encoded data scanned in one operation.
@@ -353,4 +353,19 @@ fn private_mode(options: &mut OpenOptions) {
 fn sync_directory(path: &Path) -> Result<(), Error> {
     File::open(path)?.sync_all()?;
     Ok(())
+}
+
+#[cfg(all(test, unix))]
+#[test]
+fn next_checkpoint_can_lock_while_an_inherited_descriptor_is_open() {
+    let directory = crate::test_support::TestDir::new();
+    let store = Store::new(directory.0.clone()).unwrap();
+    let first = store.lock().unwrap();
+    let inherited = first.duplicate().unwrap();
+    assert!(matches!(store.lock(), Err(Error::Busy)));
+    drop(first);
+    let next = store.lock().expect("next checkpoint owns the lock");
+    drop(inherited);
+    assert!(matches!(store.lock(), Err(Error::Busy)));
+    drop(next);
 }
