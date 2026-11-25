@@ -489,7 +489,7 @@ fn preflight_rejects_invalid_input_before_writing() {
                 "--type",
                 "report",
                 "--platform-version",
-                "8.3.27",
+                "8.3",
                 "--format",
                 "json",
             ],
