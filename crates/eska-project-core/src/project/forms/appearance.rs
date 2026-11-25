@@ -370,6 +370,22 @@ impl<'a> Appearance<'a> {
                     ResolvedColor::Web(target.name)
                 }
                 Some(references::WINDOWS_COLOR) => ResolvedColor::System(target.name),
+                Some(references::PALETTE_COLOR)
+                    if matches!(
+                        target.name.as_str(),
+                        "Red"
+                            | "Orange"
+                            | "Yellow"
+                            | "Green"
+                            | "LightBlue"
+                            | "Blue"
+                            | "Purple"
+                            | "Gray"
+                    ) =>
+                {
+                    // Keep palette colors semantic so the preview can resolve either theme.
+                    ResolvedColor::Role(format!("Palette{}", target.name))
+                }
                 _ => {
                     self.problem("color_reference_unsupported", property, Some(target));
                     ResolvedColor::Role(role.into())
