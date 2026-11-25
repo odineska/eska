@@ -1918,3 +1918,50 @@ fn cancelled_external_designer_fallback_preserves_published_pair() {
         }));
     }
 }
+
+/// A successful native process cannot publish a link to a file outside its workspace.
+#[cfg(unix)]
+#[test]
+fn standalone_build_rejects_linked_artifact_and_preserves_previous_pair() {
+    for locale in ["ru", "en"] {
+        let fixture = TestDir::new();
+        let ibcmd = fake_ibcmd(&fixture);
+        let root = project(&fixture, "configuration", "Linked");
+        let outside = fixture.0.join("outside.cf");
+        fs::write(&outside, b"external file").unwrap();
+        let invoke = |linked: bool| {
+            let mut command = Command::new(env!("CARGO_BIN_EXE_eska"));
+            command
+                .current_dir(&root)
+                .env("FAKE_IBCMD_VERSION", "8.5.4.2072")
+                .args([
+                    "--lang",
+                    locale,
+                    "build",
+                    "--manifest",
+                    "--platform-version",
+                    "8.5.4.2072",
+                    "--format",
+                    "json",
+                    "--ibcmd",
+                ])
+                .arg(&ibcmd);
+            if linked {
+                command.env("FAKE_IBCMD_ARTIFACT_SYMLINK", &outside);
+            }
+            command.output().unwrap()
+        };
+        let initial = invoke(false);
+        assert!(initial.status.success(), "{initial:?}");
+        let artifact = root.join("build/Linked.cf");
+        let manifest = root.join("build/Linked.cf.manifest.json");
+        let previous = fs::read(&artifact).unwrap();
+        let passport = fs::read(&manifest).unwrap();
+        let rejected = invoke(true);
+        assert!(!rejected.status.success(), "{rejected:?}");
+        assert_eq!(fs::read(&artifact).unwrap(), previous);
+        assert_eq!(fs::read(&manifest).unwrap(), passport);
+        assert!(!fs::symlink_metadata(artifact).unwrap().is_symlink());
+        assert_eq!(fs::read(outside).unwrap(), b"external file");
+    }
+}

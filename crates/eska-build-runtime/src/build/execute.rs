@@ -424,8 +424,8 @@ where
 
 /// Require an ibcmd result to be a non-empty regular file before publication.
 pub(super) fn validate_artifact(artifact: &Path) -> Result<(), BuildError> {
-    let metadata =
-        fs::metadata(artifact).map_err(|_| BuildError::ArtifactMissing(artifact.to_owned()))?;
+    let metadata = fs::symlink_metadata(artifact)
+        .map_err(|_| BuildError::ArtifactMissing(artifact.to_owned()))?;
     if !metadata.is_file() {
         return Err(BuildError::ArtifactMissing(artifact.to_owned()));
     }
@@ -1023,6 +1023,25 @@ fn make_owned_tree_writable(path: &Path) -> io::Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(unix)]
+    #[test]
+    fn artifact_validation_rejects_symlinks_before_publication() {
+        use crate::test_support::TestDir;
+        use std::os::unix::fs::symlink;
+
+        let directory = TestDir::new();
+        let outside = directory.0.join("outside.cf");
+        let artifact = directory.0.join("artifact.cf");
+        fs::write(&outside, b"external artifact").unwrap();
+        symlink(&outside, &artifact).unwrap();
+
+        assert!(matches!(
+            validate_artifact(&artifact),
+            Err(BuildError::ArtifactMissing(path)) if path == artifact
+        ));
+        assert_eq!(fs::read(outside).unwrap(), b"external artifact");
+    }
 
     #[test]
     /// Leave both previous destinations untouched when the manifest cannot be backed up.

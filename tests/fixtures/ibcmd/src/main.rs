@@ -229,6 +229,12 @@ fn import_configuration(arguments: &[OsString]) {
         process::exit(7);
     }
 
+    #[cfg(unix)]
+    if let Some(target) = env::var_os("FAKE_IBCMD_ARTIFACT_SYMLINK") {
+        std::os::unix::fs::symlink(target, &output).expect("fixture artifact symlink");
+        return;
+    }
+
     wait_for_test_release();
     stream_test_diagnostic(&source);
     if let Err(error) = write_artifact(&source, &output) {
