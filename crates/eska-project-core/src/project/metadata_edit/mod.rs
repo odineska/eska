@@ -1,5 +1,6 @@
 //! Validated edits of existing Designer properties, without serializing the document.
 
+pub(super) mod catalog;
 pub(crate) mod choice_fields;
 mod choice_links;
 pub(crate) mod choice_parameters;

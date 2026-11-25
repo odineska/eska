@@ -7,7 +7,10 @@ use std::{collections::BTreeMap, ops::Range};
 use roxmltree::{Document, Node};
 
 use super::{NameError, RenameReplacement, UncertainReference, same_name, validate_name};
-use crate::project::metadata_model::MetadataKind;
+use crate::project::{
+    metadata_edit::{catalog, references},
+    metadata_model::MetadataKind,
+};
 
 const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
 const XR: &str = "http://v8.1c.ru/8.3/xcf/readable";
@@ -410,17 +413,12 @@ fn metadata_reference_property(node: Node<'_, '_>) -> bool {
     } else {
         class.to_owned()
     };
-    include_str!("../metadata_edit/fields.tsv")
-        .lines()
-        .skip(1)
-        .any(|line| {
-            let columns: Vec<_> = line.split('\t').collect();
-            columns.len() == 6
-                && columns[0] == class
-                && Some(columns[1]) == node.tag_name().namespace()
-                && columns[2] == node.tag_name().name()
-                && (MetadataKind::from_xml_tag(columns[3]).is_ok()
-                    || crate::project::metadata_edit::references::target(columns[3]).is_some())
+    let tag = node.tag_name();
+    tag.namespace()
+        .and_then(|namespace| catalog::field(&class, namespace, tag.name()))
+        .is_some_and(|field| {
+            MetadataKind::from_xml_tag(field.model_type).is_ok()
+                || references::target(field.model_type).is_some()
         })
 }
 

@@ -1,10 +1,9 @@
 //! Reviewed Designer writer mappings over the installed EDT property model.
 
-use crate::project::metadata_edit::EditingProfile;
 use roxmltree::Node;
 use serde::{Serialize, Serializer};
 
-use super::EditError;
+use super::{EditError, EditingProfile, catalog};
 use crate::project::metadata_model::{ObjectId, PropertyKey};
 
 pub(super) const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
@@ -208,21 +207,10 @@ pub(super) fn field_type(
     top: bool,
     profile: EditingProfile,
 ) -> Option<&'static str> {
-    include_str!("fields.tsv").lines().skip(1).find_map(|line| {
-        let mut columns = line.split('\t');
-        let owner = columns.next()?;
-        let namespace = columns.next()?;
-        let name = columns.next()?;
-        let kind = columns.next()?;
-        let property = columns.next()?;
-        let catalog = columns.next()?;
-        (owner == class
-            && namespace == node.tag_name().namespace().unwrap_or_default()
-            && name == node.tag_name().name()
-            && (!top || property == "1")
-            && (profile.modern() || catalog == "8.3.27"))
-            .then_some(kind)
-    })
+    let tag = node.tag_name();
+    let field = catalog::field(class, tag.namespace().unwrap_or_default(), tag.name())?;
+    ((!top || field.property) && (profile.modern() || field.since == "8.3.27"))
+        .then_some(field.model_type)
 }
 
 /// Creation selectors consult the exact same catalog and special domain rules as existing fields.
@@ -486,13 +474,11 @@ pub(super) fn schema(model_type: &str, profile: EditingProfile) -> Option<Scalar
         }),
         "EBigDecimal" => Some(ScalarSchema::Decimal { nullable: false }),
         domain => {
-            let values: Vec<_> = include_str!("enums.tsv")
-                .lines()
-                .skip(1)
-                .filter_map(|line| line.split_once('\t'))
-                .filter(|(kind, value)| {
-                    *kind == domain
-                        && (*value != "Version8_5_4" || profile == EditingProfile::V854)
+            let values: Vec<_> = catalog::enum_values(domain)
+                .iter()
+                .copied()
+                .filter(|value| {
+                    (*value != "Version8_5_4" || profile == EditingProfile::V854)
                         && (profile.modern()
                             || !matches!(
                                 *value,
@@ -502,7 +488,7 @@ pub(super) fn schema(model_type: &str, profile: EditingProfile) -> Option<Scalar
                                     | "TaxiEnableVersion8_5"
                             ))
                 })
-                .map(|(_, value)| value.to_owned())
+                .map(str::to_owned)
                 .collect();
             (!values.is_empty()).then(|| ScalarSchema::Enum {
                 domain: domain.to_owned(),
