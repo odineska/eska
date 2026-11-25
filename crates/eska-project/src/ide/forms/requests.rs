@@ -82,6 +82,14 @@ impl State {
             node,
             application: input.application,
             pictures: context.api_minor >= 37,
+            profiles: context.api_minor >= 56,
+            platform_854: context
+                .project
+                .project()
+                .configuration()
+                .build_settings()
+                .platform_version()
+                .is_some_and(|version| version.series_components() == [8, 5, 4]),
             revision: 1,
             preview,
             model,
