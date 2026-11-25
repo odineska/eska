@@ -96,14 +96,9 @@ fn build_reports_the_installed_build_for_a_series_requirement() {
 }
 
 #[cfg(unix)]
-#[test]
-fn distrobox_resolves_series_numerically_and_respects_an_exact_pin() {
+fn prepare_series_distrobox(bin: &Path) {
     use std::os::unix::fs::PermissionsExt as _;
 
-    let fixture = support::TestDir::new();
-    let project = project(&fixture.0.join("series"), ProjectType::Configuration);
-    let bin = fixture.0.join("bin");
-    fs::create_dir(&bin).unwrap();
     let distrobox = bin.join("distrobox");
     fs::write(
         &distrobox,
@@ -132,6 +127,16 @@ esac
     )
     .unwrap();
     fs::set_permissions(distrobox, fs::Permissions::from_mode(0o755)).unwrap();
+}
+
+#[cfg(unix)]
+#[test]
+fn distrobox_resolves_series_numerically_and_respects_an_exact_pin() {
+    let fixture = support::TestDir::new();
+    let project = project(&fixture.0.join("series"), ProjectType::Configuration);
+    let bin = fixture.0.join("bin");
+    fs::create_dir(&bin).unwrap();
+    prepare_series_distrobox(&bin);
 
     for (requested, found) in [("8.5.4", "8.5.4.10000"), ("8.5.4.999", "8.5.4.999")] {
         let mut previous = None;
