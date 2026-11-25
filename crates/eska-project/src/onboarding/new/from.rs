@@ -134,14 +134,13 @@ fn execute(
         || args.platform.select_platform
         || inherited.is_none()
     {
-        Some(
-            BuildSettings::new(tool.configured_version(), "build".into()).map_err(|_| {
-                Failure::new(
-                    "platform-version-invalid",
-                    localizer.text("artifact-version-invalid"),
-                )
-            })?,
-        )
+        let version = tool.configured_version(args.platform.platform_version.as_deref());
+        Some(BuildSettings::new(version, "build".into()).map_err(|_| {
+            Failure::new(
+                "platform-version-invalid",
+                localizer.text("artifact-version-invalid"),
+            )
+        })?)
     } else {
         None
     };

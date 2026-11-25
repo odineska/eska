@@ -317,7 +317,9 @@ impl NewHandler<'_> {
             return Ok(None);
         }
         BuildSettings::new(
-            tool.as_ref().map_or("", |tool| tool.version().as_str()),
+            tool.as_ref().map_or("", |tool| {
+                tool.configured_version(self.args.platform.platform_version.as_deref())
+            }),
             "build".into(),
         )
         .map(Some)

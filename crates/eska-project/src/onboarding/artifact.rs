@@ -59,17 +59,12 @@ pub struct ToolSelection {
 }
 
 impl ToolSelection {
-    /// Retain the verified exact version across the following native preparation.
-    pub const fn version(&self) -> &PlatformVersion {
-        &self.version
-    }
-
-    /// Keep a temporary unpacking platform separate from the new project's stored version.
-    pub fn configured_version(&self) -> &str {
+    /// Keep the requested version constraint distinct from the verified executable.
+    pub fn configured_version<'a>(&'a self, requested: Option<&'a str>) -> &'a str {
         if self.deferred {
             ""
         } else {
-            self.version.as_str()
+            requested.unwrap_or_else(|| self.version.as_str())
         }
     }
 }

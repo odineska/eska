@@ -154,7 +154,7 @@ fn workspace_init_enrolls_a_copied_export_without_workflow_or_git_files() {
 /// Persist member overrides without copying root-owned build settings or changing XML bytes.
 fn workspace_init_saves_an_explicit_platform_even_when_root_has_no_version() {
     for locale in ["ru", "en"] {
-        for inherited in ["", "8.3.27.2325"] {
+        for (inherited, requested) in [("", "8.3.28"), ("8.3.27.2325", "8.3.28.1000")] {
             let fixture = TestDir::new();
             fs::write(
                 fixture.0.join("eska.toml"),
@@ -165,7 +165,7 @@ fn workspace_init_saves_an_explicit_platform_even_when_root_has_no_version() {
             let before = snapshot(&member);
             let log = fixture.0.join("runner.log");
             let output = command(&member, locale)
-                .args(["--platform-version", "8.3.28.1000", "--ibcmd"])
+                .args(["--platform-version", requested, "--ibcmd"])
                 .arg(super::build::fake_ibcmd(&fixture))
                 .env("FAKE_IBCMD_VERSION", "8.3.28.1000")
                 .env("FAKE_IBCMD_LOG", &log)
@@ -174,7 +174,7 @@ fn workspace_init_saves_an_explicit_platform_even_when_root_has_no_version() {
             success(&output);
             assert_eq!(fs::read_to_string(log).unwrap(), "--version\n");
             let manifest = fs::read_to_string(member.join("eska.toml")).unwrap();
-            assert!(manifest.contains("platform_version = \"8.3.28.1000\""));
+            assert!(manifest.contains(&format!("platform_version = \"{requested}\"")));
             assert!(!manifest.contains("artifacts_directory"));
             assert!(!manifest.contains("[vcs"));
             let discovery::DiscoveryContext::Workspace { workspace, .. } =
@@ -190,7 +190,7 @@ fn workspace_init_saves_an_explicit_platform_even_when_root_has_no_version() {
                     .platform_version()
                     .unwrap()
                     .as_str(),
-                "8.3.28.1000"
+                requested
             );
             assert_eq!(
                 project
@@ -298,17 +298,20 @@ fn standalone_init_validates_the_selected_platform_before_writing() {
                 .output()
                 .unwrap();
             let error = failure(&output, code, locale);
-            assert!(error.contains(if code == 2 {
-                if locale == "ru" {
-                    "линейку платформы"
+            assert!(
+                error.contains(if code == 2 {
+                    if locale == "ru" {
+                        "линейку платформы"
+                    } else {
+                        "Use a platform series"
+                    }
+                } else if locale == "ru" {
+                    "не соответствует требованию"
                 } else {
-                    "four numeric"
-                }
-            } else if locale == "ru" {
-                "проект требует точно"
-            } else {
-                "project requires exactly"
-            }));
+                    "does not match the requested"
+                }),
+                "{locale} {version}: {error}"
+            );
             assert_eq!(snapshot(&fixture.0), before);
         }
     }
