@@ -317,9 +317,8 @@ impl NewHandler<'_> {
             return Ok(None);
         }
         BuildSettings::new(
-            tool.as_ref().map_or("", |tool| {
-                tool.configured_version(self.args.platform.platform_version.as_deref())
-            }),
+            tool.as_ref()
+                .map_or("", artifact::ToolSelection::configured_version),
             "build".into(),
         )
         .map(Some)

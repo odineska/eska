@@ -134,7 +134,7 @@ fn execute(
         || args.platform.select_platform
         || inherited.is_none()
     {
-        let version = tool.configured_version(args.platform.platform_version.as_deref());
+        let version = tool.configured_version();
         Some(BuildSettings::new(version, "build".into()).map_err(|_| {
             Failure::new(
                 "platform-version-invalid",

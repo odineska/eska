@@ -110,6 +110,8 @@ fn native_onboarding_refuses_invalid_component_replies_and_rolls_back() {
         for mode in [
             "missing",
             "bridge-schema",
+            "bridge-onboarding-series",
+            "bridge-onboarding-mismatch",
             "bridge-onboarding-identity",
             "bridge-onboarding-failed",
         ] {
@@ -122,6 +124,7 @@ fn native_onboarding_refuses_invalid_component_replies_and_rolls_back() {
             fs::write(&input, bytes).unwrap();
             let component =
                 Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/component.py");
+            let unpack_started = fixture.0.join("unpack-started");
             let output = command(&fixture.0, locale)
                 .env(
                     "ESKA_BUILD_BINARY",
@@ -132,6 +135,7 @@ fn native_onboarding_refuses_invalid_component_replies_and_rolls_back() {
                     },
                 )
                 .env("ESKA_COMPONENT_FIXTURE_MODE", mode)
+                .env("ESKA_COMPONENT_FIXTURE_READY", &unpack_started)
                 .args([
                     "__shell-new",
                     "project",
@@ -141,13 +145,21 @@ fn native_onboarding_refuses_invalid_component_replies_and_rolls_back() {
                     "trunk",
                     "--no-vcs",
                     "--platform-version",
-                    "8.3.27.2325",
+                    "8.3.27",
                 ])
                 .output()
                 .unwrap();
             assert_eq!(output.status.code(), Some(1), "{output:?}");
             assert_eq!(output.stdout, [] as [u8; 0]);
             assert_ne!(output.stderr, [] as [u8; 0]);
+            assert_eq!(
+                unpack_started.exists(),
+                matches!(
+                    mode,
+                    "bridge-onboarding-identity" | "bridge-onboarding-failed"
+                ),
+                "{mode}"
+            );
             assert!(!root.exists());
             assert_eq!(fs::read(&input).unwrap(), bytes);
             assert_eq!(
