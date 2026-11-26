@@ -2,6 +2,7 @@
 
 mod base_configuration;
 mod execute;
+mod external_designer;
 pub(crate) mod ibcmd_generation;
 mod infobase;
 pub(crate) mod manifest;

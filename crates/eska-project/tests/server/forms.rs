@@ -3217,3 +3217,30 @@ fn choice_pictures_use_effective_form_resources_and_require_api_46() {
     }
     assert_eq!(fs::read_to_string(path).unwrap(), FORM);
 }
+
+#[test]
+fn interface_85_profile_is_negotiated_independently_of_compatibility_and_build() {
+    for version in ["8.5.4", "8.5.4.2072", "8.5.4.2073"] {
+        let directory = fixture();
+        fs::write(
+            directory.0.join("eska.toml"),
+            format!("[project]\ntype='configuration'\n[build]\nplatform_version='{version}'\n"),
+        )
+        .unwrap();
+        let path = directory.0.join("src/Configuration.xml");
+        let input = fs::read_to_string(&path).unwrap().replace("<Name>Fixture</Name>", "<Name>Fixture</Name><CompatibilityMode>Version8_5_1</CompatibilityMode><InterfaceCompatibilityMode>Version8_5</InterfaceCompatibilityMode>");
+        fs::write(path, input).unwrap();
+        for (minor, profile) in [(55, "taxi-8.3.27"), (56, "version-8.5")] {
+            let mut client = Client::new(&directory.0, "ru-RU");
+            let (context, node) = connect(&mut client, &directory.0, "ru-RU", minor);
+            let opened = client.request("form/open", &params(&context, json!({"node":node})));
+            assert_eq!(opened["profile"], profile, "{version}: {opened}");
+            if minor >= 56 {
+                assert_eq!(opened["compatibilityMode"], "Version8_5_1");
+                assert_eq!(opened["interfaceCompatibilityMode"], "Version8_5");
+            } else {
+                assert!(opened.get("compatibilityMode").is_none());
+            }
+        }
+    }
+}

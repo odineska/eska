@@ -5,7 +5,7 @@ use crate::{
         localization::{LocalizationValue, Localizer},
         path_output,
     },
-    project::build::{ManagedInfobaseError, ToolError, ToolSource},
+    project::build::{ManagedInfobaseError, PlatformVersion, ToolError, ToolSource},
 };
 pub use eska_presentation::diagnostics::global::{
     present_global_config_error, present_global_config_error_with_links,
@@ -21,7 +21,7 @@ pub fn present_tool_error(error: &ToolError, localizer: &Localizer) -> String {
     present_tool_error_with_links(error, localizer, false)
 }
 
-/// Present platform discovery and exact-version failures shared by platform consumers.
+/// Present platform discovery and version failures shared by platform consumers.
 pub fn present_tool_error_with_links(
     error: &ToolError,
     localizer: &Localizer,
@@ -73,6 +73,10 @@ pub fn present_tool_error_with_links(
                 ),
             ],
         ),
+        ToolError::SeriesNotFound {
+            expected,
+            available,
+        } => present_missing_series(expected, available, localizer),
         ToolError::Run(error) if error.kind() == std::io::ErrorKind::Interrupted => {
             localizer.text("component-cancelled")
         }
@@ -113,6 +117,26 @@ pub fn present_tool_error_with_links(
             ],
         ),
     }
+}
+
+fn present_missing_series(
+    expected: &PlatformVersion,
+    available: &[PlatformVersion],
+    localizer: &Localizer,
+) -> String {
+    let version = ("version", LocalizationValue::Text(expected.as_str()));
+    if available.is_empty() {
+        return localizer.format("build-series-missing-empty", &[version]);
+    }
+    let available = available
+        .iter()
+        .map(PlatformVersion::as_str)
+        .collect::<Vec<_>>()
+        .join(", ");
+    localizer.format(
+        "build-series-missing",
+        &[version, ("available", LocalizationValue::Text(&available))],
+    )
 }
 
 /// Present managed build-infobase failures shared by build and clean commands.

@@ -1,5 +1,6 @@
 //! A document's shared numbering settings are copied only from a verified numerator descriptor.
 
+use crate::project::metadata_edit::EditingProfile;
 use roxmltree::{Document, Node};
 
 use super::{EditError, EditPlan, FieldStep, ScalarSchema, patch, schema};
@@ -23,7 +24,7 @@ pub struct Numbering {
 
 impl Numbering {
     /// Unknown or incomplete writer shapes cannot invent configuration defaults or missing fields.
-    pub fn read(input: &str, modern: bool) -> Result<Self, EditError> {
+    pub fn read(input: &str, profile: EditingProfile) -> Result<Self, EditError> {
         metadata_parser::check_envelope(input).map_err(|_| EditError::InvalidXml)?;
         let document = Document::parse(input).map_err(|_| EditError::InvalidXml)?;
         let properties = properties(&document, "DocumentNumerator")?;
@@ -32,9 +33,9 @@ impl Numbering {
             .map(|name| {
                 let node = field(properties, name)?;
                 let value = scalar_text(node)?;
-                let model = schema::field_type("DocumentNumerator", node, true, modern)
+                let model = schema::field_type("DocumentNumerator", node, true, profile)
                     .ok_or(EditError::UnsupportedValue)?;
-                schema::schema(model, modern)
+                schema::schema(model, profile)
                     .ok_or(EditError::UnsupportedValue)?
                     .validate(value)?;
                 Ok((name, value.to_owned()))

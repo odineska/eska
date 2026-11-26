@@ -1,5 +1,6 @@
 //! Numbering edits bind their dependent descriptors to a separate, freshly checked revision.
 
+use crate::project::metadata_edit::EditingProfile;
 mod context;
 mod history;
 
@@ -83,7 +84,7 @@ impl ProjectSession {
         kind: MetadataKind,
         expected: Option<&str>,
         property: &str,
-        modern: bool,
+        profile: EditingProfile,
     ) -> Result<PropertyEditPlan, PropertyEditError> {
         let expected = expected.ok_or(EditError::ContextRequired)?;
         let context = NumberingContext::read(&self.source, &primary.object_id, kind)?;
@@ -107,7 +108,7 @@ impl ProjectSession {
                     numbering::document_numerator(result.primary.plan.output())?
                 {
                     let target = context.numerator(&reference)?;
-                    let numbering = Numbering::read(&target.input, modern)?;
+                    let numbering = Numbering::read(&target.input, profile)?;
                     result.primary.plan = numbering.synchronize(
                         result.primary.plan.original(),
                         &result.primary.object_id,
@@ -117,7 +118,7 @@ impl ProjectSession {
                 }
             }
             MetadataKind::DocumentNumerator => {
-                let numbering = Numbering::read(result.primary.plan.output(), modern)?;
+                let numbering = Numbering::read(result.primary.plan.output(), profile)?;
                 for file in &context.files {
                     let plan = numbering
                         .synchronize(&file.input, &file.id, None, Some(property))

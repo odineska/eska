@@ -53,13 +53,29 @@ case "$1:$2:$3" in
     else
       printf '0123456789012345678901234567890123456789\n'
     fi ;;
+  infobase:config:checksum)
+    checksum_file=main-checksum
+    for argument in "$@"; do
+      if test "$argument" = --db; then checksum_file=database-checksum; fi
+    done
+    test -f "$checksum_file" || exit 2
+    cat "$checksum_file" ;;
   infobase:config:apply)
+    if test -f record-apply-arguments; then printf '%s\n' "$@" > apply-arguments; fi
+    if test -f require-restructuring-confirmation; then
+      confirmed=no
+      for argument in "$@"; do
+        if test "$argument" = --force; then confirmed=yes; fi
+      done
+      test "$confirmed" = yes || exit 255
+    fi
     if test -f pause-apply; then
       touch apply-ready
       exec sleep 30
     fi
     test ! -f fail-apply || exit 1
     if test -f next-generation; then cp next-generation generation-override; fi
+    if test -f replacement-database-checksum; then cp replacement-database-checksum database-checksum; fi
     if test -f apply-generation-output; then cat apply-generation-output; fi ;;
   infobase:config:import)
     if test "$4" = files; then
@@ -98,6 +114,127 @@ fn initialize(root: &Path) {
     );
 }
 
+#[test]
+fn full_restructuring_requires_the_reviewed_initialize_plan() {
+    let directory = TestDir::new();
+    let root = &directory.0;
+    let module = prepare(root);
+    let arguments = root.join("apply-arguments");
+    let needs_confirmation = root.join("require-restructuring-confirmation");
+    fs::write(root.join("record-apply-arguments"), "").unwrap();
+    fs::write(&needs_confirmation, "").unwrap();
+
+    let (output, preview) = apply(root, "en-US", &["--initialize"]);
+    assert!(output.status.success(), "{preview}");
+    assert_eq!(preview["plan"]["mode"], "initialize");
+    assert!(!arguments.exists());
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, applied) = apply(root, "en-US", &["--initialize", "--confirm", token]);
+    assert!(output.status.success(), "{applied}");
+    assert!(
+        fs::read_to_string(&arguments)
+            .unwrap()
+            .lines()
+            .any(|argument| argument == "--force")
+    );
+
+    fs::remove_file(needs_confirmation).unwrap();
+    fs::write(module, "A = 2;").unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "incremental");
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, applied) = apply(root, "en-US", &["--confirm", token]);
+    assert!(output.status.success(), "{applied}");
+    assert!(
+        !fs::read_to_string(arguments)
+            .unwrap()
+            .lines()
+            .any(|argument| argument == "--force")
+    );
+}
+
+#[test]
+fn full_file_apply_records_the_new_generation_only_if_the_imported_contents_match() {
+    let directory = TestDir::new();
+    let root = &directory.0;
+    let module = prepare(root);
+    for file in [root.join("ibcmd"), root.join(".eska/settings_local.toml")] {
+        let content = fs::read_to_string(&file).unwrap();
+        fs::write(file, content.replace("8.3.27.2342", "8.5.4.3000")).unwrap();
+    }
+    let checksum = "c".repeat(64);
+    for file in ["main-checksum", "database-checksum"] {
+        fs::write(root.join(file), format!("{checksum}\n")).unwrap();
+    }
+    let logged = "a".repeat(40);
+    let published = "b".repeat(40);
+    fs::write(
+        root.join("apply-generation-output"),
+        format!("[INFO] Configuration generation is created: {logged}\n"),
+    )
+    .unwrap();
+    fs::write(root.join("next-generation"), format!("{published}\n")).unwrap();
+    initialize(root);
+    let (output, unchanged) = apply(root, "en-US", &[]);
+    assert!(output.status.success(), "{unchanged}");
+    assert_eq!(unchanged["plan"]["mode"], "unchanged");
+    assert_eq!(
+        unchanged["plan"]["inspection"]["baseline_generation"],
+        published
+    );
+
+    fs::write(module, "A = 2;").unwrap();
+    fs::write(root.join("replacement-database-checksum"), "d".repeat(64)).unwrap();
+    fs::write(root.join("next-generation"), "e".repeat(40)).unwrap();
+    let (_, preview) = apply(root, "en-US", &["--initialize"]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, error) = apply(root, "en-US", &["--initialize", "--confirm", token]);
+    assert!(!output.status.success(), "{error}");
+    assert_eq!(error["error"]["code"], "stale_preview");
+    let (_, preview) = apply(root, "en-US", &["--initialize"]);
+    assert_eq!(
+        preview["plan"]["inspection"]["baseline_generation"],
+        published
+    );
+    assert_eq!(preview["plan"]["inspection"]["pending_apply"], true);
+}
+
+#[test]
+fn full_file_apply_without_checksum_does_not_save_an_unverified_generation() {
+    for checksum in [None, Some("invalid checksum")] {
+        let directory = TestDir::new();
+        let root = &directory.0;
+        prepare(root);
+        for file in [root.join("ibcmd"), root.join(".eska/settings_local.toml")] {
+            let content = fs::read_to_string(&file).unwrap();
+            fs::write(file, content.replace("8.3.27.2342", "8.5.4.3000")).unwrap();
+        }
+        if let Some(checksum) = checksum {
+            fs::write(root.join("main-checksum"), checksum).unwrap();
+        }
+        let original = "0123456789012345678901234567890123456789";
+        fs::write(
+            root.join("apply-generation-output"),
+            format!("[INFO] Configuration generation is created: {original}\n"),
+        )
+        .unwrap();
+        // A matching observed generation needs no checksum fallback.
+        initialize(root);
+        fs::write(root.join("next-generation"), "b".repeat(40)).unwrap();
+        let (_, preview) = apply(root, "en-US", &["--initialize"]);
+        let token = preview["plan"]["confirmation"].as_str().unwrap();
+        let (output, error) = apply(root, "ru-RU", &["--initialize", "--confirm", token]);
+        assert!(!output.status.success(), "{error}");
+        assert_eq!(error["error"]["code"], "stale_preview");
+        let (_, pending) = apply(root, "en-US", &["--initialize"]);
+        assert_eq!(
+            pending["plan"]["inspection"]["baseline_generation"],
+            original
+        );
+        assert_eq!(pending["plan"]["inspection"]["pending_apply"], true);
+    }
+}
+
 fn probe(root: &Path, language: &str, input: Option<&[u8]>) -> (Output, Value) {
     let mut command = Command::new(env!("CARGO_BIN_EXE_eska-build"));
     command
@@ -123,6 +260,34 @@ fn probe(root: &Path, language: &str, input: Option<&[u8]>) -> (Output, Value) {
     let output = child.wait_with_output().unwrap();
     let value = serde_json::from_slice(&output.stdout).unwrap();
     (output, value)
+}
+
+#[test]
+fn runtime_without_a_version_reuses_the_verified_inventory_installation() {
+    let directory = TestDir::new();
+    let root = &directory.0;
+    prepare(root);
+    let settings = root.join(".eska/settings_local.toml");
+    let content = fs::read_to_string(&settings).unwrap();
+    fs::write(settings, content.replace("version='8.3.27.2342'\n", "")).unwrap();
+    let ibcmd = root.join("ibcmd");
+    let content = fs::read_to_string(&ibcmd).unwrap();
+    fs::write(
+        ibcmd,
+        content.replace(
+            "--version::) printf",
+            "--version::) printf 'probe\\n' >> version-calls; printf",
+        ),
+    )
+    .unwrap();
+    fs::write(root.join("1cv8c"), "").unwrap();
+    let (output, report) = probe(root, "en-US", None);
+    assert!(output.status.success(), "{report}");
+    assert_eq!(report["status"], "ready");
+    assert_eq!(
+        fs::read_to_string(root.join("version-calls")).unwrap(),
+        "probe\n"
+    );
 }
 
 #[test]

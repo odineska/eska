@@ -168,7 +168,7 @@ impl BuildDocument {
                 path_encoding,
             },
             platform: PlatformDocument {
-                version: plan.platform_version().as_str().to_owned(),
+                version: result.platform_version().as_str().to_owned(),
             },
             duration_ms: result.duration().as_millis(),
         }
@@ -204,13 +204,12 @@ impl BuildPlanEntryDocument {
                 .plan
                 .base_configuration()
                 .map(BuildBaseDocument::new),
-            infobase: prepared
-                .plan
-                .recreates_infobase()
-                .then(|| BuildPlanInfobaseDocument {
-                    root: BuildPlanPathDocument::new(prepared.plan.infobase_root()),
-                    mode: "recreate",
-                }),
+            infobase: (prepared.plan.uses_managed_infobase(tool)
+                && prepared.plan.recreates_infobase())
+            .then(|| BuildPlanInfobaseDocument {
+                root: BuildPlanPathDocument::new(prepared.plan.infobase_root()),
+                mode: "recreate",
+            }),
             artifact: BuildPlanArtifactDocument {
                 r#type: prepared.plan.artifact_type().as_str(),
                 path: artifact_path,
@@ -254,7 +253,7 @@ impl WorkspaceBuildEntry {
                 path_encoding,
             }),
             platform: PlatformDocument {
-                version: plan.platform_version().as_str().to_owned(),
+                version: result.platform_version().as_str().to_owned(),
             },
             duration_ms: Some(result.duration().as_millis()),
             error: None,

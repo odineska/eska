@@ -1,6 +1,7 @@
 //! Structural overrides reuse existing scalar schemas; they cannot inject XML or change identity.
 
 use super::{ProjectSession, WorkspaceError};
+use crate::project::metadata_edit::EditingProfile;
 use crate::project::{
     metadata_edit::{
         EditError, EditPlan, EditableField, EditingDocument, PropertyChange, Replacement,
@@ -18,7 +19,7 @@ use crate::project::{
 struct Target<'a> {
     id: &'a ObjectId,
     parent: Option<ObjectId>,
-    modern: bool,
+    profile: EditingProfile,
 }
 impl Target<'_> {
     fn editing<'a>(&'a self, input: &'a str) -> EditingDocument<'a> {
@@ -27,7 +28,7 @@ impl Target<'_> {
             id: self.id,
             parent: self.parent.clone(),
             predefined: false,
-            modern: self.modern,
+            profile: self.profile,
         }
     }
 }
@@ -67,12 +68,12 @@ impl ProjectSession {
         let target = Target {
             id,
             parent: owner.parent(),
-            modern: self
-                .project()
-                .configuration()
-                .build_settings()
-                .platform_version()
-                .is_some_and(|version| version.as_str().starts_with("8.5.1.")),
+            profile: EditingProfile::for_platform(
+                self.project()
+                    .configuration()
+                    .build_settings()
+                    .platform_version(),
+            ),
         };
         for (key, keys) in types {
             input = self.override_types(&input, &target, key, keys, inputs)?;

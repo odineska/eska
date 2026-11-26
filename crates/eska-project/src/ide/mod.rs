@@ -22,7 +22,7 @@ mod runtime;
 mod server;
 mod source_labels;
 
-pub(crate) const API_MINOR: u32 = 55;
+pub(crate) const API_MINOR: u32 = 56;
 
 /// Run a persistent framed protocol session without human output on stdout.
 pub fn run() -> std::process::ExitCode {

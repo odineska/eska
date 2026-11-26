@@ -37,8 +37,14 @@ if mode.startswith("bridge-"):
         result["data"] = {"padding": "x" * (1024 * 1024 + 1)}
     if mode.startswith("bridge-onboarding-"):
         if operation == "select_platform":
-            result["data"] = {"platform_version": "8.3.27.2325"}
+            version = {"bridge-onboarding-series": "8.3.27",
+                       "bridge-onboarding-mismatch": "8.5.4.2072"}.get(mode, "8.3.27.2325")
+            result["data"] = {"platform_version": version}
+            if "--create" in sys.argv:
+                result["data"]["deferred"] = False
         else:
+            if "ESKA_COMPONENT_FIXTURE_READY" in os.environ:
+                publish_ready()
             destination = Path(sys.argv[operation_index + 2])
             destination.mkdir()
             destination.joinpath("Object.xml").write_bytes(Path(sys.argv[operation_index + 1]).read_bytes())

@@ -37,6 +37,8 @@ struct Entry {
     node: NodeId,
     application: Option<String>,
     pictures: bool,
+    profiles: bool,
+    platform_854: bool,
     revision: u64,
     preview: FormPreview,
     model: Value,
@@ -88,6 +90,9 @@ struct Overlay {
 pub(super) fn capability(minor: u32) -> Value {
     let mut result = json!({"pictures":minor >= 37,"inputPreparation":minor >= 38,"handlerNavigation":minor >= 39,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
         "maxFormBytes":eska_project_core::project::forms::MAX_FORM_BYTES,"maxOverlayBytes":8*1024*1024,"maxInlineBytes":128*1024,"uploads":"queryBuffers"});
+    if minor >= 56 {
+        result["profiles"] = json!(["taxi-8.3.27", "version-8.5"]);
+    }
     if minor >= 41 {
         result["propertyPalette"] = json!(true);
     }
@@ -262,9 +267,40 @@ impl Server {
     }
 }
 fn header(id: &str, entry: &Entry) -> Value {
-    json!({"formSessionId":id,"revision":entry.revision.to_string(),"contextFingerprint":entry.preview.context_fingerprint,"application":entry.preview.application,
+    let mut result = json!({"formSessionId":id,"revision":entry.revision.to_string(),"contextFingerprint":entry.preview.context_fingerprint,"application":entry.preview.application,
         "limitedContext":entry.preview.limited_context,"status":if entry.last_error.is_some(){"stale"}else{"ready"},"lastError":entry.last_error,"modelComplete":entry.preview.form.diagnostics.is_empty() && entry.preview.presentation.diagnostics.is_empty(),
-        "profile":"taxi-8.3.27","dependencies":entry.preview.dependencies.iter().filter(|dependency| entry.pictures || dependency.role != eska_project_core::project::forms::FormDependencyRole::Picture).map(dto::dependency).collect::<Vec<_>>(),"model":entry.model})
+        "profile":"taxi-8.3.27","dependencies":entry.preview.dependencies.iter().filter(|dependency| entry.pictures || dependency.role != eska_project_core::project::forms::FormDependencyRole::Picture).map(dto::dependency).collect::<Vec<_>>(),"model":entry.model});
+    if entry.profiles {
+        let compatibility = configuration_value(&entry.preview, "CompatibilityMode");
+        let interface = configuration_value(&entry.preview, "InterfaceCompatibilityMode");
+        if entry.platform_854 && interface == Some("Version8_5") {
+            result["profile"] = json!("version-8.5");
+        }
+        result["compatibilityMode"] = json!(compatibility);
+        result["interfaceCompatibilityMode"] = json!(interface);
+    }
+    result
+}
+fn configuration_value<'a>(preview: &'a FormPreview, name: &str) -> Option<&'a str> {
+    use eska_project_core::project::metadata_model::{MetadataKind, MetadataValue};
+    preview
+        .resources
+        .iter()
+        .rev()
+        .flat_map(|resource| &resource.descriptor.objects)
+        .filter(|object| object.metadata.kind() == MetadataKind::Configuration)
+        .filter_map(|object| object.properties.as_ref())
+        .flat_map(|properties| properties.iter())
+        .find_map(|field| match &field.property.value {
+            MetadataValue::Text(value)
+                if field.property.key.name == name
+                    && field.property.key.namespace.as_deref()
+                        == Some("http://v8.1c.ru/8.3/MDClasses") =>
+            {
+                Some(value.as_str())
+            }
+            _ => None,
+        })
 }
 fn limit() -> Value {
     domain(
@@ -304,5 +340,19 @@ fn preview_error(error: FormPreviewError) -> Value {
             }
         },
         FormPreviewError::NotManagedForm => failure("not_managed_form"),
+    }
+}
+
+#[cfg(test)]
+mod profile_tests {
+    use super::*;
+    #[test]
+    fn new_profiles_are_advertised_only_to_negotiated_clients() {
+        assert!(capability(55).get("profiles").is_none());
+        assert_eq!(capability(55)["profile"], "taxi-8.3.27");
+        assert_eq!(
+            capability(56)["profiles"],
+            json!(["taxi-8.3.27", "version-8.5"])
+        );
     }
 }

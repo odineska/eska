@@ -52,25 +52,16 @@ impl Failure {
 pub struct ToolSelection {
     binary: PathBuf,
     version: PlatformVersion,
+    configured_version: String,
     options: Vec<OsString>,
     language: &'static str,
     scope: Operation,
-    deferred: bool,
 }
 
 impl ToolSelection {
-    /// Retain the verified exact version across the following native preparation.
-    pub const fn version(&self) -> &PlatformVersion {
-        &self.version
-    }
-
-    /// Keep a temporary unpacking platform separate from the new project's stored version.
+    /// Return the portable manifest constraint selected alongside the verified executable.
     pub fn configured_version(&self) -> &str {
-        if self.deferred {
-            ""
-        } else {
-            self.version.as_str()
-        }
+        &self.configured_version
     }
 }
 
@@ -184,20 +175,42 @@ impl PlatformHandler<'_> {
         let version = fields
             .get("platform_version")
             .ok_or_else(|| failure(Error::InvalidResponse))?;
-        if init && version.is_null() {
+        let requested = self.args.platform_version.as_deref();
+        let explicit = requested
+            .filter(|value| !value.is_empty())
+            .map(PlatformVersion::parse)
+            .transpose()
+            .map_err(|_| failure(Error::InvalidResponse))?;
+        let constraint = if requested.is_some() || self.args.select_platform {
+            explicit.as_ref()
+        } else {
+            inherited
+        };
+        if init && version.is_null() && constraint.is_none() {
             return Ok(None);
         }
         let version = version
             .as_str()
-            .and_then(|version| PlatformVersion::parse(version).ok())
+            .and_then(|value| PlatformVersion::parse_exact(value).ok())
+            .filter(|actual| {
+                constraint.is_none_or(|required| required.matches_installation(actual))
+            })
             .ok_or_else(|| failure(Error::InvalidResponse))?;
+        let configured_version = if deferred {
+            if constraint.is_some() {
+                return Err(failure(Error::InvalidResponse));
+            }
+            String::new()
+        } else {
+            explicit.as_ref().unwrap_or(&version).as_str().to_owned()
+        };
         Ok(Some(ToolSelection {
             binary,
             version,
+            configured_version,
             options,
             language,
             scope: scope.clone(),
-            deferred,
         }))
     }
     /// Preserve OS-native option values; command lines never pass through a shell.

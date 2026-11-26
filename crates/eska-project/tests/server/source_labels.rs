@@ -26,6 +26,9 @@ fn source_labels_protocol_is_bounded_and_versioned() {
             let mut params = context.clone();
             params["paths"] = json!([
                 {"value":"Documents/ВыдачаЗайма/Ext/ObjectModule.bsl","encoding":"utf-8"},
+                {"value":"Documents/ВыдачаЗайма/Forms/Форма.xml","encoding":"utf-8"},
+                {"value":"Documents/ВыдачаЗайма/Forms/Форма/Ext/Form.xml","encoding":"utf-8"},
+                {"value":"Documents/ВыдачаЗайма/Forms/Форма/Ext/Form/Module.bsl","encoding":"utf-8"},
                 {"value":"unknown.txt","encoding":"utf-8"}
             ]);
             if minor < 54 {
@@ -39,7 +42,17 @@ fn source_labels_protocol_is_bounded_and_versioned() {
                     result["labels"][0]["translations"]["ru-RU"],
                     "Документ.ВыдачаЗайма.МодульОбъекта"
                 );
-                assert!(result["labels"][1]["translations"].is_null());
+                for (label, suffix) in result["labels"].as_array().unwrap()[1..4].iter().zip([
+                    ".Свойства",
+                    "",
+                    ".Модуль",
+                ]) {
+                    assert_eq!(
+                        label["translations"]["ru-RU"],
+                        format!("Документ.ВыдачаЗайма.Форма.Форма{suffix}")
+                    );
+                }
+                assert!(result["labels"][4]["translations"].is_null());
                 assert_eq!(result["generation"], context["generation"]);
                 captions.push(result["labels"].clone());
                 params["paths"] = json!([{"value":"../outside.xml","encoding":"utf-8"}]);
@@ -82,4 +95,39 @@ fn source_labels_protocol_is_bounded_and_versioned() {
         !root.join("src/Documents").exists(),
         "captions do not require existing source files"
     );
+}
+
+/// Root-level payload directories in external exports use the opened metadata identity.
+#[test]
+fn source_labels_for_direct_external_export_use_known_root() {
+    let fixture = support::TestDir::new();
+    let root = fixture.0.join("direct-external");
+    create::create(&root, &ProjectConfig::new(ProjectType::Processing)).unwrap();
+    fs::write(root.join("src/Загрузка.xml"), "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><ExternalDataProcessor uuid=\"root\"><Properties><Name>Загрузка</Name></Properties><ChildObjects/></ExternalDataProcessor></MetaDataObject>").unwrap();
+    let mut client = Client::new(&root, "ru");
+    client.request("initialize", &json!({"apiVersion":{"major":1,"minor":54},"client":{"name":"source-labels","version":"1"}}));
+    let opened = client.request("workspace/open", &json!({"start":{"value":root,"encoding":"utf-8"},"selection":{"kind":"current"},"diskCache":false}));
+    let project = &opened["projects"][0];
+    let files = [
+        ("Forms/Выбор.xml", "Форма.Выбор.Свойства"),
+        ("Forms/Выбор/Ext/Form.xml", "Форма.Выбор"),
+        ("Forms/Выбор/Ext/Form/Module.bsl", "Форма.Выбор.Модуль"),
+        (
+            "Commands/Выполнить/Ext/CommandModule.bsl",
+            "Команда.Выполнить.МодульКоманды",
+        ),
+        ("Ext/ObjectModule.bsl", "МодульОбъекта"),
+    ];
+    let result = client.request("metadata/sourceLabels", &json!({
+        "sessionId":opened["sessionId"],"projectId":project["projectId"],"generation":project["generation"],
+        "paths":files.map(|(path,_)| json!({"value":path,"encoding":"utf-8"})),
+    }));
+    for (label, (file, suffix)) in result["labels"].as_array().unwrap().iter().zip(files) {
+        assert_eq!(
+            label["translations"]["ru-RU"],
+            format!("Обработка.Загрузка.{suffix}"),
+            "{file}"
+        );
+    }
+    client.finish();
 }

@@ -1,6 +1,6 @@
 //! Bounded inspection of the root descriptor, independent of filenames and aliases.
 
-use std::{fs, io::Read, path::Path};
+use std::{ffi::OsString, fs, io::Read, path::Path};
 
 use super::{Error as ArtifactError, io_error};
 use crate::project::{ProjectType, designer_xml};
@@ -21,7 +21,14 @@ pub struct Identity {
 /// # Errors
 /// Rejects ambiguous, malformed, oversized and linked root descriptors.
 pub fn inspect_identity(directory: &Path) -> Result<Option<Identity>, ArtifactError> {
-    let mut identity = None;
+    Ok(inspect_descriptor(directory)?.map(|(_, identity)| identity))
+}
+
+/// Find the root descriptor and retain its actual file name for callers moving its tree.
+/// # Errors
+/// Rejects ambiguous, malformed, oversized and linked root descriptors.
+pub fn inspect_descriptor(directory: &Path) -> Result<Option<(OsString, Identity)>, ArtifactError> {
+    let mut descriptor = None;
     for entry in fs::read_dir(directory).map_err(|error| io_error(directory, error))? {
         let entry = entry.map_err(|error| io_error(directory, error))?;
         let path = entry.path();
@@ -42,13 +49,13 @@ pub fn inspect_identity(directory: &Path) -> Result<Option<Identity>, ArtifactEr
             return Err(ArtifactError::UnsafePath(path));
         }
         if let Some(found) = read_identity(&path)? {
-            if identity.is_some() {
+            if descriptor.is_some() {
                 return Err(ArtifactError::AmbiguousDescriptor(directory.to_owned()));
             }
-            identity = Some(found);
+            descriptor = Some((entry.file_name(), found));
         }
     }
-    Ok(identity)
+    Ok(descriptor)
 }
 
 /// Parse a single bounded XML document and retain only its root identity.

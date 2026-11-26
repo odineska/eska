@@ -341,7 +341,7 @@ fn dry_run_honors_selector_and_platform_override() {
     let config_before = fs::read(&manifest).expect("workspace config");
     let output = Command::new(env!("CARGO_BIN_EXE_eska"))
         .current_dir(&fixture.0)
-        .env("FAKE_IBCMD_VERSION", "8.5.4.1234")
+        .env("FAKE_IBCMD_VERSION", "8.3.27.2342")
         .args([
             "--lang",
             "en",
@@ -350,7 +350,7 @@ fn dry_run_honors_selector_and_platform_override() {
             "-p",
             "import-orders",
             "--platform-version",
-            "8.5.4.1234",
+            "8.3.27.2342",
             "--recreate-infobase",
             "--format",
             "json",
@@ -367,11 +367,11 @@ fn dry_run_honors_selector_and_platform_override() {
     assert_eq!(document["projects"][0]["name"], "import-orders");
     assert_eq!(
         document["projects"][0]["platform"]["required_version"],
-        "8.5.4.1234"
+        "8.3.27.2342"
     );
     assert_eq!(
         document["projects"][0]["platform"]["found_version"],
-        "8.5.4.1234"
+        "8.3.27.2342"
     );
     assert_eq!(document["projects"][0]["infobase"]["mode"], "recreate");
     assert_eq!(
@@ -1486,4 +1486,492 @@ fn workspace_manifest_keeps_each_member_transaction_independent() {
             .expect("preserved manifest"),
         b"old manifest"
     );
+}
+
+/// Supported releases use standalone import, retaining manifests and prior outputs on failure.
+#[test]
+fn standalone_build_preserves_publication_contract_without_infobase() {
+    for version in ["8.5.4.2072", "8.5.4.3000"] {
+        for (kind, extension) in [
+            ("configuration", "cf"),
+            ("extension", "cfe"),
+            ("processing", "epf"),
+            ("report", "erf"),
+        ] {
+            for locale in ["ru", "en"] {
+                let fixture = TestDir::new();
+                let ibcmd = fake_ibcmd(&fixture);
+                let root = project(&fixture, kind, "Standalone");
+                let config = root.join("eska.toml");
+                fs::write(
+                    &config,
+                    fs::read_to_string(&config)
+                        .unwrap()
+                        .replace("8.3.27.2325", version),
+                )
+                .unwrap();
+                let log = fixture.0.join("ibcmd.log");
+                let invoke = |fail: bool, mode: &str| {
+                    Command::new(env!("CARGO_BIN_EXE_eska"))
+                        .current_dir(&root)
+                        .env("FAKE_IBCMD_VERSION", version)
+                        .env("FAKE_IBCMD_LOG", &log)
+                        .env("FAKE_IBCMD_FAIL_IMPORT", if fail { "1" } else { "0" })
+                        .args([
+                            "--lang",
+                            locale,
+                            "build",
+                            "--recreate-infobase",
+                            "--format",
+                            "json",
+                            "--ibcmd",
+                        ])
+                        .arg(&ibcmd)
+                        .arg(mode)
+                        .output()
+                        .unwrap()
+                };
+                let preview = invoke(false, "--dry-run");
+                assert!(preview.status.success(), "{preview:?}");
+                let plan: Value = serde_json::from_slice(&preview.stdout).unwrap();
+                assert!(plan["projects"][0]["infobase"].is_null(), "{plan}");
+                for _ in 0..2 {
+                    let output = invoke(false, "--manifest");
+                    assert!(output.status.success(), "{output:?}");
+                }
+                let artifact = root.join(format!("build/Standalone.{extension}"));
+                let manifest = root.join(format!("build/Standalone.{extension}.manifest.json"));
+                let before = fs::read(&artifact).unwrap();
+                let passport = fs::read(&manifest).unwrap();
+                assert!(!invoke(true, "--manifest").status.success());
+                assert_eq!(fs::read(artifact).unwrap(), before);
+                assert_eq!(fs::read(manifest).unwrap(), passport);
+                assert!(!root.join("build/.eska/infobases").exists());
+                let calls = fs::read_to_string(log).unwrap();
+                assert_eq!(
+                    calls
+                        .lines()
+                        .filter(|line| line.starts_with("config import"))
+                        .count(),
+                    3
+                );
+                assert!(!calls.contains("infobase create"), "{calls}");
+            }
+        }
+    }
+}
+
+/// File-capable platforms retain the managed infobase when an external object needs context.
+#[test]
+fn standalone_capability_keeps_external_base_configuration_context() {
+    for kind in ["processing", "report"] {
+        let fixture = TestDir::new();
+        let ibcmd = fake_ibcmd(&fixture);
+        let root = project(&fixture, kind, "Contextual");
+        let config = root.join("eska.toml");
+        fs::write(
+            &config,
+            fs::read_to_string(&config)
+                .unwrap()
+                .replace("8.3.27.2325", "8.5.4.2072"),
+        )
+        .unwrap();
+        let base = fixture.0.join("base.cf");
+        fs::write(&base, b"base configuration").unwrap();
+        let log = fixture.0.join("ibcmd.log");
+        let output = Command::new(env!("CARGO_BIN_EXE_eska"))
+            .current_dir(&root)
+            .env("FAKE_IBCMD_VERSION", "8.5.4.2072")
+            .env("FAKE_IBCMD_LOG", &log)
+            .args(["--lang", "en", "build", "--base-configuration"])
+            .arg(&base)
+            .arg("--ibcmd")
+            .arg(&ibcmd)
+            .output()
+            .unwrap();
+        assert!(output.status.success(), "{output:?}");
+        let calls = fs::read_to_string(log).unwrap();
+        assert!(
+            calls
+                .lines()
+                .any(|line| line.starts_with("infobase create") && line.contains("--load=")),
+            "{calls}"
+        );
+        assert!(
+            calls
+                .lines()
+                .any(|line| line.starts_with("infobase config import")),
+            "{calls}"
+        );
+        assert!(
+            !calls.lines().any(|line| line.starts_with("config import")),
+            "{calls}"
+        );
+    }
+}
+
+/// Put the two portable process fixtures in one installation without affecting other tests.
+fn platform_with_designer(fixture: &TestDir) -> PathBuf {
+    let platform = fixture.0.join("platform");
+    fs::create_dir(&platform).unwrap();
+    let ibcmd = platform.join(format!("ibcmd{}", std::env::consts::EXE_SUFFIX));
+    let designer = platform.join(format!("1cv8{}", std::env::consts::EXE_SUFFIX));
+    let executable = fake_ibcmd(fixture);
+    fs::copy(&executable, &ibcmd).unwrap();
+    fs::copy(executable, designer).unwrap();
+    ibcmd
+}
+
+/// Resolve CF and XML context identically while keeping ibcmd first for future platform fixes.
+#[test]
+fn contextual_external_import_uses_paired_designer_after_platform_failure() {
+    for version in ["8.5.4.2072", "8.5.4.3000"] {
+        for kind in ["processing", "report"] {
+            for context in ["cf", "xml"] {
+                let fixture = TestDir::new();
+                let ibcmd = platform_with_designer(&fixture);
+                let root = project(&fixture, kind, "Contextual");
+                fs::rename(
+                    root.join("src/Contextual.xml"),
+                    root.join("src/FixtureExternalDescriptor.xml"),
+                )
+                .unwrap();
+                let config = root.join("eska.toml");
+                let mut config_text = fs::read_to_string(&config)
+                    .unwrap()
+                    .replace("8.3.27.2325", version);
+                let base = fixture.0.join("base.cf");
+                fs::write(&base, b"base configuration").unwrap();
+                if context == "xml" {
+                    let source = fixture.0.join("base-source-input");
+                    fs::create_dir(&source).unwrap();
+                    fs::write(source.join("Configuration.xml"), "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><Configuration uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>BaseContext</Name></Properties></Configuration></MetaDataObject>").unwrap();
+                    config_text
+                        .push_str("\n[analysis.configuration]\nsource='../base-source-input'\n");
+                }
+                fs::write(config, config_text).unwrap();
+                let log = fixture.0.join("ibcmd.log");
+                let invoke = |fail: bool| {
+                    let mut command = Command::new(env!("CARGO_BIN_EXE_eska"));
+                    command
+                        .current_dir(&root)
+                        .env("FAKE_IBCMD_VERSION", version)
+                        .env("FAKE_IBCMD_LOG", &log)
+                        .env(
+                            "FAKE_IBCMD_FAIL_SOURCE_CONTAINS",
+                            if fail {
+                                "FixtureExternalDescriptor.xml"
+                            } else {
+                                ""
+                            },
+                        )
+                        .args([
+                            "--lang",
+                            "en",
+                            "build",
+                            "--manifest",
+                            "--format",
+                            "json",
+                            "--ibcmd",
+                        ])
+                        .arg(&ibcmd);
+                    if context == "cf" {
+                        command.arg("--base-configuration").arg(&base);
+                    }
+                    command.output().unwrap()
+                };
+                let native = invoke(false);
+                assert!(native.status.success(), "{native:?}");
+                assert!(!fs::read_to_string(&log).unwrap().contains("DESIGNER"));
+                for _ in 0..2 {
+                    let output = invoke(true);
+                    assert!(output.status.success(), "{output:?}");
+                    let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+                    assert_eq!(document["schema_version"], 1);
+                    assert_eq!(document["artifact"]["type"], kind);
+                }
+                let calls = fs::read_to_string(log).unwrap();
+                let stages = calls
+                    .lines()
+                    .filter(|line| {
+                        line.starts_with("infobase config import") || line.starts_with("DESIGNER")
+                    })
+                    .collect::<Vec<_>>();
+                assert!(
+                    stages[stages.len() - 2].starts_with("infobase config import"),
+                    "{calls}"
+                );
+                assert!(stages.last().unwrap().starts_with("DESIGNER"), "{calls}");
+                assert_eq!(
+                    calls
+                        .lines()
+                        .filter(|line| line.starts_with("DESIGNER"))
+                        .count(),
+                    2
+                );
+                assert!(calls.contains("/LoadExternalDataProcessorOrReportFromFiles"));
+                assert!(!calls.contains("config apply"));
+            }
+        }
+    }
+}
+
+/// Every Designer success signal is required before replacing the artifact/manifest pair.
+#[test]
+fn failed_designer_external_import_preserves_published_pair() {
+    for (key, value) in [
+        ("FAKE_DESIGNER_RESULT", "1"),
+        ("FAKE_DESIGNER_RESULT", "invalid"),
+        ("FAKE_DESIGNER_RESULT", "missing"),
+        ("FAKE_DESIGNER_FAIL_PROCESS", "1"),
+        ("FAKE_DESIGNER_EMPTY_ARTIFACT", "1"),
+        ("FAKE_DESIGNER_NO_ARTIFACT", "1"),
+    ] {
+        for locale in ["ru", "en"] {
+            let fixture = TestDir::new();
+            let ibcmd = platform_with_designer(&fixture);
+            let root = project(&fixture, "processing", "Contextual");
+            let config = root.join("eska.toml");
+            fs::write(
+                &config,
+                fs::read_to_string(&config)
+                    .unwrap()
+                    .replace("8.3.27.2325", "8.5.4.2072"),
+            )
+            .unwrap();
+            let base = fixture.0.join("base.cf");
+            fs::write(&base, b"base configuration").unwrap();
+            let invoke = |fail: bool| {
+                let mut command = Command::new(env!("CARGO_BIN_EXE_eska"));
+                command
+                    .current_dir(&root)
+                    .env("FAKE_IBCMD_VERSION", "8.5.4.2072")
+                    .args([
+                        "--lang",
+                        locale,
+                        "build",
+                        "--manifest",
+                        "--format",
+                        "json",
+                        "--base-configuration",
+                    ])
+                    .arg(&base)
+                    .arg("--ibcmd")
+                    .arg(&ibcmd);
+                if fail {
+                    command
+                        .env("FAKE_IBCMD_FAIL_IMPORT", "1")
+                        .env("FAKE_IBCMD_PARTIAL_IMPORT", "1")
+                        .env(key, value);
+                    if key == "FAKE_DESIGNER_FAIL_PROCESS" {
+                        // A crashed Designer does not guarantee a result file.
+                        command.env("FAKE_DESIGNER_RESULT", "missing");
+                    }
+                }
+                command.output().unwrap()
+            };
+            let initial = invoke(false);
+            assert!(initial.status.success(), "{initial:?}");
+            let artifact = root.join("build/Contextual.epf");
+            let manifest = root.join("build/Contextual.epf.manifest.json");
+            let previous = (fs::read(&artifact).unwrap(), fs::read(&manifest).unwrap());
+            let output = invoke(true);
+            assert_eq!(output.status.code(), Some(1), "{key}={value}: {output:?}");
+            let document: Value = serde_json::from_slice(&output.stdout).unwrap();
+            assert_eq!(document["status"], "error");
+            if key == "FAKE_DESIGNER_FAIL_PROCESS" {
+                assert_eq!(document["error"]["code"], "command-failed");
+                assert!(
+                    String::from_utf8_lossy(&output.stderr).contains("fixture Designer import")
+                );
+            }
+            assert_eq!(
+                (fs::read(artifact).unwrap(), fs::read(manifest).unwrap()),
+                previous
+            );
+        }
+    }
+}
+
+/// Earlier platforms and imports without an explicit configuration context never use Designer.
+#[test]
+fn external_designer_fallback_requires_supported_context() {
+    for (version, context) in [("8.3.27.2325", true), ("8.5.4.2072", false)] {
+        let fixture = TestDir::new();
+        let ibcmd = platform_with_designer(&fixture);
+        let root = project(&fixture, "processing", "Contextual");
+        let config = root.join("eska.toml");
+        fs::write(
+            &config,
+            fs::read_to_string(&config)
+                .unwrap()
+                .replace("8.3.27.2325", version),
+        )
+        .unwrap();
+        let base = fixture.0.join("base.cf");
+        fs::write(&base, b"base configuration").unwrap();
+        let log = fixture.0.join("ibcmd.log");
+        let mut command = Command::new(env!("CARGO_BIN_EXE_eska"));
+        command
+            .current_dir(&root)
+            .env("FAKE_IBCMD_VERSION", version)
+            .env("FAKE_IBCMD_FAIL_IMPORT", "1")
+            .env("FAKE_IBCMD_LOG", &log)
+            .args(["--lang", "en", "build", "--ibcmd"])
+            .arg(&ibcmd);
+        if context {
+            command.arg("--base-configuration").arg(base);
+        }
+        let output = command.output().unwrap();
+        assert_eq!(output.status.code(), Some(1), "{output:?}");
+        assert!(!fs::read_to_string(log).unwrap().contains("DESIGNER"));
+    }
+}
+
+/// Cancellation in either native importer reaps it and preserves the previous publication pair.
+#[cfg(unix)]
+#[test]
+fn cancelled_external_designer_fallback_preserves_published_pair() {
+    for phase in ["ibcmd", "designer"] {
+        let fixture = TestDir::new();
+        let ibcmd = platform_with_designer(&fixture);
+        let root = project(&fixture, "processing", "Contextual");
+        let config = root.join("eska.toml");
+        fs::write(
+            &config,
+            fs::read_to_string(&config)
+                .unwrap()
+                .replace("8.3.27.2325", "8.5.4.2072"),
+        )
+        .unwrap();
+        let base = fixture.0.join("base.cf");
+        fs::write(&base, b"base configuration").unwrap();
+        let invoke = || {
+            let mut command = Command::new(env!("CARGO_BIN_EXE_eska"));
+            command
+                .current_dir(&root)
+                .env("FAKE_IBCMD_VERSION", "8.5.4.2072")
+                .args([
+                    "--lang",
+                    "en",
+                    "build",
+                    "--manifest",
+                    "--base-configuration",
+                ])
+                .arg(&base)
+                .arg("--ibcmd")
+                .arg(&ibcmd);
+            command
+        };
+        let initial = invoke().output().unwrap();
+        assert!(initial.status.success(), "{initial:?}");
+        let artifact = root.join("build/Contextual.epf");
+        let manifest = root.join("build/Contextual.epf.manifest.json");
+        let previous = (fs::read(&artifact).unwrap(), fs::read(&manifest).unwrap());
+        let ready = fixture.0.join("ready");
+        let log = fixture.0.join("ibcmd.log");
+        let mut command = invoke();
+        command
+            .env("FAKE_IBCMD_LOG", &log)
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped());
+        if phase == "designer" {
+            command
+                .env("FAKE_IBCMD_FAIL_IMPORT", "1")
+                .env("FAKE_DESIGNER_READY", &ready)
+                .env("FAKE_DESIGNER_CONTINUE", fixture.0.join("never"));
+        } else {
+            command
+                .env("FAKE_IBCMD_IMPORT_READY", &ready)
+                .env("FAKE_IBCMD_IMPORT_CONTINUE", fixture.0.join("never"));
+        }
+        let child = command.spawn().unwrap();
+        for _ in 0..100 {
+            if ready.is_file() {
+                break;
+            }
+            thread::sleep(Duration::from_millis(50));
+        }
+        let signal = Command::new("kill")
+            .args(["-TERM", &child.id().to_string()])
+            .status()
+            .unwrap();
+        assert!(signal.success());
+        let output = child.wait_with_output().unwrap();
+        assert!(
+            ready.is_file(),
+            "native importer did not become ready: {output:?}"
+        );
+        assert_eq!(output.status.code(), Some(1), "{output:?}");
+        assert!(
+            String::from_utf8_lossy(&output.stderr).contains("Build interrupted"),
+            "{output:?}"
+        );
+        assert_eq!(
+            (fs::read(artifact).unwrap(), fs::read(manifest).unwrap()),
+            previous
+        );
+        let calls = fs::read_to_string(log).unwrap();
+        assert_eq!(
+            calls
+                .lines()
+                .filter(|line| line.starts_with("DESIGNER"))
+                .count(),
+            usize::from(phase == "designer")
+        );
+        assert!(!fs::read_dir(root.join("build")).unwrap().any(|entry| {
+            entry
+                .unwrap()
+                .file_name()
+                .to_string_lossy()
+                .contains(".eska-work-")
+        }));
+    }
+}
+
+/// A successful native process cannot publish a link to a file outside its workspace.
+#[cfg(unix)]
+#[test]
+fn standalone_build_rejects_linked_artifact_and_preserves_previous_pair() {
+    for locale in ["ru", "en"] {
+        let fixture = TestDir::new();
+        let ibcmd = fake_ibcmd(&fixture);
+        let root = project(&fixture, "configuration", "Linked");
+        let outside = fixture.0.join("outside.cf");
+        fs::write(&outside, b"external file").unwrap();
+        let invoke = |linked: bool| {
+            let mut command = Command::new(env!("CARGO_BIN_EXE_eska"));
+            command
+                .current_dir(&root)
+                .env("FAKE_IBCMD_VERSION", "8.5.4.2072")
+                .args([
+                    "--lang",
+                    locale,
+                    "build",
+                    "--manifest",
+                    "--platform-version",
+                    "8.5.4.2072",
+                    "--format",
+                    "json",
+                    "--ibcmd",
+                ])
+                .arg(&ibcmd);
+            if linked {
+                command.env("FAKE_IBCMD_ARTIFACT_SYMLINK", &outside);
+            }
+            command.output().unwrap()
+        };
+        let initial = invoke(false);
+        assert!(initial.status.success(), "{initial:?}");
+        let artifact = root.join("build/Linked.cf");
+        let manifest = root.join("build/Linked.cf.manifest.json");
+        let previous = fs::read(&artifact).unwrap();
+        let passport = fs::read(&manifest).unwrap();
+        let rejected = invoke(true);
+        assert!(!rejected.status.success(), "{rejected:?}");
+        assert_eq!(fs::read(&artifact).unwrap(), previous);
+        assert_eq!(fs::read(&manifest).unwrap(), passport);
+        assert!(!fs::symlink_metadata(artifact).unwrap().is_symlink());
+        assert_eq!(fs::read(outside).unwrap(), b"external file");
+    }
 }

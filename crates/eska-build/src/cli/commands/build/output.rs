@@ -130,20 +130,22 @@ fn write_project_build_preview(
         };
         write_build_preview_field(key, &display_path(path), localizer);
     }
-    write_build_preview_field(
-        "build-preview-infobase",
-        &display_path(item.plan.infobase_root()),
-        localizer,
-    );
-    write_build_preview_field(
-        "build-preview-infobase-mode",
-        &localizer.text(if item.plan.recreates_infobase() {
-            "build-preview-infobase-recreate"
-        } else {
-            "build-preview-infobase-reuse"
-        }),
-        localizer,
-    );
+    if item.plan.uses_managed_infobase(tool) {
+        write_build_preview_field(
+            "build-preview-infobase",
+            &display_path(item.plan.infobase_root()),
+            localizer,
+        );
+        write_build_preview_field(
+            "build-preview-infobase-mode",
+            &localizer.text(if item.plan.recreates_infobase() {
+                "build-preview-infobase-recreate"
+            } else {
+                "build-preview-infobase-reuse"
+            }),
+            localizer,
+        );
+    }
     write_build_preview_field(
         "build-preview-artifact-type",
         &localizer.text(artifact_type_key(item.plan.artifact_type())),

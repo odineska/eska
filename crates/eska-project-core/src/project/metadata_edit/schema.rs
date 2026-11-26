@@ -3,7 +3,7 @@
 use roxmltree::Node;
 use serde::{Serialize, Serializer};
 
-use super::EditError;
+use super::{EditError, EditingProfile, catalog};
 use crate::project::metadata_model::{ObjectId, PropertyKey};
 
 pub(super) const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
@@ -205,23 +205,12 @@ pub(super) fn field_type(
     class: &str,
     node: Node<'_, '_>,
     top: bool,
-    modern: bool,
+    profile: EditingProfile,
 ) -> Option<&'static str> {
-    include_str!("fields.tsv").lines().skip(1).find_map(|line| {
-        let mut columns = line.split('\t');
-        let owner = columns.next()?;
-        let namespace = columns.next()?;
-        let name = columns.next()?;
-        let kind = columns.next()?;
-        let property = columns.next()?;
-        let profile = columns.next()?;
-        (owner == class
-            && namespace == node.tag_name().namespace().unwrap_or_default()
-            && name == node.tag_name().name()
-            && (!top || property == "1")
-            && (modern || profile == "8.3.27"))
-            .then_some(kind)
-    })
+    let tag = node.tag_name();
+    let field = catalog::field(class, tag.namespace().unwrap_or_default(), tag.name())?;
+    ((!top || field.property) && (profile.modern() || field.since == "8.3.27"))
+        .then_some(field.model_type)
 }
 
 /// Creation selectors consult the exact same catalog and special domain rules as existing fields.
@@ -237,7 +226,11 @@ pub fn initial_field(
     let node = document
         .descendants()
         .find(|node| node.has_tag_name((MD, property)))?;
-    scalar(node, Some(field_type(owner, node, true, false)?), false)
+    scalar(
+        node,
+        Some(field_type(owner, node, true, EditingProfile::Base)?),
+        EditingProfile::Base,
+    )
 }
 
 /// Read-only identities and payload format switches cannot be changed as scalar properties.
@@ -263,7 +256,7 @@ pub(super) fn protected(name: &str) -> bool {
 pub(super) fn scalar(
     node: Node<'_, '_>,
     model_type: Option<&str>,
-    modern: bool,
+    profile: EditingProfile,
 ) -> Option<ScalarSchema> {
     let model_type = model_type?;
     if super::lengths::inherited_from_numerator(node)
@@ -353,7 +346,7 @@ pub(super) fn scalar(
     if model_type == "ELong" {
         return session_age(node);
     }
-    let mut result = schema(model_type, modern)?;
+    let mut result = schema(model_type, profile)?;
     if let ScalarSchema::Integer { min, max } = &mut result {
         (*min, *max) = integer_bounds(node)?;
     }
@@ -471,7 +464,7 @@ fn sibling_number(node: Node<'_, '_>, name: &str) -> Option<i64> {
 }
 
 /// Domain tokens remain machine-readable; translations are added by the IDE adapter.
-pub(super) fn schema(model_type: &str, modern: bool) -> Option<ScalarSchema> {
+pub(super) fn schema(model_type: &str, profile: EditingProfile) -> Option<ScalarSchema> {
     match model_type {
         "EString" => Some(ScalarSchema::Text { domain: None }),
         "EBoolean" => Some(ScalarSchema::Boolean),
@@ -481,13 +474,12 @@ pub(super) fn schema(model_type: &str, modern: bool) -> Option<ScalarSchema> {
         }),
         "EBigDecimal" => Some(ScalarSchema::Decimal { nullable: false }),
         domain => {
-            let values: Vec<_> = include_str!("enums.tsv")
-                .lines()
-                .skip(1)
-                .filter_map(|line| line.split_once('\t'))
-                .filter(|(kind, value)| {
-                    *kind == domain
-                        && (modern
+            let values: Vec<_> = catalog::enum_values(domain)
+                .iter()
+                .copied()
+                .filter(|value| {
+                    (*value != "Version8_5_4" || profile == EditingProfile::V854)
+                        && (profile.modern()
                             || !matches!(
                                 *value,
                                 "Version8_5_1"
@@ -496,7 +488,7 @@ pub(super) fn schema(model_type: &str, modern: bool) -> Option<ScalarSchema> {
                                     | "TaxiEnableVersion8_5"
                             ))
                 })
-                .map(|(_, value)| value.to_owned())
+                .map(str::to_owned)
                 .collect();
             (!values.is_empty()).then(|| ScalarSchema::Enum {
                 domain: domain.to_owned(),
@@ -534,5 +526,34 @@ pub(super) fn nested_type(
             Some("EBoolean")
         }
         _ => None,
+    }
+}
+
+#[cfg(test)]
+mod profile_tests {
+    use super::*;
+    use crate::project::build::PlatformVersion;
+    #[test]
+    fn compatibility_values_follow_platform_series_not_build_number() {
+        for (version, expected, latest) in [
+            ("8.3.27.1859", "8.3.27", false),
+            ("8.5.1.1150", "8.5.1", false),
+            ("8.5.4", "8.5.4", true),
+            ("8.5.4.2072", "8.5.4", true),
+            ("8.5.4.2073", "8.5.4", true),
+        ] {
+            let version = PlatformVersion::parse(version).unwrap();
+            let profile = EditingProfile::for_platform(Some(&version));
+            assert_eq!(profile.name(), expected);
+            let ScalarSchema::Enum { values, .. } = schema("CompatibilityMode", profile).unwrap()
+            else {
+                panic!()
+            };
+            assert_eq!(values.iter().any(|value| value == "Version8_5_4"), latest);
+            assert_eq!(
+                values.iter().any(|value| value == "Version8_5_1"),
+                profile.modern()
+            );
+        }
     }
 }

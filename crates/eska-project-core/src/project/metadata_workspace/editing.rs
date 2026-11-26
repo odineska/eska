@@ -1,6 +1,7 @@
 //! Property mutations share the checked source resolver, support rules and invalidation boundary.
 
-use std::path::PathBuf;
+use crate::project::metadata_edit::EditingProfile;
+use std::{io::ErrorKind, path::PathBuf};
 
 use super::{
     ProjectSession, PropertyEditPlan, PropertyReplay, RefreshReport, WorkspaceError,
@@ -13,6 +14,8 @@ use crate::project::{
         PropertyFileEdit, numbering,
     },
     metadata_model::{MetadataKind, ObjectId},
+    metadata_rename::transaction::Guard,
+    metadata_write::FileChange,
     support::State,
 };
 
@@ -269,7 +272,7 @@ impl ProjectSession {
             }
         }
         let plan = document.update(expected, path, change)?;
-        let modern = document.modern;
+        let profile = document.profile;
         self.validate_predefined_constraints(id, &plan)?;
         let kind = self.object(id)?.kind;
         let plan = if numbering::linked_field(kind, path) {
@@ -282,7 +285,7 @@ impl ProjectSession {
                 kind,
                 context,
                 &path[0].key.name,
-                modern,
+                profile,
             )?
         } else {
             Self::scalar_property_plan(id, location.path, plan)
@@ -380,8 +383,7 @@ impl ProjectSession {
         path: &[FieldStep],
         change: &PropertyChange,
     ) -> Result<RefreshReport, PropertyEditError> {
-        let guard =
-            crate::project::metadata_rename::transaction::Guard::acquire(self.project().root())?;
+        let guard = Guard::acquire(self.project().root())?;
         guard.check_clear(self.project().source())?;
         let plan = self.plan_property(id, expected, context, path, change)?;
         if plan.context_before.is_some() {
@@ -391,7 +393,7 @@ impl ProjectSession {
         let (location, _) = self.editing_source(id)?;
         let history = plan.primary.plan.history();
         let changed = !plan.is_empty();
-        let report = self.publish_property(id, &location, &plan.primary.plan);
+        let report = self.publish_property(&guard, id, &location, &plan.primary.plan);
         if changed && (report.is_ok() || matches!(report, Err(PropertyEditError::Committed(_)))) {
             self.record_property(id, HistoryStep::Scalar(history));
         }
@@ -409,8 +411,7 @@ impl ProjectSession {
         context: Option<&str>,
         undo: bool,
     ) -> Result<PropertyReplay, PropertyEditError> {
-        let guard =
-            crate::project::metadata_rename::transaction::Guard::acquire(self.project().root())?;
+        let guard = Guard::acquire(self.project().root())?;
         guard.check_clear(self.project().source())?;
         self.reveal_declared_object(id)?;
         let (location, input) = self.editing_source(id)?;
@@ -438,7 +439,7 @@ impl ProjectSession {
             }
         };
         let plan = scalar.replay(&input, undo)?;
-        let report = self.publish_property(id, &location, &plan);
+        let report = self.publish_property(&guard, id, &location, &plan);
         if report.is_ok() || matches!(report, Err(PropertyEditError::Committed(_))) {
             self.advance_history(id, step, undo);
         }
@@ -481,12 +482,12 @@ impl ProjectSession {
             .inline
             .first()
             .is_some_and(|item| item.kind == MetadataKind::PredefinedItem);
-        let modern = self
-            .project()
-            .configuration()
-            .build_settings()
-            .platform_version()
-            .is_some_and(|version| version.as_str().starts_with("8.5.1."));
+        let profile = EditingProfile::for_platform(
+            self.project()
+                .configuration()
+                .build_settings()
+                .platform_version(),
+        );
         Ok(EditingDocument {
             input,
             id,
@@ -496,7 +497,7 @@ impl ProjectSession {
                 owner.parent()
             },
             predefined,
-            modern,
+            profile,
         })
     }
 
@@ -542,6 +543,7 @@ impl ProjectSession {
     /// Publication precedes cache invalidation, and no-op edits leave the generation untouched.
     fn publish_property(
         &mut self,
+        guard: &Guard,
         id: &ObjectId,
         location: &SourceLocation,
         plan: &EditPlan,
@@ -561,12 +563,28 @@ impl ProjectSession {
             cursor = object.parent.clone();
         }
         ancestry.reverse();
-        plan.publish(self.project().source(), &location.path)?;
+        let source = self.project().source();
         if plan.is_empty() {
+            // Preserve the exact no-op validation boundary without creating a journal.
+            plan.publish(source, &location.path)?;
             return Ok(RefreshReport {
                 generation: self.generation,
                 affected: Vec::new(),
             });
+        }
+        let change = FileChange {
+            path: location.path.clone(),
+            before: Some(plan.original().as_bytes().to_vec()),
+            after: Some(plan.output().as_bytes().to_vec()),
+        };
+        match guard.publish_files(source, &[change], &[]) {
+            Err(EditError::Io(error)) if error.kind() == ErrorKind::CrossesDevices => {
+                // A mounted source may live on a different filesystem from the journal.
+                // Only a cleared transaction permits retrying beside the source file.
+                guard.check_clear(source)?;
+                plan.publish(source, &location.path)?;
+            }
+            result => result?,
         }
         let report = self
             .changed_paths(std::slice::from_ref(&location.path))

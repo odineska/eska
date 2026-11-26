@@ -35,28 +35,65 @@ impl MetadataPath {
     }
 }
 
+/// One physical source and its logical metadata path.
+#[derive(Debug, PartialEq, Eq)]
+pub struct MetadataSourcePath<'a> {
+    pub logical: MetadataPath,
+    pub artifact: Option<SourceArtifact<'a>>,
+}
+
+/// Additional caption for a file that shares its logical path with other sources.
+#[derive(Debug, PartialEq, Eq)]
+pub struct SourceArtifact<'a> {
+    pub kind: &'static str,
+    pub name: Option<&'a str>,
+}
+
 /// Resolve a project-relative Designer XML path when its ownership is unambiguous.
 #[must_use]
 pub fn from_path(project_type: ProjectType, path: &BStr) -> Option<MetadataPath> {
-    let path = path.to_str().ok()?;
-    let components: Vec<_> = path.split('/').collect();
-    if components.is_empty() {
-        return None;
-    }
+    from_source_path(project_type, path, None).map(|source| source.logical)
+}
 
-    if components[0] == "Configuration.xml" {
-        return Some(root_path("configuration", None));
+/// Resolve the caption of a Designer XML source without opening its descriptor or payload.
+/// A direct external export has no owner directory, so its root name comes from the caller.
+#[must_use]
+pub fn from_source_path<'a>(
+    project_type: ProjectType,
+    path: &'a BStr,
+    external_root: Option<&str>,
+) -> Option<MetadataSourcePath<'a>> {
+    let path = path.to_str().ok()?;
+    let (first, rest) = split_component(path);
+    if first == "Configuration.xml" {
+        return Some(descriptor_path(root_path("configuration", None)));
     }
-    if components[0] == "Ext" {
-        return root_extension_path(project_type, &components);
-    }
-    if !components[0].contains('.')
-        && components.len() >= 2
-        && let Some(kind) = top_level_kind(components[0])
+    let external_kind = match project_type {
+        ProjectType::Processing => Some("data-processor"),
+        ProjectType::Report => Some("report"),
+        ProjectType::Configuration | ProjectType::Extension => None,
+    };
+    if let (Some(kind), Some(root)) = (external_kind, external_root)
+        && rest.is_some()
+        && matches!(first, "Ext" | "Forms" | "Templates" | "Commands")
     {
-        return top_level_path(kind, &components);
+        // A wrapped export can use a root name that is also a collection directory.
+        if first == root
+            && let Some(wrapped) = object_path(kind, path)
+        {
+            return Some(wrapped);
+        }
+        return nested_path(root_path(kind, Some(root)), Some(path));
     }
-    external_object_path(project_type, &components)
+    if first == "Ext" {
+        return root_extension_path(project_type, rest);
+    }
+    if let Some(rest) = rest
+        && let Some(kind) = top_level_kind(first)
+    {
+        return object_path(kind, rest);
+    }
+    object_path(external_kind?, path)
 }
 
 /// Tell whether a path is the main XML descriptor whose children can be compared semantically.
@@ -136,37 +173,30 @@ pub fn changed_children(before: &[u8], after: &[u8]) -> Option<Vec<Vec<MetadataP
     Some(changed)
 }
 
-/// Build the logical root and optional nested path for a top-level metadata object.
-fn top_level_path(kind: &'static str, components: &[&str]) -> Option<MetadataPath> {
-    let object = components
-        .get(1)?
-        .strip_suffix(".xml")
-        .unwrap_or(components[1]);
-    let base = root_path(kind, Some(object));
-    nested_path(base, &components[2..])
-}
-
-/// Build the logical root for an external processing or report export.
-fn external_object_path(project_type: ProjectType, components: &[&str]) -> Option<MetadataPath> {
-    let kind = match project_type {
-        ProjectType::Processing => "data-processor",
-        ProjectType::Report => "report",
-        ProjectType::Configuration | ProjectType::Extension => return None,
-    };
-    let object = components[0].strip_suffix(".xml").unwrap_or(components[0]);
+/// Build the logical root for a top-level metadata object or an external object export.
+fn object_path<'a>(kind: &'static str, path: &'a str) -> Option<MetadataSourcePath<'a>> {
+    let (file, rest) = split_component(path);
+    let object = file.strip_suffix(".xml").unwrap_or(file);
     if object.is_empty() {
         return None;
     }
-    nested_path(root_path(kind, Some(object)), &components[1..])
+    let base = root_path(kind, Some(object));
+    if rest.is_none() && has_extension(file, "xml") {
+        return Some(descriptor_path(base));
+    }
+    nested_path(base, rest)
 }
 
 /// Resolve configuration-level modules and artifacts below `Ext`.
-fn root_extension_path(project_type: ProjectType, components: &[&str]) -> Option<MetadataPath> {
+fn root_extension_path(
+    project_type: ProjectType,
+    rest: Option<&str>,
+) -> Option<MetadataSourcePath<'_>> {
     let kind = match project_type {
         ProjectType::Configuration | ProjectType::Extension => "configuration",
         ProjectType::Processing | ProjectType::Report => return None,
     };
-    nested_path(root_path(kind, None), &components[1..])
+    nested_path(root_path(kind, None), rest)
 }
 
 /// Construct the first Configurator-style segment.
@@ -180,43 +210,67 @@ fn root_path(kind: &'static str, name: Option<&str>) -> MetadataPath {
     }
 }
 
+fn split_component(path: &str) -> (&str, Option<&str>) {
+    match path.split_once('/') {
+        Some((first, rest)) => (first, Some(rest)),
+        None => (path, None),
+    }
+}
+
+const fn descriptor_path(logical: MetadataPath) -> MetadataSourcePath<'static> {
+    MetadataSourcePath {
+        logical,
+        artifact: Some(SourceArtifact {
+            kind: "properties",
+            name: None,
+        }),
+    }
+}
+
 /// Resolve nested metadata collections and Designer-owned artifact files.
-fn nested_path(mut base: MetadataPath, components: &[&str]) -> Option<MetadataPath> {
-    if components.is_empty() {
-        return Some(base);
-    }
-    let components = if components.first() == Some(&"Ext") {
-        &components[1..]
-    } else {
-        components
+fn nested_path(mut base: MetadataPath, tail: Option<&str>) -> Option<MetadataSourcePath<'_>> {
+    let Some(tail) = tail.filter(|tail| *tail != "Ext") else {
+        return Some(MetadataSourcePath {
+            logical: base,
+            artifact: None,
+        });
     };
-    if components.is_empty() {
-        return Some(base);
-    }
-    if let [collection, item, rest @ ..] = components
-        && let Some(kind) = nested_collection_kind(base.group, collection)
+    let tail = tail.strip_prefix("Ext/").unwrap_or(tail);
+    let (first, rest) = split_component(tail);
+    if let Some(rest) = rest
+        && let Some(kind) = nested_collection_kind(base.group, first)
     {
+        let (item, rest) = split_component(rest);
         base.parts.push(MetadataPart {
             kind,
             name: Some(item.strip_suffix(".xml").unwrap_or(item).to_owned()),
         });
         if has_extension(item, "xml") {
-            return rest.is_empty().then_some(base);
+            return rest.is_none().then(|| descriptor_path(base));
         }
         return nested_path(base, rest);
     }
-    if let [file] = components
-        && let Some(module) = module_kind(file)
+    if rest.is_none()
+        && let Some(module) = module_kind(first)
     {
-        if !module_belongs_to_owner(&base, module) {
+        let artifact = if module_belongs_to_owner(&base, module) {
+            Some(SourceArtifact {
+                kind: module,
+                name: None,
+            })
+        } else {
             base.parts.push(MetadataPart {
                 kind: module,
                 name: None,
             });
-        }
-        return Some(base);
+            None
+        };
+        return Some(MetadataSourcePath {
+            logical: base,
+            artifact,
+        });
     }
-    is_owner_artifact(&base, components).then_some(base)
+    owner_artifact(base, first, rest)
 }
 
 /// Resolve a nested collection to the Configurator node it introduces.
@@ -262,22 +316,67 @@ fn module_belongs_to_owner(path: &MetadataPath, module: &str) -> bool {
     (path.group == "common-module" || is_form_owner(path)) && module == "module"
 }
 
-/// Recognize Designer files whose logical identity is their existing metadata owner.
-fn is_owner_artifact(path: &MetadataPath, components: &[&str]) -> bool {
-    match components {
-        [file] if has_extension(file, "xml") => true,
-        ["Help", _rest @ ..] => true,
-        ["Form", _rest @ ..] if is_form_owner(path) => true,
-        ["Form.bin"] if is_form_owner(path) => true,
-        ["Template", _rest @ ..] if is_template_owner(path) => true,
-        [file] if is_template_owner(path) && file.starts_with("Template.") => true,
-        ["Picture", _rest @ ..] if path.group == "common-picture" => true,
-        ["Package.bin"] if path.group == "xdto-package" => true,
-        [file] if path.group == "ws-reference" && has_extension(file, "xsd") => true,
-        ["CommandModule.bsl"] if is_command_owner(path) => true,
-        components if path.group == "configuration" => is_configuration_artifact(components),
-        _ => false,
-    }
+/// Resolve files that share the owner's identity in logical diffs.
+fn owner_artifact<'a>(
+    logical: MetadataPath,
+    file: &'a str,
+    rest: Option<&'a str>,
+) -> Option<MetadataSourcePath<'a>> {
+    let (kind, name) = match (file, rest) {
+        ("Form.xml" | "Form.bin", None) if is_form_owner(&logical) => {
+            return Some(MetadataSourcePath {
+                logical,
+                artifact: None,
+            });
+        }
+        (file, None) if is_template_owner(&logical) && file.starts_with("Template.") => {
+            return Some(MetadataSourcePath {
+                logical,
+                artifact: None,
+            });
+        }
+        ("Form", Some("Module.bsl" | "Module.bin")) if is_form_owner(&logical) => ("module", None),
+        ("Form", rest) if is_form_owner(&logical) => ("resource", rest),
+        ("Template", rest) if is_template_owner(&logical) => ("resource", rest),
+        ("CommandModule.bsl", None) if is_command_owner(&logical) => ("command-module", None),
+        ("Help.xml", None) => ("help", None),
+        ("Help", rest) => ("help", rest),
+        ("Picture.xml", None) if logical.group == "common-picture" => ("picture", None),
+        ("Picture", rest) if logical.group == "common-picture" => ("picture", rest),
+        ("Package.bin", None) if logical.group == "xdto-package" => ("package", None),
+        (file, None) if logical.group == "ws-reference" && has_extension(file, "xsd") => {
+            ("schema", Some(file))
+        }
+        ("Rights.xml", None) => ("rights", None),
+        ("Schedule.xml", None) => ("schedule", None),
+        ("Predefined.xml", None) => ("predefined-data", None),
+        ("CommandInterface.xml", None) => ("command-interface", None),
+        ("Content.xml", None) => ("content", None),
+        ("Flowchart.xml", None) => ("flowchart", None),
+        ("MainSectionPicture.xml", None) if logical.group == "configuration" => {
+            ("main-section-picture", None)
+        }
+        ("MainSectionPicture", rest) if logical.group == "configuration" => {
+            ("main-section-picture", rest)
+        }
+        ("Splash.xml", None) if logical.group == "configuration" => ("splash", None),
+        ("Splash", rest) if logical.group == "configuration" => ("splash", rest),
+        ("ParentConfigurations.bin", None) if logical.group == "configuration" => {
+            ("parent-configurations", None)
+        }
+        ("ParentConfigurations", rest) if logical.group == "configuration" => {
+            ("parent-configurations", rest)
+        }
+        ("MobileClientSignature.bin", None) if logical.group == "configuration" => {
+            ("mobile-client-signature", None)
+        }
+        (file, None) if has_extension(file, "xml") => ("source-file", Some(file)),
+        _ => return None,
+    };
+    Some(MetadataSourcePath {
+        logical,
+        artifact: Some(SourceArtifact { kind, name }),
+    })
 }
 
 /// Forms own their module and embedded item resources in the Configurator tree.
@@ -297,15 +396,6 @@ fn is_template_owner(path: &MetadataPath) -> bool {
 /// Command modules are implementation of the named command node.
 fn is_command_owner(path: &MetadataPath) -> bool {
     path.group == "common-command" || path.parts.last().is_some_and(|part| part.kind == "command")
-}
-
-/// Recognize configuration payloads exported below the root `Ext` folder.
-fn is_configuration_artifact(components: &[&str]) -> bool {
-    matches!(
-        components,
-        ["MobileClientSignature.bin" | "ParentConfigurations.bin"]
-            | ["MainSectionPicture" | "Splash" | "ParentConfigurations", ..]
-    )
 }
 
 /// Map Designer XML top-level collection folders to stable metadata kind identifiers.

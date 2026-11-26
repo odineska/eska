@@ -10,6 +10,7 @@ pub(super) const SYSTEM_FONT: &str = "http://v8.1c.ru/8.1/data/ui/fonts/system";
 pub(super) const CONFIG: &str = "http://v8.1c.ru/8.1/data/enterprise/current-config";
 pub(super) const WEB_COLOR: &str = "http://v8.1c.ru/8.1/data/ui/colors/web";
 pub(super) const WINDOWS_COLOR: &str = "http://v8.1c.ru/8.1/data/ui/colors/windows";
+pub(super) const PALETTE_COLOR: &str = "http://v8.1c.ru/8.1/data/ui/colors/palette";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -82,7 +83,7 @@ pub(super) fn collect(root: Node<'_, '_>) -> Vec<FormReference> {
                 || name.contains(char::is_whitespace)
                 || !matches!(
                     namespace,
-                    STYLE | SYSTEM_FONT | CONFIG | WEB_COLOR | WINDOWS_COLOR
+                    STYLE | SYSTEM_FONT | CONFIG | WEB_COLOR | WINDOWS_COLOR | PALETTE_COLOR
                 )
             {
                 continue;

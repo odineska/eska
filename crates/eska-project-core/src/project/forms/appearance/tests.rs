@@ -135,6 +135,33 @@ fn rebound_prefix_is_resolved_at_its_original_scope() {
     assert_eq!(result.elements[1].font.weight, 400);
 }
 
+#[test]
+fn designer_palette_colors_keep_their_theme_role_through_style_references() {
+    let resources = [resource(
+        "Hint",
+        &format!(
+            "<Value xsi:type=\"u:Color\" xmlns:p=\"{}\">p:LightBlue</Value>",
+            references::PALETTE_COLOR
+        ),
+    )];
+    let result = view(
+        &format!(
+            "<BackColor>s:Hint</BackColor><TextColor xmlns:s=\"{}\">s:Purple</TextColor>",
+            references::PALETTE_COLOR
+        ),
+        &resources,
+    );
+    assert!(result.diagnostics.is_empty(), "{:?}", result.diagnostics);
+    assert_eq!(
+        result.elements[1].background,
+        ResolvedColor::Role("PaletteLightBlue".into())
+    );
+    assert_eq!(
+        result.elements[1].foreground,
+        ResolvedColor::Role("PalettePurple".into())
+    );
+}
+
 fn descriptor(kind: &str, name: &str, properties: &str) -> FormResource {
     let xml = format!(
         "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><{kind} uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"

@@ -196,7 +196,10 @@ impl PatchHandler<'_> {
             }
             client.prepare(&plan.fingerprint, workspace, localizer)
         })
-        .map_err(|error| self.fail(&error.code, &error.detail, localizer))
+        .map_err(|error| {
+            let detail = format!("[{}] {}", tool.version().as_str(), error.detail);
+            self.fail(&error.code, &detail, localizer)
+        })
     }
 
     /// Keep JSON error codes independent of locale while presenting human details separately.

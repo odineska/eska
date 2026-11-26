@@ -7,7 +7,8 @@ use std::{
 };
 
 use super::{
-    ArtifactType, BuildPlan, Ibcmd, ManagedInfobaseError, ManifestError, ProcessStream, RunError,
+    ArtifactType, BuildPlan, Ibcmd, ManagedInfobaseError, ManifestError, PlatformVersion,
+    ProcessStream, RunError,
     base_configuration::{self, PreparedBase},
     infobase::{LockedInfobase, ManagedInfobase},
     manifest,
@@ -28,11 +29,17 @@ pub enum BuildStage {
 pub struct BuildResult {
     output: PathBuf,
     manifest: Option<PathBuf>,
+    platform_version: PlatformVersion,
     duration: Duration,
     tool_output: Vec<u8>,
 }
 
 impl BuildResult {
+    #[must_use]
+    pub const fn platform_version(&self) -> &PlatformVersion {
+        &self.platform_version
+    }
+
     #[must_use]
     pub fn output(&self) -> &Path {
         &self.output
@@ -85,10 +92,10 @@ pub enum BuildError {
     LibraryConfiguration(Box<eska_project_core::config::global::GlobalConfigError>),
 }
 
-/// Build a native 1C artifact through a reusable managed file infobase.
+/// Build a native 1C artifact using standalone file import or a managed file infobase.
 ///
-/// The pipeline reuses a compatible file infobase or creates one with an optional base `.cf`,
-/// then imports the Designer XML directory with `infobase config import --out`.
+/// Supported platforms import independent Designer XML directly with `config import --out`.
+/// Context-dependent inputs and older platforms reuse or create a managed file infobase.
 /// The destination is replaced only after `ibcmd` produced a non-empty file.
 ///
 /// # Errors
@@ -159,7 +166,11 @@ where
     ibcmd
         .begin_interruptible_operation()
         .map_err(|source| BuildError::Run {
-            stage: BuildStage::CreateInfobase,
+            stage: if plan.uses_managed_infobase(ibcmd) {
+                BuildStage::CreateInfobase
+            } else {
+                BuildStage::ImportSources
+            },
             source,
         })?;
     let parent = plan
@@ -180,15 +191,7 @@ where
         || plan.clone(),
         |snapshot| plan.with_snapshot_source(snapshot.source().to_owned()),
     );
-    let lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
-    let artifact = prepare_artifact(
-        plan,
-        &effective_plan,
-        ibcmd,
-        lease,
-        &workspace.path,
-        on_output,
-    )?;
+    let artifact = prepare_artifact(plan, &effective_plan, ibcmd, &workspace.path, on_output)?;
     let manifest_path = publish_result(
         plan,
         ibcmd,
@@ -202,6 +205,7 @@ where
     Ok(BuildResult {
         output: plan.output().to_owned(),
         manifest: manifest_path,
+        platform_version: ibcmd.version().clone(),
         duration: started.elapsed(),
         tool_output: artifact.tool_output,
     })
@@ -217,7 +221,6 @@ fn prepare_artifact<F>(
     plan: &BuildPlan,
     effective_plan: &BuildPlan,
     ibcmd: &Ibcmd,
-    lease: LockedInfobase<'_>,
     workspace: &Path,
     on_output: &mut F,
 ) -> Result<PreparedArtifact, BuildError>
@@ -226,6 +229,7 @@ where
 {
     let import_source = import_source(effective_plan)?;
     if let Some(library) = plan.library_build() {
+        let _lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
         let prepared = super::shared_library::prepare(
             library,
             effective_plan.source(),
@@ -239,6 +243,18 @@ where
             tool_output: prepared.tool_output,
         });
     }
+    let pid_file = workspace.join("ibcmd.pid");
+    let artifact = workspace.join(format!("artifact.{}", plan.artifact_type().extension()));
+    if !plan.uses_managed_infobase(ibcmd) {
+        let imported =
+            import_artifact(ibcmd, &import_source, None, &artifact, &pid_file, on_output)?;
+        return Ok(PreparedArtifact {
+            path: artifact,
+            base: None,
+            tool_output: collect_tool_output(&[], None, &imported),
+        });
+    }
+    let lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
     let mut effective_base_configuration = base_configuration::prepare(
         plan,
         ibcmd,
@@ -247,8 +263,6 @@ where
         effective_plan.source() != plan.source(),
         on_output,
     )?;
-    let pid_file = workspace.join("ibcmd.pid");
-    let artifact = workspace.join(format!("artifact.{}", plan.artifact_type().extension()));
     let (infobase, create_output) = prepare_infobase(
         lease,
         effective_base_configuration.as_mut(),
@@ -256,7 +270,8 @@ where
         &pid_file,
         on_output,
     )?;
-    let import_output = import_artifact(
+    let import_output = import_with_context(
+        plan,
         ibcmd,
         &import_source,
         infobase.data(),
@@ -289,7 +304,10 @@ where
     F: FnMut(BuildStage, ProcessStream, &[u8]),
 {
     let infobase = lease
-        .prepare(base.as_ref().map(|base| base.path.as_path()))
+        .prepare(
+            ibcmd.version(),
+            base.as_ref().map(|base| base.path.as_path()),
+        )
         .map_err(BuildError::ManagedInfobase)?;
     let mut created = None;
     if infobase.needs_creation() {
@@ -315,8 +333,9 @@ where
     Ok((infobase, created))
 }
 
-/// Import only into the leased database and validate the staged artifact before publication.
-fn import_artifact<F>(
+/// Retry only platform-rejected contextual external imports through the paired Designer.
+fn import_with_context<F>(
+    plan: &BuildPlan,
     ibcmd: &Ibcmd,
     source: &Path,
     data: &Path,
@@ -327,20 +346,77 @@ fn import_artifact<F>(
 where
     F: FnMut(BuildStage, ProcessStream, &[u8]),
 {
-    let output = run(
-        ibcmd,
-        BuildStage::ImportSources,
-        [
-            OsString::from("infobase"),
-            OsString::from("config"),
-            OsString::from("import"),
-            option("--data", data),
-            option("--out", artifact),
-            native_path(source).as_os_str().to_owned(),
-        ],
-        pid,
-        on_output,
-    )?;
+    let imported = import_artifact(ibcmd, source, Some(data), artifact, pid, on_output);
+    let Err(BuildError::CommandFailed { stderr, .. }) = imported else {
+        return imported;
+    };
+    reject_interrupted_import(ibcmd, BuildStage::ImportSources)?;
+    let eligible = plan.base_configuration().is_some()
+        && matches!(
+            plan.artifact_type(),
+            ArtifactType::Processing | ArtifactType::Report
+        )
+        && ibcmd.supports_standalone_config_files();
+    let available = eligible && ibcmd.designer_available().unwrap_or(false);
+    reject_interrupted_import(ibcmd, BuildStage::ImportSources)?;
+    if !available {
+        return Err(BuildError::CommandFailed {
+            stage: BuildStage::ImportSources,
+            stderr,
+        });
+    }
+    let expected = if plan.artifact_type() == ArtifactType::Processing {
+        ProjectType::Processing
+    } else {
+        ProjectType::Report
+    };
+    let descriptor = external_descriptor(source, expected)?;
+    super::external_designer::import(ibcmd, &descriptor, data, artifact, pid, on_output)
+        .map(|mut output| {
+            let mut previous = stderr.as_bytes().to_vec();
+            previous.push(b'\n');
+            previous.extend_from_slice(&output.stderr);
+            output.stderr = previous;
+            output
+        })
+        .map_err(|error| match error {
+            BuildError::CommandFailed {
+                stage,
+                stderr: designer,
+            } => BuildError::CommandFailed {
+                stage,
+                stderr: format!("{stderr}\n{designer}"),
+            },
+            error => error,
+        })
+}
+
+/// Import into a standalone file or leased database and validate before publication.
+fn import_artifact<F>(
+    ibcmd: &Ibcmd,
+    source: &Path,
+    data: Option<&Path>,
+    artifact: &Path,
+    pid: &Path,
+    on_output: &mut F,
+) -> Result<std::process::Output, BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let mut arguments = Vec::new();
+    if let Some(data) = data {
+        arguments.push(OsString::from("infobase"));
+        arguments.push(OsString::from("config"));
+        arguments.push(OsString::from("import"));
+        arguments.push(option("--data", data));
+    } else {
+        arguments.extend([OsString::from("config"), OsString::from("import")]);
+        // Standalone commands still own server IPC state, but never create an infobase.
+        arguments.push(option("--data", &pid.with_extension("data")));
+    }
+    arguments.push(option("--out", artifact));
+    arguments.push(native_path(source).as_os_str().to_owned());
+    let output = run(ibcmd, BuildStage::ImportSources, arguments, pid, on_output)?;
     reject_interrupted_import(ibcmd, BuildStage::ImportSources)?;
     validate_artifact(artifact)?;
     Ok(output)
@@ -348,8 +424,8 @@ where
 
 /// Require an ibcmd result to be a non-empty regular file before publication.
 pub(super) fn validate_artifact(artifact: &Path) -> Result<(), BuildError> {
-    let metadata =
-        fs::metadata(artifact).map_err(|_| BuildError::ArtifactMissing(artifact.to_owned()))?;
+    let metadata = fs::symlink_metadata(artifact)
+        .map_err(|_| BuildError::ArtifactMissing(artifact.to_owned()))?;
     if !metadata.is_file() {
         return Err(BuildError::ArtifactMissing(artifact.to_owned()));
     }
@@ -476,15 +552,20 @@ fn import_source(plan: &BuildPlan) -> Result<PathBuf, BuildError> {
         ArtifactType::Report => ProjectType::Report,
         ArtifactType::Configuration | ArtifactType::Extension => unreachable!(),
     };
-    let entries =
-        fs::read_dir(plan.source()).map_err(|source| BuildError::DescriptorDirectory {
-            path: plan.source().to_owned(),
-            source,
-        })?;
+    external_descriptor(plan.source(), expected)?;
+    Ok(plan.source().to_owned())
+}
+
+/// Select the validated root XML file required by Designer's external-object batch command.
+fn external_descriptor(directory: &Path, expected: ProjectType) -> Result<PathBuf, BuildError> {
+    let entries = fs::read_dir(directory).map_err(|source| BuildError::DescriptorDirectory {
+        path: directory.to_owned(),
+        source,
+    })?;
     let mut descriptors = Vec::new();
     for entry in entries {
         let entry = entry.map_err(|source| BuildError::DescriptorDirectory {
-            path: plan.source().to_owned(),
+            path: directory.to_owned(),
             source,
         })?;
         let path = entry.path();
@@ -510,9 +591,9 @@ fn import_source(plan: &BuildPlan) -> Result<PathBuf, BuildError> {
         }
     }
     match descriptors.as_slice() {
-        [_descriptor] => Ok(plan.source().to_owned()),
-        [] => Err(BuildError::DescriptorMissing(plan.source().to_owned())),
-        _ => Err(BuildError::DescriptorsMultiple(plan.source().to_owned())),
+        [descriptor] => Ok(descriptor.to_owned()),
+        [] => Err(BuildError::DescriptorMissing(directory.to_owned())),
+        _ => Err(BuildError::DescriptorsMultiple(directory.to_owned())),
     }
 }
 
@@ -942,6 +1023,25 @@ fn make_owned_tree_writable(path: &Path) -> io::Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(unix)]
+    #[test]
+    fn artifact_validation_rejects_symlinks_before_publication() {
+        use crate::test_support::TestDir;
+        use std::os::unix::fs::symlink;
+
+        let directory = TestDir::new();
+        let outside = directory.0.join("outside.cf");
+        let artifact = directory.0.join("artifact.cf");
+        fs::write(&outside, b"external artifact").unwrap();
+        symlink(&outside, &artifact).unwrap();
+
+        assert!(matches!(
+            validate_artifact(&artifact),
+            Err(BuildError::ArtifactMissing(path)) if path == artifact
+        ));
+        assert_eq!(fs::read(outside).unwrap(), b"external artifact");
+    }
 
     #[test]
     /// Leave both previous destinations untouched when the manifest cannot be backed up.

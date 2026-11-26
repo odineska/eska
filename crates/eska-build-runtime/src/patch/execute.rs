@@ -51,8 +51,13 @@ fn validate_output(plan: &PatchDescription, tool: &Ibcmd, output: &Path) -> Resu
     if plan.modules.is_empty() {
         return Err(PatchError::new("empty", ""));
     }
-    if tool.version().as_str() != "8.3.27.2325" {
-        return Err(PatchError::new("platform", tool.version().as_str()));
+    // Compatibility is established by every required operation on the isolated database,
+    // not a release-number allowlist. Fail before staging when the paired Designer is absent.
+    if !tool
+        .designer_available()
+        .map_err(|e| PatchError::new("tool", e.to_string()))?
+    {
+        return Err(PatchError::new("tool", "1cv8"));
     }
     if output.extension() != Some(std::ffi::OsStr::new("cfe")) || output.exists() {
         return Err(PatchError::new("output", output.display().to_string()));

@@ -32,6 +32,13 @@ fn run(arguments: &[OsString]) -> Result<(), String> {
     log_invocation(arguments).map_err(|error| format!("log invocation: {error}"))?;
     match arguments {
         [command] if command == "--version" => print_version(),
+        [command, rest @ ..] if command == "DESIGNER" => import_with_designer(rest)?,
+        [group, command, rest @ ..] if group == "config" && command == "import" => {
+            import_configuration(rest);
+        }
+        [group, command, rest @ ..] if group == "config" && command == "export" => {
+            export_configuration(rest)?;
+        }
         [group, command, rest @ ..] if group == "infobase" && command == "create" => {
             create_infobase(rest);
         }
@@ -51,6 +58,53 @@ fn run(arguments: &[OsString]) -> Result<(), String> {
             import_configuration(rest);
         }
         _ => process::exit(9),
+    }
+    Ok(())
+}
+
+/// Exercise the paired Designer process and its independent result/output contracts.
+fn import_with_designer(arguments: &[OsString]) -> Result<(), String> {
+    let argument = |name: &str| {
+        arguments
+            .windows(2)
+            .find(|pair| pair[0] == name)
+            .map(|pair| PathBuf::from(&pair[1]))
+    };
+    let descriptor =
+        argument("/LoadExternalDataProcessorOrReportFromFiles").ok_or("missing descriptor")?;
+    let position = arguments
+        .iter()
+        .position(|value| value == "/LoadExternalDataProcessorOrReportFromFiles")
+        .ok_or("missing import command")?;
+    let artifact = arguments
+        .get(position + 2)
+        .map(PathBuf::from)
+        .ok_or("missing artifact")?;
+    let log = argument("/Out").ok_or("missing log")?;
+    let result = argument("/DumpResult").ok_or("missing result")?;
+    let data = argument("/F").ok_or("missing infobase")?;
+    if data.file_name() != Some(OsStr::new("db-data")) {
+        return Err("Designer did not reuse the prepared database".to_owned());
+    }
+    wait_for_release("FAKE_DESIGNER_READY", "FAKE_DESIGNER_CONTINUE");
+    fs::write(log, b"fixture Designer import\n").map_err(|error| error.to_string())?;
+    let code = env::var("FAKE_DESIGNER_RESULT").unwrap_or_else(|_| "0".to_owned());
+    if code != "missing" {
+        fs::write(result, format!("\u{feff}{code}\r\n")).map_err(|error| error.to_string())?;
+    }
+    if !env_flag("FAKE_DESIGNER_NO_ARTIFACT") {
+        if env_flag("FAKE_DESIGNER_EMPTY_ARTIFACT") {
+            fs::write(&artifact, b"").map_err(|error| error.to_string())?;
+        } else {
+            write_artifact(
+                descriptor.parent().ok_or("missing source directory")?,
+                &artifact,
+            )
+            .map_err(|error| error.to_string())?;
+        }
+    }
+    if env_flag("FAKE_DESIGNER_FAIL_PROCESS") {
+        process::exit(8);
     }
     Ok(())
 }
@@ -79,9 +133,10 @@ fn export_configuration(arguments: &[OsString]) -> Result<(), String> {
         return Err("[ERROR] fake export failure".to_owned());
     }
     let source = if let Some(source) = option_path(arguments, "--file=") {
-        if source
-            .extension()
-            .is_some_and(|extension| extension == "cf")
+        if !env_flag("FAKE_IBCMD_STANDALONE_FILES")
+            && source
+                .extension()
+                .is_some_and(|extension| extension == "cf")
         {
             return Err("direct CF export is unsupported by this fixture".to_owned());
         }
@@ -160,6 +215,9 @@ fn import_configuration(arguments: &[OsString]) {
     let source = PathBuf::from(source);
 
     if env_flag("FAKE_IBCMD_FAIL_IMPORT") {
+        if env_flag("FAKE_IBCMD_PARTIAL_IMPORT") {
+            fs::write(&output, b"partial failed import").expect("fixture partial artifact");
+        }
         eprintln!("fake import failure");
         process::exit(7);
     }
@@ -169,6 +227,12 @@ fn import_configuration(arguments: &[OsString]) {
     {
         eprintln!("fake selective import failure");
         process::exit(7);
+    }
+
+    #[cfg(unix)]
+    if let Some(target) = env::var_os("FAKE_IBCMD_ARTIFACT_SYMLINK") {
+        std::os::unix::fs::symlink(target, &output).expect("fixture artifact symlink");
+        return;
     }
 
     wait_for_test_release();

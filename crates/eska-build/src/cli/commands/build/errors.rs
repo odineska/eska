@@ -271,7 +271,7 @@ pub(super) fn tool_error_code(error: &ToolError) -> &'static str {
         ToolError::InvalidExecutable(_) => "ibcmd-executable-invalid",
         ToolError::DistroboxContainerRequired => "distrobox-container-required",
         ToolError::Scan { .. } | ToolError::ScanCommandFailed { .. } => "platform-scan-failed",
-        ToolError::NotFound { .. } => "ibcmd-not-found",
+        ToolError::NotFound { .. } | ToolError::SeriesNotFound { .. } => "ibcmd-not-found",
         ToolError::Run(error) if error.kind() == std::io::ErrorKind::Interrupted => "interrupted",
         ToolError::Run(_) => "ibcmd-run-failed",
         ToolError::VersionCommandFailed { .. } => "ibcmd-version-command-failed",

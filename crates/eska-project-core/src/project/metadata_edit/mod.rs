@@ -1,5 +1,6 @@
 //! Validated edits of existing Designer properties, without serializing the document.
 
+pub(super) mod catalog;
 pub(crate) mod choice_fields;
 mod choice_links;
 pub(crate) mod choice_parameters;
@@ -236,5 +237,32 @@ impl SavedEdit {
             .chain(&self.reverse)
             .map(|edit| edit.text.len())
             .sum()
+    }
+}
+
+/// Verified editing catalogs; compatibility mode and UI profile are independent.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub(crate) enum EditingProfile {
+    Base,
+    V851,
+    V854,
+}
+impl EditingProfile {
+    pub(crate) fn for_platform(version: Option<&crate::project::build::PlatformVersion>) -> Self {
+        match version.map(crate::project::build::PlatformVersion::series_components) {
+            Some([8, 5, 1]) => Self::V851,
+            Some([8, 5, 4]) => Self::V854,
+            _ => Self::Base,
+        }
+    }
+    fn modern(self) -> bool {
+        self != Self::Base
+    }
+    const fn name(self) -> &'static str {
+        match self {
+            Self::Base => "8.3.27",
+            Self::V851 => "8.5.1",
+            Self::V854 => "8.5.4",
+        }
     }
 }

@@ -131,6 +131,7 @@ pub struct ToolOptions {
     distrobox: Option<String>,
     runner: RunnerPreference,
     project_local: bool,
+    ibcmd_in_container: bool,
 }
 
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -150,6 +151,7 @@ impl ToolOptions {
         distrobox: Option<String>,
     ) -> Self {
         Self {
+            ibcmd_in_container: ibcmd.is_some() && distrobox.is_some(),
             inventory_deadline: None,
             #[cfg(unix)]
             cancellation: None,
@@ -167,6 +169,7 @@ impl ToolOptions {
         Self {
             inventory_deadline: Some(std::time::Instant::now() + std::time::Duration::from_secs(5)),
             ibcmd: None,
+            ibcmd_in_container: false,
             runner: if container.is_some() {
                 RunnerPreference::Distrobox
             } else {
@@ -244,7 +247,8 @@ impl ToolOptions {
     }
 
     fn explicit_runner(&self, path: PathBuf) -> Result<(Runner, ToolSource), ToolError> {
-        if self.project_local
+        // Only a path paired with a selected container belongs to the container filesystem.
+        if self.ibcmd_in_container
             && let Some(container) = &self.distrobox
         {
             validate_component(container)
@@ -300,6 +304,18 @@ pub enum ToolSource {
 }
 
 impl ToolSource {
+    fn runner(&self) -> Runner {
+        match self {
+            Self::Explicit(path) | Self::Path(path) | Self::Standard(path) => {
+                Runner::Host(path.clone())
+            }
+            Self::Distrobox { container, path } => Runner::Distrobox {
+                container: container.clone(),
+                path: path.clone(),
+            },
+        }
+    }
+
     /// Return the stable runner kind represented by this discovered tool source.
     #[must_use]
     pub const fn runner_kind(&self) -> &'static str {
@@ -416,15 +432,20 @@ impl Ibcmd {
         path.set_file_name(filename);
         program
     }
-    /// Discover `ibcmd` and require the exact project platform version.
+    /// Discover `ibcmd` for a project series or an exact platform request.
     ///
     /// Explicit CLI values take precedence over environment values. Distrobox is
     /// considered only when its container is explicitly configured.
     ///
     /// # Errors
     /// Returns a structured error when an override is unsafe, the executable is
-    /// unavailable, its version cannot be read, or the exact version differs.
+    /// unavailable, its version cannot be read, or no installed build matches.
     pub fn discover(expected: &PlatformVersion, options: &ToolOptions) -> Result<Self, ToolError> {
+        if expected.is_series() && options.explicit_ibcmd().is_none() {
+            return discover_series(expected, options)
+                .map(|platform| Self::from_installation(platform, options));
+        }
+
         let arch = options
             .platform_arch
             .clone()
@@ -444,7 +465,8 @@ impl Ibcmd {
         } else if runner_preference != RunnerPreference::Distrobox
             && let Some(path) = find_on_path("ibcmd")
         {
-            (Runner::Host(path.clone()), ToolSource::Path(path))
+            return discover_host_path(expected, options, path, standard_path(&arch, expected))
+                .map(|platform| Self::from_installation(platform, options));
         } else {
             let standard = standard_path(&arch, expected);
             if runner_preference != RunnerPreference::Distrobox && standard.is_file() {
@@ -473,31 +495,30 @@ impl Ibcmd {
             }
         };
 
-        let output = probe_runner(&runner, &["--version".into()], options)?;
-        if !output.status.success() {
-            return Err(ToolError::VersionCommandFailed {
-                source,
-                stderr: String::from_utf8_lossy(&output.stderr).trim().to_owned(),
-            });
-        }
-        let version = parse_version(&output.stdout, &output.stderr)
-            .ok_or_else(|| ToolError::VersionUnreadable(source.clone()))?;
-        if version != *expected {
+        let platform = platform_from_runner(&runner, source, options)?;
+        if !expected.matches_installation(platform.version()) {
             return Err(ToolError::VersionMismatch {
                 expected: expected.clone(),
-                actual: version,
-                source,
+                actual: platform.version,
+                source: Box::new(platform.source),
             });
         }
-        Ok(Self {
+        Ok(Self::from_installation(platform, options))
+    }
+
+    pub(crate) fn from_installation(platform: InstalledPlatform, options: &ToolOptions) -> Self {
+        let runner = platform.source.runner();
+        #[cfg(not(unix))]
+        let _ = options;
+        Self {
             #[cfg(unix)]
             cancellation: Arc::new(Cancellation::default()),
             #[cfg(unix)]
             outer_cancellation: options.cancellation.clone(),
             runner,
-            source,
-            version,
-        })
+            source: platform.source,
+            version: platform.version,
+        }
     }
 
     /// Scan platform installations available through the effective runner.
@@ -505,37 +526,15 @@ impl Ibcmd {
     /// # Errors
     /// Returns a structured error when the runner cannot be inspected or a candidate is invalid.
     pub fn installed(options: &ToolOptions) -> Result<Vec<InstalledPlatform>, ToolError> {
-        let arch = options
-            .platform_arch
-            .clone()
-            .or_else(|| env::var(ARCH_ENV).ok())
-            .unwrap_or_else(default_architecture);
-        validate_component(&arch).map_err(|()| ToolError::InvalidArchitecture(arch.clone()))?;
-        if let Some(path) = options.explicit_ibcmd() {
-            let (runner, source) = options.explicit_runner(path)?;
-            return platform_from_runner(&runner, source, options).map(|platform| vec![platform]);
-        }
-        let distrobox_override = options.distrobox_name();
-        let preference = if distrobox_override.is_some() {
-            RunnerPreference::Distrobox
-        } else {
-            options.runner
-        };
-        let mut installed = if preference == RunnerPreference::Distrobox {
-            let container = distrobox_override.ok_or(ToolError::DistroboxContainerRequired)?;
-            scan_distrobox(&container, &arch, options)?
-        } else {
-            let host = scan_host(&arch, options)?;
-            if host.is_empty() && preference == RunnerPreference::Auto {
-                if let Some(container) = distrobox_override {
-                    scan_distrobox(&container, &arch, options)?
-                } else {
-                    host
-                }
-            } else {
-                host
+        let mut installed = Vec::new();
+        for candidate in installation_candidates(options)? {
+            let version = candidate.version.clone();
+            let container = matches!(candidate.source, ToolSource::Distrobox { .. });
+            let platform = candidate.verify(options)?;
+            if !container || version.is_none() || version.as_ref() == Some(platform.version()) {
+                installed.push(platform);
             }
-        };
+        }
         installed.sort_by(|left, right| right.version.cmp(&left.version));
         installed.dedup_by(|left, right| left.version == right.version);
         Ok(installed)
@@ -549,6 +548,12 @@ impl Ibcmd {
     #[must_use]
     pub const fn version(&self) -> &PlatformVersion {
         &self.version
+    }
+
+    /// Standalone file import and export were introduced for the 8.5.4 series.
+    #[must_use]
+    pub(crate) fn supports_standalone_config_files(&self) -> bool {
+        self.version.series_components() >= [8, 5, 4]
     }
 
     /// Share a caller's Unix cancellation lifetime across process queries and native setup.
@@ -749,6 +754,10 @@ pub enum ToolError {
         expected: PlatformVersion,
         standard: PathBuf,
     },
+    SeriesNotFound {
+        expected: PlatformVersion,
+        available: Vec<PlatformVersion>,
+    },
     Run(io::Error),
     VersionCommandFailed {
         source: ToolSource,
@@ -758,12 +767,179 @@ pub enum ToolError {
     VersionMismatch {
         expected: PlatformVersion,
         actual: PlatformVersion,
-        source: ToolSource,
+        source: Box<ToolSource>,
     },
 }
 
-/// Inspect standard host installation directories and verify each discovered executable.
-fn scan_host(arch: &str, options: &ToolOptions) -> Result<Vec<InstalledPlatform>, ToolError> {
+/// A PATH wrapper may target another version even when the requested installation exists.
+fn discover_host_path(
+    expected: &PlatformVersion,
+    options: &ToolOptions,
+    path: PathBuf,
+    standard: PathBuf,
+) -> Result<InstalledPlatform, ToolError> {
+    let verify = |source: ToolSource| {
+        let platform = platform_from_runner(&source.runner(), source, options)?;
+        if !expected.matches_installation(platform.version()) {
+            return Err(ToolError::VersionMismatch {
+                expected: expected.clone(),
+                actual: platform.version,
+                source: Box::new(platform.source),
+            });
+        }
+        Ok(platform)
+    };
+    match verify(ToolSource::Path(path)) {
+        Err(
+            ToolError::VersionCommandFailed { .. }
+            | ToolError::VersionUnreadable(_)
+            | ToolError::VersionMismatch { .. },
+        ) if standard.is_file() => verify(ToolSource::Standard(standard)),
+        result => result,
+    }
+}
+
+/// Select a series without probing unrelated installations or hiding process errors.
+fn discover_series(
+    expected: &PlatformVersion,
+    options: &ToolOptions,
+) -> Result<InstalledPlatform, ToolError> {
+    select_series(expected, options, installation_candidates(options)?)
+}
+
+fn select_series(
+    expected: &PlatformVersion,
+    options: &ToolOptions,
+    mut candidates: Vec<InstallationCandidate>,
+) -> Result<InstalledPlatform, ToolError> {
+    // PATH has no reliable version hint. Inspect it before pruning standard builds.
+    let path = candidates
+        .iter()
+        .position(|candidate| candidate.version.is_none())
+        .map(|index| candidates.remove(index).verify(options));
+    let (path, path_error) = match path {
+        Some(Ok(platform)) => (Some(platform), None),
+        Some(Err(
+            error @ (ToolError::VersionCommandFailed { .. } | ToolError::VersionUnreadable(_)),
+        )) => (None, Some(error)),
+        Some(Err(error)) => return Err(error),
+        None => (None, None),
+    };
+    candidates.sort_by(|left, right| right.version.cmp(&left.version));
+    let mut available: Vec<_> = candidates
+        .iter()
+        .filter_map(|candidate| candidate.version.clone())
+        .collect();
+    if let Some(platform) = &path {
+        available.push(platform.version.clone());
+    }
+    let selected = path.filter(|platform| expected.matches_installation(platform.version()));
+    let mut candidate_error = None;
+    for candidate in candidates {
+        let Some(version) = &candidate.version else {
+            continue;
+        };
+        if !expected.matches_installation(version)
+            || selected
+                .as_ref()
+                .is_some_and(|platform| version < platform.version())
+        {
+            continue;
+        }
+        if let Some(platform) = &selected
+            && version == platform.version()
+            && same_host_executable(&candidate.source, &platform.source)
+        {
+            return Ok(InstalledPlatform {
+                version: version.clone(),
+                source: candidate.source,
+            });
+        }
+        let platform = match candidate.verify(options) {
+            Ok(platform) => platform,
+            Err(
+                error @ (ToolError::VersionCommandFailed { .. } | ToolError::VersionUnreadable(_)),
+            ) => {
+                candidate_error.get_or_insert(error);
+                continue;
+            }
+            Err(error) => return Err(error),
+        };
+        if &platform.version != version {
+            candidate_error.get_or_insert_with(|| ToolError::VersionMismatch {
+                expected: version.clone(),
+                actual: platform.version,
+                source: Box::new(platform.source),
+            });
+            continue;
+        }
+        return Ok(platform);
+    }
+    if let Some(platform) = selected {
+        return Ok(platform);
+    }
+    if let Some(error) = candidate_error.or(path_error) {
+        return Err(error);
+    }
+    available.sort_by(|left, right| right.cmp(left));
+    available.dedup();
+    Err(ToolError::SeriesNotFound {
+        expected: expected.clone(),
+        available,
+    })
+}
+
+fn same_host_executable(left: &ToolSource, right: &ToolSource) -> bool {
+    match (left.runner(), right.runner()) {
+        (Runner::Host(left), Runner::Host(right)) => {
+            left == right
+                || left
+                    .canonicalize()
+                    .ok()
+                    .zip(right.canonicalize().ok())
+                    .is_some_and(|(left, right)| left == right)
+        }
+        _ => false,
+    }
+}
+
+/// An unverified location; standard directory names provide a version hint only.
+struct InstallationCandidate {
+    source: ToolSource,
+    version: Option<PlatformVersion>,
+}
+
+impl InstallationCandidate {
+    fn verify(&self, options: &ToolOptions) -> Result<InstalledPlatform, ToolError> {
+        platform_from_runner(&self.source.runner(), self.source.clone(), options)
+    }
+}
+
+fn installation_candidates(options: &ToolOptions) -> Result<Vec<InstallationCandidate>, ToolError> {
+    let arch = options
+        .platform_arch
+        .clone()
+        .or_else(|| env::var(ARCH_ENV).ok())
+        .unwrap_or_else(default_architecture);
+    validate_component(&arch).map_err(|()| ToolError::InvalidArchitecture(arch.clone()))?;
+    if let Some(path) = options.explicit_ibcmd() {
+        let (_, source) = options.explicit_runner(path)?;
+        return Ok(vec![InstallationCandidate {
+            source,
+            version: None,
+        }]);
+    }
+    if let Some(container) = options.distrobox_name() {
+        return scan_distrobox(&container, &arch, options);
+    }
+    if options.runner == RunnerPreference::Distrobox {
+        return Err(ToolError::DistroboxContainerRequired);
+    }
+    scan_host(&arch)
+}
+
+/// Enumerate standard host installation directories without starting their executables.
+fn scan_host(arch: &str) -> Result<Vec<InstallationCandidate>, ToolError> {
     let mut installed = Vec::new();
     for root in standard_roots(arch) {
         let entries = match std::fs::read_dir(&root) {
@@ -776,29 +952,27 @@ fn scan_host(arch: &str, options: &ToolOptions) -> Result<Vec<InstalledPlatform>
                 path: root.clone(),
                 source,
             })?;
-            let Some(_) = entry
+            let Some(version) = entry
                 .file_name()
                 .to_str()
-                .and_then(|value| PlatformVersion::parse(value).ok())
+                .and_then(|value| PlatformVersion::parse_exact(value).ok())
             else {
                 continue;
             };
             let path = standard_executable(&entry.path());
             if path.is_file() {
-                installed.push(platform_from_runner(
-                    &Runner::Host(path.clone()),
-                    ToolSource::Standard(path),
-                    options,
-                )?);
+                installed.push(InstallationCandidate {
+                    source: ToolSource::Standard(path),
+                    version: Some(version),
+                });
             }
         }
     }
     if let Some(path) = find_on_path("ibcmd") {
-        installed.push(platform_from_runner(
-            &Runner::Host(path.clone()),
-            ToolSource::Path(path),
-            options,
-        )?);
+        installed.push(InstallationCandidate {
+            source: ToolSource::Path(path),
+            version: None,
+        });
     }
     Ok(installed)
 }
@@ -808,7 +982,7 @@ fn scan_distrobox(
     container: &str,
     arch: &str,
     options: &ToolOptions,
-) -> Result<Vec<InstalledPlatform>, ToolError> {
+) -> Result<Vec<InstallationCandidate>, ToolError> {
     validate_component(container)
         .map_err(|()| ToolError::InvalidContainer(container.to_owned()))?;
     let root = format!("/opt/1cv8/{arch}");
@@ -842,25 +1016,18 @@ fn scan_distrobox(
             .parent()
             .and_then(Path::file_name)
             .and_then(OsStr::to_str)
-            .and_then(|value| PlatformVersion::parse(value).ok())
+            .and_then(|value| PlatformVersion::parse_exact(value).ok())
         else {
             continue;
         };
         let source = ToolSource::Distrobox {
             container: container.to_owned(),
-            path: path.clone(),
+            path,
         };
-        let platform = platform_from_runner(
-            &Runner::Distrobox {
-                container: container.to_owned(),
-                path,
-            },
+        installed.push(InstallationCandidate {
             source,
-            options,
-        )?;
-        if platform.version == version {
-            installed.push(platform);
-        }
+            version: Some(version),
+        });
     }
     Ok(installed)
 }
@@ -1205,7 +1372,7 @@ fn parse_version(stdout: &[u8], stderr: &[u8]) -> Option<PlatformVersion> {
         .find_map(|token| {
             let token = token
                 .trim_matches(|character: char| !character.is_ascii_digit() && character != '.');
-            PlatformVersion::parse(token).ok()
+            PlatformVersion::parse_exact(token).ok()
         })
 }
 
@@ -1219,6 +1386,137 @@ impl From<io::Error> for ToolError {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(unix)]
+    #[test]
+    fn equal_series_versions_prefer_the_standard_installation_with_its_designer() {
+        use std::os::unix::{fs::PermissionsExt as _, fs::symlink};
+
+        let root = env::var_os("ESKA_TEST_ROOT").expect("ESKA_TEST_ROOT");
+        for same_executable in [false, true] {
+            let directory = tempfile::tempdir_in(&root).unwrap();
+            let standard = directory.path().join("installation");
+            let path_bin = directory.path().join("bin");
+            std::fs::create_dir(&standard).unwrap();
+            std::fs::create_dir(&path_bin).unwrap();
+            let standard_ibcmd = standard.join("ibcmd");
+            let path_ibcmd = path_bin.join("ibcmd");
+            let script = "#!/bin/sh\nprintf 'probe\\n' >> \"$0.calls\"\nprintf '8.5.4.2072\\n'\n";
+            std::fs::write(&standard_ibcmd, script).unwrap();
+            std::fs::set_permissions(&standard_ibcmd, std::fs::Permissions::from_mode(0o755))
+                .unwrap();
+            std::fs::write(standard.join("1cv8"), "").unwrap();
+            if same_executable {
+                symlink(&standard_ibcmd, &path_ibcmd).unwrap();
+            } else {
+                std::fs::write(&path_ibcmd, script).unwrap();
+                std::fs::set_permissions(&path_ibcmd, std::fs::Permissions::from_mode(0o755))
+                    .unwrap();
+            }
+            let options = ToolOptions::default();
+            let platform = select_series(
+                &PlatformVersion::parse("8.5.4").unwrap(),
+                &options,
+                vec![
+                    InstallationCandidate {
+                        source: ToolSource::Standard(standard_ibcmd.clone()),
+                        version: Some(PlatformVersion::parse_exact("8.5.4.2072").unwrap()),
+                    },
+                    InstallationCandidate {
+                        source: ToolSource::Path(path_ibcmd.clone()),
+                        version: None,
+                    },
+                ],
+            )
+            .unwrap();
+            assert_eq!(
+                platform.source,
+                ToolSource::Standard(standard_ibcmd.clone())
+            );
+            let tool = Ibcmd::from_installation(platform, &options);
+            assert!(tool.designer_available().unwrap());
+            let probes: usize = [&standard_ibcmd, &path_ibcmd]
+                .into_iter()
+                .map(|path| {
+                    std::fs::read_to_string(path.with_file_name("ibcmd.calls"))
+                        .map_or(0, |calls| calls.lines().count())
+                })
+                .sum();
+            assert_eq!(probes, if same_executable { 1 } else { 2 });
+        }
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn exact_host_lookup_uses_standard_only_after_a_local_path_version_failure() {
+        use std::os::unix::fs::PermissionsExt as _;
+
+        let root = env::var_os("ESKA_TEST_ROOT").expect("ESKA_TEST_ROOT");
+        for path_output in ["8.5.4.2072", "8.3.27.2325", "unreadable", "failed"] {
+            let directory = tempfile::tempdir_in(&root).unwrap();
+            let path_bin = directory.path().join("bin");
+            let standard_bin = directory.path().join("standard");
+            std::fs::create_dir(&path_bin).unwrap();
+            std::fs::create_dir(&standard_bin).unwrap();
+            let path = path_bin.join("ibcmd");
+            let standard = standard_bin.join("ibcmd");
+            for (path, output) in [(&path, path_output), (&standard, "8.5.4.2072")] {
+                let script = format!(
+                    "#!/bin/sh\nprintf 'probe\\n' >> \"$0.calls\"\nprintf '{output}\\n'\n{}\n",
+                    if output == "failed" {
+                        "exit 2"
+                    } else {
+                        "exit 0"
+                    }
+                );
+                std::fs::write(path, script).unwrap();
+                std::fs::set_permissions(path, std::fs::Permissions::from_mode(0o755)).unwrap();
+            }
+            std::fs::write(standard_bin.join("1cv8"), "").unwrap();
+            let options = ToolOptions::default();
+            let expected = PlatformVersion::parse_exact("8.5.4.2072").unwrap();
+            let platform =
+                discover_host_path(&expected, &options, path.clone(), standard.clone()).unwrap();
+            let matching_path = path_output == "8.5.4.2072";
+            assert_eq!(
+                platform.source,
+                if matching_path {
+                    ToolSource::Path(path.clone())
+                } else {
+                    ToolSource::Standard(standard.clone())
+                }
+            );
+            let tool = Ibcmd::from_installation(platform, &options);
+            assert_eq!(tool.designer_available().unwrap(), !matching_path);
+            assert_eq!(
+                std::fs::read_to_string(path.with_file_name("ibcmd.calls")).unwrap(),
+                "probe\n"
+            );
+            let standard_calls = standard.with_file_name("ibcmd.calls");
+            assert_eq!(standard_calls.exists(), !matching_path);
+            if !matching_path {
+                assert_eq!(std::fs::read_to_string(&standard_calls).unwrap(), "probe\n");
+            }
+            std::fs::remove_file(&standard).unwrap();
+            let result = discover_host_path(&expected, &options, path.clone(), standard.clone());
+            match path_output {
+                "8.5.4.2072" => assert!(result.is_ok()),
+                "8.3.27.2325" => assert!(matches!(result, Err(ToolError::VersionMismatch { .. }))),
+                "unreadable" => assert!(matches!(result, Err(ToolError::VersionUnreadable(_)))),
+                _ => assert!(matches!(
+                    result,
+                    Err(ToolError::VersionCommandFailed { .. })
+                )),
+            }
+            // A runner startup error is not a local version refusal.
+            std::fs::write(&standard, "").unwrap();
+            std::fs::remove_file(&path).unwrap();
+            assert!(matches!(
+                discover_host_path(&expected, &options, path, standard),
+                Err(ToolError::Run(_))
+            ));
+        }
+    }
 
     #[test]
     /// Read a platform version without accepting partial or malformed tokens.
@@ -1239,5 +1537,21 @@ mod tests {
             assert!(validate_component(value).is_err());
         }
         assert!(validate_component("1c-ubuntu_env.1").is_ok());
+    }
+
+    #[test]
+    fn machine_container_default_does_not_reinterpret_an_explicit_host_path() {
+        let root = env::var_os("ESKA_TEST_ROOT").expect("ESKA_TEST_ROOT");
+        let directory = tempfile::tempdir_in(root).unwrap();
+        let path = directory.path().join("ibcmd");
+        std::fs::write(&path, "").unwrap();
+        let options = ToolOptions::new(Some(path.clone()), None, None).with_machine_defaults(
+            RunnerPreference::Distrobox,
+            None,
+            Some("default-box".into()),
+        );
+        let (runner, source) = options.explicit_runner(path.clone()).unwrap();
+        assert!(matches!(runner, Runner::Host(executable) if executable == path));
+        assert_eq!(source, ToolSource::Explicit(path));
     }
 }

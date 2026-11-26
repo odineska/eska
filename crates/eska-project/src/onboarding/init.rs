@@ -239,7 +239,8 @@ impl InitHandler<'_> {
     ) -> Result<BuildSettings, Failure> {
         let tool = artifact::resolve_for_init(&self.args.platform, localizer, scope)?;
         BuildSettings::new(
-            tool.as_ref().map_or("", |tool| tool.version().as_str()),
+            tool.as_ref()
+                .map_or("", artifact::ToolSelection::configured_version),
             "build".into(),
         )
         .map_err(|_| {

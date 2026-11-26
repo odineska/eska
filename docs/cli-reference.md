@@ -554,7 +554,7 @@ Options:
       --recreate-infobase             Всегда пересоздавать служебную базу перед сборкой
       --ibcmd <ПУТЬ>                  Явный путь к ibcmd (или ESKA_IBCMD)
       --platform-arch <АРХИТЕКТУРА>   Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
-      --distrobox <КОНТЕЙНЕР>         Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+      --distrobox <КОНТЕЙНЕР>         Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --platform-version <ВЕРСИЯ>     Версия платформы только для текущей сборки
       --select-platform               Интерактивно выбрать установленную платформу только для текущей сборки
       --format <human|json>           Формат вывода [default: human] [possible values: human, json]
@@ -714,7 +714,7 @@ Options:
       --platform-arch <PLATFORM_ARCH>
           Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --distrobox <DISTROBOX>
-          Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+          Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --platform-version <PLATFORM_VERSION>
           Версия платформы 1С; сохраняется при создании проекта, действует однократно при импорте
       --select-platform
@@ -770,7 +770,7 @@ Options:
       --platform-arch <PLATFORM_ARCH>
           Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --distrobox <DISTROBOX>
-          Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+          Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --platform-version <PLATFORM_VERSION>
           Версия платформы 1С; сохраняется в eska.toml (в workspace по умолчанию наследуется из корня)
       --select-platform
@@ -812,7 +812,7 @@ Options:
       --platform-arch <PLATFORM_ARCH>
           Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --distrobox <DISTROBOX>
-          Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+          Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --platform-version <PLATFORM_VERSION>
           Версия платформы 1С; сохраняется при создании проекта, действует однократно при импорте
       --select-platform
@@ -923,7 +923,7 @@ Options:
       --lang <ЛОКАЛЬ>                Выбрать язык интерфейса
       --platform-arch <АРХИТЕКТУРА>  Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --project-dir <КАТАЛОГ>        Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
-      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --format <ФОРМАТ>              Формат вывода: human или json [default: human] [possible values: human, json]
   -p, --project <ПРОЕКТ>             Выбрать проект workspace по имени; можно повторять
       --workspace                    Диагностировать все проекты workspace
@@ -1404,7 +1404,7 @@ Options:
       --ibcmd <ПУТЬ>                 Явный путь к ibcmd (или ESKA_IBCMD)
       --project-dir <КАТАЛОГ>        Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий)
       --platform-arch <АРХИТЕКТУРА>  Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
-      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --format <human|json>          Формат вывода [default: human] [possible values: human, json]
   -h, --help                         Показать справку
 ```
@@ -1917,7 +1917,7 @@ Options:
       --lang <ЛОКАЛЬ>                Выбрать язык интерфейса
       --platform-arch <АРХИТЕКТУРА>  Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --project-dir <КАТАЛОГ>        Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
-      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --format <ФОРМАТ>              Формат вывода: human или json [default: human] [possible values: human, json]
   -p, --project <ПРОЕКТ>             Выбрать проект workspace по имени; можно повторять
       --workspace                    Диагностировать все проекты workspace
@@ -2028,7 +2028,7 @@ Options:
       --project-dir <КАТАЛОГ>      Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
       --type <ТИП>                 Тип проекта: configuration, extension, processing, report
       --source <КАТАЛОГ>           Каталог исходников относительно корня проекта (автопоиск: корень или src) [default: src]
-      --platform-version <ВЕРСИЯ>  Необязательная точная версия платформы сборки; сохраняется как данные, платформа не запускается
+      --platform-version <ВЕРСИЯ>  Необязательная линейка или точная версия платформы сборки. Значение сохраняется в проекте
       --format <ФОРМАТ>            Формат вывода: human или json [default: human] [possible values: human, json]
   -h, --help                       Показать справку
 ```
@@ -2051,7 +2051,7 @@ Options:
       --project-dir <КАТАЛОГ>      Искать проект из указанного каталога; для clone/new/init — базовый каталог (по умолчанию — текущий) [default: .]
       --source <КАТАЛОГ>           Каталог исходников относительно корня проекта (автопоиск: корень или src)
       --name <ИМЯ>                 Имя workspace-проекта; по умолчанию имя его каталога
-      --platform-version <ВЕРСИЯ>  Необязательная точная версия платформы сборки; сохраняется как данные, платформа не запускается
+      --platform-version <ВЕРСИЯ>  Необязательная линейка или точная версия платформы сборки. Значение сохраняется в проекте
       --format <ФОРМАТ>            Формат вывода: human или json [default: human] [possible values: human, json]
   -h, --help                       Показать справку
 ```
@@ -2936,7 +2936,7 @@ eska-build 0.38.0
       --recreate-infobase             Всегда пересоздавать служебную базу перед сборкой
       --ibcmd <ПУТЬ>                  Явный путь к ibcmd (или ESKA_IBCMD)
       --platform-arch <АРХИТЕКТУРА>   Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
-      --distrobox <КОНТЕЙНЕР>         Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+      --distrobox <КОНТЕЙНЕР>         Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --platform-version <ВЕРСИЯ>     Версия платформы только для текущей сборки
       --select-platform               Интерактивно выбрать установленную платформу только для текущей сборки
       --format <human|json>           Формат вывода [default: human] [possible values: human, json]
@@ -2971,7 +2971,7 @@ eska-build 0.38.0
       --platform-arch <PLATFORM_ARCH>
           Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --distrobox <DISTROBOX>
-          Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+          Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --project-dir <PROJECT_DIR>
           Начать поиск проекта с этого каталога [default: .]
       --platform-version <PLATFORM_VERSION>
@@ -3053,7 +3053,7 @@ eska-build 0.38.0
       --platform-arch <PLATFORM_ARCH>
           Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --distrobox <DISTROBOX>
-          Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+          Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --platform-version <PLATFORM_VERSION>
           Версия платформы 1С; сохраняется при создании проекта, действует однократно при импорте
       --select-platform
@@ -3145,7 +3145,7 @@ eska-build 0.38.0
       --lang <LANG>                  Выбрать язык интерфейса
       --platform-arch <АРХИТЕКТУРА>  Каталог архитектуры платформы 1С (или ESKA_PLATFORM_ARCH)
       --project-dir <PROJECT_DIR>    Начать поиск проекта с этого каталога [default: .]
-      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox, используемый только при отсутствии ibcmd на хосте (или ESKA_DISTROBOX)
+      --distrobox <КОНТЕЙНЕР>        Контейнер Distrobox для выполнения команд платформы (или ESKA_DISTROBOX)
       --format <human|json>          Формат вывода [default: human] [possible values: human, json]
   -h, --help                         Показать справку
 ```

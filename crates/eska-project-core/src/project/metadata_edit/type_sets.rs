@@ -5,7 +5,7 @@ use std::{collections::BTreeSet, fmt::Write};
 use roxmltree::Node;
 use serde::Serialize;
 
-use super::{EditError, EditPlan, Replacement, ScalarSchema, patch, schema, types};
+use super::{EditError, EditPlan, Replacement, ScalarSchema, catalog, patch, schema, types};
 use crate::project::metadata_model::{MetadataKind, ObjectId, PropertyKey};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
@@ -25,21 +25,13 @@ pub struct Rule {
 /// The reviewed property catalog is also the source of missing optional type containers.
 pub fn rules(id: &ObjectId) -> impl Iterator<Item = Rule> {
     let owner = schema::object_class(id);
-    include_str!("fields.tsv")
-        .lines()
-        .skip(1)
-        .filter_map(move |line| {
-            let mut columns = line.split('\t');
-            if columns.next() != Some(owner.as_str()) || columns.next() != Some(schema::MD) {
-                return None;
-            }
-            let property = columns.next()?;
-            let model_type = columns.next()?;
-            if columns.next() != Some("1") {
-                return None;
-            }
-            let domain = match model_type {
-                "TypeDescription" if owner == "EventSubscription" && property == "Source" => {
+    let event_subscription = owner == "EventSubscription";
+    catalog::fields(&owner)
+        .iter()
+        .filter(|field| field.namespace == schema::MD && field.property)
+        .filter_map(move |field| {
+            let domain = match field.model_type {
+                "TypeDescription" if event_subscription && field.name == "Source" => {
                     TypeDomain::EventSource
                 }
                 "TypeDescription" => TypeDomain::Value,
@@ -48,7 +40,10 @@ pub fn rules(id: &ObjectId) -> impl Iterator<Item = Rule> {
                 }
                 _ => return None,
             };
-            Some(Rule { property, domain })
+            Some(Rule {
+                property: field.name,
+                domain,
+            })
         })
 }
 
@@ -470,7 +465,7 @@ mod tests {
             id: &id,
             parent: None,
             predefined: false,
-            modern: false,
+            profile: super::super::EditingProfile::Base,
         };
         let editing = document.inspect().unwrap();
         let field = editing

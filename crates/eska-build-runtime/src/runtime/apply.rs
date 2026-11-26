@@ -280,8 +280,15 @@ fn write_plan(
     let state = mark_pending(&target.state, confirmation.as_bytes())?;
 
     progress(Stage::Import);
-    match plan.mode {
-        Mode::Initialize => target.import_full(source)?,
+    let (apply_arguments, imported_checksum) = match plan.mode {
+        Mode::Initialize => {
+            target.import_full(source)?;
+            // The confirmed full import already authorizes restructuring the test database.
+            (
+                vec![OsString::from("--force")],
+                target.imported_configuration_checksum()?,
+            )
+        }
         Mode::Incremental => {
             let (arguments, input) = partial.ok_or(ApplyError::StalePreview)?;
             target.command(
@@ -291,12 +298,17 @@ fn write_plan(
                 input,
                 Stage::Import,
             )?;
+            (Vec::new(), None)
         }
         Mode::Unchanged | Mode::Unsupported => return Err(ApplyError::StalePreview),
-    }
+    };
     progress(Stage::Apply);
-    let applied = target.command(&["apply"], &[], None, None, Stage::Apply)?;
-    let generation = target.applied_generation(&applied)?;
+    let applied = target.command(&["apply"], &apply_arguments, None, None, Stage::Apply)?;
+    let generation = if plan.mode == Mode::Initialize && target.requires_file_generation_check() {
+        target.initialized_file_generation(&applied, imported_checksum.as_deref())?
+    } else {
+        target.applied_generation(&applied)?
+    };
     let document = Baseline {
         generation: generation.clone(),
         files: current,
@@ -593,6 +605,59 @@ impl Target {
                 result => return result,
             }
         }
+    }
+
+    fn requires_file_generation_check(&self) -> bool {
+        matches!(self.connection, Connection::File(_))
+            && self.extension.is_none()
+            && self.platform.version().series_components() >= [8, 5, 4]
+    }
+
+    fn imported_configuration_checksum(&self) -> Result<Option<String>, ApplyError> {
+        if !self.requires_file_generation_check() {
+            return Ok(None);
+        }
+        self.native_configuration_checksum(&[])
+    }
+
+    fn native_configuration_checksum(
+        &self,
+        arguments: &[OsString],
+    ) -> Result<Option<String>, ApplyError> {
+        let output = match self.command(&["checksum"], arguments, None, None, Stage::Inspect) {
+            Ok(output) => output,
+            Err(ApplyError::PlatformFailed(Stage::Inspect)) => return Ok(None),
+            Err(error) => return Err(error),
+        };
+        Ok(std::str::from_utf8(&output)
+            .ok()
+            .map(str::trim)
+            .filter(|value| value.len() == 64 && value.bytes().all(|byte| byte.is_ascii_hexdigit()))
+            .map(str::to_ascii_lowercase))
+    }
+
+    fn initialized_file_generation(
+        &self,
+        output: &[u8],
+        imported_checksum: Option<&str>,
+    ) -> Result<String, ApplyError> {
+        let generation = self.generation()?;
+        if ibcmd_generation::from_apply_output(output, false).as_deref() == Some(&generation) {
+            return Ok(generation);
+        }
+        // Restructuring can publish a new generation after ibcmd logs the imported one.
+        // Bind the observed generation to both configuration states before saving it.
+        let imported_checksum = imported_checksum.ok_or(ApplyError::StalePreview)?;
+        if self.native_configuration_checksum(&[])?.as_deref() != Some(imported_checksum)
+            || self
+                .native_configuration_checksum(&["--db".into()])?
+                .as_deref()
+                != Some(imported_checksum)
+            || self.generation()? != generation
+        {
+            return Err(ApplyError::StalePreview);
+        }
+        Ok(generation)
     }
 
     fn generation(&self) -> Result<String, ApplyError> {
