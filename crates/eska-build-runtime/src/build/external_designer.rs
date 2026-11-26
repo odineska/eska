@@ -53,8 +53,14 @@ where
         on_output(stage, ProcessStream::Stdout, line);
     }
     output.stdout.extend_from_slice(&diagnostics);
-    let result = fs::read_to_string(&result).map_err(run_error)?;
-    if !output.status.success() || result.trim_start_matches('\u{feff}').trim() != "0" {
+    // A failed process may never write /DumpResult; retain its native diagnostics first.
+    if !output.status.success()
+        || fs::read_to_string(&result)
+            .map_err(run_error)?
+            .trim_start_matches('\u{feff}')
+            .trim()
+            != "0"
+    {
         return Err(BuildError::CommandFailed {
             stage,
             stderr: format!(

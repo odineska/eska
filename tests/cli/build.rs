@@ -1763,6 +1763,10 @@ fn failed_designer_external_import_preserves_published_pair() {
                         .env("FAKE_IBCMD_FAIL_IMPORT", "1")
                         .env("FAKE_IBCMD_PARTIAL_IMPORT", "1")
                         .env(key, value);
+                    if key == "FAKE_DESIGNER_FAIL_PROCESS" {
+                        // A crashed Designer does not guarantee a result file.
+                        command.env("FAKE_DESIGNER_RESULT", "missing");
+                    }
                 }
                 command.output().unwrap()
             };
@@ -1775,6 +1779,12 @@ fn failed_designer_external_import_preserves_published_pair() {
             assert_eq!(output.status.code(), Some(1), "{key}={value}: {output:?}");
             let document: Value = serde_json::from_slice(&output.stdout).unwrap();
             assert_eq!(document["status"], "error");
+            if key == "FAKE_DESIGNER_FAIL_PROCESS" {
+                assert_eq!(document["error"]["code"], "command-failed");
+                assert!(
+                    String::from_utf8_lossy(&output.stderr).contains("fixture Designer import")
+                );
+            }
             assert_eq!(
                 (fs::read(artifact).unwrap(), fs::read(manifest).unwrap()),
                 previous
