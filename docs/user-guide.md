@@ -533,13 +533,13 @@ cache `eska/libraries`; при нестандартном config — в сосе
    нет, выполните команду **Выбрать проект и подключиться**.
 
 В первом скринкасте проект уже подключён; показана именно настройка проводника.
-Скринкасты записаны в русскоязычном интерфейсе Explorer, без звука.
+Скринкасты сняты без звука на русской демобазе 8.5.4.2072. В первой части каждого видео показан «Такси», во второй — «Воздушный».
 
-[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-setup.gif)](https://odineska.tech/eska/docs/#demo-setup)
+[![Настроить проводник — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-setup.gif)](https://odineska.tech/eska/docs/#demo-setup)
 
 ### Дерево метаданных
 
-[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-tree.gif)](https://odineska.tech/eska/docs/#demo-tree)
+[![Найти объект и открыть модуль — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-tree.gif)](https://odineska.tech/eska/docs/#demo-tree)
 
 В корне показаны конфигурации и подпроекты; разделы метаданных находятся прямо
 внутри проекта. «Общие», коллекции объектов, вложенные реквизиты и табличные части,
@@ -553,9 +553,9 @@ cache `eska/libraries`; при нестандартном config — в сосе
 
 В **Стандартных реквизитах** видны платформенные поля и их типы, в том числе при отсутствии настройки в XML. Выбор открывает свойства поля в режиме чтения. У объектов с предопределёнными данными дерево открывает их иерархию и исходник. Нажатие на подписку на событие ведёт к обработчику в общем модуле.
 
-У справочника «Товары» в группе **Стандартные реквизиты** можно открыть «Пометка удаления» и посмотреть её тип в карточке свойств.
+У справочника «Товары» в группе **Стандартные реквизиты** откройте «Код». В карточке видны тип «Строка» и длина 9.
 
-[![Открыть свойства стандартного реквизита](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-standard-attributes.gif)](https://odineska.tech/eska/docs/#demo-standard-attributes)
+[![Открыть свойства стандартного реквизита](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-standard-attributes.gif)](https://odineska.tech/eska/docs/#demo-standard-attributes)
 
 <a id="metadata-authoring"></a>
 
@@ -606,9 +606,9 @@ JSON-запросы, `--no-input`, предварительная проверк
 
 Редактирование требует Metadata API 1.53, создание обработчиков — 1.54. Предпросмотр Designer XML 8.3.27 имеет статус beta. Команды и BSL формы выполняются в клиенте 1С. [Свойства, события и ограничения](https://github.com/odineska/eska-vscode-explorer/blob/main/docs/form-preview.md).
 
-[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-18/explorer-forms.gif)](https://odineska.tech/eska/docs/#demo-forms)
+[![Открыть управляемую форму — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-forms.gif)](https://odineska.tech/eska/docs/#demo-forms)
 
-[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-form-edit.gif)](https://odineska.tech/eska/docs/#demo-form-edit)
+[![Изменить заголовок поля и отменить правку — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-form-edit.gif)](https://odineska.tech/eska/docs/#demo-form-edit)
 
 ### Открытие и переход от файла
 
@@ -713,11 +713,15 @@ Unsaved BSL сам по себе не меняет Git-статус. Без вс
 пределами этой области остаются в индексе. Встроенное расширение Git предоставляет
 сравнение, файловые действия и декорации дерева. [Команды для терминала](#daily-work)
 
-[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-scm.gif)](https://odineska.tech/eska/docs/#demo-scm)
+[![Проверить Git-изменения по объектам — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-scm.gif)](https://odineska.tech/eska/docs/#demo-scm)
 
 <a id="debug"></a>
 
 ### Запуск и HTTP-отладка
+
+[![Посмотреть ход реструктуризации справочника «Товары»](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/eska-apply.gif)](https://odineska.tech/eska/docs/#demo-apply)
+
+Индикация хода обновления в этом ролике показана в сборке ESKA из исходников.
 
 Откройте **Настройки проекта → Настроить проект → Запуск и отладка** и заполните нужный профиль. Флажки задают типы предметов автоподключения, параметры профиля сохраняются в `.eska/settings_local.toml`. В панели **Запуск и отладка → ESKA: запуск 1С** доступны запуск клиента, обновление тестовой базы и подключение к `dbgs`. Команда **Запустить 1С с отладкой** запускает клиент, **Подключиться к серверу отладки 1С** подключается к работающей сессии. Во время отладки можно выбрать предмет и типы автоподключения.
 
@@ -778,7 +782,7 @@ Standalone-проект этой функцией не отключается. �
 
 ## 10. Свойства и переименование метаданных
 
-[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-properties.gif)](https://odineska.tech/eska/docs/#demo-properties)
+[![Посмотреть свойства — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-properties.gif)](https://odineska.tech/eska/docs/#demo-properties)
 
 Панель **Свойства** читает объект и схему редактирования из ESKA. Редактор не
 угадывает допустимые поля по внешнему виду XML. Read-only поле показывает
@@ -1012,7 +1016,7 @@ dirty-текст сохраняется с ограничением записи
 поддерживаемых источников предоставляет ESKA. Наличие имени в каталоге не означает
 полного вывода типа выражения или проверки выполнения запроса.
 
-[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-21/explorer-query.gif)](https://odineska.tech/eska/docs/#demo-query)
+[![Изменить запрос и сохранить через Ctrl+S — скринкаст без звука](https://raw.githubusercontent.com/odineska/odineska.github.io/main/assets/demos/2026-11-26/explorer-query.gif)](https://odineska.tech/eska/docs/#demo-query)
 
 ### Таблицы, поля и соединения
 
