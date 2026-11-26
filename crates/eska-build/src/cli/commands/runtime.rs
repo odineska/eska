@@ -28,6 +28,8 @@ use serde_json::json;
 
 mod presentation;
 
+use super::progress::Reporter;
+
 pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer) -> ExitCode {
     execute(args, start, localizer, Operation::Run)
 }
@@ -193,14 +195,17 @@ pub fn install_extension(
     start: &Path,
     localizer: &Localizer,
 ) -> ExitCode {
+    let progress = Reporter::new(
+        matches!(args.format, OutputFormat::Json),
+        "inspect",
+        localizer,
+    );
     let result = extension_project(start, args.profile, localizer).and_then(|project| {
-        installation::install(
+        installation::install_observed(
             &project,
             ProfileName::Test,
             args.confirm.as_deref(),
-            |stage| {
-                extension_progress(stage, args.format, localizer);
-            },
+            |event| progress.apply(event, "extension_progress"),
         )
         .map_err(|error| present_apply_error(&error, localizer))
     });
@@ -224,15 +229,18 @@ pub fn remove_extension(
     start: &Path,
     localizer: &Localizer,
 ) -> ExitCode {
+    let progress = Reporter::new(
+        matches!(args.format, OutputFormat::Json),
+        "inspect",
+        localizer,
+    );
     let result = extension_project(start, args.profile, localizer).and_then(|project| {
-        removal::remove(
+        removal::remove_observed(
             &project,
             ProfileName::Test,
             args.confirm.as_deref(),
             args.force,
-            || {
-                extension_progress(Stage::Remove, args.format, localizer);
-            },
+            |event| progress.apply(event, "extension_progress"),
         )
         .map_err(|error| present_apply_error(&error, localizer))
     });
@@ -270,23 +278,6 @@ fn extension_project(
             diagnostics::present_project_error(&error, localizer),
         )
     })
-}
-
-fn extension_progress(stage: Stage, format: OutputFormat, localizer: &Localizer) {
-    let (phase, key) = match stage {
-        Stage::Import => ("import", "runtime-apply-importing"),
-        Stage::Apply => ("apply", "runtime-apply-applying"),
-        Stage::Remove => ("remove", "runtime-extension-removing"),
-        Stage::Inspect => return,
-    };
-    if matches!(format, OutputFormat::Json) {
-        eprintln!(
-            "{}",
-            json!({"schema_version":1,"kind":"extension_progress","phase":phase})
-        );
-    } else {
-        eprintln!("{}", localizer.text(key));
-    }
 }
 
 fn extension_response<T: serde::Serialize>(
@@ -381,32 +372,19 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
             );
         }
     };
-    let result = args.confirm.as_ref().map_or_else(
-        || apply::preview(&project, ProfileName::Test, args.initialize),
-        |confirmation| {
-            apply::execute(
-                &project,
-                ProfileName::Test,
-                args.initialize,
-                confirmation,
-                |stage| {
-                    let (phase, key) = if stage == Stage::Import {
-                        ("import", "runtime-apply-importing")
-                    } else {
-                        ("apply", "runtime-apply-applying")
-                    };
-                    if matches!(args.format, OutputFormat::Json) {
-                        eprintln!(
-                            "{}",
-                            json!({"schema_version":1,"kind":"apply_progress","phase":phase})
-                        );
-                    } else {
-                        eprintln!("{}", localizer.text(key));
-                    }
-                },
-            )
+    let progress = Reporter::new(
+        matches!(args.format, OutputFormat::Json),
+        "inspect",
+        localizer,
+    );
+    let observe = |event| progress.apply(event, "apply_progress");
+    let result = args.confirm.as_deref().map_or_else(
+        || apply::preview_observed(&project, ProfileName::Test, args.initialize, observe),
+        |token| {
+            apply::execute_observed(&project, ProfileName::Test, args.initialize, token, observe)
         },
     );
+    drop(progress);
     match result {
         Ok(plan) => {
             let status = if args.confirm.is_some() {
@@ -448,28 +426,10 @@ fn apply_application(
         ProfileArg::Prod => ProfileName::Prod,
     };
     let json_output = matches!(args.format, OutputFormat::Json);
+    let progress = Reporter::new(json_output, "inspect", localizer);
+    let observe = |event| progress.apply(event, "apply_progress");
     let failure = if let Some(token) = args.confirm.as_deref() {
-        match application::execute(
-            start,
-            name,
-            profile,
-            args.initialize,
-            token,
-            |member, stage| {
-                let (phase, key) = match stage {
-                    Stage::Import => ("import", "runtime-apply-importing"),
-                    _ => ("apply", "runtime-apply-applying"),
-                };
-                if json_output {
-                    eprintln!(
-                        "{}",
-                        json!({"schema_version":1,"kind":"apply_progress","phase":phase,"component":member})
-                    );
-                } else {
-                    eprintln!("{member}  {}", localizer.text(key));
-                }
-            },
-        ) {
+        match application::execute_observed(start, name, profile, args.initialize, token, observe) {
             Ok(applied) => {
                 if json_output {
                     println!(
@@ -485,7 +445,7 @@ fn apply_application(
             Err(failure) => failure,
         }
     } else {
-        match application::preview(start, name, profile, args.initialize) {
+        match application::preview_observed(start, name, profile, args.initialize, observe) {
             Ok(plan) => {
                 if json_output {
                     println!(
@@ -784,7 +744,7 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
             "source_inside_infobase",
             "runtime-apply-source-inside-infobase",
         ),
-        ApplyError::PlatformFailed(Stage::Inspect) => {
+        ApplyError::PlatformFailed(Stage::Inspect | Stage::Verify) => {
             ("generation_failed", "runtime-apply-inspect-failed")
         }
         ApplyError::PlatformFailed(Stage::Import) => {

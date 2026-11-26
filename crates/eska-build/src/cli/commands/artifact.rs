@@ -14,8 +14,7 @@ use crate::{
         localization::{LocalizationValue, Localizer},
         path_output, platform,
         process_output::{
-            self, decorate_status, diagnostic_styling_enabled, progress::ProgressLine,
-            result_styling_enabled,
+            self, decorate_status, diagnostic_styling_enabled, result_styling_enabled,
         },
     },
     project::{
@@ -117,23 +116,22 @@ pub fn unpack(
         )
         .map_err(ArtifactError::Output)?;
     }
-    let mut progress = (human && io::stderr().is_terminal())
-        .then(|| ProgressLine::start(localizer.text("artifact-unpack-progress"), styled));
+    let progress = super::progress::Reporter::new(!human, "unpack", localizer);
+    progress.observe("unpack", None, None);
     let mut output_error = None;
     let result = PreparedArtifact::unpack(input, destination, tool, |_, line| {
         if output_error.is_none()
-            && let Err(error) = process_output::write_diagnostic(line, styled, progress.as_ref())
+            && let Err(error) =
+                process_output::write_diagnostic(&progress.diagnostic(line), styled, None)
         {
             output_error = Some(error);
         }
+        if !line.is_empty() {
+            let signal = eska_build_runtime::progress::classify(line)
+                .unwrap_or(eska_build_runtime::progress::Signal::Activity);
+            progress.observe("unpack", None, Some(signal));
+        }
     });
-    if let Some(error) = progress
-        .as_mut()
-        .and_then(|progress| progress.finish().err())
-        && output_error.is_none()
-    {
-        output_error = Some(error);
-    }
     let prepared = result?;
     if let Some(error) = output_error {
         return Err(ArtifactError::Output(error));

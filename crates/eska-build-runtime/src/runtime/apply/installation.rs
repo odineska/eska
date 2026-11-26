@@ -40,11 +40,46 @@ pub fn install(
     confirmation: Option<&str>,
     mut progress: impl FnMut(Stage),
 ) -> Result<Plan, ApplyError> {
+    install_inner(project, profile, confirmation, &mut progress, None)
+}
+
+/// Run with sanitized live phase and native activity events.
+/// # Errors
+/// Returns the same failures as the corresponding unobserved operation.
+pub fn install_observed(
+    project: &Project,
+    profile: ProfileName,
+    confirmation: Option<&str>,
+    progress: impl FnMut(super::Progress),
+) -> Result<Plan, ApplyError> {
+    let progress = std::cell::RefCell::new(progress);
+    install_inner(
+        project,
+        profile,
+        confirmation,
+        &mut |_| {},
+        Some(&|event| (progress.borrow_mut())(event)),
+    )
+}
+
+fn install_inner(
+    project: &Project,
+    profile: ProfileName,
+    confirmation: Option<&str>,
+    mut progress: impl FnMut(Stage),
+    observer: Option<super::Observer<'_>>,
+) -> Result<Plan, ApplyError> {
     require_test(profile)?;
     if project.configuration().project_type() != ProjectType::Extension {
         return Err(ApplyError::ProjectType);
     }
-    let target = Target::open(project, profile)?;
+    let mut target = Target::open(project, profile)?;
+    target.observer = observer;
+    target.component = target
+        .extension
+        .as_ref()
+        .map(|extension| extension.name.clone());
+    target.emit(Stage::Inspect, None);
     let _lock = confirmation.map(|_| lock(&target.lock)).transpose()?;
     let Some(confirmation) = confirmation else {
         let current = target.capture(project, None)?;
@@ -71,6 +106,8 @@ pub fn install(
     verify_base(&target, &plan)?;
     progress(Stage::Apply);
     let applied = target.command(&["apply"], &[], None, None, Stage::Apply)?;
+    target.verifying.set(true);
+    target.emit(Stage::Verify, None);
     let generation = target.applied_generation(&applied)?;
     target.verify_installed(&plan.extension)?;
     let baseline = Baseline {

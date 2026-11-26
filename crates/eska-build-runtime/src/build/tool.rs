@@ -7,7 +7,7 @@ use std::{
     sync::{
         OnceLock,
         atomic::{AtomicBool, Ordering},
-        mpsc::{self, Receiver, Sender},
+        mpsc::{self, Receiver, SyncSender},
     },
     thread,
     time::Duration,
@@ -646,6 +646,31 @@ impl Ibcmd {
         S: AsRef<OsStr>,
         F: FnMut(ProcessStream, &[u8]),
     {
+        self.run_owned_bounded(
+            arguments,
+            pid_file,
+            cwd,
+            input,
+            on_output,
+            (cancelled, usize::MAX, None),
+        )
+    }
+
+    pub(crate) fn run_owned_bounded<I, S, F>(
+        &self,
+        arguments: I,
+        pid_file: &Path,
+        cwd: Option<&Path>,
+        input: Option<std::fs::File>,
+        on_output: &mut F,
+        options: (Option<&AtomicBool>, usize, Option<&mut dyn FnMut()>),
+    ) -> Result<Output, RunError>
+    where
+        I: IntoIterator<Item = S>,
+        S: AsRef<OsStr>,
+        F: FnMut(ProcessStream, &[u8]),
+    {
+        let (cancelled, output_limit, mut on_tick) = options;
         let arguments: Vec<_> = arguments
             .into_iter()
             .map(|argument| argument.as_ref().to_os_string())
@@ -667,15 +692,28 @@ impl Ibcmd {
             .map_err(RunError::Io)?;
         let stdout = child.stdout.take().ok_or(RunError::MissingPipe)?;
         let stderr = child.stderr.take().ok_or(RunError::MissingPipe)?;
-        let (sender, receiver) = mpsc::channel();
+        let (sender, receiver) = mpsc::sync_channel(64);
         let stdout_sender = sender.clone();
-        let stdout =
-            thread::spawn(move || read_pipe(stdout, ProcessStream::Stdout, &stdout_sender));
-        let stderr = thread::spawn(move || read_pipe(stderr, ProcessStream::Stderr, &sender));
+        let stdout = thread::spawn(move || {
+            read_pipe(stdout, ProcessStream::Stdout, &stdout_sender, output_limit)
+        });
+        let stderr =
+            thread::spawn(move || read_pipe(stderr, ProcessStream::Stderr, &sender, output_limit));
         let mut stdout_bytes = Vec::new();
         let mut stderr_bytes = Vec::new();
+        let mut overflow = [false; 2];
         let (status, interrupted) = loop {
-            drain_output(&receiver, &mut stdout_bytes, &mut stderr_bytes, on_output);
+            if let Some(tick) = &mut on_tick {
+                tick();
+            }
+            let saturated = drain_output(
+                &receiver,
+                &mut stdout_bytes,
+                &mut stderr_bytes,
+                on_output,
+                output_limit,
+                &mut overflow,
+            );
             if self.was_interrupted() || cancelled.is_some_and(|flag| flag.load(Ordering::Acquire))
             {
                 terminate_distrobox_process(&self.runner, pid_file);
@@ -685,11 +723,35 @@ impl Ibcmd {
             if let Some(status) = child.try_wait().map_err(RunError::Io)? {
                 break (status, false);
             }
-            thread::sleep(Duration::from_millis(25));
+            if !saturated {
+                thread::sleep(Duration::from_millis(25));
+            }
         };
+        // Readers may still be draining a final burst after process exit. Keep
+        // receiving until both stop so bounded queues cannot deadlock their join.
+        while !stdout.is_finished() || !stderr.is_finished() {
+            let saturated = drain_output(
+                &receiver,
+                &mut stdout_bytes,
+                &mut stderr_bytes,
+                on_output,
+                output_limit,
+                &mut overflow,
+            );
+            if !saturated {
+                thread::sleep(Duration::from_millis(1));
+            }
+        }
         join_reader(stdout)?;
         join_reader(stderr)?;
-        drain_output(&receiver, &mut stdout_bytes, &mut stderr_bytes, on_output);
+        drain_output(
+            &receiver,
+            &mut stdout_bytes,
+            &mut stderr_bytes,
+            on_output,
+            output_limit,
+            &mut overflow,
+        );
         let output = Output {
             status,
             stdout: stdout_bytes,
@@ -1227,13 +1289,23 @@ struct ProcessLine {
 fn read_pipe(
     pipe: impl io::Read,
     stream: ProcessStream,
-    sender: &Sender<ProcessLine>,
+    sender: &SyncSender<ProcessLine>,
+    output_limit: usize,
 ) -> io::Result<()> {
     let mut reader = BufReader::new(pipe);
     loop {
         let mut bytes = Vec::new();
-        if reader.read_until(b'\n', &mut bytes)? == 0 {
-            return Ok(());
+        if output_limit == usize::MAX {
+            if reader.read_until(b'\n', &mut bytes)? == 0 {
+                return Ok(());
+            }
+        } else {
+            let mut chunk = [0_u8; 8192];
+            let count = io::Read::read(&mut reader, &mut chunk)?;
+            if count == 0 {
+                return Ok(());
+            }
+            bytes.extend_from_slice(&chunk[..count]);
         }
         if sender.send(ProcessLine { stream, bytes }).is_err() {
             return Ok(());
@@ -1247,16 +1319,32 @@ fn drain_output<F>(
     stdout: &mut Vec<u8>,
     stderr: &mut Vec<u8>,
     on_output: &mut F,
-) where
+    limit: usize,
+    overflow: &mut [bool; 2],
+) -> bool
+where
     F: FnMut(ProcessStream, &[u8]),
 {
-    for line in receiver.try_iter() {
-        match line.stream {
-            ProcessStream::Stdout => stdout.extend_from_slice(&line.bytes),
-            ProcessStream::Stderr => stderr.extend_from_slice(&line.bytes),
+    let mut delivered = 0;
+    for line in receiver.try_iter().take(64) {
+        delivered += 1;
+        let (retained, exceeded) = match line.stream {
+            ProcessStream::Stdout => (&mut *stdout, &mut overflow[0]),
+            ProcessStream::Stderr => (&mut *stderr, &mut overflow[1]),
+        };
+        if !*exceeded {
+            if retained.len().saturating_add(line.bytes.len()) <= limit {
+                retained.extend_from_slice(&line.bytes);
+            } else {
+                // A truncated prefix could hide duplicate generation records. Discard
+                // the entire stream so callers must perform authoritative inspection.
+                retained.clear();
+                *exceeded = true;
+            }
         }
         on_output(line.stream, &line.bytes);
     }
+    delivered == 64
 }
 
 /// Convert a pipe reader thread into a structured process error.
@@ -1388,6 +1476,102 @@ mod tests {
     use super::*;
 
     #[cfg(unix)]
+    #[test]
+    fn saturated_output_requests_another_batch_without_a_polling_pause() {
+        let (sender, receiver) = mpsc::sync_channel(64);
+        for _ in 0..64 {
+            sender
+                .send(ProcessLine {
+                    stream: ProcessStream::Stdout,
+                    bytes: vec![b'x'],
+                })
+                .unwrap();
+        }
+        let mut stdout = Vec::new();
+        let mut stderr = Vec::new();
+        let mut overflow = [false; 2];
+        let mut notifications = 0;
+        assert!(drain_output(
+            &receiver,
+            &mut stdout,
+            &mut stderr,
+            &mut |_, _| notifications += 1,
+            1024,
+            &mut overflow
+        ));
+        assert_eq!(notifications, 64);
+        assert!(!drain_output(
+            &receiver,
+            &mut stdout,
+            &mut stderr,
+            &mut |_, _| {},
+            1024,
+            &mut overflow
+        ));
+    }
+
+    #[test]
+    fn bounded_pipe_delivers_cr_activity_before_eof() {
+        struct Pipe(Receiver<Vec<u8>>);
+        impl io::Read for Pipe {
+            fn read(&mut self, buffer: &mut [u8]) -> io::Result<usize> {
+                let Ok(bytes) = self.0.recv() else {
+                    return Ok(0);
+                };
+                buffer[..bytes.len()].copy_from_slice(&bytes);
+                Ok(bytes.len())
+            }
+        }
+        let (writer, input) = mpsc::channel();
+        let (sender, receiver) = mpsc::sync_channel(64);
+        let worker =
+            thread::spawn(move || read_pipe(Pipe(input), ProcessStream::Stdout, &sender, 1024));
+        writer
+            .send(b"[INFO] Accepting changes...\r".to_vec())
+            .unwrap();
+        let notification = receiver.recv_timeout(Duration::from_secs(2));
+        drop(writer);
+        worker.join().unwrap().unwrap();
+        assert_eq!(
+            notification.unwrap().bytes,
+            b"[INFO] Accepting changes...\r"
+        );
+    }
+
+    #[test]
+    fn bounded_capture_discards_truncated_stream_without_losing_notifications() {
+        let (sender, receiver) = mpsc::sync_channel(8);
+        for (stream, bytes) in [
+            (ProcessStream::Stdout, b"1234".as_slice()),
+            (ProcessStream::Stderr, b"err".as_slice()),
+            (ProcessStream::Stdout, b"5678".as_slice()),
+            (ProcessStream::Stdout, b"x".as_slice()),
+        ] {
+            sender
+                .send(ProcessLine {
+                    stream,
+                    bytes: bytes.to_vec(),
+                })
+                .unwrap();
+        }
+        let mut stdout = Vec::new();
+        let mut stderr = Vec::new();
+        let mut overflow = [false; 2];
+        let mut delivered = 0;
+        drain_output(
+            &receiver,
+            &mut stdout,
+            &mut stderr,
+            &mut |_, bytes| delivered += bytes.len(),
+            5,
+            &mut overflow,
+        );
+        assert_eq!(stdout, [] as [u8; 0]);
+        assert_eq!(stderr, b"err");
+        assert_eq!(overflow, [true, false]);
+        assert_eq!(delivered, 12);
+    }
+
     #[test]
     fn equal_series_versions_prefer_the_standard_installation_with_its_designer() {
         use std::os::unix::{fs::PermissionsExt as _, fs::symlink};

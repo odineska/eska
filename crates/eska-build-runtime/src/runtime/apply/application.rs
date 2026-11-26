@@ -89,8 +89,42 @@ pub fn preview(
     profile: ProfileName,
     allow_full: bool,
 ) -> Result<ApplicationPlan, Failure> {
+    preview_inner(start, application, profile, allow_full, None)
+}
+
+/// Run with sanitized live phase and native activity events.
+/// # Errors
+/// Returns the same failures as the corresponding unobserved operation.
+pub fn preview_observed(
+    start: &Path,
+    application: &str,
+    profile: ProfileName,
+    allow_full: bool,
+    progress: impl FnMut(super::Progress),
+) -> Result<ApplicationPlan, Failure> {
+    let progress = std::cell::RefCell::new(progress);
+    preview_inner(
+        start,
+        application,
+        profile,
+        allow_full,
+        Some(&|event| (progress.borrow_mut())(event)),
+    )
+}
+
+fn preview_inner(
+    start: &Path,
+    application: &str,
+    profile: ProfileName,
+    allow_full: bool,
+    observer: Option<super::Observer<'_>>,
+) -> Result<ApplicationPlan, Failure> {
     let context = resolve(start, application, profile)?;
-    let members = targets(&context, profile)?;
+    let mut members = targets(&context, profile)?;
+    for member in &mut members {
+        member.target.observer = observer;
+        member.target.component = Some(member.name.to_owned());
+    }
     prepare(&members, application, allow_full, false).map(|prepared| prepared.plan)
 }
 
@@ -106,8 +140,55 @@ pub fn execute(
     confirmation: &str,
     mut progress: impl FnMut(&str, Stage),
 ) -> Result<AppliedApplication, Failure> {
+    execute_inner(
+        start,
+        application,
+        profile,
+        allow_full,
+        confirmation,
+        &mut progress,
+        None,
+    )
+}
+
+/// Run with sanitized live phase and native activity events.
+/// # Errors
+/// Returns the same failures as the corresponding unobserved operation.
+pub fn execute_observed(
+    start: &Path,
+    application: &str,
+    profile: ProfileName,
+    allow_full: bool,
+    confirmation: &str,
+    progress: impl FnMut(super::Progress),
+) -> Result<AppliedApplication, Failure> {
+    let progress = std::cell::RefCell::new(progress);
+    execute_inner(
+        start,
+        application,
+        profile,
+        allow_full,
+        confirmation,
+        &mut |_: &str, _: Stage| {},
+        Some(&|event| (progress.borrow_mut())(event)),
+    )
+}
+
+fn execute_inner(
+    start: &Path,
+    application: &str,
+    profile: ProfileName,
+    allow_full: bool,
+    confirmation: &str,
+    mut progress: impl FnMut(&str, Stage),
+    observer: Option<super::Observer<'_>>,
+) -> Result<AppliedApplication, Failure> {
     let context = resolve(start, application, profile)?;
-    let members = targets(&context, profile)?;
+    let mut members = targets(&context, profile)?;
+    for member in &mut members {
+        member.target.observer = observer;
+        member.target.component = Some(member.name.to_owned());
+    }
     let _lock = lock(&members[0].target.lock)?;
     let prepared = prepare(&members, application, allow_full, true)?;
     if prepared.plan.confirmation.as_deref() != Some(confirmation) {
@@ -130,7 +211,7 @@ fn resolve(start: &Path, name: &str, profile: ProfileName) -> Result<AnalysisCon
 struct Member<'a> {
     name: &'a str,
     source: &'a ContextSource,
-    target: Target,
+    target: Target<'a>,
 }
 
 fn targets(context: &AnalysisContext, profile: ProfileName) -> Result<Vec<Member<'_>>, ApplyError> {
@@ -248,6 +329,7 @@ fn prepare(
     let mut components = Vec::with_capacity(members.len());
     let mut inputs = Vec::with_capacity(members.len());
     for member in members {
+        member.target.emit(Stage::Inspect, None);
         let prepared =
             prepare_component(member, &mut generations, allow_full, stage).map_err(|error| {
                 Failure {
@@ -407,6 +489,8 @@ fn apply(
             continue;
         }
         let mut started = false;
+        member.target.last_stage.set(None);
+        member.target.emit(Stage::Inspect, None);
         let result = apply_component(
             &member.target,
             &source,
@@ -431,6 +515,9 @@ fn apply(
         outcomes[index].status = ComponentStatus::Applied;
     }
     for member in members {
+        member.target.verifying.set(true);
+        member.target.last_stage.set(None);
+        member.target.emit(Stage::Verify, None);
         let expected = prepared.generations.for_target(&member.target)?;
         let observed = member.target.verified_generation().and_then(|generation| {
             (generation == expected.generation)

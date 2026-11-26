@@ -3,5 +3,5 @@
 mod execute;
 mod extension;
 pub use eska_project_core::patch::{PatchDescription, PatchError};
-pub use execute::execute;
+pub use execute::{execute, execute_observed};
 const MD: &str = "http://v8.1c.ru/8.3/MDClasses";

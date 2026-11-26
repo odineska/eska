@@ -7,7 +7,7 @@ use super::{
     native_path, option, persist_baseline, read_baseline, read_pending, source_snapshot, structure,
 };
 
-impl Target {
+impl Target<'_> {
     pub(super) fn preview_baseline(
         &self,
         observation: Option<&Observation>,

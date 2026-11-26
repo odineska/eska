@@ -9,6 +9,7 @@ mod picture;
 pub mod removal;
 mod structure;
 
+pub use crate::progress::ProgressCommand;
 pub use extension::Identity as ExtensionIdentity;
 pub use structure::{ObjectChange, ObjectKind, ObjectOperation};
 
@@ -61,7 +62,18 @@ pub enum Stage {
     Import,
     Apply,
     Remove,
+    Verify,
 }
+
+/// A verified phase or sanitized native activity event.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Progress {
+    pub component: Option<String>,
+    pub stage: Stage,
+    pub signal: Option<crate::progress::Signal>,
+}
+
+type Observer<'a> = &'a dyn Fn(Progress);
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -185,7 +197,36 @@ struct Baseline {
 /// # Errors
 /// Returns a structured preflight error when the target or last successful baseline cannot be verified.
 pub fn preview(project: &Project, name: ProfileName, initialize: bool) -> Result<Plan, ApplyError> {
-    let target = Target::open(project, name)?;
+    preview_inner(project, name, initialize, None)
+}
+
+/// Prepare a plan with sanitized live inspection progress.
+/// # Errors
+/// Returns the same preflight errors as [`preview`].
+pub fn preview_observed(
+    project: &Project,
+    name: ProfileName,
+    initialize: bool,
+    progress: impl FnMut(Progress),
+) -> Result<Plan, ApplyError> {
+    let progress = std::cell::RefCell::new(progress);
+    preview_inner(
+        project,
+        name,
+        initialize,
+        Some(&|event| (progress.borrow_mut())(event)),
+    )
+}
+
+fn preview_inner(
+    project: &Project,
+    name: ProfileName,
+    initialize: bool,
+    observer: Option<Observer<'_>>,
+) -> Result<Plan, ApplyError> {
+    let mut target = Target::open(project, name)?;
+    target.observer = observer;
+    target.emit(Stage::Inspect, None);
     let generation = match target.observe() {
         Ok(generation) => Ok(generation),
         Err(ApplyError::PlatformFailed(Stage::Inspect)) => Err(ReviewReason::GenerationUnavailable),
@@ -219,7 +260,41 @@ pub fn execute(
     confirmation: &str,
     mut progress: impl FnMut(Stage),
 ) -> Result<Plan, ApplyError> {
-    let target = Target::open(project, name)?;
+    execute_inner(project, name, initialize, confirmation, &mut progress, None)
+}
+
+/// Execute with sanitized live native progress, including inspection and verification.
+/// # Errors
+/// Returns the same preflight and execution failures as [`execute`].
+pub fn execute_observed(
+    project: &Project,
+    name: ProfileName,
+    initialize: bool,
+    confirmation: &str,
+    progress: impl FnMut(Progress),
+) -> Result<Plan, ApplyError> {
+    let progress = std::cell::RefCell::new(progress);
+    execute_inner(
+        project,
+        name,
+        initialize,
+        confirmation,
+        &mut |_| {},
+        Some(&|event| (progress.borrow_mut())(event)),
+    )
+}
+
+fn execute_inner(
+    project: &Project,
+    name: ProfileName,
+    initialize: bool,
+    confirmation: &str,
+    mut progress: impl FnMut(Stage),
+    observer: Option<Observer<'_>>,
+) -> Result<Plan, ApplyError> {
+    let mut target = Target::open(project, name)?;
+    target.observer = observer;
+    target.emit(Stage::Inspect, None);
     let _lock = lock(&target.lock)?;
     let baseline = read_baseline(&target.state)?;
     let input = target.stage_source(project, baseline.as_ref().ok().filter(|_| !initialize))?;
@@ -304,6 +379,8 @@ fn write_plan(
     };
     progress(Stage::Apply);
     let applied = target.command(&["apply"], &apply_arguments, None, None, Stage::Apply)?;
+    target.verifying.set(true);
+    target.emit(Stage::Verify, None);
     let generation = if plan.mode == Mode::Initialize && target.requires_file_generation_check() {
         target.initialized_file_generation(&applied, imported_checksum.as_deref())?
     } else {
@@ -316,6 +393,7 @@ fn write_plan(
         root,
     };
     save_baseline(&target.state, &state, &document)?;
+    target.verifying.set(false);
     Ok(generation)
 }
 
@@ -358,7 +436,11 @@ fn read_pending(state: &Path) -> Result<Option<Vec<u8>>, ApplyError> {
     }
 }
 
-struct Target {
+struct Target<'a> {
+    observer: Option<Observer<'a>>,
+    component: Option<String>,
+    verifying: std::cell::Cell<bool>,
+    last_stage: std::cell::Cell<Option<Stage>>,
     platform: Ibcmd,
     connection: Connection,
     identity: String,
@@ -408,7 +490,30 @@ struct Observation {
     dependency_generations: BTreeMap<String, String>,
 }
 
-impl Target {
+impl Target<'_> {
+    fn emit(&self, stage: Stage, signal: Option<crate::progress::Signal>) {
+        let stage = if self.verifying.get() {
+            Stage::Verify
+        } else if stage == Stage::Inspect {
+            // Checks performed within import remain part of that phase. Final
+            // checks explicitly enter Verify after the modifying child exits.
+            self.last_stage.get().unwrap_or(Stage::Inspect)
+        } else {
+            stage
+        };
+        let previous = self.last_stage.replace(Some(stage));
+        if signal.is_none() && previous == Some(stage) {
+            return;
+        }
+        if let Some(observer) = self.observer {
+            observer(Progress {
+                component: self.component.clone(),
+                stage,
+                signal,
+            });
+        }
+    }
+
     const fn project_type(&self) -> ProjectType {
         if self.extension.is_some() {
             ProjectType::Extension
@@ -483,6 +588,10 @@ impl Target {
             |selection| (Some(selection.identity), selection.dependencies),
         );
         Ok(Self {
+            observer: None,
+            component: None,
+            verifying: std::cell::Cell::new(false),
+            last_stage: std::cell::Cell::new(None),
             platform,
             connection,
             identity,
@@ -513,6 +622,10 @@ impl Target {
         }
         let directory = self.state.parent().ok_or(ApplyError::InvalidState)?;
         Ok(Self {
+            observer: self.observer,
+            component: None,
+            verifying: std::cell::Cell::new(false),
+            last_stage: std::cell::Cell::new(None),
             platform: self.platform.clone(),
             connection: self.connection.clone(),
             identity: self.identity.clone(),
@@ -828,15 +941,37 @@ impl Target {
         .map(|output| output.stdout)
     }
 
-    fn config_output(
+    fn start_command(&self, stage: Stage, command: &[&str], extra: &[OsString]) {
+        self.emit(stage, None);
+        if stage == Stage::Inspect
+            && let Some(command) = inspection_command(command, extra)
+        {
+            self.emit(
+                stage,
+                Some(crate::progress::Signal::CommandStarted(command)),
+            );
+        }
+    }
+
+    fn file_activity(&self, stage: Stage) -> Option<FileActivity> {
+        if !matches!(
+            stage,
+            Stage::Inspect | Stage::Import | Stage::Apply | Stage::Remove
+        ) {
+            return None;
+        }
+        match &self.connection {
+            Connection::File(directory) => FileActivity::open(directory.join("1Cv8.1CD")),
+            Connection::Standalone(_) => None,
+        }
+    }
+
+    fn config_arguments(
         &self,
         extension: Option<&str>,
         command: &[&str],
         extra: &[OsString],
-        cwd: Option<&Path>,
-        input: Option<File>,
-        stage: Stage,
-    ) -> Result<Output, ApplyError> {
+    ) -> Vec<OsString> {
         let mut arguments = Vec::new();
         if let Connection::Standalone(pid) = self.connection {
             arguments.push(format!("--pid={pid}").into());
@@ -854,24 +989,157 @@ impl Target {
             arguments.push(format!("--extension={extension}").into());
         }
         arguments.extend_from_slice(extra);
-        let output = self
+        arguments
+    }
+
+    fn config_output(
+        &self,
+        extension: Option<&str>,
+        command: &[&str],
+        extra: &[OsString],
+        cwd: Option<&Path>,
+        input: Option<File>,
+        stage: Stage,
+    ) -> Result<Output, ApplyError> {
+        let arguments = self.config_arguments(extension, command, extra);
+        self.start_command(stage, command, extra);
+        let mut signals = crate::progress::Decoder::default();
+        let mut observed_bytes = [0_usize; 2];
+        let mut generations = ibcmd_generation::Collector::default();
+        let mut file_activity = self.file_activity(stage);
+        let mut next_sample = Instant::now() + Duration::from_secs(5);
+        let mut tick = || {
+            if Instant::now() >= next_sample {
+                if file_activity.as_mut().is_some_and(FileActivity::changed) {
+                    self.emit(stage, Some(crate::progress::Signal::DatabaseFileChanged));
+                }
+                next_sample = Instant::now() + Duration::from_secs(5);
+            }
+        };
+        let mut output = self
             .platform
-            .run_owned(
+            .run_owned_bounded(
                 arguments,
                 &self.scratch.path().join("process.pid"),
                 cwd,
                 input,
-                &mut |_, _| {},
-                None,
+                &mut |stream, bytes| {
+                    let index = match stream {
+                        crate::build::ProcessStream::Stdout => 0,
+                        crate::build::ProcessStream::Stderr => 1,
+                    };
+                    observed_bytes[index] = observed_bytes[index].saturating_add(bytes.len());
+                    if index == 0 && command == ["apply"] {
+                        generations.push(bytes, extension.is_some());
+                    }
+                    signals.push(stream, bytes, &mut |signal| {
+                        if signal.is_some()
+                            || matches!(
+                                stage,
+                                Stage::Inspect | Stage::Import | Stage::Apply | Stage::Remove
+                            )
+                        {
+                            self.emit(
+                                stage,
+                                Some(signal.unwrap_or(crate::progress::Signal::Activity)),
+                            );
+                        }
+                    });
+                },
+                (None, 1024 * 1024, Some(&mut tick)),
             )
             .map_err(process_error)?;
+        if file_activity.as_mut().is_some_and(FileActivity::changed) {
+            self.emit(stage, Some(crate::progress::Signal::DatabaseFileChanged));
+        }
+        signals.finish(&mut |signal| {
+            if signal.is_some()
+                || matches!(
+                    stage,
+                    Stage::Inspect | Stage::Import | Stage::Apply | Stage::Remove
+                )
+            {
+                self.emit(
+                    stage,
+                    Some(signal.unwrap_or(crate::progress::Signal::Activity)),
+                );
+            }
+        });
         if self.platform.was_interrupted() {
             return Err(ApplyError::Interrupted);
         }
         if !output.status.success() {
             return Err(ApplyError::PlatformFailed(stage));
         }
+        if matches!(
+            command,
+            ["generation-id" | "checksum"] | ["extension", "list"]
+        ) && observed_bytes[0] > 1024 * 1024
+        {
+            // These commands consume stdout as authoritative data. Never pass a
+            // discarded inventory to the optional-listing fallback as an empty list.
+            return Err(ApplyError::InvalidState);
+        }
+        if command == ["apply"] {
+            output.stdout = generations
+                .finish(extension.is_some())
+                .map_or_default(|id| {
+                    let prefix = if extension.is_some() {
+                        "[INFO] Создано поколение расширения конфигурации:"
+                    } else {
+                        "[INFO] Configuration generation is created:"
+                    };
+                    format!("{prefix} {id}\n").into_bytes()
+                });
+        }
         Ok(output)
+    }
+}
+
+fn inspection_command(command: &[&str], extra: &[OsString]) -> Option<ProgressCommand> {
+    Some(match command {
+        ["generation-id"] => ProgressCommand::ReadGeneration,
+        ["checksum"] if extra.iter().any(|argument| argument == "--db") => {
+            ProgressCommand::ChecksumDatabase
+        }
+        ["checksum"] => ProgressCommand::ChecksumMain,
+        ["extension", "list"] => ProgressCommand::ListExtensions,
+        ["export", "info"] | ["export", "objects", "Configuration"] => {
+            ProgressCommand::ReadExtensionInfo
+        }
+        ["export"] => ProgressCommand::ExportConfiguration,
+        ["save"] => ProgressCommand::SaveConfiguration,
+        _ => return None,
+    })
+}
+
+struct FileActivity {
+    path: PathBuf,
+    fingerprint: (u64, std::time::SystemTime),
+}
+
+impl FileActivity {
+    fn fingerprint(path: &Path) -> Option<(u64, std::time::SystemTime)> {
+        let metadata = fs::metadata(path).ok()?;
+        metadata
+            .is_file()
+            .then_some((metadata.len(), metadata.modified().ok()?))
+    }
+
+    fn open(path: PathBuf) -> Option<Self> {
+        Some(Self {
+            fingerprint: Self::fingerprint(&path)?,
+            path,
+        })
+    }
+
+    fn changed(&mut self) -> bool {
+        let Some(current) = Self::fingerprint(&self.path) else {
+            return false;
+        };
+        let changed = current != self.fingerprint;
+        self.fingerprint = current;
+        changed
     }
 }
 
@@ -1297,6 +1565,61 @@ fn import_input(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn inspection_commands_expose_only_allowlisted_operation_types() {
+        for (arguments, expected) in [
+            (vec!["generation-id"], ProgressCommand::ReadGeneration),
+            (vec!["checksum"], ProgressCommand::ChecksumMain),
+            (vec!["extension", "list"], ProgressCommand::ListExtensions),
+            (vec!["export"], ProgressCommand::ExportConfiguration),
+            (vec!["save"], ProgressCommand::SaveConfiguration),
+            (vec!["export", "info"], ProgressCommand::ReadExtensionInfo),
+            (
+                vec!["export", "objects", "Configuration"],
+                ProgressCommand::ReadExtensionInfo,
+            ),
+        ] {
+            assert_eq!(
+                inspection_command(
+                    &arguments,
+                    &["--password=secret".into(), "/private/path".into()]
+                ),
+                Some(expected)
+            );
+        }
+        assert_eq!(
+            inspection_command(&["checksum"], &["--db".into()]),
+            Some(ProgressCommand::ChecksumDatabase)
+        );
+        assert_eq!(
+            inspection_command(&["checksum"], &["--password=--db".into()]),
+            Some(ProgressCommand::ChecksumMain)
+        );
+        for arguments in [
+            vec!["arbitrary secret"],
+            vec!["export", "objects", "PrivateName"],
+            vec!["generation-id", "secret"],
+            vec!["apply"],
+        ] {
+            assert_eq!(inspection_command(&arguments, &[]), None);
+        }
+    }
+
+    #[test]
+    fn file_activity_reports_only_observed_changes_and_tolerates_missing_files() {
+        let directory = crate::test_support::TestDir::new();
+        let path = directory.0.join("1Cv8.1CD");
+        assert!(FileActivity::open(path.clone()).is_none());
+        fs::write(&path, b"old").unwrap();
+        let mut activity = FileActivity::open(path.clone()).unwrap();
+        assert!(!activity.changed());
+        fs::write(&path, b"new and longer").unwrap();
+        assert!(activity.changed());
+        assert!(!activity.changed());
+        fs::remove_file(path).unwrap();
+        assert!(!activity.changed());
+    }
 
     #[test]
     fn windows_import_preserves_unicode_and_limits_the_command_line() {

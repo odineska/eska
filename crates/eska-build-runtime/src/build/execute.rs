@@ -20,9 +20,41 @@ static WORKSPACE_SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum BuildStage {
+    PrepareSources,
+    PublishArtifact,
     PrepareBaseConfiguration,
     CreateInfobase,
     ImportSources,
+}
+
+/// Internal pipeline callbacks keep phase changes separate from real process output.
+pub(super) trait BuildObserver {
+    fn output(&mut self, stage: BuildStage, stream: ProcessStream, bytes: &[u8]);
+    fn stage(&mut self, _stage: BuildStage) {}
+}
+
+impl<F: FnMut(BuildStage, ProcessStream, &[u8])> BuildObserver for F {
+    fn output(&mut self, stage: BuildStage, stream: ProcessStream, bytes: &[u8]) {
+        self(stage, stream, bytes);
+    }
+}
+
+struct ObservedBuild<O, S> {
+    output: O,
+    stage: S,
+}
+
+impl<O, S> BuildObserver for ObservedBuild<O, S>
+where
+    O: FnMut(BuildStage, ProcessStream, &[u8]),
+    S: FnMut(BuildStage),
+{
+    fn output(&mut self, stage: BuildStage, stream: ProcessStream, bytes: &[u8]) {
+        (self.output)(stage, stream, bytes);
+    }
+    fn stage(&mut self, stage: BuildStage) {
+        (self.stage)(stage);
+    }
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -144,6 +176,29 @@ where
     )
 }
 
+/// Build with explicit phase starts independent of native diagnostic output.
+/// The optional manifest request uses the same immutable snapshot and publication
+/// guarantees as [`execute_streaming_with_manifest`].
+/// # Errors
+/// Returns the same structured preflight, execution and publication failures as [`execute`].
+pub fn execute_observed(
+    plan: &BuildPlan,
+    ibcmd: &Ibcmd,
+    manifest_request: Option<(&Project, Option<&str>, super::GitProvenance)>,
+    on_output: impl FnMut(BuildStage, ProcessStream, &[u8]),
+    on_stage: impl FnMut(BuildStage),
+) -> Result<BuildResult, BuildError> {
+    execute_streaming_inner(
+        plan,
+        ibcmd,
+        manifest_request,
+        &mut ObservedBuild {
+            output: on_output,
+            stage: on_stage,
+        },
+    )
+}
+
 /// Share the verified platform pipeline between ordinary and manifested builds.
 fn execute_streaming_inner<F>(
     plan: &BuildPlan,
@@ -152,7 +207,7 @@ fn execute_streaming_inner<F>(
     on_output: &mut F,
 ) -> Result<BuildResult, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: BuildObserver,
 {
     let started = Instant::now();
     if manifest_request.is_some() {
@@ -183,6 +238,7 @@ where
         ensure_configured_output_is_inside_project(plan, parent)?;
     }
     let workspace = Workspace::create(parent)?;
+    on_output.stage(BuildStage::PrepareSources);
     let snapshot = manifest_project
         .map(|project| manifest::capture_source(project, plan, &workspace.path))
         .transpose()
@@ -192,6 +248,7 @@ where
         |snapshot| plan.with_snapshot_source(snapshot.source().to_owned()),
     );
     let artifact = prepare_artifact(plan, &effective_plan, ibcmd, &workspace.path, on_output)?;
+    on_output.stage(BuildStage::PublishArtifact);
     let manifest_path = publish_result(
         plan,
         ibcmd,
@@ -225,10 +282,11 @@ fn prepare_artifact<F>(
     on_output: &mut F,
 ) -> Result<PreparedArtifact, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: BuildObserver,
 {
     let import_source = import_source(effective_plan)?;
     if let Some(library) = plan.library_build() {
+        on_output.stage(BuildStage::PrepareBaseConfiguration);
         let _lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
         let prepared = super::shared_library::prepare(
             library,
@@ -255,6 +313,9 @@ where
         });
     }
     let lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
+    if plan.base_configuration().is_some() {
+        on_output.stage(BuildStage::PrepareBaseConfiguration);
+    }
     let mut effective_base_configuration = base_configuration::prepare(
         plan,
         ibcmd,
@@ -301,7 +362,7 @@ fn prepare_infobase<F>(
     on_output: &mut F,
 ) -> Result<(ManagedInfobase, Option<std::process::Output>), BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: BuildObserver,
 {
     let infobase = lease
         .prepare(
@@ -312,6 +373,7 @@ where
     let mut created = None;
     if infobase.needs_creation() {
         if let Some(shared) = base.as_mut().and_then(|base| base.shared.as_mut()) {
+            on_output.stage(BuildStage::CreateInfobase);
             shared.materialize(ibcmd, infobase.data(), on_output)?;
         } else {
             created = Some(create_infobase(
@@ -344,7 +406,7 @@ fn import_with_context<F>(
     on_output: &mut F,
 ) -> Result<std::process::Output, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: BuildObserver,
 {
     let imported = import_artifact(ibcmd, source, Some(data), artifact, pid, on_output);
     let Err(BuildError::CommandFailed { stderr, .. }) = imported else {
@@ -401,7 +463,7 @@ fn import_artifact<F>(
     on_output: &mut F,
 ) -> Result<std::process::Output, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: BuildObserver,
 {
     let mut arguments = Vec::new();
     if let Some(data) = data {
@@ -460,7 +522,7 @@ pub(super) fn create_infobase<F>(
     on_output: &mut F,
 ) -> Result<std::process::Output, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: BuildObserver,
 {
     let mut arguments = vec![
         OsString::from("infobase"),
@@ -608,11 +670,12 @@ pub(super) fn run<I, S, F>(
 where
     I: IntoIterator<Item = S>,
     S: AsRef<OsStr>,
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: BuildObserver,
 {
+    on_output.stage(stage);
     let output = ibcmd
         .run_interruptible(arguments, pid_file, &mut |stream, output| {
-            on_output(stage, stream, output);
+            on_output.output(stage, stream, output);
         })
         .map_err(|source| BuildError::Run { stage, source })?;
     if output.status.success() {

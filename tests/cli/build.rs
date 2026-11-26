@@ -666,10 +666,19 @@ fn streams_humanized_diagnostics_while_build_is_running() {
         "▶ Начало сборки платформой 1С 8.3.27.2325\n"
     );
 
-    first_line.clear();
-    stderr
-        .read_line(&mut first_line)
-        .expect("read first diagnostic");
+    let mut stages = Vec::new();
+    loop {
+        first_line.clear();
+        assert_ne!(stderr.read_line(&mut first_line).unwrap(), 0, "{stages:?}");
+        if first_line.starts_with("[INFO]") {
+            break;
+        }
+        stages.push(first_line.trim_end().to_owned());
+    }
+    assert!(
+        stages.iter().any(|line| line == "Импорт исходников"),
+        "{stages:?}"
+    );
 
     assert_eq!(
         first_line,
@@ -694,7 +703,16 @@ fn streams_humanized_diagnostics_while_build_is_running() {
         .expect("read build result");
     let status = child.wait().expect("wait for streaming build");
     assert!(status.success(), "{remaining_stderr}");
-    assert_eq!(remaining_stderr, "[WARN] fake build warning\n");
+    assert!(
+        remaining_stderr
+            .lines()
+            .any(|line| line == "[WARN] fake build warning")
+    );
+    assert!(
+        remaining_stderr
+            .lines()
+            .any(|line| line == "Публикация артефакта")
+    );
     assert!(stdout.contains("✓ Собран"), "{stdout}");
 }
 

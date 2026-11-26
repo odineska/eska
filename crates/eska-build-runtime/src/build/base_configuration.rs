@@ -14,8 +14,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 use super::{
-    BaseConfiguration, BuildError, BuildPlan, BuildStage, Ibcmd, ProcessStream, execute,
-    source_snapshot,
+    BaseConfiguration, BuildError, BuildPlan, BuildStage, Ibcmd, execute, source_snapshot,
 };
 use crate::native_path;
 
@@ -140,7 +139,7 @@ pub(super) fn prepare<F>(
     on_output: &mut F,
 ) -> Result<Option<PreparedBase>, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: crate::build::execute::BuildObserver,
 {
     match plan.base_configuration() {
         None => Ok(None),
@@ -183,7 +182,7 @@ fn prepare_xml<F>(
     on_output: &mut F,
 ) -> Result<PreparedBase, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: crate::build::execute::BuildObserver,
 {
     let cf = root.join(CACHE_CF);
     let stamp = root.join(CACHE_STATE);
@@ -246,7 +245,7 @@ pub(super) fn compile_xml<F>(
     on_output: &mut F,
 ) -> Result<(PathBuf, Vec<u8>), BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: crate::build::execute::BuildObserver,
 {
     let data = workspace.join("base-data");
     let pid = workspace.join("base.pid");

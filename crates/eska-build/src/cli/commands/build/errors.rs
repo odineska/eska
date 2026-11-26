@@ -231,6 +231,8 @@ fn present_streamed_build_error(error: &BuildError, localizer: &Localizer) -> St
 /// Localize the fixed pipeline stage while retaining enum-based control flow.
 fn stage_name(stage: BuildStage, localizer: &Localizer) -> String {
     localizer.text(match stage {
+        BuildStage::PrepareSources => "op-prepare-sources",
+        BuildStage::PublishArtifact => "op-publish-artifact",
         BuildStage::PrepareBaseConfiguration => "build-stage-prepare-base-configuration",
         BuildStage::CreateInfobase => "build-stage-create-infobase",
         BuildStage::ImportSources => "build-stage-import-sources",
@@ -343,6 +345,8 @@ pub(super) const fn execution_error_stage(error: &BuildExecutionError) -> Option
         BuildExecutionError::Build(
             BuildError::Run { stage, .. } | BuildError::CommandFailed { stage, .. },
         ) => Some(match stage {
+            BuildStage::PrepareSources => "prepare-sources",
+            BuildStage::PublishArtifact => "publish-artifact",
             BuildStage::PrepareBaseConfiguration => "prepare-base-configuration",
             BuildStage::CreateInfobase => "create-infobase",
             BuildStage::ImportSources => "import-sources",

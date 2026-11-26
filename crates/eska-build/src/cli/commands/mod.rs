@@ -8,5 +8,6 @@ pub mod doctor;
 pub mod import;
 pub mod patch;
 pub mod platform;
+mod progress;
 pub mod runtime;
 pub mod unpack;

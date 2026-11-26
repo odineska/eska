@@ -9,12 +9,17 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 
-struct Workspace(PathBuf);
+type Observer<'a> = &'a dyn Fn(&'static str, Option<crate::progress::Signal>);
 
-impl Drop for Workspace {
+struct Workspace<'a> {
+    path: PathBuf,
+    notify: Observer<'a>,
+}
+
+impl Drop for Workspace<'_> {
     /// Delete only the uniquely claimed workspace, including incomplete platform databases.
     fn drop(&mut self) {
-        let _ = fs::remove_dir_all(&self.0);
+        let _ = fs::remove_dir_all(&self.path);
     }
 }
 
@@ -28,20 +33,37 @@ pub fn execute(
     output: &Path,
     prepare: impl FnOnce(&Path) -> Result<(), PatchError>,
 ) -> Result<(), PatchError> {
+    execute_observed(plan, tool, output, prepare, |_, _| {})
+}
+
+/// Build a patch while reporting verified phases and sanitized native activity.
+/// # Errors
+/// Returns the same preparation, validation and publication failures as [`execute`].
+pub fn execute_observed(
+    plan: &PatchDescription,
+    tool: &Ibcmd,
+    output: &Path,
+    prepare: impl FnOnce(&Path) -> Result<(), PatchError>,
+    progress: impl FnMut(&'static str, Option<crate::progress::Signal>),
+) -> Result<(), PatchError> {
+    let progress = std::cell::RefCell::new(progress);
+    let observer = |stage, signal| (progress.borrow_mut())(stage, signal);
     validate_output(plan, tool, output)?;
     let parent = output
         .parent()
         .ok_or_else(|| PatchError::new("output", output.display().to_string()))?;
     fs::create_dir_all(parent).map_err(|e| PatchError::new("io", e.to_string()))?;
-    let workspace = workspace(parent)?;
+    let workspace = workspace(parent, &observer)?;
     tool.begin_interruptible_operation()
         .map_err(|e| PatchError::new("tool", format!("{e:?}")))?;
-    prepare(&workspace.0)?;
-    let base = workspace.0.join("base");
+    (workspace.notify)("prepare_base", None);
+    prepare(&workspace.path)?;
+    let base = workspace.path.join("base");
     let candidate = build_candidate(plan, tool, &workspace, &base)?;
     if tool.was_interrupted() {
         return Err(PatchError::new("tool", "interrupted"));
     }
+    (workspace.notify)("publish_artifact", None);
     fs::hard_link(candidate, output).map_err(|e| PatchError::new("output", e.to_string()))
 }
 
@@ -79,9 +101,9 @@ fn build_candidate(
     workspace: &Workspace,
     base: &Path,
 ) -> Result<PathBuf, PatchError> {
-    let data = workspace.0.join("data");
-    let extension = workspace.0.join("extension");
-    let candidate = workspace.0.join("candidate.cfe");
+    let data = workspace.path.join("data");
+    let extension = workspace.path.join("extension");
+    let candidate = workspace.path.join("candidate.cfe");
     let data_arg = option("--data", &data);
     let extension_arg = OsString::from(format!("--extension={}", plan.name));
     prepare_infobase(tool, workspace, base, &data_arg)?;
@@ -171,7 +193,7 @@ fn create_extension(
             crate::native_path(extension).as_os_str().to_owned(),
         ],
     )?;
-    extension::write(plan, &workspace.0.join("modules"), extension)?;
+    extension::write(plan, &workspace.path.join("modules"), extension)?;
     run(
         tool,
         workspace,
@@ -258,7 +280,7 @@ fn save_candidate(
 }
 
 /// Claim a new staging directory beside the artifact without reusing another process's files.
-fn workspace(parent: &Path) -> Result<Workspace, PatchError> {
+fn workspace<'a>(parent: &Path, observer: Observer<'a>) -> Result<Workspace<'a>, PatchError> {
     let time = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .map_err(|e| PatchError::new("io", e.to_string()))?
@@ -269,7 +291,12 @@ fn workspace(parent: &Path) -> Result<Workspace, PatchError> {
             std::process::id()
         ));
         match fs::create_dir(&path) {
-            Ok(()) => return Ok(Workspace(path)),
+            Ok(()) => {
+                return Ok(Workspace {
+                    path,
+                    notify: observer,
+                });
+            }
             Err(e) if e.kind() == std::io::ErrorKind::AlreadyExists => {}
             Err(e) => return Err(PatchError::new("io", e.to_string())),
         }
@@ -284,8 +311,17 @@ fn run(
     stage: &str,
     args: Vec<OsString>,
 ) -> Result<(), PatchError> {
-    let result = tool
-        .run_interruptible(args, &workspace.0.join("process.pid"), &mut |_, _| {})
+    let phase = match stage {
+        "create" => "create_infobase",
+        "create-extension" | "export-extension" => "prepare_sources",
+        "import-base" | "import-extension" => "import",
+        "apply-base" | "apply-extension" => "apply",
+        "check-extension" => "verify",
+        "save" => "build",
+        _ => "patch",
+    };
+    (workspace.notify)(phase, None);
+    let result = run_observed(tool, workspace, phase, args)
         .map_err(|e| PatchError::new("tool", format!("{stage}: {e:?}")))?;
     if !result.status.success() {
         return Err(PatchError::new(
@@ -309,8 +345,8 @@ fn designer(
     stage: &str,
     checks: Vec<&str>,
 ) -> Result<(), PatchError> {
-    let log = workspace.0.join(format!("{stage}.log"));
-    let result_file = workspace.0.join(format!("{stage}.result"));
+    let log = workspace.path.join(format!("{stage}.log"));
+    let result_file = workspace.path.join(format!("{stage}.result"));
     let mut args: Vec<OsString> = vec![
         "DESIGNER".into(),
         "/F".into(),
@@ -326,8 +362,8 @@ fn designer(
     ];
     args.extend(checks.into_iter().map(OsString::from));
     args.extend(["-Extension".into(), name.into()]);
-    let output = tool
-        .run_designer(args, &workspace.0.join("process.pid"))
+    (workspace.notify)("verify", None);
+    let output = run_observed(&tool.sibling_program("1cv8"), workspace, "verify", args)
         .map_err(|e| PatchError::new("tool", format!("{e:?}")))?;
     if !output.status.success()
         || fs::read_to_string(result_file)
@@ -343,6 +379,37 @@ fn designer(
         ));
     }
     Ok(())
+}
+
+fn run_observed(
+    tool: &Ibcmd,
+    workspace: &Workspace<'_>,
+    phase: &'static str,
+    arguments: Vec<OsString>,
+) -> Result<std::process::Output, crate::build::RunError> {
+    let mut decoder = crate::progress::Decoder::default();
+    let output = tool.run_owned_bounded(
+        arguments,
+        &workspace.path.join("process.pid"),
+        None,
+        None,
+        &mut |stream, bytes| {
+            decoder.push(stream, bytes, &mut |signal| {
+                (workspace.notify)(
+                    phase,
+                    Some(signal.unwrap_or(crate::progress::Signal::Activity)),
+                );
+            });
+        },
+        (None, 1024 * 1024, None),
+    );
+    decoder.finish(&mut |signal| {
+        (workspace.notify)(
+            phase,
+            Some(signal.unwrap_or(crate::progress::Signal::Activity)),
+        );
+    });
+    output
 }
 
 /// Preserve arbitrary filesystem bytes as a single option value.

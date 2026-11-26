@@ -36,6 +36,38 @@ pub fn remove(
     force: bool,
     mut removing: impl FnMut(),
 ) -> Result<Plan, ApplyError> {
+    remove_inner(project, profile, confirmation, force, &mut removing, None)
+}
+
+/// Run with sanitized live phase and native activity events.
+/// # Errors
+/// Returns the same failures as the corresponding unobserved operation.
+pub fn remove_observed(
+    project: &Project,
+    profile: ProfileName,
+    confirmation: Option<&str>,
+    force: bool,
+    progress: impl FnMut(super::Progress),
+) -> Result<Plan, ApplyError> {
+    let progress = std::cell::RefCell::new(progress);
+    remove_inner(
+        project,
+        profile,
+        confirmation,
+        force,
+        &mut || {},
+        Some(&|event| (progress.borrow_mut())(event)),
+    )
+}
+
+fn remove_inner(
+    project: &Project,
+    profile: ProfileName,
+    confirmation: Option<&str>,
+    force: bool,
+    mut removing: impl FnMut(),
+    observer: Option<super::Observer<'_>>,
+) -> Result<Plan, ApplyError> {
     require_test(profile)?;
     if confirmation.is_some() && !force {
         return Err(ApplyError::ForceRequired);
@@ -45,7 +77,13 @@ pub fn remove(
     }
     let mut selection = extension::resolve(project, true)?;
     let dependents = std::mem::take(&mut selection.dependents);
-    let target = Target::open_selected(project, profile, Some(selection))?;
+    let mut target = Target::open_selected(project, profile, Some(selection))?;
+    target.observer = observer;
+    target.component = target
+        .extension
+        .as_ref()
+        .map(|extension| extension.name.clone());
+    target.emit(Stage::Inspect, None);
     let _lock = confirmation.map(|_| lock(&target.lock)).transpose()?;
     target.verify_source(project.source())?;
     let plan = review(&target, &dependents)?;
@@ -70,6 +108,8 @@ pub fn remove(
             None,
             Stage::Remove,
         )?;
+        target.verifying.set(true);
+        target.emit(Stage::Verify, None);
         if target.extension_listed(&plan.extension.name)? != Some(false) {
             return Err(ApplyError::PlatformFailed(Stage::Remove));
         }
