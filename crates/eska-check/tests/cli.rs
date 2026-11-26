@@ -152,6 +152,57 @@ fn standalone_reports_passed_and_threshold_exceeded_in_both_locales() {
     assert!(!fixture.root.join(".git").exists());
 }
 
+/// Progress is opt-in for JSON, localized for humans, and never modifies stdout.
+#[cfg(unix)]
+#[test]
+fn progress_preserves_json_report_and_uses_locale_independent_module_counts() {
+    let fixture = Fixture::new();
+    for locale in ["ru", "en"] {
+        let quiet = fixture
+            .command(locale)
+            .env("ESKA_OPERATION_PROGRESS", "0")
+            .output()
+            .unwrap();
+        assert_eq!(quiet.stderr, [] as [u8; 0]);
+        let observed = fixture
+            .command(locale)
+            .env("ESKA_OPERATION_PROGRESS", "1")
+            .output()
+            .unwrap();
+        assert!(observed.status.success());
+        assert_eq!(observed.stdout, quiet.stdout);
+        let events: Vec<Value> = String::from_utf8(observed.stderr)
+            .unwrap()
+            .lines()
+            .map(|line| serde_json::from_str(line).unwrap())
+            .collect();
+        for event in &events {
+            assert_eq!(event["schema_version"], 1);
+            assert_eq!(event["kind"], "operation_progress");
+            assert_eq!(event["event"], "stage");
+        }
+        assert!(
+            events
+                .iter()
+                .any(|event| event["phase"] == "check_structure")
+        );
+        assert!(
+            events
+                .iter()
+                .any(|event| event["phase"] == "prepare_analyzer")
+        );
+        let modules: Vec<_> = events
+            .iter()
+            .filter(|event| event["phase"] == "analyze_modules")
+            .collect();
+        assert_eq!(modules[0]["processed_modules"], 0);
+        assert_eq!(modules[0]["total_modules"], 1);
+        assert_eq!(modules.last().unwrap()["processed_modules"], 1);
+        assert_eq!(modules.last().unwrap()["total_modules"], 1);
+        assert!(events.iter().all(|event| event.get("percent").is_none()));
+    }
+}
+
 /// Exit 3 and complete=false distinguish a tool failure from threshold exceedance.
 #[cfg(unix)]
 #[test]
@@ -276,7 +327,24 @@ fn human_output_is_localized_in_both_languages() {
         } else {
             "warning FixtureRule"
         }));
-        assert_eq!(output.stderr, [] as [u8; 0]);
+        let progress = String::from_utf8(output.stderr).unwrap();
+        for label in if locale == "ru" {
+            [
+                "Проверка структуры проекта",
+                "Подготовка анализатора",
+                "Анализ модулей",
+                "Обработано модулей: 1/1",
+            ]
+        } else {
+            [
+                "Checking project structure",
+                "Preparing analyzer",
+                "Analyzing modules",
+                "Modules processed: 1/1",
+            ]
+        } {
+            assert!(progress.contains(label), "{progress}");
+        }
         let json = fixture.command(locale).output().unwrap();
         assert!(json.status.success());
         assert_eq!(fs::read(report_path).unwrap(), json.stdout);

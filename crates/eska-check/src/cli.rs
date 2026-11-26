@@ -80,6 +80,8 @@ pub fn run() -> ExitCode {
     {
         return code;
     }
+    let mut progress = crate::progress::Reporter::new(cli.format, &localizer);
+    progress.observe(check::Progress::CheckStructure);
     let initial =
         configuration::inspect(&cli.project_dir, cli.application.as_deref()).map_err(Failure::from);
     let mut report_file = match initial
@@ -99,7 +101,7 @@ pub fn run() -> ExitCode {
             Failure::Configuration(eska_analyzer::Error::ProcessIo(io::Error::other(error)))
         })
         .and(initial)
-        .and_then(|plan| execute(&cli, &plan, &cancelled));
+        .and_then(|plan| execute(&cli, &plan, &cancelled, progress));
     let code = match &result {
         Ok(report) => u8::from(report.counts.exceeds(&report.policy)),
         Err(error) => {
@@ -137,6 +139,7 @@ fn execute(
     cli: &Cli,
     initial: &configuration::Plan,
     cancelled: &AtomicBool,
+    mut progress: crate::progress::Reporter,
 ) -> Result<Report, Failure> {
     let analyzer = Analyzer {
         binary: cli
@@ -148,8 +151,9 @@ fn execute(
         cancelled,
         connection_closed: None,
     };
+    progress.prepare_analyzer();
     let plan = configuration::prepare(initial, &analyzer, false)?;
-    check::analyze(&plan, &analyzer)
+    check::analyze_observed(&plan, &analyzer, move |event| progress.observe(event))
 }
 
 /// An explicit report path creates a new file; an existing source or earlier report is preserved.
