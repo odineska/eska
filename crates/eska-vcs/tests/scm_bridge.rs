@@ -505,6 +505,7 @@ fn branches_capability_is_false_without_git_and_reads_remain_available() {
         for (operation, success) in [
             ("scm-root", true),
             ("scm-status", true),
+            ("scm-history", true),
             ("scm-branches", false),
         ] {
             let output = Command::new(env!("CARGO_BIN_EXE_eska-vcs"))
@@ -519,6 +520,7 @@ fn branches_capability_is_false_without_git_and_reads_remain_available() {
             let reply: Value = serde_json::from_slice(&output.stdout).unwrap();
             if operation == "scm-root" {
                 assert_eq!(reply["data"]["safe_switch_available"], true);
+                assert_eq!(reply["data"]["history_available"], true);
                 assert_eq!(reply["data"]["branches_available"], false);
                 assert_eq!(reply["data"]["mutations_available"], false);
             } else if !success {
@@ -834,4 +836,111 @@ fn branch_picker_shelves_create_remote_tag_and_detached_transitions() {
         assert_eq!(fs::read(root.join("file")).unwrap(), b"unstaged\r\n");
         assert_eq!(fs::read(root.join("new")).unwrap(), b"untracked");
     }
+}
+
+#[test]
+fn history_reads_merge_multi_tip_refs_and_snapshot_paging() {
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init", "-b", "main"]);
+    let empty = bridge(root, "en", &["scm-history"], None, true);
+    assert_eq!(empty["data"]["head"]["unborn"], true);
+    assert_eq!(empty["data"]["commits"], json!([]));
+    git(root, &["commit", "--allow-empty", "-m", "base"]);
+    git(root, &["checkout", "-b", "side"]);
+    git(root, &["commit", "--allow-empty", "-m", "side"]);
+    git(root, &["tag", "-a", "release", "-m", "release"]);
+    git(root, &["update-ref", "refs/remotes/origin/side", "HEAD"]);
+    git(root, &["checkout", "main"]);
+    git(root, &["commit", "--allow-empty", "-m", "main"]);
+    git(root, &["merge", "--no-ff", "side", "-m", "merge"]);
+    git(root, &["checkout", "-b", "other", "HEAD~1"]);
+    git(root, &["commit", "--allow-empty", "-m", "other"]);
+    git(root, &["checkout", "main"]);
+    let all = bridge(root, "en", &["scm-history"], None, true);
+    assert_eq!(all, bridge(root, "ru", &["scm-history"], None, true));
+    let commits = all["data"]["commits"].as_array().unwrap();
+    assert_eq!(commits.len(), 5);
+    let merge = commits.iter().find(|c| c["subject"] == "merge").unwrap();
+    assert_eq!(merge["parents"].as_array().unwrap().len(), 2);
+    let side = commits.iter().find(|c| c["subject"] == "side").unwrap();
+    for kind in ["local", "remote", "tag"] {
+        assert!(
+            side["refs"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|r| r["kind"] == kind)
+        );
+    }
+    let mut paged = Vec::new();
+    let mut cursor = None::<String>;
+    loop {
+        let mut args = vec!["scm-history", "--limit", "1"];
+        if let Some(cursor) = cursor.as_deref() {
+            args.extend(["--cursor", cursor]);
+        }
+        let page = bridge(root, "en", &args, None, true);
+        paged.extend(page["data"]["commits"].as_array().unwrap().clone());
+        cursor = page["data"]["next_cursor"].as_str().map(str::to_owned);
+        if cursor.is_none() {
+            break;
+        }
+    }
+    assert_eq!(&paged, commits);
+    let first = bridge(root, "en", &["scm-history", "--limit", "1"], None, true);
+    let cursor = first["data"]["next_cursor"].as_str().unwrap();
+    git(root, &["checkout", "--detach"]);
+    assert_eq!(
+        bridge(
+            root,
+            "en",
+            &["scm-history", "--cursor", cursor],
+            None,
+            false
+        )["error"],
+        "stale_cursor"
+    );
+    assert_eq!(
+        bridge(root, "en", &["scm-history"], None, true)["data"]["head"]["detached"],
+        true
+    );
+    assert_eq!(
+        bridge(root, "en", &["scm-history", "--limit", "0"], None, false)["error"],
+        "input"
+    );
+    assert_eq!(
+        bridge(root, "en", &["scm-history", "--cursor", "bad"], None, false)["error"],
+        "input"
+    );
+}
+
+#[test]
+fn history_respects_shallow_boundary_and_reports_broken_ancestry() {
+    let fixture = support::TestDir::new();
+    let root = &fixture.0;
+    git(root, &["init", "-b", "main"]);
+    git(root, &["commit", "--allow-empty", "-m", "base"]);
+    git(root, &["commit", "--allow-empty", "-m", "tip"]);
+    let tip = bridge(root, "en", &["scm-history"], None, true)["data"]["commits"][0]["id"]
+        .as_str()
+        .unwrap()
+        .to_owned();
+    fs::write(root.join(".git/shallow"), format!("{tip}\n")).unwrap();
+    let shallow = bridge(root, "en", &["scm-history"], None, true);
+    assert_eq!(shallow["data"]["commits"].as_array().unwrap().len(), 1);
+    assert_eq!(shallow["data"]["commits"][0]["parents"], json!([]));
+    fs::remove_file(root.join(".git/shallow")).unwrap();
+    let full = bridge(root, "en", &["scm-history"], None, true);
+    let parent = full["data"]["commits"][1]["id"].as_str().unwrap();
+    fs::remove_file(
+        root.join(".git/objects")
+            .join(&parent[..2])
+            .join(&parent[2..]),
+    )
+    .unwrap();
+    assert_eq!(
+        bridge(root, "en", &["scm-history"], None, false)["error"],
+        "history"
+    );
 }

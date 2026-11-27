@@ -33,6 +33,13 @@ enum ScmOperation {
     Root,
     #[command(name = "scm-stage-lines")]
     StageLines { file: PathBuf },
+    #[command(name = "scm-history")]
+    History {
+        #[arg(long, default_value_t = 100)]
+        limit: usize,
+        #[arg(long)]
+        cursor: Option<String>,
+    },
     #[command(name = "scm-status")]
     Status,
     #[command(name = "scm-branches")]
@@ -177,6 +184,9 @@ impl ScmOperation {
     fn run(&self, root: &Path) -> (&'static str, Result<Value, Value>) {
         match self {
             Self::StageLines { file } => ("scm_stage_lines", scm::stage_lines_input(root, file)),
+            Self::History { limit, cursor } => {
+                ("scm_history", scm::history(root, *limit, cursor.as_deref()))
+            }
             Self::Root => ("scm_root", scm::root(root)),
             Self::Status => ("scm_status", scm::status(root)),
             Self::Branches => ("scm_branches", scm::branches(root)),

@@ -14,6 +14,8 @@ use std::{
     path::{Component, Path, PathBuf},
 };
 
+pub use super::scm_history::history;
+
 type Reply = Result<Value, Value>;
 #[derive(Clone, Copy, Debug, clap::ValueEnum)]
 pub enum Revision {
@@ -38,7 +40,7 @@ pub fn root(start: &Path) -> Reply {
     let (root, root_encoding) = json_path(repo.work_dir().as_os_str());
     let git_available = Executor::new(repo.work_dir()).git_available();
     Ok(json!({"root":root,"root_encoding":root_encoding,
-        "safe_switch_available":true,"mutations_available":git_available,"branches_available":git_available,"branch_actions_available":git_available,"line_staging_available":true}))
+        "history_available":true,"safe_switch_available":true,"mutations_available":git_available,"branches_available":git_available,"branch_actions_available":git_available,"line_staging_available":true}))
 }
 /// List existing local branch names without remote guessing or a second repository watcher.
 pub fn branches(start: &Path) -> Reply {

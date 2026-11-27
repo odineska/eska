@@ -13,6 +13,7 @@ pub mod workflow;
 
 pub(crate) mod scm_branches;
 pub(crate) mod scm_bridge;
+mod scm_history;
 
 pub mod scm_details;
 
