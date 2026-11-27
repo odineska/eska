@@ -15,7 +15,7 @@ pub(super) fn import<F>(
     on_output: &mut F,
 ) -> Result<Output, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: crate::build::execute::BuildObserver,
 {
     let stage = BuildStage::ImportSources;
     execute::reject_interrupted_import(tool, stage)?;
@@ -41,16 +41,17 @@ where
         "/DumpResult".into(),
         native_path(&result).as_os_str().to_owned(),
     ];
+    on_output.stage(stage);
     let mut output = tool
         .sibling_program("1cv8")
         .run_interruptible(args, pid, &mut |stream, bytes| {
-            on_output(stage, stream, bytes);
+            on_output.output(stage, stream, bytes);
         })
         .map_err(|source| BuildError::Run { stage, source })?;
     execute::reject_interrupted_import(tool, stage)?;
     let diagnostics = fs::read(&log).unwrap_or_default();
     for line in diagnostics.split_inclusive(|byte| *byte == b'\n') {
-        on_output(stage, ProcessStream::Stdout, line);
+        on_output.output(stage, ProcessStream::Stdout, line);
     }
     output.stdout.extend_from_slice(&diagnostics);
     // A failed process may never write /DumpResult; retain its native diagnostics first.

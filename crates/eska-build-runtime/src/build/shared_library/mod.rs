@@ -4,8 +4,7 @@ mod storage;
 mod template;
 
 use super::{
-    BuildError, BuildStage, Ibcmd, ProcessStream, ToolSource, base_configuration, execute,
-    source_snapshot,
+    BuildError, BuildStage, Ibcmd, ToolSource, base_configuration, execute, source_snapshot,
 };
 use eska_project_core::{
     application::LibrarySelection,
@@ -72,7 +71,7 @@ pub(super) fn prepare<F>(
     on_output: &mut F,
 ) -> Result<PreparedLibrary, BuildError>
 where
-    F: FnMut(BuildStage, ProcessStream, &[u8]),
+    F: crate::build::execute::BuildObserver,
 {
     let root = global::library_cache_root(&library.config)
         .map_err(|source| BuildError::LibraryConfiguration(Box::new(source)))?

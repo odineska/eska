@@ -270,7 +270,8 @@ Git. Кодировка `utf-8` сохраняет допустимый текс
 Explorer. Они возвращают один JSON-документ
 `{schema_version:1, operation, data, error}` и не зависят от языка CLI.
 `operation` использует имена `scm_root`, `scm_status`, `scm_blob`, `scm_files`,
-`scm_branches`, `scm_checkout`, `scm_refs`, `scm_switch`, `scm_stage_lines`.
+`scm_branches`, `scm_checkout`, `scm_refs`, `scm_switch`, `scm_stage_lines`,
+`scm_history`.
 При ошибке `data` равен `null`, `error` содержит машинный код, exit code — 1.
 
 - `scm-root` находит ближайший рабочий репозиторий от `--project-dir` и возвращает
@@ -282,6 +283,31 @@ Explorer. Они возвращают один JSON-документ
   Дополнительный `line_staging_available: true` означает поддержку индексирования
   выделенных строк через встроенный gix; system Git для него не нужен.
   Отсутствующий флаг в старом backend клиент трактует как `false`.
+- `scm-history --limit N [--cursor TOKEN]` читает граф коммитов через gix,
+  без системного Git и манифеста. `history_available: true` в `scm-root`
+  сообщает поддержку. N по умолчанию 100, допустимо 1–200.
+  Ответ содержит `commits`, `head`, `next_cursor`.
+  Для commit возвращаются полный `id`, все `parents` (включая merge),
+  `author: {name,name_encoding,email,email_encoding}`, `authored_at:
+  {seconds,offset}`, `subject`, `subject_encoding`, `refs`.
+  `seconds` — Unix seconds, `offset` — секунды восточнее UTC.
+  Текст использует существующие `utf-8`/`percent` кодировки.
+  Ссылки имеют `{name,name_encoding,kind}`, kind — `head`, `local`, `remote`,
+  `tag`; имена короткие, HEAD называется `HEAD`. Annotated tags разворачиваются
+  до коммитов; ссылки на tree/blob и символические remote aliases пропускаются.
+  История включает HEAD и все tips локальных/удалённых веток и тегов, в том числе
+  не достижимые из HEAD. Порядок топологический: потомки перед родителями;
+  исходные tips сортируются по object ID. Shallow boundaries учитывает gix.
+  `head` содержит nullable `id`, `branch`, `branch_encoding`, booleans
+  `detached`, `unborn`; unborn может иметь историю других refs.
+  `next_cursor` — nullable непрозрачный токен фиксированного небольшого размера
+  (не более 85 ASCII символов), закрепляющий fingerprint HEAD/refs и смещение.
+  При движении ссылок продолжение возвращает `stale_cursor`: клиент начинает
+  новую загрузку. Ошибки — `input`, `repository`, `references`, `history`,
+  `stale_cursor`. Неверный limit/cursor даёт JSON-ошибку bridge.
+  Страницы ограничивают объём ответа, но
+  топологическая сортировка может прочитать всю достижимую историю до первой
+  страницы; при продолжении обход повторяется. Второго watcher нет.
 - `scm-branches` возвращает список локальных веток в формате
   `{branches:[{name,name_encoding}]}`. Короткие имена из `refs/heads/`
   отсортированы по исходным байтам. Кодировки `utf-8` и `percent` совпадают

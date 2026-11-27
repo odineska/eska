@@ -5,7 +5,7 @@ mod support;
 
 use std::{
     fs,
-    io::Write,
+    io::{BufRead, BufReader, Write},
     net::TcpListener,
     os::unix::fs::PermissionsExt,
     path::{Path, PathBuf},
@@ -62,6 +62,15 @@ case "$1:$2:$3" in
     cat "$checksum_file" ;;
   infobase:config:apply)
     if test -f record-apply-arguments; then printf '%s\n' "$@" > apply-arguments; fi
+    if test -f progress-log; then
+      cat progress-log >&2
+      attempts=0
+      while test ! -f release-apply && test "$attempts" -lt 100; do
+        sleep 0.1
+        attempts=$((attempts + 1))
+      done
+      test -f release-apply || exit 3
+    fi
     if test -f require-restructuring-confirmation; then
       confirmed=no
       for argument in "$@"; do
@@ -151,6 +160,95 @@ fn full_restructuring_requires_the_reviewed_initialize_plan() {
             .lines()
             .any(|argument| argument == "--force")
     );
+}
+
+#[test]
+fn confirmed_apply_streams_sanitized_restructuring_before_the_process_exits() {
+    for (locale, structure, object, accept) in [
+        (
+            "ru",
+            "Обработка структуры базы данных...",
+            "Обработка данных Реструктуризация",
+            "Принятие изменений...",
+        ),
+        (
+            "en",
+            "Process database structure...",
+            "Processing data Restructuring",
+            "Accepting changes...",
+        ),
+    ] {
+        let directory = TestDir::new();
+        let root = &directory.0;
+        prepare(root);
+        fs::write(root.join("progress-log"), format!(
+            "[INFO] {structure}\n[INFO] {object} Catalog.First\n[INFO] {object} Catalog.Last\n[INFO] password=private-text\n[INFO] {accept}\n"
+        )).unwrap();
+        let (_, preview) = apply(root, locale, &["--initialize"]);
+        let token = preview["plan"]["confirmation"].as_str().unwrap();
+        let mut child = Command::new(env!("CARGO_BIN_EXE_eska-build"))
+            .current_dir(root)
+            .env("TMPDIR", root)
+            .env("ESKA_OPERATION_PROGRESS", "1")
+            .args([
+                "--lang",
+                locale,
+                "apply",
+                "--initialize",
+                "--confirm",
+                token,
+                "--format",
+                "json",
+            ])
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .spawn()
+            .unwrap();
+        let stderr = BufReader::new(child.stderr.take().unwrap());
+        let mut steps = Vec::new();
+        let mut verified = false;
+        for line in stderr.lines() {
+            let line = line.unwrap();
+            assert!(!line.contains("private-text"));
+            let row: Value = serde_json::from_str(&line).unwrap();
+            if row["kind"] != "operation_progress" {
+                continue;
+            }
+            assert_eq!(row["schema_version"], 1);
+            assert!(
+                row["stage_elapsed_ms"].as_u64().unwrap() <= row["elapsed_ms"].as_u64().unwrap()
+            );
+            if row["phase"] == "verify" {
+                verified = true;
+            }
+            if row["phase"] != "apply" || row["event"] != "native" {
+                continue;
+            }
+            let step = row["step"].as_str().unwrap();
+            if step == "accept_changes" {
+                assert_eq!(row["objects_seen"], 2);
+                assert_eq!(row["native_lines"], 5);
+                assert!(child.try_wait().unwrap().is_none());
+                fs::write(root.join("release-apply"), "").unwrap();
+            }
+            steps.push((step.to_owned(), row["object"].as_str().map(str::to_owned)));
+        }
+        assert_eq!(
+            steps,
+            [
+                ("process_database_structure".into(), None),
+                ("object_restructuring".into(), Some("Catalog.First".into())),
+                ("object_restructuring".into(), Some("Catalog.Last".into())),
+                ("accept_changes".into(), None),
+            ]
+        );
+        assert!(verified);
+        let output = child.wait_with_output().unwrap();
+        assert!(output.status.success());
+        let result: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(result["kind"], "apply");
+        assert_eq!(result["status"], "applied");
+    }
 }
 
 #[test]
@@ -2092,4 +2190,71 @@ fn failed_apply_preserves_the_last_snapshot_and_requires_review() {
     assert_eq!(fs::read(snapshot).unwrap(), applied);
     let (_, pending) = apply(root, "en-US", &[]);
     assert_eq!(pending["error"]["code"], "incomplete_apply");
+}
+
+#[test]
+fn noisy_full_apply_keeps_unique_generation_evidence_without_optional_checksum() {
+    let generation = "0123456789012345678901234567890123456789";
+    for lang in ["en-US", "ru-RU"] {
+        for duplicate in [false, true] {
+            let fixture = TestDir::new();
+            let root = &fixture.0;
+            prepare(root);
+            for file in [root.join("ibcmd"), root.join(".eska/settings_local.toml")] {
+                let content = fs::read_to_string(&file).unwrap();
+                fs::write(file, content.replace("8.3.27.2342", "8.5.4.3000")).unwrap();
+            }
+            let prefix = if lang == "ru-RU" {
+                "[INFO] Создано поколение конфигурации:"
+            } else {
+                "[INFO] Created configuration generation:"
+            };
+            let record = format!("{prefix} {generation}\n");
+            let mut log = format!(
+                "{}\n{record}{}\n",
+                "x".repeat(1024 * 1024 + 1),
+                "y".repeat(1024 * 1024 + 1)
+            );
+            if duplicate {
+                log.push_str(&record);
+            }
+            fs::write(root.join("apply-generation-output"), log).unwrap();
+            let (_, plan) = apply(root, lang, &["--initialize"]);
+            let token = plan["plan"]["confirmation"].as_str().unwrap();
+            let (output, result) = apply(root, lang, &["--initialize", "--confirm", token]);
+            assert_eq!(output.status.success(), !duplicate, "{result}");
+            if duplicate {
+                assert_eq!(result["error"]["code"], "stale_preview");
+            } else {
+                assert_eq!(result["status"], "applied");
+                // Even the observed 8.5 wording cannot skip checksum proof when
+                // restructuring publishes a generation different from the logged one.
+                fs::write(root.join("next-generation"), "b".repeat(40)).unwrap();
+                let (_, plan) = apply(root, lang, &["--initialize"]);
+                let token = plan["plan"]["confirmation"].as_str().unwrap();
+                let (output, result) = apply(root, lang, &["--initialize", "--confirm", token]);
+                assert!(!output.status.success(), "{result}");
+                assert_eq!(result["error"]["code"], "stale_preview");
+            }
+        }
+    }
+}
+
+#[test]
+fn noisy_export_remains_file_authoritative_but_oversized_inventory_is_refused() {
+    for lang in ["en-US", "ru-RU"] {
+        let fixture = TestDir::new();
+        let (base, one) = prepare_extensions(&fixture.0);
+        fs::write(base.join("noisy-export"), vec![b'x'; 1024 * 1024 + 1]).unwrap();
+        let platform = base.join("ibcmd");
+        fs::write(&platform, EXTENSION_IBCMD.replace("infobase:config:export)", "infobase:config:export)\n        cat \"$dir/noisy-export\"\n        cat \"$dir/noisy-export\" >&2")).unwrap();
+        let (output, result) = apply(&one, lang, &["--initialize"]);
+        assert!(output.status.success(), "{result}");
+        let mut inventory = extension_record("One");
+        inventory.push_str(&" ".repeat(1024 * 1024 + 1));
+        fs::write(base.join("extension-list"), inventory).unwrap();
+        let (output, result) = remove_extension(&one, lang, &[]);
+        assert!(!output.status.success(), "{result}");
+        assert!(!base.join("writes").exists());
+    }
 }

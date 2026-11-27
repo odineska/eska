@@ -1,6 +1,7 @@
 //! Standalone CI entry point; no full CLI, metadata server, Git or platform runtime is linked.
 
 mod cli;
+mod progress;
 mod report;
 
 /// Preserve the check result as a process exit status for CI runners.

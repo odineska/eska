@@ -6,6 +6,7 @@ pub mod artifact;
 pub mod build;
 pub mod patch;
 pub use eska_project_core::paths::native_path;
+pub mod progress;
 pub mod runtime;
 
 #[cfg(test)]

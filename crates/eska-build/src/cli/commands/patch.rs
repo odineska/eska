@@ -187,15 +187,26 @@ impl PatchHandler<'_> {
             )
         })?;
         let tool = super::artifact::attach_cancellation(tool, cancellation);
-        eska_build_runtime::patch::execute(&plan.description, &tool, output, |workspace| {
-            if tool.was_interrupted() {
-                return Err(eska_project_core::patch::PatchError::new(
-                    "tool",
-                    localizer.text("component-cancelled"),
-                ));
-            }
-            client.prepare(&plan.fingerprint, workspace, localizer)
-        })
+        let progress = super::progress::Reporter::new(
+            matches!(self.options.format, Format::Json),
+            "patch",
+            localizer,
+        );
+        eska_build_runtime::patch::execute_observed(
+            &plan.description,
+            &tool,
+            output,
+            |workspace| {
+                if tool.was_interrupted() {
+                    return Err(eska_project_core::patch::PatchError::new(
+                        "tool",
+                        localizer.text("component-cancelled"),
+                    ));
+                }
+                client.prepare(&plan.fingerprint, workspace, localizer)
+            },
+            |phase, signal| progress.observe(phase, None, signal),
+        )
         .map_err(|error| {
             let detail = format!("[{}] {}", tool.version().as_str(), error.detail);
             self.fail(&error.code, &detail, localizer)

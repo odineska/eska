@@ -16,6 +16,16 @@ use crate::{
     process::Analyzer,
 };
 
+/// Verified analysis boundaries and accepted unique module results.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum Progress {
+    CheckStructure,
+    AnalyzeModules {
+        processed_modules: usize,
+        total_modules: usize,
+    },
+}
+
 /// Effective diagnostics retain upstream coordinates and messages without a second rule engine.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct Diagnostic {
@@ -157,7 +167,22 @@ impl From<crate::Error> for Failure {
 /// Rejects partial policy, structural failures, interrupted processes, invalid/incomplete streams
 /// and changes to the selected inputs. No failure can be interpreted as a clean report.
 pub fn analyze(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Report, Failure> {
+    analyze_observed(plan, analyzer, |_| {})
+}
+
+/// Analyze with phase starts and counts of validated unique JSONL module records.
+///
+/// A processed module is not proof that the full run succeeded. The callback may
+/// run on the stdout reader thread and stops before this function returns.
+/// # Errors
+/// Returns the same complete-analysis failures as [`analyze`].
+pub fn analyze_observed(
+    plan: &Plan,
+    analyzer: &Analyzer<'_>,
+    mut progress: impl FnMut(Progress) + Send + 'static,
+) -> Result<Report, Failure> {
     let release = analyzer.validated_release(plan.context.root())?;
+    progress(Progress::CheckStructure);
     let snapshot = files::Snapshot::capture(plan, analyzer, &release)?;
     let mut declared_objects = 0;
     for source in plan.context.sources() {
@@ -183,6 +208,12 @@ pub fn analyze(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Report, Failure> 
     analyzer.check_config(plan.context.root(), &plan.path())?;
     let expected = snapshot.modules.clone();
     let config = plan.path();
+    progress(Progress::AnalyzeModules {
+        processed_modules: 0,
+        total_modules: expected.len(),
+    });
+    let observer = std::sync::Arc::new(std::sync::Mutex::new(Some(progress)));
+    let reader_observer = std::sync::Arc::clone(&observer);
     let output = analyzer.run_with_stdout(
         plan.context.root(),
         [
@@ -194,8 +225,30 @@ pub fn analyze(plan: &Plan, analyzer: &Analyzer<'_>) -> Result<Report, Failure> 
             OsStr::new("--format"),
             OsStr::new("jsonl"),
         ],
-        move |stdout| Ok(jsonl::read(stdout, &expected, &expected_version)),
-    )?;
+        move |stdout| {
+            Ok(jsonl::read_observed(
+                stdout,
+                &expected,
+                &expected_version,
+                &mut |processed_modules, total_modules| {
+                    if let Ok(mut observer) = reader_observer.lock()
+                        && let Some(observer) = observer.as_mut()
+                    {
+                        observer(Progress::AnalyzeModules {
+                            processed_modules,
+                            total_modules,
+                        });
+                    }
+                },
+            ))
+        },
+    );
+    // Timeout can leave a descendant holding stdout open. Disable its callback
+    // under the same lock before returning, without waiting for that descendant.
+    if let Ok(mut observer) = observer.lock() {
+        observer.take();
+    }
+    let output = output?;
     if !output.status.success() {
         return Err(Failure::ProcessExit {
             exit_code: output.status.code(),

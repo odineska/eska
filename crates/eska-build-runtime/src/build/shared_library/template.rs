@@ -1,8 +1,8 @@
 //! Copy a verified closed file infobase; consumers never open the shared database itself.
 
 use super::{
-    BuildError, BuildStage, Ibcmd, PreparedLibrary, ProcessStream, check_cancel, execute, hex,
-    source_snapshot, storage,
+    BuildError, BuildStage, Ibcmd, PreparedLibrary, check_cancel, execute, hex, source_snapshot,
+    storage,
 };
 use serde::{Deserialize, Serialize};
 use std::{fs, io, path::Path};
@@ -23,7 +23,7 @@ impl PreparedLibrary {
         on_output: &mut F,
     ) -> Result<(), BuildError>
     where
-        F: FnMut(BuildStage, ProcessStream, &[u8]),
+        F: crate::build::execute::BuildObserver,
     {
         let root = self.lease.root.join("template");
         for _ in 0..2 {
@@ -70,7 +70,7 @@ impl PreparedLibrary {
         on_output: &mut F,
     ) -> Result<(), BuildError>
     where
-        F: FnMut(BuildStage, ProcessStream, &[u8]),
+        F: crate::build::execute::BuildObserver,
     {
         storage::owned(target)?;
         let job = execute::Workspace::create(&self.lease.root)?;

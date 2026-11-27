@@ -17,7 +17,7 @@ pub use eska_project_core::project::build::{
     BuildSettings, BuildSettingsError, InvalidArtifactsDirectoryReason, PlatformVersion,
 };
 pub use execute::{
-    BuildError, BuildResult, BuildStage, execute, execute_streaming,
+    BuildError, BuildResult, BuildStage, execute, execute_observed, execute_streaming,
     execute_streaming_with_manifest, preflight, preflight_manifest,
 };
 pub use infobase::{

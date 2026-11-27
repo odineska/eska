@@ -52,13 +52,23 @@ fn valid_diagnostic(diagnostic: &Diagnostic) -> bool {
 }
 
 /// Drain rejected stdout until the child exits; the process owner still enforces its deadline.
+#[cfg(test)]
 pub(super) fn read(
     stream: impl Read,
     expected: &BTreeSet<PathBuf>,
     version: &str,
 ) -> Result<Vec<FileResult>, Failure> {
+    read_observed(stream, expected, version, &mut |_, _| {})
+}
+
+pub(super) fn read_observed(
+    stream: impl Read,
+    expected: &BTreeSet<PathBuf>,
+    version: &str,
+    progress: &mut impl FnMut(usize, usize),
+) -> Result<Vec<FileResult>, Failure> {
     let mut reader = BufReader::new(stream);
-    let result = parse(&mut reader, expected, MAX_REPORT, version);
+    let result = parse_observed(&mut reader, expected, MAX_REPORT, version, progress);
     if result.is_err() {
         let _ = io::copy(&mut reader, &mut io::sink());
     }
@@ -66,11 +76,28 @@ pub(super) fn read(
 }
 
 /// Enforce framing, event ordering and count identities before publishing any diagnostics.
+#[cfg(test)]
 fn parse(
     reader: &mut impl BufRead,
     expected: &BTreeSet<PathBuf>,
     max_report_bytes: u64,
     expected_version: &str,
+) -> Result<Vec<FileResult>, Failure> {
+    parse_observed(
+        reader,
+        expected,
+        max_report_bytes,
+        expected_version,
+        &mut |_, _| {},
+    )
+}
+
+fn parse_observed(
+    reader: &mut impl BufRead,
+    expected: &BTreeSet<PathBuf>,
+    max_report_bytes: u64,
+    expected_version: &str,
+    progress: &mut impl FnMut(usize, usize),
 ) -> Result<Vec<FileResult>, Failure> {
     let invalid = |reason| Failure::Stream { reason };
     let mut started = false;
@@ -134,6 +161,7 @@ fn parse(
                 if files.insert(path, diagnostics).is_some() {
                     return Err(invalid("duplicate_file"));
                 }
+                progress(files.len(), expected.len());
             }
             Event::Done {
                 elapsed_secs,
@@ -192,6 +220,48 @@ mod tests {
             output.push(b'\n');
         }
         output
+    }
+
+    #[test]
+    fn counters_include_only_validated_unique_module_records() {
+        let expected = BTreeSet::from([PathBuf::from("/selected/Module.bsl")]);
+        let mut seen = Vec::new();
+        assert!(
+            read_observed(
+                stream(&events()).as_slice(),
+                &expected,
+                "0.4.0",
+                &mut |processed, total| seen.push((processed, total))
+            )
+            .is_ok()
+        );
+        assert_eq!(seen, [(1, 1)]);
+        let mut duplicated = events();
+        duplicated.insert(2, duplicated[1].clone());
+        seen.clear();
+        assert!(
+            read_observed(
+                stream(&duplicated).as_slice(),
+                &expected,
+                "0.4.0",
+                &mut |processed, total| seen.push((processed, total))
+            )
+            .is_err()
+        );
+        assert_eq!(seen, [(1, 1)]);
+        let mut invalid = events();
+        invalid[1]["error"] = json!("native failure");
+        seen.clear();
+        assert!(
+            read_observed(
+                stream(&invalid).as_slice(),
+                &expected,
+                "0.4.0",
+                &mut |processed, total| seen.push((processed, total))
+            )
+            .is_err()
+        );
+        assert_eq!(seen, [] as [(usize, usize); 0]);
     }
 
     /// JSONL follows the selected executable version instead of a compiled-in release pin.

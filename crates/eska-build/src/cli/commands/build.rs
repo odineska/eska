@@ -29,7 +29,9 @@ mod json;
 mod output;
 mod reference;
 
-use crate::cli::process_output::{diagnostic_styling_enabled, progress::ProgressLine};
+use super::progress::Reporter;
+use crate::cli::process_output::diagnostic_styling_enabled;
+use eska_build_runtime::progress::{Signal, classify};
 
 use errors::{
     BuildExecutionError, execution_error_code, execution_error_message, execution_error_stage,
@@ -415,7 +417,6 @@ impl BuildHandler<'_> {
         let project = prepared.project;
         let plan = &prepared.plan;
         let human = matches!(self.options.format, OutputFormat::Human);
-        let interactive = human && io::stderr().is_terminal();
         let styled = diagnostic_styling_enabled();
         let configured_version = project.configuration().build_settings().platform_version();
         if human && configured_version != Some(plan.platform_version()) {
@@ -443,40 +444,38 @@ impl BuildHandler<'_> {
             write_build_started(ibcmd.version().as_str(), localizer, styled)
                 .map_err(BuildExecutionError::Output)?;
         }
-        let mut progress =
-            interactive.then(|| ProgressLine::start(localizer.text("build-progress"), styled));
+        let progress = Reporter::new(!human, "build", localizer);
+        let component = prepared.name.map(ProjectName::as_str);
         let mut output_error = None;
-        let mut on_output = |_: BuildStage, _: build::ProcessStream, line: &[u8]| {
+        let on_output = |stage: BuildStage, _: build::ProcessStream, line: &[u8]| {
             if output_error.is_none()
                 && let Err(error) =
-                    write_diagnostic(line, project, localizer, styled, progress.as_ref())
+                    write_diagnostic(&progress.diagnostic(line), project, localizer, styled, None)
             {
                 output_error = Some(error);
             }
+            if !line.is_empty() {
+                progress.observe(
+                    progress_phase(stage),
+                    component,
+                    Some(classify(line).unwrap_or(Signal::Activity)),
+                );
+            }
         };
-        let result = if self.options.mode.manifest {
-            let project_name = prepared
-                .name
-                .map(ProjectName::as_str)
-                .or_else(|| project.root().file_name().and_then(std::ffi::OsStr::to_str));
-            build::execute_streaming_with_manifest(
-                plan,
+        let manifest = if self.options.mode.manifest {
+            let project_name =
+                component.or_else(|| project.root().file_name().and_then(std::ffi::OsStr::to_str));
+            Some((
                 project,
                 project_name,
                 provenance(project.root()).map_err(BuildExecutionError::Vcs)?,
-                ibcmd,
-                &mut on_output,
-            )
+            ))
         } else {
-            build::execute_streaming(plan, ibcmd, &mut on_output)
+            None
         };
-        if let Some(error) = progress
-            .as_mut()
-            .and_then(|progress| progress.finish().err())
-            && output_error.is_none()
-        {
-            output_error = Some(error);
-        }
+        let result = build::execute_observed(plan, ibcmd, manifest, on_output, |stage| {
+            progress.observe(progress_phase(stage), component, None);
+        });
         let result = result.map_err(BuildExecutionError::Build)?;
         if let Some(error) = output_error {
             return Err(BuildExecutionError::Output(error));
@@ -799,4 +798,14 @@ pub fn run(
     provenance: &dyn Fn(&Path) -> Result<build::GitProvenance, eska_tool_runtime::Error>,
 ) -> ExitCode {
     BuildHandler { options: args }.run(directory, localizer, provenance)
+}
+
+const fn progress_phase(stage: BuildStage) -> &'static str {
+    match stage {
+        BuildStage::PrepareSources => "prepare_sources",
+        BuildStage::PrepareBaseConfiguration => "prepare_base",
+        BuildStage::CreateInfobase => "create_infobase",
+        BuildStage::ImportSources => "import",
+        BuildStage::PublishArtifact => "publish_artifact",
+    }
 }
